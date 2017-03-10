@@ -6,20 +6,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:openDrawer="start">
 
-    <include
-        layout="@layout/app_bar_menu_principal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    tools:openDrawer="start">
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@drawable/fondomenu"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_menu_principal"
+        app:itemIconTint="#ffffff"
+        app:itemTextColor="#ffffff"
         app:menu="@menu/activity_menu_principal_drawer" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/app_bar_menu_principal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <FrameLayout
+            android:id="@+id/actividad"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
 
 </android.support.v4.widget.DrawerLayout>

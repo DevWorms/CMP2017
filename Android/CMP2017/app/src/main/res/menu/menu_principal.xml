@@ -9,6 +9,7 @@
         android:orderInCategory="101"
         android:showAsAction="ifRoom"
         android:title="Home"
-        android:visible="true" />
+        android:visible="true"
+        app:showAsAction="ifRoom" />
 
 </menu>

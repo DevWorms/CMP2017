@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B396BF61E70DF2200C4611E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396BF51E70DF2200C4611E /* LoginViewController.swift */; };
+		3B396BF81E70DF2F00C4611E /* RegistroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396BF71E70DF2F00C4611E /* RegistroViewController.swift */; };
+		3B396BFA1E70E4F400C4611E /* MenuPrincipalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396BF91E70E4F400C4611E /* MenuPrincipalViewController.swift */; };
+		3B396BFC1E762CA500C4611E /* MenuUsuarioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396BFB1E762CA500C4611E /* MenuUsuarioViewController.swift */; };
+		3B396BFE1E76388400C4611E /* ProgramaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396BFD1E76388400C4611E /* ProgramaViewController.swift */; };
+		3B396C001E764CA400C4611E /* DetalleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396BFF1E764CA400C4611E /* DetalleViewController.swift */; };
+		3B396C021E764CCD00C4611E /* MenuMapaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396C011E764CCD00C4611E /* MenuMapaViewController.swift */; };
+		3B396C041E764F5F00C4611E /* TransportacionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396C031E764F5F00C4611E /* TransportacionViewController.swift */; };
+		3B396C061E76536D00C4611E /* TranspRutasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396C051E76536D00C4611E /* TranspRutasViewController.swift */; };
+		3B396C081E7653B800C4611E /* RutasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396C071E7653B800C4611E /* RutasViewController.swift */; };
+		3B396C0A1E7655CE00C4611E /* ConocePueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396C091E7655CE00C4611E /* ConocePueViewController.swift */; };
+		3B396C0C1E76628200C4611E /* TelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396C0B1E76628200C4611E /* TelsViewController.swift */; };
+		3B396C0E1E766AF800C4611E /* MiPerfilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396C0D1E766AF800C4611E /* MiPerfilViewController.swift */; };
+		3B396C101E766E0900C4611E /* NotificacionesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396C0F1E766E0900C4611E /* NotificacionesViewController.swift */; };
 		3B5B8F711E7083ED00F0D6AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5B8F701E7083ED00F0D6AA /* AppDelegate.swift */; };
 		3B5B8F731E7083ED00F0D6AA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5B8F721E7083ED00F0D6AA /* ViewController.swift */; };
 		3B5B8F761E7083ED00F0D6AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B5B8F741E7083ED00F0D6AA /* Main.storyboard */; };
@@ -35,6 +49,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3B396BF51E70DF2200C4611E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		3B396BF71E70DF2F00C4611E /* RegistroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistroViewController.swift; sourceTree = "<group>"; };
+		3B396BF91E70E4F400C4611E /* MenuPrincipalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuPrincipalViewController.swift; sourceTree = "<group>"; };
+		3B396BFB1E762CA500C4611E /* MenuUsuarioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuUsuarioViewController.swift; sourceTree = "<group>"; };
+		3B396BFD1E76388400C4611E /* ProgramaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramaViewController.swift; sourceTree = "<group>"; };
+		3B396BFF1E764CA400C4611E /* DetalleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetalleViewController.swift; sourceTree = "<group>"; };
+		3B396C011E764CCD00C4611E /* MenuMapaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuMapaViewController.swift; sourceTree = "<group>"; };
+		3B396C031E764F5F00C4611E /* TransportacionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransportacionViewController.swift; sourceTree = "<group>"; };
+		3B396C051E76536D00C4611E /* TranspRutasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranspRutasViewController.swift; sourceTree = "<group>"; };
+		3B396C071E7653B800C4611E /* RutasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RutasViewController.swift; sourceTree = "<group>"; };
+		3B396C091E7655CE00C4611E /* ConocePueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConocePueViewController.swift; sourceTree = "<group>"; };
+		3B396C0B1E76628200C4611E /* TelsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TelsViewController.swift; sourceTree = "<group>"; };
+		3B396C0D1E766AF800C4611E /* MiPerfilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiPerfilViewController.swift; sourceTree = "<group>"; };
+		3B396C0F1E766E0900C4611E /* NotificacionesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificacionesViewController.swift; sourceTree = "<group>"; };
 		3B5B8F6D1E7083ED00F0D6AA /* CMP 2017.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CMP 2017.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B5B8F701E7083ED00F0D6AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B5B8F721E7083ED00F0D6AA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +129,20 @@
 			children = (
 				3B5B8F701E7083ED00F0D6AA /* AppDelegate.swift */,
 				3B5B8F721E7083ED00F0D6AA /* ViewController.swift */,
+				3B396BF51E70DF2200C4611E /* LoginViewController.swift */,
+				3B396BF71E70DF2F00C4611E /* RegistroViewController.swift */,
+				3B396BFB1E762CA500C4611E /* MenuUsuarioViewController.swift */,
+				3B396BFD1E76388400C4611E /* ProgramaViewController.swift */,
+				3B396BFF1E764CA400C4611E /* DetalleViewController.swift */,
+				3B396C011E764CCD00C4611E /* MenuMapaViewController.swift */,
+				3B396C031E764F5F00C4611E /* TransportacionViewController.swift */,
+				3B396C051E76536D00C4611E /* TranspRutasViewController.swift */,
+				3B396C071E7653B800C4611E /* RutasViewController.swift */,
+				3B396C091E7655CE00C4611E /* ConocePueViewController.swift */,
+				3B396C0B1E76628200C4611E /* TelsViewController.swift */,
+				3B396C0D1E766AF800C4611E /* MiPerfilViewController.swift */,
+				3B396C0F1E766E0900C4611E /* NotificacionesViewController.swift */,
+				3B396BF91E70E4F400C4611E /* MenuPrincipalViewController.swift */,
 				3B5B8F741E7083ED00F0D6AA /* Main.storyboard */,
 				3B5B8F7A1E7083ED00F0D6AA /* Assets.xcassets */,
 				3B5B8F7C1E7083ED00F0D6AA /* LaunchScreen.storyboard */,
@@ -196,6 +238,7 @@
 				TargetAttributes = {
 					3B5B8F6C1E7083EC00F0D6AA = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 2NW94YE5N7;
 						ProvisioningStyle = Automatic;
 					};
 					3B5B8F831E7083ED00F0D6AA = {
@@ -262,9 +305,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B396C0A1E7655CE00C4611E /* ConocePueViewController.swift in Sources */,
+				3B396BF61E70DF2200C4611E /* LoginViewController.swift in Sources */,
+				3B396C101E766E0900C4611E /* NotificacionesViewController.swift in Sources */,
 				3B5B8F731E7083ED00F0D6AA /* ViewController.swift in Sources */,
 				3B5B8F791E7083ED00F0D6AA /* CMP_2017.xcdatamodeld in Sources */,
+				3B396C001E764CA400C4611E /* DetalleViewController.swift in Sources */,
+				3B396C021E764CCD00C4611E /* MenuMapaViewController.swift in Sources */,
+				3B396BF81E70DF2F00C4611E /* RegistroViewController.swift in Sources */,
+				3B396BFA1E70E4F400C4611E /* MenuPrincipalViewController.swift in Sources */,
+				3B396C0C1E76628200C4611E /* TelsViewController.swift in Sources */,
+				3B396C041E764F5F00C4611E /* TransportacionViewController.swift in Sources */,
+				3B396C081E7653B800C4611E /* RutasViewController.swift in Sources */,
+				3B396C061E76536D00C4611E /* TranspRutasViewController.swift in Sources */,
 				3B5B8F711E7083ED00F0D6AA /* AppDelegate.swift in Sources */,
+				3B396BFC1E762CA500C4611E /* MenuUsuarioViewController.swift in Sources */,
+				3B396C0E1E766AF800C4611E /* MiPerfilViewController.swift in Sources */,
+				3B396BFE1E76388400C4611E /* ProgramaViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,6 +473,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2NW94YE5N7;
 				INFOPLIST_FILE = "CMP 2017/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.devworms.CMP-2017";
@@ -428,6 +486,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2NW94YE5N7;
 				INFOPLIST_FILE = "CMP 2017/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.devworms.CMP-2017";
@@ -509,6 +568,7 @@
 				3B5B8F9A1E7083ED00F0D6AA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3B5B8F9B1E7083ED00F0D6AA /* Build configuration list for PBXNativeTarget "CMP 2017Tests" */ = {
 			isa = XCConfigurationList;
@@ -517,6 +577,7 @@
 				3B5B8F9D1E7083ED00F0D6AA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3B5B8F9E1E7083ED00F0D6AA /* Build configuration list for PBXNativeTarget "CMP 2017UITests" */ = {
 			isa = XCConfigurationList;
@@ -525,6 +586,7 @@
 				3B5B8FA01E7083ED00F0D6AA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

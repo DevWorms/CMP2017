@@ -25,3 +25,9 @@ Package Control.merged-ca-bundle
 Package Control.user-ca-bundle
 oscrypto-ca-bundle.crt
 bh_unicode_properties.cache
+
+/Web y Backend/Backend/vendor
+/Web y Backend/Backend/.idea
+/Web y Backend/Backend/Homestead.json
+/Web y Backend/Backend/Homestead.yaml
+/Web y Backend/Backend/.env

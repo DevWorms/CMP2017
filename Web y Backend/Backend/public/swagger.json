@@ -17,7 +17,7 @@
                     "user"
                 ],
                 "summary": "Login de usuario",
-                "description": "Login de usuario",
+                "description": "Login de usuario devuelve el api_key del usuario",
                 "operationId": "loginUser",
                 "produces": [
                     "application/json"
@@ -109,6 +109,46 @@
                         "name": "association",
                         "in": "formData",
                         "description": "Asociación (es un string por el momento) Ej. \"Asociación 4\"",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/user/profile/{id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Perfil de usuario",
+                "description": "Devuelve el perfil del usuario",
+                "operationId": "userProfile",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Nombre(s)",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "last_name",
+                        "in": "api_key",
+                        "description": "Apellido(s)",
                         "required": true,
                         "type": "string"
                     }

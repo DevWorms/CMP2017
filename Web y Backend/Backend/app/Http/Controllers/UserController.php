@@ -84,6 +84,7 @@ class UserController extends Controller {
 
                 $res['status'] = 1;
                 $res['mensaje'] = "Perfil creado correctamente";
+                $res['api_key'] = $user->api_token;
                 return response()->json($res, 201);
             }
         } catch (FatalThrowableError $ex) {
@@ -266,6 +267,7 @@ class UserController extends Controller {
                 if (Hash::check($password, $user->password)) {
                     $res['status'] = 1;
                     $res['mensaje'] = "Bienvenido " . $user->name . " " . $user->last_name;
+                    $res['api_key'] = $user->api_token;
                     return response()->json($res, 200);
                 } else {
                     $res['status'] = 0;

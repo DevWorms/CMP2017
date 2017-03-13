@@ -23,6 +23,10 @@ class TranspRutasViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func menu(_ sender: Any) {
+        let vc = storyboard!.instantiateViewController(withIdentifier: "MenuPrincipal")
+        self.present( vc , animated: true, completion: nil)
+    }
 
     /*
     // MARK: - Navigation

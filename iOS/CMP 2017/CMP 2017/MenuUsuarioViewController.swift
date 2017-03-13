@@ -25,6 +25,12 @@ class MenuUsuarioViewController: ViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func cerrarSesion(_ sender: Any) {
+        //NSUserDefaults.standardUserDefaults().setObject("", forKey: WebServiceResponseKey.redSocial)
+        
+        let vc = storyboard!.instantiateViewController(withIdentifier: "Inicio")
+        self.present( vc , animated: true, completion: nil)
+    }
     /*
     // MARK: - Navigation
 

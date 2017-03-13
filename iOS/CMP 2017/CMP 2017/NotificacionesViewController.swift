@@ -16,6 +16,14 @@ class NotificacionesViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "fondo.png")!)
         
+        let navBackgroundImage:UIImage! = UIImage(named: "10Pleca")
+        
+        let nav = self.navigationController?.navigationBar
+        
+        nav?.tintColor = UIColor.white
+        
+        nav!.setBackgroundImage(navBackgroundImage, for:.default)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -23,6 +31,10 @@ class NotificacionesViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func menu(_ sender: Any) {
+        let vc = storyboard!.instantiateViewController(withIdentifier: "MenuPrincipal")
+        self.present( vc , animated: true, completion: nil)
+    }
 
     /*
     // MARK: - Navigation

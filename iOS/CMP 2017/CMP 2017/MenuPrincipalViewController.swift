@@ -9,7 +9,16 @@
 import UIKit
 
 class MenuPrincipalViewController: UIViewController {
-
+    
+    @IBOutlet weak var programaBtn: UIButton!
+    @IBOutlet weak var acompañantesBtn: UIButton!
+    @IBOutlet weak var patrocinadoresBtn: UIButton!
+    @IBOutlet weak var transportacionBtn: UIButton!
+    @IBOutlet weak var conoceBtn: UIButton!
+    @IBOutlet weak var mapaBtn: UIButton!
+    @IBOutlet weak var socialesBtn: UIButton!
+    @IBOutlet weak var expositoresBtn: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,8 +31,18 @@ class MenuPrincipalViewController: UIViewController {
         nav?.tintColor = UIColor.white
         
         nav!.setBackgroundImage(navBackgroundImage, for:.default)
-
-        // Do any additional setup after loading the view.
+        
+        ///
+        let invitado = UserDefaults.standard.value(forKey: "invitado") as! Bool
+        
+        if invitado {
+            programaBtn.isEnabled = false
+            acompañantesBtn.isEnabled = false
+            transportacionBtn.isEnabled = false
+            conoceBtn.isEnabled = false
+            mapaBtn.isEnabled = false
+            socialesBtn.isEnabled = false
+        }
     }
 
     override func didReceiveMemoryWarning() {

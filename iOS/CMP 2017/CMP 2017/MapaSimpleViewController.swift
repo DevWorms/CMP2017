@@ -1,20 +1,18 @@
 //
-//  ProgramaViewController.swift
+//  MapaSimpleViewController.swift
 //  CMP 2017
 //
-//  Created by Emmanuel Valentín Granados López on 12/03/17.
+//  Created by Emmanuel Valentín Granados López on 13/03/17.
 //  Copyright © 2017 devworms. All rights reserved.
 //
 
 import UIKit
 
-class ProgramaViewController: UIViewController {
+class MapaSimpleViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "fondo.png")!)
     }
 

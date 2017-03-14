@@ -29,6 +29,8 @@ $app->post('/api/user/login', ['middleware' => 'cors', 'uses' => 'UserController
  */
 $app->post('/api/programa/create', ['middleware' => 'cors', 'uses' => 'ProgramaController@create']);
 $app->get('/api/programa/all/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'ProgramaController@getAll']);
+$app->post('/api/programa/search', ['middleware' => 'cors', 'uses' => 'ProgramaController@getFiltro']);
+$app->get('/api/programa/detail/{user_id}/{api_key}/{programa_id}', ['middleware' => 'cors', 'uses' => 'ProgramaController@getPrograma']);
 
 /*
  * Categorias

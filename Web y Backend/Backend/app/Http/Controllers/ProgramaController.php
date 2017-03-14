@@ -44,6 +44,7 @@ class ProgramaController extends Controller {
             User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
 
             $categoria_id = $request->get('categoria_id');
+            $nombre = $request->get('nombre');
             $lugar = $request->get('lugar');
             $recomendaciones = $request->get('recomendaciones');
             $latitude = $request->get('latitude');
@@ -52,6 +53,7 @@ class ProgramaController extends Controller {
             $foto = $request->file('foto');
 
             $validator = Validator::make($request->all(), [
+                'nombre' => 'required',
                 'categoria_id' => 'required',
                 'lugar' => 'required',
                 'recomendaciones' => 'required',
@@ -68,10 +70,11 @@ class ProgramaController extends Controller {
                 $id_cat = Categoria::where('id', $categoria_id)->first();
                 if ($id_cat) {
                     if ($foto) {
-
                     }
 
                     $programa = Programa::create([
+                        'user_id' => $user_id,
+                        'nombre' => $nombre,
                         'categoria_id' => $categoria_id,
                         'lugar' => $lugar,
                         'recomendaciones' => $recomendaciones,
@@ -129,28 +132,81 @@ class ProgramaController extends Controller {
         }
     }
 
-    private function uploadFile($file, $user_id) {
-        $mimes = ["jpeg", "jpg", "gif", "png", "doc", "docx", "zip", "odt", "pdf", "xls", "xlsx", "rar", "rtf", "txt"];
-        $images = ["jpeg", "jpg", "gif", "png"];
+    public function getFiltro(Request $request) {
+        try {
+            $user_id = $request->get('user_id');
+            $api_key = $request->get('api_key');
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
 
-        if ($file->getSize() > 10000000) {
-            $response['estado'] = 0;
-            $response['mensaje'] = "El archivo excede el límite de 10mb";
-            return response()->json($response, 401);
-        } else {
-            $path = $file->storeAs("p_" . $pendiente->id_pendiente, uniqid() . "." . $file->getClientOriginalExtension(), 's3');
+            if ($request->get('fecha')) {
+                $fecha = Carbon::parse($request->get('fecha'))->toDateString();
+            } else {
+                $fecha = null;
+            }
+            $tipo = $request->get('categoria_id');
 
-            File::create([
-                'id_pendiente' => $pendiente->id_pendiente,
-                'name' => $file->getClientOriginalName(),
-                'url' => Storage::disk('s3')->url($path),
-                'size' => $file->getSize(),
-                'user_id' => $user->user_id
-            ]);
+            $programas = Programa::all();
 
-            $response['status'] = 1;
-            $response['mensaje'] = "success";
-            return response()->json($response, 200);
+            if ($fecha) {
+                $programas = $programas->where('fecha', $fecha)->all();
+            }
+
+            if ($tipo) {
+                $categoria = Categoria::where('id', $tipo)->first();
+                if ($categoria) {
+                    $programas = $programas->where('categoria_id', $tipo)->all();
+                } else {
+                    $res['status'] = 0;
+                    $res['mensaje'] = "Categoría no encontrada";
+                    return response()->json($res, 400);
+                }
+            }
+
+            $res['status'] = 1;
+            $res['mensaje'] = "success";
+            $res['programas'] = $programas;
+            return response()->json($res, 200);
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (FatalThrowableError $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    public function getPrograma($user_id, $api_key, $programa_id) {
+        try {
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+            $programa = Programa::where('id', $programa_id)->first();
+            if ($programa) {
+                $res['status'] = 1;
+                $res['mensaje'] = "success";
+                $res['programa'] = $programa;
+                return response()->json($res, 200);
+            } else {
+                $res['status'] = 0;
+                $res['mensaje'] = "No se encontro el Evento";
+                return response()->json($res, 400);
+            }
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (FatalThrowableError $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
         }
     }
 }

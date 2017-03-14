@@ -80,5 +80,97 @@ class DatabaseSeeder extends Seeder
             'user_id' => 1,
             'nombre' => "Cursos Pre-Congreso",
         ]);
+
+        \App\Programa::create([
+            'nombre' => "Evento 1",
+            'categoria_id' => 1,
+            'lugar' => "Lugar 1",
+            'recomendaciones' => "Te recomiendo una recomendación",
+            'latitude' => 19.5032747,
+            'longitude' => -99.1324364,
+            'fecha' => "2017-03-20"
+        ]);
+
+        \App\Programa::create([
+            'nombre' => "Evento 2",
+            'categoria_id' => 1,
+            'lugar' => "Lugar 2",
+            'recomendaciones' => "Te recomiendo una recomendación",
+            'latitude' => 19.5032747,
+            'longitude' => -99.1324364,
+            'fecha' => "2017-03-20"
+        ]);
+
+        \App\Programa::create([
+            'nombre' => "Evento 3",
+            'categoria_id' => 2,
+            'lugar' => "Lugar 3",
+            'recomendaciones' => "Te recomiendo una recomendación",
+            'latitude' => 19.5032747,
+            'longitude' => -99.1324364,
+            'fecha' => "2017-03-19"
+        ]);
+
+        \App\Programa::create([
+            'nombre' => "Evento 4",
+            'categoria_id' => 3,
+            'lugar' => "Lugar 4",
+            'recomendaciones' => "Te recomiendo una recomendación",
+            'fecha' => "2017-03-18"
+        ]);
+
+        \App\Programa::create([
+            'nombre' => "Evento 5",
+            'categoria_id' => 4,
+            'lugar' => "Lugar 5",
+            'recomendaciones' => "Te recomiendo una recomendación",
+            'fecha' => "2017-03-21"
+        ]);
+
+        \App\Programa::create([
+            'nombre' => "Evento 6",
+            'categoria_id' => 5,
+            'lugar' => "Lugar 6",
+            'recomendaciones' => "Te recomiendo una recomendación",
+            'latitude' => 19.5032747,
+            'longitude' => -99.1324364,
+            'fecha' => "2017-03-22"
+        ]);
+
+        \App\Programa::create([
+            'nombre' => "Evento 7",
+            'categoria_id' => 6,
+            'lugar' => "Lugar 7",
+            'recomendaciones' => "Te recomiendo una recomendación",
+            'fecha' => "2017-03-22"
+        ]);
+
+        \App\Programa::create([
+            'nombre' => "Evento 8",
+            'categoria_id' => 6,
+            'lugar' => "Lugar 7",
+            'recomendaciones' => "Te recomiendo una recomendación",
+            'fecha' => "2017-03-23"
+        ]);
+
+        \App\Programa::create([
+            'nombre' => "Evento 9",
+            'categoria_id' => 5,
+            'lugar' => "Lugar 9",
+            'recomendaciones' => "Te recomiendo una recomendación",
+            'latitude' => 19.5032747,
+            'longitude' => -99.1324364,
+            'fecha' => "2017-03-23"
+        ]);
+
+        \App\Programa::create([
+            'nombre' => "Evento 10",
+            'categoria_id' => 4,
+            'lugar' => "Lugar 10",
+            'recomendaciones' => "Te recomiendo una recomendación",
+            'latitude' => 19.5032747,
+            'longitude' => -99.1324364,
+            'fecha' => "2017-03-24"
+        ]);
     }
 }

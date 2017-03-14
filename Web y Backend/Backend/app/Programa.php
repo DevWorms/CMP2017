@@ -18,7 +18,7 @@ class Programa extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'categoria_id', 'foto_id', 'user_id', 'lugar', 'recomendaciones', 'latitude', 'longitude', 'fecha', 'foto'
+        'id', 'categoria_id', 'foto_id', 'user_id', 'nombre', 'lugar', 'recomendaciones', 'latitude', 'longitude', 'fecha'
     ];
 
     /**

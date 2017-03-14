@@ -5,7 +5,7 @@
         "version": "0.0.1",
         "title": "CMP WebService"
     },
-    "host": "localhost:8000",
+    "host": "cmp.devworms.com",
     "basePath": "/api",
     "schemes": [
         "http"
@@ -147,7 +147,7 @@
                     },
                     {
                         "name": "api_key",
-                        "in": "api_key",
+                        "in": "path",
                         "description": "Api Key de usuario",
                         "required": true,
                         "type": "string"
@@ -200,6 +200,13 @@
                         "type": "string"
                     },
                     {
+                        "name": "nombre",
+                        "in": "formData",
+                        "description": "Nombre del evento",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
                         "name": "lugar",
                         "in": "formData",
                         "description": "Lugar donde se llevara a cabo el evento",
@@ -211,7 +218,7 @@
                         "in": "formData",
                         "description": "Recomendaciones del evento",
                         "required": true,
-                        "type": "text"
+                        "type": "string"
                     },
                     {
                         "name": "fecha",
@@ -231,7 +238,7 @@
                         "name": "longitude",
                         "in": "formData",
                         "description": "Coordenadas del mapa longitude",
-                        "required": true,
+                        "required": false,
                         "type": "string"
                     }
                 ],
@@ -272,6 +279,107 @@
                         "in": "path",
                         "description": "Api Key del usuario",
                         "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/programa/detail/{user_id}/{api_key}/{programa_id}": {
+            "get": {
+                "tags": [
+                    "programa"
+                ],
+                "summary": "Detalle del evento",
+                "description": "Devuelve el detalle del evento",
+                "operationId": "programaDetail",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "programa_id",
+                        "in": "path",
+                        "description": "Id del evento",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/programa/search": {
+            "post": {
+                "tags": [
+                    "programa"
+                ],
+                "summary": "Buscar programas",
+                "description": "Filtra los programas por tipo y fecha",
+                "operationId": "searchPrograma",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "categoria_id",
+                        "in": "formData",
+                        "description": "Categoría a la que pertenece el evento, si es null, o no se envia, devuelve los programas de TODAS las categorias",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fecha",
+                        "in": "formData",
+                        "description": "Fecha del evento, si es null, o no se envia, devuelve los programas sin importar la fecha",
+                        "required": false,
                         "type": "string"
                     }
                 ],

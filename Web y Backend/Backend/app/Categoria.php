@@ -27,4 +27,8 @@ class Categoria extends Model
      * @var array
      */
     protected $hidden = [];
+
+    public function programa() {
+        return $this->belongsTo('App\Programa', 'id', 'categoria_id');
+    }
 }

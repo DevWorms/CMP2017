@@ -15,27 +15,23 @@ $app->get('/', function () use ($app) {
     return "CMP WebService";
 });
 
-$app->get('/api/docs', function () use ($app) {
-    return view('swagger');
-});
-
 /*
  * Usuarios
  */
-$app->post('/api/user/signup', 'UserController@create');
-$app->patch('/api/user/edit', 'UserController@update');
-$app->get('/api/user/profile/{id}/{token}', 'UserController@select');
-$app->delete('/api/user/delete/{id}', 'UserController@delete');
-$app->post('/api/user/login', 'UserController@login');
+$app->post('/api/user/signup', ['middleware' => 'cors', 'uses' => 'UserController@create']);
+$app->patch('/api/user/edit', ['middleware' => 'cors', 'uses' => 'UserController@update']);
+$app->get('/api/user/profile/{id}/{token}', ['middleware' => 'cors', 'uses' => 'UserController@select']);
+$app->delete('/api/user/delete/{id}', ['middleware' => 'cors', 'uses' => 'UserController@delete']);
+$app->post('/api/user/login', ['middleware' => 'cors', 'uses' => 'UserController@login']);
 
 /*
  * Programas
  */
-$app->post('/api/programa/create', 'ProgramaController@create');
-$app->get('/api/programa/all/{user_id}/{api_key}', 'ProgramaController@getAll');
+$app->post('/api/programa/create', ['middleware' => 'cors', 'uses' => 'ProgramaController@create']);
+$app->get('/api/programa/all/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'ProgramaController@getAll']);
 
 /*
  * Categorias
  */
-$app->post('/api/categoria/create', 'CategoriaController@create');
-$app->get('/api/categoria/all/{user_id}/{api_key}', 'CategoriaController@getAll');
+$app->post('/api/categoria/create', ['middleware' => 'cors', 'uses' => 'CategoriaController@create']);
+$app->get('/api/categoria/all/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'CategoriaController@getAll']);

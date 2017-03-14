@@ -17,11 +17,13 @@ class Programa extends Migration
             $table->increments('id');
             $table->unsignedBigInteger('categoria_id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('foto_id');
             $table->string('lugar', 90);
             $table->text('recomendaciones');
             $table->string('latitude', 40)->nullable();
             $table->string('longitude', 40)->nullable();
-            $table->string('fecha');
+            $table->date('fecha');
+            $table->string('foto', 90)->nullable();
             $table->timestamps();
         });
     }

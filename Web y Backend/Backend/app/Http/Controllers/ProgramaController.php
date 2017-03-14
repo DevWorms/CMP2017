@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Categoria;
+use App\File;
 use App\Programa;
 use App\User;
 use Carbon\Carbon;
@@ -48,6 +49,7 @@ class ProgramaController extends Controller {
             $latitude = $request->get('latitude');
             $longitude = $request->get('longitude');
             $fecha = Carbon::parse($request->get('fecha'));
+            $foto = $request->file('foto');
 
             $validator = Validator::make($request->all(), [
                 'categoria_id' => 'required',
@@ -65,6 +67,10 @@ class ProgramaController extends Controller {
             } else {
                 $id_cat = Categoria::where('id', $categoria_id)->first();
                 if ($id_cat) {
+                    if ($foto) {
+
+                    }
+
                     $programa = Programa::create([
                         'categoria_id' => $categoria_id,
                         'lugar' => $lugar,
@@ -120,6 +126,31 @@ class ProgramaController extends Controller {
             $res['status'] = 0;
             $res['mensaje'] = $ex->getMessage();
             return response()->json($res, 500);
+        }
+    }
+
+    private function uploadFile($file, $user_id) {
+        $mimes = ["jpeg", "jpg", "gif", "png", "doc", "docx", "zip", "odt", "pdf", "xls", "xlsx", "rar", "rtf", "txt"];
+        $images = ["jpeg", "jpg", "gif", "png"];
+
+        if ($file->getSize() > 10000000) {
+            $response['estado'] = 0;
+            $response['mensaje'] = "El archivo excede el límite de 10mb";
+            return response()->json($response, 401);
+        } else {
+            $path = $file->storeAs("p_" . $pendiente->id_pendiente, uniqid() . "." . $file->getClientOriginalExtension(), 's3');
+
+            File::create([
+                'id_pendiente' => $pendiente->id_pendiente,
+                'name' => $file->getClientOriginalName(),
+                'url' => Storage::disk('s3')->url($path),
+                'size' => $file->getSize(),
+                'user_id' => $user->user_id
+            ]);
+
+            $response['status'] = 1;
+            $response['mensaje'] = "success";
+            return response()->json($response, 200);
         }
     }
 }

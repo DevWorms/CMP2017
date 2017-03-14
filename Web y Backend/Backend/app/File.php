@@ -10,7 +10,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Programa extends Model
+class File extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -18,7 +18,7 @@ class Programa extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'categoria_id', 'foto_id', 'user_id', 'lugar', 'recomendaciones', 'latitude', 'longitude', 'fecha', 'foto'
+        'id', 'user_id', 'url', 'nombre', 'size'
     ];
 
     /**
@@ -27,12 +27,4 @@ class Programa extends Model
      * @var array
      */
     protected $hidden = [];
-
-    public function categoria() {
-        return $this->hasOne('App\Categoria', 'categoria_id', 'id');
-    }
-
-    public function foto() {
-        return $this->hasOne('App\File', 'foto_id', 'id');
-    }
 }

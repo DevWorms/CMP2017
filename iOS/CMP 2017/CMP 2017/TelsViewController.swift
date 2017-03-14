@@ -28,6 +28,26 @@ class TelsViewController: UIViewController {
         self.present( vc , animated: true, completion: nil)
     }
 
+    @IBAction func ambulancia(_ sender: Any) {
+        UIApplication.shared.openURL(URL(string: "tel://055")!)
+    }
+    
+    @IBAction func policia(_ sender: Any) {
+        UIApplication.shared.openURL(URL(string: "tel://066")!)
+    }
+    
+    @IBAction func bomberos(_ sender: Any) {
+        UIApplication.shared.openURL(URL(string: "tel://080")!)
+    }
+    
+    @IBAction func taxisSitio(_ sender: Any) {
+        UIApplication.shared.openURL(URL(string: "tel://21137431")!)
+    }
+    
+    @IBAction func taxisPuebla(_ sender: Any) {
+        UIApplication.shared.openURL(URL(string: "tel://21542222")!)
+    }
+    
     /*
     // MARK: - Navigation
 

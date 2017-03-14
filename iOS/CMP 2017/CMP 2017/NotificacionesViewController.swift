@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NotificacionesViewController: UIViewController {
+class NotificacionesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +34,16 @@ class NotificacionesViewController: UIViewController {
     @IBAction func menu(_ sender: Any) {
         let vc = storyboard!.instantiateViewController(withIdentifier: "MenuPrincipal")
         self.present( vc , animated: true, completion: nil)
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        
+        return cell
     }
 
     /*

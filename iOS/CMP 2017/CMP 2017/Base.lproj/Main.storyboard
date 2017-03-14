@@ -571,6 +571,9 @@
                                         </fragment>
                                     </attributedString>
                                 </state>
+                                <connections>
+                                    <action selector="ambulancia:" destination="C8B-bI-kHD" eventType="touchUpInside" id="fSj-RI-Q86"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fm1-rC-K78">
                                 <rect key="frame" x="16" y="290" width="343" height="30"/>
@@ -586,6 +589,9 @@
                                         </fragment>
                                     </attributedString>
                                 </state>
+                                <connections>
+                                    <action selector="policia:" destination="C8B-bI-kHD" eventType="touchUpInside" id="C3u-3C-WQC"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="05P-GG-NEa">
                                 <rect key="frame" x="16" y="328" width="343" height="30"/>
@@ -601,6 +607,9 @@
                                         </fragment>
                                     </attributedString>
                                 </state>
+                                <connections>
+                                    <action selector="bomberos:" destination="C8B-bI-kHD" eventType="touchUpInside" id="4Zs-gG-PuK"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8hh-Fo-Noq">
                                 <rect key="frame" x="16" y="428" width="343" height="30"/>
@@ -616,6 +625,9 @@
                                         </fragment>
                                     </attributedString>
                                 </state>
+                                <connections>
+                                    <action selector="taxisPuebla:" destination="C8B-bI-kHD" eventType="touchUpInside" id="tBo-hW-B53"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nw6-E1-SvY">
                                 <rect key="frame" x="16" y="466" width="343" height="30"/>
@@ -623,6 +635,9 @@
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                 <color key="tintColor" red="0.38130987016399209" green="0.38973728377428879" blue="0.40482233502538068" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Taxis Sitio Centro: 21 13 74 31"/>
+                                <connections>
+                                    <action selector="taxisSitio:" destination="C8B-bI-kHD" eventType="touchUpInside" id="s6g-Jl-VfU"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1105,11 +1120,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="35Y-yM-xmv">
-                                <rect key="frame" x="0.0" y="72" width="375" height="575"/>
+                                <rect key="frame" x="0.0" y="118" width="375" height="529"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="64" id="bYl-Sn-NwE">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="64" id="bYl-Sn-NwE">
                                         <rect key="frame" x="0.0" y="28" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bYl-Sn-NwE" id="EpU-Wk-DH6">
@@ -1129,8 +1144,13 @@
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="P6W-w9-gHR" id="TcA-CO-NWx"/>
+                                    <outlet property="delegate" destination="P6W-w9-gHR" id="pPI-96-ob0"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1647,12 +1667,12 @@
         <image name="08Cerrar_Sesion" width="70" height="56"/>
         <image name="08Conoce_Puebla" width="390" height="346"/>
         <image name="10Close" width="91" height="89"/>
-        <image name="11Casa" width="104" height="82"/>
-        <image name="12Menu" width="106" height="58"/>
+        <image name="11Casa" width="32" height="25"/>
+        <image name="12Menu" width="32" height="17"/>
         <image name="13Banner_publicitario" width="1246" height="246"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zrc-cq-o1r"/>
+        <segue reference="ycn-As-Ut0"/>
         <segue reference="Euz-ZR-EEI"/>
         <segue reference="c93-xJ-B5s"/>
         <segue reference="NTs-h7-V0z"/>

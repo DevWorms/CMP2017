@@ -1,9 +1,13 @@
 package com.cmp2017.devworms.cmp2017;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -25,7 +29,10 @@ public class MenuPrincipal extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        SharedPreferences sp = getSharedPreferences("prefe", Activity.MODE_PRIVATE);
+        String nombre = sp.getString("Nombre","");
 
+        Log.d("pass : ", "> " + nombre);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -35,7 +42,8 @@ public class MenuPrincipal extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+        toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
+        getSupportActionBar().setTitle(nombre);
         getFragmentManager().beginTransaction()
                 .replace(R.id.actividad, new MenuFragment()).commit();
 

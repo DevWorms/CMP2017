@@ -18,10 +18,11 @@
 
 
         <TextView
-            android:id="@+id/txtDescrip"
-            android:layout_width="wrap_content"
+            android:id="@+id/txtTituloListado"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Resultados"
+            android:textAlignment="center"
             android:textColor="#2844A8"
             android:textSize="30sp"
             android:textStyle="bold" />

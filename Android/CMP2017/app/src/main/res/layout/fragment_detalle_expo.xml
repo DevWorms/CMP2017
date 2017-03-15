@@ -18,17 +18,29 @@
         <ImageView
             android:id="@+id/Banner"
             android:layout_width="match_parent"
-            android:layout_height="165dp"
+            android:layout_height="130dp"
             android:layout_gravity="top"
             android:background="@android:color/transparent"
             android:minHeight="80dp"
             android:scaleType="fitXY"
-            android:src="@drawable/imagefotogolf" />
+            android:src="@drawable/espalogo" />
 
 
         <!-- Song Title -->
 
         <!-- Album Name -->
+        <TextView
+            android:id="@+id/nomEmpre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:text="Nombre empresa"
+            android:textColor="#1e2747"
+            android:textSize="18sp"
+            android:textStyle="normal|bold"
+            android:typeface="sans" />
 
         <TextView
             android:id="@+id/TitContacto"
@@ -73,6 +85,17 @@
             android:paddingLeft="20dp"
             android:text="Llevar ropa cómoda y zapatos deportivos"
             android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btnPresent"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/btnpresentacion"
+            android:paddingBottom="5dp"
+            android:textStyle="normal" />
 
         <Button
             android:id="@+id/btnLocalizar"

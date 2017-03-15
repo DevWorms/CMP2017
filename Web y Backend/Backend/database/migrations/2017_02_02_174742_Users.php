@@ -19,6 +19,7 @@ class Users extends Migration {
             $table->string('association', 40);
             $table->string('email');
             $table->string('password');
+            $table->string('clave');
             $table->string('api_token', 32);
             $table->string('oauth_token')->nullable();
             $table->string('tmp_token')->nullable();

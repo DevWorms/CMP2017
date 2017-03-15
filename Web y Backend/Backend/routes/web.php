@@ -37,3 +37,14 @@ $app->get('/api/programa/detail/{user_id}/{api_key}/{programa_id}', ['middleware
  */
 $app->post('/api/categoria/create', ['middleware' => 'cors', 'uses' => 'CategoriaController@create']);
 $app->get('/api/categoria/all/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'CategoriaController@getAll']);
+
+/*
+ * Expositores
+ */
+$app->post('/api/expositor/create', ['middleware' => 'cors', 'uses' => 'ExpositorController@create']);
+$app->get('/api/expositor/all/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'ExpositorController@getAll']);
+$app->get('/api/expositor/order/name/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'ExpositorController@getByName']);
+$app->get('/api/expositor/detail/{user_id}/{api_key}/{expositor_id}', ['middleware' => 'cors', 'uses' => 'ExpositorController@getExpositor']);
+
+$app->get('/api/expositor/addfavorito/{user_id}/{api_key}/{expositor_id}', ['middleware' => 'cors', 'uses' => 'ExpositorController@addFavorito']);
+$app->get('/api/expositor/misfavoritos/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'ExpositorController@getMyExpositores']);

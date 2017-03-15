@@ -54,6 +54,7 @@ class UserController extends Controller {
             $email = $request->get('email');
             $password = Hash::make($request->get('password'));
             $api_token = md5(str_random(20));
+            $clave = $request->get('clave');
 
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
@@ -61,8 +62,10 @@ class UserController extends Controller {
                 'type' => 'required',
                 'association' => 'required',
                 'email' => 'required|email|unique:users',
-                'password' => 'required|min:5|confirmed',
-                'password_confirmation' => 'required|min:5'
+                'clave' => 'required',
+                'password' => 'required|min:5'
+                //'password' => 'required|min:5|confirmed',
+                //'password_confirmation' => 'required|min:5'
             ], $this->messagesSignup());
 
             if ($validator->fails()) {
@@ -80,6 +83,7 @@ class UserController extends Controller {
                 $user->email = $email;
                 $user->password = $password;
                 $user->api_token = $api_token;
+                $user->clave = $clave;
                 $user->save();
 
                 $res['status'] = 1;

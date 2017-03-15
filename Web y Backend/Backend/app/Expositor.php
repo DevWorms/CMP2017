@@ -10,15 +10,22 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Categoria extends Model
+class Expositor extends Model
 {
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'expositores';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'id', 'nombre'
+        'id', 'user_id', 'url', 'nombre', 'pdf_file', 'logo_file', 'email', 'telefono', 'acerca', 'latitude', 'longitude'
     ];
 
     /**
@@ -26,11 +33,5 @@ class Categoria extends Model
      *
      * @var array
      */
-    protected $hidden = [
-        'user_id'
-    ];
-
-    public function programa() {
-        return $this->belongsTo('App\Programa', 'id', 'categoria_id');
-    }
+    protected $hidden = [];
 }

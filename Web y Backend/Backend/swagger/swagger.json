@@ -92,9 +92,9 @@
                         "type": "string"
                     },
                     {
-                        "name": "password_confirmation",
+                        "name": "clave",
                         "in": "formData",
-                        "description": "Confirmación de la contraseña",
+                        "description": "Clave de inscripción",
                         "required": true,
                         "type": "string"
                     },
@@ -451,6 +451,308 @@
                 "summary": "Devuelve todas las categorías",
                 "description": "Devuelve todas las categorías",
                 "operationId": "categoriaAll",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/expositor/create": {
+            "post": {
+                "tags": [
+                    "expositor"
+                ],
+                "summary": "Crear nuevo expositor",
+                "description": "Crear un nuevo expositor devuelve el expositor creada",
+                "operationId": "expositorNew",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nombre",
+                        "in": "formData",
+                        "description": "Nombre del expositor",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "Email del expositor",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "url",
+                        "in": "formData",
+                        "description": "Url del expositor",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "telefono",
+                        "in": "formData",
+                        "description": "Telefono del expositor",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "acerca",
+                        "in": "formData",
+                        "description": "Acerca del expositor",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "latitude",
+                        "in": "formData",
+                        "description": "Coordenadas del mapa latitude",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "formData",
+                        "description": "Coordenadas del mapa longitude",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/expositor/all/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "expositor"
+                ],
+                "summary": "Devuelve todos los expositores",
+                "description": "Devuelve todos los expositores",
+                "operationId": "expositorAll",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/expositor/order/name/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "expositor"
+                ],
+                "summary": "Devuelve todos los expositores ordenados alfabeticamente",
+                "description": "Devuelve todos los expositores ordenados alfabeticamente",
+                "operationId": "expositorAll",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/expositor/detail/{user_id}/{api_key}/{expositor_id}": {
+            "get": {
+                "tags": [
+                    "expositor"
+                ],
+                "summary": "Devuelve el detalle de un expositor",
+                "description": "Devuelve el detalle de un expositor",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "expositor_id",
+                        "in": "path",
+                        "description": "Id del expositor",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/expositor/addfavorito/{user_id}/{api_key}/{expositor_id}":  {
+            "get": {
+                "tags": [
+                    "expositor",
+                    "favorito"
+                ],
+                "summary": "Agrega un expositor a la lista de favoritos del usuario",
+                "description": "Agrega un expositor a la lista de favoritos del usuario",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "expositor_id",
+                        "in": "path",
+                        "description": "Id del expositor que se agrega a la lista de favoritos",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/expositor/misfavoritos/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "expositor",
+                    "favorito"
+                ],
+                "summary": "Devuelve todos los expositores en la lista de favoritos del usuario",
+                "description": "Devuelve todos los expositores en la lista de favoritos del usuario",
                 "produces": [
                     "application/json"
                 ],

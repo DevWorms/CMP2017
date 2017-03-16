@@ -31,7 +31,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">DASHBOARD CMP 2017</a>
+                <a class="navbar-brand" href="index.php">DASHBOARD CMP 2017</a>
             </div>
 
             <!-- Top Menu -->

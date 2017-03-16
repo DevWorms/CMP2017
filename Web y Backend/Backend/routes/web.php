@@ -48,3 +48,8 @@ $app->get('/api/expositor/detail/{user_id}/{api_key}/{expositor_id}', ['middlewa
 
 $app->get('/api/expositor/addfavorito/{user_id}/{api_key}/{expositor_id}', ['middleware' => 'cors', 'uses' => 'ExpositorController@addFavorito']);
 $app->get('/api/expositor/misfavoritos/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'ExpositorController@getMyExpositores']);
+
+/*
+ * Archivo
+ */
+$app->post('/api/fileupload',['middleware' => 'cors', 'uses' => 'FileController@upload']);

@@ -16,8 +16,8 @@ class Expositor extends Migration
         Schema::create('expositores', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedInteger('pdf_file');
-            $table->unsignedInteger('logo_file');
+            $table->unsignedInteger('pdf_file')->nullable();
+            $table->unsignedInteger('logo_file')->nullable();
             $table->integer('stand');
             $table->string('nombre');
             $table->string('email');

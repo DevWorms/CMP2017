@@ -240,6 +240,27 @@
                         "description": "Coordenadas del mapa longitude",
                         "required": false,
                         "type": "string"
+                    },
+                    {
+                        "name": "hora_inicio",
+                        "in": "formData",
+                        "description": "Hora de inicio del evento. Ej: 10:00:00",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "hora_fin",
+                        "in": "formData",
+                        "description": "Hora de fin del evento. Ej: 12:00:00",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "archivo",
+                        "in": "formData",
+                        "description": "Imágen del evento. Max 10mb. Formatos válidos: jpeg,jpg,gif,png",
+                        "required": false,
+                        "type": "file"
                     }
                 ],
                 "responses": {
@@ -557,6 +578,27 @@
                         "description": "Coordenadas del mapa longitude",
                         "required": false,
                         "type": "string"
+                    },
+                    {
+                        "name": "stand",
+                        "in": "formData",
+                        "description": "Stand del expositor",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "archivo_pdf",
+                        "in": "formData",
+                        "description": "PDF descripción del Expositor. Max 10mb. Formatos válidos: pdf",
+                        "required": false,
+                        "type": "file"
+                    },
+                    {
+                        "name": "archivo_logo",
+                        "in": "formData",
+                        "description": "Imágen logo del expositor. Max 10mb. Formatos válidos: jpeg,jpg,gif,png",
+                        "required": false,
+                        "type": "file"
                     }
                 ],
                 "responses": {
@@ -620,6 +662,45 @@
                 "summary": "Devuelve todos los expositores ordenados alfabeticamente",
                 "description": "Devuelve todos los expositores ordenados alfabeticamente",
                 "operationId": "expositorAll",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/expositor/order/stand/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "expositor"
+                ],
+                "summary": "Devuelve todos los expositores ordenados por número de stand",
+                "description": "Devuelve todos los expositores ordenados por número de stand",
                 "produces": [
                     "application/json"
                 ],
@@ -851,6 +932,13 @@
                         "description": "Hora de fin del evento",
                         "required": false,
                         "type": "string"
+                    },
+                    {
+                        "name": "archivo",
+                        "in": "formData",
+                        "description": "Imágen del evento. Max 10mb. Formatos válidos: jpeg,jpg,gif,png",
+                        "required": false,
+                        "type": "file"
                     }
                 ],
                 "responses": {
@@ -958,7 +1046,7 @@
                 }
             }
         },
-        "/api/acompanantes/detail/{user_id}/{api_key}/{programa_id}": {
+        "/acompanantes/detail/{user_id}/{api_key}/{programa_id}": {
             "get": {
                 "tags": [
                     "acompañantes"

@@ -17,7 +17,7 @@ class Programa extends Migration
             $table->increments('id');
             $table->unsignedBigInteger('categoria_id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('foto_id');
+            $table->unsignedBigInteger('foto_id')->nullable();
             $table->string('nombre');
             $table->string('lugar', 90);
             $table->text('recomendaciones');

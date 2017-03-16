@@ -2,30 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\File;
+use App\User;
+use Carbon\Carbon;
+use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Validator;
 
-//use Symfony\Component\HttpFoundation\File\UploadedFile;
+class FileController extends Controller {
+    protected $destinationPath = "./files/";
 
-
-
-class FileController extends Controller
-{
-    protected $destinationPath = "./";
-
-
-    public function upload(Request $request)
-    {
-
-        //dd($request->file('archivo'));
+    public function upload(Request $request) {
         try {
-            $file = $request->file('archivo');
-            //dd($request->files);
+            $user_id = $request->get('user_id');
+            $api_key = $request->get('api_key');
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
 
-            $rules = array('file' => 'required|mimes:jpeg,jpg,gif,png,doc,docx,zip,odt,pdf,xls,xlsx,rar,rtf,txt|max:10000000'); //'required|mimes:png,gif,jpeg,txt,pdf,doc'
+            $file = $request->file('archivo');
+            $rules = array('file' => 'required|mimes:jpeg,jpg,gif,png,pdf|max:10000000');
             $validator = Validator::make(array('file' => $file), $rules);
-            //dd($file);
 
             if ($validator->passes()) {
                 if ($file->getSize() > 10000000) {
@@ -33,7 +29,16 @@ class FileController extends Controller
                     $response['mensaje'] = "El archivo excede el límite de 10mb";
                     return response()->json($response, 401);
                 } else {
-                    $uploadedFile = $request->file('archivo')->move($this->destinationPath,$file->getClientOriginalName());
+                    $path = $this->destinationPath . Carbon::now()->year . "/" . Carbon::now()->month . "/";
+                    $uploadedFile = $request->file('archivo')->move($path, uniqid() . "." . $file->getClientOriginalExtension());
+
+                    File::create([
+                        'user_id' => $user_id,
+                        'url' => $uploadedFile->getPathname(),
+                        'nombre' => $file->getClientOriginalName(),
+                        'size' => $file->getClientSize()
+                    ]);
+
                     $response['estado'] = 1;
                     $response['mensaje'] = "Exito";
                     $response['ruta'] = $uploadedFile->getPathname();
@@ -45,6 +50,10 @@ class FileController extends Controller
 
                 return response()->json($response, 401);
             }
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
         } catch (Exception $ex) {
             $response['estado'] = 0;
             $response['mensaje'] = $ex->getMessage();

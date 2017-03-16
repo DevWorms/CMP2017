@@ -33,5 +33,13 @@ class Expositor extends Model
      *
      * @var array
      */
-    protected $hidden = [];
+    protected $hidden = ['updated_at'];
+
+    public function pdf() {
+        return $this->hasOne('App\File', 'id', 'pdf_file');
+    }
+
+    public function logo() {
+        return $this->hasOne('App\File', 'id', 'logo_file');
+    }
 }

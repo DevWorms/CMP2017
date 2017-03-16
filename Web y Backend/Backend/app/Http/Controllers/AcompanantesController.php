@@ -20,11 +20,24 @@ use Symfony\Component\Debug\Exception\FatalThrowableError;
 
 class AcompanantesController extends Controller {
     /**
+     * instancia de ProgramaController para la funcion returnPrograma
+     *
+     * @var ProgramaController
+     */
+    private $tool;
+
+    /**
      * UserController constructor.
      */
     public function __construct() {
+        $this->tool = new ProgramaController();
     }
 
+    /**
+     * Mensajes de error
+     *
+     * @return array
+     */
     private function messages() {
         return [
             'required' => 'Ingresa un valor para :attribute.'
@@ -49,19 +62,26 @@ class AcompanantesController extends Controller {
             $recomendaciones = $request->get('recomendaciones');
             $latitude = $request->get('latitude');
             $longitude = $request->get('longitude');
-            $fecha = Carbon::parse($request->get('fecha'));
+            $fecha = Carbon::parse($request->get('fecha'))->toDateString();
+
+            // Si tiene hora de inicio, la valida, si no es null
             if ($request->get('hora_inicio')) {
-                $hora_inicio = $request->get('hora_inicio');
+                $hora_inicio = Carbon::parse($request->get('hora_inicio'))->toTimeString();
             } else {
                 $hora_inicio = null;
             }
+
+            // Si tiene hora de fin, la valida, si no es null
             if ($request->get('hora_fin')) {
                 $hora_fin = Carbon::parse($request->get('hora_fin'))->toTimeString();
             } else {
                 $hora_fin = null;
             }
-            $foto = $request->file('foto');
+            $file_id = null;
 
+            /*
+             * Valida los datos obligatorios
+             */
             $validator = Validator::make($request->all(), [
                 'nombre' => 'required',
                 'categoria_id' => 'required',
@@ -71,17 +91,52 @@ class AcompanantesController extends Controller {
             ], $this->messages());
 
             if ($validator->fails()) {
+                //Si los datos no estan completos, devuelve error
                 $errors = $validator->errors();
 
                 $res['status'] = 0;
                 $res['mensaje'] = $errors->first();
                 return response()->json($res, 400);
             } else {
+                // Valida que exista la categoría a la que pertenecerá
                 $id_cat = Categoria::where('id', $categoria_id)->first();
                 if ($id_cat) {
-                    if ($foto) {
+                    $file = $request->file('archivo');
+                    // Si se adjunta un archivo, se sube
+                    if ($file) {
+                        $rules = array('file' => 'required|mimes:jpeg,jpg,gif,png,pdf|max:10000000');
+                        $validator = Validator::make(array('file' => $file), $rules);
+
+                        // Si el archivo tiene extensión valida
+                        if ($validator->passes()) {
+                            // Si el archivo es mayor a 10mb
+                            if ($file->getSize() > 10000000) {
+                                $response['estado'] = 0;
+                                $response['mensaje'] = "El archivo excede el límite de 10mb";
+                                return response()->json($response, 401);
+                            } else {
+                                // Si va bien, lo mueve a la carpeta y guarda el registro
+                                $path = $this->tool->destinationPath . Carbon::now()->year . "/" . Carbon::now()->month . "/";
+                                $uploadedFile = $request->file('archivo')->move($path, uniqid() . "." . $file->getClientOriginalExtension());
+
+                                $file_id = File::create([
+                                    'user_id' => $user_id,
+                                    'url' => $uploadedFile->getPathname(),
+                                    'nombre' => $file->getClientOriginalName(),
+                                    'size' => $file->getClientSize()
+                                ]);
+
+                                $file_id = $file_id->id;
+                            }
+                        } else {
+                            $response['estado'] = 0;
+                            $response['mensaje'] = "Error, tipo de archivo invalido";
+
+                            return response()->json($response, 401);
+                        }
                     }
 
+                    // Crea el programa
                     $programa = Programa::create([
                         'user_id' => $user_id,
                         'nombre' => $nombre,
@@ -93,8 +148,12 @@ class AcompanantesController extends Controller {
                         'fecha' => $fecha,
                         'hora_inicio' => $hora_inicio,
                         'hora_fin' => $hora_fin,
-                        'type' => 2
+                        'type' => 2,
+                        'foto_id' => $file_id
                     ]);
+
+                    // Devuelve el programa
+                    $programa = $this->tool->returnPrograma($programa);
 
                     $res['status'] = 1;
                     $res['mensaje'] = "Evento creado correctamente";
@@ -117,10 +176,21 @@ class AcompanantesController extends Controller {
         }
     }
 
+    /**
+     * Devuelve todos los Eventos
+     *
+     * @param $user_id
+     * @param $api_key
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getAll($user_id, $api_key) {
         try {
             User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
             $programas = Programa::where('type', 2)->orderBy('fecha', 'asc')->get();
+
+            foreach ($programas as $programa) {
+                $programa = $this->tool->returnPrograma($programa);
+            }
 
             $res['status'] = 1;
             $res['mensaje'] = "success";
@@ -137,6 +207,10 @@ class AcompanantesController extends Controller {
         }
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getFiltro(Request $request) {
         try {
             $user_id = $request->get('user_id');
@@ -167,13 +241,17 @@ class AcompanantesController extends Controller {
                 }
             }
 
+            foreach ($programas as $programa) {
+                $programa = $this->tool->returnPrograma($programa);
+            }
+
             $res['status'] = 1;
             $res['mensaje'] = "success";
             $res['acompanantes'] = $programas;
             return response()->json($res, 200);
         } catch (ModelNotFoundException $ex) {
             $res['status'] = 0;
-            $res['mensaje'] = "Error de credenciales";
+            $res['mensaje'] = "Error de credenciales " .$ex->getMessage();
             return response()->json($res, 400);
         } catch (\Exception $ex) {
             $res['status'] = 0;
@@ -182,11 +260,19 @@ class AcompanantesController extends Controller {
         }
     }
 
+    /**
+     * @param $user_id
+     * @param $api_key
+     * @param $programa_id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getPrograma($user_id, $api_key, $programa_id) {
         try {
             User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
             $programa = Programa::where('id', $programa_id)->first();
             if ($programa) {
+                $programa = $this->tool->returnPrograma($programa);
+
                 $res['status'] = 1;
                 $res['mensaje'] = "success";
                 $res['acompanante'] = $programa;

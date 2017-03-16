@@ -25,7 +25,7 @@ class Expositor extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'user_id', 'url', 'nombre', 'pdf_file', 'logo_file', 'email', 'telefono', 'acerca', 'latitude', 'longitude'
+        'id', 'user_id', 'url', 'nombre', 'pdf_file', 'logo_file', 'stand', 'email', 'telefono', 'acerca', 'latitude', 'longitude'
     ];
 
     /**
@@ -33,5 +33,13 @@ class Expositor extends Model
      *
      * @var array
      */
-    protected $hidden = [];
+    protected $hidden = ['updated_at'];
+
+    public function pdf() {
+        return $this->hasOne('App\File', 'id', 'pdf_file');
+    }
+
+    public function logo() {
+        return $this->hasOne('App\File', 'id', 'logo_file');
+    }
 }

@@ -18,13 +18,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
 
-class ProgramaController extends Controller {
-    public $destinationPath = "./files/";
+class AcompanantesController extends Controller {
+    /**
+     * instancia de ProgramaController para la funcion returnPrograma
+     *
+     * @var ProgramaController
+     */
+    private $tool;
 
     /**
      * UserController constructor.
      */
     public function __construct() {
+        $this->tool = new ProgramaController();
     }
 
     /**
@@ -98,7 +104,7 @@ class ProgramaController extends Controller {
                     $file = $request->file('archivo');
                     // Si se adjunta un archivo, se sube
                     if ($file) {
-                        $rules = array('file' => 'required|mimes:jpeg,jpg,gif,png|max:10000000');
+                        $rules = array('file' => 'required|mimes:jpeg,jpg,gif,png,pdf|max:10000000');
                         $validator = Validator::make(array('file' => $file), $rules);
 
                         // Si el archivo tiene extensión valida
@@ -110,7 +116,7 @@ class ProgramaController extends Controller {
                                 return response()->json($response, 401);
                             } else {
                                 // Si va bien, lo mueve a la carpeta y guarda el registro
-                                $path = $this->destinationPath . Carbon::now()->year . "/" . Carbon::now()->month . "/";
+                                $path = $this->tool->destinationPath . Carbon::now()->year . "/" . Carbon::now()->month . "/";
                                 $uploadedFile = $request->file('archivo')->move($path, uniqid() . "." . $file->getClientOriginalExtension());
 
                                 $file_id = File::create([
@@ -142,18 +148,17 @@ class ProgramaController extends Controller {
                         'fecha' => $fecha,
                         'hora_inicio' => $hora_inicio,
                         'hora_fin' => $hora_fin,
-                        'type' => 1,
+                        'type' => 2,
                         'foto_id' => $file_id
                     ]);
 
                     // Devuelve el programa
-                    $programa = $this->returnPrograma($programa);
+                    $programa = $this->tool->returnPrograma($programa);
 
                     $res['status'] = 1;
                     $res['mensaje'] = "Evento creado correctamente";
-                    $res['evento'] = $programa;
+                    $res['acompanante'] = $programa;
                     return response()->json($res, 201);
-
                 } else {
                     $res['status'] = 0;
                     $res['mensaje'] = "Categoría invalida";
@@ -181,24 +186,20 @@ class ProgramaController extends Controller {
     public function getAll($user_id, $api_key) {
         try {
             User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
-            $programas = Programa::where('type', 1)->orderBy('fecha', 'asc')->get();
+            $programas = Programa::where('type', 2)->orderBy('fecha', 'asc')->get();
 
             foreach ($programas as $programa) {
-                $programa = $this->returnPrograma($programa);
+                $programa = $this->tool->returnPrograma($programa);
             }
 
             $res['status'] = 1;
             $res['mensaje'] = "success";
-            $res['programas'] = $programas;
+            $res['acompanantes'] = $programas;
             return response()->json($res, 200);
         } catch (ModelNotFoundException $ex) {
             $res['status'] = 0;
             $res['mensaje'] = "Error de credenciales";
             return response()->json($res, 400);
-        } catch (FatalThrowableError $ex) {
-            $res['status'] = 0;
-            $res['mensaje'] = $ex->getMessage();
-            return response()->json($res, 500);
         } catch (\Exception $ex) {
             $res['status'] = 0;
             $res['mensaje'] = $ex->getMessage();
@@ -207,8 +208,6 @@ class ProgramaController extends Controller {
     }
 
     /**
-     * Devuelve los Eventos por filtro de fecha y categoría
-     *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
@@ -225,7 +224,7 @@ class ProgramaController extends Controller {
             }
             $tipo = $request->get('categoria_id');
 
-            $programas = Programa::where('type', 1)->get();
+            $programas = Programa::where('type', 2)->get();
 
             if ($fecha) {
                 $programas = $programas->where('fecha', $fecha)->values();
@@ -243,21 +242,17 @@ class ProgramaController extends Controller {
             }
 
             foreach ($programas as $programa) {
-                $programa = $this->returnPrograma($programa);
+                $programa = $this->tool->returnPrograma($programa);
             }
 
             $res['status'] = 1;
             $res['mensaje'] = "success";
-            $res['programas'] = $programas;
+            $res['acompanantes'] = $programas;
             return response()->json($res, 200);
         } catch (ModelNotFoundException $ex) {
             $res['status'] = 0;
-            $res['mensaje'] = "Error de credenciales";
+            $res['mensaje'] = "Error de credenciales " .$ex->getMessage();
             return response()->json($res, 400);
-        } catch (FatalThrowableError $ex) {
-            $res['status'] = 0;
-            $res['mensaje'] = $ex->getMessage();
-            return response()->json($res, 500);
         } catch (\Exception $ex) {
             $res['status'] = 0;
             $res['mensaje'] = $ex->getMessage();
@@ -266,8 +261,6 @@ class ProgramaController extends Controller {
     }
 
     /**
-     * Devuelve el detalle de un evento
-     *
      * @param $user_id
      * @param $api_key
      * @param $programa_id
@@ -278,10 +271,11 @@ class ProgramaController extends Controller {
             User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
             $programa = Programa::where('id', $programa_id)->first();
             if ($programa) {
-                $programa = $this->returnPrograma($programa);
+                $programa = $this->tool->returnPrograma($programa);
+
                 $res['status'] = 1;
                 $res['mensaje'] = "success";
-                $res['programa'] = $programa;
+                $res['acompanante'] = $programa;
                 return response()->json($res, 200);
             } else {
                 $res['status'] = 0;
@@ -301,27 +295,5 @@ class ProgramaController extends Controller {
             $res['mensaje'] = $ex->getMessage();
             return response()->json($res, 500);
         }
-    }
-
-    /**
-     * Agrega la categoría y foto del evento
-     *
-     * @param $programa
-     * @return mixed
-     */
-    public function returnPrograma($programa) {
-        if ($programa->foto_id) {
-            $programa->foto;
-        } else {
-            $programa->foto = [];
-        }
-
-        if ($programa->categoria_id) {
-            $programa->categoria;
-        }
-
-        unset($programa['foto_id']);
-        unset($programa['categoria_id']);
-        return $programa;
     }
 }

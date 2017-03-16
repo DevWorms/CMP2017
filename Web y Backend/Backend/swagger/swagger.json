@@ -240,6 +240,27 @@
                         "description": "Coordenadas del mapa longitude",
                         "required": false,
                         "type": "string"
+                    },
+                    {
+                        "name": "hora_inicio",
+                        "in": "formData",
+                        "description": "Hora de inicio del evento. Ej: 10:00:00",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "hora_fin",
+                        "in": "formData",
+                        "description": "Hora de fin del evento. Ej: 12:00:00",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "archivo",
+                        "in": "formData",
+                        "description": "Imágen del evento. Max 10mb. Formatos válidos: jpeg,jpg,gif,png",
+                        "required": false,
+                        "type": "file"
                     }
                 ],
                 "responses": {
@@ -557,6 +578,27 @@
                         "description": "Coordenadas del mapa longitude",
                         "required": false,
                         "type": "string"
+                    },
+                    {
+                        "name": "stand",
+                        "in": "formData",
+                        "description": "Stand del expositor",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "archivo_pdf",
+                        "in": "formData",
+                        "description": "PDF descripción del Expositor. Max 10mb. Formatos válidos: pdf",
+                        "required": false,
+                        "type": "file"
+                    },
+                    {
+                        "name": "archivo_logo",
+                        "in": "formData",
+                        "description": "Imágen logo del expositor. Max 10mb. Formatos válidos: jpeg,jpg,gif,png",
+                        "required": false,
+                        "type": "file"
                     }
                 ],
                 "responses": {
@@ -620,6 +662,45 @@
                 "summary": "Devuelve todos los expositores ordenados alfabeticamente",
                 "description": "Devuelve todos los expositores ordenados alfabeticamente",
                 "operationId": "expositorAll",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/expositor/order/stand/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "expositor"
+                ],
+                "summary": "Devuelve todos los expositores ordenados por número de stand",
+                "description": "Devuelve todos los expositores ordenados por número de stand",
                 "produces": [
                     "application/json"
                 ],
@@ -768,6 +849,232 @@
                         "name": "api_key",
                         "in": "path",
                         "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/acompanantes/create": {
+            "post": {
+                "tags": [
+                    "acompañantes"
+                ],
+                "summary": "Crear nuevo evento acompañantes",
+                "description": "Crear un nuevo evento acompañantes devuelve el evento",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nombre",
+                        "in": "formData",
+                        "description": "Nombre del evento",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lugar",
+                        "in": "formData",
+                        "description": "Lugar del evento",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "recomendaciones",
+                        "in": "formData",
+                        "description": "Recomendaciones del evento",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fecha",
+                        "in": "formData",
+                        "description": "Fecha del evento",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "hora_inicio",
+                        "in": "formData",
+                        "description": "Hora de inicio del evento",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "hora_fin",
+                        "in": "formData",
+                        "description": "Hora de fin del evento",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "archivo",
+                        "in": "formData",
+                        "description": "Imágen del evento. Max 10mb. Formatos válidos: jpeg,jpg,gif,png",
+                        "required": false,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/acompanantes/search": {
+            "post": {
+                "tags": [
+                    "acompañantes"
+                ],
+                "summary": "Devuelve la lista de eventos de acompañantes filtradas por día o categoría",
+                "description": "Devuelve la lista de eventos de acompañantes filtradas por día o categoría",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fecha",
+                        "in": "formData",
+                        "description": "Día del evento",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "categoria_id",
+                        "in": "formData",
+                        "description": "Categoría a la que pertence el evento",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/acompanantes/all/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "acompañantes"
+                ],
+                "summary": "Devuelve todos los eventos de acompañantes ordenados por día",
+                "description": "Devuelve todos los eventos de acompañantes ordenados por día",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/acompanantes/detail/{user_id}/{api_key}/{programa_id}": {
+            "get": {
+                "tags": [
+                    "acompañantes"
+                ],
+                "summary": "Devuelve el detalle de un evento de acompañante",
+                "description": "Devuelve el detalle de un evento de acompañante",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "programa_id",
+                        "in": "path",
+                        "description": "Id del programa",
                         "required": true,
                         "type": "string"
                     }

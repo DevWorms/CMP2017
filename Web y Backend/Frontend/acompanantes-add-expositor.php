@@ -8,7 +8,7 @@
     <meta name="description" content="CMP 2017 - ADMIN">
     <meta name="author" content="DevWorms">
 
-    <title>CMP 2017 - Agregar Categoría</title>
+    <title>CMP 2017 - Agregar Evento</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -60,13 +60,13 @@
             <!-- Sidebar -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li class="active">
+                    <li>
                         <a href="programa.php">Programa</a>
                     </li>
                     <li>
                         <a href="expositores.php">Expositores</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="acompanantes.php">Acompañantes</a>
                     </li>
                     <li>
@@ -94,25 +94,74 @@
 
             <div class="container-fluid">
                 
-                <div class="row page-header__2">
-                    <div class="col-md-6">
-                        <form action="" method="" id="" name="" role="">
-                           
+                <form action="" method="" id="" name="" role="">    
+                    
+                    <div class="row page-header">
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <h4><a href="#">Eventos Acompañantes</a></h4>
+                        </div>
+
+                        <div class="col-xs-12 col-md-6" align="right">
+                            <button type="submit" class="btn btn-default" name="" id=""><i class="fa fa-plus-circle"></i> Agregar Evento</button>   
+                        </div>
+                    </div>
+                    <!-- Fin Fila -->
+
+                    <div class="row">
+                        <div class="col-md-5 col-md-offset-1">
+                            
                             <div class="form-group">
-                                <label for="">Nombre de la Categoría</label>
+                                <label for="">Nombre del Evento</label>
                                     <br>
                                 <input type="" name="" id="" class="form-control">
-                            </div> 
+                            </div>
                             <br>
-							
-							<button type="submit" class="btn btn-default" name="" id=""><i class="fa fa-plus-circle"></i> Agregar Categoría</button>
-                        </form>
+
+                            <div class="form-group">
+                                <label for="">Lugar</label>
+                                    <br>
+                                <input type="" name="" id="" class="form-control">
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                                <label for="">Horario</label>
+                                    <br>
+                                <input type="" name="" id="" class="form-control">
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                                <label for="">Recomendaciones</label>
+                                    <br>
+                                <textarea class="form-control" rows="5" id=""></textarea>
+                            </div>
+                            <br>                            
+                        </div>
+                        <div class="col-md-6"></div>
                     </div>
-                    <div class="col-md-6"></div>
-                </div>
-                <!-- Fin Fila -->
-                
-                
+                    <!-- Fin Fila -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <div class="form-group">
+                                <label for="">Agregar ubicación en el mapa</label>
+                                    <br><br>
+                                <button class="btn btn-default">Examinar</button>
+                            </div> 
+                        </div>
+
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-group">
+                                <label for="">Agregar foto del evento</label>
+                                    <br><br>
+                                <button class="btn btn-default">Examinar</button>
+                            </div> 
+                        </div>
+                    </div>
+                    <br>
+                    <!-- Fin Fila -->
+                </form>
             </div>
             <!-- /.container-fluid -->
 

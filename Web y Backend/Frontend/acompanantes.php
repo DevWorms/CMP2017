@@ -8,7 +8,7 @@
     <meta name="description" content="CMP 2017 - ADMIN">
     <meta name="author" content="DevWorms">
 
-    <title>CMP 2017 - Programa</title>
+    <title>CMP 2017 - Acompañantes</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -60,13 +60,13 @@
             <!-- Sidebar -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li class="active">
+                    <li>
                         <a href="programa.php">Programa</a>
                     </li>
                     <li>
                         <a href="expositores.php">Expositores</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="acompanantes.php">Acompañantes</a>
                     </li>
                     <li>
@@ -115,63 +115,49 @@
                     </div>
 
                     <div class="col-xs-12 col-md-6" align="right">
-                        <a href="agregar-evento.php" class="btn btn-default"><i class="fa fa-plus-circle"></i> Agregar Evento</a>   
+                        <a href="acompanantes-add-expositor.php" class="btn btn-default"><i class="fa fa-plus-circle"></i> Agregar Evento</a>   
                     </div>
                 </div>
                 <!-- Fin Fila -->
 
                 <br>
-                <div class="row">  
-                    <div class="col-md-10 col-md-offset-1">          
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
                         <table class="table table-striped">
                             <thead>
                               <tr>
-                                <th>Nombre</th>
-                                <th>Tipo de Evento</th>
-                                <th>Fecha</th>
+                                <th>Nombre del Evento</th>
                                 <th></th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr>
-                                <td>Conferencia Magistral de...</td>
-                                <td>Conferencia</td>
-                                <td>05-01-17</td>
-                                <td> <a href="" class="btn btn-primary btn-block">Ver</a> </td>
+                                <td>Visita Museo</td>
+                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
                               </tr>
                               <tr>
-                                <td>Conferencia Magistral de...</td>
-                                <td>Conferencia</td>
-                                <td>05-02-17</td>
-                                <td> <a href="" class="btn btn-primary btn-block">Ver</a> </td>
+                                <td>Caminata Centro</td>
+                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
                               </tr>
                               <tr>
-                                <td>Conferencia Magistral de...</td>
-                                <td>Plenaria</td>
-                                <td>05-03-17</td>
-                                <td> <a href="" class="btn btn-primary btn-block">Ver</a> </td>
+                                <td>Visita Museo</td>
+                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
                               </tr>
                               <tr>
-                                <td>Conferencia Magistral de...</td>
-                                <td>E-Poster</td>
-                                <td>05-04-17</td>
-                                <td> <a href="" class="btn btn-primary btn-block">Ver</a> </td>
+                                <td>Caminata Centro</td>
+                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
                               </tr>
                               <tr>
-                                <td>Conferencia Magistral de...</td>
-                                <td>Plenaria</td>
-                                <td>05-05-17</td>
-                                <td> <a href="" class="btn btn-primary btn-block">Ver</a> </td>
+                                <td>Visita Museo</td>
+                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
                               </tr>
                               <tr>
-                                <td>Conferencia Magistral de...</td>
-                                <td>Comida Conferencia</td>
-                                <td></td>
-                                <td> <a href="" class="btn btn-primary btn-block">Ver</a> </td>
+                                <td>Caminata Centro</td>
+                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
                               </tr>
                             </tbody>
                         </table>
-                    </div>
+                    </div>    
                 </div>
                 <!-- Fin Fila -->
                 

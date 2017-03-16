@@ -67,7 +67,7 @@
                         <a href="expositores.php">Expositores</a>
                     </li>
                     <li>
-                        <a href="acompañantes.php">Acompañantes</a>
+                        <a href="acompanantes.php">Acompañantes</a>
                     </li>
                     <li>
                         <a href="sociales-deportivos.php">Sociales y Deportivos</a>

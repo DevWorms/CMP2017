@@ -67,7 +67,7 @@
                         <a href="expositores.php">Expositores</a>
                     </li>
                     <li>
-                        <a href="acompañantes.php">Acompañantes</a>
+                        <a href="acompanantes.php">Acompañantes</a>
                     </li>
                     <li>
                         <a href="sociales-deportivos.php">Sociales y Deportivos</a>
@@ -107,7 +107,7 @@
                     <!-- Fin Fila -->
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-5 col-md-offset-1">
                             
                             <div class="form-group">
                                 <label for="">Nombre del Evento</label>

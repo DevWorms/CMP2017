@@ -10,10 +10,21 @@ import UIKit
 
 class MapaSimpleViewController: UIViewController {
 
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var webView: UIWebView!
+    
+    var tipoMapa = 0
+    // 1 clima
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "fondo.png")!)
+        
+        if self.tipoMapa == 1 {
+            titleLabel.text = "Clima"
+            webView.loadRequest(URLRequest(url: URL(string: "https://es-us.noticias.yahoo.com/clima")!))
+        }
     }
 
     override func didReceiveMemoryWarning() {

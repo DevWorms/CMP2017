@@ -27,9 +27,7 @@ class MenuPrincipalViewController: UIViewController {
         let navBackgroundImage:UIImage! = UIImage(named: "10Pleca")
         
         let nav = self.navigationController?.navigationBar
-        
         nav?.tintColor = UIColor.white
-        
         nav!.setBackgroundImage(navBackgroundImage, for:.default)
         
         ///
@@ -42,6 +40,13 @@ class MenuPrincipalViewController: UIViewController {
             conoceBtn.isEnabled = false
             mapaBtn.isEnabled = false
             socialesBtn.isEnabled = false
+            
+            programaBtn.setImage(UIImage(named: "01Programa-1.png"), for: .normal)
+            acompañantesBtn.setImage(UIImage(named: "03Eventos_Acompañantes-1.png"), for: .normal)
+            transportacionBtn.setImage(UIImage(named: "07Transportacion-1.png"), for: .normal)
+            conoceBtn.setImage(UIImage(named: "08Conoce_Puebla-1.png"), for: .normal)
+            mapaBtn.setImage(UIImage(named: "06Mapas-1.png"), for: .normal)
+            socialesBtn.setImage(UIImage(named: "04Eventos_Deportivos-1.png"), for: .normal)
         }
     }
 

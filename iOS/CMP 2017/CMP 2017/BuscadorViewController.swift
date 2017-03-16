@@ -15,19 +15,24 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "fondo.png")!)
         
         let navBackgroundImage:UIImage! = UIImage(named: "10Pleca")
         
         let nav = self.navigationController?.navigationBar
-        
         nav?.tintColor = UIColor.white
-        
         nav!.setBackgroundImage(navBackgroundImage, for:.default)
+        
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeKeyBoard(sender:)))
+        swipeDown.direction = UISwipeGestureRecognizerDirection.down
+        self.view.addGestureRecognizer(swipeDown)
     }
 
+    func swipeKeyBoard(sender:AnyObject) {
+        //Baja el textField
+        self.view.endEditing(true)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

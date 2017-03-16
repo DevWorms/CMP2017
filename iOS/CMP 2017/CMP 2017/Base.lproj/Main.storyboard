@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
@@ -106,7 +105,7 @@
                                 <rect key="frame" x="34" y="226" width="306" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="df3-NP-SoI">
                                 <rect key="frame" x="107" y="405" width="160" height="51"/>
@@ -115,7 +114,7 @@
                                 </constraints>
                                 <state key="normal" image="02Boton_Iniciar_Sesion"/>
                                 <connections>
-                                    <segue destination="ojg-qp-URi" kind="show" identifier="login" id="8n2-GQ-4cP"/>
+                                    <action selector="login:" destination="6BY-nS-9AL" eventType="touchUpInside" id="Efc-7b-B2f"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -138,6 +137,11 @@
                     <navigationItem key="navigationItem" id="frG-0b-zBp">
                         <barButtonItem key="backBarButtonItem" title="Iniciar Sesión" id="CUm-gt-jvy"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="mail" destination="o1G-wA-Mw5" id="bCo-5R-wCZ"/>
+                        <outlet property="password" destination="kmt-at-HRi" id="wbl-aQ-6FU"/>
+                        <segue destination="ojg-qp-URi" kind="show" identifier="login" id="53G-0t-Pma"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IXx-oP-jB9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -202,7 +206,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w8Q-sZ-o9x">
                                 <rect key="frame" x="213" y="270" width="131" height="118"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="04Eventos_Sociales.Deportivos"/>
+                                <state key="normal" title="Button" image="04Eventos_Deportivos"/>
                                 <connections>
                                     <segue destination="qjL-Eh-RgU" kind="show" id="NTs-h7-V0z"/>
                                 </connections>
@@ -402,7 +406,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Do2-V8-ewb" id="eoe-Sh-Qg8">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
@@ -849,6 +853,11 @@
                                 <color key="textColor" red="0.16038369599999999" green="0.32152638290000002" blue="0.6560517132" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1qv-uI-9Rc">
+                                <rect key="frame" x="0.0" y="118" width="375" height="549"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -869,10 +878,14 @@
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="titleLabel" destination="laU-II-TsK" id="hxf-Wr-tuZ"/>
+                        <outlet property="webView" destination="1qv-uI-9Rc" id="RbN-Ji-mpj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2o0-T0-ufQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4158" y="1593"/>
+            <point key="canvasLocation" x="4157.6000000000004" y="1592.6536731634185"/>
         </scene>
         <!--Detalle View Controller-->
         <scene sceneID="27Y-cd-QtO">
@@ -1343,6 +1356,11 @@
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="clave" destination="gcG-Q7-w8i" id="GXn-Os-5Fb"/>
+                        <outlet property="lastName" destination="9rn-rl-liJ" id="WmW-yn-UX3"/>
+                        <outlet property="name" destination="hbx-Ru-tkW" id="bDS-p1-zyp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yO1-0m-F6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1455,6 +1473,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="HkN-oj-dTO"/>
+                    <connections>
+                        <outlet property="claveInscripcion" destination="qMM-u4-tOo" id="dVS-td-F5Y"/>
+                        <outlet property="lastName" destination="IwX-sW-IaN" id="Cb7-AQ-0Si"/>
+                        <outlet property="mail" destination="Vx0-0F-gNJ" id="fh2-8d-0fs"/>
+                        <outlet property="name" destination="Odk-iS-2PJ" id="bhh-KH-Bgo"/>
+                        <outlet property="password" destination="mo9-fP-e45" id="xCp-8U-hQ8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fbf-eP-Tj0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1484,7 +1509,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="04Boton_Mapa_Puebla"/>
                                 <connections>
-                                    <segue destination="Ike-SW-6Fr" kind="show" id="dXc-Ql-wm5"/>
+                                    <action selector="mapaPuebla:" destination="cVd-oF-sTZ" eventType="touchUpInside" id="e6t-kW-tjC"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IWo-BY-fJw">
@@ -1499,6 +1524,9 @@
                                 <rect key="frame" x="209" y="377" width="150" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="06Clima"/>
+                                <connections>
+                                    <action selector="clima:" destination="cVd-oF-sTZ" eventType="touchUpInside" id="Skg-nx-gLv"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LOc-6P-aJx">
                                 <rect key="frame" x="16" y="377" width="150" height="55"/>
@@ -1528,6 +1556,9 @@
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <segue destination="Ike-SW-6Fr" kind="show" identifier="clima" id="fdM-hd-29f"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gK9-MU-KEK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1638,7 +1669,7 @@
         <image name="04Boton_Mapa_Puebla" width="489" height="170"/>
         <image name="04Boton_Revisar__Vuelos" width="841" height="158"/>
         <image name="04Boton_llegado_Aeropuerto" width="841" height="158"/>
-        <image name="04Eventos_Sociales.Deportivos" width="390" height="346"/>
+        <image name="04Eventos_Deportivos" width="390" height="346"/>
         <image name="04Foto_Puebla" width="1235" height="429"/>
         <image name="04Fotografia" width="1242" height="552"/>
         <image name="04Mis_Encuestas" width="70" height="56"/>
@@ -1673,10 +1704,10 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ycn-As-Ut0"/>
-        <segue reference="Euz-ZR-EEI"/>
+        <segue reference="Txx-0u-Wbb"/>
         <segue reference="c93-xJ-B5s"/>
         <segue reference="NTs-h7-V0z"/>
+        <segue reference="fdM-hd-29f"/>
         <segue reference="nTd-TS-IRq"/>
-        <segue reference="dXc-Ql-wm5"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -57,3 +57,9 @@ $app->post('/api/acompanantes/create', ['middleware' => 'cors', 'uses' => 'Acomp
 $app->get('/api/acompanantes/all/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'AcompanantesController@getAll']);
 $app->post('/api/acompanantes/search', ['middleware' => 'cors', 'uses' => 'AcompanantesController@getFiltro']);
 $app->get('/api/acompanantes/detail/{user_id}/{api_key}/{programa_id}', ['middleware' => 'cors', 'uses' => 'AcompanantesController@getPrograma']);
+
+
+/*
+ * Archivo
+ */
+$app->post('/api/fileupload',['middleware' => 'cors', 'uses' => 'FileController@upload']);

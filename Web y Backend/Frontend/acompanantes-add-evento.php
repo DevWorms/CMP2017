@@ -8,7 +8,7 @@
     <meta name="description" content="CMP 2017 - ADMIN">
     <meta name="author" content="DevWorms">
 
-    <title>CMP 2017 - Acompañantes</title>
+    <title>CMP 2017 - Agregar Evento</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -94,84 +94,74 @@
 
             <div class="container-fluid">
                 
-                <div class="row page-header">
-                    <div class="col-xs-12 col-md-6">
-                        <form action=""> 
-                          <div class="form-group row"> 
-                            <div class="col-md-10"> 
-                              
-                              <form name="" action="" method="post" class="form-inline" role="form">
-                                <div class="input-group">
-                                  <div class="input-group-btn">
-                                      <button class="btn btn-primary" type="button"><i class="glyphicon glyphicon-search"></i></button>
-                                  </div>
-                                  <input type="text" class="form-control" placeholder="Buscar ..." name="" id="">
-                                </div>
-                              </form>
-                              
+                <form action="" method="" id="" name="" role="">    
+                    
+                    <div class="row page-header">
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <h4><a href="#">Eventos Acompañantes</a></h4>
+                        </div>
+
+                        <div class="col-xs-12 col-md-6" align="right">
+                            <button type="submit" class="btn btn-default" name="" id=""><i class="fa fa-plus-circle"></i> Agregar Evento</button>   
+                        </div>
+                    </div>
+                    <!-- Fin Fila -->
+
+                    <div class="row">
+                        <div class="col-md-5 col-md-offset-1">
+                            
+                            <div class="form-group">
+                                <label for="">Nombre del Evento</label>
+                                    <br>
+                                <input type="" name="" id="" class="form-control">
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                                <label for="">Lugar</label>
+                                    <br>
+                                <input type="" name="" id="" class="form-control">
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                                <label for="">Horario</label>
+                                    <br>
+                                <input type="time" name="" id="" class="form-control">
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                                <label for="">Recomendaciones</label>
+                                    <br>
+                                <textarea class="form-control" rows="5" id=""></textarea>
+                            </div>
+                            <br>                            
+                        </div>
+                        <div class="col-md-6"></div>
+                    </div>
+                    <!-- Fin Fila -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <div class="form-group">
+                                <label for="">Agregar ubicación en el mapa</label>
+                                    <br><br>
+                                <button class="btn btn-default">Examinar</button>
                             </div> 
-                          </div>  
-                        </form> 
-                    </div>
+                        </div>
 
-                    <div class="col-xs-12 col-md-6" align="right">
-                        <a href="acompanantes-add-evento.php" class="btn btn-default"><i class="fa fa-plus-circle"></i> Agregar Evento</a>   
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-group">
+                                <label for="">Agregar foto del evento</label>
+                                    <br><br>
+                                <button class="btn btn-default">Examinar</button>
+                            </div> 
+                        </div>
                     </div>
-                </div>
-                <!-- Fin Fila -->
-
-                <br>
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1">
-                        <table class="table table-striped">
-                            <thead>
-                              <tr>
-                                <th>Nombre del Evento</th>
-                                <th></th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td>Visita Museo</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Caminata Centro</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Visita Museo</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Caminata Centro</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Visita Museo</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Caminata Centro</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
-                              </tr>
-                            </tbody>
-                        </table>
-                    </div>    
-                </div>
-                <!-- Fin Fila -->
-                
-                <br>
-                <div class="row">
-                    <div class="col-xs-6">
-                        <p>Pag. 1</p>
-                    </div>
-                    <div class="col-xs-6" align="right">
-                        <p>Ver todos</p>
-                    </div>
-                </div>
-                <!-- Fin Fila -->
-                
+                    <br>
+                    <!-- Fin Fila -->
+                </form>
             </div>
             <!-- /.container-fluid -->
 

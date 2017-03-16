@@ -8,7 +8,7 @@
     <meta name="description" content="CMP 2017 - ADMIN">
     <meta name="author" content="DevWorms">
 
-    <title>CMP 2017 - Acompañantes</title>
+    <title>CMP 2017 - Eventos Sociales y Deportivos</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -66,10 +66,10 @@
                     <li>
                         <a href="expositores.php">Expositores</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="acompanantes.php">Acompañantes</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="sociales-deportivos.php">Sociales y Deportivos</a>
                     </li>
                     <li>
@@ -115,7 +115,7 @@
                     </div>
 
                     <div class="col-xs-12 col-md-6" align="right">
-                        <a href="acompanantes-add-evento.php" class="btn btn-default"><i class="fa fa-plus-circle"></i> Agregar Evento</a>   
+                        <a href="syd-add-evento.php" class="btn btn-default"><i class="fa fa-plus-circle"></i> Agregar Evento</a>   
                     </div>
                 </div>
                 <!-- Fin Fila -->
@@ -132,27 +132,27 @@
                             </thead>
                             <tbody>
                               <tr>
-                                <td>Visita Museo</td>
+                                <td>Torneo de Golf</td>
                                 <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
                               </tr>
                               <tr>
-                                <td>Caminata Centro</td>
+                                <td>Carrera 5 KM</td>
                                 <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
                               </tr>
                               <tr>
-                                <td>Visita Museo</td>
+                                <td>Torneo de Golf</td>
                                 <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
                               </tr>
                               <tr>
-                                <td>Caminata Centro</td>
+                                <td>Carrera 5 KM</td>
                                 <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
                               </tr>
                               <tr>
-                                <td>Visita Museo</td>
+                                <td>Torneo de Golf</td>
                                 <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
                               </tr>
                               <tr>
-                                <td>Caminata Centro</td>
+                                <td>Carrera 5 KM</td>
                                 <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
                               </tr>
                             </tbody>

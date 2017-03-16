@@ -29,7 +29,8 @@ class ExpositorController extends Controller {
 
     private function messages() {
         return [
-            'required' => 'Ingresa un valor para :attribute.'
+            'required' => 'Ingresa un valor para :attribute.',
+            'numeric' => "Ingresa un número de stand válido"
         ];
     }
 
@@ -52,12 +53,14 @@ class ExpositorController extends Controller {
             $acerca = $request->get('acerca');
             $latitude = $request->get('latitude');
             $longitude = $request->get('longitude');
+            $stand = $request->get('stand');
 
             $validator = Validator::make($request->all(), [
                 'nombre' => 'required',
                 'email' => 'required',
                 'telefono' => 'required',
-                'acerca' => 'required'
+                'acerca' => 'required',
+                'stand' => 'required|numeric'
             ], $this->messages());
 
             if ($validator->fails()) {
@@ -75,7 +78,8 @@ class ExpositorController extends Controller {
                     'telefono' => $telefono,
                     'acerca' => $acerca,
                     'latitude' => $latitude,
-                    'longitude' => $longitude
+                    'longitude' => $longitude,
+                    'stand' => $stand
                 ]);
 
                 $res['status'] = 1;
@@ -121,11 +125,31 @@ class ExpositorController extends Controller {
     public function getByName($user_id, $api_key) {
         try {
             User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
-            $expositor = Expositor::orderBy('nombre', 'asc')->get();
+            $expositores = Expositor::orderBy('nombre', 'asc')->get();
 
             $res['status'] = 1;
             $res['mensaje'] = "success";
-            $res['expositor'] = $expositor;
+            $res['expositores'] = $expositores;
+            return response()->json($res, 200);
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    public function getByStand($user_id, $api_key) {
+        try {
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+            $expositores = Expositor::orderBy('stand', 'asc')->get();
+
+            $res['status'] = 1;
+            $res['mensaje'] = "success";
+            $res['expositores'] = $expositores;
             return response()->json($res, 200);
         } catch (ModelNotFoundException $ex) {
             $res['status'] = 0;

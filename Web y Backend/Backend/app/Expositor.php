@@ -25,7 +25,7 @@ class Expositor extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'user_id', 'url', 'nombre', 'pdf_file', 'logo_file', 'email', 'telefono', 'acerca', 'latitude', 'longitude'
+        'id', 'user_id', 'url', 'nombre', 'pdf_file', 'logo_file', 'stand', 'email', 'telefono', 'acerca', 'latitude', 'longitude'
     ];
 
     /**

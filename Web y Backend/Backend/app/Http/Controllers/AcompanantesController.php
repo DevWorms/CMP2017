@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
 
-class ProgramaController extends Controller {
+class AcompanantesController extends Controller {
     /**
      * UserController constructor.
      */
@@ -93,12 +93,12 @@ class ProgramaController extends Controller {
                         'fecha' => $fecha,
                         'hora_inicio' => $hora_inicio,
                         'hora_fin' => $hora_fin,
-                        'type' => 1
+                        'type' => 2
                     ]);
 
                     $res['status'] = 1;
                     $res['mensaje'] = "Evento creado correctamente";
-                    $res['evento'] = $programa;
+                    $res['acompanante'] = $programa;
                     return response()->json($res, 201);
                 } else {
                     $res['status'] = 0;
@@ -120,20 +120,16 @@ class ProgramaController extends Controller {
     public function getAll($user_id, $api_key) {
         try {
             User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
-            $programas = Programa::where('type', 1)->orderBy('fecha', 'asc')->get();
+            $programas = Programa::where('type', 2)->orderBy('fecha', 'asc')->get();
 
             $res['status'] = 1;
             $res['mensaje'] = "success";
-            $res['programas'] = $programas;
+            $res['acompanantes'] = $programas;
             return response()->json($res, 200);
         } catch (ModelNotFoundException $ex) {
             $res['status'] = 0;
             $res['mensaje'] = "Error de credenciales";
             return response()->json($res, 400);
-        } catch (FatalThrowableError $ex) {
-            $res['status'] = 0;
-            $res['mensaje'] = $ex->getMessage();
-            return response()->json($res, 500);
         } catch (\Exception $ex) {
             $res['status'] = 0;
             $res['mensaje'] = $ex->getMessage();
@@ -154,7 +150,7 @@ class ProgramaController extends Controller {
             }
             $tipo = $request->get('categoria_id');
 
-            $programas = Programa::where('type', 1)->get();
+            $programas = Programa::where('type', 2)->get();
 
             if ($fecha) {
                 $programas = $programas->where('fecha', $fecha)->values();
@@ -173,16 +169,12 @@ class ProgramaController extends Controller {
 
             $res['status'] = 1;
             $res['mensaje'] = "success";
-            $res['programas'] = $programas;
+            $res['acompanantes'] = $programas;
             return response()->json($res, 200);
         } catch (ModelNotFoundException $ex) {
             $res['status'] = 0;
             $res['mensaje'] = "Error de credenciales";
             return response()->json($res, 400);
-        } catch (FatalThrowableError $ex) {
-            $res['status'] = 0;
-            $res['mensaje'] = $ex->getMessage();
-            return response()->json($res, 500);
         } catch (\Exception $ex) {
             $res['status'] = 0;
             $res['mensaje'] = $ex->getMessage();
@@ -197,7 +189,7 @@ class ProgramaController extends Controller {
             if ($programa) {
                 $res['status'] = 1;
                 $res['mensaje'] = "success";
-                $res['programa'] = $programa;
+                $res['acompanante'] = $programa;
                 return response()->json($res, 200);
             } else {
                 $res['status'] = 0;

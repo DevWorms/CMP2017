@@ -12,13 +12,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Programa extends Model
 {
+    protected $table = "eventos";
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'id', 'categoria_id', 'foto_id', 'user_id', 'nombre', 'lugar', 'recomendaciones', 'latitude', 'longitude', 'fecha'
+        'id', 'categoria_id', 'foto_id', 'user_id', 'nombre', 'lugar', 'recomendaciones', 'latitude', 'longitude',
+        'fecha', 'hora_inicio', 'hora_fin'
     ];
 
     /**

@@ -18,6 +18,7 @@ class Expositor extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedInteger('pdf_file');
             $table->unsignedInteger('logo_file');
+            $table->integer('stand');
             $table->string('nombre');
             $table->string('email');
             $table->string('url');

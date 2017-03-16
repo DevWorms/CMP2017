@@ -8,9 +8,12 @@
 	                                                          DevWorms - 2017                                         
    ========================================================================== */
 
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 body {
+    font-family: 'Roboto', sans-serif;
     margin-top: 100px;
-    background-color: #222;
+    background-color: #FFFFFF;
 }
 
 @media(min-width:768px) {
@@ -162,4 +165,17 @@ ul.alert-dropdown {
 .page-header__2{
     margin-top: 100px;
     margin-bottom: 30%;
+}
+
+.caja{
+    margin-top: 50px;
+    background: #efefef;
+    padding: 10px;
+    height: 150px;
+    width: 75%;
+    border-radius: 10px
+}
+
+.cajaspace{
+    margin-top: 50px;
 }

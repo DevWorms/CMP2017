@@ -8,7 +8,7 @@
     <meta name="description" content="CMP 2017 - ADMIN">
     <meta name="author" content="DevWorms">
 
-    <title>CMP 2017 - Mapa Recinto</title>
+    <title>CMP 2017 - Teléfonos de Emergencia y Taxis</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -75,13 +75,13 @@
                     <li>
                         <a href="patrocinadores.php">Patrocinadores</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="mapa.php">Mapa</a>
                     </li>
                     <li>
                         <a href="transportacion.php">Transportación</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="puebla.php">Puebla</a>
                     </li>
                 </ul>
@@ -94,46 +94,117 @@
 
             <div class="container-fluid">
                 
-                <div class="row page-header">
-                   <div class="col-xs-12 col-md-offset-1 col-md-4">
-                        <h3><a href="">Mapa</a></h3>
-                    </div> 
-                </div>
-                <!-- Fin Fila -->
-
-                <div class="row">
-                    <div class="col-xs-12 col-md-offset-1 col-md-4">
-                        <h4>Mapa del recinto</h4>
-                    </div>
-                </div>
-                <br><br>
-                <!-- Fin Fila -->
-
                 <form action="" method="" id="" name="" role="">    
+                    <div class="row page-header">
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <h4><a href="#">Puebla</a></h4>
+                        </div>
+
+                        <div class="col-xs-12 col-md-5" align="right">
+                            <h4>Teléfonos</h4>   
+                        </div>
+                    </div>
+                    <!-- Fin Fila -->
                     
                     <div class="row">
-                        <div class="col-xs-12 col-md-offset-1 col-md-5">
-                            <div class="form-group">
-                                <label for="">Seleccionar PDF</label>
-                                    <br>
-                                <input type="" name="" id="" class="form-control">
-                                    <br>
-                                <button class="btn btn-default">Seleccionar</button>
-                            </div>
-                            <br> 
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <h4><b>Teléfono 1</b></h4>
                         </div>
                     </div>
+                    <br>
                     <!-- Fin Fila -->
 
                     <div class="row">
-                        <div class="col-xs-12 col-md-offset-1 col-md-4">
-                            <button type="submit" class="btn btn-primary btn-lg" name="" id="">Guardar Mapa</button> 
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <div class="form-group">
+                                <label for="">Titulo</label>
+                                    <br>
+                                <input type="" name="" id="" class="form-control">
+                            </div>
+                            <br>
+                        </div>
+
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <div class="form-group">
+                                <label for="">Imágen (fotográfia)</label>
+                                    <br><br>
+                                <button class="btn btn-default">Seleccionar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- Fin Fila -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <div class="form-group">
+                                <label for="">Teléfono</label>
+                                    <br>
+                                <input type="" name="" id="" class="form-control">
+                            </div>
+                            <br>
                         </div>
                     </div>
                     <!-- Fin Fila -->
-                <form action=""></form>
+                    
+                    <div class="row">
+                        <col-xs-12 class="col-md-2 col-md-offset-1">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block" name="" id="">Guardar</button>    
+                        </col-xs-12>
+                    </div>
+                </form>
+
+                <br><hr>
                 
-                
+                <form action="" method="" id="" name="" role="">    
+                    <div class="row">
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <h4><b>Teléfono 2</b></h4>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- Fin Fila -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <div class="form-group">
+                                <label for="">Titulo</label>
+                                    <br>
+                                <input type="" name="" id="" class="form-control">
+                            </div>
+                            <br>
+                        </div>
+
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <div class="form-group">
+                                <label for="">Imágen (fotográfia)</label>
+                                    <br><br>
+                                <button class="btn btn-default">Seleccionar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- Fin Fila -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <div class="form-group">
+                                <label for="">Teléfono</label>
+                                    <br>
+                                <input type="" name="" id="" class="form-control">
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                    <!-- Fin Fila -->
+                    
+                    <div class="row">
+                        <col-xs-12 class="col-md-2 col-md-offset-1">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block" name="" id="">Guardar</button>    
+                        </col-xs-12>
+                    </div>
+                </form>
+
             </div>
             <!-- /.container-fluid -->
 

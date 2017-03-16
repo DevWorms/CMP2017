@@ -8,7 +8,7 @@
     <meta name="description" content="CMP 2017 - ADMIN">
     <meta name="author" content="DevWorms">
 
-    <title>CMP 2017 - Mapa Recinto</title>
+    <title>CMP 2017 - Puebla</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -75,13 +75,13 @@
                     <li>
                         <a href="patrocinadores.php">Patrocinadores</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="mapa.php">Mapa</a>
                     </li>
                     <li>
                         <a href="transportacion.php">Transportación</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="puebla.php">Puebla</a>
                     </li>
                 </ul>
@@ -95,43 +95,35 @@
             <div class="container-fluid">
                 
                 <div class="row page-header">
-                   <div class="col-xs-12 col-md-offset-1 col-md-4">
-                        <h3><a href="">Mapa</a></h3>
+                   <div class="col-md-offset-1">
+                        <h3>Puebla</h3>
                     </div> 
                 </div>
                 <!-- Fin Fila -->
 
                 <div class="row">
-                    <div class="col-xs-12 col-md-offset-1 col-md-4">
-                        <h4>Mapa del recinto</h4>
+                    <div class="col-xs-5 col-xs-offset-1" align="center">
+                        <div class="caja">
+                            <a href="puebla-interes.php"><h4 class="cajaspace">Sitios de Interés</h4></a>
+                        </div>         
+                    </div>
+
+                    <div class="col-xs-5" align="center">
+                        <div class="caja">
+                            <a href="puebla-mapa.php"><h4 class="cajaspace">Mapa de Puebla</h4></a>
+                        </div>
                     </div>
                 </div>
-                <br><br>
                 <!-- Fin Fila -->
 
-                <form action="" method="" id="" name="" role="">    
-                    
-                    <div class="row">
-                        <div class="col-xs-12 col-md-offset-1 col-md-5">
-                            <div class="form-group">
-                                <label for="">Seleccionar PDF</label>
-                                    <br>
-                                <input type="" name="" id="" class="form-control">
-                                    <br>
-                                <button class="btn btn-default">Seleccionar</button>
-                            </div>
-                            <br> 
-                        </div>
+                <div class="row">
+                    <div class="col-xs-5 col-xs-offset-1" align="center">
+                        <div class="caja">
+                            <a href="puebla-tels.php"><h4 class="cajaspace">Teléfonos de<br>Emergencia y Taxis</h4></a>
+                        </div>         
                     </div>
-                    <!-- Fin Fila -->
-
-                    <div class="row">
-                        <div class="col-xs-12 col-md-offset-1 col-md-4">
-                            <button type="submit" class="btn btn-primary btn-lg" name="" id="">Guardar Mapa</button> 
-                        </div>
-                    </div>
-                    <!-- Fin Fila -->
-                <form action=""></form>
+                </div>
+                <!-- Fin Fila -->
                 
                 
             </div>

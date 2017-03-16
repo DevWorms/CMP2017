@@ -8,7 +8,7 @@
     <meta name="description" content="CMP 2017 - ADMIN">
     <meta name="author" content="DevWorms">
 
-    <title>CMP 2017 - Agregar Transportación</title>
+    <title>CMP 2017 - Puebla, Sitios de Interes</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -78,10 +78,10 @@
                     <li>
                         <a href="mapa.php">Mapa</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="transportacion.php">Transportación</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="puebla.php">Puebla</a>
                     </li>
                 </ul>
@@ -97,7 +97,7 @@
                 <form action="" method="" id="" name="" role="">    
                     <div class="row page-header">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
-                            <h4><a href="#">Transportación</a></h4>
+                            <h4><a href="#">Puebla</a></h4>
                         </div>
 
                         <div class="col-xs-12 col-md-5" align="right">
@@ -108,7 +108,7 @@
                     
                     <div class="row">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
-                            <h4><b>Ruta 1</b></h4>
+                            <h4><b>Sitio 1</b></h4>
                         </div>
                     </div>
                     <br>
@@ -124,11 +124,31 @@
                             <br>
                         </div>
 
+                        <div class="col-xs-12 col-md-5">
+                            <div class="form-group">
+                                <label for="">Google Maps Link</label>
+                                    <br>
+                                <input type="" name="" id="" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- Fin Fila -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <div class="form-group">
+                                <label for="">Descripción (300 caractéres)</label>
+                                    <br>
+                                <textarea class="form-control" rows="5" id=""></textarea>
+                            </div> 
+                        </div>
+
                         <div class="col-xs-12 col-md-6">
                             <div class="form-group">
-                                <label for="">Agregar archivo PDF</label>
-                                    <br>
-                                <button class="btn btn-default">Examinar</button>
+                                <label for="">Imágen (fotográfia)</label>
+                                    <br><br>
+                                <button class="btn btn-default">Seleccionar</button>
                             </div> 
                         </div>
                     </div>
@@ -138,9 +158,9 @@
                     <div class="row">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
                             <div class="form-group">
-                                <label for="">Descripción (100 caractéres)</label>
+                                <label for="">URL</label>
                                     <br>
-                                <textarea class="form-control" rows="3" id=""></textarea>
+                                <input type="" name="" id="" class="form-control">
                             </div>
                             <br>
                         </div>
@@ -155,11 +175,12 @@
                 </form>
 
                 <br><hr>
-
+                
                 <form action="" method="" id="" name="" role="">    
+                    
                     <div class="row">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
-                            <h4><b>Ruta 2</b></h4>
+                            <h4><b>Sitio 2</b></h4>
                         </div>
                     </div>
                     <br>
@@ -175,11 +196,31 @@
                             <br>
                         </div>
 
+                        <div class="col-xs-12 col-md-5">
+                            <div class="form-group">
+                                <label for="">Google Maps Link</label>
+                                    <br>
+                                <input type="" name="" id="" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- Fin Fila -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <div class="form-group">
+                                <label for="">Descripción (300 caractéres)</label>
+                                    <br>
+                                <textarea class="form-control" rows="5" id=""></textarea>
+                            </div> 
+                        </div>
+
                         <div class="col-xs-12 col-md-6">
                             <div class="form-group">
-                                <label for="">Agregar archivo PDF</label>
-                                    <br>
-                                <button class="btn btn-default">Examinar</button>
+                                <label for="">Imágen (fotográfia)</label>
+                                    <br><br>
+                                <button class="btn btn-default">Seleccionar</button>
                             </div> 
                         </div>
                     </div>
@@ -189,9 +230,9 @@
                     <div class="row">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
                             <div class="form-group">
-                                <label for="">Descripción (100 caractéres)</label>
+                                <label for="">URL</label>
                                     <br>
-                                <textarea class="form-control" rows="3" id=""></textarea>
+                                <input type="" name="" id="" class="form-control">
                             </div>
                             <br>
                         </div>
@@ -205,6 +246,7 @@
                     </div>
                     <br><br>
                 </form>
+
             </div>
             <!-- /.container-fluid -->
 

@@ -8,7 +8,7 @@
     <meta name="description" content="CMP 2017 - ADMIN">
     <meta name="author" content="DevWorms">
 
-    <title>CMP 2017 - Mapa Recinto</title>
+    <title>CMP 2017 - Puebla, mapa</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -75,13 +75,13 @@
                     <li>
                         <a href="patrocinadores.php">Patrocinadores</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="mapa.php">Mapa</a>
                     </li>
                     <li>
                         <a href="transportacion.php">Transportación</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="puebla.php">Puebla</a>
                     </li>
                 </ul>
@@ -96,14 +96,14 @@
                 
                 <div class="row page-header">
                    <div class="col-xs-12 col-md-offset-1 col-md-4">
-                        <h3><a href="">Mapa</a></h3>
+                        <h3><a href="">Puebla</a></h3>
                     </div> 
                 </div>
                 <!-- Fin Fila -->
 
                 <div class="row">
                     <div class="col-xs-12 col-md-offset-1 col-md-4">
-                        <h4>Mapa del recinto</h4>
+                        <h4>Mapa del Puebla</h4>
                     </div>
                 </div>
                 <br><br>

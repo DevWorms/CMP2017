@@ -61,28 +61,28 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>
-                        <a href="programa.html">Programa</a>
+                        <a href="programa.php">Programa</a>
                     </li>
                     <li class="active">
-                        <a href="expositores.html">Expositores</a>
+                        <a href="expositores.php">Expositores</a>
                     </li>
                     <li>
-                        <a href="acompañantes.html">Acompañantes</a>
+                        <a href="acompañantes.php">Acompañantes</a>
                     </li>
                     <li>
-                        <a href="sociales-deportivos.html">Sociales y Deportivos</a>
+                        <a href="sociales-deportivos.php">Sociales y Deportivos</a>
                     </li>
                     <li>
-                        <a href="patrocinadores.html">Patrocinadores</a>
+                        <a href="patrocinadores.php">Patrocinadores</a>
                     </li>
                     <li>
-                        <a href="mapa.html">Mapa</a>
+                        <a href="mapa.php">Mapa</a>
                     </li>
                     <li>
-                        <a href="transportacion.html">Transportación</a>
+                        <a href="transportacion.php">Transportación</a>
                     </li>
                     <li>
-                        <a href="puebla.html">Puebla</a>
+                        <a href="puebla.php">Puebla</a>
                     </li>
                 </ul>
             </div>
@@ -115,7 +115,7 @@
                     </div>
 
                     <div class="col-xs-12 col-md-6" align="right">
-                        <a href="agregar-expositor.html" class="btn btn-default"><i class="fa fa-plus-circle"></i> Agregar Expositor</a>   
+                        <a href="agregar-expositor.php" class="btn btn-default"><i class="fa fa-plus-circle"></i> Agregar Expositor</a>   
                     </div>
                 </div>
                 <!-- Fin Fila -->

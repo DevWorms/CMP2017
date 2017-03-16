@@ -33,9 +33,10 @@ class FileController extends Controller
                     $response['mensaje'] = "El archivo excede el límite de 10mb";
                     return response()->json($response, 401);
                 } else {
-                    $request->file('archivo')->move($this->destinationPath,$file->getClientOriginalName());
+                    $uploadedFile = $request->file('archivo')->move($this->destinationPath,$file->getClientOriginalName());
                     $response['estado'] = 1;
-                    $response['mensaje'] = "Éxito";
+                    $response['mensaje'] = "Exito";
+                    $response['ruta'] = $uploadedFile->getPathname();
                     return response()->json($response, 200);
                 }
             } else {

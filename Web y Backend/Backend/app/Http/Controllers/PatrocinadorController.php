@@ -20,12 +20,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
 
-class ExpositorController extends Controller {
+class PatrocinadorController extends Controller {
     public $destinationPath = "./files/expositores/";
     public $url_server = "http://cmp.devworms.com";
 
     /**
-     * ExpositorController constructor.
+     * PatrocinadorController constructor.
      */
     public function __construct() {
     }
@@ -43,7 +43,7 @@ class ExpositorController extends Controller {
     }
 
     /**
-     * Crea un nuevo Expositor
+     * Crea un nuevo Patrocinador
      *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
@@ -61,7 +61,7 @@ class ExpositorController extends Controller {
             $acerca = $request->get('acerca');
             $latitude = $request->get('latitude');
             $longitude = $request->get('longitude');
-            $stand = $request->get('stand');
+            $tipo = $request->get('tipo');
 
             // Archivos del expositor
             $presentacion = $request->file('archivo_pdf');
@@ -74,7 +74,7 @@ class ExpositorController extends Controller {
                 'email' => 'required',
                 'telefono' => 'required',
                 'acerca' => 'required',
-                'stand' => 'required|numeric'
+                'tipo' => 'required'
             ], $this->messages());
 
             if ($validator->fails()) {
@@ -163,16 +163,17 @@ class ExpositorController extends Controller {
                     'acerca' => $acerca,
                     'latitude' => $latitude,
                     'longitude' => $longitude,
-                    'stand' => $stand,
+                    'tipo' => $tipo,
                     'pdf_file' => $pdf_id,
-                    'logo_file' => $logo_id
+                    'logo_file' => $logo_id,
+                    'is_expositor' => 0
                 ]);
 
-                $expositor = $this->returnExpositor($expositor);
+                $expositor = $this->returnPatrocinador($expositor);
 
                 $res['status'] = 1;
-                $res['mensaje'] = "Expositor creado correctamente";
-                $res['expositor'] = $expositor;
+                $res['mensaje'] = "Patrocinador creado correctamente";
+                $res['patrocinador'] = $expositor;
                 return response()->json($res, 201);
             }
         } catch (ModelNotFoundException $ex) {
@@ -191,7 +192,7 @@ class ExpositorController extends Controller {
     }
 
     /**
-     * Devuelve todos los expositores
+     * Devuelve todos los Patrocinadores
      *
      * @param $user_id
      * @param $api_key
@@ -200,15 +201,15 @@ class ExpositorController extends Controller {
     public function getAll($user_id, $api_key) {
         try {
             User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
-            $expositores = Expositor::where('is_expositor', 1)->get();
+            $expositores = Expositor::where('is_expositor', 0)->get();
 
             foreach ($expositores as $expositor) {
-                $expositor = $this->returnExpositor($expositor);
+                $expositor = $this->returnPatrocinador($expositor);
             }
 
             $res['status'] = 1;
             $res['mensaje'] = "success";
-            $res['expositores'] = $expositores;
+            $res['patrocinadores'] = $expositores;
             return response()->json($res, 200);
         } catch (ModelNotFoundException $ex) {
             $res['status'] = 0;
@@ -222,7 +223,7 @@ class ExpositorController extends Controller {
     }
 
     /**
-     * Devuelve todos los expositores en orden alfabético
+     * Devuelve todos los Patrocinadores en orden alfabético
      *
      * @param $user_id
      * @param $api_key
@@ -231,82 +232,15 @@ class ExpositorController extends Controller {
     public function getByName($user_id, $api_key) {
         try {
             User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
-            $expositores = Expositor::where('is_expositor', 1)->orderBy('nombre', 'asc')->get();
+            $expositores = Expositor::where('is_expositor', 0)->orderBy('nombre', 'asc')->get();
 
             foreach ($expositores as $expositor) {
-                $expositor = $this->returnExpositor($expositor);
+                $expositor = $this->returnPatrocinador($expositor);
             }
 
             $res['status'] = 1;
             $res['mensaje'] = "success";
-            $res['expositores'] = $expositores;
-            return response()->json($res, 200);
-        } catch (ModelNotFoundException $ex) {
-            $res['status'] = 0;
-            $res['mensaje'] = "Error de credenciales";
-            return response()->json($res, 400);
-        } catch (\Exception $ex) {
-            $res['status'] = 0;
-            $res['mensaje'] = $ex->getMessage();
-            return response()->json($res, 500);
-        }
-    }
-
-    /**
-     * Devuelve todos los expositores en orden de stand
-     *
-     * @param $user_id
-     * @param $api_key
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getByStand($user_id, $api_key) {
-        try {
-            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
-            $expositores = Expositor::where('is_expositor', 1)->orderBy('stand', 'asc')->get();
-
-            foreach ($expositores as $expositor) {
-                $expositor = $this->returnExpositor($expositor);
-            }
-
-            $res['status'] = 1;
-            $res['mensaje'] = "success";
-            $res['expositores'] = $expositores;
-            return response()->json($res, 200);
-        } catch (ModelNotFoundException $ex) {
-            $res['status'] = 0;
-            $res['mensaje'] = "Error de credenciales";
-            return response()->json($res, 400);
-        } catch (\Exception $ex) {
-            $res['status'] = 0;
-            $res['mensaje'] = $ex->getMessage();
-            return response()->json($res, 500);
-        }
-    }
-
-    /**
-     * Devuelve mis expositores favoritos
-     *
-     * @param $user_id
-     * @param $api_key
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getMyExpositores($user_id, $api_key) {
-        try {
-            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
-            $mis_expositores = MisExpositores::where('user_id', $user_id)->get();
-            if ($mis_expositores) {
-                $expositores = Expositor::whereIn('id', $mis_expositores->pluck('expositor_id'))->get();
-            } else {
-                $expositores = [];
-            }
-
-            foreach ($expositores as $expositor) {
-                $expositor = $this->returnExpositor($expositor);
-            }
-
-            $res['status'] = 1;
-            $res['mensaje'] = "success";
-            $res['expositores'] = $expositores;
+            $res['patrocinadores'] = $expositores;
             return response()->json($res, 200);
         } catch (ModelNotFoundException $ex) {
             $res['status'] = 0;
@@ -327,16 +261,16 @@ class ExpositorController extends Controller {
      * @param $expositor_id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getExpositor($user_id, $api_key, $expositor_id) {
+    public function getPatrocinador($user_id, $api_key, $expositor_id) {
         try {
             User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
             $expositor = Expositor::where('id', $expositor_id)->first();
             if ($expositor) {
-                $expositor = $this->returnExpositor($expositor);
+                $expositor = $this->returnPatrocinador($expositor);
 
                 $res['status'] = 1;
                 $res['mensaje'] = "success";
-                $res['expositor'] = $expositor;
+                $res['patrocinador'] = $expositor;
                 return response()->json($res, 200);
             } else {
                 $res['status'] = 0;
@@ -347,10 +281,6 @@ class ExpositorController extends Controller {
             $res['status'] = 0;
             $res['mensaje'] = "Error de credenciales";
             return response()->json($res, 400);
-        } catch (FatalThrowableError $ex) {
-            $res['status'] = 0;
-            $res['mensaje'] = $ex->getMessage();
-            return response()->json($res, 500);
         } catch (\Exception $ex) {
             $res['status'] = 0;
             $res['mensaje'] = $ex->getMessage();
@@ -358,52 +288,7 @@ class ExpositorController extends Controller {
         }
     }
 
-    /**
-     * Agrega un expositor a la lista de favoritos
-     *
-     * @param $user_id
-     * @param $api_key
-     * @param $expositor_id
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function addFavorito($user_id, $api_key, $expositor_id) {
-        try {
-            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
-            $expositor = Expositor::where('id', $expositor_id)->first();
-            if ($expositor) {
-                $valida = MisExpositores::where(['user_id' => $user_id, 'expositor_id' => $expositor_id])->first();
-
-                if (!$valida) {
-                    MisExpositores::create([
-                        'user_id' => $user_id,
-                        'expositor_id' => $expositor_id
-                    ]);
-
-                    $res['status'] = 1;
-                    $res['mensaje'] = "Se agrego " . $expositor->nombre . " a tus favoritos";
-                    return response()->json($res, 200);
-                } else {
-                    $res['status'] = 0;
-                    $res['mensaje'] = "El Expositor ya se encuentra en tus favoritos";
-                    return response()->json($res, 400);
-                }
-            } else {
-                $res['status'] = 0;
-                $res['mensaje'] = "No se encontro el Expositor";
-                return response()->json($res, 400);
-            }
-        } catch (ModelNotFoundException $ex) {
-            $res['status'] = 0;
-            $res['mensaje'] = "Error de credenciales";
-            return response()->json($res, 400);
-        } catch (\Exception $ex) {
-            $res['status'] = 0;
-            $res['mensaje'] = $ex->getMessage();
-            return response()->json($res, 500);
-        }
-    }
-
-    public function returnExpositor($expositor) {
+    public function returnPatrocinador($expositor) {
         if ($expositor->pdf_file) {
             $expositor->pdf;
         } else {
@@ -418,7 +303,9 @@ class ExpositorController extends Controller {
 
         unset($expositor['pdf_file']);
         unset($expositor['logo_file']);
+        unset($expositor['stand']);
         unset($expositor['is_expositor']);
+
         return $expositor;
     }
 }

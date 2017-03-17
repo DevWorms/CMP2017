@@ -18,14 +18,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
 
-class ProgramaController extends Controller {
-    public $destinationPath = "./files/";
-    public $url_server = "http://cmp.devworms.com";
+class SocioDeportivosController extends Controller {
+
+    /**
+     * instancia de ProgramaController para la funcion returnPrograma
+     *
+     * @var ProgramaController
+     */
+    private $tool;
 
     /**
      * UserController constructor.
      */
     public function __construct() {
+        $this->tool = new ProgramaController();
     }
 
     /**
@@ -52,6 +58,9 @@ class ProgramaController extends Controller {
             User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
 
             $categoria_id = $request->get('categoria_id');
+            if (!$categoria_id) {
+                $categoria_id = null;
+            }
             $nombre = $request->get('nombre');
             $lugar = $request->get('lugar');
             $recomendaciones = $request->get('recomendaciones');
@@ -79,7 +88,6 @@ class ProgramaController extends Controller {
              */
             $validator = Validator::make($request->all(), [
                 'nombre' => 'required',
-                'categoria_id' => 'required',
                 'lugar' => 'required',
                 'recomendaciones' => 'required',
                 'fecha' => 'required'
@@ -93,74 +101,65 @@ class ProgramaController extends Controller {
                 $res['mensaje'] = $errors->first();
                 return response()->json($res, 400);
             } else {
-                // Valida que exista la categoría a la que pertenecerá
-                $id_cat = Categoria::where('id', $categoria_id)->first();
-                if ($id_cat) {
-                    $file = $request->file('archivo');
-                    // Si se adjunta un archivo, se sube
-                    if ($file) {
-                        $rules = array('file' => 'required|mimes:jpeg,jpg,gif,png|max:10000000');
-                        $validator = Validator::make(array('file' => $file), $rules);
+                $file = $request->file('archivo');
+                // Si se adjunta un archivo, se sube
+                if ($file) {
+                    $rules = array('file' => 'required|mimes:jpeg,jpg,gif,png,pdf|max:10000000');
+                    $validator = Validator::make(array('file' => $file), $rules);
 
-                        // Si el archivo tiene extensión valida
-                        if ($validator->passes()) {
-                            // Si el archivo es mayor a 10mb
-                            if ($file->getSize() > 10000000) {
-                                $response['estado'] = 0;
-                                $response['mensaje'] = "El archivo excede el límite de 10mb";
-                                return response()->json($response, 401);
-                            } else {
-                                // Si va bien, lo mueve a la carpeta y guarda el registro
-                                $path = $this->destinationPath . Carbon::now()->year . "/" . Carbon::now()->month . "/";
-                                $uploadedFile = $request->file('archivo')->move($path, uniqid() . "." . $file->getClientOriginalExtension());
-                                $url = $this->url_server . substr($uploadedFile->getPathname(), 1);
-
-                                $file_id = File::create([
-                                    'user_id' => $user_id,
-                                    'url' => $url,
-                                    'nombre' => $file->getClientOriginalName(),
-                                    'size' => $file->getClientSize()
-                                ]);
-
-                                $file_id = $file_id->id;
-                            }
-                        } else {
+                    // Si el archivo tiene extensión valida
+                    if ($validator->passes()) {
+                        // Si el archivo es mayor a 10mb
+                        if ($file->getSize() > 10000000) {
                             $response['estado'] = 0;
-                            $response['mensaje'] = "Error, tipo de archivo invalido";
-
+                            $response['mensaje'] = "El archivo excede el límite de 10mb";
                             return response()->json($response, 401);
+                        } else {
+                            // Si va bien, lo mueve a la carpeta y guarda el registro
+                            $path = $this->tool->destinationPath . Carbon::now()->year . "/" . Carbon::now()->month . "/";
+                            $uploadedFile = $request->file('archivo')->move($path, uniqid() . "." . $file->getClientOriginalExtension());
+                            $url = $this->tool->url_server . substr($uploadedFile->getPathname(), 1);
+
+                            $file_id = File::create([
+                                'user_id' => $user_id,
+                                'url' => $url,
+                                'nombre' => $file->getClientOriginalName(),
+                                'size' => $file->getClientSize()
+                            ]);
+
+                            $file_id = $file_id->id;
                         }
+                    } else {
+                        $response['estado'] = 0;
+                        $response['mensaje'] = "Error, tipo de archivo invalido";
+
+                        return response()->json($response, 401);
                     }
-
-                    // Crea el programa
-                    $programa = Programa::create([
-                        'user_id' => $user_id,
-                        'nombre' => $nombre,
-                        'categoria_id' => $categoria_id,
-                        'lugar' => $lugar,
-                        'recomendaciones' => $recomendaciones,
-                        'latitude' => $latitude,
-                        'longitude' => $longitude,
-                        'fecha' => $fecha,
-                        'hora_inicio' => $hora_inicio,
-                        'hora_fin' => $hora_fin,
-                        'type' => 1,
-                        'foto_id' => $file_id
-                    ]);
-
-                    // Devuelve el programa
-                    $programa = $this->returnPrograma($programa);
-
-                    $res['status'] = 1;
-                    $res['mensaje'] = "Evento creado correctamente";
-                    $res['evento'] = $programa;
-                    return response()->json($res, 201);
-
-                } else {
-                    $res['status'] = 0;
-                    $res['mensaje'] = "Categoría invalida";
-                    return response()->json($res, 400);
                 }
+
+                // Crea el programa
+                $programa = Programa::create([
+                    'user_id' => $user_id,
+                    'nombre' => $nombre,
+                    'categoria_id' => $categoria_id,
+                    'lugar' => $lugar,
+                    'recomendaciones' => $recomendaciones,
+                    'latitude' => $latitude,
+                    'longitude' => $longitude,
+                    'fecha' => $fecha,
+                    'hora_inicio' => $hora_inicio,
+                    'hora_fin' => $hora_fin,
+                    'type' => 3,
+                    'foto_id' => $file_id
+                ]);
+
+                // Devuelve el programa
+                $programa = $this->tool->returnPrograma($programa);
+
+                $res['status'] = 1;
+                $res['mensaje'] = "Evento creado correctamente";
+                $res['evento'] = $programa;
+                return response()->json($res, 201);
             }
         } catch (ModelNotFoundException $ex) {
             $res['status'] = 0;
@@ -183,24 +182,20 @@ class ProgramaController extends Controller {
     public function getAll($user_id, $api_key) {
         try {
             User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
-            $programas = Programa::where('type', 1)->orderBy('fecha', 'asc')->get();
+            $programas = Programa::where('type', 3)->orderBy('fecha', 'asc')->get();
 
             foreach ($programas as $programa) {
-                $programa = $this->returnPrograma($programa);
+                $programa = $this->tool->returnPrograma($programa);
             }
 
             $res['status'] = 1;
             $res['mensaje'] = "success";
-            $res['programas'] = $programas;
+            $res['eventos'] = $programas;
             return response()->json($res, 200);
         } catch (ModelNotFoundException $ex) {
             $res['status'] = 0;
             $res['mensaje'] = "Error de credenciales";
             return response()->json($res, 400);
-        } catch (FatalThrowableError $ex) {
-            $res['status'] = 0;
-            $res['mensaje'] = $ex->getMessage();
-            return response()->json($res, 500);
         } catch (\Exception $ex) {
             $res['status'] = 0;
             $res['mensaje'] = $ex->getMessage();
@@ -209,8 +204,6 @@ class ProgramaController extends Controller {
     }
 
     /**
-     * Devuelve los Eventos por filtro de fecha y categoría
-     *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
@@ -227,7 +220,7 @@ class ProgramaController extends Controller {
             }
             $tipo = $request->get('categoria_id');
 
-            $programas = Programa::where('type', 1)->get();
+            $programas = Programa::where('type', 3)->get();
 
             if ($fecha) {
                 $programas = $programas->where('fecha', $fecha)->values();
@@ -245,21 +238,17 @@ class ProgramaController extends Controller {
             }
 
             foreach ($programas as $programa) {
-                $programa = $this->returnPrograma($programa);
+                $programa = $this->tool->returnPrograma($programa);
             }
 
             $res['status'] = 1;
             $res['mensaje'] = "success";
-            $res['programas'] = $programas;
+            $res['eventos'] = $programas;
             return response()->json($res, 200);
         } catch (ModelNotFoundException $ex) {
             $res['status'] = 0;
-            $res['mensaje'] = "Error de credenciales";
+            $res['mensaje'] = "Error de credenciales " .$ex->getMessage();
             return response()->json($res, 400);
-        } catch (FatalThrowableError $ex) {
-            $res['status'] = 0;
-            $res['mensaje'] = $ex->getMessage();
-            return response()->json($res, 500);
         } catch (\Exception $ex) {
             $res['status'] = 0;
             $res['mensaje'] = $ex->getMessage();
@@ -268,8 +257,6 @@ class ProgramaController extends Controller {
     }
 
     /**
-     * Devuelve el detalle de un evento
-     *
      * @param $user_id
      * @param $api_key
      * @param $programa_id
@@ -280,10 +267,11 @@ class ProgramaController extends Controller {
             User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
             $programa = Programa::where('id', $programa_id)->first();
             if ($programa) {
-                $programa = $this->returnPrograma($programa);
+                $programa = $this->tool->returnPrograma($programa);
+
                 $res['status'] = 1;
                 $res['mensaje'] = "success";
-                $res['programa'] = $programa;
+                $res['evento'] = $programa;
                 return response()->json($res, 200);
             } else {
                 $res['status'] = 0;
@@ -303,27 +291,5 @@ class ProgramaController extends Controller {
             $res['mensaje'] = $ex->getMessage();
             return response()->json($res, 500);
         }
-    }
-
-    /**
-     * Agrega la categoría y foto del evento
-     *
-     * @param $programa
-     * @return mixed
-     */
-    public function returnPrograma($programa) {
-        if ($programa->foto_id) {
-            $programa->foto;
-        } else {
-            $programa->foto = [];
-        }
-
-        if ($programa->categoria_id) {
-            $programa->categoria;
-        }
-
-        unset($programa['foto_id']);
-        unset($programa['categoria_id']);
-        return $programa;
     }
 }

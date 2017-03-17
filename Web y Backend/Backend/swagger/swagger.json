@@ -959,8 +959,8 @@
                 "tags": [
                     "acompañantes"
                 ],
-                "summary": "Devuelve la lista de eventos de acompañantes filtradas por día o categoría",
-                "description": "Devuelve la lista de eventos de acompañantes filtradas por día o categoría",
+                "summary": "Devuelve la lista de eventos de acompañantes filtradas por día",
+                "description": "Devuelve la lista de eventos de acompañantes filtradas por día",
                 "produces": [
                     "application/json"
                 ],
@@ -983,14 +983,7 @@
                         "name": "fecha",
                         "in": "formData",
                         "description": "Día del evento",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "categoria_id",
-                        "in": "formData",
-                        "description": "Categoría a la que pertence el evento",
-                        "required": true,
+                        "required": false,
                         "type": "string"
                     }
                 ],
@@ -1075,6 +1068,459 @@
                         "name": "programa_id",
                         "in": "path",
                         "description": "Id del programa",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/deportivos/create": {
+            "post": {
+                "tags": [
+                    "Sociales y Deportivos"
+                ],
+                "summary": "Crear nuevo evento de Sociales y Deportivos",
+                "description": "Crear un nuevo evento de Sociales y Deportivos devuelve el evento",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nombre",
+                        "in": "formData",
+                        "description": "Nombre del evento",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lugar",
+                        "in": "formData",
+                        "description": "Lugar del evento",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "recomendaciones",
+                        "in": "formData",
+                        "description": "Recomendaciones del evento",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fecha",
+                        "in": "formData",
+                        "description": "Fecha del evento",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "hora_inicio",
+                        "in": "formData",
+                        "description": "Hora de inicio del evento",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "hora_fin",
+                        "in": "formData",
+                        "description": "Hora de fin del evento",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "archivo",
+                        "in": "formData",
+                        "description": "Imágen del evento. Max 10mb. Formatos válidos: jpeg,jpg,gif,png",
+                        "required": false,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/deportivos/search": {
+            "post": {
+                "tags": [
+                    "Sociales y Deportivos"
+                ],
+                "summary": "Devuelve la lista de eventos de Sociales y Deportivos filtradas por día",
+                "description": "Devuelve la lista de eventos de Sociales y Deportivos filtradas por día",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fecha",
+                        "in": "formData",
+                        "description": "Día del evento",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/deportivos/all/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "Sociales y Deportivos"
+                ],
+                "summary": "Devuelve todos los eventos de Sociales y Deportivos ordenados por día",
+                "description": "Devuelve todos los eventos de Sociales y Deportivos ordenados por día",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/deportivos/detail/{user_id}/{api_key}/{programa_id}": {
+            "get": {
+                "tags": [
+                    "Sociales y Deportivos"
+                ],
+                "summary": "Devuelve el detalle de un evento de Sociales y Deportivos",
+                "description": "Devuelve el detalle de un evento de Sociales y Deportivos",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "programa_id",
+                        "in": "path",
+                        "description": "Id del programa",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/patrocinador/create": {
+            "post": {
+                "tags": [
+                    "patrocinador"
+                ],
+                "summary": "Crear nuevo patrocinador",
+                "description": "Crear un nuevo patrocinador devuelve el patrocinador creado",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nombre",
+                        "in": "formData",
+                        "description": "Nombre del patrocinador",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "Email del patrocinador",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "url",
+                        "in": "formData",
+                        "description": "Url del patrocinador",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "telefono",
+                        "in": "formData",
+                        "description": "Telefono del patrocinador",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "acerca",
+                        "in": "formData",
+                        "description": "Acerca del patrocinador",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "latitude",
+                        "in": "formData",
+                        "description": "Coordenadas del mapa latitude",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "formData",
+                        "description": "Coordenadas del mapa longitude",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tipo",
+                        "in": "formData",
+                        "description": "Tipo de patrocinador",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "archivo_pdf",
+                        "in": "formData",
+                        "description": "PDF descripción del Expositor. Max 10mb. Formatos válidos: pdf",
+                        "required": false,
+                        "type": "file"
+                    },
+                    {
+                        "name": "archivo_logo",
+                        "in": "formData",
+                        "description": "Imágen logo del expositor. Max 10mb. Formatos válidos: jpeg,jpg,gif,png",
+                        "required": false,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/patrocinador/all/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "patrocinador"
+                ],
+                "summary": "Devuelve todos los patrocinadores",
+                "description": "Devuelve todos los patrocinadores",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/patrocinador/order/name/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "patrocinador"
+                ],
+                "summary": "Devuelve todos los patrocinadores ordenados alfabeticamente",
+                "description": "Devuelve todos los patrocinadores ordenados alfabeticamente",
+                "operationId": "expositorAll",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/patrocinador/detail/{user_id}/{api_key}/{expositor_id}": {
+            "get": {
+                "tags": [
+                    "patrocinador"
+                ],
+                "summary": "Devuelve el detalle de un patrocinador",
+                "description": "Devuelve el detalle de un patrocinador",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "patrocinador_id",
+                        "in": "path",
+                        "description": "Id del patrocinador",
                         "required": true,
                         "type": "string"
                     }

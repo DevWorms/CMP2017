@@ -15,7 +15,7 @@ class Programa extends Migration
     {
         Schema::create('eventos', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedBigInteger('categoria_id');
+            $table->unsignedBigInteger('categoria_id')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('foto_id')->nullable();
             $table->string('nombre');

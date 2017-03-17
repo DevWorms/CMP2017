@@ -31,7 +31,7 @@
 	                    <p for="">Contraseña</p>
 	                    <input type="password" id="contrasena">
 	                    <br><br>
-	                    <button class="btn btn-primary btn-block btn-lg" id="">Ingresar</button>
+	                    <button class="btn btn-primary btn-block btn-lg" id="login">Ingresar</button>
 	            </div>
 	        </div>  
 	</div>
@@ -40,7 +40,7 @@
     <!-- Scripts -->
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
-
+	<script src="js/login.js"></script>
 </body>
 
 </html>

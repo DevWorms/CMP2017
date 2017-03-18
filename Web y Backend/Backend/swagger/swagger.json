@@ -1,0 +1,1580 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "API para CMP",
+        "version": "0.0.1",
+        "title": "CMP WebService"
+    },
+    "host": "cmp.devworms.com",
+    "basePath": "/api",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/user/login": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Login de usuario",
+                "description": "Login de usuario devuelve el api_key del usuario",
+                "operationId": "loginUser",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "formData",
+                        "description": "Email del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "description": "Contraseña del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/user/signup": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Registro de usuario",
+                "description": "Registro de usuario",
+                "operationId": "signupUser",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "description": "Nombre(s)",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "last_name",
+                        "in": "formData",
+                        "description": "Apellido(s)",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "Email, no puede repetirse en la BD",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "description": "Contraseña (mínimo 6 caracteres)",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "clave",
+                        "in": "formData",
+                        "description": "Clave de inscripción",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "type",
+                        "in": "formData",
+                        "description": "Tipo de usuario (es un string por el momento) Ej. \"Trabajador de Pemex\"",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "association",
+                        "in": "formData",
+                        "description": "Asociación (es un string por el momento) Ej. \"Asociación 4\"",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/user/profile/{id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Perfil de usuario",
+                "description": "Devuelve el perfil del usuario",
+                "operationId": "userProfile",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key de usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/programa/create": {
+            "post": {
+                "tags": [
+                    "programa"
+                ],
+                "summary": "Crea un nuevo programa",
+                "description": "Crea un nuevo programa, devuelve el programa",
+                "operationId": "newPrograma",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "categoria_id",
+                        "in": "formData",
+                        "description": "Categoría a la que pertenecerá el evento",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nombre",
+                        "in": "formData",
+                        "description": "Nombre del evento",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lugar",
+                        "in": "formData",
+                        "description": "Lugar donde se llevara a cabo el evento",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "recomendaciones",
+                        "in": "formData",
+                        "description": "Recomendaciones del evento",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fecha",
+                        "in": "formData",
+                        "description": "Fecha del evento. Ej: 2016-03-20",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "latitude",
+                        "in": "formData",
+                        "description": "Coordenadas del mapa latitude",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "formData",
+                        "description": "Coordenadas del mapa longitude",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "hora_inicio",
+                        "in": "formData",
+                        "description": "Hora de inicio del evento. Ej: 10:00:00",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "hora_fin",
+                        "in": "formData",
+                        "description": "Hora de fin del evento. Ej: 12:00:00",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "archivo",
+                        "in": "formData",
+                        "description": "Imágen del evento. Max 10mb. Formatos válidos: jpeg,jpg,gif,png",
+                        "required": false,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/programa/all/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "programa"
+                ],
+                "summary": "Devuelve los últimos 10 eventos creados",
+                "description": "Devuelve los últimos 10 eventos creados",
+                "operationId": "programaAll",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/programa/detail/{user_id}/{api_key}/{programa_id}": {
+            "get": {
+                "tags": [
+                    "programa"
+                ],
+                "summary": "Detalle del evento",
+                "description": "Devuelve el detalle del evento",
+                "operationId": "programaDetail",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "programa_id",
+                        "in": "path",
+                        "description": "Id del evento",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/programa/search": {
+            "post": {
+                "tags": [
+                    "programa"
+                ],
+                "summary": "Buscar programas",
+                "description": "Filtra los programas por tipo y fecha",
+                "operationId": "searchPrograma",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "categoria_id",
+                        "in": "formData",
+                        "description": "Categoría a la que pertenece el evento, si es null, o no se envia, devuelve los programas de TODAS las categorias",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fecha",
+                        "in": "formData",
+                        "description": "Fecha del evento, si es null, o no se envia, devuelve los programas sin importar la fecha",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/categoria/create": {
+            "post": {
+                "tags": [
+                    "categoria"
+                ],
+                "summary": "Crear nueva categoría",
+                "description": "Crear nueva categoría devuelve la categoría creada",
+                "operationId": "categoriaNew",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nombre",
+                        "in": "formData",
+                        "description": "Nombre de la categoría",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/categoria/all/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "categoria"
+                ],
+                "summary": "Devuelve todas las categorías",
+                "description": "Devuelve todas las categorías",
+                "operationId": "categoriaAll",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/expositor/create": {
+            "post": {
+                "tags": [
+                    "expositor"
+                ],
+                "summary": "Crear nuevo expositor",
+                "description": "Crear un nuevo expositor devuelve el expositor creada",
+                "operationId": "expositorNew",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nombre",
+                        "in": "formData",
+                        "description": "Nombre del expositor",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "Email del expositor",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "url",
+                        "in": "formData",
+                        "description": "Url del expositor",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "telefono",
+                        "in": "formData",
+                        "description": "Telefono del expositor",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "acerca",
+                        "in": "formData",
+                        "description": "Acerca del expositor",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "latitude",
+                        "in": "formData",
+                        "description": "Coordenadas del mapa latitude",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "formData",
+                        "description": "Coordenadas del mapa longitude",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "stand",
+                        "in": "formData",
+                        "description": "Stand del expositor",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "archivo_pdf",
+                        "in": "formData",
+                        "description": "PDF descripción del Expositor. Max 10mb. Formatos válidos: pdf",
+                        "required": false,
+                        "type": "file"
+                    },
+                    {
+                        "name": "archivo_logo",
+                        "in": "formData",
+                        "description": "Imágen logo del expositor. Max 10mb. Formatos válidos: jpeg,jpg,gif,png",
+                        "required": false,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/expositor/all/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "expositor"
+                ],
+                "summary": "Devuelve todos los expositores",
+                "description": "Devuelve todos los expositores",
+                "operationId": "expositorAll",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/expositor/order/name/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "expositor"
+                ],
+                "summary": "Devuelve todos los expositores ordenados alfabeticamente",
+                "description": "Devuelve todos los expositores ordenados alfabeticamente",
+                "operationId": "expositorAll",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/expositor/order/stand/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "expositor"
+                ],
+                "summary": "Devuelve todos los expositores ordenados por número de stand",
+                "description": "Devuelve todos los expositores ordenados por número de stand",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/expositor/detail/{user_id}/{api_key}/{expositor_id}": {
+            "get": {
+                "tags": [
+                    "expositor"
+                ],
+                "summary": "Devuelve el detalle de un expositor",
+                "description": "Devuelve el detalle de un expositor",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "expositor_id",
+                        "in": "path",
+                        "description": "Id del expositor",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/expositor/addfavorito/{user_id}/{api_key}/{expositor_id}":  {
+            "get": {
+                "tags": [
+                    "expositor",
+                    "favorito"
+                ],
+                "summary": "Agrega un expositor a la lista de favoritos del usuario",
+                "description": "Agrega un expositor a la lista de favoritos del usuario",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "expositor_id",
+                        "in": "path",
+                        "description": "Id del expositor que se agrega a la lista de favoritos",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/expositor/misfavoritos/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "expositor",
+                    "favorito"
+                ],
+                "summary": "Devuelve todos los expositores en la lista de favoritos del usuario",
+                "description": "Devuelve todos los expositores en la lista de favoritos del usuario",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/acompanantes/create": {
+            "post": {
+                "tags": [
+                    "acompañantes"
+                ],
+                "summary": "Crear nuevo evento acompañantes",
+                "description": "Crear un nuevo evento acompañantes devuelve el evento",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nombre",
+                        "in": "formData",
+                        "description": "Nombre del evento",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lugar",
+                        "in": "formData",
+                        "description": "Lugar del evento",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "recomendaciones",
+                        "in": "formData",
+                        "description": "Recomendaciones del evento",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fecha",
+                        "in": "formData",
+                        "description": "Fecha del evento",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "hora_inicio",
+                        "in": "formData",
+                        "description": "Hora de inicio del evento",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "hora_fin",
+                        "in": "formData",
+                        "description": "Hora de fin del evento",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "archivo",
+                        "in": "formData",
+                        "description": "Imágen del evento. Max 10mb. Formatos válidos: jpeg,jpg,gif,png",
+                        "required": false,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/acompanantes/search": {
+            "post": {
+                "tags": [
+                    "acompañantes"
+                ],
+                "summary": "Devuelve la lista de eventos de acompañantes filtradas por día",
+                "description": "Devuelve la lista de eventos de acompañantes filtradas por día",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fecha",
+                        "in": "formData",
+                        "description": "Día del evento",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/acompanantes/all/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "acompañantes"
+                ],
+                "summary": "Devuelve todos los eventos de acompañantes ordenados por día",
+                "description": "Devuelve todos los eventos de acompañantes ordenados por día",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/acompanantes/detail/{user_id}/{api_key}/{programa_id}": {
+            "get": {
+                "tags": [
+                    "acompañantes"
+                ],
+                "summary": "Devuelve el detalle de un evento de acompañante",
+                "description": "Devuelve el detalle de un evento de acompañante",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "programa_id",
+                        "in": "path",
+                        "description": "Id del programa",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/deportivos/create": {
+            "post": {
+                "tags": [
+                    "Sociales y Deportivos"
+                ],
+                "summary": "Crear nuevo evento de Sociales y Deportivos",
+                "description": "Crear un nuevo evento de Sociales y Deportivos devuelve el evento",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nombre",
+                        "in": "formData",
+                        "description": "Nombre del evento",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lugar",
+                        "in": "formData",
+                        "description": "Lugar del evento",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "recomendaciones",
+                        "in": "formData",
+                        "description": "Recomendaciones del evento",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fecha",
+                        "in": "formData",
+                        "description": "Fecha del evento",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "hora_inicio",
+                        "in": "formData",
+                        "description": "Hora de inicio del evento",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "hora_fin",
+                        "in": "formData",
+                        "description": "Hora de fin del evento",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "archivo",
+                        "in": "formData",
+                        "description": "Imágen del evento. Max 10mb. Formatos válidos: jpeg,jpg,gif,png",
+                        "required": false,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/deportivos/search": {
+            "post": {
+                "tags": [
+                    "Sociales y Deportivos"
+                ],
+                "summary": "Devuelve la lista de eventos de Sociales y Deportivos filtradas por día",
+                "description": "Devuelve la lista de eventos de Sociales y Deportivos filtradas por día",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fecha",
+                        "in": "formData",
+                        "description": "Día del evento",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/deportivos/all/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "Sociales y Deportivos"
+                ],
+                "summary": "Devuelve todos los eventos de Sociales y Deportivos ordenados por día",
+                "description": "Devuelve todos los eventos de Sociales y Deportivos ordenados por día",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/deportivos/detail/{user_id}/{api_key}/{programa_id}": {
+            "get": {
+                "tags": [
+                    "Sociales y Deportivos"
+                ],
+                "summary": "Devuelve el detalle de un evento de Sociales y Deportivos",
+                "description": "Devuelve el detalle de un evento de Sociales y Deportivos",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "programa_id",
+                        "in": "path",
+                        "description": "Id del programa",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/patrocinador/create": {
+            "post": {
+                "tags": [
+                    "patrocinador"
+                ],
+                "summary": "Crear nuevo patrocinador",
+                "description": "Crear un nuevo patrocinador devuelve el patrocinador creado",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nombre",
+                        "in": "formData",
+                        "description": "Nombre del patrocinador",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "Email del patrocinador",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "url",
+                        "in": "formData",
+                        "description": "Url del patrocinador",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "telefono",
+                        "in": "formData",
+                        "description": "Telefono del patrocinador",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "acerca",
+                        "in": "formData",
+                        "description": "Acerca del patrocinador",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "latitude",
+                        "in": "formData",
+                        "description": "Coordenadas del mapa latitude",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "formData",
+                        "description": "Coordenadas del mapa longitude",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tipo",
+                        "in": "formData",
+                        "description": "Tipo de patrocinador",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "archivo_pdf",
+                        "in": "formData",
+                        "description": "PDF descripción del Expositor. Max 10mb. Formatos válidos: pdf",
+                        "required": false,
+                        "type": "file"
+                    },
+                    {
+                        "name": "archivo_logo",
+                        "in": "formData",
+                        "description": "Imágen logo del expositor. Max 10mb. Formatos válidos: jpeg,jpg,gif,png",
+                        "required": false,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/patrocinador/all/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "patrocinador"
+                ],
+                "summary": "Devuelve todos los patrocinadores",
+                "description": "Devuelve todos los patrocinadores",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/patrocinador/order/name/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "patrocinador"
+                ],
+                "summary": "Devuelve todos los patrocinadores ordenados alfabeticamente",
+                "description": "Devuelve todos los patrocinadores ordenados alfabeticamente",
+                "operationId": "expositorAll",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/patrocinador/detail/{user_id}/{api_key}/{expositor_id}": {
+            "get": {
+                "tags": [
+                    "patrocinador"
+                ],
+                "summary": "Devuelve el detalle de un patrocinador",
+                "description": "Devuelve el detalle de un patrocinador",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "patrocinador_id",
+                        "in": "path",
+                        "description": "Id del patrocinador",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "last_Name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "association": {
+                    "type": "string"
+                }
+            }
+        },
+        "ApiResponse": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "mensaje": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

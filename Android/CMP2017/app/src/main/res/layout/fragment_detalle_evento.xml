@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cmp2017.devworms.cmp2017.DetalleEventoFragment">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="368dp"
+        android:layout_height="551dp"
+        android:background="@drawable/fondo"
+        android:orientation="vertical"
+        android:weightSum="1"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
+
+        <ImageView
+            android:id="@+id/Banner"
+            android:layout_width="match_parent"
+            android:layout_height="165dp"
+            android:layout_gravity="top"
+            android:background="@android:color/transparent"
+            android:minHeight="80dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/imagefotogolf" />
+
+
+        <!-- Song Title -->
+
+        <!-- Album Name -->
+
+        <TextView
+            android:id="@+id/TitContacto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:text="Torneo de Golf"
+            android:textColor="#1e2747"
+            android:textSize="18sp"
+            android:textStyle="normal|bold"
+            android:typeface="sans" />
+
+        <TextView
+            android:id="@+id/phone"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:text="Lugar: Club Campestre de Puebla"
+            android:textColor="#1e2747"
+            android:textSize="14sp" />
+
+        <!-- Album Name -->
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:text="Recomendaciones"
+            android:textColor="#1e2747"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Song Duration -->
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:text="Llevar ropa cómoda y zapatos deportivos"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btnLocalizar"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/btnlocalizarmapa"
+            android:paddingBottom="5dp"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/btnAgreExpo"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/btnagregaragenda" />
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

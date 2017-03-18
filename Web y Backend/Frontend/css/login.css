@@ -1,0 +1,53 @@
+/* ==========================================================================
+       _____ __  __ _____    ___   ___  __ ______  
+      / ____|  \/  |  __ \  |__ \ / _ \/_ |____  | 
+     | |    | \  / | |__) |    ) | | | || |   / /  
+     | |    | |\/| |  ___/    / /| | | || |  / /   
+     | |____| |  | | |       / /_| |_| || | / /    
+      \_____|_|  |_|_|      |____|\___/ |_|/_/     
+                                                              DevWorms - 2017                                         
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body{
+    font-family: 'Roboto', sans-serif;
+    background-image: linear-gradient(90deg, #52e7ff, #10375e);
+}
+ 
+html,body{
+    position: relative;
+    height: 100%;
+}
+
+.title-container{ 
+    margin: 80px auto 0px auto;
+    padding: 20px 40px 40px;
+    text-align: center;
+    color: white;
+}
+
+.login-container{
+    position: relative;
+    width: 450px;
+    margin: 0px auto;
+    padding: 20px 40px 40px;
+    text-align: center;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    border-radius: 25px;
+}
+
+.form-box input{
+    width: 100%;
+    text-align: center;
+    height:45px;
+    border: 1px solid #ccc;;
+    background: #fafafa;
+    transition:0.2s ease-in-out;
+    border-radius: 5px;   
+}
+
+.form-box button{
+    width: 50%;
+}

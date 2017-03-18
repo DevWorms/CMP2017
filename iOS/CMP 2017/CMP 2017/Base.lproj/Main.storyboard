@@ -473,36 +473,64 @@
                                 <color key="textColor" red="0.16038369599999999" green="0.32152638290000002" blue="0.6560517132" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iu6-1D-Fz2">
-                                <rect key="frame" x="51" y="239" width="273" height="55"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="04Revisar_Rutas"/>
-                                <connections>
-                                    <segue destination="4KS-Xp-rHC" kind="show" id="IRL-bZ-XDI"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Revisa los horarios y las rutas que tenemos disponibles para el transporte aeropuerto hotel-recinto y viceversa" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W80-Rz-TqT">
-                                <rect key="frame" x="16" y="139" width="343" height="92"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Revisa las rutas de transportación que tenemos preparadas para el Congreso" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W80-Rz-TqT">
+                                <rect key="frame" x="51" y="118" width="273" height="72"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="¿Viajas de algún lugar a la ciudad de Puebla? Revisa los itinerarios de vuelo de las diferentes aerolineas" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h5u-I3-l3T">
-                                <rect key="frame" x="16" y="332" width="343" height="92"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="187" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tax-4l-WG8">
+                                <rect key="frame" x="0.0" y="198" width="375" height="469"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="24f-ek-Rnj">
-                                <rect key="frame" x="51" y="432" width="273" height="57"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="04Boton_Revisar__Vuelos"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="187" id="Eqj-Y9-2Ff">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="187"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Eqj-Y9-2Ff" id="kdY-j0-R86">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="186"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ruta 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ECV-hQ-CjL">
+                                                    <rect key="frame" x="8" y="8" width="359" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hotel Fiesta Inn/Congreso" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yZH-W3-YZB">
+                                                    <rect key="frame" x="8" y="37" width="359" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGc-Ij-TpW">
+                                                    <rect key="frame" x="8" y="66" width="359" height="65"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Wi-e2-jbE">
+                                                    <rect key="frame" x="74" y="139" width="227" height="39"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Button" image="04Revisar_Rutas"/>
+                                                    <connections>
+                                                        <segue destination="Ike-SW-6Fr" kind="show" id="Hqu-sl-Rm1"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
-                                    <segue destination="Ike-SW-6Fr" kind="show" id="Q3B-UR-P4z"/>
+                                    <outlet property="dataSource" destination="ACP-Le-KqL" id="zmI-hW-3Y3"/>
+                                    <outlet property="delegate" destination="ACP-Le-KqL" id="ChI-49-cWt"/>
                                 </connections>
-                            </button>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -526,7 +554,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ran-Nx-uua" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3377" y="1593"/>
+            <point key="canvasLocation" x="3320.8000000000002" y="1592.6536731634185"/>
         </scene>
         <!--Tels View Controller-->
         <scene sceneID="reK-cg-P8m">
@@ -667,122 +695,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sl2-qC-nLU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2549.5999999999999" y="2318.5907046476764"/>
-        </scene>
-        <!--Transp Rutas View Controller-->
-        <scene sceneID="eFM-au-VYG">
-            <objects>
-                <viewController id="4KS-Xp-rHC" customClass="TranspRutasViewController" customModule="CMP_2017" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="xDC-r3-153"/>
-                        <viewControllerLayoutGuide type="bottom" id="zYQ-y3-WJc"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="LAO-Zy-beD">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Transportación" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bWo-cJ-8jS">
-                                <rect key="frame" x="16" y="72" width="343" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
-                                <color key="textColor" red="0.16038369599999999" green="0.32152638290000002" blue="0.6560517132" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4cu-ko-Xwt">
-                                <rect key="frame" x="51" y="305" width="273" height="57"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="06Hotel_Centro_Expositor_Puebla"/>
-                                <connections>
-                                    <segue destination="enz-h0-6Bu" kind="show" id="oao-7M-FTx"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a06-yB-Zri">
-                                <rect key="frame" x="51" y="211" width="273" height="57"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="04Boton_llegado_Aeropuerto"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hFI-S6-XiQ">
-                                <rect key="frame" x="51" y="403" width="273" height="57"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="05Boton_Salida_Aeropuerto"/>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="tJu-5b-G03">
-                        <barButtonItem key="backBarButtonItem" title="Transp. Rutas" id="aMt-jR-yJu"/>
-                        <rightBarButtonItems>
-                            <barButtonItem image="12Menu" id="kdA-sn-Z1Q">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <segue destination="6J5-cF-d15" kind="presentation" id="lXy-aA-TLh"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem image="11Casa" id="tiL-NI-pOK">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <action selector="menu:" destination="4KS-Xp-rHC" id="XeN-cj-YB4"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nme-Ax-OuK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3376.8000000000002" y="2318.5907046476764"/>
-        </scene>
-        <!--Rutas View Controller-->
-        <scene sceneID="pQO-mY-ELG">
-            <objects>
-                <viewController id="enz-h0-6Bu" customClass="RutasViewController" customModule="CMP_2017" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="PoJ-vW-oLE"/>
-                        <viewControllerLayoutGuide type="bottom" id="HoJ-nB-apZ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="qKG-KM-WB4">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="H1h-dG-5Rr">
-                                <rect key="frame" x="16" y="72" width="343" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="Miércoles 7"/>
-                                    <segment title="Jueves 8"/>
-                                    <segment title="Viernes 9"/>
-                                </segments>
-                            </segmentedControl>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Lq-Ee-SKF">
-                                <rect key="frame" x="16" y="139" width="343" height="508"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="ZlX-tD-HnB">
-                        <barButtonItem key="backBarButtonItem" title="Rutas" id="wIu-uI-3Vj"/>
-                        <rightBarButtonItems>
-                            <barButtonItem image="12Menu" id="8WO-tz-Ee1">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <segue destination="6J5-cF-d15" kind="presentation" id="8BB-hA-HT8"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem image="11Casa" id="Jlv-QH-6IW">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <action selector="menu:" destination="enz-h0-6Bu" id="bgI-Ca-eS2"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="C87-6H-XJD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4157.6000000000004" y="2318.5907046476764"/>
         </scene>
         <!--Menu Mapa View Controller-->
         <scene sceneID="zvX-4X-9wL">
@@ -1108,6 +1020,15 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <connections>
+                        <outlet property="actualizar" destination="0th-Jn-Ql8" id="II8-3n-JJn"/>
+                        <outlet property="miAgenda" destination="Igw-1g-X4k" id="aeN-Di-qeX"/>
+                        <outlet property="miPerfil" destination="24r-qL-fCT" id="j8y-DX-kbt"/>
+                        <outlet property="misContactos" destination="2SK-rw-a88" id="azC-oS-6d2"/>
+                        <outlet property="misEncuestas" destination="hQd-df-VMV" id="jOj-E5-454"/>
+                        <outlet property="misExpositores" destination="d2M-hq-kU6" id="LNR-Wl-HVo"/>
+                        <outlet property="notif" destination="MhV-p7-rgD" id="ehH-d1-fjB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QoQ-Cp-0pE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1667,8 +1588,6 @@
         <image name="03Eventos_Acompañantes" width="390" height="346"/>
         <image name="03_Mis_Expositores" width="70" height="56"/>
         <image name="04Boton_Mapa_Puebla" width="489" height="170"/>
-        <image name="04Boton_Revisar__Vuelos" width="841" height="158"/>
-        <image name="04Boton_llegado_Aeropuerto" width="841" height="158"/>
         <image name="04Eventos_Deportivos" width="390" height="346"/>
         <image name="04Foto_Puebla" width="1235" height="429"/>
         <image name="04Fotografia" width="1242" height="552"/>
@@ -1680,7 +1599,6 @@
         <image name="05Boton_Mapas_del_Recinto" width="841" height="158"/>
         <image name="05Boton_Orden_Alfabetico" width="489" height="170"/>
         <image name="05Boton_Presentacion_de_la_empresa" width="841" height="158"/>
-        <image name="05Boton_Salida_Aeropuerto" width="841" height="158"/>
         <image name="05Boton_Telefonos_taxis_emergencias" width="489" height="170"/>
         <image name="05Boton_guardar_cambios" width="489" height="170"/>
         <image name="05Patrocinadores" width="390" height="346"/>
@@ -1690,7 +1608,6 @@
         <image name="06Boton_num_de_pagina" width="489" height="170"/>
         <image name="06Centro_de_Notificaciones" width="70" height="56"/>
         <image name="06Clima" width="489" height="170"/>
-        <image name="06Hotel_Centro_Expositor_Puebla" width="841" height="158"/>
         <image name="06Mapas" width="390" height="346"/>
         <image name="07Actualizar_informacion" width="70" height="56"/>
         <image name="07Boton_Sitios_interes" width="489" height="170"/>
@@ -1703,11 +1620,11 @@
         <image name="13Banner_publicitario" width="1246" height="246"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ycn-As-Ut0"/>
+        <segue reference="Iza-Fr-z8V"/>
         <segue reference="Txx-0u-Wbb"/>
         <segue reference="c93-xJ-B5s"/>
         <segue reference="NTs-h7-V0z"/>
-        <segue reference="fdM-hd-29f"/>
         <segue reference="nTd-TS-IRq"/>
+        <segue reference="Hqu-sl-Rm1"/>
     </inferredMetricsTieBreakers>
 </document>

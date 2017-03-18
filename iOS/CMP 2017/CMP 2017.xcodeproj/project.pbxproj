@@ -15,8 +15,6 @@
 		3B396C001E764CA400C4611E /* DetalleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396BFF1E764CA400C4611E /* DetalleViewController.swift */; };
 		3B396C021E764CCD00C4611E /* MenuMapaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396C011E764CCD00C4611E /* MenuMapaViewController.swift */; };
 		3B396C041E764F5F00C4611E /* TransportacionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396C031E764F5F00C4611E /* TransportacionViewController.swift */; };
-		3B396C061E76536D00C4611E /* TranspRutasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396C051E76536D00C4611E /* TranspRutasViewController.swift */; };
-		3B396C081E7653B800C4611E /* RutasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396C071E7653B800C4611E /* RutasViewController.swift */; };
 		3B396C0A1E7655CE00C4611E /* ConocePueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396C091E7655CE00C4611E /* ConocePueViewController.swift */; };
 		3B396C0C1E76628200C4611E /* TelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396C0B1E76628200C4611E /* TelsViewController.swift */; };
 		3B396C0E1E766AF800C4611E /* MiPerfilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396C0D1E766AF800C4611E /* MiPerfilViewController.swift */; };
@@ -60,8 +58,6 @@
 		3B396BFF1E764CA400C4611E /* DetalleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetalleViewController.swift; sourceTree = "<group>"; };
 		3B396C011E764CCD00C4611E /* MenuMapaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuMapaViewController.swift; sourceTree = "<group>"; };
 		3B396C031E764F5F00C4611E /* TransportacionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransportacionViewController.swift; sourceTree = "<group>"; };
-		3B396C051E76536D00C4611E /* TranspRutasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranspRutasViewController.swift; sourceTree = "<group>"; };
-		3B396C071E7653B800C4611E /* RutasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RutasViewController.swift; sourceTree = "<group>"; };
 		3B396C091E7655CE00C4611E /* ConocePueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConocePueViewController.swift; sourceTree = "<group>"; };
 		3B396C0B1E76628200C4611E /* TelsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TelsViewController.swift; sourceTree = "<group>"; };
 		3B396C0D1E766AF800C4611E /* MiPerfilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiPerfilViewController.swift; sourceTree = "<group>"; };
@@ -145,8 +141,6 @@
 				3B396BFF1E764CA400C4611E /* DetalleViewController.swift */,
 				3B396C011E764CCD00C4611E /* MenuMapaViewController.swift */,
 				3B396C031E764F5F00C4611E /* TransportacionViewController.swift */,
-				3B396C051E76536D00C4611E /* TranspRutasViewController.swift */,
-				3B396C071E7653B800C4611E /* RutasViewController.swift */,
 				3B396C091E7655CE00C4611E /* ConocePueViewController.swift */,
 				3B396C0B1E76628200C4611E /* TelsViewController.swift */,
 				3B396C0D1E766AF800C4611E /* MiPerfilViewController.swift */,
@@ -327,8 +321,6 @@
 				3B396BFA1E70E4F400C4611E /* MenuPrincipalViewController.swift in Sources */,
 				3B396C0C1E76628200C4611E /* TelsViewController.swift in Sources */,
 				3B396C041E764F5F00C4611E /* TransportacionViewController.swift in Sources */,
-				3B396C081E7653B800C4611E /* RutasViewController.swift in Sources */,
-				3B396C061E76536D00C4611E /* TranspRutasViewController.swift in Sources */,
 				3B396C141E77392B00C4611E /* MapaSimpleViewController.swift in Sources */,
 				3B5B8F711E7083ED00F0D6AA /* AppDelegate.swift in Sources */,
 				3B396BFC1E762CA500C4611E /* MenuUsuarioViewController.swift in Sources */,

@@ -11,6 +11,7 @@ import UIKit
 class BuscadorViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var abcArray = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z", "#"]
+    //http://shrikar.com/swift-ios-tutorial-uisearchbar-and-uisearchbardelegate/
 
     override func viewDidLoad() {
         super.viewDidLoad()

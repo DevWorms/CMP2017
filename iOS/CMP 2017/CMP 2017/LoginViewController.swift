@@ -89,10 +89,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     print(json)
                     if let jsonResult = json as? [String: Any] {
                         
-                        UserDefaults.standard.setValue(jsonResult["api_key"] as! String, forKey: "apiKey")
-                        //UserDefaults.standardUserDefaults().setInteger(json[WebServiceResponseKey.userId] as! Int, forKey: WebServiceResponseKey.userId)
+                       DispatchQueue.main.async {
+                            
+                            UserDefaults.standard.setValue(jsonResult["api_key"] as! String, forKey: "api_key")
+                            UserDefaults.standard.setValue(jsonResult["user_id"] as! String, forKey: "user_id")
                         
-                        DispatchQueue.main.async {
                             //self.loadCargarPerfilUsuario()
                             self.performSegue(withIdentifier: "login", sender: nil)
                         }

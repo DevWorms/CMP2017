@@ -10,10 +10,38 @@ import UIKit
 
 class MenuUsuarioViewController: ViewController {
 
+    @IBOutlet weak var miPerfil: UIButton!
+    @IBOutlet weak var miAgenda: UIButton!
+    @IBOutlet weak var misExpositores: UIButton!
+    @IBOutlet weak var misEncuestas: UIButton!
+    @IBOutlet weak var misContactos: UIButton!
+    @IBOutlet weak var notif: UIButton!
+    @IBOutlet weak var actualizar: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "09Fondo.png")!)
+        
+        let invitado = UserDefaults.standard.value(forKey: "invitado") as! Bool
+        
+        if invitado {
+            miPerfil.isEnabled = false
+            miAgenda.isEnabled = false
+            misExpositores.isEnabled = false
+            misEncuestas.isEnabled = false
+            misContactos.isEnabled = false
+            notif.isEnabled = false
+            actualizar.isEnabled = false
+            
+            miPerfil.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .normal)
+            miAgenda.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .normal)
+            misExpositores.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .normal)
+            misEncuestas.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .normal)
+            misContactos.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .normal)
+            notif.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .normal)
+            actualizar.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .normal)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,7 +54,8 @@ class MenuUsuarioViewController: ViewController {
     }
     
     @IBAction func cerrarSesion(_ sender: Any) {
-        //NSUserDefaults.standardUserDefaults().setObject("", forKey: WebServiceResponseKey.redSocial)
+        UserDefaults.standard.set("", forKey: "api_key")
+        UserDefaults.standard.set("", forKey: "user_id")
         
         let vc = storyboard!.instantiateViewController(withIdentifier: "Inicio")
         self.present( vc , animated: true, completion: nil)

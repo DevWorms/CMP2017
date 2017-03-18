@@ -17,6 +17,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let apiKey = UserDefaults.standard.value(forKey: "api_key") as? String
+        
+        if ( apiKey == "" || apiKey == nil ){
+            print("Not logged in..")
+            
+        }else{
+            print("Logged in..")
+            //print("current key: \( NSUserDefaults.standardUserDefaults().stringForKey("ApiKey")!)")
+            
+            let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "MenuPrincipal") 
+            self.window?.rootViewController = vc
+        }
                 
         return true
     }

@@ -99,7 +99,7 @@
                                 <rect key="frame" x="34" y="162" width="306" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Contraseña" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kmt-at-HRi">
                                 <rect key="frame" x="34" y="226" width="306" height="30"/>
@@ -286,7 +286,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="01Boton_buscar"/>
                                 <connections>
-                                    <segue destination="qjL-Eh-RgU" kind="show" id="psR-II-8MZ"/>
+                                    <segue destination="qjL-Eh-RgU" kind="show" identifier="programa" id="psR-II-8MZ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -309,15 +309,19 @@
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="dia" destination="yo1-2C-Iy8" id="4q7-pA-kCR"/>
+                        <outlet property="tipoEvento" destination="JWd-Hd-RbI" id="tSM-Qb-tgh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6b4-ON-ozo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4158" y="-235"/>
         </scene>
-        <!--View Controller-->
+        <!--Resultados View Controller-->
         <scene sceneID="99f-QC-7QP">
             <objects>
-                <viewController id="qjL-Eh-RgU" sceneMemberID="viewController">
+                <viewController id="qjL-Eh-RgU" customClass="ResultadosViewController" customModule="CMP_2017" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SPp-tR-Kn1"/>
                         <viewControllerLayoutGuide type="bottom" id="mcN-Yy-f9l"/>
@@ -333,14 +337,26 @@
                                 <color key="textColor" red="0.16038369599999999" green="0.32152638290000002" blue="0.6560517132" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gxn-w1-UpA">
-                                <rect key="frame" x="164" y="617" width="46" height="30"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7kX-zn-3RF">
+                                <rect key="frame" x="0.0" y="118" width="375" height="549"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="X5k-K8-2CR">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X5k-K8-2CR" id="Ldo-Zn-iwg">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
-                                    <segue destination="E5i-1x-Kko" kind="show" id="acy-yq-vF1"/>
+                                    <outlet property="dataSource" destination="qjL-Eh-RgU" id="Ouh-q0-qAu"/>
+                                    <outlet property="delegate" destination="qjL-Eh-RgU" id="0fe-AG-HEL"/>
                                 </connections>
-                            </button>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -355,13 +371,21 @@
                             </barButtonItem>
                             <barButtonItem image="11Casa" id="udm-mZ-KUO">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="menu:" destination="qjL-Eh-RgU" id="b5j-Fr-Mcy"/>
+                                </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="label" destination="8gv-ea-vxB" id="nvA-Ay-EoD"/>
+                        <outlet property="tableView" destination="7kX-zn-3RF" id="05E-pc-cTo"/>
+                        <segue destination="E5i-1x-Kko" kind="show" identifier="detalle" id="GKY-3m-4VQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="31g-4C-D5d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4938" y="152"/>
+            <point key="canvasLocation" x="4936.8000000000002" y="151.57421289355324"/>
         </scene>
         <!--Buscador View Controller-->
         <scene sceneID="d7B-ZY-dA0">
@@ -819,11 +843,17 @@
                                 <rect key="frame" x="52" y="537" width="270" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="05Boton_Agregar_Agenda"/>
+                                <connections>
+                                    <action selector="btnDos:" destination="E5i-1x-Kko" eventType="touchUpInside" id="RSY-AT-48e"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sIf-mf-txP">
                                 <rect key="frame" x="52" y="484" width="270" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="06Boton_Localizar_en_el_mapa"/>
+                                <connections>
+                                    <action selector="btnUno:" destination="E5i-1x-Kko" eventType="touchUpInside" id="tYS-Nz-1To"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Torneo de Golf" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mMF-nr-YKw">
                                 <rect key="frame" x="16" y="221" width="343" height="21"/>
@@ -864,6 +894,9 @@
                                 <rect key="frame" x="52" y="591" width="270" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="05Boton_Presentacion_de_la_empresa"/>
+                                <connections>
+                                    <action selector="btnTres:" destination="E5i-1x-Kko" eventType="touchUpInside" id="sD5-2a-OY2"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -884,6 +917,14 @@
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="btn1" destination="sIf-mf-txP" id="wgy-Mv-Ng5"/>
+                        <outlet property="btn2" destination="l0G-B2-VYX" id="B1x-9R-GkB"/>
+                        <outlet property="btn3" destination="c5c-30-Ada" id="lLp-Y9-xAQ"/>
+                        <outlet property="lugar" destination="XwB-cG-Jqa" id="imd-yi-0wp"/>
+                        <outlet property="recomendaciones" destination="kOt-TJ-7bZ" id="y2t-5E-zo7"/>
+                        <outlet property="titulo" destination="mMF-nr-YKw" id="Cv2-Uy-CBr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zQy-h9-r1Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1139,7 +1180,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="285"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tcS-bh-5p3" id="HgZ-nT-ekp">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="284"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="285"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="04Foto_Puebla" translatesAutoresizingMaskIntoConstraints="NO" id="KRS-je-5M3">
@@ -1324,7 +1365,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Contraseña" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mo9-fP-e45">
                                 <rect key="frame" x="28" y="240" width="319" height="30"/>
@@ -1333,7 +1374,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Clave de Inscripción" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qMM-u4-tOo">
                                 <rect key="frame" x="28" y="287" width="319" height="30"/>
@@ -1360,7 +1401,7 @@
                                 </constraints>
                                 <state key="normal" image="02Boton_Registrarme"/>
                                 <connections>
-                                    <segue destination="ojg-qp-URi" kind="show" identifier="registro" id="Txx-0u-Wbb"/>
+                                    <action selector="signUp:" destination="Y5a-d0-2i0" eventType="touchUpInside" id="ppp-Yq-liu"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1395,11 +1436,14 @@
                     </view>
                     <navigationItem key="navigationItem" id="HkN-oj-dTO"/>
                     <connections>
+                        <outlet property="asociacion" destination="HE7-sI-azf" id="ZFg-DC-F7i"/>
                         <outlet property="claveInscripcion" destination="qMM-u4-tOo" id="dVS-td-F5Y"/>
                         <outlet property="lastName" destination="IwX-sW-IaN" id="Cb7-AQ-0Si"/>
                         <outlet property="mail" destination="Vx0-0F-gNJ" id="fh2-8d-0fs"/>
                         <outlet property="name" destination="Odk-iS-2PJ" id="bhh-KH-Bgo"/>
                         <outlet property="password" destination="mo9-fP-e45" id="xCp-8U-hQ8"/>
+                        <outlet property="tipoUser" destination="wos-qq-qB4" id="diQ-yc-MNn"/>
+                        <segue destination="ojg-qp-URi" kind="show" identifier="registro" id="yoF-n0-fc5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fbf-eP-Tj0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1620,11 +1664,11 @@
         <image name="13Banner_publicitario" width="1246" height="246"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Iza-Fr-z8V"/>
-        <segue reference="Txx-0u-Wbb"/>
-        <segue reference="c93-xJ-B5s"/>
-        <segue reference="NTs-h7-V0z"/>
-        <segue reference="nTd-TS-IRq"/>
+        <segue reference="eRA-mI-tof"/>
+        <segue reference="psR-II-8MZ"/>
+        <segue reference="53G-0t-Pma"/>
         <segue reference="Hqu-sl-Rm1"/>
+        <segue reference="GKY-3m-4VQ"/>
+        <segue reference="ZdW-HO-l3u"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -9,18 +9,41 @@
 import UIKit
 
 class DetalleViewController: UIViewController {
+    
+    @IBOutlet weak var titulo: UILabel!
+    @IBOutlet weak var lugar: UILabel!
+    @IBOutlet weak var recomendaciones: UILabel!
+    @IBOutlet weak var btn1: UIButton!
+    @IBOutlet weak var btn2: UIButton!
+    @IBOutlet weak var btn3: UIButton!
+    
+    // 1 Programa
+    var seccion = 0
+    var detalle = [String: Any]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "fondo.png")!)
+        
+        self.titulo.text = detalle["nombre"] as! String?
+        self.lugar.text = detalle["lugar"] as! String?
+        self.recomendaciones.text = detalle["recomendaciones"] as! String?
 
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func btnUno(_ sender: Any) {
+    }
+    
+    @IBAction func btnDos(_ sender: Any) {
+    }
+    
+    @IBAction func btnTres(_ sender: Any) {
     }
     
     @IBAction func menu(_ sender: Any) {

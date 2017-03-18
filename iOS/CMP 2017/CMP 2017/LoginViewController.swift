@@ -91,8 +91,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         
                        DispatchQueue.main.async {
                             
-                            UserDefaults.standard.setValue(jsonResult["api_key"] as! String, forKey: "api_key")
-                            UserDefaults.standard.setValue(jsonResult["user_id"] as! String, forKey: "user_id")
+                            UserDefaults.standard.setValue(jsonResult["api_key"], forKey: "api_key")
+                            UserDefaults.standard.setValue(jsonResult["user_id"], forKey: "user_id")
                         
                             //self.loadCargarPerfilUsuario()
                             self.performSegue(withIdentifier: "login", sender: nil)

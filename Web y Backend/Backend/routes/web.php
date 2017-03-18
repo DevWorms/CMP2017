@@ -75,6 +75,33 @@ $app->get('/api/patrocinador/order/name/{user_id}/{api_key}', ['middleware' => '
 $app->get('/api/patrocinador/detail/{user_id}/{api_key}/{expositor_id}', ['middleware' => 'cors', 'uses' => 'PatrocinadorController@getPatrocinador']);
 
 /*
+ * Notificaciones push
+ */
+$app->post('/api/notificacion/save', ['middleware' => 'cors', 'uses' => 'NotificationController@save']);
+$app->get('/api/notificacion/all/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'NotificationController@getAll']);
+$app->get('/api/notificacion/unread/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'NotificationController@unread']);
+$app->get('/api/notificacion/markasread/{user_id}/{api_key}/{notificacion_id}', ['middleware' => 'cors', 'uses' => 'NotificationController@markAsRead']);
+
+/*
+ * Mis eventos
+ */
+$app->get('/api/eventos/addfavorito/{user_id}/{api_key}/{evento_id}', ['middleware' => 'cors', 'uses' => 'MisEventosController@addFavorito']);
+$app->get('/api/eventos/miagenda/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'MisEventosController@getMyAgenda']);
+
+/*
+ * TODO Actualizaciones
+ */
+$app->get('/api/updates/check/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'UpdatesController@checkUpdates']);
+$app->get('/api/updates/getupdate/{user_id}/{api_key}/{update_id}', ['middleware' => 'cors', 'uses' => 'UpdatesController@getUpdate']);
+
+/*
+ * Rutas
+ */
+$app->post('/api/ruta/create', ['middleware' => 'cors', 'uses' => 'RutasController@create']);
+$app->get('/api/ruta/all/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'RutasController@getAll']);
+$app->get('/api/ruta/detail/{user_id}/{api_key}/{ruta_id}', ['middleware' => 'cors', 'uses' => 'RutasController@getRuta']);
+
+/*
  * Archivo
  */
 $app->post('/api/fileupload',['middleware' => 'cors', 'uses' => 'FileController@upload']);

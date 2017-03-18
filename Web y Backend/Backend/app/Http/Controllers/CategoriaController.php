@@ -64,7 +64,7 @@ class CategoriaController extends Controller {
                 $res['status'] = 1;
                 $res['mensaje'] = "Categoria creado correctamente";
                 $res['categoria'] = $categoria;
-                return response()->json($res, 201);
+                return response()->json($res, 200);
             }
         } catch (ModelNotFoundException $ex) {
             $res['status'] = 0;

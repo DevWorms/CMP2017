@@ -95,7 +95,7 @@ class PatrocinadorController extends Controller {
                         if ($logo->getSize() > 10000000) {
                             $response['estado'] = 0;
                             $response['mensaje'] = "El archivo excede el límite de 10mb";
-                            return response()->json($response, 401);
+                            return response()->json($response, 400);
                         } else {
                             // Si va bien, lo mueve a la carpeta y guarda el registro
                             $path = $this->destinationPath . Carbon::now()->year . "/" . Carbon::now()->month . "/";
@@ -115,7 +115,7 @@ class PatrocinadorController extends Controller {
                         $response['estado'] = 0;
                         $response['mensaje'] = "Error, tipo de archivo invalido";
 
-                        return response()->json($response, 401);
+                        return response()->json($response, 400);
                     }
                 }
 
@@ -130,7 +130,7 @@ class PatrocinadorController extends Controller {
                         if ($presentacion->getSize() > 10000000) {
                             $response['estado'] = 0;
                             $response['mensaje'] = "El archivo excede el límite de 10mb";
-                            return response()->json($response, 401);
+                            return response()->json($response, 400);
                         } else {
                             // Si va bien, lo mueve a la carpeta y guarda el registro
                             $path = $this->destinationPath . Carbon::now()->year . "/" . Carbon::now()->month . "/";
@@ -150,7 +150,7 @@ class PatrocinadorController extends Controller {
                         $response['estado'] = 0;
                         $response['mensaje'] = "Error, tipo de PDF invalido";
 
-                        return response()->json($response, 401);
+                        return response()->json($response, 400);
                     }
                 }
 
@@ -174,7 +174,7 @@ class PatrocinadorController extends Controller {
                 $res['status'] = 1;
                 $res['mensaje'] = "Patrocinador creado correctamente";
                 $res['patrocinador'] = $expositor;
-                return response()->json($res, 201);
+                return response()->json($res, 200);
             }
         } catch (ModelNotFoundException $ex) {
             $res['status'] = 0;

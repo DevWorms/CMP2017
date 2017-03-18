@@ -223,7 +223,7 @@
                     {
                         "name": "fecha",
                         "in": "formData",
-                        "description": "Fecha del evento. Ej: 2016-03-20",
+                        "description": "Fecha del evento. Ej: 2016-03-20 ó 20-03-2017",
                         "required": true,
                         "type": "string"
                     },
@@ -399,7 +399,7 @@
                     {
                         "name": "fecha",
                         "in": "formData",
-                        "description": "Fecha del evento, si es null, o no se envia, devuelve los programas sin importar la fecha",
+                        "description": "Fecha del evento, si es null, o no se envia, devuelve los programas sin importar la fecha. Ej: 2016-03-20 ó 20-03-2017",
                         "required": false,
                         "type": "string"
                     }
@@ -661,7 +661,6 @@
                 ],
                 "summary": "Devuelve todos los expositores ordenados alfabeticamente",
                 "description": "Devuelve todos los expositores ordenados alfabeticamente",
-                "operationId": "expositorAll",
                 "produces": [
                     "application/json"
                 ],
@@ -915,21 +914,21 @@
                     {
                         "name": "fecha",
                         "in": "formData",
-                        "description": "Fecha del evento",
+                        "description": "Fecha del evento. Ej: 2016-03-20 ó 20-03-2017",
                         "required": true,
                         "type": "string"
                     },
                     {
                         "name": "hora_inicio",
                         "in": "formData",
-                        "description": "Hora de inicio del evento",
+                        "description": "Hora de inicio del evento. 10:00:00 ó 10:00",
                         "required": false,
                         "type": "string"
                     },
                     {
                         "name": "hora_fin",
                         "in": "formData",
-                        "description": "Hora de fin del evento",
+                        "description": "Hora de fin del evento. 10:00:00 ó 10:00",
                         "required": false,
                         "type": "string"
                     },
@@ -982,7 +981,7 @@
                     {
                         "name": "fecha",
                         "in": "formData",
-                        "description": "Día del evento",
+                        "description": "Día del evento. Ej: 2016-03-20 ó 20-03-2017",
                         "required": false,
                         "type": "string"
                     }
@@ -1134,21 +1133,21 @@
                     {
                         "name": "fecha",
                         "in": "formData",
-                        "description": "Fecha del evento",
+                        "description": "Fecha del evento. Ej: 2016-03-20 ó 20-03-2017",
                         "required": true,
                         "type": "string"
                     },
                     {
                         "name": "hora_inicio",
                         "in": "formData",
-                        "description": "Hora de inicio del evento",
+                        "description": "Hora de inicio del evento. 10:00:00 ó 10:00",
                         "required": false,
                         "type": "string"
                     },
                     {
                         "name": "hora_fin",
                         "in": "formData",
-                        "description": "Hora de fin del evento",
+                        "description": "Hora de fin del evento. 10:00:00 ó 10:00",
                         "required": false,
                         "type": "string"
                     },
@@ -1201,7 +1200,7 @@
                     {
                         "name": "fecha",
                         "in": "formData",
-                        "description": "Día del evento",
+                        "description": "Día del evento. Ej: 2016-03-20 ó 20-03-2017",
                         "required": false,
                         "type": "string"
                     }
@@ -1459,7 +1458,6 @@
                 ],
                 "summary": "Devuelve todos los patrocinadores ordenados alfabeticamente",
                 "description": "Devuelve todos los patrocinadores ordenados alfabeticamente",
-                "operationId": "expositorAll",
                 "produces": [
                     "application/json"
                 ],
@@ -1492,7 +1490,7 @@
                 }
             }
         },
-        "/patrocinador/detail/{user_id}/{api_key}/{expositor_id}": {
+        "/patrocinador/detail/{user_id}/{api_key}/{patrocinador_id}": {
             "get": {
                 "tags": [
                     "patrocinador"
@@ -1523,6 +1521,428 @@
                         "description": "Id del patrocinador",
                         "required": true,
                         "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/notificacion/save": {
+            "post": {
+                "tags": [
+                    "notificacion"
+                ],
+                "summary": "Guarda la notificación push de un usuario",
+                "description": "Guarda la notificación push de un usuario",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "notificacion",
+                        "in": "formData",
+                        "description": "Texto de la notificacion",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "leido",
+                        "in": "formData",
+                        "description": "Status de la notificación 0 (Default) = no leido, 1 = leido",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/notificacion/all/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "notificacion"
+                ],
+                "summary": "Devuelve todas las notificaciones",
+                "description": "Devuelve todas las notificaciones de un usuario",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/notificacion/unread/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "notificacion"
+                ],
+                "summary": "Devuelve todas las notificaciones no leidas",
+                "description": "Devuelve todas las notificaciones no leidas de un usuario",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/notificacion/markasread/{user_id}/{api_key}/{notificacion_id}": {
+            "get": {
+                "tags": [
+                    "notificacion"
+                ],
+                "summary": "Devuelve todas las notificaciones no leidas",
+                "description": "Devuelve todas las notificaciones no leidas de un usuario",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "notificacion_id",
+                        "in": "path",
+                        "description": "Id de la notificación",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/eventos/addfavorito/{user_id}/{api_key}/{evento_id}": {
+            "get": {
+                "tags": [
+                    "evntos",
+                    "acompañantes",
+                    "programa",
+                    "Sociales y Deportivos",
+                    "agenda"
+                ],
+                "summary": "Agrega un evento a la agenda del usuario",
+                "description": "Agrega un evento del programa, de acompañantes o Social/deportivo a la agenda del usuario",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "evento_id",
+                        "in": "path",
+                        "description": "Id del evento",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/eventos/miagenda/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "evntos",
+                    "acompañantes",
+                    "programa",
+                    "Sociales y Deportivos",
+                    "agenda"
+                ],
+                "summary": "Devuelve los eventos en la agenda del usuario",
+                "description": "Devuelve los eventos en la agenda del usuario agrupados por hora",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/ruta/create": {
+            "post": {
+                "tags": [
+                    "ruta"
+                ],
+                "summary": "Crea una nueva ruta",
+                "description": "Crea y asigna una nueva ruta a un usuario",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "titulo",
+                        "in": "formData",
+                        "description": "Titulo de la ruta",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "descripcion",
+                        "in": "formData",
+                        "description": "Descripcion de la ruta",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "user_asignado",
+                        "in": "formData",
+                        "description": "id del usuario al que se asignará la ruta",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "archivo",
+                        "in": "formData",
+                        "description": "PDF con la información de la ruta",
+                        "required": false,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/ruta/all/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "ruta"
+                ],
+                "summary": "Devuelve todas las rutas",
+                "description": "Devuelve todas las rutas asignadas al usuario",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/ruta/detail/{user_id}/{api_key}/{ruta_id}": {
+            "get": {
+                "tags": [
+                    "ruta"
+                ],
+                "summary": "Devuelve el detalle de una ruta",
+                "description": "Devuelve el detalle de una ruta",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "ruta_id",
+                        "in": "path",
+                        "description": "Id de la ruta",
+                        "required": true,
+                        "type": "integer"
                     }
                 ],
                 "responses": {

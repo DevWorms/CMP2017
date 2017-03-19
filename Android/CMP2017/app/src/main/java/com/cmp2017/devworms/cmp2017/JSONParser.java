@@ -15,12 +15,14 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static com.loopj.android.http.AsyncHttpClient.log;
+
 public class JSONParser {
 
 
     static InputStream is = null;
     static JSONObject jObj = null;
-    static String json = "";
+    static String json,json2;
     Response respuesta;
     // constructor
     public JSONParser() {
@@ -61,19 +63,7 @@ public class JSONParser {
                 Request request = new Request.Builder()
                         .url(url)
                         .get()
-                        .addHeader("Apikey", bd)
-                        .build();
-
-                respuesta = client.newCall(request).execute();
-            } else if(method == "GETF") {
-                OkHttpClient client = new OkHttpClient();
-                Log.d("URL : ", "> " + url);
-                Log.d("bd : ", "> " + bd2);
-                Request request = new Request.Builder()
-                        .url(url)
-                        .get()
-                        .addHeader("Apikey", bd)
-                        .addHeader("Folio", bd2)
+                        .addHeader("cache-control", "no-cache")
                         .build();
 
                 respuesta = client.newCall(request).execute();
@@ -86,9 +76,10 @@ public class JSONParser {
         }
 
         try {
-            Log.d("message: ", "> " + respuesta.body().string().toString());
-            if("OK".equals(respuesta.message().toString())){
+
+            if("OK".equals(respuesta.message().toString()) || "Created".equals(respuesta.message().toString())){
                 json = respuesta.body().string().toString();
+
             }else{
                 json = "error"  ;
             }
@@ -97,7 +88,9 @@ public class JSONParser {
         }
 
         // return JSON String
-        return json;
+
+            return json;
+
 
     }
 }

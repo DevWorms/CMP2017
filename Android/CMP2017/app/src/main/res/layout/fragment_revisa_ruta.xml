@@ -35,39 +35,19 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="30dp"
-                android:text="Revisa los horarios y las rutas que tenemos disponible para el transporte aeropuerto hotel-recinto y viceversa"
-                android:textSize="18sp" />
-
             <Button
-                android:id="@+id/btnRevisaRutas"
+                android:id="@+id/btnMapRec"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/btnrevisarutas"
+                android:layout_marginTop="60dp"
+                android:background="@drawable/btnllegadaaero"
                 android:gravity="center"
                 android:paddingBottom="5dp"
                 android:textSize="17sp"
                 android:textStyle="normal" />
-
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="50dp"
-                android:text="¿Viajas de algún lugar a la ciudad de Puebla? Revisa las intinerarios de vuelo de las diferentes aerolineas"
-                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/btnMapExp"
@@ -76,8 +56,22 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/btnrevisavuelos"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/btnhotelexpo"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:textSize="17sp"
+                android:textStyle="normal" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/btnsalidaaero"
                 android:gravity="center"
                 android:paddingBottom="5dp"
                 android:textSize="17sp"

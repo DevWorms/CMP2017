@@ -12,13 +12,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Programa extends Model
 {
+    protected $table = "eventos";
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'id', 'categoria_id', 'foto_id', 'user_id', 'nombre', 'lugar', 'recomendaciones', 'latitude', 'longitude', 'fecha'
+        'id', 'categoria_id', 'foto_id', 'user_id', 'nombre', 'lugar', 'recomendaciones', 'latitude', 'longitude',
+        'fecha', 'hora_inicio', 'hora_fin', 'type'
     ];
 
     /**
@@ -26,13 +28,13 @@ class Programa extends Model
      *
      * @var array
      */
-    protected $hidden = [];
+    protected $hidden = ['updated_at'];
 
     public function categoria() {
-        return $this->hasOne('App\Categoria', 'categoria_id', 'id');
+        return $this->hasOne('App\Categoria', 'id', 'categoria_id');
     }
 
     public function foto() {
-        return $this->hasOne('App\File', 'foto_id', 'id');
+        return $this->hasOne('App\File', 'id', 'foto_id');
     }
 }

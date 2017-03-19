@@ -89,7 +89,8 @@ class UserController extends Controller {
                 $res['status'] = 1;
                 $res['mensaje'] = "Perfil creado correctamente";
                 $res['api_key'] = $user->api_token;
-                return response()->json($res, 201);
+                $res['user_id'] = $user->id;
+                return response()->json($res, 200);
             }
         } catch (FatalThrowableError $ex) {
             $res['status'] = 0;
@@ -165,12 +166,12 @@ class UserController extends Controller {
 
                 $res['status'] = 1;
                 $res['mensaje'] = "Tu perfil se actualizo correctamente";
-                return response()->json($res, 201);
+                return response()->json($res, 200);
             }
         } catch (ModelNotFoundException $ex) {
             $res['status'] = 0;
             $res['mensaje'] = "Usuario no encontrado";
-            return response()->json($res, 404);
+            return response()->json($res, 400);
         } catch (FatalThrowableError $ex) {
             $res['status'] = 0;
             $res['mensaje'] = $ex->getMessage();
@@ -201,7 +202,7 @@ class UserController extends Controller {
         } catch (ModelNotFoundException $ex) {
             $res['status'] = 0;
             $res['mensaje'] = "Usuario no encontrado";
-            return response()->json($res, 404);
+            return response()->json($res, 400);
         } catch (FatalThrowableError $ex) {
             $res['status'] = 0;
             $res['mensaje'] = $ex->getMessage();
@@ -231,7 +232,7 @@ class UserController extends Controller {
         } catch (ModelNotFoundException $ex) {
             $res['status'] = 0;
             $res['mensaje'] = "Usuario no encontrado";
-            return response()->json($res, 404);
+            return response()->json($res, 400);
         } catch (FatalThrowableError $ex) {
             $res['status'] = 0;
             $res['mensaje'] = $ex->getMessage();
@@ -272,17 +273,18 @@ class UserController extends Controller {
                     $res['status'] = 1;
                     $res['mensaje'] = "Bienvenido " . $user->name . " " . $user->last_name;
                     $res['api_key'] = $user->api_token;
+                    $res['user_id'] = $user->id;
                     return response()->json($res, 200);
                 } else {
                     $res['status'] = 0;
                     $res['mensaje'] = "Usuario o contraseña incorrecto";
-                    return response()->json($res, 404);
+                    return response()->json($res, 400);
                 }
             }
         } catch (ModelNotFoundException $ex) {
             $res['status'] = 0;
             $res['mensaje'] = "Usuario o contraseña incorrecto";
-            return response()->json($res, 404);
+            return response()->json($res, 400);
         } catch (FatalThrowableError $ex) {
             $res['status'] = 0;
             $res['mensaje'] = $ex->getMessage();

@@ -33,6 +33,5 @@ class MisExpositores extends Model
      *
      * @var array
      */
-    protected $hidden = [
-    ];
+    protected $hidden = ['updated_at'];
 }

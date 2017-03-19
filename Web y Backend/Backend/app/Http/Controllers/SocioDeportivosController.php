@@ -229,7 +229,7 @@ class SocioDeportivosController extends Controller {
             if ($tipo) {
                 $categoria = Categoria::where('id', $tipo)->first();
                 if ($categoria) {
-                    $programas = $programas->where('categoria_id', $tipo)->all();
+                    $programas = $programas->where('categoria_id', $tipo)->values();
                 } else {
                     $res['status'] = 0;
                     $res['mensaje'] = "Categoría no encontrada";

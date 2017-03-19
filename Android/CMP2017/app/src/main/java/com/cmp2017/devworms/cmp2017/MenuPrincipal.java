@@ -1,6 +1,7 @@
 package com.cmp2017.devworms.cmp2017;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,7 +23,7 @@ import android.widget.ImageView;
 
 public class MenuPrincipal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    String nombre;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,10 +31,19 @@ public class MenuPrincipal extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        SharedPreferences sp = getSharedPreferences("prefe", Activity.MODE_PRIVATE);
-        String nombre = sp.getString("Nombre","");
+        String inicioComo = getIntent().getExtras().getString("parametro");
 
-        Log.d("pass : ", "> " + nombre);
+        if(inicioComo.equals("invi")){
+            nombre = "Bienvenido Usuario";
+
+        }else{
+            SharedPreferences sp = getSharedPreferences("prefe", Activity.MODE_PRIVATE);
+            nombre = sp.getString("Nombre","");
+
+
+        }
+
+        Log.d("nombre : ", "> " + nombre);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -45,7 +56,7 @@ public class MenuPrincipal extends AppCompatActivity
         toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
         getSupportActionBar().setTitle(nombre);
         getFragmentManager().beginTransaction()
-                .replace(R.id.actividad, new MenuFragment()).commit();
+                .replace(R.id.actividad, new MenuFragment()).addToBackStack(null).commit();
 
     }
 
@@ -53,12 +64,19 @@ public class MenuPrincipal extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
+
+        int count = getFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
             super.onBackPressed();
+            getFragmentManager().popBackStack();
+        } else if (count == 1){
+
+        } else{
+
+            getFragmentManager().popBackStack();//No se porqué puse lo mismo O.o
         }
+
     }
 
     @Override
@@ -112,4 +130,6 @@ public class MenuPrincipal extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

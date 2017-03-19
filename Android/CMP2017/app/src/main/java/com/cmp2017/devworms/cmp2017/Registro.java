@@ -137,16 +137,20 @@ class getRegstroAT extends AsyncTask<String, String, String> {
             String respuesta= jsp.makeHttpRequest("http://cmp.devworms.com/api/user/signup","POST",body,"");
             Log.d("Registro : ", "> " + respuesta);
             if(respuesta!="error"){
-                try{ JSONObject json = new JSONObject(respuesta);
+                try{
+                    JSONObject json = new JSONObject(respuesta);
 
                     String apikey = json.getString("api_key");
+                    String iduser = json.getString("user_id");
                     Log.d("Registroapikey : ", "> " + apikey);
                     String nombrecomple= nom + " "+ ape;
                     SharedPreferences  sp = getSharedPreferences("prefe", Activity.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sp.edit();
                     editor.putString("APIkey", apikey);
                     editor.putString("Nombre", nombrecomple);
+                    editor.putString("IdUser", iduser);
                     editor.commit();
+
                 }
                 catch (JSONException e) {
                     e.printStackTrace();

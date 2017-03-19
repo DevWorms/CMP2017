@@ -47,6 +47,10 @@ $app->get('/api/expositor/order/name/{user_id}/{api_key}', ['middleware' => 'cor
 $app->get('/api/expositor/order/stand/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'ExpositorController@getByStand']);
 $app->get('/api/expositor/detail/{user_id}/{api_key}/{expositor_id}', ['middleware' => 'cors', 'uses' => 'ExpositorController@getExpositor']);
 
+// Solo web (?)
+$app->get('/api/expositor/paginate/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'ExpositorController@paginate']);
+$app->post('/api/expositor/search', ['middleware' => 'cors', 'uses' => 'ExpositorController@search']);
+
 $app->get('/api/expositor/addfavorito/{user_id}/{api_key}/{expositor_id}', ['middleware' => 'cors', 'uses' => 'ExpositorController@addFavorito']);
 $app->get('/api/expositor/misfavoritos/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'ExpositorController@getMyExpositores']);
 

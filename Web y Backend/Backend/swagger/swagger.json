@@ -865,6 +865,91 @@
                 }
             }
         },
+        "/expositor/paginate/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "expositor"
+                ],
+                "summary": "Paginación de expositores",
+                "description": "Paginación de todos los expositores de 5 en 5, paginación",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/expositor/search": {
+            "post": {
+                "tags": [
+                    "expositor"
+                ],
+                "summary": "Busqueda de expositores",
+                "description": "Devuelve los expositores cuyo nombre concuerda con la busqueda",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "search",
+                        "in": "formData",
+                        "description": "Parámetro a buscar",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
         "/acompanantes/create": {
             "post": {
                 "tags": [
@@ -1716,7 +1801,7 @@
         "/eventos/addfavorito/{user_id}/{api_key}/{evento_id}": {
             "get": {
                 "tags": [
-                    "evntos",
+                    "eventos",
                     "acompañantes",
                     "programa",
                     "Sociales y Deportivos",
@@ -1766,7 +1851,7 @@
         "/eventos/miagenda/{user_id}/{api_key}": {
             "get": {
                 "tags": [
-                    "evntos",
+                    "eventos",
                     "acompañantes",
                     "programa",
                     "Sociales y Deportivos",

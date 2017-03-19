@@ -56,7 +56,18 @@ class PatrocinadorController extends Controller {
 
             $nombre = $request->get('nombre');
             $email = $request->get('email');
-            $url = $request->get('url');
+            $url_expositor = $request->get('url');
+            if ((strtolower(substr($url_expositor, 0, 7)) == "http://") || (strtolower(substr($url_expositor, 0, 8)) == "https://")) {
+                if (substr($url_expositor, -1) != "/") {
+                    $url_expositor = $url_expositor . "/";
+                }
+            } else {
+                if (substr($url_expositor, -1) == "/") {
+                    $url_expositor = "http://" . $url_expositor;
+                } else {
+                    $url_expositor = "http://" . $url_expositor . "/";
+                }
+            }
             $telefono = $request->get('telefono');
             $acerca = $request->get('acerca');
             $latitude = $request->get('latitude');
@@ -156,7 +167,7 @@ class PatrocinadorController extends Controller {
 
                 $expositor = Expositor::create([
                     'user_id' => $user_id,
-                    'url' => $url,
+                    'url' => $url_expositor,
                     'nombre' => $nombre,
                     'email' => $email,
                     'telefono' => $telefono,

@@ -91,17 +91,15 @@
 
         <!-- Contenido -->
         <div id="page-wrapper">
-
             <div class="container-fluid">
-                
-                <form action="" method="" id="" name="" role="">    
-                    
+                <div id="error"></div>
+                <form enctype="multipart/form-data" method="POST" id="crearExpositor" name="crearExpositor">
                     <div class="row page-header">
                         <div class="col-xs-12 col-md-6">
                         </div>
 
                         <div class="col-xs-12 col-md-6" align="right">
-                            <button type="submit" class="btn btn-default" name="" id=""><i class="fa fa-plus-circle"></i> Agregar Expositor</button>   
+                            <button type="submit" class="btn btn-default" id="btn_crearExpositor"><i class="fa fa-plus-circle"></i> Agregar Expositor</button>
                         </div>
                     </div>
                     <!-- Fin Fila -->
@@ -109,16 +107,16 @@
                     <div class="row">    
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
                            <div class="form-group">
-                                <label for="">Nombre del Expositor</label>
+                                <label for="nombre">Nombre del Expositor</label>
                                     <br>
-                                <input type="" name="" id="" class="form-control">
+                                <input type="text" name="nombre" id="nombre" class="form-control" required>
                             </div> 
                         </div>
                         <div class="col-xs-12 col-md-5">
                             <div class="form-group">
-                                <label for="">Correo Electrónico</label>
+                                <label for="email">Correo Electrónico</label>
                                     <br>
-                                <input type="" name="" id="" class="form-control">
+                                <input type="email" name="email" id="email" class="form-control" required>
                             </div>
                         </div>                    
                     </div>
@@ -128,20 +126,25 @@
                     <div class="row">    
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
                            <div class="form-group">
-                                <label for="">URL</label>
+                                <label for="url">URL</label>
                                     <br>
-                                <input type="" name="" id="" class="form-control">
+                                <input type="text" name="url" id="url" class="form-control" required>
                                 <br>
-                                <label for="">Teléfono</label>
+                                <label for="telefono">Teléfono</label>
                                     <br>
-                                <input type="" name="" id="" class="form-control">
+                                <input type="number" name="telefono" id="telefono" class="form-control" required>
+
+                               <br>
+                               <label for="stand">Número de stand</label>
+                               <br>
+                               <input type="number" name="stand" id="stand" class="form-control" required>
                             </div> 
                         </div>
                         <div class="col-xs-12 col-md-5">
                             <div class="form-group">
-                                <label for="">Recomendaciones</label>
+                                <label for="acerca">Acerca del expositor</label>
                                     <br>
-                                <textarea class="form-control" rows="5" id=""></textarea>
+                                <textarea class="form-control" rows="5" id="acerca" name="acerca" required></textarea>
                             </div>
                         </div>                    
                     </div>
@@ -153,18 +156,14 @@
                            <div class="form-group">
                                 <label for="">Agregar archivo PDF</label>
                                     <br>
-                                <input type="" name="" id="" class="form-control">
-                                    <br>
-                                <button class="btn btn-default">Examinar</button>
+                                <input type="file" name="archivo_pdf" id="archivo_pdf" class="form-control">
                             </div> 
                         </div>
                         <div class="col-xs-12 col-md-5">
                             <div class="form-group">
                                 <label for="">Agregar imágen (logotipo)</label>
                                     <br>
-                                <input type="" name="" id="" class="form-control">
-                                    <br>
-                                <button class="btn btn-default">Examinar</button>
+                                <input type="file" name="archivo_logo" id="archivo_logo" class="form-control">
                             </div>
                         </div>                    
                     </div>
@@ -196,7 +195,8 @@
     <!-- Scripts -->
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
-
+    <script src="js/js.php"></script>
+    <script src="js/add-expositores.js"></script>
 </body>
 
 </html>

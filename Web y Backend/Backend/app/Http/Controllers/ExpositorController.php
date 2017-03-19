@@ -56,7 +56,18 @@ class ExpositorController extends Controller {
 
             $nombre = $request->get('nombre');
             $email = $request->get('email');
-            $url = $request->get('url');
+            $url_expositor = $request->get('url');
+            if ((strtolower(substr($url_expositor, 0, 7)) == "http://") || (strtolower(substr($url_expositor, 0, 8)) == "https://")) {
+                if (substr($url_expositor, -1) != "/") {
+                    $url_expositor = $url_expositor . "/";
+                }
+            } else {
+                if (substr($url_expositor, -1) == "/") {
+                    $url_expositor = "http://" . $url_expositor;
+                } else {
+                    $url_expositor = "http://" . $url_expositor . "/";
+                }
+            }
             $telefono = $request->get('telefono');
             $acerca = $request->get('acerca');
             $latitude = $request->get('latitude');
@@ -156,7 +167,7 @@ class ExpositorController extends Controller {
 
                 $expositor = Expositor::create([
                     'user_id' => $user_id,
-                    'url' => $url,
+                    'url' => $url_expositor,
                     'nombre' => $nombre,
                     'email' => $email,
                     'telefono' => $telefono,
@@ -200,8 +211,58 @@ class ExpositorController extends Controller {
     public function getAll($user_id, $api_key) {
         try {
             User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
-            $expositores = Expositor::where('is_expositor', 1)->get();
+            $expositores = Expositor::orderBy('id', 'DESC')->where('is_expositor', 1)->get();
 
+            foreach ($expositores as $expositor) {
+                $expositor = $this->returnExpositor($expositor);
+            }
+
+            $res['status'] = 1;
+            $res['mensaje'] = "success";
+            $res['expositores'] = $expositores;
+            return response()->json($res, 200);
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    public function paginate($user_id, $api_key) {
+        try {
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+            $expositores = Expositor::orderBy('id', 'DESC')->where('is_expositor', 1)->paginate(5);
+            foreach ($expositores as $expositor) {
+                $expositor = $this->returnExpositor($expositor);
+            }
+
+            $res['status'] = 1;
+            $res['mensaje'] = "success";
+            $res['expositores'] = $expositores;
+            return response()->json($res, 200);
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    public function search(Request $request) {
+        try {
+            $user_id = $request->get('user_id');
+            $api_key = $request->get('api_key');
+            $search = $request->get('search');
+
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+            $expositores = Expositor::where('nombre', 'LIKE', '%'. $search .'%')->where('is_expositor', 1)->get();
             foreach ($expositores as $expositor) {
                 $expositor = $this->returnExpositor($expositor);
             }

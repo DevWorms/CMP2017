@@ -32,6 +32,9 @@ $app->get('/api/programa/all/{user_id}/{api_key}', ['middleware' => 'cors', 'use
 $app->post('/api/programa/search', ['middleware' => 'cors', 'uses' => 'ProgramaController@getFiltro']);
 $app->get('/api/programa/detail/{user_id}/{api_key}/{programa_id}', ['middleware' => 'cors', 'uses' => 'ProgramaController@getPrograma']);
 
+// Solo web (?)
+$app->get('/api/programa/paginate/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'ProgramaController@paginate']);
+
 /*
  * Categorias
  */
@@ -77,6 +80,10 @@ $app->post('/api/patrocinador/create', ['middleware' => 'cors', 'uses' => 'Patro
 $app->get('/api/patrocinador/all/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'PatrocinadorController@getAll']);
 $app->get('/api/patrocinador/order/name/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'PatrocinadorController@getByName']);
 $app->get('/api/patrocinador/detail/{user_id}/{api_key}/{expositor_id}', ['middleware' => 'cors', 'uses' => 'PatrocinadorController@getPatrocinador']);
+
+// Solo web (?)
+$app->get('/api/patrocinador/paginate/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'PatrocinadorController@paginate']);
+$app->post('/api/patrocinador/search', ['middleware' => 'cors', 'uses' => 'PatrocinadorController@search']);
 
 /*
  * Notificaciones push

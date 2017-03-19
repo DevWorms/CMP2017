@@ -299,6 +299,56 @@ class PatrocinadorController extends Controller {
         }
     }
 
+    public function paginate($user_id, $api_key) {
+        try {
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+            $expositores = Expositor::orderBy('id', 'DESC')->where('is_expositor', 0)->paginate(5);
+            foreach ($expositores as $expositor) {
+                $expositor = $this->returnPatrocinador($expositor);
+            }
+
+            $res['status'] = 1;
+            $res['mensaje'] = "success";
+            $res['patrocinadores'] = $expositores;
+            return response()->json($res, 200);
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    public function search(Request $request) {
+        try {
+            $user_id = $request->get('user_id');
+            $api_key = $request->get('api_key');
+            $search = $request->get('search');
+
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+            $expositores = Expositor::where('nombre', 'LIKE', '%'. $search .'%')->where('is_expositor', 0)->get();
+            foreach ($expositores as $expositor) {
+                $expositor = $this->returnPatrocinador($expositor);
+            }
+
+            $res['status'] = 1;
+            $res['mensaje'] = "success";
+            $res['patrocinadores'] = $expositores;
+            return response()->json($res, 200);
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
     public function returnPatrocinador($expositor) {
         if ($expositor->pdf_file) {
             $expositor->pdf;

@@ -198,6 +198,9 @@
                                 <% if (logo.nombre) { %> <img src="${logo.url}" width="200px" height="200px"> <% } %>
                             </div>
                             <div class="col-md-12">
+                                <br>
+                            </div>
+                            <div class="col-md-12">
                                 <p><strong>Nombre</strong>: ${nombre}</p>
                             </div>
                             <div class="col-md-12">

@@ -417,6 +417,45 @@
                 }
             }
         },
+        "/programa/paginate/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "programa"
+                ],
+                "summary": "Paginación de programas",
+                "description": "Paginación de todos los programas de 5 en 5, paginación",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
         "/categoria/create": {
             "post": {
                 "tags": [
@@ -1604,6 +1643,91 @@
                         "name": "patrocinador_id",
                         "in": "path",
                         "description": "Id del patrocinador",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/patrocinador/paginate/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "patrocinador"
+                ],
+                "summary": "Paginación de patrocinadores",
+                "description": "Paginación de todos los patrocinadores de 5 en 5, paginación",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/patrocinador/search": {
+            "post": {
+                "tags": [
+                    "patrocinador"
+                ],
+                "summary": "Busqueda de patrocinadores",
+                "description": "Devuelve los patrocinadores cuyo nombre concuerda con la busqueda",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "search",
+                        "in": "formData",
+                        "description": "Parámetro a buscar",
                         "required": true,
                         "type": "string"
                     }

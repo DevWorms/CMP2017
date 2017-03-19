@@ -91,17 +91,15 @@
 
         <!-- Contenido -->
         <div id="page-wrapper">
-
             <div class="container-fluid">
-                
-                <form action="" method="" id="" name="" role="">    
-                    
+                <div id="error"></div>
+                <form enctype="multipart/form-data" method="POST" id="crearEvento" name="crearEvento">
                     <div class="row page-header">
                         <div class="col-xs-12 col-md-6">
                         </div>
 
                         <div class="col-xs-12 col-md-6" align="right">
-                            <button type="submit" class="btn btn-default" name="" id=""><i class="fa fa-plus-circle"></i> Agregar Evento</button>   
+                            <button type="submit" class="btn btn-default" id="btn_crearEvento"><i class="fa fa-plus-circle"></i> Agregar Evento</button>
                         </div>
                     </div>
                     <!-- Fin Fila -->
@@ -110,21 +108,15 @@
                         <div class="col-md-5 col-md-offset-1">
                             
                             <div class="form-group">
-                                <label for="">Nombre del Evento</label>
+                                <label for="nombre">Nombre del Evento</label>
                                     <br>
-                                <input type="" name="" id="" class="form-control">
+                                <input type="text" name="nombre" id="nombre" class="form-control" required>
                             </div>
                             <br>
 
                             <div class="form-group">
                               <label for="sel1">Tipo de Evento</label>
-                              <select class="form-control" id="sel1" placehodler="Selecciona">
-                                <option disabled selected hidden>Selecciona</option>
-                                <option>Sesiones Técnicas</option>
-                                <option>Plenarias</option>
-                                <option>Comidas Conferencias</option>
-                                <option>E-Póster</option>
-                                <option>Cursos Pre-Congreso</option>
+                              <select class="form-control" id="categoria_id" name="categoria_id">
                               </select>
                               <br>
                               <a href="categoria-evento.php" class="btn btn-default">Agregar categoría de evento</a>
@@ -132,16 +124,44 @@
                             <br>
 
                             <div class="form-group">
-                                <label for="">Lugar</label>
+                                <label for="lugar">Lugar</label>
                                     <br>
-                                <input type="" name="" id="" class="form-control">
+                                <input type="text" name="lugar" id="lugar" class="form-control" required>
                             </div> 
                             <br>
 
                             <div class="form-group">
-                                <label for="">Recomendaciones</label>
+                                <label for="recomendaciones">Recomendaciones</label>
                                     <br>
-                                <textarea class="form-control" rows="5" id=""></textarea>
+                                <textarea class="form-control" rows="5" id="recomendaciones" name="recomendaciones" required></textarea>
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                                <label for="fecha">Fecha del evento</label>
+                                <br>
+                                <input type="date" name="fecha" id="fecha" class="form-control" required>
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                                <label for="archivo">Imágen del evento</label>
+                                <br>
+                                <input type="file" name="archivo" id="archivo" class="form-control" required>
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                                <label for="hora_inicio">Hora de inicio del evento</label>
+                                <br>
+                                <input type="time" name="hora_inicio" id="hora_inicio" class="form-control" required>
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                                <label for="hora_fin">Hora de fin del evento</label>
+                                <br>
+                                <input type="time" name="hora_fin" id="hora_fin" class="form-control">
                             </div>
                             <br>
 
@@ -171,6 +191,9 @@
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
+    <script src="js/js.php"></script>
+    <script src="js/lodash.js"></script>
+    <script src="js/add-programa.js"></script>
 </body>
 
 </html>

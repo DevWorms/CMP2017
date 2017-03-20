@@ -31,7 +31,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">DASHBOARD CMP 2017</a>
+                <a class="navbar-brand" href="index.php">DASHBOARD <b style="color: #52e7ff;">CMP 2017</b></a>
             </div>
 
             <!-- Top Menu -->
@@ -96,11 +96,11 @@
                 <form enctype="multipart/form-data" method="POST" id="crearPatrocinador" name="crearPatrocinador">
                     <div class="row page-header">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
-                            <h4><a href="#">Patrocinador</a></h4>
+                            <h4 style="color: #10375e;">Patrocinador</h4>
                         </div>
 
                         <div class="col-xs-12 col-md-6" align="right">
-                            <button type="submit" class="btn btn-default" name="" id=""><i class="fa fa-plus-circle"></i> Agregar Patrocinador</button>   
+                            <button type="submit" class="btn basico" name="" id=""><i class="fa fa-plus-circle"></i> &nbsp;Agregar Patrocinador</button>   
                         </div>
                     </div>
                     <!-- Fin Fila -->
@@ -173,7 +173,7 @@
                             <div class="form-group">
                                 <label for="">Agregar ubicación en el mapa</label>
                                     <br><br>
-                                <button class="btn btn-default">Ir al mapa</button>
+                                <button class="btn basico2">Ir al mapa</button>
                             </div> 
                         </div>
 

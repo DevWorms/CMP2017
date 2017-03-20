@@ -31,7 +31,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">DASHBOARD CMP 2017</a>
+                <a class="navbar-brand" href="index.php">DASHBOARD <b style="color: #52e7ff;">CMP 2017</b></a>
             </div>
 
             <!-- Top Menu -->
@@ -104,7 +104,7 @@
                                 <div class="input-group">
                                     <input type="date" class="form-control" placeholder="Buscar ..." name="q" id="q">
                                     <div class="input-group-btn">
-                                        <button class="btn btn-primary" type="button" name="search" id="search"><i class="glyphicon glyphicon-search"></i></button>
+                                        <button class="btn btn-default" type="button" name="search" id="search"><i class="glyphicon glyphicon-search"></i></button>
                                     </div>
                                 </div>
                               </form>
@@ -115,7 +115,7 @@
                     </div>
 
                     <div class="col-xs-12 col-md-6" align="right">
-                        <a href="agregar-evento.php" class="btn btn-default" id="btn_crearEvento"><i class="fa fa-plus-circle"></i> Agregar Evento</a>
+                        <a href="agregar-evento.php" class="btn basico" id="btn_crearEvento"><i class="fa fa-plus-circle"></i> &nbsp;Agregar Evento</a>
                     </div>
                 </div>
                 <!-- Fin Fila -->
@@ -133,42 +133,6 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td>Conferencia Magistral de...</td>
-                                <td>Conferencia</td>
-                                <td>05-01-17</td>
-                                <td> <a href="" class="btn btn-primary btn-block">Ver</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Conferencia Magistral de...</td>
-                                <td>Conferencia</td>
-                                <td>05-02-17</td>
-                                <td> <a href="" class="btn btn-primary btn-block">Ver</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Conferencia Magistral de...</td>
-                                <td>Plenaria</td>
-                                <td>05-03-17</td>
-                                <td> <a href="" class="btn btn-primary btn-block">Ver</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Conferencia Magistral de...</td>
-                                <td>E-Poster</td>
-                                <td>05-04-17</td>
-                                <td> <a href="" class="btn btn-primary btn-block">Ver</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Conferencia Magistral de...</td>
-                                <td>Plenaria</td>
-                                <td>05-05-17</td>
-                                <td> <a href="" class="btn btn-primary btn-block">Ver</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Conferencia Magistral de...</td>
-                                <td>Comida Conferencia</td>
-                                <td></td>
-                                <td> <a href="" class="btn btn-primary btn-block">Ver</a> </td>
-                              </tr>
                             </tbody>
                         </table>
                     </div>

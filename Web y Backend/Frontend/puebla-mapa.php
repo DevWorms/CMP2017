@@ -31,7 +31,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">DASHBOARD CMP 2017</a>
+                <a class="navbar-brand" href="index.php">DASHBOARD <b style="color: #52e7ff;">CMP 2017</b></a>
             </div>
 
             <!-- Top Menu -->
@@ -91,12 +91,11 @@
 
         <!-- Contenido -->
         <div id="page-wrapper">
-
             <div class="container-fluid">
-                
+                <div id="error"></div>
                 <div class="row page-header">
                    <div class="col-xs-12 col-md-offset-1 col-md-4">
-                        <h3><a href="">Puebla</a></h3>
+                        <h3 style="color: #10375e;">Puebla</h3>
                     </div> 
                 </div>
                 <!-- Fin Fila -->
@@ -108,17 +107,13 @@
                 </div>
                 <br><br>
                 <!-- Fin Fila -->
-
-                <form action="" method="" id="" name="" role="">    
-                    
+                <form enctype="multipart/form-data" method="POST" id="crearEvento" name="crearEvento">
                     <div class="row">
                         <div class="col-xs-12 col-md-offset-1 col-md-5">
                             <div class="form-group">
-                                <label for="">Seleccionar PDF</label>
+                                <label for="mapa">Seleccionar PDF</label>
                                     <br>
-                                <input type="" name="" id="" class="form-control">
-                                    <br>
-                                <button class="btn btn-default">Seleccionar</button>
+                                <input type="file" name="mapa" id="mapa" class="form-control" required>
                             </div>
                             <br> 
                         </div>
@@ -126,8 +121,8 @@
                     <!-- Fin Fila -->
 
                     <div class="row">
-                        <div class="col-xs-12 col-md-offset-1 col-md-4">
-                            <button type="submit" class="btn btn-primary btn-lg" name="" id="">Guardar Mapa</button> 
+                        <div class="col-xs-offset-2 col-xs-8 col-md-offset-1 col-md-2">
+                            <button type="submit" class="btn btn-block basico" name="" id="">Guardar Mapa</button> 
                         </div>
                     </div>
                     <!-- Fin Fila -->
@@ -147,6 +142,9 @@
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
+    <script src="js/js.php"></script>
+    <script src="js/lodash.js"></script>
+    <script src="js/add-map.js"></script>
 </body>
 
 </html>

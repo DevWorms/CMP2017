@@ -31,7 +31,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">DASHBOARD CMP 2017</a>
+                <a class="navbar-brand" href="index.php">DASHBOARD <b style="color: #52e7ff;">CMP 2017</b></a>
             </div>
 
             <!-- Top Menu -->
@@ -104,7 +104,7 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Buscar ..." name="q" id="q">
                                     <div class="input-group-btn">
-                                        <button class="btn btn-primary" type="button" name="search" id="search"><i class="glyphicon glyphicon-search"></i></button>
+                                        <button class="btn btn-default" type="button" name="search" id="search"><i class="glyphicon glyphicon-search"></i></button>
                                     </div>
                                 </div>
                               </form>
@@ -115,7 +115,7 @@
                     </div>
 
                     <div class="col-xs-12 col-md-6" align="right">
-                        <a href="agregar-patrocinador.php" class="btn btn-default"><i class="fa fa-plus-circle"></i> Agregar Patrocinador</a>   
+                        <a href="agregar-patrocinador.php" class="btn basico"><i class="fa fa-plus-circle"></i> &nbsp;Agregar Patrocinador</a>   
                     </div>
                 </div>
                 <!-- Fin Fila -->
@@ -131,30 +131,6 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td>Patrocinador 1</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Patrocinador 2</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Patrocinador 3</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Patrocinador 4</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Patrocinador 5</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Patrocinador 6</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
-                              </tr>
                             </tbody>
                         </table>
                     </div>    

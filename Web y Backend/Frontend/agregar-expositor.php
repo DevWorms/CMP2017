@@ -31,7 +31,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">DASHBOARD CMP 2017</a>
+                <a class="navbar-brand" href="index.php">DASHBOARD <b style="color: #52e7ff;">CMP 2017</b></a>
             </div>
 
             <!-- Top Menu -->
@@ -99,7 +99,7 @@
                         </div>
 
                         <div class="col-xs-12 col-md-6" align="right">
-                            <button type="submit" class="btn btn-default" id="btn_crearExpositor"><i class="fa fa-plus-circle"></i> Agregar Expositor</button>
+                            <button type="submit" class="btn basico" id="btn_crearExpositor"><i class="fa fa-plus-circle"></i> &nbsp;Agregar Expositor</button>
                         </div>
                     </div>
                     <!-- Fin Fila -->
@@ -175,7 +175,7 @@
                            <div class="form-group">
                                 <label for="">Agregar ubicación en el mapa</label>
                                     <br><br>
-                                <button class="btn btn-default">Examinar</button>
+                                <button class="btn basico2">Examinar</button>
                             </div> 
                         </div>                
                     </div>

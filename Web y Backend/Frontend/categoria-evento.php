@@ -31,7 +31,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">DASHBOARD CMP 2017</a>
+                <a class="navbar-brand" href="index.php">DASHBOARD <b style="color: #52e7ff;">CMP 2017</b></a>
             </div>
 
             <!-- Top Menu -->
@@ -95,7 +95,7 @@
             <div class="container-fluid">
                 
                 <div class="row page-header__2">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-md-offset-1">
                         <form action="" method="" id="" name="" role="">
                            
                             <div class="form-group">
@@ -105,7 +105,7 @@
                             </div> 
                             <br>
 							
-							<button type="submit" class="btn btn-default" name="" id=""><i class="fa fa-plus-circle"></i> Agregar Categoría</button>
+							<button type="submit" class="btn basico" name="" id=""><i class="fa fa-plus-circle"></i> &nbsp;Agregar Categoría</button>
                         </form>
                     </div>
                     <div class="col-md-6"></div>

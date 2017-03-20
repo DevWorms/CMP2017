@@ -31,7 +31,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">DASHBOARD CMP 2017</a>
+                <a class="navbar-brand" href="index.php">DASHBOARD <b style="color: #52e7ff;">CMP 2017</b></a>
             </div>
 
             <!-- Top Menu -->
@@ -94,9 +94,9 @@
 
             <div class="container-fluid">
                 
-                <div class="row page-header">
-                   <div class="col-md-offset-1">
-                        <h3>Puebla</h3>
+                <div class="row custom-page-header">
+                   <div class="col-xs-offset-1 col-md-offset-1">
+                        <h3 style="color: #10375e;">Puebla</h3>
                     </div> 
                 </div>
                 <!-- Fin Fila -->
@@ -104,13 +104,13 @@
                 <div class="row">
                     <div class="col-xs-5 col-xs-offset-1" align="center">
                         <div class="caja">
-                            <a href="puebla-interes.php"><h4 class="cajaspace">Sitios de Interés</h4></a>
+                            <a style="color: #10375e;" href="puebla-interes.php"><h4 class="cajaspace">Sitios de Interés</h4></a>
                         </div>         
                     </div>
 
                     <div class="col-xs-5" align="center">
                         <div class="caja">
-                            <a href="puebla-mapa.php"><h4 class="cajaspace">Mapa de Puebla</h4></a>
+                            <a style="color: #10375e;" href="puebla-mapa.php"><h4 class="cajaspace">Mapa de Puebla</h4></a>
                         </div>
                     </div>
                 </div>
@@ -119,7 +119,7 @@
                 <div class="row">
                     <div class="col-xs-5 col-xs-offset-1" align="center">
                         <div class="caja">
-                            <a href="puebla-tels.php"><h4 class="cajaspace">Teléfonos de<br>Emergencia y Taxis</h4></a>
+                            <a style="color: #10375e;" href="puebla-tels.php"><h4 class="cajaspace2">Teléfonos de<br>Emergencia y Taxis</h4></a>
                         </div>         
                     </div>
                 </div>

@@ -31,7 +31,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">DASHBOARD CMP 2017</a>
+                <a class="navbar-brand" href="index.php">DASHBOARD <b style="color: #52e7ff;">CMP 2017</b></a>
             </div>
 
             <!-- Top Menu -->
@@ -104,7 +104,7 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Buscar ..." name="" id="q">
                                     <div class="input-group-btn">
-                                        <button class="btn btn-primary" id="search" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                                        <button class="btn btn-default" id="search" type="button"><i class="glyphicon glyphicon-search"></i></button>
                                     </div>
                                 </div>
                               </form>
@@ -115,7 +115,7 @@
                     </div>
 
                     <div class="col-xs-12 col-md-6" align="right">
-                        <a href="agregar-expositor.php" class="btn btn-default"><i class="fa fa-plus-circle"></i> Agregar Expositor</a>   
+                        <a href="agregar-expositor.php" class="btn basico"><i class="fa fa-plus-circle"></i> &nbsp;Agregar Expositor</a>   
                     </div>
                 </div>
                 <!-- Fin Fila -->
@@ -132,30 +132,6 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td>British Pretoleoum</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Ver</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Pemex</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Ver</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Shell</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Ver</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Industria Mexicana de...</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Ver</a> </td>
-                              </tr>
-                              <tr>
-                                <td>BCM Nacional</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Ver</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Petrobras</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Ver</a> </td>
-                              </tr>
                             </tbody>
                         </table>
                     </div>    

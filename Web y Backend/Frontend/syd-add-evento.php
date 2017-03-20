@@ -96,7 +96,7 @@
                 <form enctype="multipart/form-data" method="POST" id="crearEvento" name="crearEvento">
                     <div class="row page-header">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
-                            <h4><a href="#">Eventos Sociales y Deportivos</a></h4>
+                            <h4 style="color: #10375e;">Eventos Sociales y Deportivos</h4>
                         </div>
 
                         <div class="col-xs-12 col-md-6" align="right">

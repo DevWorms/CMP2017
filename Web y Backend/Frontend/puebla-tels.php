@@ -91,10 +91,9 @@
 
         <!-- Contenido -->
         <div id="page-wrapper">
-
             <div class="container-fluid">
-                
-                <form action="" method="" id="" name="" role="">    
+                <div id="error"></div>
+                <form enctype="multipart/form-data" method="POST" id="crearEvento" name="crearEvento">
                     <div class="row page-header">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
                             <h4><a href="#">Puebla</a></h4>
@@ -105,30 +104,21 @@
                         </div>
                     </div>
                     <!-- Fin Fila -->
-                    
-                    <div class="row">
-                        <div class="col-xs-12 col-md-5 col-md-offset-1">
-                            <h4><b>Teléfono 1</b></h4>
-                        </div>
-                    </div>
-                    <br>
-                    <!-- Fin Fila -->
-
                     <div class="row">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
                             <div class="form-group">
-                                <label for="">Titulo</label>
-                                    <br>
-                                <input type="" name="" id="" class="form-control">
+                                <label for="titulo">Titulo</label>
+                                <br>
+                                <input type="text" name="titulo" id="titulo" class="form-control" required>
                             </div>
                             <br>
                         </div>
 
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
                             <div class="form-group">
-                                <label for="">Imágen (fotográfia)</label>
+                                <label for="imagen">Imágen (fotográfia)</label>
                                     <br><br>
-                                <button class="btn btn-default">Seleccionar</button>
+                                <input type="file" id="imagen" name="imagen">
                             </div>
                         </div>
                     </div>
@@ -138,9 +128,9 @@
                     <div class="row">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
                             <div class="form-group">
-                                <label for="">Teléfono</label>
+                                <label for="telefono">Teléfono</label>
                                     <br>
-                                <input type="" name="" id="" class="form-control">
+                                <input type="number" name="telefono" id="telefono" class="form-control" required>
                             </div>
                             <br>
                         </div>
@@ -154,57 +144,7 @@
                     </div>
                 </form>
 
-                <br><hr>
-                
-                <form action="" method="" id="" name="" role="">    
-                    <div class="row">
-                        <div class="col-xs-12 col-md-5 col-md-offset-1">
-                            <h4><b>Teléfono 2</b></h4>
-                        </div>
-                    </div>
-                    <br>
-                    <!-- Fin Fila -->
-
-                    <div class="row">
-                        <div class="col-xs-12 col-md-5 col-md-offset-1">
-                            <div class="form-group">
-                                <label for="">Titulo</label>
-                                    <br>
-                                <input type="" name="" id="" class="form-control">
-                            </div>
-                            <br>
-                        </div>
-
-                        <div class="col-xs-12 col-md-5 col-md-offset-1">
-                            <div class="form-group">
-                                <label for="">Imágen (fotográfia)</label>
-                                    <br><br>
-                                <button class="btn btn-default">Seleccionar</button>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <!-- Fin Fila -->
-
-                    <div class="row">
-                        <div class="col-xs-12 col-md-5 col-md-offset-1">
-                            <div class="form-group">
-                                <label for="">Teléfono</label>
-                                    <br>
-                                <input type="" name="" id="" class="form-control">
-                            </div>
-                            <br>
-                        </div>
-                    </div>
-                    <!-- Fin Fila -->
-                    
-                    <div class="row">
-                        <col-xs-12 class="col-md-2 col-md-offset-1">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block" name="" id="">Guardar</button>    
-                        </col-xs-12>
-                    </div>
-                </form>
-
+                <br>
             </div>
             <!-- /.container-fluid -->
 
@@ -218,6 +158,9 @@
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
+    <script src="js/js.php"></script>
+    <script src="js/lodash.js"></script>
+    <script src="js/add-tel.js"></script>
 </body>
 
 </html>

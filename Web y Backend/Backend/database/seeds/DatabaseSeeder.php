@@ -880,6 +880,29 @@ class DatabaseSeeder extends Seeder
                     'leido' => rand(0, 1)
                 ]);
             }
+
+            for ($i = 1; $i < 7; $i++) {
+                \App\PueblaSitios::create([
+                    'user_id' => 1,
+                    'titulo' => $faker->city,
+                    'maps_link' => $faker->url,
+                    'descripcion' => $faker->paragraph,
+                    'imagen_id' => $i,
+                    'url' => $faker->url
+                ]);
+
+                \App\PueblaTelefonos::create([
+                    'user_id' => 1,
+                    'titulo' => $faker->company,
+                    'imagen_id' => 1,
+                    'telefono' => $faker->phoneNumber
+                ]);
+            }
+
+            \App\PueblaMapa::create([
+                'user_id' => 1,
+                'file_id' => 11
+            ]);
         } catch (Exception $ex) {
             echo $ex->getLine() . " " . $ex->getMessage();
         }

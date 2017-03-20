@@ -91,9 +91,8 @@
 
         <!-- Contenido -->
         <div id="page-wrapper">
-
             <div class="container-fluid">
-                
+                <div id="error"></div>
                 <div class="row page-header">
                    <div class="col-xs-12 col-md-offset-1 col-md-4">
                         <h3><a href="">Puebla</a></h3>
@@ -108,17 +107,13 @@
                 </div>
                 <br><br>
                 <!-- Fin Fila -->
-
-                <form action="" method="" id="" name="" role="">    
-                    
+                <form enctype="multipart/form-data" method="POST" id="crearEvento" name="crearEvento">
                     <div class="row">
                         <div class="col-xs-12 col-md-offset-1 col-md-5">
                             <div class="form-group">
-                                <label for="">Seleccionar PDF</label>
+                                <label for="mapa">Seleccionar PDF</label>
                                     <br>
-                                <input type="" name="" id="" class="form-control">
-                                    <br>
-                                <button class="btn btn-default">Seleccionar</button>
+                                <input type="file" name="mapa" id="mapa" class="form-control" required>
                             </div>
                             <br> 
                         </div>
@@ -147,6 +142,9 @@
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
+    <script src="js/js.php"></script>
+    <script src="js/lodash.js"></script>
+    <script src="js/add-map.js"></script>
 </body>
 
 </html>

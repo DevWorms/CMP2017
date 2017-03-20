@@ -2244,7 +2244,305 @@
                     }
                 }
             }
+        },
+        "/puebla/sitio/create": {
+            "post": {
+                "tags": [
+                    "Conoce Puebla"
+                ],
+                "summary": "Crea un sitio",
+                "description": "Crea un sitio en Conoce puebla",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "titulo",
+                        "in": "formData",
+                        "description": "Titulo del sitio",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "maps_link",
+                        "in": "formData",
+                        "description": "Link de google maps",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "descripcion",
+                        "in": "formData",
+                        "description": "Descripción del sitio. Máximo 300 caracteres",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "url",
+                        "in": "formData",
+                        "description": "URL del sitio",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "imagen",
+                        "in": "formData",
+                        "description": "Imágen del sitio",
+                        "required": false,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/puebla/telefono/create": {
+            "post": {
+                "tags": [
+                    "Conoce Puebla"
+                ],
+                "summary": "Crea un número telefónico",
+                "description": "Crea un número telefónico en Conoce puebla",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "titulo",
+                        "in": "formData",
+                        "description": "Titulo del teléfono",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "telefono",
+                        "in": "formData",
+                        "description": "Número telefónico",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "imagen",
+                        "in": "formData",
+                        "description": "imagen del teléfono",
+                        "required": false,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/puebla/sitio/all/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "Conoce Puebla"
+                ],
+                "summary": "Devuelve todos los sitios",
+                "description": "Devuelve todos los sitios en Conoce puebla",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/puebla/telefono/all/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "Conoce Puebla"
+                ],
+                "summary": "Devuelve todos los telefonos",
+                "description": "Devuelve todos los telefonos en Conoce puebla",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/puebla/mapa/upload": {
+            "post": {
+                "tags": [
+                    "Conoce Puebla"
+                ],
+                "summary": "Sube el mapa de Puebla",
+                "description": "Sube el mapa de Puebla para Conoce Puebla",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "mapa",
+                        "in": "formData",
+                        "description": "PDF del mapa",
+                        "required": true,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/puebla/mapa/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "Conoce Puebla"
+                ],
+                "summary": "Devuelve el mapa de Puebla",
+                "description": "Devuelve el mapa de Puebla",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
         }
+
     },
     "definitions": {
         "User": {

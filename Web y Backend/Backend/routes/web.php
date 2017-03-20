@@ -119,6 +119,16 @@ $app->get('/api/ruta/all/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' =
 $app->get('/api/ruta/detail/{user_id}/{api_key}/{ruta_id}', ['middleware' => 'cors', 'uses' => 'RutasController@getRuta']);
 
 /*
+ * Conoce puebla...
+ */
+$app->post('/api/puebla/sitio/create', ['middleware' => 'cors', 'uses' => 'ConocePueblaController@createSitio']);
+$app->post('/api/puebla/telefono/create', ['middleware' => 'cors', 'uses' => 'ConocePueblaController@createTelefono']);
+$app->post('/api/puebla/mapa/upload', ['middleware' => 'cors', 'uses' => 'ConocePueblaController@uploadMapa']);
+$app->get('/api/puebla/sitio/all/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'ConocePueblaController@getSitios']);
+$app->get('/api/puebla/telefono/all/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'ConocePueblaController@getTelefonos']);
+$app->get('/api/puebla/mapa/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'ConocePueblaController@getMapa']);
+
+/*
  * Archivo
  */
 $app->post('/api/fileupload',['middleware' => 'cors', 'uses' => 'FileController@upload']);

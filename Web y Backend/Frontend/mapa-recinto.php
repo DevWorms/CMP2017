@@ -31,7 +31,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">DASHBOARD CMP 2017</a>
+                <a class="navbar-brand" href="index.php">DASHBOARD <b style="color: #52e7ff;">CMP 2017</b></a>
             </div>
 
             <!-- Top Menu -->
@@ -96,7 +96,7 @@
                 
                 <div class="row page-header">
                    <div class="col-xs-12 col-md-offset-1 col-md-4">
-                        <h3><a href="">Mapa</a></h3>
+                        <h3 style="color: #10375e;">Mapa</h3>
                     </div> 
                 </div>
                 <!-- Fin Fila -->

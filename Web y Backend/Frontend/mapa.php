@@ -31,7 +31,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">DASHBOARD CMP 2017</a>
+                <a class="navbar-brand" href="index.php">DASHBOARD <b style="color: #52e7ff;">CMP 2017</b></a>
             </div>
 
             <!-- Top Menu -->
@@ -96,7 +96,7 @@
                 
                 <div class="row custom-page-header">
                    <div class="col-xs-offset-1 col-md-offset-1">
-                        <h3>Mapa</h3>
+                        <h3 style="color: #10375e;">Mapa</h3>
                     </div> 
                 </div>
                 <!-- Fin Fila -->
@@ -104,13 +104,13 @@
                 <div class="row">
                     <div class="col-xs-5 col-xs-offset-1" align="center">
                         <div class="caja">
-                            <a href="mapa-recinto.php"><h4 class="cajaspace">Mapa del Recinto</h4></a>
+                            <a style="color: #10375e;" href="mapa-recinto.php"><h4 class="cajaspace">Mapa del Recinto</h4></a>
                         </div>         
                     </div>
 
                     <div class="col-xs-5" align="center">
                         <div class="caja">
-                            <a href="mapa-expositores.php"><h4 class="cajaspace">Mapa de Expositores</h4></a>
+                            <a style="color: #10375e;" href="mapa-expositores.php"><h4 class="cajaspace">Mapa de Expositores</h4></a>
                         </div>
                     </div>
                 </div>

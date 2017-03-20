@@ -14,6 +14,7 @@
 
     <!-- CSS -->
     <link href="css/login.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -21,7 +22,7 @@
 
    <div class="container">
 		<div class="title-container">
-			<h2>Inicio de Sesión</h2>
+			<h2 class="animated zoomIn" style="letter-spacing: 2px;"><b>Inicio de Sesión</b></h2>
 		</div>
 		<div class="login-container">            
 	            <div class="form-box" align="center">
@@ -31,7 +32,7 @@
 	                    <p for="">Contraseña</p>
 	                    <input type="password" id="contrasena">
 	                    <br><br>
-	                    <button class="btn btn-primary btn-block btn-lg" id="login">Ingresar</button>
+	                    <button class="btn app-boton btn-block btn-lg animated tada" id="login">Ingresar</button>
 	            </div>
 	        </div>  
 	</div>

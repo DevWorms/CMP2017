@@ -183,7 +183,7 @@ ul.alert-dropdown {
     border-radius: 10px;
 }
 .caja a h4{
-    font-size: 15px;
+    font-size: 13px;
 }
 @media(min-width:768px) {
     .caja{
@@ -194,13 +194,25 @@ ul.alert-dropdown {
         width: 65%;
         border-radius: 10px
     }
+    .caja:hover{
+        margin-top: 40px;
+        background: #50DBF2;
+        padding: 10px;
+        height: 135px;
+        width: 63%;
+        border-radius: 10px
+        transition: all 200ms linear;
+    }
     .caja a h4{
         font-size: 18px;
     }
 }
 
 .cajaspace{
-    margin-top: 50px;
+    margin-top: 48px;
+}
+.cajaspace2{
+    margin-top: 40px;
 }
 
 .basico{
@@ -208,8 +220,18 @@ ul.alert-dropdown {
     background-color: #52e7ff;
     border-color: #52e7ff;
 }
+.basico:hover{
+    color: #10375e;
+    background-color: #50DBF2;
+    border-color: #52e7ff;
+}
 .basico2{
     color: #333;
-    background-color: #e6e6e6;
+    background-color: #EEEEEE;
+    border-color: #b2b2b2;
+}
+.basico2:hover{
+    color: #333;
+    background-color: #DAD8D8;
     border-color: #b2b2b2;
 }

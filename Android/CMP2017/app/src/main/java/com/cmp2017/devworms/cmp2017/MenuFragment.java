@@ -108,7 +108,7 @@ public class MenuFragment extends Fragment {
             Bundle parametro = new Bundle();
 
             parametro.putString("nombre","Eventos de \n Acompañantes");
-
+            parametro.putString("seccion","acomp");
 
             fragment.setArguments(parametro);
 
@@ -140,7 +140,7 @@ public class MenuFragment extends Fragment {
             Bundle parametro = new Bundle();
 
             parametro.putString("nombre","Eventos de Sociales \n y Deportivos");
-
+            parametro.putString("seccion","social");
 
             fragment.setArguments(parametro);
 

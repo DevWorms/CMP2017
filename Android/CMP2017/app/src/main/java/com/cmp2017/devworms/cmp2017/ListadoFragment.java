@@ -73,43 +73,45 @@ public class ListadoFragment extends Fragment {
             }else {
                 fecha = "";
             }
-            new getLista().execute();
-
-            lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> arg0, View view, int arg2,
-                                        long arg3) {
-                    // on selecting a single album
-                    // TrackListActivity will be launched to show tracks inside the album
-                    String idProgram= ((TextView)view.findViewById(R.id.txtid)).getText().toString();
-                    Fragment fragment = new DetalleEventoFragment();
-
-                    Bundle parametro = new Bundle();
+            new getListaPrograma().execute();
 
 
-                    parametro.putString("idProgram",idProgram);
-
-
-                    fragment.setArguments(parametro);
-
-                    final FragmentTransaction ft = getFragmentManager()
-                            .beginTransaction();
-                    ft.replace(R.id.actividad, fragment, "tag");
-
-                    ft.addToBackStack("tag");
-
-                    ft.commit();
-                }
-            });
+        }else if(seccion.equals("acomp") || seccion.equals("social")){
+            new getListaAcompSocial().execute();
         }
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View view, int arg2,
+                                    long arg3) {
+                // on selecting a single album
+                // TrackListActivity will be launched to show tracks inside the album
+                String idProgram= ((TextView)view.findViewById(R.id.txtid)).getText().toString();
+                Fragment fragment = new DetalleEventoFragment();
 
+                Bundle parametro = new Bundle();
+
+
+                parametro.putString("idProgram",idProgram);
+
+
+                fragment.setArguments(parametro);
+
+                final FragmentTransaction ft = getFragmentManager()
+                        .beginTransaction();
+                ft.replace(R.id.actividad, fragment, "tag");
+
+                ft.addToBackStack("tag");
+
+                ft.commit();
+            }
+        });
         return view;
 
 
 
     }
 
-    class getLista extends AsyncTask<String, String, String> {
+    class getListaPrograma extends AsyncTask<String, String, String> {
 
         /**
          * Before starting background thread Show Progress Dialog
@@ -239,6 +241,143 @@ public class ListadoFragment extends Fragment {
                 // updating listview
 
                     lista.setAdapter(adapter);
+
+            }
+            // updating UI from Background Thread
+
+
+        }
+    }
+
+    class getListaAcompSocial extends AsyncTask<String, String, String> {
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(getActivity());
+            pDialog.setMessage("Buscando");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        /**
+         * getting Albums JSON
+         */
+        protected String doInBackground(String... args) {
+            // Building Parameters
+            //add your data
+            String body= "";
+
+            if( seccion.equals("acomp")) {
+                body = "http://cmp.devworms.com/api/acompanantes/all/" + userId + "/" + apiKey + "";
+
+            }else{
+                body = "http://cmp.devworms.com/api/deportivos/all/"+userId+"/"+apiKey+"";
+            }
+            JSONParser jsp = new JSONParser();
+
+
+            String respuesta = jsp.makeHttpRequest(body, "GET", body, "");
+            Log.d("LoginRes : ", "> " + respuesta);
+            if (respuesta != "error") {
+                try {
+                    JSONObject json = new JSONObject(respuesta);
+                    String elemBus = "";
+                    if( seccion.equals("acomp")) {
+                        elemBus = json.getString("acompanantes");
+
+                    }else{
+                        elemBus = json.getString("eventos");
+                    }
+
+
+                    JSONArray jsonProgramas = new JSONArray(elemBus);
+
+                    int cuanto = jsonProgramas.length();
+                    albumsList = new ArrayList<HashMap<String, String>>();
+                    Log.d("ListadoProgra : ", "> " + cuanto);
+                    String actFecha="";
+                    // looping through All albums
+                    for (int i = 0; i < jsonProgramas.length(); i++) {
+                        JSONObject c = jsonProgramas.getJSONObject(i);
+
+
+                        // creating new HashMap
+                        HashMap<String, String> map = new HashMap<String, String>();
+
+                        // Storing each json item values in variable
+                        String id = c.getString("id");
+                        String name = c.getString("nombre");
+
+                        String proFecha = c.getString("fecha");
+
+                        String fechaLetra = "";
+
+                        if(proFecha.equals("2017-06-05")){
+                            fechaLetra = "Lunes 5 de Junio";
+                        }else if(proFecha.equals("2017-06-06")){
+                            fechaLetra = "Martes 6 de Junio";
+                        }else if(proFecha.equals("2017-06-07")){
+                            fechaLetra = "Miercoles 7 de Junio";
+                        }else if(proFecha.equals("2017-06-08")){
+                            fechaLetra = "Jueves 8 de Junio";
+                        }else if(proFecha.equals("2017-06-09")){
+                            fechaLetra = "Viernes 9 de Junio";
+                        }
+
+                            if (actFecha.equals("")||  !actFecha.equals(proFecha)){
+                                map.put("acompFecha", fechaLetra);
+                                actFecha = proFecha;
+                            }
+
+                            map.put("acompId", id);
+
+
+                            map.put("acompName", name);
+
+
+
+                        // adding HashList to ArrayList
+                        albumsList.add(map);
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                resp = "ok";
+
+
+            } else {
+                resp = "No hay resultados";
+            }
+
+
+            return null;
+        }
+
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog after getting all albums
+            Log.d("Login : ", "> " + resp);
+            pDialog.dismiss();
+            if (resp.equals("ok") ) {
+                ListAdapter adapter = new SimpleAdapter(
+                        getActivity(), albumsList,
+                        R.layout.formato_lista_resultados, new String[] { "acompFecha",
+                        "acompName","acompId" }, new int[] {
+                        R.id.txtFecha, R.id.txtTitulo , R.id.txtid});
+
+                // updating listview
+
+                lista.setAdapter(adapter);
 
             }
             // updating UI from Background Thread

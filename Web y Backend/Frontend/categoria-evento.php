@@ -95,7 +95,7 @@
             <div class="container-fluid">
                 
                 <div class="row page-header__2">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-md-offset-1">
                         <form action="" method="" id="" name="" role="">
                            
                             <div class="form-group">

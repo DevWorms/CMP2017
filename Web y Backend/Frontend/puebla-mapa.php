@@ -121,7 +121,7 @@
                     <!-- Fin Fila -->
 
                     <div class="row">
-                        <div class="col-xs-12 col-md-offset-1 col-md-4">
+                        <div class="col-xs-offset-3 col-xs-6 col-md-offset-1 col-md-4">
                             <button type="submit" class="btn btn-primary btn-lg" name="" id="">Guardar Mapa</button> 
                         </div>
                     </div>

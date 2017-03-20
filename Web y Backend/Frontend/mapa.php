@@ -94,8 +94,8 @@
 
             <div class="container-fluid">
                 
-                <div class="row page-header">
-                   <div class="col-md-offset-1">
+                <div class="row custom-page-header">
+                   <div class="col-xs-offset-1 col-md-offset-1">
                         <h3>Mapa</h3>
                     </div> 
                 </div>

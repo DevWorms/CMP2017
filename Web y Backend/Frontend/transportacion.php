@@ -128,7 +128,7 @@
                             <div class="form-group">
                                 <label for="">Agregar archivo PDF</label>
                                     <br>
-                                <button class="btn btn-default">Examinar</button>
+                                <button class="btn basico2">Examinar</button>
                             </div> 
                         </div>
                     </div>
@@ -149,7 +149,7 @@
                     
                     <div class="row">
                         <col-xs-12 class="col-xs-offset-2 col-xs-8 col-md-2 col-md-offset-1">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block" name="" id="">Guardar</button>    
+                            <button type="submit" class="btn basico btn-lg btn-block" name="" id="">Guardar</button>    
                         </col-xs-12>
                     </div>
                 </form>
@@ -179,7 +179,7 @@
                             <div class="form-group">
                                 <label for="">Agregar archivo PDF</label>
                                     <br>
-                                <button class="btn btn-default">Examinar</button>
+                                <button class="btn basico2">Examinar</button>
                             </div> 
                         </div>
                     </div>
@@ -200,7 +200,7 @@
                     
                     <div class="row">
                         <col-xs-12 class="col-xs-offset-2 col-xs-8 col-md-2 col-md-offset-1">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block" name="" id="">Guardar</button>    
+                            <button type="submit" class="btn basico btn-lg btn-block" name="" id="">Guardar</button>    
                         </col-xs-12>
                     </div>
                     <br><br>

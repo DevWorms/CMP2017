@@ -32,7 +32,7 @@
 	                    <p for="">Contraseña</p>
 	                    <input type="password" id="contrasena">
 	                    <br><br>
-	                    <button class="btn app-boton btn-block btn-lg animated tada" id="login">Ingresar</button>
+	                    <button class="btn app-boton btn-block btn-lg animated pulse" id="login">Ingresar</button>
 	            </div>
 	        </div>  
 	</div>

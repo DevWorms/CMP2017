@@ -100,7 +100,7 @@
                         </div>
 
                         <div class="col-xs-12 col-md-6" align="right">
-                            <button type="submit" class="btn btn-default" name="" id=""><i class="fa fa-plus-circle"></i> Agregar Patrocinador</button>   
+                            <button type="submit" class="btn basico" name="" id=""><i class="fa fa-plus-circle"></i> &nbsp;Agregar Patrocinador</button>   
                         </div>
                     </div>
                     <!-- Fin Fila -->
@@ -173,7 +173,7 @@
                             <div class="form-group">
                                 <label for="">Agregar ubicación en el mapa</label>
                                     <br><br>
-                                <button class="btn btn-default">Ir al mapa</button>
+                                <button class="btn basico2">Ir al mapa</button>
                             </div> 
                         </div>
 

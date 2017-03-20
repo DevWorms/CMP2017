@@ -118,7 +118,7 @@
                                     <br>
                                 <input type="" name="" id="" class="form-control">
                                     <br>
-                                <button class="btn btn-default">Seleccionar</button>
+                                <button class="btn basico2">Seleccionar</button>
                             </div>
                             <br> 
                         </div>
@@ -127,7 +127,7 @@
 
                     <div class="row">
                         <div class="col-xs-12 col-md-offset-1 col-md-4">
-                            <button type="submit" class="btn btn-primary btn-lg" name="" id="">Guardar Mapa</button> 
+                            <button type="submit" class="btn basico btn-lg" name="" id="">Guardar Mapa</button> 
                         </div>
                     </div>
                     <!-- Fin Fila -->

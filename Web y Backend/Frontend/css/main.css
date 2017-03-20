@@ -201,3 +201,13 @@ ul.alert-dropdown {
     margin-top: 50px;
 }
 
+.basico{
+    color: #10375e;
+    background-color: #52e7ff;
+    border-color: #52e7ff;
+}
+.basico2{
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #b2b2b2;
+}

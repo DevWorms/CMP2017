@@ -161,7 +161,7 @@
                     
                     <div class="row">
                         <col-xs-12 class="col-xs-offset-2 col-xs-8 col-md-2 col-md-offset-1">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block" name="save" id="save">Guardar</button>
+                            <button type="submit" class="btn basico btn-lg btn-block" name="save" id="save">Guardar</button>
                         </col-xs-12>
                     </div>
                 </form>

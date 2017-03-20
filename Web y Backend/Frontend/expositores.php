@@ -104,7 +104,7 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Buscar ..." name="" id="q">
                                     <div class="input-group-btn">
-                                        <button class="btn btn-primary" id="search" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                                        <button class="btn btn-default" id="search" type="button"><i class="glyphicon glyphicon-search"></i></button>
                                     </div>
                                 </div>
                               </form>
@@ -115,7 +115,7 @@
                     </div>
 
                     <div class="col-xs-12 col-md-6" align="right">
-                        <a href="agregar-expositor.php" class="btn btn-default"><i class="fa fa-plus-circle"></i> Agregar Expositor</a>   
+                        <a href="agregar-expositor.php" class="btn basico"><i class="fa fa-plus-circle"></i> &nbsp;Agregar Expositor</a>   
                     </div>
                 </div>
                 <!-- Fin Fila -->

@@ -104,7 +104,7 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Buscar ..." name="q" id="q">
                                     <div class="input-group-btn">
-                                        <button class="btn btn-primary" type="button" name="search" id="search"><i class="glyphicon glyphicon-search"></i></button>
+                                        <button class="btn btn-default" type="button" name="search" id="search"><i class="glyphicon glyphicon-search"></i></button>
                                     </div>
                                 </div>
                               </form>
@@ -115,7 +115,7 @@
                     </div>
 
                     <div class="col-xs-12 col-md-6" align="right">
-                        <a href="agregar-patrocinador.php" class="btn btn-default"><i class="fa fa-plus-circle"></i> Agregar Patrocinador</a>   
+                        <a href="agregar-patrocinador.php" class="btn basico"><i class="fa fa-plus-circle"></i> &nbsp;Agregar Patrocinador</a>   
                     </div>
                 </div>
                 <!-- Fin Fila -->

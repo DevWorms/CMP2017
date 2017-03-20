@@ -105,7 +105,7 @@
                             </div> 
                             <br>
 							
-							<button type="submit" class="btn btn-default" name="" id=""><i class="fa fa-plus-circle"></i> Agregar Categoría</button>
+							<button type="submit" class="btn basico" name="" id=""><i class="fa fa-plus-circle"></i> &nbsp;Agregar Categoría</button>
                         </form>
                     </div>
                     <div class="col-md-6"></div>

@@ -56,6 +56,7 @@ body {
     .side-nav {
         position: fixed;
         top: 51px;
+        padding-top: 60px;
         left: 225px;
         width: 225px;
         margin-left: -225px;
@@ -75,7 +76,8 @@ body {
     .side-nav li a:hover,
     .side-nav li a:focus {
         outline: none;
-        background-color: #000 !important;
+        color: #10375e !important;
+        background-color: #52e7ff !important;
     }
 }
 

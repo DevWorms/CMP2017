@@ -1208,6 +1208,45 @@
                 }
             }
         },
+        "/acompanantes/paginate/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "acompañantes"
+                ],
+                "summary": "Paginación de eventos de acompañantes",
+                "description": "Paginación de todos los eventos de acompañantes de 5 en 5, paginación",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
         "/deportivos/create": {
             "post": {
                 "tags": [
@@ -1410,6 +1449,45 @@
                         "name": "programa_id",
                         "in": "path",
                         "description": "Id del programa",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/deportivos/paginate/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "Sociales y Deportivos"
+                ],
+                "summary": "Paginación de eventos sociales y deportivos",
+                "description": "Paginación de todos los eventos sociales y deportivos de 5 en 5, paginación",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
                         "required": true,
                         "type": "string"
                     }

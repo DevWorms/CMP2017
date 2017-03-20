@@ -292,4 +292,27 @@ class SocioDeportivosController extends Controller {
             return response()->json($res, 500);
         }
     }
+
+    public function paginate($user_id, $api_key) {
+        try {
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+            $expositores = Programa::orderBy('id', 'DESC')->where('type', 3)->paginate(5);
+            foreach ($expositores as $expositor) {
+                $expositor = $this->tool->returnPrograma($expositor);
+            }
+
+            $res['status'] = 1;
+            $res['mensaje'] = "success";
+            $res['eventos'] = $expositores;
+            return response()->json($res, 200);
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
 }

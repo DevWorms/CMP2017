@@ -65,6 +65,9 @@ $app->get('/api/acompanantes/all/{user_id}/{api_key}', ['middleware' => 'cors', 
 $app->post('/api/acompanantes/search', ['middleware' => 'cors', 'uses' => 'AcompanantesController@getFiltro']);
 $app->get('/api/acompanantes/detail/{user_id}/{api_key}/{programa_id}', ['middleware' => 'cors', 'uses' => 'AcompanantesController@getPrograma']);
 
+// Solo web (?)
+$app->get('/api/acompanantes/paginate/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'AcompanantesController@paginate']);
+
 /*
  * Eventos Sociales y Deportivos
  */
@@ -72,6 +75,9 @@ $app->post('/api/deportivos/create', ['middleware' => 'cors', 'uses' => 'SocioDe
 $app->get('/api/deportivos/all/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'SocioDeportivosController@getAll']);
 $app->post('/api/deportivos/search', ['middleware' => 'cors', 'uses' => 'SocioDeportivosController@getFiltro']);
 $app->get('/api/deportivos/detail/{user_id}/{api_key}/{programa_id}', ['middleware' => 'cors', 'uses' => 'SocioDeportivosController@getPrograma']);
+
+// Solo web (?)
+$app->get('/api/deportivos/paginate/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'SocioDeportivosController@paginate']);
 
 /*
  * Patrocinadores

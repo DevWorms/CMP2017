@@ -132,30 +132,6 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td>British Pretoleoum</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Ver</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Pemex</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Ver</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Shell</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Ver</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Industria Mexicana de...</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Ver</a> </td>
-                              </tr>
-                              <tr>
-                                <td>BCM Nacional</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Ver</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Petrobras</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Ver</a> </td>
-                              </tr>
                             </tbody>
                         </table>
                     </div>    

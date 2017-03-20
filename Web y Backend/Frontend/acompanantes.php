@@ -102,10 +102,10 @@
                               
                               <form name="" action="" method="post" class="form-inline" role="form">
                                 <div class="input-group">
-                                  <div class="input-group-btn">
-                                      <button class="btn btn-primary" type="button"><i class="glyphicon glyphicon-search"></i></button>
-                                  </div>
-                                  <input type="text" class="form-control" placeholder="Buscar ..." name="" id="">
+                                    <input type="date" class="form-control" placeholder="Buscar ..." name="q" id="q">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-primary" type="button" name="search" id="search"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
                                 </div>
                               </form>
                               
@@ -123,7 +123,7 @@
                 <br>
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1">
-                        <table class="table table-striped">
+                        <table class="table table-striped" id="tbl_acompanantes">
                             <thead>
                               <tr>
                                 <th>Nombre del Evento</th>
@@ -131,30 +131,6 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td>Visita Museo</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Caminata Centro</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Visita Museo</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Caminata Centro</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Visita Museo</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Caminata Centro</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
-                              </tr>
                             </tbody>
                         </table>
                     </div>    
@@ -163,11 +139,15 @@
                 
                 <br>
                 <div class="row">
-                    <div class="col-xs-6">
-                        <p>Pag. 1</p>
+                    <div class="col-xs-3" style="margin-top: 30px;">
+                        <div id="page-counter"></div>
                     </div>
-                    <div class="col-xs-6" align="right">
-                        <p>Ver todos</p>
+                    <div class="col-xs-6" align="center" style="margin-top: 0px;">
+                        <ul class="pagination" id="pagination">
+                        </ul>
+                    </div>
+                    <div class="col-xs-3" style="margin-top: 30px;">
+                        <p><a href="#" onclick="showAll()">Ver todos</a></p>
                     </div>
                 </div>
                 <!-- Fin Fila -->
@@ -180,11 +160,68 @@
 
     </div>
     <!-- /#wrapper -->
-    
+    <div id="modalsExpositores"></div>
+    <script type="text/template" id="modal_detalle_expositor">
+        <div id="DetalleExpositor-${id}" class="modal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" style="text-align:center;">Evento: ${nombre}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8">
+                            <div class="col-md-12">
+                                <% if (foto.nombre) { %> <img src="${foto.url}" width="200px" height="200px"> <% } %>
+                            </div>
+                            <div class="col-md-12">
+                                <br>
+                            </div>
+                            <div class="col-md-12">
+                                <p><strong>Nombre</strong>: ${nombre}</p>
+                            </div>
+                            <div class="col-md-12">
+                                <p><strong>Lugar</strong>: ${lugar}</p>
+                            </div>
+                            <div class="col-md-12">
+                                <p><strong>Fecha</strong>: ${fecha}</p>
+                            </div>
+                            <div class="col-md-12">
+                                <p><strong>Hora de inicio</strong>: <% if (hora_inicio) { %> ${hora_inicio} <% } %></p>
+                            </div>
+                            <div class="col-md-12">
+                                <p><strong>Hora de fin</strong>: <% if (hora_fin) { %> ${hora_fin} <% } %></p>
+                            </div>
+                            <div class="col-md-12">
+                                <p><strong>Recomendaciones</strong>: ${recomendaciones}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="form-group" align="right">
+                            <div class="col-md-12">
+                                <div class="col-md-8"></div>
+                                <div class="col-md-4">
+                                    <!--<button class="btn btn-primary btn-block" type="submit" name="up_button" onclick="event.preventDefault();" id="up_button">Guardar</button>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
     <!-- Scripts -->
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
+    <script src="js/js.php"></script>
+    <script src="js/lodash.js"></script>
+    <script src="js/acompañante.js"></script>
 </body>
 
 </html>

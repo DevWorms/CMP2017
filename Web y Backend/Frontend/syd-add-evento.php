@@ -91,52 +91,64 @@
 
         <!-- Contenido -->
         <div id="page-wrapper">
-
             <div class="container-fluid">
-                
-                <form action="" method="" id="" name="" role="">    
-                    
+                <div id="error"></div>
+                <form enctype="multipart/form-data" method="POST" id="crearEvento" name="crearEvento">
                     <div class="row page-header">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
                             <h4><a href="#">Eventos Sociales y Deportivos</a></h4>
                         </div>
 
                         <div class="col-xs-12 col-md-6" align="right">
-                            <button type="submit" class="btn btn-default" name="" id=""><i class="fa fa-plus-circle"></i> Agregar Evento</button>   
+                            <button type="submit" class="btn btn-default" name="btn_crearEvento" id="btn_crearEvento"><i class="fa fa-plus-circle"></i> Agregar Evento</button>
                         </div>
                     </div>
                     <!-- Fin Fila -->
 
                     <div class="row">
                         <div class="col-md-5 col-md-offset-1">
-                            
+
                             <div class="form-group">
-                                <label for="">Nombre del Evento</label>
-                                    <br>
-                                <input type="" name="" id="" class="form-control">
+                                <label for="nombre">Nombre del Evento</label>
+                                <br>
+                                <input type="text" name="nombre" id="nombre" class="form-control" required>
                             </div>
                             <br>
 
                             <div class="form-group">
-                                <label for="">Lugar</label>
-                                    <br>
-                                <input type="" name="" id="" class="form-control">
+                                <label for="lugar">Lugar</label>
+                                <br>
+                                <input type="text" name="lugar" id="lugar" class="form-control" required>
                             </div>
                             <br>
 
                             <div class="form-group">
-                                <label for="">Horario</label>
-                                    <br>
-                                <input type="time" name="" id="" class="form-control">
+                                <label for="fecha">Fecha</label>
+                                <br>
+                                <input type="date" name="fecha" id="fecha" class="form-control" required>
                             </div>
                             <br>
 
                             <div class="form-group">
-                                <label for="">Recomendaciones</label>
-                                    <br>
-                                <textarea class="form-control" rows="5" id=""></textarea>
+                                <label for="hora_inicio">Hora de inicio</label>
+                                <br>
+                                <input type="time" name="hora_inicio" id="hora_inicio" class="form-control" required>
                             </div>
-                            <br>                            
+                            <br>
+
+                            <div class="form-group">
+                                <label for="hora_fin">Hora de fin</label>
+                                <br>
+                                <input type="time" name="hora_fin" id="hora_fin" class="form-control" required>
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                                <label for="recomendaciones">Recomendaciones</label>
+                                <br>
+                                <textarea class="form-control" rows="5" id="recomendaciones" name="recomendaciones" required></textarea>
+                            </div>
+                            <br>
                         </div>
                         <div class="col-md-6"></div>
                     </div>
@@ -146,17 +158,17 @@
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
                             <div class="form-group">
                                 <label for="">Agregar ubicación en el mapa</label>
-                                    <br><br>
+                                <br><br>
                                 <button class="btn btn-default">Examinar</button>
-                            </div> 
+                            </div>
                         </div>
 
                         <div class="col-xs-12 col-md-6">
                             <div class="form-group">
-                                <label for="">Agregar foto del evento</label>
-                                    <br><br>
-                                <button class="btn btn-default">Examinar</button>
-                            </div> 
+                                <label for="archivo">Agregar foto del evento</label>
+                                <br><br>
+                                <input type="file" name="archivo" id="archivo">
+                            </div>
                         </div>
                     </div>
                     <br>
@@ -175,6 +187,9 @@
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
+    <script src="js/js.php"></script>
+    <script src="js/lodash.js"></script>
+    <script src="js/add-syd.js"></script>
 </body>
 
 </html>

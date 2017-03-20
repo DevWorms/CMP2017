@@ -131,30 +131,6 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td>Patrocinador 1</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Patrocinador 2</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Patrocinador 3</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Patrocinador 4</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Patrocinador 5</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Patrocinador 6</td>
-                                <td align="right"> <a href="" class="btn btn-primary">Editar</a> </td>
-                              </tr>
                             </tbody>
                         </table>
                     </div>    

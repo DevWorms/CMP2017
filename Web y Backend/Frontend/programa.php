@@ -133,42 +133,6 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td>Conferencia Magistral de...</td>
-                                <td>Conferencia</td>
-                                <td>05-01-17</td>
-                                <td> <a href="" class="btn btn-primary btn-block">Ver</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Conferencia Magistral de...</td>
-                                <td>Conferencia</td>
-                                <td>05-02-17</td>
-                                <td> <a href="" class="btn btn-primary btn-block">Ver</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Conferencia Magistral de...</td>
-                                <td>Plenaria</td>
-                                <td>05-03-17</td>
-                                <td> <a href="" class="btn btn-primary btn-block">Ver</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Conferencia Magistral de...</td>
-                                <td>E-Poster</td>
-                                <td>05-04-17</td>
-                                <td> <a href="" class="btn btn-primary btn-block">Ver</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Conferencia Magistral de...</td>
-                                <td>Plenaria</td>
-                                <td>05-05-17</td>
-                                <td> <a href="" class="btn btn-primary btn-block">Ver</a> </td>
-                              </tr>
-                              <tr>
-                                <td>Conferencia Magistral de...</td>
-                                <td>Comida Conferencia</td>
-                                <td></td>
-                                <td> <a href="" class="btn btn-primary btn-block">Ver</a> </td>
-                              </tr>
                             </tbody>
                         </table>
                     </div>

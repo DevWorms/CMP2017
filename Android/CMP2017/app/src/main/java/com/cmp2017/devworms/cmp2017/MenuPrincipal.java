@@ -30,14 +30,13 @@ public class MenuPrincipal extends AppCompatActivity
         setContentView(R.layout.activity_menu_principal);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        String inicioComo = getIntent().getExtras().getString("parametro");
-
+        SharedPreferences sp = getSharedPreferences("prefe", Activity.MODE_PRIVATE);
+        String inicioComo = sp.getString("Nombre","");
         if(inicioComo.equals("invi")){
             nombre = "Bienvenido Usuario";
 
         }else{
-            SharedPreferences sp = getSharedPreferences("prefe", Activity.MODE_PRIVATE);
+
             nombre = sp.getString("Nombre","");
 
 

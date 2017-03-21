@@ -157,13 +157,64 @@
                     <!-- Fin Fila -->
                     
                     <div class="row">
-                        <col-xs-12 class="col-md-2 col-md-offset-1">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block" name="" id="guardar<?=$ruta?>" ruta ="<?=$ruta?>" key = "<?=$_SESSION['api_key']?>" user="<?=$_SESSION['user_id']?>">Guardar</button>
+
+                        <col-xs-12 class="col-xs-offset-2 col-xs-8 col-md-2 col-md-offset-1">
+                            <button type="submit" class="btn basico btn-block" name="" id="guardar<?=$ruta?>" ruta ="<?=$ruta?>" key = "<?=$_SESSION['api_key']?>" user="<?=$_SESSION['user_id']?>">Guardar</button>
                         </col-xs-12>
                     </div>
                 </form>
 
                 <br><hr>
+
+                <form action="" method="" id="" name="" role="">    
+                    <div class="row">
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <h4><b>Ruta 2</b></h4>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- Fin Fila -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <div class="form-group">
+                                <label for="">Titulo</label>
+                                    <br>
+                                <input type="" name="" id="" class="form-control">
+                            </div>
+                            <br>
+                        </div>
+
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-group">
+                                <label for="">Agregar archivo PDF</label>
+                                    <br>
+                                <button class="btn basico2">Examinar</button>
+                            </div> 
+                        </div>
+                    </div>
+                    <br>
+                    <!-- Fin Fila -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <div class="form-group">
+                                <label for="">Descripción (100 caractéres)</label>
+                                    <br>
+                                <textarea class="form-control" rows="3" id=""></textarea>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                    <!-- Fin Fila -->
+                    
+                    <div class="row">
+                        <col-xs-12 class="col-xs-offset-2 col-xs-8 col-md-2 col-md-offset-1">
+                            <button type="submit" class="btn basico btn-block" name="" id="">Guardar</button>    
+                        </col-xs-12>
+                    </div>
+                    <br><br>
+                </form>
                 <?php
                     }
                 ?>

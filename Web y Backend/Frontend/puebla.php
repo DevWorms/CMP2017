@@ -119,7 +119,7 @@
                 <div class="row">
                     <div class="col-xs-5 col-xs-offset-1" align="center">
                         <div class="caja">
-                            <a style="color: #10375e;" href="puebla-tels.php"><h4 class="cajaspace">Teléfonos de<br>Emergencia y Taxis</h4></a>
+                            <a style="color: #10375e;" href="puebla-tels.php"><h4 class="cajaspace2">Teléfonos de<br>Emergencia y Taxis</h4></a>
                         </div>         
                     </div>
                 </div>

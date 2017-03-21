@@ -36,7 +36,7 @@
 
 
         <AutoCompleteTextView
-            android:id="@+id/autoComplete"
+            android:id="@+id/autoCompleteEcpo"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_alignParentLeft="true"
@@ -54,10 +54,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/btnOrdAlf"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_marginLeft="15dp"
@@ -66,7 +67,7 @@
                 android:background="@drawable/btnordenalfabetico" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btnNumStand"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_marginLeft="15dp"
@@ -75,42 +76,8 @@
                 android:background="@drawable/btnordennumerico" />
         </LinearLayout>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="20dp"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Nombre"
-                android:id="@+id/nombre_txt"
-                android:layout_alignBottom="@+id/id_txt"
-                android:layout_toRightOf="@+id/id_txt"
-                android:layout_toEndOf="@+id/id_txt"
-                android:layout_marginLeft="21dp"
-                android:layout_marginStart="21dp" />
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="20dp"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Telefono"
-                android:id="@+id/tel_txt"
-                android:layout_alignTop="@+id/nombre_txt"
-                android:layout_toRightOf="@+id/nombre_txt"
-                android:layout_toEndOf="@+id/nombre_txt"
-                android:layout_marginLeft="20dp"
-                android:layout_marginStart="20dp" />
-
-
-        </LinearLayout>
-
         <ListView
-            android:id="@+id/lvlitems"
+            android:id="@+id/lvExpo"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_marginTop="1dp"
@@ -119,7 +86,7 @@
             android:dividerHeight="1dp"
             android:footerDividersEnabled="false"
             android:headerDividersEnabled="false"
-            android:paddingBottom="20dp" >
+            android:paddingBottom="20dp">
 
         </ListView>
 

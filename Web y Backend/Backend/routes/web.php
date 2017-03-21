@@ -40,6 +40,7 @@ $app->get('/api/programa/paginate/{user_id}/{api_key}', ['middleware' => 'cors',
  */
 $app->post('/api/categoria/create', ['middleware' => 'cors', 'uses' => 'CategoriaController@create']);
 $app->get('/api/categoria/all/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'CategoriaController@getAll']);
+$app->get('/api/categoria/complete/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'CategoriaController@getAllComplete']);
 
 /*
  * Expositores
@@ -85,6 +86,7 @@ $app->get('/api/deportivos/paginate/{user_id}/{api_key}', ['middleware' => 'cors
 $app->post('/api/patrocinador/create', ['middleware' => 'cors', 'uses' => 'PatrocinadorController@create']);
 $app->get('/api/patrocinador/all/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'PatrocinadorController@getAll']);
 $app->get('/api/patrocinador/order/name/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'PatrocinadorController@getByName']);
+$app->get('/api/patrocinador/order/stand/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'PatrocinadorController@getByStand']);
 $app->get('/api/patrocinador/detail/{user_id}/{api_key}/{expositor_id}', ['middleware' => 'cors', 'uses' => 'PatrocinadorController@getPatrocinador']);
 
 // Solo web (?)

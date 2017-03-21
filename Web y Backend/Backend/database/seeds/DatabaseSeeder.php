@@ -133,8 +133,8 @@ class DatabaseSeeder extends Seeder
              */
             \App\File::create([
                 'user_id' => 1,
-                'url' => "http://cmp.devworms.com/files/expositores/1.pdf",
-                'nombre' => "acercade.pdf",
+                'url' => "http://cmp.devworms.com/files/expositores/MapaRecinto.pdf",
+                'nombre' => "MapaRecinto.pdf",
                 'size' => 2000000
             ]);
 
@@ -624,6 +624,7 @@ class DatabaseSeeder extends Seeder
                 'tipo' => "Op",
                 'pdf_file' => 11,
                 'logo_file' => 1,
+                'stand' => 1,
                 'is_expositor' => 0
             ]);
 
@@ -637,6 +638,7 @@ class DatabaseSeeder extends Seeder
                 'tipo' => "Op",
                 'pdf_file' => 11,
                 'logo_file' => 2,
+                'stand' => 1,
                 'is_expositor' => 0
             ]);
 
@@ -650,6 +652,7 @@ class DatabaseSeeder extends Seeder
                 'tipo' => "Op",
                 'pdf_file' => 11,
                 'logo_file' => 3,
+                'stand' => 3,
                 'is_expositor' => 0
             ]);
 
@@ -663,6 +666,7 @@ class DatabaseSeeder extends Seeder
                 'tipo' => "Op",
                 'pdf_file' => 11,
                 'logo_file' => 4,
+                'stand' => 3,
                 'is_expositor' => 0
             ]);
 
@@ -676,6 +680,7 @@ class DatabaseSeeder extends Seeder
                 'tipo' => "Op",
                 'pdf_file' => 11,
                 'logo_file' => 5,
+                'stand' => 7,
                 'is_expositor' => 0
             ]);
 
@@ -689,6 +694,7 @@ class DatabaseSeeder extends Seeder
                 'tipo' => "Op",
                 'pdf_file' => 11,
                 'logo_file' => 6,
+                'stand' => 7,
                 'is_expositor' => 0
             ]);
 
@@ -702,6 +708,7 @@ class DatabaseSeeder extends Seeder
                 'tipo' => "Op",
                 'pdf_file' => 11,
                 'logo_file' => 7,
+                'stand' => 17,
                 'is_expositor' => 0
             ]);
 
@@ -715,6 +722,7 @@ class DatabaseSeeder extends Seeder
                 'tipo' => "Op",
                 'pdf_file' => 11,
                 'logo_file' => 8,
+                'stand' => 17,
                 'is_expositor' => 0
             ]);
 
@@ -728,6 +736,7 @@ class DatabaseSeeder extends Seeder
                 'tipo' => "Op",
                 'pdf_file' => 11,
                 'logo_file' => 9,
+                'stand' => 10,
                 'is_expositor' => 0
             ]);
 
@@ -741,6 +750,7 @@ class DatabaseSeeder extends Seeder
                 'tipo' => "Op",
                 'pdf_file' => 11,
                 'logo_file' => 10,
+                'stand' => 10,
                 'is_expositor' => 0
             ]);
 

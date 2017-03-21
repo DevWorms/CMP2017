@@ -73,6 +73,7 @@ class PatrocinadorController extends Controller {
             $latitude = $request->get('latitude');
             $longitude = $request->get('longitude');
             $tipo = $request->get('tipo');
+            $stand = $request->get('stand');
 
             // Archivos del expositor
             $presentacion = $request->file('archivo_pdf');
@@ -85,7 +86,8 @@ class PatrocinadorController extends Controller {
                 'email' => 'required',
                 'telefono' => 'required',
                 'acerca' => 'required',
-                'tipo' => 'required'
+                'tipo' => 'required',
+                'stand' => 'required'
             ], $this->messages());
 
             if ($validator->fails()) {
@@ -175,6 +177,7 @@ class PatrocinadorController extends Controller {
                     'latitude' => $latitude,
                     'longitude' => $longitude,
                     'tipo' => $tipo,
+                    'stand' => $stand,
                     'pdf_file' => $pdf_id,
                     'logo_file' => $logo_id,
                     'is_expositor' => 0
@@ -244,6 +247,30 @@ class PatrocinadorController extends Controller {
         try {
             User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
             $expositores = Expositor::where('is_expositor', 0)->orderBy('nombre', 'asc')->get();
+
+            foreach ($expositores as $expositor) {
+                $expositor = $this->returnPatrocinador($expositor);
+            }
+
+            $res['status'] = 1;
+            $res['mensaje'] = "success";
+            $res['patrocinadores'] = $expositores;
+            return response()->json($res, 200);
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    public function getByStand($user_id, $api_key) {
+        try {
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+            $expositores = Expositor::where('is_expositor', 0)->orderBy('stand', 'asc')->get();
 
             foreach ($expositores as $expositor) {
                 $expositor = $this->returnPatrocinador($expositor);
@@ -364,7 +391,6 @@ class PatrocinadorController extends Controller {
 
         unset($expositor['pdf_file']);
         unset($expositor['logo_file']);
-        unset($expositor['stand']);
         unset($expositor['is_expositor']);
 
         return $expositor;

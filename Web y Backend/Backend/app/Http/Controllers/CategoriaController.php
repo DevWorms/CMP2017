@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
 
 class CategoriaController extends Controller {
+
     /**
      * UserController constructor.
      */
@@ -82,7 +83,7 @@ class CategoriaController extends Controller {
     public function getAll($user_id, $api_key) {
         try {
             User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
-            $categorias = Categoria::take(5)->get();
+            $categorias = Categoria::all();
 
             $res['status'] = 1;
             $res['mensaje'] = "success";

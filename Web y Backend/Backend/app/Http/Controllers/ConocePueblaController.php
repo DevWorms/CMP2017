@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ConocePueblaController extends Controller {
     public $destinationPath = "./files/";
-    public $url_server = "http://cmp.devworms.com";
+    public $url_server = "http://files.cmp.devworms.com";
 
     private function messages() {
         return [
@@ -89,7 +89,7 @@ class ConocePueblaController extends Controller {
                                 // Si va bien, lo mueve a la carpeta y guarda el registro
                                 $path = $this->destinationPath . Carbon::now()->year . "/" . Carbon::now()->month . "/";
                                 $uploadedFile = $request->file('imagen')->move($path, uniqid() . "." . $logo->getClientOriginalExtension());
-                                $url = $this->url_server . substr($uploadedFile->getPathname(), 1);
+                                $url = $this->url_server . substr($uploadedFile->getPathname(), 7);
 
                                 $file = File::create([
                                     'user_id' => $user_id,
@@ -186,7 +186,7 @@ class ConocePueblaController extends Controller {
                                 // Si va bien, lo mueve a la carpeta y guarda el registro
                                 $path = $this->destinationPath . Carbon::now()->year . "/" . Carbon::now()->month . "/";
                                 $uploadedFile = $request->file('imagen')->move($path, uniqid() . "." . $logo->getClientOriginalExtension());
-                                $url = $this->url_server . substr($uploadedFile->getPathname(), 1);
+                                $url = $this->url_server . substr($uploadedFile->getPathname(), 7);
 
                                 $file = File::create([
                                     'user_id' => $user_id,
@@ -274,7 +274,7 @@ class ConocePueblaController extends Controller {
                         // Si va bien, lo mueve a la carpeta y guarda el registro
                         $path = $this->destinationPath . Carbon::now()->year . "/" . Carbon::now()->month . "/";
                         $uploadedFile = $request->file('mapa')->move($path, uniqid() . "." . $mapa->getClientOriginalExtension());
-                        $url = $this->url_server . substr($uploadedFile->getPathname(), 1);
+                        $url = $this->url_server . substr($uploadedFile->getPathname(), 7);
 
                         $file = File::create([
                             'user_id' => $user_id,

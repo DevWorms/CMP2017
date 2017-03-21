@@ -392,7 +392,7 @@
                     {
                         "name": "categoria_id",
                         "in": "formData",
-                        "description": "Categoría a la que pertenece el evento, si es null, o no se envia, devuelve los programas de TODAS las categorias",
+                        "description": "Categoría a la que pertenece el evento, si es null, o no se envia, devuelve los programas de TODAS las categorias. Si el id es 0, devuelve las 'otras' categorías.",
                         "required": false,
                         "type": "string"
                     },

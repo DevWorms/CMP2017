@@ -14,11 +14,16 @@ class DetalleViewController: UIViewController {
     @IBOutlet weak var titulo: UILabel!
     @IBOutlet weak var lugar: UILabel!
     @IBOutlet weak var recomendaciones: UILabel!
+    
+    @IBOutlet weak var lbl2: UILabel!
+    @IBOutlet weak var lbl3: UILabel!
+    
     @IBOutlet weak var btn1: UIButton!
     @IBOutlet weak var btn2: UIButton!
     @IBOutlet weak var btn3: UIButton!
     
     // 1 Programa
+    // 2 Expositores
     var seccion = 0
     var detalle = [String: Any]()
 
@@ -30,20 +35,39 @@ class DetalleViewController: UIViewController {
         switch self.seccion {
         case 1:
             btn3.isHidden = true
+            
+            self.titulo.text = detalle["nombre"] as! String?
+            self.lugar.text = detalle["lugar"] as! String?
+            self.recomendaciones.text = detalle["recomendaciones"] as! String?
+            
+            let foto = detalle["foto"] as! [String: Any]
+            let data = try? Data(contentsOf: URL(string: foto["url"] as! String)!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+            DispatchQueue.main.async {
+                self.foto.image = UIImage(data: data!)
+            }
+        case 2:
+            btn2.imageView?.image = #imageLiteral(resourceName: "04Agregar_a_mis_expositores")
+            
+            self.titulo.text = detalle["nombre"] as! String?
+            self.lbl2.text = "Contacto"
+            self.lugar.text = (detalle["url"] as! String) + "\n" + (detalle["telefono"] as! String) + "\n" + (detalle["email"] as! String)
+            self.lbl3.text = "Acerca de:"
+            self.recomendaciones.text = detalle["acerca"] as! String?
+            
+            if let foto = detalle["logo"] as? [String: Any] {
+                let data = try? Data(contentsOf: URL(string: foto["url"] as! String)!)
+                DispatchQueue.main.async {
+                    self.foto.image = UIImage(data: data!)
+                }
+            }
+            
         default:
             break
         }
         
-        self.titulo.text = detalle["nombre"] as! String?
-        self.lugar.text = detalle["lugar"] as! String?
-        self.recomendaciones.text = detalle["recomendaciones"] as! String?
+        self.titulo.sizeToFit()
         
-        let foto = detalle["foto"] as! [String: Any]
         
-        let data = try? Data(contentsOf: URL(string: foto["url"] as! String)!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-        DispatchQueue.main.async {
-            self.foto.image = UIImage(data: data!)
-        }
     }
 
     override func didReceiveMemoryWarning() {

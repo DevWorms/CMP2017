@@ -104,7 +104,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
                             
                             // agregar los datos que no estan vacios
                             if self.programaXfecha[0].count != 0 {
-                               self.programaFecha.append(self.programaXfecha[0] as! [String])
+                                self.programaFecha.append(self.programaXfecha[0] as! [String])
                                 self.idPrograma.append(self.idXprograma[0] as! [Int])
                             }
                             if self.programaXfecha[1].count != 0 {
@@ -221,7 +221,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
         switch self.seccion {
         case 1:
             for program in self.programas {
-                if program["id"] as! Int == idPrograma[indexPath.section][indexPath.row] as! Int {
+                if program["id"] as! Int == idPrograma[indexPath.section][indexPath.row] {
                     programaAmostrar = program
                     self.performSegue(withIdentifier: "detalle", sender: nil)
                 }

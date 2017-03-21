@@ -176,7 +176,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="03Eventos_Acompañantes"/>
                                 <connections>
-                                    <segue destination="qjL-Eh-RgU" kind="show" id="ney-xN-oW4"/>
+                                    <segue destination="qjL-Eh-RgU" kind="show" identifier="acompañantes" id="ney-xN-oW4"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="koL-DU-Z7Y">
@@ -346,7 +346,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X5k-K8-2CR" id="Ldo-Zn-iwg">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1668,11 +1668,11 @@
         <image name="13Banner_publicitario" width="1246" height="246"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="kar-bh-Zrv"/>
-        <segue reference="ZdW-HO-l3u"/>
-        <segue reference="p9G-ew-iHC"/>
         <segue reference="53G-0t-Pma"/>
-        <segue reference="psR-II-8MZ"/>
+        <segue reference="ney-xN-oW4"/>
         <segue reference="Hqu-sl-Rm1"/>
+        <segue reference="ZdW-HO-l3u"/>
+        <segue reference="kar-bh-Zrv"/>
+        <segue reference="p9G-ew-iHC"/>
     </inferredMetricsTieBreakers>
 </document>

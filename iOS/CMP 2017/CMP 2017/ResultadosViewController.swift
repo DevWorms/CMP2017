@@ -14,6 +14,8 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet weak var tableView: UITableView!
     
     // 1 Programa
+    // 2 Expositores
+    // 3 acompañantes
     var seccion = 0
     
     var diaPrograma = ""
@@ -49,15 +51,21 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
                 var urlRequest = URLRequest(url: URL(string: strUrl)!)
                 urlRequest.httpMethod = "POST"
                 
-                URLSession.shared.uploadTask(with: urlRequest, from: httpBody, completionHandler: parseJsonPrograma).resume()
+                URLSession.shared.uploadTask(with: urlRequest, from: httpBody, completionHandler: parseJson).resume()
             } else {
                 print("Error de codificación de caracteres.")
             }
+        case 3:
+            let strUrl = "http://cmp.devworms.com/api/acompanantes/all/\(userID!)/\(apiKey!)"
+            print(strUrl)
+            
+            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
+            
         default: break
         }
     }
     
-    func parseJsonPrograma(data: Data?, urlResponse: URLResponse?, error: Error?) {
+    func parseJson(data: Data?, urlResponse: URLResponse?, error: Error?) {
         if error != nil {
             print(error!)
         } else if urlResponse != nil {
@@ -72,9 +80,18 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
                         }
                         
                         if let jsonResult = json as? [String: Any] {
-                            for programa in jsonResult["programas"] as! [[String:Any]] {
-                                self.programas.append(programa)
+                            switch self.seccion {
+                            case 1:
+                                for programa in jsonResult["programas"] as! [[String:Any]] {
+                                    self.programas.append(programa)
+                                }
+                            case 3:
+                                for programa in jsonResult["acompanantes"] as! [[String:Any]] {
+                                    self.programas.append(programa)
+                                }
+                            default: break
                             }
+                            
                             
                             //para titulos
                             for date in self.programas {
@@ -161,7 +178,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
     
     func numberOfSections(in tableView: UITableView) -> Int {
         switch self.seccion {
-        case 1:
+        case 1,3:
             return fechas.count
         default:
             return 0
@@ -170,7 +187,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch self.seccion {
-        case 1:
+        case 1,3:
             return self.programaFecha[section].count
         default:
             return 0
@@ -182,7 +199,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
         var diaMostrar = ""
         
         switch self.seccion {
-        case 1:
+        case 1,3:
             switch fechas[section] {
             case "2017-06-05":
                 diaMostrar = "Lunes 5 de Junio"
@@ -208,7 +225,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
         switch self.seccion {
-        case 1:
+        case 1,3:
             cell.textLabel?.text = self.programaFecha[indexPath.section][indexPath.row]
         default: break
         }
@@ -219,7 +236,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         switch self.seccion {
-        case 1:
+        case 1,3:
             for program in self.programas {
                 if program["id"] as! Int == idPrograma[indexPath.section][indexPath.row] {
                     programaAmostrar = program

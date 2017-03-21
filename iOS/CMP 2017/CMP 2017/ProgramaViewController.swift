@@ -13,7 +13,7 @@ class ProgramaViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     @IBOutlet weak var dia: UIPickerView!
     @IBOutlet weak var tipoEvento: UIPickerView!
     
-    var pickerTipo = ["Todos", "Sesiuones Técnicas", "Comidas Conferencias", "e-Poster", "Otros"]
+    var pickerTipo = ["Todos", "Sesiones Técnicas", "Comidas / Conferencias", "E-Póster", "Otros"]
     var pickerDia = ["Todos", "Lunes 5 de Junio", "Martes 6 de Junio", "Miércoles 7 de Junio", "Jueves 8 de Junio", "Viernes 9 de Junio"]
     
     var selectedTipo = "Todos"
@@ -97,13 +97,26 @@ class ProgramaViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
                 diaEnviar = ""
             }
             
-            if selectedTipo == "Todos" {
-                selectedTipo = ""
+            var tipoEnviar = ""
+            
+            switch selectedTipo {
+            case "Todos":
+                tipoEnviar = ""
+            case "Sesiones Técnicas":
+                tipoEnviar = "1"
+            case "Comidas / Conferencias":
+                tipoEnviar = "3"
+            case "E-Póster":
+                tipoEnviar = "4"
+            case "Otros":
+                tipoEnviar = "6"
+            default:
+                tipoEnviar = ""
             }
             
             (segue.destination as! ResultadosViewController).seccion = 1
             (segue.destination as! ResultadosViewController).diaPrograma = diaEnviar
-            (segue.destination as! ResultadosViewController).tipoPrograma = selectedTipo
+            (segue.destination as! ResultadosViewController).tipoPrograma = tipoEnviar
         }
     }
 

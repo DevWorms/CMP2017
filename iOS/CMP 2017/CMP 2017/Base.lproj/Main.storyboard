@@ -346,7 +346,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X5k-K8-2CR" id="Ldo-Zn-iwg">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -513,7 +513,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="187"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Eqj-Y9-2Ff" id="kdY-j0-R86">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="186"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="187"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ruta 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ECV-hQ-CjL">
@@ -921,6 +921,7 @@
                         <outlet property="btn1" destination="sIf-mf-txP" id="wgy-Mv-Ng5"/>
                         <outlet property="btn2" destination="l0G-B2-VYX" id="B1x-9R-GkB"/>
                         <outlet property="btn3" destination="c5c-30-Ada" id="lLp-Y9-xAQ"/>
+                        <outlet property="foto" destination="uAX-0j-wpn" id="HNf-0W-3GD"/>
                         <outlet property="lugar" destination="XwB-cG-Jqa" id="imd-yi-0wp"/>
                         <outlet property="recomendaciones" destination="kOt-TJ-7bZ" id="y2t-5E-zo7"/>
                         <outlet property="titulo" destination="mMF-nr-YKw" id="Cv2-Uy-CBr"/>
@@ -1664,11 +1665,11 @@
         <image name="13Banner_publicitario" width="1246" height="246"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="eRA-mI-tof"/>
+        <segue reference="GJj-eU-EjN"/>
+        <segue reference="GKY-3m-4VQ"/>
         <segue reference="psR-II-8MZ"/>
         <segue reference="53G-0t-Pma"/>
         <segue reference="Hqu-sl-Rm1"/>
-        <segue reference="GKY-3m-4VQ"/>
         <segue reference="ZdW-HO-l3u"/>
     </inferredMetricsTieBreakers>
 </document>

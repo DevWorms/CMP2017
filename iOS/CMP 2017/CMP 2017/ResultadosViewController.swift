@@ -23,6 +23,9 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
     var fechas = [String]()
     var programaXfecha = [[], [], [], [], []]
     var idXprograma = [[], [], [], [], []]
+    // variables finales sin basura
+    var programaFecha = [[String]]()
+    var idPrograma = [[Int]]()
     
     var programaAmostrar = [String : Any]()
     
@@ -34,7 +37,8 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
         let apiKey = UserDefaults.standard.value(forKey: "api_key")
         let userID = UserDefaults.standard.value(forKey: "user_id")
         
-        if seccion == 1 {
+        switch self.seccion {
+        case 1:
             let parameterString = "user_id=\(userID!)&api_key=\(apiKey!)&categoria_id=\(tipoPrograma)&fecha=\(diaPrograma)"
             
             print(parameterString)
@@ -49,6 +53,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
             } else {
                 print("Error de codificación de caracteres.")
             }
+        default: break
         }
     }
     
@@ -96,6 +101,29 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
                                     self.idXprograma[4].append(date["id"] as! Int)
                                 }
                             }
+                            
+                            // agregar los datos que no estan vacios
+                            if self.programaXfecha[0].count != 0 {
+                               self.programaFecha.append(self.programaXfecha[0] as! [String])
+                                self.idPrograma.append(self.idXprograma[0] as! [Int])
+                            }
+                            if self.programaXfecha[1].count != 0 {
+                                self.programaFecha.append(self.programaXfecha[1] as! [String])
+                                self.idPrograma.append(self.idXprograma[1] as! [Int])
+                            }
+                            if self.programaXfecha[2].count != 0 {
+                                self.programaFecha.append(self.programaXfecha[2] as! [String])
+                                self.idPrograma.append(self.idXprograma[2] as! [Int])
+                            }
+                            if self.programaXfecha[3].count != 0 {
+                                self.programaFecha.append(self.programaXfecha[3] as! [String])
+                                self.idPrograma.append(self.idXprograma[3] as! [Int])
+                            }
+                            if self.programaXfecha[4].count != 0 {
+                                self.programaFecha.append(self.programaXfecha[4] as! [String])
+                                self.idPrograma.append(self.idXprograma[4] as! [Int])
+                            }
+                            
                         }
                         
                         self.tableView.reloadData()
@@ -132,18 +160,20 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if self.seccion == 1 {
+        switch self.seccion {
+        case 1:
             return fechas.count
-        } else {
-            return 1
+        default:
+            return 0
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.seccion == 1 {
-            return self.programaXfecha[section].count
-        } else {
-            return 1
+        switch self.seccion {
+        case 1:
+            return self.programaFecha[section].count
+        default:
+            return 0
         }
     }
     
@@ -151,7 +181,8 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
         
         var diaMostrar = ""
         
-        if self.seccion == 1 {
+        switch self.seccion {
+        case 1:
             switch fechas[section] {
             case "2017-06-05":
                 diaMostrar = "Lunes 5 de Junio"
@@ -166,11 +197,8 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
             default:
                 diaMostrar = ""
             }
-        } else {
-            
+        default: break
         }
-        
-        
         
         return diaMostrar
     }
@@ -179,25 +207,26 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        if self.seccion == 1 {
-            cell.textLabel?.text = self.programaXfecha[indexPath.section][indexPath.row] as? String
-        } else {
-            
+        switch self.seccion {
+        case 1:
+            cell.textLabel?.text = self.programaFecha[indexPath.section][indexPath.row]
+        default: break
         }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.seccion == 1 {
+        
+        switch self.seccion {
+        case 1:
             for program in self.programas {
-                if program["id"] as! Int == idXprograma[indexPath.section][indexPath.row] as! Int {
+                if program["id"] as! Int == idPrograma[indexPath.section][indexPath.row] as! Int {
                     programaAmostrar = program
                     self.performSegue(withIdentifier: "detalle", sender: nil)
                 }
             }
-        } else {
-            
+        default: break
         }
     }
     

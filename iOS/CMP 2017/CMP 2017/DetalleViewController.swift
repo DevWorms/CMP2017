@@ -10,6 +10,7 @@ import UIKit
 
 class DetalleViewController: UIViewController {
     
+    @IBOutlet weak var foto: UIImageView!
     @IBOutlet weak var titulo: UILabel!
     @IBOutlet weak var lugar: UILabel!
     @IBOutlet weak var recomendaciones: UILabel!
@@ -26,10 +27,23 @@ class DetalleViewController: UIViewController {
 
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "fondo.png")!)
         
+        switch self.seccion {
+        case 1:
+            btn3.isHidden = true
+        default:
+            break
+        }
+        
         self.titulo.text = detalle["nombre"] as! String?
         self.lugar.text = detalle["lugar"] as! String?
         self.recomendaciones.text = detalle["recomendaciones"] as! String?
-
+        
+        let foto = detalle["foto"] as! [String: Any]
+        
+        let data = try? Data(contentsOf: URL(string: foto["url"] as! String)!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+        DispatchQueue.main.async {
+            self.foto.image = UIImage(data: data!)
+        }
     }
 
     override func didReceiveMemoryWarning() {

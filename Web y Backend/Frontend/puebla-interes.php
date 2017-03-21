@@ -31,7 +31,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">DASHBOARD CMP 2017</a>
+                <a class="navbar-brand" href="index.php">DASHBOARD <b style="color: #52e7ff;">CMP 2017</b></a>
             </div>
 
             <!-- Top Menu -->
@@ -91,13 +91,12 @@
 
         <!-- Contenido -->
         <div id="page-wrapper">
-
             <div class="container-fluid">
-                
-                <form action="" method="" id="" name="" role="">    
+                <div id="error"></div>
+                <form enctype="multipart/form-data" method="POST" id="crearEvento" name="crearEvento">
                     <div class="row page-header">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
-                            <h4><a href="#">Puebla</a></h4>
+                            <h4 style="color: #10375e;">Puebla</h4>
                         </div>
 
                         <div class="col-xs-12 col-md-5" align="right">
@@ -105,30 +104,23 @@
                         </div>
                     </div>
                     <!-- Fin Fila -->
-                    
-                    <div class="row">
-                        <div class="col-xs-12 col-md-5 col-md-offset-1">
-                            <h4><b>Sitio 1</b></h4>
-                        </div>
-                    </div>
-                    <br>
                     <!-- Fin Fila -->
 
                     <div class="row">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
                             <div class="form-group">
-                                <label for="">Titulo</label>
+                                <label for="titulo">Titulo</label>
                                     <br>
-                                <input type="" name="" id="" class="form-control">
+                                <input type="text" name="titulo" id="titulo" class="form-control" required>
                             </div>
                             <br>
                         </div>
 
                         <div class="col-xs-12 col-md-5">
                             <div class="form-group">
-                                <label for="">Google Maps Link</label>
+                                <label for="maps_link">Google Maps Link</label>
                                     <br>
-                                <input type="" name="" id="" class="form-control">
+                                <input type="text" name="maps_link" id="maps_link" class="form-control" required>
                             </div>
                         </div>
                     </div>
@@ -138,17 +130,17 @@
                     <div class="row">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
                             <div class="form-group">
-                                <label for="">Descripción (300 caractéres)</label>
+                                <label for="descripcion">Descripción (300 caractéres)</label>
                                     <br>
-                                <textarea class="form-control" rows="5" id=""></textarea>
+                                <textarea class="form-control" rows="5" id="descripcion" name="descripcion" required></textarea>
                             </div> 
                         </div>
 
                         <div class="col-xs-12 col-md-6">
                             <div class="form-group">
-                                <label for="">Imágen (fotográfia)</label>
+                                <label for="imagen">Imágen (fotográfia)</label>
                                     <br><br>
-                                <button class="btn btn-default">Seleccionar</button>
+                                <input type="file" id="imagen" name="imagen">
                             </div> 
                         </div>
                     </div>
@@ -158,9 +150,9 @@
                     <div class="row">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
                             <div class="form-group">
-                                <label for="">URL</label>
+                                <label for="url">URL</label>
                                     <br>
-                                <input type="" name="" id="" class="form-control">
+                                <input type="text" name="url" id="url" class="form-control" required>
                             </div>
                             <br>
                         </div>
@@ -168,85 +160,13 @@
                     <!-- Fin Fila -->
                     
                     <div class="row">
-                        <col-xs-12 class="col-md-2 col-md-offset-1">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block" name="" id="">Guardar</button>    
+                        <col-xs-12 class="col-xs-offset-2 col-xs-8 col-md-2 col-md-offset-1">
+                            <button type="submit" class="btn basico btn-block" name="save" id="save">Guardar</button>
                         </col-xs-12>
                     </div>
                 </form>
 
                 <br><hr>
-                
-                <form action="" method="" id="" name="" role="">    
-                    
-                    <div class="row">
-                        <div class="col-xs-12 col-md-5 col-md-offset-1">
-                            <h4><b>Sitio 2</b></h4>
-                        </div>
-                    </div>
-                    <br>
-                    <!-- Fin Fila -->
-
-                    <div class="row">
-                        <div class="col-xs-12 col-md-5 col-md-offset-1">
-                            <div class="form-group">
-                                <label for="">Titulo</label>
-                                    <br>
-                                <input type="" name="" id="" class="form-control">
-                            </div>
-                            <br>
-                        </div>
-
-                        <div class="col-xs-12 col-md-5">
-                            <div class="form-group">
-                                <label for="">Google Maps Link</label>
-                                    <br>
-                                <input type="" name="" id="" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <!-- Fin Fila -->
-
-                    <div class="row">
-                        <div class="col-xs-12 col-md-5 col-md-offset-1">
-                            <div class="form-group">
-                                <label for="">Descripción (300 caractéres)</label>
-                                    <br>
-                                <textarea class="form-control" rows="5" id=""></textarea>
-                            </div> 
-                        </div>
-
-                        <div class="col-xs-12 col-md-6">
-                            <div class="form-group">
-                                <label for="">Imágen (fotográfia)</label>
-                                    <br><br>
-                                <button class="btn btn-default">Seleccionar</button>
-                            </div> 
-                        </div>
-                    </div>
-                    <br>
-                    <!-- Fin Fila -->
-
-                    <div class="row">
-                        <div class="col-xs-12 col-md-5 col-md-offset-1">
-                            <div class="form-group">
-                                <label for="">URL</label>
-                                    <br>
-                                <input type="" name="" id="" class="form-control">
-                            </div>
-                            <br>
-                        </div>
-                    </div>
-                    <!-- Fin Fila -->
-                    
-                    <div class="row">
-                        <col-xs-12 class="col-md-2 col-md-offset-1">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block" name="" id="">Guardar</button>    
-                        </col-xs-12>
-                    </div>
-                    <br><br>
-                </form>
-
             </div>
             <!-- /.container-fluid -->
 
@@ -260,6 +180,9 @@
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
+    <script src="js/js.php"></script>
+    <script src="js/lodash.js"></script>
+    <script src="js/add-sitio.js"></script>
 </body>
 
 </html>

@@ -21,6 +21,10 @@ public class MenuFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
 
+        String inicioComo= getActivity().getIntent().getExtras().getString("parametro");
+
+
+
         ImageView imgbtnProgramas = (ImageView) view.findViewById(R.id.imagbtnPrograma);
         imgbtnProgramas.setOnClickListener(new SecProgram());
 
@@ -41,6 +45,32 @@ public class MenuFragment extends Fragment {
 
         ImageView imagbtnTrans= (ImageView) view.findViewById(R.id.imagbtnTransp);
         imagbtnTrans.setOnClickListener(new SecTrans());
+
+        ImageView imagbtnPuebla= (ImageView) view.findViewById(R.id.imagbtnPuebla);
+        //imagbtnPuebla.setOnClickListener(new SecTrans());
+
+        if(inicioComo.equals("invi")){
+
+            imgbtnProgramas.setImageDrawable(getResources().getDrawable(R.drawable.btnprogramagris));
+            imgbtnProgramas.setEnabled(false);
+
+            imagbtnEvenAcom.setImageDrawable(getResources().getDrawable(R.drawable.btnacompgris));
+            imagbtnEvenAcom.setEnabled(false);
+
+            imagbtnSocialDep.setImageDrawable(getResources().getDrawable(R.drawable.btnsociadeportivosgris));
+            imagbtnSocialDep.setEnabled(false);
+
+            imagbtnMapa.setImageDrawable(getResources().getDrawable(R.drawable.btnmapasgris));
+            imagbtnMapa.setEnabled(false);
+
+            imagbtnTrans.setImageDrawable(getResources().getDrawable(R.drawable.btntransportaciongris));
+            imagbtnTrans.setEnabled(false);
+
+            imagbtnPuebla.setImageDrawable(getResources().getDrawable(R.drawable.btnpueblagris));
+            imagbtnPuebla.setEnabled(false);
+
+        }
+
         return view;
 
 
@@ -52,7 +82,7 @@ public class MenuFragment extends Fragment {
 
 
             getFragmentManager().beginTransaction()
-                    .replace(R.id.actividad, new ProgramFragment()).commit();
+                    .replace(R.id.actividad, new ProgramFragment()).addToBackStack(null).commit();
 
 
         }
@@ -64,7 +94,7 @@ public class MenuFragment extends Fragment {
 
 
             getFragmentManager().beginTransaction()
-                    .replace(R.id.actividad, new ExpositoresFrgament()).commit();
+                    .replace(R.id.actividad, new ExpositoresFrgament()).addToBackStack(null).commit();
 
 
         }
@@ -78,7 +108,7 @@ public class MenuFragment extends Fragment {
             Bundle parametro = new Bundle();
 
             parametro.putString("nombre","Eventos de \n Acompañantes");
-
+            parametro.putString("seccion","acomp");
 
             fragment.setArguments(parametro);
 
@@ -110,7 +140,7 @@ public class MenuFragment extends Fragment {
             Bundle parametro = new Bundle();
 
             parametro.putString("nombre","Eventos de Sociales \n y Deportivos");
-
+            parametro.putString("seccion","social");
 
             fragment.setArguments(parametro);
 
@@ -164,7 +194,7 @@ public class MenuFragment extends Fragment {
 
 
             getFragmentManager().beginTransaction()
-                    .replace(R.id.actividad, new MapaFragment()).commit();
+                    .replace(R.id.actividad, new MapaFragment()).addToBackStack(null).commit();
 
 
         }
@@ -175,9 +205,11 @@ public class MenuFragment extends Fragment {
 
 
             getFragmentManager().beginTransaction()
-                    .replace(R.id.actividad, new TransportacionFragment()).commit();
+                    .replace(R.id.actividad, new TransportacionFragment()).addToBackStack(null).commit();
 
 
         }
     }
+
+
 }

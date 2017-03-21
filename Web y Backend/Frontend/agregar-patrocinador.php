@@ -31,7 +31,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">DASHBOARD CMP 2017</a>
+                <a class="navbar-brand" href="index.php">DASHBOARD <b style="color: #52e7ff;">CMP 2017</b></a>
             </div>
 
             <!-- Top Menu -->
@@ -91,18 +91,16 @@
 
         <!-- Contenido -->
         <div id="page-wrapper">
-
             <div class="container-fluid">
-                
-                <form action="" method="" id="" name="" role="">    
-                    
+                <div id="error"></div>
+                <form enctype="multipart/form-data" method="POST" id="crearPatrocinador" name="crearPatrocinador">
                     <div class="row page-header">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
-                            <h4><a href="#">Patrocinador</a></h4>
+                            <h4 style="color: #10375e;">Patrocinador</h4>
                         </div>
 
                         <div class="col-xs-12 col-md-6" align="right">
-                            <button type="submit" class="btn btn-default" name="" id=""><i class="fa fa-plus-circle"></i> Agregar Patrocinador</button>   
+                            <button type="submit" class="btn basico" name="" id=""><i class="fa fa-plus-circle"></i> &nbsp;Agregar Patrocinador</button>   
                         </div>
                     </div>
                     <!-- Fin Fila -->
@@ -111,33 +109,39 @@
                         <div class="col-md-5 col-md-offset-1">
                             
                             <div class="form-group">
-                                <label for="">Nombre del patrocinador</label>
+                                <label for="nombre">Nombre del patrocinador</label>
                                     <br>
-                                <input type="" name="" id="" class="form-control">
+                                <input type="text" name="nombre" id="nombre" class="form-control" required>
                             </div>
                             <br>
 
                             <div class="form-group">
-                                <label for="">Dirección web URL</label>
+                                <label for="url">Dirección web URL</label>
                                     <br>
-                                <input type="" name="" id="" class="form-control">
+                                <input type="text" name="url" id="url" class="form-control" required>
                             </div>
                             <br>
 
                             <div class="form-group">
-                                <label for="">Teléfono</label>
+                                <label for="telefono">Teléfono</label>
                                     <br>
-                                <input type="" name="" id="" class="form-control">
+                                <input type="number" name="telefono" id="telefono" class="form-control" required>
                             </div>
                             <br>
 
                             <div class="form-group">
-                                <label for="">Correo electrónico</label>
+                                <label for="email">Correo electrónico</label>
                                     <br>
-                                <input type="" name="" id="" class="form-control">
+                                <input type="email" name="email" id="email" class="form-control" required>
                             </div>
                             <br>
 
+                            <div class="form-group">
+                                <label for="tipo">Tipo de patrocinador</label>
+                                <br>
+                                <input type="text" name="tipo" id="tipo" class="form-control" required>
+                            </div>
+                            <br>
                         </div>
                         <div class="col-md-6"></div>
                     </div>
@@ -146,18 +150,18 @@
                     <div class="row">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
                             <div class="form-group">
-                                <label for="">Acerca de</label>
+                                <label for="acerca">Acerca de</label>
                                     <br>
-                                <textarea class="form-control" rows="5" id=""></textarea>
+                                <textarea class="form-control" rows="5" id="acerca" name="acerca" required></textarea>
                             </div>
                             <br>
                         </div>
 
                         <div class="col-xs-12 col-md-6">
                             <div class="form-group">
-                                <label for="">Agregar archivo PDF</label>
+                                <label for="archivo_pdf">Agregar archivo PDF</label>
                                     <br><br>
-                                <button class="btn btn-default">Examinar</button>
+                                <input type="file" name="archivo_pdf" id="archivo_pdf">
                             </div> 
                         </div>
                     </div>
@@ -169,15 +173,15 @@
                             <div class="form-group">
                                 <label for="">Agregar ubicación en el mapa</label>
                                     <br><br>
-                                <button class="btn btn-default">Ir al mapa</button>
+                                <button class="btn basico2">Ir al mapa</button>
                             </div> 
                         </div>
 
                         <div class="col-xs-12 col-md-6">
                             <div class="form-group">
-                                <label for="">Agregar imagen de logotipo</label>
+                                <label for="archivo_logo">Agregar imagen de logotipo</label>
                                     <br><br>
-                                <button class="btn btn-default">Examinar</button>
+                                <input type="file" name="archivo_logo" id="archivo_logo">
                             </div> 
                         </div>
                     </div>
@@ -196,7 +200,8 @@
     <!-- Scripts -->
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
-
+    <script src="js/js.php"></script>
+    <script src="js/add-patrocinadores.js"></script>
 </body>
 
 </html>

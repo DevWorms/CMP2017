@@ -1,3 +1,6 @@
+<?php
+    require_once "sesion/validar.php"
+?>
 <!DOCTYPE html>
 <html lang="">
 
@@ -31,7 +34,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">DASHBOARD CMP 2017</a>
+                <a class="navbar-brand" href="index.php">DASHBOARD <b style="color: #52e7ff;">CMP 2017</b></a>
             </div>
 
             <!-- Top Menu -->
@@ -93,11 +96,17 @@
         <div id="page-wrapper">
 
             <div class="container-fluid">
+
+                <?php
+                    $rutas = [1,2,3];
+
+                foreach ($rutas as $ruta){
+                ?>
                 
-                <form action="" method="" id="" name="" role="">    
+                <form action="" method="" id="ruta<?=$ruta?>" name="" role="">
                     <div class="row page-header">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
-                            <h4><a href="#">Transportación</a></h4>
+                            <h4 style="color: #10375e;">Transportación</h4>
                         </div>
 
                         <div class="col-xs-12 col-md-5" align="right">
@@ -108,7 +117,7 @@
                     
                     <div class="row">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
-                            <h4><b>Ruta 1</b></h4>
+                            <h4><b>Ruta <?=$ruta?></b></h4>
                         </div>
                     </div>
                     <br>
@@ -119,7 +128,7 @@
                             <div class="form-group">
                                 <label for="">Titulo</label>
                                     <br>
-                                <input type="" name="" id="" class="form-control">
+                                <input type="" name="" id="titulo<?=$ruta?>" class="form-control">
                             </div>
                             <br>
                         </div>
@@ -128,7 +137,7 @@
                             <div class="form-group">
                                 <label for="">Agregar archivo PDF</label>
                                     <br>
-                                <button class="btn btn-default">Examinar</button>
+                                <input type="file" class="btn btn-default" id = "archivo<?=$ruta?>">Examinar</input>
                             </div> 
                         </div>
                     </div>
@@ -140,7 +149,7 @@
                             <div class="form-group">
                                 <label for="">Descripción (100 caractéres)</label>
                                     <br>
-                                <textarea class="form-control" rows="3" id=""></textarea>
+                                <textarea class="form-control" rows="3" id="desc<?=$ruta?>"></textarea>
                             </div>
                             <br>
                         </div>
@@ -148,8 +157,9 @@
                     <!-- Fin Fila -->
                     
                     <div class="row">
-                        <col-xs-12 class="col-md-2 col-md-offset-1">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block" name="" id="">Guardar</button>    
+
+                        <col-xs-12 class="col-xs-offset-2 col-xs-8 col-md-2 col-md-offset-1">
+                            <button type="submit" class="btn basico btn-block" name="" id="guardar<?=$ruta?>" ruta ="<?=$ruta?>" key = "<?=$_SESSION['api_key']?>" user="<?=$_SESSION['user_id']?>">Guardar</button>
                         </col-xs-12>
                     </div>
                 </form>
@@ -179,7 +189,7 @@
                             <div class="form-group">
                                 <label for="">Agregar archivo PDF</label>
                                     <br>
-                                <button class="btn btn-default">Examinar</button>
+                                <button class="btn basico2">Examinar</button>
                             </div> 
                         </div>
                     </div>
@@ -199,12 +209,15 @@
                     <!-- Fin Fila -->
                     
                     <div class="row">
-                        <col-xs-12 class="col-md-2 col-md-offset-1">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block" name="" id="">Guardar</button>    
+                        <col-xs-12 class="col-xs-offset-2 col-xs-8 col-md-2 col-md-offset-1">
+                            <button type="submit" class="btn basico btn-block" name="" id="">Guardar</button>    
                         </col-xs-12>
                     </div>
                     <br><br>
                 </form>
+                <?php
+                    }
+                ?>
             </div>
             <!-- /.container-fluid -->
 
@@ -217,6 +230,7 @@
     <!-- Scripts -->
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/transporte.js"></script>
 
 </body>
 

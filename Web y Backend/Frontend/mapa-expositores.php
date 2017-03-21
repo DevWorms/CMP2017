@@ -31,7 +31,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">DASHBOARD CMP 2017</a>
+                <a class="navbar-brand" href="index.php">DASHBOARD <b style="color: #52e7ff;">CMP 2017</b></a>
             </div>
 
             <!-- Top Menu -->
@@ -96,7 +96,7 @@
                 
                 <div class="row page-header">
                    <div class="col-xs-12 col-md-offset-1 col-md-4">
-                        <h3>Mapa</h3>
+                        <h3 style="color: #10375e;">Mapa</h3>
                     </div> 
                 </div>
                 <!-- Fin Fila -->
@@ -110,10 +110,14 @@
                 <!-- Fin Fila -->
     
                 <div class="row">
-                    <div class="col-xs-12 col-md-offset-1 col-md-9">
+                    <div class="col-xs-12 col-md-offset-1 col-md-10">
                         <div class="panel panel-danger">
                             <div class="panel-heading">Esta sección esta pendiente ...</div>
                             <div class="panel-body" align="center">
+                                <br>
+                                <p>
+                                    <i>Esta sección esta pendiente pues aún se esta definiendo la funcionalidad y tecnología de este mapa.</i>
+                                </p>
                                 <br>
                                 <img src="http://www.clker.com/cliparts/N/h/E/L/8/c/cogs-hi.png" alt="" width="80px">
                                 <br><br>    

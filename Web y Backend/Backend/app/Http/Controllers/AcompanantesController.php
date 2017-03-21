@@ -112,7 +112,7 @@ class AcompanantesController extends Controller {
                         if ($file->getSize() > 10000000) {
                             $response['estado'] = 0;
                             $response['mensaje'] = "El archivo excede el límite de 10mb";
-                            return response()->json($response, 401);
+                            return response()->json($response, 400);
                         } else {
                             // Si va bien, lo mueve a la carpeta y guarda el registro
                             $path = $this->tool->destinationPath . Carbon::now()->year . "/" . Carbon::now()->month . "/";
@@ -132,7 +132,7 @@ class AcompanantesController extends Controller {
                         $response['estado'] = 0;
                         $response['mensaje'] = "Error, tipo de archivo invalido";
 
-                        return response()->json($response, 401);
+                        return response()->json($response, 400);
                     }
                 }
 
@@ -158,7 +158,7 @@ class AcompanantesController extends Controller {
                 $res['status'] = 1;
                 $res['mensaje'] = "Evento creado correctamente";
                 $res['acompanante'] = $programa;
-                return response()->json($res, 201);
+                return response()->json($res, 200);
             }
         } catch (ModelNotFoundException $ex) {
             $res['status'] = 0;
@@ -228,7 +228,7 @@ class AcompanantesController extends Controller {
             if ($tipo) {
                 $categoria = Categoria::where('id', $tipo)->first();
                 if ($categoria) {
-                    $programas = $programas->where('categoria_id', $tipo)->all();
+                    $programas = $programas->where('categoria_id', $tipo)->values();
                 } else {
                     $res['status'] = 0;
                     $res['mensaje'] = "Categoría no encontrada";
@@ -247,6 +247,56 @@ class AcompanantesController extends Controller {
         } catch (ModelNotFoundException $ex) {
             $res['status'] = 0;
             $res['mensaje'] = "Error de credenciales " .$ex->getMessage();
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    public function paginate($user_id, $api_key) {
+        try {
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+            $expositores = Programa::orderBy('id', 'DESC')->where('type', 2)->paginate(5);
+            foreach ($expositores as $expositor) {
+                $expositor = $this->tool->returnPrograma($expositor);
+            }
+
+            $res['status'] = 1;
+            $res['mensaje'] = "success";
+            $res['acompanantes'] = $expositores;
+            return response()->json($res, 200);
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    public function search(Request $request) {
+        try {
+            $user_id = $request->get('user_id');
+            $api_key = $request->get('api_key');
+            $search = $request->get('search');
+
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+            $expositores = Programa::where('nombre', 'LIKE', '%'. $search .'%')->where('type', 2)->get();
+            foreach ($expositores as $expositor) {
+                $expositor = $this->tool->returnPrograma($expositor);
+            }
+
+            $res['status'] = 1;
+            $res['mensaje'] = "success";
+            $res['acompanantes'] = $expositores;
+            return response()->json($res, 200);
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
             return response()->json($res, 400);
         } catch (\Exception $ex) {
             $res['status'] = 0;

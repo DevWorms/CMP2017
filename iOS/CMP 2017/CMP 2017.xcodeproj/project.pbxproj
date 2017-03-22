@@ -31,6 +31,8 @@
 		3B5B8F7E1E7083ED00F0D6AA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B5B8F7C1E7083ED00F0D6AA /* LaunchScreen.storyboard */; };
 		3B5B8F891E7083ED00F0D6AA /* CMP_2017Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5B8F881E7083ED00F0D6AA /* CMP_2017Tests.swift */; };
 		3B5B8F941E7083ED00F0D6AA /* CMP_2017UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5B8F931E7083ED00F0D6AA /* CMP_2017UITests.swift */; };
+		3B8B4C7B1E824B7B00983CD4 /* TransportacionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8B4C7A1E824B7B00983CD4 /* TransportacionTableViewCell.swift */; };
+		3B8B4C7D1E82501200983CD4 /* SitioTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8B4C7C1E82501200983CD4 /* SitioTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +83,8 @@
 		3B5B8F8F1E7083ED00F0D6AA /* CMP 2017UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CMP 2017UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B5B8F931E7083ED00F0D6AA /* CMP_2017UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMP_2017UITests.swift; sourceTree = "<group>"; };
 		3B5B8F951E7083ED00F0D6AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3B8B4C7A1E824B7B00983CD4 /* TransportacionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransportacionTableViewCell.swift; sourceTree = "<group>"; };
+		3B8B4C7C1E82501200983CD4 /* SitioTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SitioTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,11 +143,13 @@
 				3B396BFB1E762CA500C4611E /* MenuUsuarioViewController.swift */,
 				3B396C131E77392B00C4611E /* MapaSimpleViewController.swift */,
 				3B396C151E773C3900C4611E /* SitiosViewController.swift */,
+				3B8B4C7C1E82501200983CD4 /* SitioTableViewCell.swift */,
 				3B396BFD1E76388400C4611E /* ProgramaViewController.swift */,
 				3B4608101E7CD687005264D4 /* ResultadosViewController.swift */,
 				3B396BFF1E764CA400C4611E /* DetalleViewController.swift */,
 				3B396C011E764CCD00C4611E /* MenuMapaViewController.swift */,
 				3B396C031E764F5F00C4611E /* TransportacionViewController.swift */,
+				3B8B4C7A1E824B7B00983CD4 /* TransportacionTableViewCell.swift */,
 				3B396C091E7655CE00C4611E /* ConocePueViewController.swift */,
 				3B396C0B1E76628200C4611E /* TelsViewController.swift */,
 				3B396C0D1E766AF800C4611E /* MiPerfilViewController.swift */,
@@ -325,6 +331,8 @@
 				3B396C0C1E76628200C4611E /* TelsViewController.swift in Sources */,
 				3B396C041E764F5F00C4611E /* TransportacionViewController.swift in Sources */,
 				3B396C141E77392B00C4611E /* MapaSimpleViewController.swift in Sources */,
+				3B8B4C7D1E82501200983CD4 /* SitioTableViewCell.swift in Sources */,
+				3B8B4C7B1E824B7B00983CD4 /* TransportacionTableViewCell.swift in Sources */,
 				3B5B8F711E7083ED00F0D6AA /* AppDelegate.swift in Sources */,
 				3B4608111E7CD687005264D4 /* ResultadosViewController.swift in Sources */,
 				3B396BFC1E762CA500C4611E /* MenuUsuarioViewController.swift in Sources */,

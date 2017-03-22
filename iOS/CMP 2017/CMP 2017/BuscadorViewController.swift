@@ -29,7 +29,7 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
     var filteredProvisional:[String] = []
     var filteredID:[Int] = []
     
-    var seccion = 0
+    var seccion = 2
     var alphabet = true
 
     override func viewDidLoad() {
@@ -46,6 +46,8 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeKeyBoard(sender:)))
         swipeDown.direction = UISwipeGestureRecognizerDirection.down
         self.view.addGestureRecognizer(swipeDown)
+        
+        searchBar.delegate = self
         
         self.alfabeticamente()
      
@@ -66,19 +68,16 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
         
         alphabet = true
         
+        var strUrl = ""
+        
         if self.seccion == 5 { // patrocinadores
-            
-            let strUrl = "http://cmp.devworms.com/api/patrocinador/order/name/\(userID!)/\(apiKey!)"
-            print(strUrl)
-            
-            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
+            strUrl = "http://cmp.devworms.com/api/patrocinador/order/name/\(userID!)/\(apiKey!)"
         } else {
-            
-            let strUrl = "http://cmp.devworms.com/api/expositor/order/name/\(userID!)/\(apiKey!)"
-            print(strUrl)
-            
-            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
+            strUrl = "http://cmp.devworms.com/api/expositor/order/name/\(userID!)/\(apiKey!)"
         }
+        
+        print(strUrl)
+        URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
     }
     
     func stand() {
@@ -87,23 +86,16 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
         
         alphabet = false
         
+        var strUrl = ""
+        
         if self.seccion == 5 { // patrocinadores
-            
-            searchBar.isHidden = true
-            
-            let strUrl = "http://cmp.devworms.com/api/patrocinador/order/stand/\(userID!)/\(apiKey!)"
-            print(strUrl)
-            
-            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
+            strUrl = "http://cmp.devworms.com/api/patrocinador/order/stand/\(userID!)/\(apiKey!)"
         } else {
-            
-            searchBar.delegate = self
-            
-            let strUrl = "http://cmp.devworms.com/api/expositor/order/stand/\(userID!)/\(apiKey!)"
-            print(strUrl)
-            
-            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
+            strUrl = "http://cmp.devworms.com/api/expositor/order/stand/\(userID!)/\(apiKey!)"
         }
+        
+        print(strUrl)
+        URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
     }
     
     func parseJson(data: Data?, urlResponse: URLResponse?, error: Error?) {
@@ -309,6 +301,9 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        if(searchActive) {
+            return nil
+        }
         return abcArray
     }
     
@@ -357,7 +352,7 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detalle" {
-            (segue.destination as! DetalleViewController).seccion = 2
+            (segue.destination as! DetalleViewController).seccion = self.seccion
             (segue.destination as! DetalleViewController).detalle = self.expositorAmostrar
         }
     }

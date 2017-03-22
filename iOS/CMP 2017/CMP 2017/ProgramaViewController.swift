@@ -109,7 +109,7 @@ class ProgramaViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             case "E-Póster":
                 tipoEnviar = "4"
             case "Otros":
-                tipoEnviar = "6"
+                tipoEnviar = "0"
             default:
                 tipoEnviar = ""
             }

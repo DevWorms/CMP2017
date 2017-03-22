@@ -22,15 +22,15 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
     var diaPrograma = ""
     var tipoPrograma = ""
     
-    var programas = [[String : Any]]()
+    var datos = [[String : Any]]()
     var fechas = [String]()
-    var programaXfecha = [[], [], [], [], []]
-    var idXprograma = [[], [], [], [], []]
+    var datoXfecha = [[], [], [], [], []]
+    var idXdato = [[], [], [], [], []]
     // variables finales sin basura
-    var programaFecha = [[String]]()
-    var idPrograma = [[Int]]()
+    var datoFecha = [[String]]()
+    var idDato = [[Int]]()
     
-    var programaAmostrar = [String : Any]()
+    var datoAmostrar = [String : Any]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,30 +81,30 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
                     
                     DispatchQueue.main.async {
                         
-                        if self.programas.count > 0 {
-                            self.programas.removeAll()
+                        if self.datos.count > 0 {
+                            self.datos.removeAll()
                         }
                         
                         if let jsonResult = json as? [String: Any] {
                             switch self.seccion {
                             case 1:
-                                for programa in jsonResult["programas"] as! [[String:Any]] {
-                                    self.programas.append(programa)
+                                for dato in jsonResult["programas"] as! [[String:Any]] {
+                                    self.datos.append(dato)
                                 }
                             case 3:
-                                for programa in jsonResult["acompanantes"] as! [[String:Any]] {
-                                    self.programas.append(programa)
+                                for dato in jsonResult["acompanantes"] as! [[String:Any]] {
+                                    self.datos.append(dato)
                                 }
                             case 4:
-                                for programa in jsonResult["eventos"] as! [[String:Any]] {
-                                    self.programas.append(programa)
+                                for dato in jsonResult["eventos"] as! [[String:Any]] {
+                                    self.datos.append(dato)
                                 }
                             default: break
                             }
                             
                             
                             //para titulos
-                            for date in self.programas {
+                            for date in self.datos {
                                 if self.fechas.contains(date["fecha"] as! String) {
                                     
                                 } else {
@@ -112,43 +112,43 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
                                 }
                                 
                                 if date["fecha"] as! String == "2017-06-05" {
-                                    self.programaXfecha[0].append(date["nombre"] as! String)
-                                    self.idXprograma[0].append(date["id"] as! Int)
+                                    self.datoXfecha[0].append(date["nombre"] as! String)
+                                    self.idXdato[0].append(date["id"] as! Int)
                                 }else if date["fecha"] as! String == "2017-06-06" {
-                                    self.programaXfecha[1].append(date["nombre"] as! String)
-                                    self.idXprograma[1].append(date["id"] as! Int)
+                                    self.datoXfecha[1].append(date["nombre"] as! String)
+                                    self.idXdato[1].append(date["id"] as! Int)
                                 }else if date["fecha"] as! String == "2017-06-07" {
-                                    self.programaXfecha[2].append(date["nombre"] as! String)
-                                    self.idXprograma[2].append(date["id"] as! Int)
+                                    self.datoXfecha[2].append(date["nombre"] as! String)
+                                    self.idXdato[2].append(date["id"] as! Int)
                                 }else if date["fecha"] as! String == "2017-06-08" {
-                                    self.programaXfecha[3].append(date["nombre"] as! String)
-                                    self.idXprograma[3].append(date["id"] as! Int)
+                                    self.datoXfecha[3].append(date["nombre"] as! String)
+                                    self.idXdato[3].append(date["id"] as! Int)
                                 }else if date["fecha"] as! String == "2017-06-09" {
-                                    self.programaXfecha[4].append(date["nombre"] as! String)
-                                    self.idXprograma[4].append(date["id"] as! Int)
+                                    self.datoXfecha[4].append(date["nombre"] as! String)
+                                    self.idXdato[4].append(date["id"] as! Int)
                                 }
                             }
                             
                             // agregar los datos que no estan vacios
-                            if self.programaXfecha[0].count != 0 {
-                                self.programaFecha.append(self.programaXfecha[0] as! [String])
-                                self.idPrograma.append(self.idXprograma[0] as! [Int])
+                            if self.datoXfecha[0].count != 0 {
+                                self.datoFecha.append(self.datoXfecha[0] as! [String])
+                                self.idDato.append(self.idXdato[0] as! [Int])
                             }
-                            if self.programaXfecha[1].count != 0 {
-                                self.programaFecha.append(self.programaXfecha[1] as! [String])
-                                self.idPrograma.append(self.idXprograma[1] as! [Int])
+                            if self.datoXfecha[1].count != 0 {
+                                self.datoFecha.append(self.datoXfecha[1] as! [String])
+                                self.idDato.append(self.idXdato[1] as! [Int])
                             }
-                            if self.programaXfecha[2].count != 0 {
-                                self.programaFecha.append(self.programaXfecha[2] as! [String])
-                                self.idPrograma.append(self.idXprograma[2] as! [Int])
+                            if self.datoXfecha[2].count != 0 {
+                                self.datoFecha.append(self.datoXfecha[2] as! [String])
+                                self.idDato.append(self.idXdato[2] as! [Int])
                             }
-                            if self.programaXfecha[3].count != 0 {
-                                self.programaFecha.append(self.programaXfecha[3] as! [String])
-                                self.idPrograma.append(self.idXprograma[3] as! [Int])
+                            if self.datoXfecha[3].count != 0 {
+                                self.datoFecha.append(self.datoXfecha[3] as! [String])
+                                self.idDato.append(self.idXdato[3] as! [Int])
                             }
-                            if self.programaXfecha[4].count != 0 {
-                                self.programaFecha.append(self.programaXfecha[4] as! [String])
-                                self.idPrograma.append(self.idXprograma[4] as! [Int])
+                            if self.datoXfecha[4].count != 0 {
+                                self.datoFecha.append(self.datoXfecha[4] as! [String])
+                                self.idDato.append(self.idXdato[4] as! [Int])
                             }
                             
                         }
@@ -198,7 +198,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch self.seccion {
         case 1,3,4:
-            return self.programaFecha[section].count
+            return self.datoFecha[section].count
         default:
             return 0
         }
@@ -236,7 +236,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
         
         switch self.seccion {
         case 1,3,4:
-            cell.textLabel?.text = self.programaFecha[indexPath.section][indexPath.row]
+            cell.textLabel?.text = self.datoFecha[indexPath.section][indexPath.row]
         default: break
         }
         
@@ -247,9 +247,9 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
         
         switch self.seccion {
         case 1,3,4:
-            for program in self.programas {
-                if program["id"] as! Int == idPrograma[indexPath.section][indexPath.row] {
-                    programaAmostrar = program
+            for dato in self.datos {
+                if dato["id"] as! Int == idDato[indexPath.section][indexPath.row] {
+                    self.datoAmostrar = dato
                     self.performSegue(withIdentifier: "detalle", sender: nil)
                 }
             }
@@ -268,7 +268,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detalle" {
             (segue.destination as! DetalleViewController).seccion = self.seccion
-            (segue.destination as! DetalleViewController).detalle = self.programaAmostrar
+            (segue.destination as! DetalleViewController).detalle = self.datoAmostrar
         }
     }
 

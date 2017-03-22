@@ -43,6 +43,9 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
         nav?.tintColor = UIColor.white
         nav!.setBackgroundImage(navBackgroundImage, for:.default)
         
+        nav?.titleTextAttributes = [NSForegroundColorAttributeName: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)]
+        nav?.topItem?.title = UserDefaults.standard.value(forKey: "name") as! String?
+        
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeKeyBoard(sender:)))
         swipeDown.direction = UISwipeGestureRecognizerDirection.down
         self.view.addGestureRecognizer(swipeDown)

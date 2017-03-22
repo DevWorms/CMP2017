@@ -30,6 +30,9 @@ class MenuPrincipalViewController: UIViewController {
         nav?.tintColor = UIColor.white
         nav!.setBackgroundImage(navBackgroundImage, for:.default)
         
+        nav?.titleTextAttributes = [NSForegroundColorAttributeName: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)]
+        nav?.topItem?.title = UserDefaults.standard.value(forKey: "name") as! String?
+        
         ///
         let invitado = UserDefaults.standard.value(forKey: "invitado") as! Bool
         

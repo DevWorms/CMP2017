@@ -49,6 +49,61 @@ class RegistroViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         // Dispose of any resources that can be recreated.
     }
     
+    func loadCargarPerfilUsuario() {
+        
+        let apiKey = UserDefaults.standard.value(forKey: "api_key")
+        let userID = UserDefaults.standard.value(forKey: "user_id")
+        
+        let strUrl = "http://cmp.devworms.com/api/user/profile/\(userID!)/\(apiKey!)"
+        print(strUrl)
+        
+        URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
+    }
+    
+    func parseJson(data: Data?, urlResponse: URLResponse?, error: Error?) {
+        if error != nil {
+            print(error!)
+        } else if urlResponse != nil {
+            if (urlResponse as! HTTPURLResponse).statusCode == 200 {
+                if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                    //print(json)
+                    if let jsonResult = json as? [String: Any] {
+                        DispatchQueue.main.async {
+                            
+                            let result = jsonResult["user"] as! [String: Any]
+                            
+                            UserDefaults.standard.setValue("Hola \(result["name"]!)", forKey: "name")
+                            
+                            self.performSegue(withIdentifier: "login", sender: nil)
+                            
+                        }
+                    }
+                    
+                } else {
+                    print("HTTP Status Code: 200")
+                    print("El JSON de respuesta es inválido.")
+                }
+            } else {
+                
+                DispatchQueue.main.async {
+                    if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                        if let jsonResult = json as? [String: Any] {
+                            let vc_alert = UIAlertController(title: nil, message: jsonResult["mensaje"] as? String, preferredStyle: .alert)
+                            vc_alert.addAction(UIAlertAction(title: "OK", style: .cancel , handler: nil))
+                            self.present(vc_alert, animated: true, completion: nil)
+                        }
+                        
+                        
+                    } else {
+                        print("HTTP Status Code: 400 o 500")
+                        print("El JSON de respuesta es inválido.")
+                    }
+                }
+            }
+        }
+    }
+
+    
     @IBAction func signUp(_ sender: Any) {
         if     !((mail.text?.isEmpty)!)
             && !((password.text?.isEmpty)!)
@@ -89,7 +144,7 @@ class RegistroViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         } else if urlResponse != nil {
             if (urlResponse as! HTTPURLResponse).statusCode == 200 {
                 if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
-                    print(json)
+                    //print(json)
                     if let jsonResult = json as? [String: Any] {
                         
                         DispatchQueue.main.async {
@@ -97,8 +152,8 @@ class RegistroViewController: UIViewController, UITextFieldDelegate, UIPickerVie
                             UserDefaults.standard.setValue(jsonResult["api_key"], forKey: "api_key")
                             UserDefaults.standard.setValue(jsonResult["user_id"], forKey: "user_id")
                             
-                            //self.loadCargarPerfilUsuario()
-                            self.performSegue(withIdentifier: "registro", sender: nil)
+                            self.loadCargarPerfilUsuario()
+                            
                         }
                     }
                     

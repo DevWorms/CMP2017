@@ -25,6 +25,7 @@ class DetalleViewController: UIViewController {
     // 1 Programa
     // 2 Expositores
     // 3 acompañantes
+    // 4 deportivos
     var seccion = 0
     var detalle = [String: Any]()
 
@@ -34,7 +35,7 @@ class DetalleViewController: UIViewController {
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "fondo.png")!)
         
         switch self.seccion {
-        case 1,3:
+        case 1,3,4:
             btn3.isHidden = true
             
             self.titulo.text = detalle["nombre"] as! String?

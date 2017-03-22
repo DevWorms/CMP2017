@@ -208,7 +208,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="04Eventos_Deportivos"/>
                                 <connections>
-                                    <segue destination="qjL-Eh-RgU" kind="show" id="NTs-h7-V0z"/>
+                                    <segue destination="qjL-Eh-RgU" kind="show" identifier="deportivos" id="NTs-h7-V0z"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t3S-BH-Q2z">
@@ -346,7 +346,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X5k-K8-2CR" id="Ldo-Zn-iwg">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1669,10 +1669,10 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="53G-0t-Pma"/>
-        <segue reference="ney-xN-oW4"/>
-        <segue reference="Hqu-sl-Rm1"/>
-        <segue reference="ZdW-HO-l3u"/>
-        <segue reference="kar-bh-Zrv"/>
+        <segue reference="ycn-As-Ut0"/>
+        <segue reference="c93-xJ-B5s"/>
+        <segue reference="NTs-h7-V0z"/>
         <segue reference="p9G-ew-iHC"/>
+        <segue reference="Hqu-sl-Rm1"/>
     </inferredMetricsTieBreakers>
 </document>

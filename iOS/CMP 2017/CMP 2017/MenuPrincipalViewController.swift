@@ -62,6 +62,8 @@ class MenuPrincipalViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "acompañantes" {
             (segue.destination as! ResultadosViewController).seccion = 3
+        } else if segue.identifier == "deportivos" {
+            (segue.destination as! ResultadosViewController).seccion = 4
         }
     }
 

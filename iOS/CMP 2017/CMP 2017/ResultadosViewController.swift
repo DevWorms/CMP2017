@@ -16,6 +16,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
     // 1 Programa
     // 2 Expositores
     // 3 acompañantes
+    // 4 deportivos
     var seccion = 0
     
     var diaPrograma = ""
@@ -60,6 +61,11 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
             print(strUrl)
             
             URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
+        case 4:
+            let strUrl = "http://cmp.devworms.com/api/deportivos/all/\(userID!)/\(apiKey!)"
+            print(strUrl)
+            
+            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
             
         default: break
         }
@@ -87,6 +93,10 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
                                 }
                             case 3:
                                 for programa in jsonResult["acompanantes"] as! [[String:Any]] {
+                                    self.programas.append(programa)
+                                }
+                            case 4:
+                                for programa in jsonResult["eventos"] as! [[String:Any]] {
                                     self.programas.append(programa)
                                 }
                             default: break
@@ -178,7 +188,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
     
     func numberOfSections(in tableView: UITableView) -> Int {
         switch self.seccion {
-        case 1,3:
+        case 1,3,4:
             return fechas.count
         default:
             return 0
@@ -187,7 +197,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch self.seccion {
-        case 1,3:
+        case 1,3,4:
             return self.programaFecha[section].count
         default:
             return 0
@@ -199,7 +209,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
         var diaMostrar = ""
         
         switch self.seccion {
-        case 1,3:
+        case 1,3,4:
             switch fechas[section] {
             case "2017-06-05":
                 diaMostrar = "Lunes 5 de Junio"
@@ -225,7 +235,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
         switch self.seccion {
-        case 1,3:
+        case 1,3,4:
             cell.textLabel?.text = self.programaFecha[indexPath.section][indexPath.row]
         default: break
         }
@@ -236,7 +246,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         switch self.seccion {
-        case 1,3:
+        case 1,3,4:
             for program in self.programas {
                 if program["id"] as! Int == idPrograma[indexPath.section][indexPath.row] {
                     programaAmostrar = program

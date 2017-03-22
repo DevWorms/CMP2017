@@ -18,8 +18,7 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
     var abcArray = [String]()
     
     var expositores = [[String : Any]]()
-    var expositoresArraySucio = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
-    var idExpositorSucio = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+    
     // variables finales sin basura
     var expositoresArray = [[String]]()
     var idExpositores = [[Int]]()
@@ -47,6 +46,11 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
         swipeDown.direction = UISwipeGestureRecognizerDirection.down
         self.view.addGestureRecognizer(swipeDown)
         
+        self.alfabeticamente()
+     
+    }
+    
+    func alfabeticamente() {
         let apiKey = UserDefaults.standard.value(forKey: "api_key")
         let userID = UserDefaults.standard.value(forKey: "user_id")
         
@@ -57,7 +61,7 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
             let strUrl = "http://cmp.devworms.com/api/patrocinador/order/name/\(userID!)/\(apiKey!)"
             print(strUrl)
             
-            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJsonExpositores).resume()
+            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJsonAlphabetical).resume()
         } else {
             
             searchBar.delegate = self
@@ -65,12 +69,34 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
             let strUrl = "http://cmp.devworms.com/api/expositor/order/name/\(userID!)/\(apiKey!)"
             print(strUrl)
             
-            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJsonExpositores).resume()
+            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJsonAlphabetical).resume()
         }
-     
     }
     
-    func parseJsonExpositores(data: Data?, urlResponse: URLResponse?, error: Error?) {
+    /*func stand() {
+        let apiKey = UserDefaults.standard.value(forKey: "api_key")
+        let userID = UserDefaults.standard.value(forKey: "user_id")
+        
+        if self.seccion == 5 { // patrocinadores
+            
+            searchBar.isHidden = true
+            
+            let strUrl = "http://cmp.devworms.com/api/patrocinador/order/stand/\(userID!)/\(apiKey!)"
+            print(strUrl)
+            
+            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJsonExpositores).resume()
+        } else {
+            
+            searchBar.delegate = self
+            
+            let strUrl = "http://cmp.devworms.com/api/expositor/order/stand/\(userID!)/\(apiKey!)"
+            print(strUrl)
+            
+            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJsonExpositores).resume()
+        }
+    }*/
+    
+    func parseJsonAlphabetical(data: Data?, urlResponse: URLResponse?, error: Error?) {
         if error != nil {
             print(error!)
         } else if urlResponse != nil {
@@ -82,6 +108,10 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
                         
                         if self.expositores.count > 0 {
                             self.expositores.removeAll()
+                            self.abcArray.removeAll()
+                            self.idExpositores.removeAll()
+                            self.expositoresArray.removeAll()
+                            self.expositorAmostrar.removeAll()
                         }
                         
                         if let jsonResult = json as? [String: Any] {
@@ -95,184 +125,40 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
                                 }
                             }
                             
-                            //para titulos
+                            // llenar las secciones
                             for letra in self.expositores {
                                 
-                                if (letra["nombre"] as! String).hasPrefix("A") { // true
-                                    if !self.abcArray.contains("A") {
-                                        self.abcArray.append("A")
-                                    }
-                                    self.expositoresArraySucio[0].append(letra["nombre"] as! String)
-                                    self.idExpositorSucio[0].append(letra["id"] as! Int)
-                                } else if (letra["nombre"] as! String).hasPrefix("B") { // true
-                                    if !self.abcArray.contains("B") {
-                                        self.abcArray.append("B")
-                                    }
-                                    self.expositoresArraySucio[1].append(letra["nombre"] as! String)
-                                    self.idExpositorSucio[1].append(letra["id"] as! Int)
-                                } else if (letra["nombre"] as! String).hasPrefix("C") { // true
-                                    if !self.abcArray.contains("C") {
-                                        self.abcArray.append("C")
-                                    }
-                                    self.expositoresArraySucio[2].append(letra["nombre"] as! String)
-                                    self.idExpositorSucio[2].append(letra["id"] as! Int)
-                                } else if (letra["nombre"] as! String).hasPrefix("D") { // true
-                                    if !self.abcArray.contains("D") {
-                                        self.abcArray.append("D")
-                                    }
-                                    self.expositoresArraySucio[3].append(letra["nombre"] as! String)
-                                    self.idExpositorSucio[3].append(letra["id"] as! Int)
-                                } else if (letra["nombre"] as! String).hasPrefix("E") { // true
-                                    if !self.abcArray.contains("E") {
-                                        self.abcArray.append("E")
-                                    }
-                                    self.expositoresArraySucio[4].append(letra["nombre"] as! String)
-                                    self.idExpositorSucio[4].append(letra["id"] as! Int)
-                                } else if (letra["nombre"] as! String).hasPrefix("F") { // true
-                                    if !self.abcArray.contains("F") {
-                                        self.abcArray.append("F")
-                                    }
-                                    self.expositoresArraySucio[5].append(letra["nombre"] as! String)
-                                    self.idExpositorSucio[5].append(letra["id"] as! Int)
-                                } else if (letra["nombre"] as! String).hasPrefix("G") { // true
-                                    if !self.abcArray.contains("G") {
-                                        self.abcArray.append("G")
-                                    }
-                                    self.expositoresArraySucio[6].append(letra["nombre"] as! String)
-                                    self.idExpositorSucio[6].append(letra["id"] as! Int)
-                                } else if (letra["nombre"] as! String).hasPrefix("H") { // true
-                                    if !self.abcArray.contains("H") {
-                                        self.abcArray.append("H")
-                                    }
-                                    self.expositoresArraySucio[7].append(letra["nombre"] as! String)
-                                    self.idExpositorSucio[7].append(letra["id"] as! Int)
-                                } else if (letra["nombre"] as! String).hasPrefix("I") { // true
-                                    if !self.abcArray.contains("I") {
-                                        self.abcArray.append("I")
-                                    }
-                                    self.expositoresArraySucio[8].append(letra["nombre"] as! String)
-                                    self.idExpositorSucio[8].append(letra["id"] as! Int)
-                                } else if (letra["nombre"] as! String).hasPrefix("J") { // true
-                                    if !self.abcArray.contains("J") {
-                                        self.abcArray.append("J")
-                                    }
-                                    self.expositoresArraySucio[9].append(letra["nombre"] as! String)
-                                    self.idExpositorSucio[9].append(letra["id"] as! Int)
-                                } else if (letra["nombre"] as! String).hasPrefix("K") { // true
-                                    if !self.abcArray.contains("K") {
-                                        self.abcArray.append("K")
-                                    }
-                                    self.expositoresArraySucio[10].append(letra["nombre"] as! String)
-                                    self.idExpositorSucio[10].append(letra["id"] as! Int)
-                                } else if (letra["nombre"] as! String).hasPrefix("L") { // true
-                                    if !self.abcArray.contains("L") {
-                                        self.abcArray.append("L")
-                                    }
-                                    self.expositoresArraySucio[11].append(letra["nombre"] as! String)
-                                    self.idExpositorSucio[11].append(letra["id"] as! Int)
-                                } else if (letra["nombre"] as! String).hasPrefix("M") { // true
-                                    if !self.abcArray.contains("M") {
-                                        self.abcArray.append("M")
-                                    }
-                                    self.expositoresArraySucio[12].append(letra["nombre"] as! String)
-                                    self.idExpositorSucio[12].append(letra["id"] as! Int)
-                                } else if (letra["nombre"] as! String).hasPrefix("N") { // true
-                                    if !self.abcArray.contains("N") {
-                                        self.abcArray.append("N")
-                                    }
-                                    self.expositoresArraySucio[13].append(letra["nombre"] as! String)
-                                    self.idExpositorSucio[13].append(letra["id"] as! Int)
-                                } else if (letra["nombre"] as! String).hasPrefix("Ñ") { // true
-                                    if !self.abcArray.contains("Ñ") {
-                                        self.abcArray.append("Ñ")
-                                    }
-                                    self.expositoresArraySucio[14].append(letra["nombre"] as! String)
-                                    self.idExpositorSucio[14].append(letra["id"] as! Int)
-                                } else if (letra["nombre"] as! String).hasPrefix("O") { // true
-                                    if !self.abcArray.contains("O") {
-                                        self.abcArray.append("O")
-                                    }
-                                    self.expositoresArraySucio[15].append(letra["nombre"] as! String)
-                                    self.idExpositorSucio[15].append(letra["id"] as! Int)
-                                } else if (letra["nombre"] as! String).hasPrefix("P") { // true
-                                    if !self.abcArray.contains("P") {
-                                        self.abcArray.append("P")
-                                    }
-                                    self.expositoresArraySucio[16].append(letra["nombre"] as! String)
-                                    self.idExpositorSucio[16].append(letra["id"] as! Int) 
-                                } else if (letra["nombre"] as! String).hasPrefix("Q") { // true
-                                    if !self.abcArray.contains("Q") {
-                                        self.abcArray.append("Q")
-                                    }
-                                    self.expositoresArraySucio[17].append(letra["nombre"] as! String)
-                                    self.idExpositorSucio[17].append(letra["id"] as! Int) 
-                                } else if (letra["nombre"] as! String).hasPrefix("R") { // true
-                                    if !self.abcArray.contains("R") {
-                                        self.abcArray.append("R")
-                                    }
-                                    self.expositoresArraySucio[18].append(letra["nombre"] as! String)
-                                    self.idExpositorSucio[18].append(letra["id"] as! Int) 
-                                } else if (letra["nombre"] as! String).hasPrefix("S") { // true
-                                    if !self.abcArray.contains("S") {
-                                        self.abcArray.append("S")
-                                    }
-                                    self.expositoresArraySucio[19].append(letra["nombre"] as! String)
-                                    self.idExpositorSucio[19].append(letra["id"] as! Int) 
-                                } else if (letra["nombre"] as! String).hasPrefix("T") { // true
-                                    if !self.abcArray.contains("T") {
-                                        self.abcArray.append("T")
-                                    }
-                                    self.expositoresArraySucio[20].append(letra["nombre"] as! String)
-                                    self.idExpositorSucio[20].append(letra["id"] as! Int) 
-                                } else if (letra["nombre"] as! String).hasPrefix("U") { // true
-                                    if !self.abcArray.contains("U") {
-                                        self.abcArray.append("U")
-                                    }
-                                    self.expositoresArraySucio[21].append(letra["nombre"] as! String)
-                                    self.idExpositorSucio[21].append(letra["id"] as! Int) 
-                                } else if (letra["nombre"] as! String).hasPrefix("V") { // true
-                                    if !self.abcArray.contains("V") {
-                                        self.abcArray.append("V")
-                                    }
-                                    self.expositoresArraySucio[22].append(letra["nombre"] as! String)
-                                    self.idExpositorSucio[22].append(letra["id"] as! Int) 
-                                } else if (letra["nombre"] as! String).hasPrefix("W") { // true
-                                    if !self.abcArray.contains("W") {
-                                        self.abcArray.append("W")
-                                    }
-                                    self.expositoresArraySucio[23].append(letra["nombre"] as! String)
-                                    self.idExpositorSucio[23].append(letra["id"] as! Int) 
-                                } else if (letra["nombre"] as! String).hasPrefix("X") { // true
-                                    if !self.abcArray.contains("X") {
-                                        self.abcArray.append("X")
-                                    }
-                                    self.expositoresArraySucio[24].append(letra["nombre"] as! String)
-                                    self.idExpositorSucio[24].append(letra["id"] as! Int) 
-                                } else if (letra["nombre"] as! String).hasPrefix("Y") { // true
-                                    if !self.abcArray.contains("Y") {
-                                        self.abcArray.append("Y")
-                                    }
-                                    self.expositoresArraySucio[25].append(letra["nombre"] as! String)
-                                    self.idExpositorSucio[25].append(letra["id"] as! Int) 
-                                } else if (letra["nombre"] as! String).hasPrefix("Z") { // true
-                                    if !self.abcArray.contains("Z") {
-                                        self.abcArray.append("Z")
-                                    }
-                                    self.expositoresArraySucio[26].append(letra["nombre"] as! String)
-                                    self.idExpositorSucio[26].append(letra["id"] as! Int) 
-                                } else { // true
-                                    if !self.abcArray.contains("#") {
-                                        self.abcArray.append("#")
-                                    }
-                                    self.expositoresArraySucio[27].append(letra["nombre"] as! String)
-                                    self.idExpositorSucio[27].append(letra["id"] as! Int) 
+                                if !self.abcArray.contains( String(describing: (letra["nombre"] as! String).characters.first!).uppercased() ) {
+                                    self.abcArray.append( String(describing: (letra["nombre"] as! String).characters.first!).uppercased() )
                                 }
-
                             }
                             
-                            self.llenarArraysLimpios()
+                            print(self.abcArray)
                             
-                            self.abcArray = self.abcArray.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedDescending }
+                            // llenar las rows
+                            
+                            var expositoresOrdText = [String]()
+                            var expositoresOrdId = [Int]()
+                            
+                            for letra in self.abcArray {
+                                for result in self.expositores {
+                                    
+                                    if (result["nombre"] as! String).uppercased().hasPrefix( letra) {
+                                        expositoresOrdText.append( result["nombre"] as! String )
+                                        expositoresOrdId.append( result["id"] as! Int )
+                                    }
+                                }
+                                
+                                self.idExpositores.append(expositoresOrdId)
+                                self.expositoresArray.append(expositoresOrdText)
+                                expositoresOrdId.removeAll()
+                                expositoresOrdText.removeAll()
+                            }
+                            
+                            print("final")
+                            print(self.expositoresArray)
+                            
+                            //self.abcArray = self.abcArray.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedDescending }
                             
                         }
                         
@@ -302,121 +188,6 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
             }
         }
         
-    }
-
-    func llenarArraysLimpios() {
-        if self.expositoresArraySucio[0].count != 0 {
-            self.expositoresArray.append(self.expositoresArraySucio[0] as! [String])
-            self.idExpositores.append(self.idExpositorSucio[0] as! [Int])
-        }
-        if self.expositoresArraySucio[1].count != 0 {
-            self.expositoresArray.append(self.expositoresArraySucio[1] as! [String])
-            self.idExpositores.append(self.idExpositorSucio[1] as! [Int])
-        }
-        if self.expositoresArraySucio[2].count != 0 {
-            self.expositoresArray.append(self.expositoresArraySucio[2] as! [String])
-            self.idExpositores.append(self.idExpositorSucio[2] as! [Int])
-        }
-        if self.expositoresArraySucio[3].count != 0 {
-            self.expositoresArray.append(self.expositoresArraySucio[3] as! [String])
-            self.idExpositores.append(self.idExpositorSucio[3] as! [Int])
-        }
-        if self.expositoresArraySucio[4].count != 0 {
-            self.expositoresArray.append(self.expositoresArraySucio[4] as! [String])
-            self.idExpositores.append(self.idExpositorSucio[4] as! [Int])
-        }
-        if self.expositoresArraySucio[5].count != 0 {
-            self.expositoresArray.append(self.expositoresArraySucio[5] as! [String])
-            self.idExpositores.append(self.idExpositorSucio[5] as! [Int])
-        }
-        if self.expositoresArraySucio[6].count != 0 {
-            self.expositoresArray.append(self.expositoresArraySucio[6] as! [String])
-            self.idExpositores.append(self.idExpositorSucio[6] as! [Int])
-        }
-        if self.expositoresArraySucio[7].count != 0 {
-            self.expositoresArray.append(self.expositoresArraySucio[7] as! [String])
-            self.idExpositores.append(self.idExpositorSucio[7] as! [Int])
-        }
-        if self.expositoresArraySucio[8].count != 0 {
-            self.expositoresArray.append(self.expositoresArraySucio[8] as! [String])
-            self.idExpositores.append(self.idExpositorSucio[8] as! [Int])
-        }
-        if self.expositoresArraySucio[9].count != 0 {
-            self.expositoresArray.append(self.expositoresArraySucio[9] as! [String])
-            self.idExpositores.append(self.idExpositorSucio[9] as! [Int])
-        }
-        if self.expositoresArraySucio[10].count != 0 {
-            self.expositoresArray.append(self.expositoresArraySucio[10] as! [String])
-            self.idExpositores.append(self.idExpositorSucio[10] as! [Int])
-        }
-        if self.expositoresArraySucio[11].count != 0 {
-            self.expositoresArray.append(self.expositoresArraySucio[11] as! [String])
-            self.idExpositores.append(self.idExpositorSucio[11] as! [Int])
-        }
-        if self.expositoresArraySucio[12].count != 0 {
-            self.expositoresArray.append(self.expositoresArraySucio[12] as! [String])
-            self.idExpositores.append(self.idExpositorSucio[12] as! [Int])
-        }
-        if self.expositoresArraySucio[13].count != 0 {
-            self.expositoresArray.append(self.expositoresArraySucio[13] as! [String])
-            self.idExpositores.append(self.idExpositorSucio[13] as! [Int])
-        }
-        if self.expositoresArraySucio[14].count != 0 {
-            self.expositoresArray.append(self.expositoresArraySucio[14] as! [String])
-            self.idExpositores.append(self.idExpositorSucio[14] as! [Int])
-        }
-        if self.expositoresArraySucio[15].count != 0 {
-            self.expositoresArray.append(self.expositoresArraySucio[15] as! [String])
-            self.idExpositores.append(self.idExpositorSucio[15] as! [Int])
-        }
-        if self.expositoresArraySucio[16].count != 0 {
-            self.expositoresArray.append(self.expositoresArraySucio[16] as! [String])
-            self.idExpositores.append(self.idExpositorSucio[16] as! [Int])
-        }
-        if self.expositoresArraySucio[17].count != 0 {
-            self.expositoresArray.append(self.expositoresArraySucio[17] as! [String])
-            self.idExpositores.append(self.idExpositorSucio[17] as! [Int])
-        }
-        if self.expositoresArraySucio[18].count != 0 {
-            self.expositoresArray.append(self.expositoresArraySucio[18] as! [String])
-            self.idExpositores.append(self.idExpositorSucio[18] as! [Int])
-        }
-        if self.expositoresArraySucio[19].count != 0 {
-            self.expositoresArray.append(self.expositoresArraySucio[19] as! [String])
-            self.idExpositores.append(self.idExpositorSucio[19] as! [Int])
-        }
-        if self.expositoresArraySucio[20].count != 0 {
-            self.expositoresArray.append(self.expositoresArraySucio[20] as! [String])
-            self.idExpositores.append(self.idExpositorSucio[20] as! [Int])
-        }
-        if self.expositoresArraySucio[21].count != 0 {
-            self.expositoresArray.append(self.expositoresArraySucio[21] as! [String])
-            self.idExpositores.append(self.idExpositorSucio[21] as! [Int])
-        }
-        if self.expositoresArraySucio[22].count != 0 {
-            self.expositoresArray.append(self.expositoresArraySucio[22] as! [String])
-            self.idExpositores.append(self.idExpositorSucio[22] as! [Int])
-        }
-        if self.expositoresArraySucio[23].count != 0 {
-            self.expositoresArray.append(self.expositoresArraySucio[23] as! [String])
-            self.idExpositores.append(self.idExpositorSucio[23] as! [Int])
-        }
-        if self.expositoresArraySucio[24].count != 0 {
-            self.expositoresArray.append(self.expositoresArraySucio[24] as! [String])
-            self.idExpositores.append(self.idExpositorSucio[24] as! [Int])
-        }
-        if self.expositoresArraySucio[25].count != 0 {
-            self.expositoresArray.append(self.expositoresArraySucio[25] as! [String])
-            self.idExpositores.append(self.idExpositorSucio[25] as! [Int])
-        }
-        if self.expositoresArraySucio[26].count != 0 {
-            self.expositoresArray.append(self.expositoresArraySucio[26] as! [String])
-            self.idExpositores.append(self.idExpositorSucio[26] as! [Int])
-        }
-        if self.expositoresArraySucio[27].count != 0 {
-            self.expositoresArray.append(self.expositoresArraySucio[27] as! [String])
-            self.idExpositores.append(self.idExpositorSucio[27] as! [Int])
-        }
     }
 
     func swipeKeyBoard(sender:AnyObject) {

@@ -95,21 +95,21 @@
                         "name": "clave",
                         "in": "formData",
                         "description": "Clave de inscripción",
-                        "required": true,
+                        "required": false,
                         "type": "string"
                     },
                     {
                         "name": "type",
                         "in": "formData",
-                        "description": "Tipo de usuario (es un string por el momento) Ej. \"Trabajador de Pemex\"",
-                        "required": true,
-                        "type": "string"
+                        "description": "Tipo de usuario. Puede ser null ó 1=Congresista, 2=Expositor, 3=Estudiante, 4=Acompañante",
+                        "required": false,
+                        "type": "integer"
                     },
                     {
                         "name": "association",
                         "in": "formData",
-                        "description": "Asociación (es un string por el momento) Ej. \"Asociación 4\"",
-                        "required": true,
+                        "description": "Asociación. Puede ser null ó 1=AIPM, 2=CIPM, 3=AMGE, 4=AMGP, 5=SPE / México",
+                        "required": false,
                         "type": "string"
                     }
                 ],
@@ -153,6 +153,54 @@
                         "type": "string"
                     }
                 ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/user/types": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Devuelve los tipos de usuario disponible",
+                "description": "Devuelve los tipos de usuario disponible",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/user/associations": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Devuelve las asociaciones de usuario disponible",
+                "description": "Devuelve lss asociaciones de usuario disponible",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -510,45 +558,6 @@
                 ],
                 "summary": "Devuelve las categorías por default",
                 "description": "Devuelve las categorías por default",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation"
-                    },
-                    "400": {
-                        "description": "Invalid username/password supplied"
-                    },
-                    "500": {
-                        "description": "Internal server error"
-                    }
-                }
-            }
-        },
-        "/categoria/complete/{user_id}/{api_key}": {
-            "get": {
-                "tags": [
-                    "categoria"
-                ],
-                "summary": "Devuelve las 'otras' categorías",
-                "description": "Devuelve las 'otras' categorías",
                 "produces": [
                     "application/json"
                 ],

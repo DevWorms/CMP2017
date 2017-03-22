@@ -59,10 +59,9 @@ class UserController extends Controller {
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
                 'last_name' => 'required',
-                'type' => 'required',
-                'association' => 'required',
                 'email' => 'required|email|unique:users',
-                'clave' => 'required',
+                'association' => 'numeric',
+                'type' => 'numeric',
                 'password' => 'required|min:5'
                 //'password' => 'required|min:5|confirmed',
                 //'password_confirmation' => 'required|min:5'
@@ -224,6 +223,8 @@ class UserController extends Controller {
     public function select($id, $api_token) {
         try {
             $user = User::where(['id' => $id, 'api_token' => $api_token])->firstOrFail();
+            $user->type = $this->parseType($user->type);
+            $user->association = $this->parseAssociation($user->association);
 
             $res['status'] = 1;
             $res['mensaje'] = "Usuario encontrado";
@@ -293,6 +294,86 @@ class UserController extends Controller {
             $res['status'] = 0;
             $res['mensaje'] = $ex->getMessage();
             return response()->json($res, 500);
+        }
+    }
+
+    public function getTypes() {
+        try {
+            $res['status'] = 1;
+            $res['mensaje'] = "success";
+            $res['tipos'] = [
+                1 => "Congresista",
+                2 => "Expositor",
+                3 => "Estudiante",
+                4 => "Acompañante"
+            ];
+            return response()->json($res, 200);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    public function getAsociaciones() {
+        try {
+            $res['status'] = 1;
+            $res['mensaje'] = "success";
+            $res['asociaciones'] = [
+                1 => "AIPM",
+                2 => "CIPM",
+                3 => "AMGE",
+                4 => "AMGP",
+                5 => "SPE / México"
+            ];
+            return response()->json($res, 200);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    private function parseType($type) {
+        switch ($type) {
+            case 1:
+                return "Congresista";
+                break;
+            case 2:
+                return "Expositor";
+                break;
+            case 3:
+                return "Estudiante";
+                break;
+            case 4:
+                return "Acompañante";
+                break;
+            default:
+                return "";
+                break;
+        }
+    }
+
+    private function parseAssociation($type) {
+        switch ($type) {
+            case 1:
+                return "AIPM";
+                break;
+            case 2:
+                return "CIPM";
+                break;
+            case 3:
+                return "AMGE";
+                break;
+            case 4:
+                return "AMGP";
+                break;
+            case 5:
+                return  "SPE / México";
+                break;
+            default:
+                return "";
+                break;
         }
     }
 }

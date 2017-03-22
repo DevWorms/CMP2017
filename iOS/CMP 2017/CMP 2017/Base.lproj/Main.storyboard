@@ -408,6 +408,9 @@
                                 <rect key="frame" x="16" y="121" width="137" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="05Boton_Orden_Alfabetico"/>
+                                <connections>
+                                    <action selector="alfabetoAction:" destination="91U-Vc-odF" eventType="touchUpInside" id="odG-wJ-OVw"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="e0P-r8-piA">
                                 <rect key="frame" x="0.0" y="178" width="375" height="489"/>
@@ -432,6 +435,9 @@
                                 <rect key="frame" x="222" y="121" width="137" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="06Boton_num_de_pagina"/>
+                                <connections>
+                                    <action selector="standAction:" destination="91U-Vc-odF" eventType="touchUpInside" id="bf5-wI-L61"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

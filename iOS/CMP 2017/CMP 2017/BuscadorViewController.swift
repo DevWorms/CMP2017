@@ -30,6 +30,7 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
     var filteredID:[Int] = []
     
     var seccion = 0
+    var alphabet = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,32 +51,41 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
      
     }
     
+    @IBAction func alfabetoAction(_ sender: Any) {
+        self.alfabeticamente()
+    }
+    
+    @IBAction func standAction(_ sender: Any) {
+        self.stand()
+    }
+    
+    
     func alfabeticamente() {
         let apiKey = UserDefaults.standard.value(forKey: "api_key")
         let userID = UserDefaults.standard.value(forKey: "user_id")
         
+        alphabet = true
+        
         if self.seccion == 5 { // patrocinadores
-            
-            searchBar.isHidden = true
             
             let strUrl = "http://cmp.devworms.com/api/patrocinador/order/name/\(userID!)/\(apiKey!)"
             print(strUrl)
             
-            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJsonAlphabetical).resume()
+            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
         } else {
-            
-            searchBar.delegate = self
             
             let strUrl = "http://cmp.devworms.com/api/expositor/order/name/\(userID!)/\(apiKey!)"
             print(strUrl)
             
-            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJsonAlphabetical).resume()
+            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
         }
     }
     
-    /*func stand() {
+    func stand() {
         let apiKey = UserDefaults.standard.value(forKey: "api_key")
         let userID = UserDefaults.standard.value(forKey: "user_id")
+        
+        alphabet = false
         
         if self.seccion == 5 { // patrocinadores
             
@@ -84,7 +94,7 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
             let strUrl = "http://cmp.devworms.com/api/patrocinador/order/stand/\(userID!)/\(apiKey!)"
             print(strUrl)
             
-            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJsonExpositores).resume()
+            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
         } else {
             
             searchBar.delegate = self
@@ -92,11 +102,11 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
             let strUrl = "http://cmp.devworms.com/api/expositor/order/stand/\(userID!)/\(apiKey!)"
             print(strUrl)
             
-            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJsonExpositores).resume()
+            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
         }
-    }*/
+    }
     
-    func parseJsonAlphabetical(data: Data?, urlResponse: URLResponse?, error: Error?) {
+    func parseJson(data: Data?, urlResponse: URLResponse?, error: Error?) {
         if error != nil {
             print(error!)
         } else if urlResponse != nil {
@@ -125,41 +135,73 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
                                 }
                             }
                             
-                            // llenar las secciones
-                            for letra in self.expositores {
+                            
+                            if self.alphabet {
                                 
-                                if !self.abcArray.contains( String(describing: (letra["nombre"] as! String).characters.first!).uppercased() ) {
-                                    self.abcArray.append( String(describing: (letra["nombre"] as! String).characters.first!).uppercased() )
-                                }
-                            }
-                            
-                            print(self.abcArray)
-                            
-                            // llenar las rows
-                            
-                            var expositoresOrdText = [String]()
-                            var expositoresOrdId = [Int]()
-                            
-                            for letra in self.abcArray {
-                                for result in self.expositores {
+                                // llenar las secciones
+                                for letra in self.expositores {
                                     
-                                    if (result["nombre"] as! String).uppercased().hasPrefix( letra) {
-                                        expositoresOrdText.append( result["nombre"] as! String )
-                                        expositoresOrdId.append( result["id"] as! Int )
+                                    if !self.abcArray.contains( String(describing: (letra["nombre"] as! String).characters.first!).uppercased() ) {
+                                        self.abcArray.append( String(describing: (letra["nombre"] as! String).characters.first!).uppercased() )
                                     }
                                 }
                                 
-                                self.idExpositores.append(expositoresOrdId)
-                                self.expositoresArray.append(expositoresOrdText)
-                                expositoresOrdId.removeAll()
-                                expositoresOrdText.removeAll()
+                                // llenar las rows
+                                
+                                var expositoresOrdText = [String]()
+                                var expositoresOrdId = [Int]()
+                                
+                                for letra in self.abcArray {
+                                    for result in self.expositores {
+                                        
+                                        if (result["nombre"] as! String).uppercased().hasPrefix( letra) {
+                                            expositoresOrdText.append( result["nombre"] as! String )
+                                            expositoresOrdId.append( result["id"] as! Int )
+                                        }
+                                    }
+                                    
+                                    self.idExpositores.append(expositoresOrdId)
+                                    self.expositoresArray.append(expositoresOrdText)
+                                    expositoresOrdId.removeAll()
+                                    expositoresOrdText.removeAll()
+                                }
+                                
+                            } else {
+                                // llenar las secciones
+                                for letra in self.expositores {
+                                    
+                                    if !self.abcArray.contains( letra["stand"] as! String ) {
+                                        self.abcArray.append( letra["stand"] as! String )
+                                    }
+                                }
+                                
+                                // llenar las rows
+                                
+                                var expositoresOrdText = [String]()
+                                var expositoresOrdId = [Int]()
+                                
+                                for letra in self.abcArray {
+                                    for result in self.expositores {
+                                        
+                                        if (result["stand"] as! String) ==  letra {
+                                            expositoresOrdText.append( result["nombre"] as! String )
+                                            expositoresOrdId.append( result["id"] as! Int )
+                                        }
+                                    }
+                                    
+                                    self.idExpositores.append(expositoresOrdId)
+                                    self.expositoresArray.append(expositoresOrdText)
+                                    expositoresOrdId.removeAll()
+                                    expositoresOrdText.removeAll()
+                                }
+                                
+                                for index in 0 ... self.abcArray.count-1 {
+                                    self.abcArray[index] = "Stand " + self.abcArray[index]
+                                }
+                                
                             }
                             
-                            print("final")
-                            print(self.expositoresArray)
-                            
                             //self.abcArray = self.abcArray.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedDescending }
-                            
                         }
                         
                         self.tableView.reloadData()

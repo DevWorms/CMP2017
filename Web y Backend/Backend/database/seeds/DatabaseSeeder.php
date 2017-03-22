@@ -16,11 +16,11 @@ class DatabaseSeeder extends Seeder
 
         try {
             \App\User::create([
-                'name' => "Ricardo",
-                'last_name' => "Osorio",
-                'type' => "Visitante",
-                'association' => "Asociación 1",
-                'email' => "ricardo.0x7@gmail.com",
+                'name' => "Administrador",
+                'last_name' => "",
+                'type' => 0,
+                'association' => 0,
+                'email' => "admin@mail.com",
                 'password' => "$2y$10\$jyblYgb2MUdLD6JOCKCzu.6oVqhaVFl.HmLwTCeuaNDHo.UJr6Czy", // "123456"
                 'api_token' => 0
             ]);
@@ -28,8 +28,8 @@ class DatabaseSeeder extends Seeder
             \App\User::create([
                 'name' => "Valentin",
                 'last_name' => "Granados",
-                'type' => "Trabajador de Pemex",
-                'association' => "Asociación 2",
+                'type' => 1,
+                'association' => 1,
                 'email' => "vale@devworms.com",
                 'password' => "$2y$10\$jyblYgb2MUdLD6JOCKCzu.6oVqhaVFl.HmLwTCeuaNDHo.UJr6Czy", // "123456"
                 'api_token' => 1
@@ -38,8 +38,8 @@ class DatabaseSeeder extends Seeder
             \App\User::create([
                 'name' => "Salvador",
                 'last_name' => "Munguia",
-                'type' => "Estudiante",
-                'association' => "Asociación 3",
+                'type' => 2,
+                'association' => "",
                 'email' => "salva@devworms.com",
                 'password' => "$2y$10\$jyblYgb2MUdLD6JOCKCzu.6oVqhaVFl.HmLwTCeuaNDHo.UJr6Czy", // "123456"
                 'api_token' => 2
@@ -48,8 +48,8 @@ class DatabaseSeeder extends Seeder
             \App\User::create([
                 'name' => "Richard",
                 'last_name' => "VelRo",
-                'type' => "Staff",
-                'association' => "Asociación 4",
+                'type' => 3,
+                'association' => 3,
                 'email' => "richard@devworms.com",
                 'password' => "$2y$10\$jyblYgb2MUdLD6JOCKCzu.6oVqhaVFl.HmLwTCeuaNDHo.UJr6Czy", // "123456"
                 'api_token' => 3

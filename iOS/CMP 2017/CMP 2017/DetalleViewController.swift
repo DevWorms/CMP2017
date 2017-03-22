@@ -25,7 +25,8 @@ class DetalleViewController: UIViewController {
     // 1 Programa
     // 2 Expositores
     // 3 acompañantes
-    // 4 deportivos
+    // 4 deportivo
+    // 5 patrocinadores
     var seccion = 0
     var detalle = [String: Any]()
 

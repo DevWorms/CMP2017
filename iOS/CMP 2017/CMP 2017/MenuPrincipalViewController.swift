@@ -64,6 +64,8 @@ class MenuPrincipalViewController: UIViewController {
             (segue.destination as! ResultadosViewController).seccion = 3
         } else if segue.identifier == "deportivos" {
             (segue.destination as! ResultadosViewController).seccion = 4
+        } else if segue.identifier == "patrocinadores" {
+            (segue.destination as! BuscadorViewController).seccion = 5
         }
     }
 

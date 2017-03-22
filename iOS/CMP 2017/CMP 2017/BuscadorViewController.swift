@@ -29,6 +29,8 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
     var filtered:[String] = []
     var filteredProvisional:[String] = []
     var filteredID:[Int] = []
+    
+    var seccion = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,15 +47,26 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
         swipeDown.direction = UISwipeGestureRecognizerDirection.down
         self.view.addGestureRecognizer(swipeDown)
         
-        searchBar.delegate = self
-        
         let apiKey = UserDefaults.standard.value(forKey: "api_key")
         let userID = UserDefaults.standard.value(forKey: "user_id")
         
-        let strUrl = "http://cmp.devworms.com/api/expositor/order/name/\(userID!)/\(apiKey!)"
-        print(strUrl)
-        
-        URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJsonExpositores).resume()
+        if self.seccion == 5 { // patrocinadores
+            
+            searchBar.isHidden = true
+            
+            let strUrl = "http://cmp.devworms.com/api/patrocinador/order/name/\(userID!)/\(apiKey!)"
+            print(strUrl)
+            
+            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJsonExpositores).resume()
+        } else {
+            
+            searchBar.delegate = self
+            
+            let strUrl = "http://cmp.devworms.com/api/expositor/order/name/\(userID!)/\(apiKey!)"
+            print(strUrl)
+            
+            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJsonExpositores).resume()
+        }
      
     }
     
@@ -72,8 +85,14 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
                         }
                         
                         if let jsonResult = json as? [String: Any] {
-                            for programa in jsonResult["expositores"] as! [[String:Any]] {
-                                self.expositores.append(programa)
+                            if self.seccion == 5 { // patrocinadores
+                                for programa in jsonResult["patrocinadores"] as! [[String:Any]] {
+                                    self.expositores.append(programa)
+                                }
+                            } else {
+                                for programa in jsonResult["expositores"] as! [[String:Any]] {
+                                    self.expositores.append(programa)
+                                }
                             }
                             
                             //para titulos

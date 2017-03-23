@@ -9,15 +9,14 @@
 namespace App\Http\Controllers;
 
 use App\Categoria;
-use App\Programa;
 use App\User;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
 
 class CategoriaController extends Controller {
+
     /**
      * UserController constructor.
      */
@@ -85,6 +84,30 @@ class CategoriaController extends Controller {
         try {
             User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
             $categorias = Categoria::all();
+
+            $res['status'] = 1;
+            $res['mensaje'] = "success";
+            $res['categorias'] = $categorias;
+            return response()->json($res, 200);
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (FatalThrowableError $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    public function getAllComplete($user_id, $api_key) {
+        try {
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+            $categorias = Categoria::where('id', '>', 5)->get();
 
             $res['status'] = 1;
             $res['mensaje'] = "success";

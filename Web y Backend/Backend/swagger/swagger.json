@@ -95,21 +95,67 @@
                         "name": "clave",
                         "in": "formData",
                         "description": "Clave de inscripción",
-                        "required": true,
+                        "required": false,
                         "type": "string"
                     },
                     {
                         "name": "type",
                         "in": "formData",
-                        "description": "Tipo de usuario (es un string por el momento) Ej. \"Trabajador de Pemex\"",
-                        "required": true,
+                        "description": "Tipo de usuario. Puede ser null ó 1=Congresista, 2=Expositor, 3=Estudiante, 4=Acompañante",
+                        "required": false,
                         "type": "string"
                     },
                     {
                         "name": "association",
                         "in": "formData",
-                        "description": "Asociación (es un string por el momento) Ej. \"Asociación 4\"",
+                        "description": "Asociación. Puede ser null ó 1=AIPM, 2=CIPM, 3=AMGE, 4=AMGP, 5=SPE / México",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/user/edit": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Actualiza el perfil de usuario",
+                "description": "Actualiza el perfil de usuario",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "description": "Nombre(s)",
                         "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "last_name",
+                        "in": "formData",
+                        "description": "Apellido(s)",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "clave",
+                        "in": "formData",
+                        "description": "Clave de inscripción",
+                        "required": false,
                         "type": "string"
                     }
                 ],
@@ -149,6 +195,100 @@
                         "name": "api_key",
                         "in": "path",
                         "description": "Api Key de usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/user/types": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Devuelve los tipos de usuario disponible",
+                "description": "Devuelve los tipos de usuario disponible",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/user/associations": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Devuelve las asociaciones de usuario disponible",
+                "description": "Devuelve lss asociaciones de usuario disponible",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/user/resetpassword": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Restaurar contraseña",
+                "description": "Restaurar contraseña",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "Api key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "description": "Nueva contraseña del usuario. Mínimo 6 caracteres.",
                         "required": true,
                         "type": "string"
                     }
@@ -392,7 +532,7 @@
                     {
                         "name": "categoria_id",
                         "in": "formData",
-                        "description": "Categoría a la que pertenece el evento, si es null, o no se envia, devuelve los programas de TODAS las categorias",
+                        "description": "Categoría a la que pertenece el evento, si es null, o no se envia, devuelve los programas de TODAS las categorias. Si el id es 0, devuelve las 'otras' categorías.",
                         "required": false,
                         "type": "string"
                     },
@@ -508,9 +648,8 @@
                 "tags": [
                     "categoria"
                 ],
-                "summary": "Devuelve todas las categorías",
-                "description": "Devuelve todas las categorías",
-                "operationId": "categoriaAll",
+                "summary": "Devuelve las categorías por default",
+                "description": "Devuelve las categorías por default",
                 "produces": [
                     "application/json"
                 ],
@@ -1660,6 +1799,45 @@
                 ],
                 "summary": "Devuelve todos los patrocinadores ordenados alfabeticamente",
                 "description": "Devuelve todos los patrocinadores ordenados alfabeticamente",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/patrocinador/order/stand/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "patrocinador"
+                ],
+                "summary": "Devuelve todos los patrocinadores ordenados por stand",
+                "description": "Devuelve todos los patrocinadores ordenados por stand",
                 "produces": [
                     "application/json"
                 ],

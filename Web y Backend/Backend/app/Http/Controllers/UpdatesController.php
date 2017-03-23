@@ -65,7 +65,23 @@ class UpdatesController extends Controller
                 ->orderBy('updated_at', 'DESC')
                 ->first();
 
-            // TODO devolver la actulalización
+            // Switch para cada uno de los módulos
+            switch ($modulo->modulo) {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    break;
+            }
 
             $res['status'] = 1;
             $res['mensaje'] = "success";

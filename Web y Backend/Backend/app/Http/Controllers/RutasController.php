@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Validator;
 
 class RutasController extends Controller {
     public $destinationPath = "./files/";
-    public $url_server = "http://cmp.devworms.com";
+    public $url_server = "http://files.cmp.devworms.com";
 
     private function messages() {
         return [
@@ -74,7 +74,7 @@ class RutasController extends Controller {
                                     // Si va bien, lo mueve a la carpeta y guarda el registro
                                     $path = $this->destinationPath . Carbon::now()->year . "/" . Carbon::now()->month . "/";
                                     $uploadedFile = $request->file('archivo')->move($path, uniqid() . "." . $file->getClientOriginalExtension());
-                                    $url = $this->url_server . substr($uploadedFile->getPathname(), 1);
+                                    $url = $this->url_server . substr($uploadedFile->getPathname(), 7);
 
                                     $file_id = File::create([
                                         'user_id' => $user_id,
@@ -136,7 +136,8 @@ class RutasController extends Controller {
     public function getAll($user_id, $api_key) {
         try {
             User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
-            $rutas = Ruta::where('user_id_asignado', $user_id)->get();
+            //$rutas = Ruta::where('user_id_asignado', $user_id)->get();
+            $rutas = Ruta::all();
 
             foreach ($rutas as $ruta) {
                 $ruta = $this->returnRuta($ruta);

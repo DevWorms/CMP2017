@@ -16,11 +16,11 @@ class DatabaseSeeder extends Seeder
 
         try {
             \App\User::create([
-                'name' => "Ricardo",
-                'last_name' => "Osorio",
-                'type' => "Visitante",
-                'association' => "Asociación 1",
-                'email' => "ricardo.0x7@gmail.com",
+                'name' => "Administrador",
+                'last_name' => "",
+                'type' => 0,
+                'association' => 0,
+                'email' => "admin@mail.com",
                 'password' => "$2y$10\$jyblYgb2MUdLD6JOCKCzu.6oVqhaVFl.HmLwTCeuaNDHo.UJr6Czy", // "123456"
                 'api_token' => 0
             ]);
@@ -28,8 +28,8 @@ class DatabaseSeeder extends Seeder
             \App\User::create([
                 'name' => "Valentin",
                 'last_name' => "Granados",
-                'type' => "Trabajador de Pemex",
-                'association' => "Asociación 2",
+                'type' => 1,
+                'association' => 1,
                 'email' => "vale@devworms.com",
                 'password' => "$2y$10\$jyblYgb2MUdLD6JOCKCzu.6oVqhaVFl.HmLwTCeuaNDHo.UJr6Czy", // "123456"
                 'api_token' => 1
@@ -38,8 +38,8 @@ class DatabaseSeeder extends Seeder
             \App\User::create([
                 'name' => "Salvador",
                 'last_name' => "Munguia",
-                'type' => "Estudiante",
-                'association' => "Asociación 3",
+                'type' => 2,
+                'association' => "",
                 'email' => "salva@devworms.com",
                 'password' => "$2y$10\$jyblYgb2MUdLD6JOCKCzu.6oVqhaVFl.HmLwTCeuaNDHo.UJr6Czy", // "123456"
                 'api_token' => 2
@@ -48,8 +48,8 @@ class DatabaseSeeder extends Seeder
             \App\User::create([
                 'name' => "Richard",
                 'last_name' => "VelRo",
-                'type' => "Staff",
-                'association' => "Asociación 4",
+                'type' => 3,
+                'association' => 3,
                 'email' => "richard@devworms.com",
                 'password' => "$2y$10\$jyblYgb2MUdLD6JOCKCzu.6oVqhaVFl.HmLwTCeuaNDHo.UJr6Czy", // "123456"
                 'api_token' => 3
@@ -133,8 +133,8 @@ class DatabaseSeeder extends Seeder
              */
             \App\File::create([
                 'user_id' => 1,
-                'url' => "http://cmp.devworms.com/files/expositores/1.pdf",
-                'nombre' => "acercade.pdf",
+                'url' => "http://cmp.devworms.com/files/expositores/MapaRecinto.pdf",
+                'nombre' => "MapaRecinto.pdf",
                 'size' => 2000000
             ]);
 
@@ -624,6 +624,7 @@ class DatabaseSeeder extends Seeder
                 'tipo' => "Op",
                 'pdf_file' => 11,
                 'logo_file' => 1,
+                'stand' => 1,
                 'is_expositor' => 0
             ]);
 
@@ -637,6 +638,7 @@ class DatabaseSeeder extends Seeder
                 'tipo' => "Op",
                 'pdf_file' => 11,
                 'logo_file' => 2,
+                'stand' => 1,
                 'is_expositor' => 0
             ]);
 
@@ -650,6 +652,7 @@ class DatabaseSeeder extends Seeder
                 'tipo' => "Op",
                 'pdf_file' => 11,
                 'logo_file' => 3,
+                'stand' => 3,
                 'is_expositor' => 0
             ]);
 
@@ -663,6 +666,7 @@ class DatabaseSeeder extends Seeder
                 'tipo' => "Op",
                 'pdf_file' => 11,
                 'logo_file' => 4,
+                'stand' => 3,
                 'is_expositor' => 0
             ]);
 
@@ -676,6 +680,7 @@ class DatabaseSeeder extends Seeder
                 'tipo' => "Op",
                 'pdf_file' => 11,
                 'logo_file' => 5,
+                'stand' => 7,
                 'is_expositor' => 0
             ]);
 
@@ -689,6 +694,7 @@ class DatabaseSeeder extends Seeder
                 'tipo' => "Op",
                 'pdf_file' => 11,
                 'logo_file' => 6,
+                'stand' => 7,
                 'is_expositor' => 0
             ]);
 
@@ -702,6 +708,7 @@ class DatabaseSeeder extends Seeder
                 'tipo' => "Op",
                 'pdf_file' => 11,
                 'logo_file' => 7,
+                'stand' => 17,
                 'is_expositor' => 0
             ]);
 
@@ -715,6 +722,7 @@ class DatabaseSeeder extends Seeder
                 'tipo' => "Op",
                 'pdf_file' => 11,
                 'logo_file' => 8,
+                'stand' => 17,
                 'is_expositor' => 0
             ]);
 
@@ -728,6 +736,7 @@ class DatabaseSeeder extends Seeder
                 'tipo' => "Op",
                 'pdf_file' => 11,
                 'logo_file' => 9,
+                'stand' => 10,
                 'is_expositor' => 0
             ]);
 
@@ -741,6 +750,7 @@ class DatabaseSeeder extends Seeder
                 'tipo' => "Op",
                 'pdf_file' => 11,
                 'logo_file' => 10,
+                'stand' => 10,
                 'is_expositor' => 0
             ]);
 

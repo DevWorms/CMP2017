@@ -20,7 +20,7 @@ use Symfony\Component\Debug\Exception\FatalThrowableError;
 
 class ProgramaController extends Controller {
     public $destinationPath = "./files/";
-    public $url_server = "http://cmp.devworms.com";
+    public $url_server = "http://files.cmp.devworms.com";
 
     /**
      * UserController constructor.
@@ -113,7 +113,7 @@ class ProgramaController extends Controller {
                                 // Si va bien, lo mueve a la carpeta y guarda el registro
                                 $path = $this->destinationPath . Carbon::now()->year . "/" . Carbon::now()->month . "/";
                                 $uploadedFile = $request->file('archivo')->move($path, uniqid() . "." . $file->getClientOriginalExtension());
-                                $url = $this->url_server . substr($uploadedFile->getPathname(), 1);
+                                $url = $this->url_server . substr($uploadedFile->getPathname(), 7);
 
                                 $file_id = File::create([
                                     'user_id' => $user_id,
@@ -233,14 +233,26 @@ class ProgramaController extends Controller {
                 $programas = $programas->where('fecha', $fecha)->values();
             }
 
-            if ($tipo) {
-                $categoria = Categoria::where('id', $tipo)->first();
-                if ($categoria) {
-                    $programas = $programas->where('categoria_id', $tipo)->values();
+            if (is_numeric($tipo)) {
+                // Otras categorías...
+                if ($tipo == 0) {
+                    $categoria = Categoria::where('nombre', 'Sesiones Técnicas')
+                        ->orWhere('nombre', 'Comidas / Conferencias')
+                        ->orWhere('nombre', 'E-Póster')
+                        ->get();
+
+                    foreach ($categoria as $item) {
+                        $programas = $programas = $programas->where('categoria_id', '!=', $item->id)->values();
+                    }
                 } else {
-                    $res['status'] = 0;
-                    $res['mensaje'] = "Categoría no encontrada";
-                    return response()->json($res, 400);
+                    $categoria = Categoria::where('id', $tipo)->first();
+                    if ($categoria) {
+                        $programas = $programas->where('categoria_id', $tipo)->values();
+                    } else {
+                        $res['status'] = 0;
+                        $res['mensaje'] = "Categoría no encontrada";
+                        return response()->json($res, 400);
+                    }
                 }
             }
 

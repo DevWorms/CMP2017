@@ -22,7 +22,7 @@ use Symfony\Component\Debug\Exception\FatalThrowableError;
 
 class ExpositorController extends Controller {
     public $destinationPath = "./files/expositores/";
-    public $url_server = "http://cmp.devworms.com";
+    public $url_server = "http://files.cmp.devworms.com";
 
     /**
      * ExpositorController constructor.
@@ -111,7 +111,7 @@ class ExpositorController extends Controller {
                             // Si va bien, lo mueve a la carpeta y guarda el registro
                             $path = $this->destinationPath . Carbon::now()->year . "/" . Carbon::now()->month . "/";
                             $uploadedFile = $request->file('archivo_logo')->move($path, uniqid() . "." . $logo->getClientOriginalExtension());
-                            $url = $this->url_server . substr($uploadedFile->getPathname(), 1);
+                            $url = $this->url_server . substr($uploadedFile->getPathname(), 7);
 
                             $file = File::create([
                                 'user_id' => $user_id,
@@ -146,7 +146,7 @@ class ExpositorController extends Controller {
                             // Si va bien, lo mueve a la carpeta y guarda el registro
                             $path = $this->destinationPath . Carbon::now()->year . "/" . Carbon::now()->month . "/";
                             $uploadedFile = $request->file('archivo_pdf')->move($path, uniqid() . "." . $presentacion->getClientOriginalExtension());
-                            $url = $this->url_server . substr($uploadedFile->getPathname(), 1);
+                            $url = $this->url_server . substr($uploadedFile->getPathname(), 7);
 
                             $file = File::create([
                                 'user_id' => $user_id,

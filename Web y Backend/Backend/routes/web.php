@@ -19,10 +19,13 @@ $app->get('/', function () use ($app) {
  * Usuarios
  */
 $app->post('/api/user/signup', ['middleware' => 'cors', 'uses' => 'UserController@create']);
-$app->patch('/api/user/edit', ['middleware' => 'cors', 'uses' => 'UserController@update']);
+$app->post('/api/user/edit', ['middleware' => 'cors', 'uses' => 'UserController@update']);
 $app->get('/api/user/profile/{id}/{token}', ['middleware' => 'cors', 'uses' => 'UserController@select']);
 $app->delete('/api/user/delete/{id}', ['middleware' => 'cors', 'uses' => 'UserController@delete']);
 $app->post('/api/user/login', ['middleware' => 'cors', 'uses' => 'UserController@login']);
+$app->get('/api/user/types', ['middleware' => 'cors', 'uses' => 'UserController@getTypes']);
+$app->get('/api/user/associations', ['middleware' => 'cors', 'uses' => 'UserController@getAsociaciones']);
+$app->post('/api/user/resetpassword', ['middleware' => 'cors', 'uses' => 'UserController@resetPassword']);
 
 /*
  * Programas
@@ -40,6 +43,7 @@ $app->get('/api/programa/paginate/{user_id}/{api_key}', ['middleware' => 'cors',
  */
 $app->post('/api/categoria/create', ['middleware' => 'cors', 'uses' => 'CategoriaController@create']);
 $app->get('/api/categoria/all/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'CategoriaController@getAll']);
+$app->get('/api/categoria/complete/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'CategoriaController@getAllComplete']);
 
 /*
  * Expositores
@@ -85,6 +89,7 @@ $app->get('/api/deportivos/paginate/{user_id}/{api_key}', ['middleware' => 'cors
 $app->post('/api/patrocinador/create', ['middleware' => 'cors', 'uses' => 'PatrocinadorController@create']);
 $app->get('/api/patrocinador/all/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'PatrocinadorController@getAll']);
 $app->get('/api/patrocinador/order/name/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'PatrocinadorController@getByName']);
+$app->get('/api/patrocinador/order/stand/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'PatrocinadorController@getByStand']);
 $app->get('/api/patrocinador/detail/{user_id}/{api_key}/{expositor_id}', ['middleware' => 'cors', 'uses' => 'PatrocinadorController@getPatrocinador']);
 
 // Solo web (?)

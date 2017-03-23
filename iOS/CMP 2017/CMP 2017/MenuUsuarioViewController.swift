@@ -56,6 +56,7 @@ class MenuUsuarioViewController: ViewController {
     @IBAction func cerrarSesion(_ sender: Any) {
         UserDefaults.standard.set("", forKey: "api_key")
         UserDefaults.standard.set("", forKey: "user_id")
+        UserDefaults.standard.set("", forKey: "name")
         
         let vc = storyboard!.instantiateViewController(withIdentifier: "Inicio")
         self.present( vc , animated: true, completion: nil)

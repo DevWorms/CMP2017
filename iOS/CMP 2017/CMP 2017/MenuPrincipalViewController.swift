@@ -30,6 +30,9 @@ class MenuPrincipalViewController: UIViewController {
         nav?.tintColor = UIColor.white
         nav!.setBackgroundImage(navBackgroundImage, for:.default)
         
+        nav?.titleTextAttributes = [NSForegroundColorAttributeName: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)]
+        nav?.topItem?.title = UserDefaults.standard.value(forKey: "name") as! String?
+        
         ///
         let invitado = UserDefaults.standard.value(forKey: "invitado") as! Bool
         
@@ -56,14 +59,17 @@ class MenuPrincipalViewController: UIViewController {
     }
     
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "acompañantes" {
+            (segue.destination as! ResultadosViewController).seccion = 3
+        } else if segue.identifier == "deportivos" {
+            (segue.destination as! ResultadosViewController).seccion = 4
+        } else if segue.identifier == "patrocinadores" {
+            (segue.destination as! BuscadorViewController).seccion = 5
+        }
     }
-    */
 
 }

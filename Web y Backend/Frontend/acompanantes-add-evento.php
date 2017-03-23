@@ -123,6 +123,13 @@
                             <br>
 
                             <div class="form-group">
+                                <label for="stand">Número de stand</label>
+                                <br>
+                                <input type="number" name="stand" id="stand" class="form-control" required>
+                            </div>
+                            <br>
+
+                            <div class="form-group">
                                 <label for="fecha">Fecha</label>
                                 <br>
                                 <input type="date" name="fecha" id="fecha" class="form-control" required>

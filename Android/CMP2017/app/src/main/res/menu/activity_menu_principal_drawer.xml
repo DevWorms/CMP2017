@@ -2,45 +2,86 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group
-        android:background="@drawable/fondomenu"
-        android:checkableBehavior="single"
-        android:menuCategory="container">
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="none"
+
+        >
 
         <item
             android:id="@+id/nav_mi_perfil"
             android:icon="@drawable/icoperfil"
-
             android:title="Mi perfil" />
+    </group>
 
+    <group
+
+        android:id="@+id/menu_bottom2"
+        android:checkableBehavior="none"
+        >
         <item
             android:id="@+id/nav_agenda"
             android:icon="@drawable/icoagenda"
             android:title="Mi agenda" />
+    </group>
+
+    <group
+
+        android:id="@+id/menu_bottom3"
+        android:checkableBehavior="none">
+
+
         <item
             android:id="@+id/nav_expositores"
             android:icon="@drawable/icomenuexpositores"
             android:title="Mis Expositores" />
+    </group>
+
+    <group
+
+        android:id="@+id/menu_bottom4"
+        android:checkableBehavior="none">
         <item
             android:id="@+id/nav_encuestas"
             android:icon="@drawable/icoencuestas"
             android:title="Mis encuestas" />
+    </group>
+    <group
 
+        android:id="@+id/menu_bottom5"
+        android:checkableBehavior="none">
         <item
             android:id="@+id/nav_contactos"
             android:icon="@drawable/icocontactos"
             android:title="Mis contactos" />
+    </group>
+    <group
+
+        android:id="@+id/menu_bottom6"
+        android:checkableBehavior="none">
         <item
             android:id="@+id/nav_notifiaciones"
             android:icon="@drawable/iconotificaciones"
             android:title="Centro de Notificaciones" />
+    </group>
+
+    <group
+
+        android:id="@+id/menu_bottom7"
+        android:checkableBehavior="none">
         <item
             android:id="@+id/nav_informacion"
             android:icon="@drawable/icoctualizarinformacion"
             android:title="Actualizar información" />
+    </group>
+    <group
+
+        android:id="@+id/menu_bottom8"
+        android:checkableBehavior="none">
         <item
             android:id="@+id/nav_cerrar"
             android:icon="@drawable/icoserrarsesion"
             android:title="Cerrar Sesión" />
+
     </group>
 
 

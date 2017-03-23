@@ -15,7 +15,7 @@ import android.widget.Spinner;
 public class ProgramFragment extends Fragment {
 
     Spinner spinTipoEven,spinDia;
-    private final static String[] tipoEvento = { "Seleciona un tipo de evento", " Todos", "Sesiones Técnicas",
+    private final static String[] tipoEvento = { "Seleciona un tipo de evento", "Todos", "Sesiones Técnicas",
             "Comidas Conferencias","e-Poster", "Otros" };
     private final static String[] diaSelec = { "Seleciona un día ", "Todos", "Lunes 5 de Junio",
             "Martes 6 de Junio", "Miercoles 7 de Junio","Jueves 8 de Junio","Viernes 9 de Junio" };

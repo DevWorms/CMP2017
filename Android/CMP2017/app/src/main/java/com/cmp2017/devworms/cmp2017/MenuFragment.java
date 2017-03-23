@@ -1,14 +1,17 @@
 package com.cmp2017.devworms.cmp2017;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import static android.R.attr.fragment;
 
@@ -20,8 +23,10 @@ public class MenuFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
+        SharedPreferences sp = getActivity().getSharedPreferences("prefe", Activity.MODE_PRIVATE);
+        String inicioComo = sp.getString("Nombre","");
 
-        String inicioComo= getActivity().getIntent().getExtras().getString("parametro");
+
 
 
 
@@ -47,7 +52,7 @@ public class MenuFragment extends Fragment {
         imagbtnTrans.setOnClickListener(new SecTrans());
 
         ImageView imagbtnPuebla= (ImageView) view.findViewById(R.id.imagbtnPuebla);
-        //imagbtnPuebla.setOnClickListener(new SecTrans());
+        imagbtnPuebla.setOnClickListener(new SecPuebla());
 
         if(inicioComo.equals("invi")){
 
@@ -192,9 +197,9 @@ public class MenuFragment extends Fragment {
     class SecMapa implements View.OnClickListener {
         public void onClick(View v) {
 
-
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.actividad, new MapaFragment()).addToBackStack(null).commit();
+            Toast.makeText(getActivity(),"En Desarrollo",Toast.LENGTH_SHORT).show();
+            /*getFragmentManager().beginTransaction()
+                    .replace(R.id.actividad, new MapaFragment()).addToBackStack(null).commit();*/
 
 
         }
@@ -202,10 +207,22 @@ public class MenuFragment extends Fragment {
 
     class SecTrans implements View.OnClickListener {
         public void onClick(View v) {
+            Toast.makeText(getActivity(),"En Desarrollo",Toast.LENGTH_SHORT).show();
+
+
+            /*getFragmentManager().beginTransaction()
+                    .replace(R.id.actividad, new TransportacionFragment()).addToBackStack(null).commit();*/
+
+
+        }
+    }
+
+    class SecPuebla implements View.OnClickListener {
+        public void onClick(View v) {
 
 
             getFragmentManager().beginTransaction()
-                    .replace(R.id.actividad, new TransportacionFragment()).addToBackStack(null).commit();
+                    .replace(R.id.actividad, new PueblaFragment()).addToBackStack(null).commit();
 
 
         }

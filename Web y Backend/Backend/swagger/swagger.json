@@ -103,7 +103,7 @@
                         "in": "formData",
                         "description": "Tipo de usuario. Puede ser null ó 1=Congresista, 2=Expositor, 3=Estudiante, 4=Acompañante",
                         "required": false,
-                        "type": "integer"
+                        "type": "string"
                     },
                     {
                         "name": "association",
@@ -247,6 +247,52 @@
                     "application/json"
                 ],
                 "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/user/resetpassword": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Restaurar contraseña",
+                "description": "Restaurar contraseña",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "Api key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "description": "Nueva contraseña del usuario. Mínimo 6 caracteres.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation"

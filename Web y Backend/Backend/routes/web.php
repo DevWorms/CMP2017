@@ -25,6 +25,7 @@ $app->delete('/api/user/delete/{id}', ['middleware' => 'cors', 'uses' => 'UserCo
 $app->post('/api/user/login', ['middleware' => 'cors', 'uses' => 'UserController@login']);
 $app->get('/api/user/types', ['middleware' => 'cors', 'uses' => 'UserController@getTypes']);
 $app->get('/api/user/associations', ['middleware' => 'cors', 'uses' => 'UserController@getAsociaciones']);
+$app->post('/api/user/resetpassword', ['middleware' => 'cors', 'uses' => 'UserController@resetPassword']);
 
 /*
  * Programas

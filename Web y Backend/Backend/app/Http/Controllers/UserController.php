@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
 
 class UserController extends Controller {
@@ -60,7 +59,7 @@ class UserController extends Controller {
                 'name' => 'required',
                 'last_name' => 'required',
                 'email' => 'required|email|unique:users',
-                'password' => 'required|min:5'
+                'password' => 'required|min:6'
                 //'password' => 'required|min:5|confirmed',
                 //'password_confirmation' => 'required|min:5'
             ], $this->messagesSignup());
@@ -103,15 +102,49 @@ class UserController extends Controller {
     // TODO
     public function resetPassword(Request $request) {
         try {
+            $user_id = $request->get('user_id');
+            $api_key = $request->get('api_key');
+            $password = Hash::make($request->get('password'));
 
+            $validator = Validator::make($request->all(), [
+                'password' => 'required|min:6'
+            ], $this->messagesSignup());
+
+            if ($validator->fails()) {
+                $errors = $validator->errors();
+
+                $res['status'] = 0;
+                $res['mensaje'] = $errors->first();
+                return response()->json($res, 400);
+            } else {
+                $user = User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+                $user->password = $password;
+                $user->save();
+
+                $msg = "Tu contraseña se actualizo correctamente";
+
+                $headers = "From: contacto@congreso.digital" . "\r\n";
+                $headers .= "Reply-To: contacto@congreso.digital" . "\r\n";
+                $headers .= "X-Mailer: PHP/" . phpversion();
+                $headers .= "Content-type: text/html; charset=utf-8\r\n";
+
+                $msg2 = "
+                    <div>
+                        Recientemente haz cambiado tu contraseña desde la aplicación
+                        <br><br>
+                        Si no haz realizado este cambio ponte en contacto con nosotros: <a href='contacto@congreso.digital'>contacto@congreso.digital</a>
+                    </div>
+                ";
+                mail($user->email, 'Haz cambiado tu contraseña', $msg2, $headers);
+
+                $res['status'] = 1;
+                $res['mensaje'] = $msg;
+                return response()->json($res, 200);
+            }
         } catch (ModelNotFoundException $ex) {
             $res['status'] = 0;
             $res['mensaje'] = "Usuario no encontrado";
             return response()->json($res, 400);
-        } catch (FatalThrowableError $ex) {
-            $res['status'] = 0;
-            $res['mensaje'] = $ex->getMessage();
-            return response()->json($res, 500);
         } catch (\Exception $ex) {
             $res['status'] = 0;
             $res['mensaje'] = $ex->getMessage();

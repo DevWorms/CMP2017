@@ -126,6 +126,52 @@
                 }
             }
         },
+        "/user/edit": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Actualiza el perfil de usuario",
+                "description": "Actualiza el perfil de usuario",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "description": "Nombre(s)",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "last_name",
+                        "in": "formData",
+                        "description": "Apellido(s)",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "clave",
+                        "in": "formData",
+                        "description": "Clave de inscripción",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
         "/user/profile/{id}/{api_key}": {
             "get": {
                 "tags": [

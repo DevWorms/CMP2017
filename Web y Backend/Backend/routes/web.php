@@ -19,7 +19,7 @@ $app->get('/', function () use ($app) {
  * Usuarios
  */
 $app->post('/api/user/signup', ['middleware' => 'cors', 'uses' => 'UserController@create']);
-$app->patch('/api/user/edit', ['middleware' => 'cors', 'uses' => 'UserController@update']);
+$app->post('/api/user/edit', ['middleware' => 'cors', 'uses' => 'UserController@update']);
 $app->get('/api/user/profile/{id}/{token}', ['middleware' => 'cors', 'uses' => 'UserController@select']);
 $app->delete('/api/user/delete/{id}', ['middleware' => 'cors', 'uses' => 'UserController@delete']);
 $app->post('/api/user/login', ['middleware' => 'cors', 'uses' => 'UserController@login']);

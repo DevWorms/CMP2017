@@ -233,7 +233,7 @@ class ProgramaController extends Controller {
                 $programas = $programas->where('fecha', $fecha)->values();
             }
 
-            if ($tipo || $tipo == 0) {
+            if (is_numeric($tipo)) {
                 // Otras categorías...
                 if ($tipo == 0) {
                     $categoria = Categoria::where('nombre', 'Sesiones Técnicas')

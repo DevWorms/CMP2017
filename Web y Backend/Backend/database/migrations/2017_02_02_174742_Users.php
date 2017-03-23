@@ -16,16 +16,16 @@ class Users extends Migration {
             $table->string('name', 90);
             $table->string('last_name', 90);
             /*
-             * Tipos de usuario
+             * Tipos de usuario // Que siempre ya no xD-
              *
              * 1 - Congresista
              * 2 - Expositor
              * 3 - Estudiante
              * 4 - Acompañante
              */
-            $table->tinyInteger('type')->nullable();
+            $table->string('type')->nullable();
             /*
-             * Asociación
+             * Asociación // Que siempre ya no xD
              *
              * 1 - AIPM
              * 2 - CIPM
@@ -33,7 +33,7 @@ class Users extends Migration {
              * 4 - AMGP
              * 5 - SPE / México
              */
-            $table->tinyInteger('association')->nullable();
+            $table->string('association')->nullable();
             $table->string('email');
             $table->string('password');
             $table->string('clave')->nullable();

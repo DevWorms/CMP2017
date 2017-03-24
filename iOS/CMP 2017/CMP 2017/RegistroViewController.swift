@@ -17,11 +17,11 @@ class RegistroViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     @IBOutlet weak var tipoUser: UIPickerView!
     @IBOutlet weak var asociacion: UIPickerView!
     
-    var pickerTipo = ["Visitante", "Trabajador de Pemex", "Estudiante", "Staff", "Otro"]
-    var pickerAsociacion = ["Asociación 1", "Asociación 2", "Asociación 3", "Asociación 4", "Ninguna"]
+    var pickerTipo = ["Tipo de Usuario","Congresista", "Expositor", "Estudiante", "Acompañante"]
+    var pickerAsociacion = ["Asociación", "AIPM", "CIPM", "AMGE", "AMGP", "SPE / México"]
     
-    var selectedTipo = "Visitante"
-    var selectedAsociacion = "Asociación 1"
+    var selectedTipo = "Tipo de Usuario"
+    var selectedAsociacion = "Asociación"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,7 +74,7 @@ class RegistroViewController: UIViewController, UITextFieldDelegate, UIPickerVie
                             
                             UserDefaults.standard.setValue("Hola \(result["name"]!)", forKey: "name")
                             
-                            self.performSegue(withIdentifier: "login", sender: nil)
+                            self.performSegue(withIdentifier: "registro", sender: nil)
                             
                         }
                     }
@@ -108,10 +108,45 @@ class RegistroViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         if     !((mail.text?.isEmpty)!)
             && !((password.text?.isEmpty)!)
             && !((name.text?.isEmpty)!)
-            && !((lastName.text?.isEmpty)!)
-            && !((claveInscripcion.text?.isEmpty)!) {
+            && !((lastName.text?.isEmpty)!) {
             
-            let parameterString = "name=\(name.text!)&last_name=\(lastName.text!)&email=\(mail.text!)&password=\(password.text!)&clave=\(claveInscripcion.text!)&type=\(selectedTipo)&association=\(selectedAsociacion)"
+            var tipo: Any
+            
+            switch selectedTipo {
+            case "Tipo de Usuario":
+                tipo = ""
+            case "Congresista":
+                tipo = 1
+            case "Expositor":
+                tipo = 2
+            case "Estudiante":
+                tipo = 3
+            case "Acompañante":
+                tipo = 4
+            default:
+                tipo = ""
+            }
+            
+            var asociacion: Any
+            
+            switch selectedAsociacion {
+            case "Asociación":
+                asociacion = ""
+            case "AIPM":
+                asociacion = 1
+            case "CIPM":
+                asociacion = 2
+            case "AMGE":
+                asociacion = 3
+            case "AMGP":
+                asociacion = 4
+            case "SPE / México":
+                asociacion = 5
+            default:
+                asociacion = ""
+            }
+            
+            let parameterString = "name=\(name.text!)&last_name=\(lastName.text!)&email=\(mail.text!)&password=\(password.text!)&clave=\(claveInscripcion.text!)&type=\(tipo)&association=\(asociacion)"
             
             print(parameterString)
             

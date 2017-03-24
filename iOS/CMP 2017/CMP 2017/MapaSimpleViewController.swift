@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MapaSimpleViewController: UIViewController {
+class MapaSimpleViewController: UIViewController, UIWebViewDelegate {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var webView: UIWebView!
@@ -21,7 +21,28 @@ class MapaSimpleViewController: UIViewController {
 
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "fondo.png")!)
         
+        self.webView.delegate = self
+        
         if Accesibilidad.isConnectedToNetwork() == true {
+            
+            let alert = UIAlertController(title: nil, message: "Cargando...", preferredStyle: .alert)
+            alert.view.tintColor = UIColor.black
+            
+            let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50)) as UIActivityIndicatorView
+            loadingIndicator.hidesWhenStopped = true
+            loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+            loadingIndicator.startAnimating()
+            
+            /*let callAction = UIAlertAction(title: "Cancelar", style: .Default, handler: {
+             action in
+             
+             self.hurryPrintMethods.cancelConnection()
+             return
+             })
+             alert.addAction(callAction)*/
+            
+            alert.view.addSubview(loadingIndicator)
+            self.present(alert, animated: true, completion: nil)
             
             if self.tipoMapa == 1 {
                 titleLabel.text = "Clima"
@@ -36,6 +57,11 @@ class MapaSimpleViewController: UIViewController {
                                              handler: nil))
             self.present(vc_alert, animated: true, completion: nil)
         }
+    }
+    
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        //quita el alert
+        self.dismiss(animated: false, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {

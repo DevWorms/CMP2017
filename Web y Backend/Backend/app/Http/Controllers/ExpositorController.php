@@ -467,6 +467,7 @@ class ExpositorController extends Controller {
     public function returnExpositor($expositor) {
         if ($expositor->pdf_file) {
             $expositor->pdf;
+            unset($expositor->pdf['is_banner']);
         } else {
             $expositor->pdf = [];
         }

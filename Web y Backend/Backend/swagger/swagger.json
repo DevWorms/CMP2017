@@ -138,6 +138,20 @@
                 ],
                 "parameters": [
                     {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "Api key del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
                         "name": "name",
                         "in": "formData",
                         "description": "Nombre(s)",
@@ -2688,6 +2702,45 @@
                 ],
                 "summary": "Devuelve el mapa de Puebla",
                 "description": "Devuelve el mapa de Puebla",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id de usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description": "Api Key del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/banners/all/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "banners"
+                ],
+                "summary": "Devuelve los banners",
+                "description": "Devuelve los banners",
                 "produces": [
                     "application/json"
                 ],

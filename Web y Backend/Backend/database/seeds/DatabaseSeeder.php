@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
                 'last_name' => "",
                 'type' => 0,
                 'association' => 0,
-                'email' => "admin@mail.com",
+                'email' => "contacto@congreso.digital",
                 'password' => "$2y$10\$jyblYgb2MUdLD6JOCKCzu.6oVqhaVFl.HmLwTCeuaNDHo.UJr6Czy", // "123456"
                 'api_token' => 0
             ]);
@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
                 'last_name' => "Munguia",
                 'type' => 2,
                 'association' => "",
-                'email' => "salva@devworms.com",
+                'email' => "smunguia@devworms.com",
                 'password' => "$2y$10\$jyblYgb2MUdLD6JOCKCzu.6oVqhaVFl.HmLwTCeuaNDHo.UJr6Czy", // "123456"
                 'api_token' => 2
             ]);
@@ -137,6 +137,19 @@ class DatabaseSeeder extends Seeder
                 'nombre' => "MapaRecinto.pdf",
                 'size' => 2000000
             ]);
+
+            /*
+             * Banners
+             */
+            for ($i = 0; $i < 5; $i++) {
+                \App\File::create([
+                    'user_id' => 1,
+                    'url' => $faker->imageUrl(),
+                    'nombre' => "imagen2" . $i . ".png",
+                    'size' => 1000000,
+                    'is_banner' => 1
+                ]);
+            }
 
             /*
              * Categorías

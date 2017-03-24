@@ -134,6 +134,6 @@ $app->get('/api/puebla/telefono/all/{user_id}/{api_key}', ['middleware' => 'cors
 $app->get('/api/puebla/mapa/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'ConocePueblaController@getMapa']);
 
 /*
- * Archivo
+ * Banners
  */
-$app->post('/api/fileupload',['middleware' => 'cors', 'uses' => 'FileController@upload']);
+$app->get('/api/banners/all/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'BannerController@getAll']);

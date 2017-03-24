@@ -179,25 +179,6 @@ class UserController extends Controller {
             } else {
                 $user = User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
 
-                // Valida el password
-                /*
-                if ($request->has('password')) {
-                    $validatePasswords = Validator::make($request->all(), [
-                        'password' => 'required|min:5|confirmed',
-                        'password_confirmation' => 'required|min:5'
-                    ]);
-                    if ($validatePasswords->fail()) {
-                        $errors = $validatePasswords->errors();
-
-                        $res['status'] = 0;
-                        $res['mensaje'] = $errors->first();
-                        return response()->json($res, 400);
-                    } else {
-                        $user->password = Hash::make($request->get('password'));
-                    }
-                }
-*/
-
                 $user->name = $name;
                 $user->last_name = $last_name;
                 if ($clave) {

@@ -20,10 +20,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class MenuPrincipal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    String nombre;
+    String nombre, inicioComo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +33,7 @@ public class MenuPrincipal extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         SharedPreferences sp = getSharedPreferences("prefe", Activity.MODE_PRIVATE);
-        String inicioComo = sp.getString("Nombre","");
+        inicioComo = sp.getString("Nombre","");
         if(inicioComo.equals("invi")){
             nombre = "Bienvenido Usuario";
 
@@ -51,7 +53,8 @@ public class MenuPrincipal extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+
+        navigationView.setNavigationItemSelectedListener(MenuPrincipal.this);
         toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
         getSupportActionBar().setTitle(nombre);
         getFragmentManager().beginTransaction()
@@ -109,19 +112,96 @@ public class MenuPrincipal extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_agenda) {
-            // Handle the camera action
+        if (id == R.id.nav_mi_perfil) {
+            if(inicioComo.equals("invi")){
+                Toast.makeText(MenuPrincipal.this,"Registrate para activar esta seccion",Toast.LENGTH_SHORT).show();
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.actividad, new MiPerfilFragment()).commit();
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+            }else{
+
+                Toast.makeText(MenuPrincipal.this,"En Desarrollo",Toast.LENGTH_SHORT).show();
+
+
+            }
+
+            return true;
+        } else if (id == R.id.nav_agenda) {
+            if(inicioComo.equals("invi")){
+                Toast.makeText(MenuPrincipal.this,"Registrate para activar esta seccion",Toast.LENGTH_SHORT).show();
+
+            }else{
+
+                Toast.makeText(MenuPrincipal.this,"En Desarrollo",Toast.LENGTH_SHORT).show();
+
+
+            }
+
         } else if (id == R.id.nav_expositores) {
+            if(inicioComo.equals("invi")){
+                Toast.makeText(MenuPrincipal.this,"Registrate para activar esta seccion",Toast.LENGTH_SHORT).show();
 
+            }else{
+
+                Toast.makeText(MenuPrincipal.this,"En Desarrollo",Toast.LENGTH_SHORT).show();
+
+
+            }
         } else if (id == R.id.nav_encuestas) {
+            if(inicioComo.equals("invi")){
+                Toast.makeText(MenuPrincipal.this,"Registrate para activar esta seccion",Toast.LENGTH_SHORT).show();
 
+            }else{
+
+                Toast.makeText(MenuPrincipal.this,"En Desarrollo",Toast.LENGTH_SHORT).show();
+
+
+            }
         } else if (id == R.id.nav_contactos) {
+            if(inicioComo.equals("invi")){
+                Toast.makeText(MenuPrincipal.this,"Registrate para activar esta seccion",Toast.LENGTH_SHORT).show();
 
+            }else{
+
+                Toast.makeText(MenuPrincipal.this,"En Desarrollo",Toast.LENGTH_SHORT).show();
+
+
+            }
         } else if (id == R.id.nav_notifiaciones) {
+            if(inicioComo.equals("invi")){
+                Toast.makeText(MenuPrincipal.this,"Registrate para activar esta seccion",Toast.LENGTH_SHORT).show();
 
+            }else{
+
+                Toast.makeText(MenuPrincipal.this,"En Desarrollo",Toast.LENGTH_SHORT).show();
+
+
+            }
         } else if (id == R.id.nav_informacion) {
+            if(inicioComo.equals("invi")){
+                Toast.makeText(MenuPrincipal.this,"Registrate para activar esta seccion",Toast.LENGTH_SHORT).show();
 
+            }else{
+
+                Toast.makeText(MenuPrincipal.this,"En Desarrollo",Toast.LENGTH_SHORT).show();
+
+
+            }
         } else if (id == R.id.nav_cerrar) {
+
+            SharedPreferences sp = getSharedPreferences("prefe", Activity.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putString("APIkey", "");
+            editor.putString("Nombre", "");
+            editor.putString("IdUser", "");
+
+            editor.commit();
+
+            Intent intent = new Intent(MenuPrincipal.this, LoginActivity.class);
+
+            startActivity(intent);
+            finish();
 
         }
 

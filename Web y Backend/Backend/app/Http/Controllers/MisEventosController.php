@@ -132,6 +132,7 @@ class MisEventosController extends Controller {
     public function returnEvento($programa) {
         if ($programa->foto_id) {
             $programa->foto;
+            unset($programa->foto['is_banner']);
         } else {
             $programa->foto = [];
         }

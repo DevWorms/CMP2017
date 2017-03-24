@@ -136,7 +136,8 @@ class RutasController extends Controller {
     public function getAll($user_id, $api_key) {
         try {
             User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
-            $rutas = Ruta::where('user_id_asignado', $user_id)->get();
+            //$rutas = Ruta::where('user_id_asignado', $user_id)->get();
+            $rutas = Ruta::all();
 
             foreach ($rutas as $ruta) {
                 $ruta = $this->returnRuta($ruta);
@@ -203,6 +204,7 @@ class RutasController extends Controller {
     public function returnRuta($ruta) {
         if ($ruta->pdf_file) {
             $ruta->pdf;
+            unset($ruta->pdf['is_banner']);
         } else {
             $ruta->pdf = [];
         }

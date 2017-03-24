@@ -29,10 +29,9 @@ public class Registro extends AppCompatActivity {
     Button btnRegis;
 
     private ProgressDialog pDialog;
-    private final static String[] tipoUsuarios = { "Visitante", "Trabajador de Pemex", "Estudiante",
-            "Staff", "Otro" };
-    private final static String[] asociaciones = { "Asociacion 1", "Asociacion 2", "Asociacion 3",
-            "Asociacion 4", "Ninguna" };
+    private final static String[] tipoUsuarios = { "Congresista", "Acompañante", "Expositor", "Estudiante"};
+    private final static String[] asociaciones = { "Ninguna","AIPM", "CIPM", "AMGE", "AMGP", "SPE / México" };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +71,7 @@ public class Registro extends AppCompatActivity {
 
 
 
-                if( nom.equals("") || nom == null ||ape.equals("") || ape == null ||  correo.equals("") || correo == null || contra.equals("") || contra == null ||  claveIns.equals("") || claveIns == null) {
+                if( nom.equals("") || nom == null ||ape.equals("") || ape == null ||  correo.equals("") || correo == null || contra.equals("") || contra == null  ) {
                     Toast.makeText(Registro.this,"Falta llenar campos.",Toast.LENGTH_SHORT).show();
                 }else{
 
@@ -129,7 +128,7 @@ class getRegstroAT extends AsyncTask<String, String, String> {
             Log.d("Asoci : ", "> " + asoci);
 
 
-            String body= "{\n\t\"name\": \""+nom+"\",\n\t\"last_name\" : \""+ape+"\",\n\t\"email\" : \""+correo+"\",\n\t\"password\" : \""+contra+"\",\n\t\"password_confirmation\" : \""+claveIns+"\",\n\t\"type\" : \""+tipoUsu+"\",\n\t\"association\" : \""+asoci+"\"\n\t\n}";
+            String body= "{\n\t\"name\": \""+nom+"\",\n\t\"last_name\" : \""+ape+"\",\n\t\"email\" : \""+correo+"\",\n\t\"password\" : \""+contra+"\",\n\t\"clave\" : \""+claveIns+"\",\n\t\"type\" : \""+tipoUsu+"\",\n\t\"association\" : \""+asoci+"\"\n\t\n}";
             JSONParser jsp= new JSONParser();
 
 
@@ -147,7 +146,7 @@ class getRegstroAT extends AsyncTask<String, String, String> {
                     SharedPreferences  sp = getSharedPreferences("prefe", Activity.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sp.edit();
                     editor.putString("APIkey", apikey);
-                    editor.putString("Nombre", nombrecomple);
+                    editor.putString("Nombre", "Bienvenido "+nombrecomple);
                     editor.putString("IdUser", iduser);
                     editor.commit();
 
@@ -177,6 +176,7 @@ class getRegstroAT extends AsyncTask<String, String, String> {
             pDialog.dismiss();
             if(resp!="Usuario ya registrado"){
                 Intent i = new Intent(Registro.this, MenuPrincipal.class);
+                i.putExtra("parametro", "no");
                 startActivity(i);
                 finish();
             }

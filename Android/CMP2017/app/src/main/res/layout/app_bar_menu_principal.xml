@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@drawable/pleca"
-        android:theme="@style/Platform.ThemeOverlay.AppCompat.Dark" />
+        android:theme="@style/AppTheme" />
 
 
 

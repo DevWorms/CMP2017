@@ -19,12 +19,13 @@ $app->get('/', function () use ($app) {
  * Usuarios
  */
 $app->post('/api/user/signup', ['middleware' => 'cors', 'uses' => 'UserController@create']);
-$app->patch('/api/user/edit', ['middleware' => 'cors', 'uses' => 'UserController@update']);
+$app->post('/api/user/edit', ['middleware' => 'cors', 'uses' => 'UserController@update']);
 $app->get('/api/user/profile/{id}/{token}', ['middleware' => 'cors', 'uses' => 'UserController@select']);
 $app->delete('/api/user/delete/{id}', ['middleware' => 'cors', 'uses' => 'UserController@delete']);
 $app->post('/api/user/login', ['middleware' => 'cors', 'uses' => 'UserController@login']);
 $app->get('/api/user/types', ['middleware' => 'cors', 'uses' => 'UserController@getTypes']);
 $app->get('/api/user/associations', ['middleware' => 'cors', 'uses' => 'UserController@getAsociaciones']);
+$app->post('/api/user/resetpassword', ['middleware' => 'cors', 'uses' => 'UserController@resetPassword']);
 
 /*
  * Programas
@@ -133,6 +134,6 @@ $app->get('/api/puebla/telefono/all/{user_id}/{api_key}', ['middleware' => 'cors
 $app->get('/api/puebla/mapa/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'ConocePueblaController@getMapa']);
 
 /*
- * Archivo
+ * Banners
  */
-$app->post('/api/fileupload',['middleware' => 'cors', 'uses' => 'FileController@upload']);
+$app->get('/api/banners/all/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'BannerController@getAll']);

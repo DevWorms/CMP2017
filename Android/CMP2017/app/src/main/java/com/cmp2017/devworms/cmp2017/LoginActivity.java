@@ -54,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText correo, pass;
     String resp,nombre;
     private ProgressDialog pDialog;
+    ConnectionDetector cd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +84,15 @@ public class LoginActivity extends AppCompatActivity {
     class IniSe implements View.OnClickListener {
         public void onClick(View v) {
 
+            cd = new ConnectionDetector(getApplicationContext());
 
+            // Check if Internet present
+            if (!cd.isConnectingToInternet()) {
+                // Internet Connection is not present
+                Toast.makeText(LoginActivity.this, "Se necesita internet", Toast.LENGTH_SHORT).show();
+                // stop executing code by return
+                return;
+            }
             new getLogin().execute();
 
 

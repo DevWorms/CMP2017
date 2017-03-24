@@ -27,7 +27,7 @@ public class Registro extends AppCompatActivity {
     String resp,nom,ape,correo,contra,claveIns,tipoUsu,asoci;
     EditText edtNombre,edtApellido,edtCorreo,edtContraseña,edtClaveIns;
     Button btnRegis;
-
+    ConnectionDetector cd;
     private ProgressDialog pDialog;
     private final static String[] tipoUsuarios = { "Congresista", "Acompañante", "Expositor", "Estudiante"};
     private final static String[] asociaciones = { "Ninguna","AIPM", "CIPM", "AMGE", "AMGP", "SPE / México" };
@@ -74,7 +74,15 @@ public class Registro extends AppCompatActivity {
                 if( nom.equals("") || nom == null ||ape.equals("") || ape == null ||  correo.equals("") || correo == null || contra.equals("") || contra == null  ) {
                     Toast.makeText(Registro.this,"Falta llenar campos.",Toast.LENGTH_SHORT).show();
                 }else{
+                    cd = new ConnectionDetector(getApplicationContext());
 
+                    // Check if Internet present
+                    if (!cd.isConnectingToInternet()) {
+                        // Internet Connection is not present
+                        Toast.makeText(Registro.this, "Se necesita internet", Toast.LENGTH_SHORT).show();
+                        // stop executing code by return
+                        return;
+                    }
 
                         new getRegstroAT().execute();
 

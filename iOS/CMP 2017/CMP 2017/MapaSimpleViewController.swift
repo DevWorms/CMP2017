@@ -21,9 +21,20 @@ class MapaSimpleViewController: UIViewController {
 
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "fondo.png")!)
         
-        if self.tipoMapa == 1 {
-            titleLabel.text = "Clima"
-            webView.loadRequest(URLRequest(url: URL(string: "https://es-us.noticias.yahoo.com/clima")!))
+        if Accesibilidad.isConnectedToNetwork() == true {
+            
+            if self.tipoMapa == 1 {
+                titleLabel.text = "Clima"
+            
+                webView.loadRequest(URLRequest(url: URL(string: "https://es-us.noticias.yahoo.com/clima")!))
+            }
+            
+        } else {
+            let vc_alert = UIAlertController(title: "Sin conexión a internet", message: "Asegúrate de estar conectado a internet.", preferredStyle: .alert)
+            vc_alert.addAction(UIAlertAction(title: "OK",
+                                             style: UIAlertActionStyle.default,
+                                             handler: nil))
+            self.present(vc_alert, animated: true, completion: nil)
         }
     }
 

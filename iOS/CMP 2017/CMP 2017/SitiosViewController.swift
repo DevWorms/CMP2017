@@ -25,7 +25,16 @@ class SitiosViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let strUrl = "http://cmp.devworms.com/api/puebla/sitio/all/\(userID!)/\(apiKey!)"
         print(strUrl)
         
-        URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
+        if Accesibilidad.isConnectedToNetwork() == true {
+            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
+            
+        } else {
+            let vc_alert = UIAlertController(title: "Sin conexión a internet", message: "Asegúrate de estar conectado a internet.", preferredStyle: .alert)
+            vc_alert.addAction(UIAlertAction(title: "OK",
+                                             style: UIAlertActionStyle.default,
+                                             handler: nil))
+            self.present(vc_alert, animated: true, completion: nil)
+        }
     }
     
     func parseJson(data: Data?, urlResponse: URLResponse?, error: Error?) {

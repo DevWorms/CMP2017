@@ -35,6 +35,7 @@ public class ListadoFragment extends Fragment {
     String seccion, nombre, tipoProgram, diaProgram, userId, apiKey, cateId, fecha, resp;
     ProgressDialog pDialog;
     ListView lista;
+
     ArrayList<HashMap<String, String>> albumsList;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,7 +57,9 @@ public class ListadoFragment extends Fragment {
                 cateId = "3";
             }else if(tipoProgram.equals("e-Poster")){
                 cateId = "4";
-            } else if(tipoProgram.equals(" Todos")){
+            } else if(tipoProgram.equals("Otros")){
+                cateId = "0";
+            }else{
                 cateId = "";
             }
             diaProgram =  getArguments().getString("diaProgra");
@@ -155,7 +158,7 @@ public class ListadoFragment extends Fragment {
                     Log.d("ListadoProgra : ", "> " + cuanto);
                     String actFecha="";
                     // looping through All albums
-                    for (int i = 0; i < jsonProgramas.length(); i++) {
+                    for (int i = 0; i <= jsonProgramas.length(); i++) {
                         JSONObject c = jsonProgramas.getJSONObject(i);
 
 
@@ -302,7 +305,7 @@ public class ListadoFragment extends Fragment {
                     Log.d("ListadoProgra : ", "> " + cuanto);
                     String actFecha="";
                     // looping through All albums
-                    for (int i = 0; i < jsonProgramas.length(); i++) {
+                    for (int i = 0; i <= jsonProgramas.length(); i++) {
                         JSONObject c = jsonProgramas.getJSONObject(i);
 
 

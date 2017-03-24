@@ -41,10 +41,17 @@ public class ExpositoresFrgament extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_expo, container, false);
-
         SharedPreferences sp = getActivity().getSharedPreferences("prefe", Activity.MODE_PRIVATE);
-        apiKey = sp.getString("APIkey","");
-        userId = sp.getString("IdUser","");
+        String inicioComo = sp.getString("Nombre","");
+
+       if (inicioComo.equals("invi")){
+           apiKey = "0";
+           userId = "1";
+       } else{
+           apiKey = sp.getString("APIkey","");
+           userId = sp.getString("IdUser","");
+       }
+
         nombre = getArguments() != null ? getArguments().getString("nombre"):"Expositores";
         txtTitulo= (TextView) view.findViewById(R.id.txtDescrip);
         txtTitulo.setText(nombre);
@@ -187,7 +194,7 @@ public class ExpositoresFrgament extends Fragment {
                     albumsList = new ArrayList<HashMap<String, String>>();
                     char actLetra = ' ';
                     // looping through All albums
-                    for (int i = 0; i < jsonExpositores.length(); i++) {
+                    for (int i = 0; i <= jsonExpositores.length(); i++) {
                         JSONObject c = jsonExpositores.getJSONObject(i);
 
 
@@ -301,7 +308,7 @@ public class ExpositoresFrgament extends Fragment {
                     albumsList = new ArrayList<HashMap<String, String>>();
                     char actLetra = ' ';
                     // looping through All albums
-                    for (int i = 0; i < jsonExpositores.length(); i++) {
+                    for (int i = 0; i <= jsonExpositores.length(); i++) {
                         JSONObject c = jsonExpositores.getJSONObject(i);
 
 
@@ -410,15 +417,20 @@ public class ExpositoresFrgament extends Fragment {
             if (respuesta != "error") {
                 try {
                     JSONObject json = new JSONObject(respuesta);
-                    String exposi = json.getString("expositores");
-
+                    String exposi = "";
+                    if(nombre.equals("Expositores")){
+                        exposi = json.getString("expositores");
+                    } else if(nombre.equals("Patrocinadores")){
+                        exposi = json.getString("patrocinadores");
+                    }
                     JSONArray jsonExpositores = new JSONArray(exposi);
 
                     int cuanto = jsonExpositores.length();
                     albumsList = new ArrayList<HashMap<String, String>>();
                     char actLetra = ' ';
+                    String standAct = "";
                     // looping through All albums
-                    for (int i = 0; i < jsonExpositores.length(); i++) {
+                    for (int i = 0; i <= jsonExpositores.length(); i++) {
                         JSONObject c = jsonExpositores.getJSONObject(i);
 
 
@@ -432,8 +444,11 @@ public class ExpositoresFrgament extends Fragment {
 
 
                         map.put("expoId", id);
+                        if(standAct.equals("") || !stand.equals(standAct)){
+                            map.put("expoLetra", "Stand " + stand);
+                            standAct = stand;
+                        }
 
-                        map.put("expoLetra", "Stand " + stand);
                         map.put("expoName", name);
 
 

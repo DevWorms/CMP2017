@@ -401,6 +401,7 @@ class ConocePueblaController extends Controller {
     public function returnSitio($sitio) {
         if ($sitio->imagen_id) {
             $sitio->imagen;
+            unset($sitio->imagen['is_banner']);
         } else {
             $sitio->imagen = [];
         }

@@ -376,6 +376,7 @@ class ProgramaController extends Controller {
     public function returnPrograma($programa) {
         if ($programa->foto_id) {
             $programa->foto;
+            unset($programa->foto['is_banner']);
         } else {
             $programa->foto = [];
         }

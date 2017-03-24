@@ -204,6 +204,7 @@ class RutasController extends Controller {
     public function returnRuta($ruta) {
         if ($ruta->pdf_file) {
             $ruta->pdf;
+            unset($ruta->pdf['is_banner']);
         } else {
             $ruta->pdf = [];
         }

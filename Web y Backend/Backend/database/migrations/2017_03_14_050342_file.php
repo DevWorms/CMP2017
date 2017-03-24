@@ -19,6 +19,7 @@ class File extends Migration
             $table->string('url', 90);
             $table->string('nombre');
             $table->bigInteger('size');
+            $table->tinyInteger('is_banner')->default(0);
             $table->timestamps();
         });
     }

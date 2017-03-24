@@ -25,6 +25,8 @@ class ViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "invitado" {
             UserDefaults.standard.set(true, forKey: "invitado")
+            UserDefaults.standard.setValue(0, forKey: "api_key")
+            UserDefaults.standard.setValue(1, forKey: "user_id")
         }
     }
 

@@ -29,7 +29,7 @@ public class Registro extends AppCompatActivity {
     Button btnRegis;
     ConnectionDetector cd;
     private ProgressDialog pDialog;
-    private final static String[] tipoUsuarios = { "Congresista", "Acompañante", "Expositor", "Estudiante"};
+    private final static String[] tipoUsuarios = { "Congresista", "Acompañante", "Expositor", "Estudiante","Otro"};
     private final static String[] asociaciones = { "Ninguna","AIPM", "CIPM", "AMGE", "AMGP", "SPE / México" };
 
     @Override
@@ -166,6 +166,7 @@ class getRegstroAT extends AsyncTask<String, String, String> {
 
 
             }else {
+
                 resp="Usuario ya registrado";
             }
 

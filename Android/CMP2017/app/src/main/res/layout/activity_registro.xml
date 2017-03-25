@@ -27,7 +27,7 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:text="Nombre"
-                android:textColor="@android:color/black"
+                android:textColor="#2844a8"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="Apellido"
-                android:textColor="@android:color/black"
+                android:textColor="#2844a8"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="Correo electrónico"
-                android:textColor="@android:color/black"
+                android:textColor="#2844a8"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="Contraseña"
-                android:textColor="@android:color/black"
+                android:textColor="#2844a8"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -105,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="Clave de inscripción"
-                android:textColor="@android:color/black"
+                android:textColor="#2844a8"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -124,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="Tipo de Usuario"
-                android:textColor="@android:color/black"
+                android:textColor="#2844a8"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -140,7 +140,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="Asociación"
-                android:textColor="@android:color/black"
+                android:textColor="#2844a8"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 

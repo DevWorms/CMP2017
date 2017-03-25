@@ -51,6 +51,46 @@
                 }
             }
         },
+        "/user/login/root": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Login de usuario para panel de Webapp",
+                "description": "Login de usuario devuelve el api_key del usuario para panel de Webapp",
+                "operationId": "loginUser",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "formData",
+                        "description": "Email del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "description": "Contraseña del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
         "/user/signup": {
             "post": {
                 "tags": [
@@ -2323,13 +2363,6 @@
                         "description": "Descripcion de la ruta",
                         "required": true,
                         "type": "string"
-                    },
-                    {
-                        "name": "user_asignado",
-                        "in": "formData",
-                        "description": "id del usuario al que se asignará la ruta",
-                        "required": true,
-                        "type": "integer"
                     },
                     {
                         "name": "archivo",

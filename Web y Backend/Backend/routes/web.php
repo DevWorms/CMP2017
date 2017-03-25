@@ -23,6 +23,7 @@ $app->post('/api/user/edit', ['middleware' => 'cors', 'uses' => 'UserController@
 $app->get('/api/user/profile/{id}/{token}', ['middleware' => 'cors', 'uses' => 'UserController@select']);
 $app->delete('/api/user/delete/{id}', ['middleware' => 'cors', 'uses' => 'UserController@delete']);
 $app->post('/api/user/login', ['middleware' => 'cors', 'uses' => 'UserController@login']);
+$app->post('/api/user/login/root', ['middleware' => 'cors', 'uses' => 'UserController@login']);
 $app->get('/api/user/types', ['middleware' => 'cors', 'uses' => 'UserController@getTypes']);
 $app->get('/api/user/associations', ['middleware' => 'cors', 'uses' => 'UserController@getAsociaciones']);
 $app->post('/api/user/resetpassword', ['middleware' => 'cors', 'uses' => 'UserController@resetPassword']);

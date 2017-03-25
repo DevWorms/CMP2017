@@ -33,7 +33,6 @@ class RutasController extends Controller {
 
             $titulo = $request->get('titulo');
             $descripcion = $request->get('descripcion');
-            $user_asignado = $request->get('user_asignado');
             $file = $request->file('archivo');
             $file_id = null;
 
@@ -42,8 +41,7 @@ class RutasController extends Controller {
              */
             $validator = Validator::make($request->all(), [
                 'titulo' => 'required',
-                'descripcion' => 'required|max:100',
-                'user_asignado' => 'required'
+                'descripcion' => 'required|max:100'
             ], $this->messages());
 
             if ($validator->fails()) {
@@ -54,70 +52,60 @@ class RutasController extends Controller {
                 $res['mensaje'] = $errors->first();
                 return response()->json($res, 400);
             } else {
-                // Valida el usuario asignado
-                $user_id_asignado = User::where(['id' => $user_asignado])->first();
-                if ($user_id_asignado) {
-                    if ($this->validarRutas($user_id_asignado)) {
-                        // Si se adjunta un archivo, se sube
-                        if ($file) {
-                            $rules = array('file' => 'required|mimes:jpeg,jpg,gif,png,pdf|max:10000000');
-                            $validator = Validator::make(array('file' => $file), $rules);
+                if ($this->validarRutas()) {
+                    // Si se adjunta un archivo, se sube
+                    if ($file) {
+                        $rules = array('file' => 'required|mimes:jpeg,jpg,gif,png,pdf|max:10000000');
+                        $validator = Validator::make(array('file' => $file), $rules);
 
-                            // Si el archivo tiene extensión valida
-                            if ($validator->passes()) {
-                                // Si el archivo es mayor a 10mb
-                                if ($file->getSize() > 10000000) {
-                                    $response['estado'] = 0;
-                                    $response['mensaje'] = "El archivo excede el límite de 10mb";
-                                    return response()->json($response, 400);
-                                } else {
-                                    // Si va bien, lo mueve a la carpeta y guarda el registro
-                                    $path = $this->destinationPath . Carbon::now()->year . "/" . Carbon::now()->month . "/";
-                                    $uploadedFile = $request->file('archivo')->move($path, uniqid() . "." . $file->getClientOriginalExtension());
-                                    $url = $this->url_server . substr($uploadedFile->getPathname(), 7);
-
-                                    $file_id = File::create([
-                                        'user_id' => $user_id,
-                                        'url' => $url,
-                                        'nombre' => $file->getClientOriginalName(),
-                                        'size' => $file->getClientSize()
-                                    ]);
-
-                                    $file_id = $file_id->id;
-                                }
-                            } else {
+                        // Si el archivo tiene extensión valida
+                        if ($validator->passes()) {
+                            // Si el archivo es mayor a 10mb
+                            if ($file->getSize() > 10000000) {
                                 $response['estado'] = 0;
-                                $response['mensaje'] = "Error, tipo de archivo invalido";
-
+                                $response['mensaje'] = "El archivo excede el límite de 10mb";
                                 return response()->json($response, 400);
+                            } else {
+                                // Si va bien, lo mueve a la carpeta y guarda el registro
+                                $path = $this->destinationPath . Carbon::now()->year . "/" . Carbon::now()->month . "/";
+                                $uploadedFile = $request->file('archivo')->move($path, uniqid() . "." . $file->getClientOriginalExtension());
+                                $url = $this->url_server . substr($uploadedFile->getPathname(), 7);
+
+                                $file_id = File::create([
+                                    'user_id' => $user_id,
+                                    'url' => $url,
+                                    'nombre' => $file->getClientOriginalName(),
+                                    'size' => $file->getClientSize()
+                                ]);
+
+                                $file_id = $file_id->id;
                             }
+                        } else {
+                            $response['estado'] = 0;
+                            $response['mensaje'] = "Error, tipo de archivo invalido";
+
+                            return response()->json($response, 400);
                         }
-
-                        // Crea el programa
-                        $ruta = Ruta::create([
-                            'user_id' => $user_id,
-                            'pdf_file' => $file_id,
-                            'titulo' => $titulo,
-                            'descripcion' => $descripcion,
-                            'user_id_asignado' => $user_id_asignado->id
-                        ]);
-
-                        // Devuelve el programa
-                        $ruta = $this->returnRuta($ruta);
-
-                        $res['status'] = 1;
-                        $res['mensaje'] = "Ruta creada correctamente";
-                        $res['ruta'] = $ruta;
-                        return response()->json($res, 200);
-                    } else {
-                        $response['estado'] = 0;
-                        $response['mensaje'] = "Error, el usuario " . $user_id_asignado->name . " " . $user_id_asignado->last_name . " ya tiene 10 rutas asignadas";
-
-                        return response()->json($response, 400);
                     }
+
+                    // Crea el programa
+                    $ruta = Ruta::create([
+                        'user_id' => $user_id,
+                        'pdf_file' => $file_id,
+                        'titulo' => $titulo,
+                        'descripcion' => $descripcion
+                    ]);
+
+                    // Devuelve el programa
+                    $ruta = $this->returnRuta($ruta);
+
+                    $res['status'] = 1;
+                    $res['mensaje'] = "Ruta creada correctamente";
+                    $res['ruta'] = $ruta;
+                    return response()->json($res, 200);
                 } else {
                     $response['estado'] = 0;
-                    $response['mensaje'] = "Error, no se encontro al usuario";
+                    $response['mensaje'] = "No puedes crear más de 10 rutas";
 
                     return response()->json($response, 400);
                 }
@@ -185,8 +173,8 @@ class RutasController extends Controller {
     }
 
     // Valida el número de rutas de un usuario
-    public function validarRutas($user) {
-        $rutas = Ruta::where('user_id_asignado', $user->id)->get();
+    public function validarRutas() {
+        $rutas = Ruta::all();
 
         if ($rutas->count() < 10) {
             return true;

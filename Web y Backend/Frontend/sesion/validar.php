@@ -1,14 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: chemasmas
- * Date: 19/03/17
- * Time: 03:53 PM
- */
 session_start();
 
-if(!isset( $_SESSION["user_id"]))
-{
+if ((!isset( $_SESSION["user_id"])) || (hash("sha256", $_SESSION["user_id"]) != $_SESSION["key"])) {
     header('Location: /');
     exit;
 }

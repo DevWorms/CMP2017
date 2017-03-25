@@ -1,57 +1,59 @@
-/**
- * Created by chemasmas on 17/03/17.
- */
-
-//baseUrl = "http://cmp.devworms.com"
-baseUrl = "http://localhost:1111"
-authDir = "/sesion/iniciar.php"
+var baseUrl = "http://webapp.cmp.devworms.com";
+var api_base = "http://cmp.devworms.com/api/";
 
 $("#login").click(
-    function (){
-        usuario = $("#id_usuario").val();
-        pass = $("#contrasena").val();
-        //console.log(usuario);
-        $.ajax(
-            {
+    function () {
+        var usuario = $("#id_usuario").val();
+        var pass = $("#contrasena").val();
+
+        if (usuario && pass) {
+            $.ajax({
                 type: 'POST',
-                url: baseUrl+"/api/user/login",
+                url: api_base + 'user/login/root',
                 crossDomain: true,
                 data: {
-                    user:usuario,
-                    password:pass
+                    user: usuario,
+                    password: pass
                 },
-                success: function(response){
-                    //console.log(response);
-                    //response = JSON.parse(response);
+                dataType: "json",
+                success: function (response) {
                     if (response.status == 1) {
-                        enviarDatos(response);
-                        //setTimeout(' window.location.href = "'+ baseUrl + "/programa.php" + '";', 1000);
+                        console.log("ok");
+                        $("#error").html('<div class="alert alert-success"> &nbsp; Bienvenido</div>');
+                        writeSession(response);
                     }
                     else {
-                        //CAso de error
-                        console.log("eror");
-                        console.log(response);
+                        console.log("nel");
+                        $("#error").html('<div class="alert alert-warning"> &nbsp; ' + response.mensaje + '</div>');
                     }
+                },
+                error : function (response) {
+                    response = response.responseJSON;
+                    $("#error").html('<div class="alert alert-warning"> &nbsp; ' + response.mensaje + '</div>');
                 }
-            }
-        );
+            });
+        } else {
+            $("#error").html('<div class="alert alert-warning"> &nbsp; Ingresa usuario y contraseña</div>');
+            setTimeout(function() {
+                $("#error").html('');
+            }, 3000);
+        }
     }
 );
 
-function enviarDatos(datos)
-{
+function writeSession(data) {
     $.ajax({
         type: 'POST',
-        url: authDir,
+        url: baseUrl + '/sesion/iniciar.php',
         crossDomain: true,
         data: {
-            user:datos,
+            id: data.user_id,
+            api_key: data.api_key,
+            key: data.key
         },
-        success:function(response){
+        success:function(response) {
             response = JSON.parse(response);
-            //console.log(response);
-
-            setTimeout(' window.location.href = "'+ response.url + '";', 1000);
+            setTimeout('window.location.href = "' + baseUrl +  response.url + '";', 1000);
         }
     });
 }

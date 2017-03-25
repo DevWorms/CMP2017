@@ -23,6 +23,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,13 +38,14 @@ public class ExpositoresFrgament extends Fragment {
     ArrayList<HashMap<String, String>> albumsList;
     ListView lista;
     AutoCompleteTextView acTextView;
+    ConnectionDetector cd;
     TextView txtTitulo;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_expo, container, false);
         SharedPreferences sp = getActivity().getSharedPreferences("prefe", Activity.MODE_PRIVATE);
         String inicioComo = sp.getString("Nombre","");
-
+        cd = new ConnectionDetector(getActivity());
        if (inicioComo.equals("invi")){
            apiKey = "0";
            userId = "1";
@@ -56,8 +58,15 @@ public class ExpositoresFrgament extends Fragment {
         txtTitulo= (TextView) view.findViewById(R.id.txtDescrip);
         txtTitulo.setText(nombre);
         lista=  (ListView) view.findViewById(R.id.lvExpo);
-        new getListaAlfabetica().execute();
+        if (!cd.isConnectingToInternet()) {
+            // Internet Connection is not present
+            Toast.makeText(getActivity(), "Se necesita internet", Toast.LENGTH_SHORT).show();
+            // stop executing code by return
 
+        }else{
+        new getListaAlfabetica().execute();
+        }
+        cd = new ConnectionDetector(getActivity());
         Button btnAlfabetico = (Button)view.findViewById(R.id.btnOrdAlf);
         btnAlfabetico.setOnClickListener(new Alfabetico());
 
@@ -80,9 +89,16 @@ public class ExpositoresFrgament extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
+                if (!cd.isConnectingToInternet()) {
+                    // Internet Connection is not present
+                    Toast.makeText(getActivity(), "Se necesita internet", Toast.LENGTH_SHORT).show();
+                    // stop executing code by return
+
+                }else{
                 lista.setAdapter(null);
                 albumsList.clear();
                 new getListaBuscar().execute();
+                }
             }
         });
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -91,6 +107,12 @@ public class ExpositoresFrgament extends Fragment {
                                     long arg3) {
                 // on selecting a single album
                 // TrackListActivity will be launched to show tracks inside the album
+                if (!cd.isConnectingToInternet()) {
+                    // Internet Connection is not present
+                    Toast.makeText(getActivity(), "Se necesita internet", Toast.LENGTH_SHORT).show();
+                    // stop executing code by return
+                    return;
+                }
                 String expoId= ((TextView)view.findViewById(R.id.txtid)).getText().toString();
                 Fragment fragment = new DetalleExpoFragment();
 
@@ -120,9 +142,14 @@ public class ExpositoresFrgament extends Fragment {
     class Alfabetico implements View.OnClickListener {
         public void onClick(View v) {
 
+            if (!cd.isConnectingToInternet()) {
+                // Internet Connection is not present
+                Toast.makeText(getActivity(), "Se necesita internet", Toast.LENGTH_SHORT).show();
+                // stop executing code by return
 
+            }else{
 
-            new getListaAlfabetica().execute();
+            new getListaAlfabetica().execute();}
 
 
 
@@ -132,10 +159,15 @@ public class ExpositoresFrgament extends Fragment {
     class Numerico implements View.OnClickListener {
         public void onClick(View v) {
 
+            if (!cd.isConnectingToInternet()) {
+                // Internet Connection is not present
+                Toast.makeText(getActivity(), "Se necesita internet", Toast.LENGTH_SHORT).show();
+                // stop executing code by return
 
+            }else {
 
-            new getListaNumerico().execute();
-
+                new getListaNumerico().execute();
+            }
 
 
         }

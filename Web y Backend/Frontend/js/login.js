@@ -18,12 +18,10 @@ $("#login").click(
                 dataType: "json",
                 success: function (response) {
                     if (response.status == 1) {
-                        console.log("ok");
                         $("#error").html('<div class="alert alert-success"> &nbsp; Bienvenido</div>');
                         writeSession(response);
                     }
                     else {
-                        console.log("nel");
                         $("#error").html('<div class="alert alert-warning"> &nbsp; ' + response.mensaje + '</div>');
                     }
                 },

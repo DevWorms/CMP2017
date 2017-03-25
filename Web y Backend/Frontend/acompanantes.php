@@ -85,6 +85,9 @@
                     <li>
                         <a href="puebla.php">Puebla</a>
                     </li>
+                    <li>
+                        <a href="banner.php">Banners</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

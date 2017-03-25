@@ -9,7 +9,7 @@
     <meta name="description" content="CMP 2017 - ADMIN">
     <meta name="author" content="DevWorms">
 
-    <title>CMP 2017 - Agregar Categoría</title>
+    <title>CMP 2017 - Agregar Transportación</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -61,7 +61,7 @@
             <!-- Sidebar -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li class="active">
+                    <li>
                         <a href="programa.php">Programa</a>
                     </li>
                     <li>
@@ -85,7 +85,7 @@
                     <li>
                         <a href="puebla.php">Puebla</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="banner.php">Banners</a>
                     </li>
                 </ul>
@@ -97,26 +97,51 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div id="error"></div>
-                <div class="row page-header__2">
-                    <div class="col-md-6 col-md-offset-1">
-                        <form method="POST" id="crearBanner"name="crearBanner">
-                            <div class="form-group">
-                                <label for="nombre">Nombre de la Categoría</label>
-                                    <br>
-                                <input type="text" name="nombre" id="nombre" class="form-control" required>
-                            </div> 
-                            <br>
-							
-							<button type="submit" class="btn basico" name="guardar" id="guardar"><i class="fa fa-plus-circle"></i> &nbsp;Agregar Categoría</button>
-                        </form>
+                <form enctype="multipart/form-data" method="POST" id="crearBanner"name="crearBanner">
+                    <div class="row page-header">
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <h4 style="color: #10375e;">Banners</h4>
+                        </div>
+
+                        <div class="col-xs-12 col-md-5" align="right">
+                            <h4>Subir nuevo banner</h4>
+                        </div>
                     </div>
-                    <div class="col-md-6"></div>
-                </div>
-                <!-- Fin Fila -->
+                    <!-- Fin Fila -->
+                    
+                    <div class="row">
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <h4><b>Banner </b></h4>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- Fin Fila -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-1"></div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-group">
+                                <label for="">Agregar Imágen</label>
+                                    <br>
+                                <input type="file" class="btn btn-default" id="archivo" name="archivo">
+                            </div> 
+                        </div>
+                    </div>
+                    <br>
+                    
+                    <div class="row">
+
+                        <col-xs-12 class="col-xs-offset-2 col-xs-8 col-md-2 col-md-offset-1">
+                            <button type="submit" class="btn basico btn-block" name="" id="guardar">Guardar</button>
+                        </col-xs-12>
+                    </div>
+                </form>
             </div>
             <!-- /.container-fluid -->
+
         </div>
         <!-- /#page-wrapper -->
+
     </div>
     <!-- /#wrapper -->
     
@@ -125,7 +150,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/js.php"></script>
     <script src="js/lodash.js"></script>
-    <script src="js/add-categoria.js"></script>
+    <script src="js/add-banner.js"></script>
 
 </body>
 </html>

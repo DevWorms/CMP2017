@@ -35,7 +35,7 @@ public class ListadoFragment extends Fragment {
     String seccion, nombre, tipoProgram, diaProgram, userId, apiKey, cateId, fecha, resp;
     ProgressDialog pDialog;
     ListView lista;
-
+    ConnectionDetector cd;
     ArrayList<HashMap<String, String>> albumsList;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,6 +48,7 @@ public class ListadoFragment extends Fragment {
         TextView txtTitulo= (TextView) view.findViewById(R.id.txtTituloListado);
         txtTitulo.setText(nombre);
         seccion =  getArguments().getString("seccion");
+        cd = new ConnectionDetector(getActivity());
         if(seccion.equals("programas")){
 
             tipoProgram =  getArguments().getString("tipoProgra");
@@ -76,7 +77,15 @@ public class ListadoFragment extends Fragment {
             }else {
                 fecha = "";
             }
-            new getListaPrograma().execute();
+            if (!cd.isConnectingToInternet()) {
+                // Internet Connection is not present
+                Toast.makeText(getActivity(), "Se necesita internet", Toast.LENGTH_SHORT).show();
+                // stop executing code by return
+
+            }else{
+                new getListaPrograma().execute();
+            }
+
 
 
         }else if(seccion.equals("acomp") || seccion.equals("social")){

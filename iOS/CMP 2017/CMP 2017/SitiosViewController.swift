@@ -19,6 +19,39 @@ class SitiosViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "fondo.png")!)
         
+        if Accesibilidad.isConnectedToNetwork() == true {
+            
+            let alert = UIAlertController(title: nil, message: "Cargando...", preferredStyle: .alert)
+            alert.view.tintColor = UIColor.black
+            
+            let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50)) as UIActivityIndicatorView
+            loadingIndicator.hidesWhenStopped = true
+            loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+            loadingIndicator.startAnimating()
+            
+            /*let callAction = UIAlertAction(title: "Cancelar", style: .Default, handler: {
+             action in
+             
+             self.hurryPrintMethods.cancelConnection()
+             return
+             })
+             alert.addAction(callAction)*/
+            
+            alert.view.addSubview(loadingIndicator)
+            self.present(alert, animated: true, completion: self.prueba)
+            
+            
+        } else {
+            let vc_alert = UIAlertController(title: "Sin conexión a internet", message: "Asegúrate de estar conectado a internet.", preferredStyle: .alert)
+            vc_alert.addAction(UIAlertAction(title: "OK",
+                                             style: UIAlertActionStyle.default,
+                                             handler: nil))
+            self.present(vc_alert, animated: true, completion: nil)
+        }
+    }
+    
+    func prueba() {
+        
         let apiKey = UserDefaults.standard.value(forKey: "api_key")
         let userID = UserDefaults.standard.value(forKey: "user_id")
         
@@ -47,6 +80,9 @@ class SitiosViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 self.datos.append(dato)
                             }
                         }
+                        
+                        //quita el alert
+                        self.dismiss(animated: false, completion: nil)
                         
                         self.tableView.reloadData()
                     }

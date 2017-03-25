@@ -101,33 +101,44 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func login(_ sender: Any) {
         
-        if     !((mail.text?.isEmpty)!)
-            && !((password.text?.isEmpty)!) {
+        if Accesibilidad.isConnectedToNetwork() == true {
+            print("Internet connection OK")
             
-            let parameterString = "user=\(mail.text!)&password=\(password.text!)"
-            
-            print(parameterString)
-            
-            let strUrl = "http://cmp.devworms.com/api/user/login"
-            
-            if let httpBody = parameterString.data(using: String.Encoding.utf8) {
-                var urlRequest = URLRequest(url: URL(string: strUrl)!)
-                urlRequest.httpMethod = "POST"
+            if     !((mail.text?.isEmpty)!)
+                && !((password.text?.isEmpty)!) {
                 
-                URLSession.shared.uploadTask(with: urlRequest, from: httpBody, completionHandler: parseJsonLogin).resume()
-            } else {
-                print("Error de codificación de caracteres.")
+                let parameterString = "user=\(mail.text!)&password=\(password.text!)"
+                
+                print(parameterString)
+                
+                let strUrl = "http://cmp.devworms.com/api/user/login"
+                
+                if let httpBody = parameterString.data(using: String.Encoding.utf8) {
+                    var urlRequest = URLRequest(url: URL(string: strUrl)!)
+                    urlRequest.httpMethod = "POST"
+                    
+                    URLSession.shared.uploadTask(with: urlRequest, from: httpBody, completionHandler: parseJsonLogin).resume()
+                } else {
+                    print("Error de codificación de caracteres.")
+                }
+                
+            }
+            else{
+                let vc_alert = UIAlertController(title: nil, message: "Información incompleta", preferredStyle: .alert)
+                
+                vc_alert.addAction(UIAlertAction(title: "OK",
+                                                 style: UIAlertActionStyle.default,
+                                                 handler: nil))
+                self.present(vc_alert, animated: true, completion: nil)
+                
             }
             
-        }
-        else{
-            let vc_alert = UIAlertController(title: nil, message: "Información incompleta", preferredStyle: .alert)
-            
+        } else {
+            let vc_alert = UIAlertController(title: "Sin conexión a internet", message: "Asegúrate de estar conectado a internet.", preferredStyle: .alert)
             vc_alert.addAction(UIAlertAction(title: "OK",
                                              style: UIAlertActionStyle.default,
                                              handler: nil))
             self.present(vc_alert, animated: true, completion: nil)
-            
         }
     }
     

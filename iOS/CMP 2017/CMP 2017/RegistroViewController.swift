@@ -17,11 +17,11 @@ class RegistroViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     @IBOutlet weak var tipoUser: UIPickerView!
     @IBOutlet weak var asociacion: UIPickerView!
     
-    var pickerTipo = ["Visitante", "Trabajador de Pemex", "Estudiante", "Staff", "Otro"]
-    var pickerAsociacion = ["Asociación 1", "Asociación 2", "Asociación 3", "Asociación 4", "Ninguna"]
+    var pickerTipo = ["Tipo de Usuario","Congresista", "Expositor", "Estudiante", "Acompañante"]
+    var pickerAsociacion = ["Asociación", "AIPM", "CIPM", "AMGE", "AMGP", "SPE / México"]
     
-    var selectedTipo = "Visitante"
-    var selectedAsociacion = "Asociación 1"
+    var selectedTipo = "Tipo de Usuario"
+    var selectedAsociacion = "Asociación"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,7 +74,7 @@ class RegistroViewController: UIViewController, UITextFieldDelegate, UIPickerVie
                             
                             UserDefaults.standard.setValue("Hola \(result["name"]!)", forKey: "name")
                             
-                            self.performSegue(withIdentifier: "login", sender: nil)
+                            self.performSegue(withIdentifier: "registro", sender: nil)
                             
                         }
                     }
@@ -105,37 +105,83 @@ class RegistroViewController: UIViewController, UITextFieldDelegate, UIPickerVie
 
     
     @IBAction func signUp(_ sender: Any) {
-        if     !((mail.text?.isEmpty)!)
-            && !((password.text?.isEmpty)!)
-            && !((name.text?.isEmpty)!)
-            && !((lastName.text?.isEmpty)!)
-            && !((claveInscripcion.text?.isEmpty)!) {
-            
-            let parameterString = "name=\(name.text!)&last_name=\(lastName.text!)&email=\(mail.text!)&password=\(password.text!)&clave=\(claveInscripcion.text!)&type=\(selectedTipo)&association=\(selectedAsociacion)"
-            
-            print(parameterString)
-            
-            let strUrl = "http://cmp.devworms.com/api/user/signup"
-            
-            if let httpBody = parameterString.data(using: String.Encoding.utf8) {
-                var urlRequest = URLRequest(url: URL(string: strUrl)!)
-                urlRequest.httpMethod = "POST"
+        
+        if Accesibilidad.isConnectedToNetwork() == true {
+            if     !((mail.text?.isEmpty)!)
+                && !((password.text?.isEmpty)!)
+                && !((name.text?.isEmpty)!)
+                && !((lastName.text?.isEmpty)!) {
                 
-                URLSession.shared.uploadTask(with: urlRequest, from: httpBody, completionHandler: parseJsonSignUp).resume()
-            } else {
-                print("Error de codificación de caracteres.")
+                var tipo: Any
+                
+                switch selectedTipo {
+                case "Tipo de Usuario":
+                    tipo = ""
+                case "Congresista":
+                    tipo = 1
+                case "Expositor":
+                    tipo = 2
+                case "Estudiante":
+                    tipo = 3
+                case "Acompañante":
+                    tipo = 4
+                default:
+                    tipo = ""
+                }
+                
+                var asociacion: Any
+                
+                switch selectedAsociacion {
+                case "Asociación":
+                    asociacion = ""
+                case "AIPM":
+                    asociacion = 1
+                case "CIPM":
+                    asociacion = 2
+                case "AMGE":
+                    asociacion = 3
+                case "AMGP":
+                    asociacion = 4
+                case "SPE / México":
+                    asociacion = 5
+                default:
+                    asociacion = ""
+                }
+                
+                let parameterString = "name=\(name.text!)&last_name=\(lastName.text!)&email=\(mail.text!)&password=\(password.text!)&clave=\(claveInscripcion.text!)&type=\(tipo)&association=\(asociacion)"
+                
+                print(parameterString)
+                
+                let strUrl = "http://cmp.devworms.com/api/user/signup"
+                
+                if let httpBody = parameterString.data(using: String.Encoding.utf8) {
+                    var urlRequest = URLRequest(url: URL(string: strUrl)!)
+                    urlRequest.httpMethod = "POST"
+                    
+                    URLSession.shared.uploadTask(with: urlRequest, from: httpBody, completionHandler: parseJsonSignUp).resume()
+                } else {
+                    print("Error de codificación de caracteres.")
+                }
+                
+            }
+            else{
+                let vc_alert = UIAlertController(title: nil, message: "Información incompleta", preferredStyle: .alert)
+                
+                vc_alert.addAction(UIAlertAction(title: "OK",
+                                                 style: UIAlertActionStyle.default,
+                                                 handler: nil))
+                self.present(vc_alert, animated: true, completion: nil)
+                
             }
             
-        }
-        else{
-            let vc_alert = UIAlertController(title: nil, message: "Información incompleta", preferredStyle: .alert)
-            
+        } else {
+            let vc_alert = UIAlertController(title: "Sin conexión a internet", message: "Asegúrate de estar conectado a internet.", preferredStyle: .alert)
             vc_alert.addAction(UIAlertAction(title: "OK",
                                              style: UIAlertActionStyle.default,
                                              handler: nil))
             self.present(vc_alert, animated: true, completion: nil)
-            
         }
+        
     }
     
     func parseJsonSignUp(data: Data?, urlResponse: URLResponse?, error: Error?) {

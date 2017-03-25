@@ -25,8 +25,17 @@ class TransportacionViewController: UIViewController, UITableViewDelegate, UITab
         
         let strUrl = "http://cmp.devworms.com/api/ruta/all/\(userID!)/\(apiKey!)"
         print(strUrl)
+        
+        if Accesibilidad.isConnectedToNetwork() == true {
+            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
             
-        URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
+        } else {
+            let vc_alert = UIAlertController(title: "Sin conexión a internet", message: "Asegúrate de estar conectado a internet.", preferredStyle: .alert)
+            vc_alert.addAction(UIAlertAction(title: "OK",
+                                             style: UIAlertActionStyle.default,
+                                             handler: nil))
+            self.present(vc_alert, animated: true, completion: nil)
+        }
         
     }
     

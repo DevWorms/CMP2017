@@ -2,12 +2,20 @@ package com.cmp2017.devworms.cmp2017;
 
 import android.app.Activity;
 import android.app.Application;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -22,9 +30,18 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 public class MenuPrincipal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     String nombre, inicioComo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +49,9 @@ public class MenuPrincipal extends AppCompatActivity
         setContentView(R.layout.activity_menu_principal);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+
         SharedPreferences sp = getSharedPreferences("prefe", Activity.MODE_PRIVATE);
         inicioComo = sp.getString("Nombre","");
         if(inicioComo.equals("invi")){
@@ -47,15 +67,35 @@ public class MenuPrincipal extends AppCompatActivity
         Log.d("nombre : ", "> " + nombre);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
-        toggle.syncState();
 
+
+
+
+        toggle.setDrawerIndicatorEnabled(false);
+        toggle.setHomeAsUpIndicator(R.drawable.ic_menu_app);
+        toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
         navigationView.setNavigationItemSelectedListener(MenuPrincipal.this);
         toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
+
+        toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                if (drawer.isDrawerOpen(GravityCompat.START)) {
+                    drawer.closeDrawer(GravityCompat.START);
+                } else {
+                    drawer.openDrawer(GravityCompat.START);
+                }
+            }
+        });
+
+
         getSupportActionBar().setTitle(nombre);
         getFragmentManager().beginTransaction()
                 .replace(R.id.actividad, new MenuFragment()).addToBackStack(null).commit();
@@ -114,14 +154,13 @@ public class MenuPrincipal extends AppCompatActivity
 
         if (id == R.id.nav_mi_perfil) {
             if(inicioComo.equals("invi")){
-                Toast.makeText(MenuPrincipal.this,"Registrate para activar esta seccion",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MenuPrincipal.this,"Registrate para activar esta sección",Toast.LENGTH_SHORT).show();
+
+            }else{
                 getFragmentManager().beginTransaction()
                         .replace(R.id.actividad, new MiPerfilFragment()).commit();
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
-            }else{
-
-                Toast.makeText(MenuPrincipal.this,"En Desarrollo",Toast.LENGTH_SHORT).show();
 
 
             }
@@ -129,7 +168,7 @@ public class MenuPrincipal extends AppCompatActivity
             return true;
         } else if (id == R.id.nav_agenda) {
             if(inicioComo.equals("invi")){
-                Toast.makeText(MenuPrincipal.this,"Registrate para activar esta seccion",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MenuPrincipal.this,"Registrate para activar esta sección",Toast.LENGTH_SHORT).show();
 
             }else{
 
@@ -140,7 +179,7 @@ public class MenuPrincipal extends AppCompatActivity
 
         } else if (id == R.id.nav_expositores) {
             if(inicioComo.equals("invi")){
-                Toast.makeText(MenuPrincipal.this,"Registrate para activar esta seccion",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MenuPrincipal.this,"Registrate para activar esta sección",Toast.LENGTH_SHORT).show();
 
             }else{
 
@@ -150,7 +189,7 @@ public class MenuPrincipal extends AppCompatActivity
             }
         } else if (id == R.id.nav_encuestas) {
             if(inicioComo.equals("invi")){
-                Toast.makeText(MenuPrincipal.this,"Registrate para activar esta seccion",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MenuPrincipal.this,"Registrate para activar esta sección",Toast.LENGTH_SHORT).show();
 
             }else{
 
@@ -160,7 +199,7 @@ public class MenuPrincipal extends AppCompatActivity
             }
         } else if (id == R.id.nav_contactos) {
             if(inicioComo.equals("invi")){
-                Toast.makeText(MenuPrincipal.this,"Registrate para activar esta seccion",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MenuPrincipal.this,"Registrate para activar esta sección",Toast.LENGTH_SHORT).show();
 
             }else{
 
@@ -170,7 +209,7 @@ public class MenuPrincipal extends AppCompatActivity
             }
         } else if (id == R.id.nav_notifiaciones) {
             if(inicioComo.equals("invi")){
-                Toast.makeText(MenuPrincipal.this,"Registrate para activar esta seccion",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MenuPrincipal.this,"Registrate para activar esta sección",Toast.LENGTH_SHORT).show();
 
             }else{
 
@@ -180,7 +219,7 @@ public class MenuPrincipal extends AppCompatActivity
             }
         } else if (id == R.id.nav_informacion) {
             if(inicioComo.equals("invi")){
-                Toast.makeText(MenuPrincipal.this,"Registrate para activar esta seccion",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MenuPrincipal.this,"Registrate para activar esta sección",Toast.LENGTH_SHORT).show();
 
             }else{
 
@@ -209,6 +248,8 @@ public class MenuPrincipal extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 
 
 }

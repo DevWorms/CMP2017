@@ -1,13 +1,18 @@
 <?php
-    //creo la nueva
+if (isset($_POST['id']) && isset($_POST['api_key'])) {
     session_start();
-    $datos = $_POST["user"];
-    $res["url"] = "/";
-    if($datos["status"] == 1)
-    {
-        $_SESSION["user_id"] = $datos["user_id"];
-        $_SESSION["api_key"] = $datos["api_key"];
-        $res["url"] = "/programa.php";
-    }
-    echo json_encode($res);
+    $_SESSION["user_id"] = $_POST['id'];
+    $_SESSION["api_key"] = $_POST['api_key'];
+    $_SESSION["key"] = $_POST['key'];
+    session_write_close();
 
+    $res['estado'] = 1;
+    $res["url"] = "/programa.php";
+    echo json_encode($res);
+} else {
+    $res['estado'] = 0;
+    $res["url"] = "/";
+    $res['mensaje'] = "Ingresa un usuario y contraseña";
+
+    echo json_encode($res);
+}

@@ -72,6 +72,20 @@
 		3B396C151E773C3900C4611E /* SitiosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SitiosViewController.swift; sourceTree = "<group>"; };
 		3B4608101E7CD687005264D4 /* ResultadosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultadosViewController.swift; sourceTree = "<group>"; };
 		3B4AC3751E858A2B00570A99 /* Accesibilidad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Accesibilidad.swift; sourceTree = "<group>"; };
+		3B4AC3781E85ED1400570A99 /* Muli-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Black.ttf"; sourceTree = "<group>"; };
+		3B4AC3791E85ED1400570A99 /* Muli-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-BlackItalic.ttf"; sourceTree = "<group>"; };
+		3B4AC37A1E85ED1400570A99 /* Muli-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Bold.ttf"; sourceTree = "<group>"; };
+		3B4AC37B1E85ED1400570A99 /* Muli-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-BoldItalic.ttf"; sourceTree = "<group>"; };
+		3B4AC37C1E85ED1400570A99 /* Muli-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-ExtraBold.ttf"; sourceTree = "<group>"; };
+		3B4AC37D1E85ED1400570A99 /* Muli-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		3B4AC37E1E85ED1400570A99 /* Muli-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-ExtraLight.ttf"; sourceTree = "<group>"; };
+		3B4AC37F1E85ED1400570A99 /* Muli-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		3B4AC3801E85ED1400570A99 /* Muli-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Italic.ttf"; sourceTree = "<group>"; };
+		3B4AC3811E85ED1400570A99 /* Muli-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Light.ttf"; sourceTree = "<group>"; };
+		3B4AC3821E85ED1400570A99 /* Muli-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-LightItalic.ttf"; sourceTree = "<group>"; };
+		3B4AC3831E85ED1400570A99 /* Muli-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Regular.ttf"; sourceTree = "<group>"; };
+		3B4AC3841E85ED1400570A99 /* Muli-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-SemiBold.ttf"; sourceTree = "<group>"; };
+		3B4AC3851E85ED1400570A99 /* Muli-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		3B5B8F6D1E7083ED00F0D6AA /* CMP 2017.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CMP 2017.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B5B8F701E7083ED00F0D6AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B5B8F721E7083ED00F0D6AA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +130,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B4AC3771E85ECFF00570A99 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				3B4AC3781E85ED1400570A99 /* Muli-Black.ttf */,
+				3B4AC3791E85ED1400570A99 /* Muli-BlackItalic.ttf */,
+				3B4AC37A1E85ED1400570A99 /* Muli-Bold.ttf */,
+				3B4AC37B1E85ED1400570A99 /* Muli-BoldItalic.ttf */,
+				3B4AC37C1E85ED1400570A99 /* Muli-ExtraBold.ttf */,
+				3B4AC37D1E85ED1400570A99 /* Muli-ExtraBoldItalic.ttf */,
+				3B4AC37E1E85ED1400570A99 /* Muli-ExtraLight.ttf */,
+				3B4AC37F1E85ED1400570A99 /* Muli-ExtraLightItalic.ttf */,
+				3B4AC3801E85ED1400570A99 /* Muli-Italic.ttf */,
+				3B4AC3811E85ED1400570A99 /* Muli-Light.ttf */,
+				3B4AC3821E85ED1400570A99 /* Muli-LightItalic.ttf */,
+				3B4AC3831E85ED1400570A99 /* Muli-Regular.ttf */,
+				3B4AC3841E85ED1400570A99 /* Muli-SemiBold.ttf */,
+				3B4AC3851E85ED1400570A99 /* Muli-SemiBoldItalic.ttf */,
+			);
+			name = Font;
+			sourceTree = "<group>";
+		};
 		3B5B8F641E7083EC00F0D6AA = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +174,7 @@
 		3B5B8F6F1E7083ED00F0D6AA /* CMP 2017 */ = {
 			isa = PBXGroup;
 			children = (
+				3B4AC3771E85ECFF00570A99 /* Font */,
 				3B5B8F701E7083ED00F0D6AA /* AppDelegate.swift */,
 				3B5B8F721E7083ED00F0D6AA /* ViewController.swift */,
 				3B396BF51E70DF2200C4611E /* LoginViewController.swift */,

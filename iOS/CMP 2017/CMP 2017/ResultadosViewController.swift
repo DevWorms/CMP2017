@@ -40,34 +40,43 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
         let apiKey = UserDefaults.standard.value(forKey: "api_key")
         let userID = UserDefaults.standard.value(forKey: "user_id")
         
-        switch self.seccion {
-        case 1:
-            let parameterString = "user_id=\(userID!)&api_key=\(apiKey!)&categoria_id=\(tipoPrograma)&fecha=\(diaPrograma)"
-            
-            print(parameterString)
-            
-            let strUrl = "http://cmp.devworms.com/api/programa/search"
-            
-            if let httpBody = parameterString.data(using: String.Encoding.utf8) {
-                var urlRequest = URLRequest(url: URL(string: strUrl)!)
-                urlRequest.httpMethod = "POST"
+        if Accesibilidad.isConnectedToNetwork() == true {
+        
+            switch self.seccion {
+            case 1:
+                let parameterString = "user_id=\(userID!)&api_key=\(apiKey!)&categoria_id=\(tipoPrograma)&fecha=\(diaPrograma)"
                 
-                URLSession.shared.uploadTask(with: urlRequest, from: httpBody, completionHandler: parseJson).resume()
-            } else {
-                print("Error de codificación de caracteres.")
+                print(parameterString)
+                
+                let strUrl = "http://cmp.devworms.com/api/programa/search"
+                
+                if let httpBody = parameterString.data(using: String.Encoding.utf8) {
+                    var urlRequest = URLRequest(url: URL(string: strUrl)!)
+                    urlRequest.httpMethod = "POST"
+                    
+                    URLSession.shared.uploadTask(with: urlRequest, from: httpBody, completionHandler: parseJson).resume()
+                } else {
+                    print("Error de codificación de caracteres.")
+                }
+            case 3:
+                let strUrl = "http://cmp.devworms.com/api/acompanantes/all/\(userID!)/\(apiKey!)"
+                print(strUrl)
+                
+                URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
+            case 4:
+                let strUrl = "http://cmp.devworms.com/api/deportivos/all/\(userID!)/\(apiKey!)"
+                print(strUrl)
+                
+                URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
+                
+            default: break
             }
-        case 3:
-            let strUrl = "http://cmp.devworms.com/api/acompanantes/all/\(userID!)/\(apiKey!)"
-            print(strUrl)
-            
-            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
-        case 4:
-            let strUrl = "http://cmp.devworms.com/api/deportivos/all/\(userID!)/\(apiKey!)"
-            print(strUrl)
-            
-            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
-            
-        default: break
+        } else {
+            let vc_alert = UIAlertController(title: "Sin conexión a internet", message: "Asegúrate de estar conectado a internet.", preferredStyle: .alert)
+            vc_alert.addAction(UIAlertAction(title: "OK",
+                                             style: UIAlertActionStyle.default,
+                                             handler: nil))
+            self.present(vc_alert, animated: true, completion: nil)
         }
     }
     

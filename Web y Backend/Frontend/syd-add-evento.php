@@ -1,3 +1,4 @@
+<?php require dirname(__FILE__) . '/sesion/validar.php'; ?>
 <!DOCTYPE html>
 <html lang="">
 
@@ -83,6 +84,9 @@
                     </li>
                     <li>
                         <a href="puebla.php">Puebla</a>
+                    </li>
+                    <li>
+                        <a href="banner.php">Banners</a>
                     </li>
                 </ul>
             </div>

@@ -842,41 +842,6 @@ class DatabaseSeeder extends Seeder
                 ]);
 
                 /*
-                 * Rutas
-                 */
-                \App\Ruta::create([
-                    'user_id' => 1,
-                    'pdf_file' => 11,
-                    'titulo' => "Info de tu ruta " . $i,
-                    'descripcion' => "Al fondo a la derecha",
-                    'user_id_asignado' => 1
-                ]);
-
-                \App\Ruta::create([
-                    'user_id' => 1,
-                    'pdf_file' => 11,
-                    'titulo' => "Info de tu ruta " . $i,
-                    'descripcion' => "Al fondo a la derecha",
-                    'user_id_asignado' => 2
-                ]);
-
-                \App\Ruta::create([
-                    'user_id' => 1,
-                    'pdf_file' => 11,
-                    'titulo' => "Info de tu ruta " . $i,
-                    'descripcion' => "Al fondo a la derecha",
-                    'user_id_asignado' => 3
-                ]);
-
-                \App\Ruta::create([
-                    'user_id' => 1,
-                    'pdf_file' => 11,
-                    'titulo' => "Info de tu ruta " . $i,
-                    'descripcion' => "Al fondo a la derecha",
-                    'user_id_asignado' => 4
-                ]);
-
-                /*
                  * Notificaciones de los usuarios
                  */
                 \App\Notificacion::create([
@@ -921,6 +886,27 @@ class DatabaseSeeder extends Seeder
                     'telefono' => $faker->phoneNumber
                 ]);
             }
+
+            \App\Ruta::create([
+                'user_id' => 1,
+                'pdf_file' => 11,
+                'titulo' => "Info de tu ruta 1",
+                'descripcion' => "Al fondo a la derecha"
+            ]);
+
+            \App\Ruta::create([
+                'user_id' => 1,
+                'pdf_file' => 11,
+                'titulo' => "Info de tu ruta 2",
+                'descripcion' => "Al fondo a la derecha"
+            ]);
+
+            \App\Ruta::create([
+                'user_id' => 1,
+                'pdf_file' => 11,
+                'titulo' => "Info de tu ruta 3",
+                'descripcion' => "Al fondo a la derecha"
+            ]);
 
             \App\PueblaMapa::create([
                 'user_id' => 1,

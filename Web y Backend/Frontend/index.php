@@ -19,29 +19,27 @@
 </head>
 
 <body>
-
    <div class="container">
 		<div class="title-container">
 			<h2 class="animated zoomIn" style="letter-spacing: 2px;"><b>Inicio de Sesión</b></h2>
 		</div>
-		<div class="login-container">            
-	            <div class="form-box" align="center">
-	            		<p for="">Usuario</p>
-	                    <input name="user" id="id_usuario" type="text">
-						<br><br>
-	                    <p for="">Contraseña</p>
-	                    <input type="password" id="contrasena">
-	                    <br><br>
-	                    <button class="btn app-boton btn-block btn-lg animated pulse" id="login">Ingresar</button>
-	            </div>
-	        </div>  
+		<div class="login-container">
+            <div id="error"></div>
+            <div class="form-box" align="center">
+                <p>Usuario</p>
+                <input name="id_usuario" id="id_usuario" type="text" style="color: black">
+                <br><br>
+                <p>Contraseña</p>
+                <input type="password" name="contrasena" id="contrasena" style="color: black">
+                <br><br>
+                <button class="btn app-boton btn-block btn-lg animated pulse" id="login">Ingresar</button>
+            </div>
+        </div>
 	</div>
-
     
     <!-- Scripts -->
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/login.js"></script>
 </body>
-
 </html>

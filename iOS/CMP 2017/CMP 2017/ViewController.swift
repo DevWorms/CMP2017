@@ -14,7 +14,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "fondo.png")!)
+        //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "fondoCMP.png")!)
     }
 
     override func didReceiveMemoryWarning() {

@@ -52,53 +52,55 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
         
         searchBar.delegate = self
         
-        self.alfabeticamente()
+        self.alfabeticamente(alph: true)
      
     }
     
     @IBAction func alfabetoAction(_ sender: Any) {
-        self.alfabeticamente()
+        self.alfabeticamente(alph: true)
     }
     
     @IBAction func standAction(_ sender: Any) {
-        self.stand()
+        self.alfabeticamente(alph: false)
     }
     
     
-    func alfabeticamente() {
+    func alfabeticamente(alph: Bool) {
         let apiKey = UserDefaults.standard.value(forKey: "api_key")
         let userID = UserDefaults.standard.value(forKey: "user_id")
         
-        alphabet = true
-        
         var strUrl = ""
         
-        if self.seccion == 5 { // patrocinadores
-            strUrl = "http://cmp.devworms.com/api/patrocinador/order/name/\(userID!)/\(apiKey!)"
+        if alph {
+            
+            alphabet = true
+            
+            if self.seccion == 5 { // patrocinadores
+                strUrl = "http://cmp.devworms.com/api/patrocinador/order/name/\(userID!)/\(apiKey!)"
+            } else {
+                strUrl = "http://cmp.devworms.com/api/expositor/order/name/\(userID!)/\(apiKey!)"
+            }
         } else {
-            strUrl = "http://cmp.devworms.com/api/expositor/order/name/\(userID!)/\(apiKey!)"
+            
+            alphabet = false
+            
+            if self.seccion == 5 { // patrocinadores
+                strUrl = "http://cmp.devworms.com/api/patrocinador/order/stand/\(userID!)/\(apiKey!)"
+            } else {
+                strUrl = "http://cmp.devworms.com/api/expositor/order/stand/\(userID!)/\(apiKey!)"
+            }
         }
         
         print(strUrl)
-        URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
-    }
-    
-    func stand() {
-        let apiKey = UserDefaults.standard.value(forKey: "api_key")
-        let userID = UserDefaults.standard.value(forKey: "user_id")
-        
-        alphabet = false
-        
-        var strUrl = ""
-        
-        if self.seccion == 5 { // patrocinadores
-            strUrl = "http://cmp.devworms.com/api/patrocinador/order/stand/\(userID!)/\(apiKey!)"
+        if Accesibilidad.isConnectedToNetwork() == true {
+            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
         } else {
-            strUrl = "http://cmp.devworms.com/api/expositor/order/stand/\(userID!)/\(apiKey!)"
+            let vc_alert = UIAlertController(title: "Sin conexión a internet", message: "Asegúrate de estar conectado a internet.", preferredStyle: .alert)
+            vc_alert.addAction(UIAlertAction(title: "OK",
+                                             style: UIAlertActionStyle.default,
+                                             handler: nil))
+            self.present(vc_alert, animated: true, completion: nil)
         }
-        
-        print(strUrl)
-        URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
     }
     
     func parseJson(data: Data?, urlResponse: URLResponse?, error: Error?) {

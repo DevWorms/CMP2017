@@ -81,7 +81,7 @@ public class JSONParser {
                 json = respuesta.body().string().toString();
 
             }else{
-                json = "error"  ;
+                json = "error "+ respuesta.body().string().toString();
             }
         } catch (Exception e) {
             Log.e("Buffer Error", "Error converting result " + e.toString());

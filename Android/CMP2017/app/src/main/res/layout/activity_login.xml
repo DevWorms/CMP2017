@@ -20,7 +20,8 @@
         android:layout_marginTop="80dp"
         android:text="Correo Electrónico"
         android:textColor="#2844a8"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        />
 
     <EditText
         android:id="@+id/editCorreo"

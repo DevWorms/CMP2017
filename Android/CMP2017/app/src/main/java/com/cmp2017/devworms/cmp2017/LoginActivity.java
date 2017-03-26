@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -60,7 +61,18 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        String font_path = "font/muliregular.ttf";  //definimos un STRING con el valor PATH ( o ruta por                                                                                    //donde tiene que buscar ) de nuetra fuente
+
+        Typeface TF = Typeface.createFromAsset(getAssets(),font_path);
+
         // Set up the login form.
+        TextView txtCorreo = (TextView) findViewById(R.id.textViewCorreo);
+        TextView txtPass = (TextView) findViewById(R.id.textViewPass);
+
+        //llamanos a la CLASS TYPEFACE y la definimos con un CREATE desde                                                    //ASSETS con la ruta STRING
+
+        txtCorreo.setTypeface(TF);   //finalmente aplicamos TYPEFACE al TEXTVIEW
+        txtPass.setTypeface(TF);
 
         correo = (EditText) findViewById(R.id.editCorreo);
         pass = (EditText) findViewById(R.id.editPass);
@@ -129,7 +141,8 @@ public class LoginActivity extends AppCompatActivity {
 
             String respuesta= jsp.makeHttpRequest("http://cmp.devworms.com/api/user/login","POST",body,"");
             Log.d("LoginRes : ", "> " + respuesta);
-            if (respuesta != "error") {
+            String rest = respuesta.substring(0,5);
+            if (!rest.equals("error")) {
                 try {
                     JSONObject json = new JSONObject(respuesta);
 

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -40,6 +42,25 @@ public class Registro extends AppCompatActivity {
         spiAso = (Spinner)findViewById(R.id.spiAso);
         spiTipoUsu.setPrompt("Tipo de Usuarios");
         spiAso.setPrompt("Asociaciones");
+        String font_path = "font/mulibold.ttf";  //definimos un STRING con el valor PATH ( o ruta por                                                                                    //donde tiene que buscar ) de nuetra fuente
+
+        Typeface TF = Typeface.createFromAsset(getAssets(),font_path);
+        TextView txtNombreR = (TextView) findViewById(R.id.textViewNombreR);
+        TextView txtApellidoR = (TextView) findViewById(R.id.textViewApellidoR);
+        TextView txtCorreoR = (TextView) findViewById(R.id.textViewCorreoR);
+        TextView txtContraR = (TextView) findViewById(R.id.textViewContraseñaR);
+        TextView txtClaveR = (TextView) findViewById(R.id.textViewClaveR);
+        TextView txtTipoR = (TextView) findViewById(R.id.textViewTipoR);
+        TextView txtAsociaR = (TextView) findViewById(R.id.textViewAsociaciónR);
+
+        txtNombreR.setTypeface(TF);
+        txtApellidoR.setTypeface(TF);
+        txtCorreoR.setTypeface(TF);
+        txtContraR.setTypeface(TF);
+        txtClaveR.setTypeface(TF);
+        txtTipoR.setTypeface(TF);
+        txtAsociaR.setTypeface(TF);
+
 
         ArrayAdapter adapterTiposUsu = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_dropdown_item, tipoUsuarios);
@@ -71,9 +92,17 @@ public class Registro extends AppCompatActivity {
 
 
 
-                if( nom.equals("") || nom == null ||ape.equals("") || ape == null ||  correo.equals("") || correo == null || contra.equals("") || contra == null  ) {
-                    Toast.makeText(Registro.this,"Falta llenar campos.",Toast.LENGTH_SHORT).show();
-                }else{
+                if( nom.equals("") || nom == null ) {
+                    Toast.makeText(Registro.this,"Debes ingresar tu Nombre",Toast.LENGTH_SHORT).show();
+                }else if(ape.equals("") || ape == null){
+                    Toast.makeText(Registro.this,"Debes ingresar tu Apellido",Toast.LENGTH_SHORT).show();
+                }else if(correo.equals("") || correo == null ){
+                    Toast.makeText(Registro.this,"Debes ingresar tu correo",Toast.LENGTH_SHORT).show();
+                }
+                else if(contra.equals("") || contra == null || contra.length()<=5 ){
+                    Toast.makeText(Registro.this,"La contraseña debe de ser de al menos 6 dígitos",Toast.LENGTH_SHORT).show();
+                }
+                else{
                     cd = new ConnectionDetector(getApplicationContext());
 
                     // Check if Internet present
@@ -143,7 +172,8 @@ class getRegstroAT extends AsyncTask<String, String, String> {
 
             String respuesta= jsp.makeHttpRequest("http://cmp.devworms.com/api/user/signup","POST",body,"");
             Log.d("Registro : ", "> " + respuesta);
-            if(respuesta!="error"){
+            String rest = respuesta.substring(0,5);
+            if( !rest.equals("error")){
                 try{
                     JSONObject json = new JSONObject(respuesta);
 
@@ -168,6 +198,20 @@ class getRegstroAT extends AsyncTask<String, String, String> {
             }else {
 
                 resp="Usuario ya registrado";
+                try{
+                    String errorRest = respuesta.substring(6,respuesta.length());
+                    JSONObject json = new JSONObject(errorRest);
+
+                    String message = json.getString("mensaje");
+                    if(message.equals("The email must be a valid email address."))
+                    {
+                        resp="Debes ingresar un correo electrónico válido";
+                    }
+
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
 
@@ -183,7 +227,7 @@ class getRegstroAT extends AsyncTask<String, String, String> {
             // dismiss the dialog after getting all albums
             Log.d("RegistroResp : ", "> " + resp);
             pDialog.dismiss();
-            if(resp!="Usuario ya registrado"){
+            if(resp.equals("Perfil creado correctamente")){
                 Intent i = new Intent(Registro.this, MenuPrincipal.class);
                 i.putExtra("parametro", "no");
                 startActivity(i);

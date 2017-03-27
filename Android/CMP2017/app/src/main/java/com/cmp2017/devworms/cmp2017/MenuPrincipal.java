@@ -172,7 +172,7 @@ public class MenuPrincipal extends AppCompatActivity
 
             }else{
 
-                Toast.makeText(MenuPrincipal.this,"En Desarrollo",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MenuPrincipal.this,"Próximamente",Toast.LENGTH_SHORT).show();
 
 
             }
@@ -183,7 +183,7 @@ public class MenuPrincipal extends AppCompatActivity
 
             }else{
 
-                Toast.makeText(MenuPrincipal.this,"En Desarrollo",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MenuPrincipal.this,"Próximamente",Toast.LENGTH_SHORT).show();
 
 
             }
@@ -193,7 +193,7 @@ public class MenuPrincipal extends AppCompatActivity
 
             }else{
 
-                Toast.makeText(MenuPrincipal.this,"En Desarrollo",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MenuPrincipal.this,"Próximamente",Toast.LENGTH_SHORT).show();
 
 
             }
@@ -203,7 +203,7 @@ public class MenuPrincipal extends AppCompatActivity
 
             }else{
 
-                Toast.makeText(MenuPrincipal.this,"En Desarrollo",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MenuPrincipal.this,"Próximamente",Toast.LENGTH_SHORT).show();
 
 
             }
@@ -213,7 +213,7 @@ public class MenuPrincipal extends AppCompatActivity
 
             }else{
 
-                Toast.makeText(MenuPrincipal.this,"En Desarrollo",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MenuPrincipal.this,"Próximamente",Toast.LENGTH_SHORT).show();
 
 
             }
@@ -223,7 +223,7 @@ public class MenuPrincipal extends AppCompatActivity
 
             }else{
 
-                Toast.makeText(MenuPrincipal.this,"En Desarrollo",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MenuPrincipal.this,"Próximamente",Toast.LENGTH_SHORT).show();
 
 
             }

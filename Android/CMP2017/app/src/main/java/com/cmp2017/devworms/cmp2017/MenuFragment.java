@@ -50,8 +50,14 @@ public class MenuFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
         SharedPreferences sp = getActivity().getSharedPreferences("prefe", Activity.MODE_PRIVATE);
         String inicioComo = sp.getString("Nombre", "");
+
         apiKey = sp.getString("APIkey", "");
         userId = sp.getString("IdUser", "");
+        if(inicioComo.equals("invi")){
+            apiKey = "0";
+            userId = "1";
+        }
+
 
         imageAnim = (ImageView) view.findViewById(R.id.imgBanner);
 
@@ -242,7 +248,7 @@ public void cambioBanner(){
     class SecMapa implements View.OnClickListener {
         public void onClick(View v) {
 
-            Toast.makeText(getActivity(),"En Desarrollo",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),"Próximamente",Toast.LENGTH_SHORT).show();
             /*getFragmentManager().beginTransaction()
                     .replace(R.id.actividad, new MapaFragment()).addToBackStack(null).commit();*/
 
@@ -252,7 +258,7 @@ public void cambioBanner(){
 
     class SecTrans implements View.OnClickListener {
         public void onClick(View v) {
-            Toast.makeText(getActivity(),"En Desarrollo",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),"Próximamente",Toast.LENGTH_SHORT).show();
 
 
             /*getFragmentManager().beginTransaction()

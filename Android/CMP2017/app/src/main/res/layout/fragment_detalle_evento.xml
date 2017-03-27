@@ -29,7 +29,7 @@
             android:background="@android:color/transparent"
             android:minHeight="80dp"
             android:scaleType="fitXY"
-            android:src="@drawable/imagefotogolf" />
+             />
 
 
         <!-- Song Title -->

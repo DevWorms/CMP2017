@@ -44,8 +44,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:alpha="0.5"
-            android:background="#ffffff"
+            android:background="?android:attr/colorBackgroundFloating"
             android:ems="10"
             android:hint="Buscar">
 
@@ -80,9 +79,10 @@
             android:id="@+id/lvExpo"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="1dp"
-            android:cacheColorHint="#00000000"
 
+            android:cacheColorHint="#00000000"
             android:dividerHeight="1dp"
             android:footerDividersEnabled="false"
             android:headerDividersEnabled="false"

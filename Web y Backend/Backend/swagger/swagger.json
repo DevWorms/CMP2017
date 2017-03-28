@@ -2191,8 +2191,8 @@
                 "tags": [
                     "notificacion"
                 ],
-                "summary": "Devuelve todas las notificaciones no leidas",
-                "description": "Devuelve todas las notificaciones no leidas de un usuario",
+                "summary": "Marca una notificación como leída",
+                "description": "Marca una notificación como leída",
                 "produces": [
                     "application/json"
                 ],

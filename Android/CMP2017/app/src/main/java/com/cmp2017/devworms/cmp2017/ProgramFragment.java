@@ -2,6 +2,7 @@ package com.cmp2017.devworms.cmp2017;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ProgramFragment extends Fragment {
@@ -26,6 +28,11 @@ public class ProgramFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_program, container, false);
         spinTipoEven = (Spinner)view.findViewById(R.id.spinTipoEven);
         spinDia = (Spinner)view.findViewById(R.id.spinDia);
+        TextView txtTituloP = (TextView) view.findViewById(R.id.txtTituloP);
+        String font_path = "font/mulibold.ttf";  //definimos un STRING con el valor PATH ( o ruta por                                                                                    //donde tiene que buscar ) de nuetra fuente
+
+        Typeface TF = Typeface.createFromAsset(getActivity().getAssets(),font_path);
+        txtTituloP.setTypeface(TF);
         cd = new ConnectionDetector(getActivity());
         ArrayAdapter adapterTiposEven = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_dropdown_item, tipoEvento);

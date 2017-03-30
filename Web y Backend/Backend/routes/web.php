@@ -139,6 +139,7 @@ $app->get('/api/ruta/all/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' =
 $app->get('/api/ruta/detail/{user_id}/{api_key}/{ruta_id}', ['middleware' => 'cors', 'uses' => 'RutasController@getRuta']);
 $app->post('/api/ruta/update', ['middleware' => 'cors', 'uses' => 'RutasController@update']);
 $app->get('/api/ruta/delete/{user_id}/{api_key}/{programa_id}', ['middleware' => 'cors', 'uses' => 'RutasController@delete']);
+$app->get('/api/ruta/paginate/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'RutasController@paginate']);
 
 /*
  * Conoce puebla...
@@ -155,6 +156,9 @@ $app->post('/api/puebla/telefono/update', ['middleware' => 'cors', 'uses' => 'Co
 $app->get('/api/puebla/telefono/delete/{user_id}/{api_key}/{banner_id}', ['middleware' => 'cors', 'uses' => 'ConocePueblaController@deleteTelefono']);
 $app->get('/api/puebla/mapa/delete/{user_id}/{api_key}/{banner_id}', ['middleware' => 'cors', 'uses' => 'ConocePueblaController@deleteMapa']);
 
+$app->get('/api/puebla/telefono/paginate/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'ConocePueblaController@paginateTelefonos']);
+$app->get('/api/puebla/sitio/paginate/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'ConocePueblaController@paginateSitios']);
+
 /*
  * Banners
  */
@@ -162,3 +166,4 @@ $app->get('/api/banners/all/{user_id}/{api_key}', ['middleware' => 'cors', 'uses
 $app->post('/api/banners/create', ['middleware' => 'cors', 'uses' => 'BannerController@create']);
 $app->post('/api/banners/update', ['middleware' => 'cors', 'uses' => 'BannerController@update']);
 $app->get('/api/banners/delete/{user_id}/{api_key}/{banner_id}', ['middleware' => 'cors', 'uses' => 'BannerController@delete']);
+$app->get('/api/banners/paginate/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'BannerController@paginate']);

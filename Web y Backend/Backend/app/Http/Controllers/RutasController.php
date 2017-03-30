@@ -339,4 +339,27 @@ class RutasController extends Controller {
             return response()->json($res, 500);
         }
     }
+
+    public function paginate($user_id, $api_key) {
+        try {
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+            $expositores = Ruta::orderBy('id', 'DESC')->paginate(5);
+            foreach ($expositores as $expositor) {
+                $expositor = $this->returnRuta($expositor);
+            }
+
+            $res['status'] = 1;
+            $res['mensaje'] = "success";
+            $res['rutas'] = $expositores;
+            return response()->json($res, 200);
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
 }

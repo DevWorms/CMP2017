@@ -777,4 +777,52 @@ class ConocePueblaController extends Controller {
             return response()->json($res, 500);
         }
     }
+
+    public function paginateSitios($user_id, $api_key) {
+        try {
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+            $expositores = PueblaSitios::orderBy('id', 'DESC')->paginate(5);
+
+            foreach ($expositores as $expositor) {
+                $expositor = $this->returnSitio($expositor);
+            }
+
+            $res['status'] = 1;
+            $res['mensaje'] = "success";
+            $res['sitios'] = $expositores;
+            return response()->json($res, 200);
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    public function paginateTelefonos($user_id, $api_key) {
+        try {
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+            $expositores = PueblaTelefonos::orderBy('id', 'DESC')->paginate(5);
+
+            foreach ($expositores as $expositor) {
+                $expositor = $this->returnSitio($expositor);
+            }
+
+            $res['status'] = 1;
+            $res['mensaje'] = "success";
+            $res['telefonos'] = $expositores;
+            return response()->json($res, 200);
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
 }

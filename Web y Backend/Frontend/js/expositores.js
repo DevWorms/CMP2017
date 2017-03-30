@@ -35,7 +35,9 @@ function showAll() {
                 response.expositores.forEach(function (expositor) {
                     $('#tbl_expositores tr:last').after('<tr>' +
                         '<td>' + expositor.nombre + '</td>' +
-                        '<td align="right"><a href="#" onclick="openModal(' + expositor.id + ')" class="btn btn-primary">Ver</a></td>' +
+                        '<td align="center"><a href="#" onclick="openModal(' + expositor.id + ')" class="btn btn-primary">Ver</a></td>' +
+                        '<td align="center"><a href="#" onclick="openEdit(' + expositor.id + ')" class="btn btn-primary">Editar</a></td>' +
+                        '<td align="center"><a href="#" onclick="deletePrograma(' + expositor.id + ')" class="btn btn-danger">Eliminar</a></td>' +
                         '</tr>');
                     createModal(expositor);
                 });
@@ -76,7 +78,9 @@ function loadExpostitores(url) {
                 data.data.forEach(function (expositor) {
                     $('#tbl_expositores tr:last').after('<tr>' +
                         '<td>' + expositor.nombre + '</td>' +
-                        '<td align="right"><a href="#" onclick="openModal(' + expositor.id + ')" class="btn btn-primary">Ver</a></td>' +
+                        '<td align="center"><a href="#" onclick="openModal(' + expositor.id + ')" class="btn btn-primary">Ver</a></td>' +
+                        '<td align="center"><a href="#" onclick="openEdit(' + expositor.id + ')" class="btn btn-primary">Editar</a></td>' +
+                        '<td align="center"><a href="#" onclick="deletePrograma(' + expositor.id + ')" class="btn btn-danger">Eliminar</a></td>' +
                         '</tr>');
                     createModal(expositor);
                 });
@@ -120,7 +124,9 @@ function buscar() {
                     response.expositores.forEach(function (expositor) {
                         $('#tbl_expositores tr:last').after('<tr>' +
                             '<td>' + expositor.nombre + '</td>' +
-                            '<td align="right"><a href="#" onclick="openModal(' + expositor.id + ')" class="btn btn-primary">Ver</a></td>' +
+                            '<td align="center"><a href="#" onclick="openModal(' + expositor.id + ')" class="btn btn-primary">Ver</a></td>' +
+                            '<td align="center"><a href="#" onclick="openEdit(' + expositor.id + ')" class="btn btn-primary">Editar</a></td>' +
+                            '<td align="center"><a href="#" onclick="deletePrograma(' + expositor.id + ')" class="btn btn-danger">Eliminar</a></td>' +
                             '</tr>');
                         createModal(expositor);
                     });
@@ -149,4 +155,37 @@ function createModal(item) {
 
 function openModal(id) {
     $("#DetalleExpositor-" + id).modal("show");
+}
+
+function deletePrograma(id) {
+    var r = window.confirm("¿Deseas eliminar el expositor?");
+
+    if (r === true) {
+        $.ajax({
+            type : 'GET',
+            url  : API_URL + 'expositor/delete/' + user_id + '/' + api_key + '/' + id,
+            success :  function(response) {
+                if (response.status == 1) {
+                    $("#error").fadeIn(1000, function() {
+                        $("#error").html('<div class="alert alert-success"> &nbsp; ' + response.mensaje + '</div>');
+                    });
+
+                    loadExpostitores(init_url);
+
+                    setTimeout(function () {
+                        $("#error").html('');
+                    }, 3000);
+                } else {
+                    $("#error").fadeIn(1000, function() {
+                        $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
+                    });
+                }
+            },
+            error : function (response) {
+                $("#error").fadeIn(1000, function() {
+                    $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
+                });
+            }
+        });
+    }
 }

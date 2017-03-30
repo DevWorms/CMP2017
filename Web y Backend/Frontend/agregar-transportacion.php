@@ -9,7 +9,7 @@
     <meta name="description" content="CMP 2017 - ADMIN">
     <meta name="author" content="DevWorms">
 
-    <title>CMP 2017 - Puebla, mapa</title>
+    <title>CMP 2017 - Agregar Transportación</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -79,10 +79,10 @@
                     <li>
                         <a href="mapa.php">Mapa</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="transportacion.php">Transportación</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="puebla.php">Puebla</a>
                     </li>
                     <li>
@@ -97,42 +97,66 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div id="error"></div>
-                <div class="row page-header">
-                   <div class="col-xs-12 col-md-offset-1 col-md-4">
-                        <h3 style="color: #10375e;">Puebla</h3>
-                    </div> 
-                </div>
-                <!-- Fin Fila -->
+                <form enctype="multipart/form-data" method="POST" id="crearRuta" name="crearRuta">
+                    <div class="row page-header">
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <h4 style="color: #10375e;">Transportación</h4>
+                        </div>
 
-                <div class="row">
-                    <div class="col-xs-12 col-md-offset-1 col-md-4">
-                        <h4>Mapa de Puebla</h4>
+                        <div class="col-xs-12 col-md-5" align="right">
+                            <h4>Crear nueva ruta</h4>
+                        </div>
                     </div>
-                </div>
-                <br><br>
-                <!-- Fin Fila -->
-                <form enctype="multipart/form-data" method="POST" id="crearEvento" name="crearEvento">
+                    <!-- Fin Fila -->
+                    
                     <div class="row">
-                        <div class="col-xs-12 col-md-offset-1 col-md-5">
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <h4><b>Ruta </b></h4>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- Fin Fila -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
                             <div class="form-group">
-                                <label for="mapa">Seleccionar PDF</label>
+                                <label for="titulo">Titulo</label>
                                     <br>
-                                <input type="file" name="mapa" id="mapa" class="form-control" required>
+                                <input type="text" name="titulo" id="titulo" class="form-control" required>
                             </div>
-                            <br> 
+                            <br>
+                        </div>
+
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-group">
+                                <label for="">Agregar archivo PDF</label>
+                                    <br>
+                                <input type="file" class="btn btn-default" id="archivo" name="archivo">
+                            </div> 
                         </div>
                     </div>
+                    <br>
                     <!-- Fin Fila -->
 
                     <div class="row">
-                        <div class="col-xs-offset-2 col-xs-8 col-md-offset-1 col-md-2">
-                            <button type="submit" class="btn btn-block basico" name="" id="">Guardar Mapa</button> 
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <div class="form-group">
+                                <label for="desc">Descripción (100 caractéres)</label>
+                                    <br>
+                                <textarea class="form-control" rows="3" id="descripcion" name="descripcion"></textarea>
+                            </div>
+                            <br>
                         </div>
                     </div>
                     <!-- Fin Fila -->
-                <form action=""></form>
-                
-                
+                    
+                    <div class="row">
+
+                        <col-xs-12 class="col-xs-offset-2 col-xs-8 col-md-2 col-md-offset-1">
+                            <button type="submit" class="btn basico btn-block" name="" id="guardar">Guardar</button>
+                        </col-xs-12>
+                    </div>
+                </form>
             </div>
             <!-- /.container-fluid -->
 
@@ -145,10 +169,10 @@
     <!-- Scripts -->
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
-
     <script src="js/js.php"></script>
     <script src="js/lodash.js"></script>
-    <script src="js/add-map.js"></script>
+    <script src="js/transporte.js"></script>
+
 </body>
 
 </html>

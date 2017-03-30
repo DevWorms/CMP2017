@@ -40,6 +40,7 @@ public class ExpositoresFrgament extends Fragment {
     AutoCompleteTextView acTextView;
     ConnectionDetector cd;
     TextView txtTitulo;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_expo, container, false);

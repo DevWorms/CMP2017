@@ -200,4 +200,143 @@ class RutasController extends Controller {
         return $ruta;
     }
 
+    public function update(Request $request) {
+        try {
+            $user_id = $request->get('user_id');
+            $api_key = $request->get('api_key');
+
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+
+            $titulo = $request->get('titulo');
+            $descripcion = $request->get('descripcion');
+            $file = $request->file('archivo');
+            $id = $request->get('id');
+
+            /*
+             * Valida los datos obligatorios
+             */
+            $validator = Validator::make($request->all(), [
+                'titulo' => 'required',
+                'descripcion' => 'required|max:100'
+            ], $this->messages());
+
+            if ($validator->fails()) {
+                //Si los datos no estan completos, devuelve error
+                $errors = $validator->errors();
+
+                $res['status'] = 0;
+                $res['mensaje'] = $errors->first();
+                return response()->json($res, 400);
+            } else {
+                $ruta = Ruta::where('id', $id)->first();
+                if ($ruta) {
+                    if ($ruta->pdf_file) {
+                        $file_id = $ruta->pdf_file;
+                    } else {
+                        $file_id = null;
+                    }
+                    if ($this->validarRutas()) {
+                        // Si se adjunta un archivo, se sube
+                        if ($file) {
+                            $rules = array('file' => 'required|mimes:jpeg,jpg,gif,png,pdf|max:10000000');
+                            $validator = Validator::make(array('file' => $file), $rules);
+
+                            // Si el archivo tiene extensión valida
+                            if ($validator->passes()) {
+                                // Si el archivo es mayor a 10mb
+                                if ($file->getSize() > 10000000) {
+                                    $response['estado'] = 0;
+                                    $response['mensaje'] = "El archivo excede el límite de 10mb";
+                                    return response()->json($response, 400);
+                                } else {
+                                    // Si va bien, lo mueve a la carpeta y guarda el registro
+                                    $path = $this->destinationPath . Carbon::now()->year . "/" . Carbon::now()->month . "/";
+                                    $uploadedFile = $request->file('archivo')->move($path, uniqid() . "." . $file->getClientOriginalExtension());
+                                    $url = $this->url_server . substr($uploadedFile->getPathname(), 7);
+
+                                    $file_id = File::create([
+                                        'user_id' => $user_id,
+                                        'url' => $url,
+                                        'nombre' => $file->getClientOriginalName(),
+                                        'size' => $file->getClientSize()
+                                    ]);
+
+                                    $file_id = $file_id->id;
+                                }
+                            } else {
+                                $response['estado'] = 0;
+                                $response['mensaje'] = "Error, tipo de archivo invalido";
+
+                                return response()->json($response, 400);
+                            }
+                        }
+
+                        // Crea el programa
+                        $ruta->pdf_file = $file_id;
+                        $ruta->titulo = $titulo;
+                        $ruta->descripcion = $descripcion;
+                        $ruta->save();
+
+                        // Devuelve el programa
+                        $ruta = $this->returnRuta($ruta);
+
+                        $res['status'] = 1;
+                        $res['mensaje'] = "Ruta actualizada correctamente";
+                        $res['ruta'] = $ruta;
+                        return response()->json($res, 200);
+                    } else {
+                        $response['estado'] = 0;
+                        $response['mensaje'] = "No puedes crear más de 10 rutas";
+
+                        return response()->json($response, 400);
+                    }
+                } else {
+                    $response['estado'] = 0;
+                    $response['mensaje'] = "No se encontró la ruta: " . $id;
+
+                    return response()->json($response, 400);
+                }
+            }
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    /**
+     * @param $user_id
+     * @param $api_key
+     * @param $expositor
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function delete($user_id, $api_key, $id) {
+        try {
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+            $expositor = Ruta::where('id', $id)->first();
+            if ($expositor) {
+                $expositor->delete();
+
+                $res['status'] = 1;
+                $res['mensaje'] = "La ruta se eliminó correctamente.";
+                return response()->json($res, 200);
+            } else {
+                $res['status'] = 0;
+                $res['mensaje'] = "No se encontro la ruta: " . $id;
+                return response()->json($res, 400);
+            }
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
 }

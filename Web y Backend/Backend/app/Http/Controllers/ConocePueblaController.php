@@ -19,9 +19,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class ConocePueblaController extends Controller {
+    /**
+     * @var string
+     */
     public $destinationPath = "./files/";
+
+    /**
+     * @var string
+     */
     public $url_server = "http://files.cmp.devworms.com";
 
+    /**
+     * @return array
+     */
     private function messages() {
         return [
             'required' => 'Ingresa un valor para :attribute.',
@@ -29,6 +39,10 @@ class ConocePueblaController extends Controller {
         ];
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function createSitio(Request $request) {
         try {
             $user_id = $request->get('user_id');
@@ -141,6 +155,10 @@ class ConocePueblaController extends Controller {
         }
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function createTelefono(Request $request) {
         try {
             $user_id = $request->get('user_id');
@@ -236,6 +254,10 @@ class ConocePueblaController extends Controller {
         }
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function uploadMapa(Request $request) {
         try {
             $user_id = $request->get('user_id');
@@ -312,6 +334,11 @@ class ConocePueblaController extends Controller {
         }
     }
 
+    /**
+     * @param $user_id
+     * @param $api_key
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getSitios($user_id, $api_key) {
         try {
             User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
@@ -336,6 +363,11 @@ class ConocePueblaController extends Controller {
         }
     }
 
+    /**
+     * @param $user_id
+     * @param $api_key
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getTelefonos($user_id, $api_key) {
         try {
             User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
@@ -360,6 +392,11 @@ class ConocePueblaController extends Controller {
         }
     }
 
+    /**
+     * @param $user_id
+     * @param $api_key
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getMapa($user_id, $api_key) {
         try {
             User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
@@ -380,6 +417,9 @@ class ConocePueblaController extends Controller {
         }
     }
 
+    /**
+     * @return bool
+     */
     private function validateSitios() {
         $sitios = PueblaSitios::all();
         if ($sitios->count() < 10) {
@@ -389,6 +429,9 @@ class ConocePueblaController extends Controller {
         }
     }
 
+    /**
+     * @return bool
+     */
     private function validateTelefonos() {
         $sitios = PueblaTelefonos::all();
         if ($sitios->count() < 10) {
@@ -398,6 +441,10 @@ class ConocePueblaController extends Controller {
         }
     }
 
+    /**
+     * @param $sitio
+     * @return mixed
+     */
     public function returnSitio($sitio) {
         if ($sitio->imagen_id) {
             $sitio->imagen;
@@ -408,5 +455,326 @@ class ConocePueblaController extends Controller {
 
         unset($sitio['imagen_id']);
         return $sitio;
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateSitio(Request $request) {
+        try {
+            $user_id = $request->get('user_id');
+            $api_key = $request->get('api_key');
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+
+            $titulo = $request->get('titulo');
+            $mapa = $request->get('maps_link');
+            $descripcion = $request->get('descripcion');
+            $url_sitio = $request->get('url');
+            $id = $request->get('id');
+
+            if ((strtolower(substr($url_sitio, 0, 7)) == "http://") || (strtolower(substr($url_sitio, 0, 8)) == "https://")) {
+                if (substr($url_sitio, -1) != "/") {
+                    $url_sitio = $url_sitio . "/";
+                }
+            } else {
+                if (substr($url_sitio, -1) == "/") {
+                    $url_sitio = "http://" . $url_sitio;
+                } else {
+                    $url_sitio = "http://" . $url_sitio . "/";
+                }
+            }
+
+            $logo = $request->file('imagen');
+
+            /*
+             * Valida los datos obligatorios
+             */
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|numeric',
+                'titulo' => 'required',
+                'maps_link' => 'required',
+                'descripcion' => 'required|max:300',
+                'url' => 'required'
+            ], $this->messages());
+
+            if ($validator->fails()) {
+                //Si los datos no estan completos, devuelve error
+                $errors = $validator->errors();
+
+                $res['status'] = 0;
+                $res['mensaje'] = $errors->first();
+                return response()->json($res, 400);
+            } else {
+                $sitio = PueblaSitios::where('id', $id)->first();
+                if ($sitio) {
+                    if ($sitio->imagen_id) {
+                        $logo_id = $sitio->imagen_id;
+                    } else {
+                        $logo_id = null;
+                    }
+                    // Sube el logo del expositor
+                    if ($logo) {
+                        $rules = array('file' => 'required|mimes:jpeg,jpg,gif,png|max:10000000');
+                        $validator = Validator::make(array('file' => $logo), $rules);
+
+                        // Si el archivo tiene extensión valida
+                        if ($validator->passes()) {
+                            // Si el archivo es mayor a 10mb
+                            if ($logo->getSize() > 10000000) {
+                                $response['estado'] = 0;
+                                $response['mensaje'] = "El archivo excede el límite de 10mb";
+                                return response()->json($response, 400);
+                            } else {
+                                // Si va bien, lo mueve a la carpeta y guarda el registro
+                                $path = $this->destinationPath . Carbon::now()->year . "/" . Carbon::now()->month . "/";
+                                $uploadedFile = $request->file('imagen')->move($path, uniqid() . "." . $logo->getClientOriginalExtension());
+                                $url = $this->url_server . substr($uploadedFile->getPathname(), 7);
+
+                                $file = File::create([
+                                    'user_id' => $user_id,
+                                    'url' => $url,
+                                    'nombre' => $logo->getClientOriginalName(),
+                                    'size' => $logo->getClientSize()
+                                ]);
+
+                                $logo_id = $file->id;
+                            }
+                        } else {
+                            $response['estado'] = 0;
+                            $response['mensaje'] = "Error, tipo de archivo invalido";
+
+                            return response()->json($response, 400);
+                        }
+                    }
+
+                    $sitio->titulo = $titulo;
+                    $sitio->maps_link = $mapa;
+                    $sitio->descripcion = $descripcion;
+                    $sitio->imagen_id = $logo_id;
+                    $sitio->url = $url_sitio;
+                    $sitio->save();
+
+                    $sitio = $this->returnSitio($sitio);
+
+                    $res['status'] = 1;
+                    $res['mensaje'] = "El sitio se actualizó correctamente";
+                    $res['sitio'] = $sitio;
+                    return response()->json($res, 200);
+                } else {
+                    $response['estado'] = 0;
+                    $response['mensaje'] = "No se encontro el sitio: " . $id;
+
+                    return response()->json($response, 400);
+                }
+            }
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    /**
+     * @param $user_id
+     * @param $api_key
+     * @param $sitio
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function deleteSitio($user_id, $api_key, $sitio) {
+        try {
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+            $programa = PueblaSitios::where('id', $sitio)->first();
+            if ($programa) {
+                $programa->delete();
+
+                $res['status'] = 1;
+                $res['mensaje'] = "El sitio se eliminó correctamente.";
+                return response()->json($res, 200);
+            } else {
+                $res['status'] = 0;
+                $res['mensaje'] = "No se encontro el sitio: " . $sitio;
+                return response()->json($res, 400);
+            }
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateTelefono(Request $request) {
+        try {
+            $user_id = $request->get('user_id');
+            $api_key = $request->get('api_key');
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+
+            $titulo = $request->get('titulo');
+            $telefono = $request->get('telefono');
+            $id = $request->get('id');
+
+            $logo = $request->file('imagen');
+
+            /*
+             * Valida los datos obligatorios
+             */
+            $validator = Validator::make($request->all(), [
+                'titulo' => 'required',
+                'telefono' => 'required'
+            ], $this->messages());
+
+            if ($validator->fails()) {
+                //Si los datos no estan completos, devuelve error
+                $errors = $validator->errors();
+
+                $res['status'] = 0;
+                $res['mensaje'] = $errors->first();
+                return response()->json($res, 400);
+            } else {
+                $tel = PueblaTelefonos::where('id', $id)->first();
+                if ($tel) {
+                    if ($tel->imagen_id) {
+                        $logo_id = $tel->imagen_id;
+                    } else {
+                        $logo_id = null;
+                    }
+                    // Sube el logo del expositor
+                    if ($logo) {
+                        $rules = array('file' => 'required|mimes:jpeg,jpg,gif,png|max:10000000');
+                        $validator = Validator::make(array('file' => $logo), $rules);
+
+                        // Si el archivo tiene extensión valida
+                        if ($validator->passes()) {
+                            // Si el archivo es mayor a 10mb
+                            if ($logo->getSize() > 10000000) {
+                                $response['estado'] = 0;
+                                $response['mensaje'] = "El archivo excede el límite de 10mb";
+                                return response()->json($response, 400);
+                            } else {
+                                // Si va bien, lo mueve a la carpeta y guarda el registro
+                                $path = $this->destinationPath . Carbon::now()->year . "/" . Carbon::now()->month . "/";
+                                $uploadedFile = $request->file('imagen')->move($path, uniqid() . "." . $logo->getClientOriginalExtension());
+                                $url = $this->url_server . substr($uploadedFile->getPathname(), 7);
+
+                                $file = File::create([
+                                    'user_id' => $user_id,
+                                    'url' => $url,
+                                    'nombre' => $logo->getClientOriginalName(),
+                                    'size' => $logo->getClientSize()
+                                ]);
+
+                                $logo_id = $file->id;
+                            }
+                        } else {
+                            $response['estado'] = 0;
+                            $response['mensaje'] = "Error, tipo de archivo invalido";
+
+                            return response()->json($response, 400);
+                        }
+                    }
+
+                    $tel->titulo = $titulo;
+                    $tel->imagen_id = $logo_id;
+                    $tel->telefono = $telefono;
+                    $tel->save();
+
+                    $tel = $this->returnSitio($tel);
+
+                    $res['status'] = 1;
+                    $res['mensaje'] = "El teléfono se creó correctamente";
+                    $res['telefono'] = $tel;
+                    return response()->json($res, 200);
+                } else {
+                    $response['estado'] = 0;
+                    $response['mensaje'] = "No se encontro el teléfono: " . $id;
+
+                    return response()->json($response, 400);
+                }
+            }
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    /**
+     * @param $user_id
+     * @param $api_key
+     * @param $telefono
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function deleteTelefono($user_id, $api_key, $telefono) {
+        try {
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+            $programa = PueblaTelefonos::where('id', $telefono)->first();
+            if ($programa) {
+                $programa->delete();
+
+                $res['status'] = 1;
+                $res['mensaje'] = "El telefono se eliminó correctamente.";
+                return response()->json($res, 200);
+            } else {
+                $res['status'] = 0;
+                $res['mensaje'] = "No se encontro el telefono: " . $telefono;
+                return response()->json($res, 400);
+            }
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    /**
+     * @param $user_id
+     * @param $api_key
+     * @param $mapa
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function deleteMapa($user_id, $api_key, $mapa) {
+        try {
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+            $programa = PueblaMapa::where('id', $mapa)->first();
+            if ($programa) {
+                $programa->delete();
+
+                $res['status'] = 1;
+                $res['mensaje'] = "El mapa se eliminó correctamente.";
+                return response()->json($res, 200);
+            } else {
+                $res['status'] = 0;
+                $res['mensaje'] = "No se encontro el mapa: " . $mapa;
+                return response()->json($res, 400);
+            }
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
     }
 }

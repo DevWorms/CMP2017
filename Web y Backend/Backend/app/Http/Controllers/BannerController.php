@@ -118,4 +118,105 @@ class BannerController extends Controller {
 
         return $banners;
     }
+
+    public function update(Request $request) {
+        try {
+            $user_id = $request->get('user_id');
+            $api_key = $request->get('api_key');
+            $id = $request->get('id');
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+
+            $file = $request->file('archivo');
+            $validator = Validator::make($request->all(), [
+                'archivo' => 'required'
+            ], $this->messages());
+
+            if ($validator->fails()) {
+                //Si los datos no estan completos, devuelve error
+                $errors = $validator->errors();
+
+                $res['status'] = 0;
+                $res['mensaje'] = $errors->first();
+                return response()->json($res, 400);
+            } else {
+                $banner = File::where('id', $id)->first();
+                if ($banner) {
+                    // se adjunta un archivo, se sube
+                    if ($file) {
+                        $rules = array('file' => 'required|mimes:jpeg,jpg,gif,png|max:10000000');
+                        $validator = Validator::make(array('file' => $file), $rules);
+
+                        // Si el archivo tiene extensión valida
+                        if ($validator->passes()) {
+                            // Si el archivo es mayor a 10mb
+                            if ($file->getSize() > 10000000) {
+                                $response['estado'] = 0;
+                                $response['mensaje'] = "El archivo excede el límite de 10mb";
+                                return response()->json($response, 400);
+                            } else {
+                                // Si va bien, lo mueve a la carpeta y guarda el registro
+                                $path = $this->destinationPath . Carbon::now()->year . "/" . Carbon::now()->month . "/";
+                                $uploadedFile = $request->file('archivo')->move($path, uniqid() . "." . $file->getClientOriginalExtension());
+                                $url = $this->url_server . substr($uploadedFile->getPathname(), 7);
+
+                                $banner->url = $url;
+                                $banner->nombre = $file->getClientOriginalName();
+                                $banner->size = $file->getClientSize();
+                                $banner->save();
+
+                                $res['status'] = 1;
+                                $res['mensaje'] = "Banner actualizado correctamente";
+                                $res['banner'] = $banner;
+                                return response()->json($res, 200);
+                            }
+                        } else {
+                            $response['estado'] = 0;
+                            $response['mensaje'] = "Error, tipo de archivo invalido";
+
+                            return response()->json($response, 400);
+                        }
+                    }
+                } else {
+                    $response['estado'] = 0;
+                    $response['mensaje'] = "No se encontró el banner: " . $id;
+
+                    return response()->json($response, 400);
+                }
+            }
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    public function delete($user_id, $api_key, $id) {
+        try {
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+            $programa = File::where('id', $id)->first();
+            if ($programa) {
+                $programa->delete();
+
+                $res['status'] = 1;
+                $res['mensaje'] = "El banner se eliminó correctamente.";
+                return response()->json($res, 200);
+            } else {
+                $res['status'] = 0;
+                $res['mensaje'] = "No se encontro el banner";
+                return response()->json($res, 400);
+            }
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
 }

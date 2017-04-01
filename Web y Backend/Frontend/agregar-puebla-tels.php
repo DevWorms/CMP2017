@@ -97,6 +97,7 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div id="error"></div>
+                <input type="hidden" id="id">
                 <form enctype="multipart/form-data" method="POST" id="crearEvento" name="crearEvento">
                     <div class="row page-header">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
@@ -143,7 +144,7 @@
                     
                     <div class="row">
                         <col-xs-12 class="col-xs-offset-2 col-xs-8 col-md-2 col-md-offset-1">
-                            <button type="submit" class="btn basico btn-block" name="" id="">Guardar</button>    
+                            <button type="submit" class="btn basico btn-block" name="" id="save">Guardar</button>
                         </col-xs-12>
                     </div>
                 </form>

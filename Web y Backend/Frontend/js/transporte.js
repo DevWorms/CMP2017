@@ -183,3 +183,7 @@ function deletePrograma(id) {
         });
     }
 }
+
+function openEdit(id) {
+    window.location.href = "agregar-transportacion.php#id=" + id;
+}

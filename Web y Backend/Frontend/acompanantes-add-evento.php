@@ -97,6 +97,7 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div id="error"></div>
+                <input type="hidden" id="id">
                 <form enctype="multipart/form-data" method="POST" id="crearEvento" name="crearEvento">
                     <div class="row page-header">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
@@ -123,13 +124,6 @@
                                 <label for="lugar">Lugar</label>
                                     <br>
                                 <input type="text" name="lugar" id="lugar" class="form-control" required>
-                            </div>
-                            <br>
-
-                            <div class="form-group">
-                                <label for="stand">Número de stand</label>
-                                <br>
-                                <input type="number" name="stand" id="stand" class="form-control" required>
                             </div>
                             <br>
 

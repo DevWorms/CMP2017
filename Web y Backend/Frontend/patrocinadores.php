@@ -204,6 +204,9 @@
                             <p><strong>Tipo de patrocinador</strong>: ${tipo}</p>
                         </div>
                         <div class="col-md-12">
+                            <p><strong>Número de stand</strong>: ${stand}</p>
+                        </div>
+                        <div class="col-md-12">
                             <p><strong>Acerca del expositor</strong>: ${acerca}</p>
                         </div>
                         <div class="col-md-12">

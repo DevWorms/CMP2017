@@ -825,4 +825,58 @@ class ConocePueblaController extends Controller {
             return response()->json($res, 500);
         }
     }
+
+    public function detailSitio($user_id, $api_key, $id) {
+        try {
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+            $expositores = PueblaSitios::where('id', $id)->first();
+            if ($expositores) {
+                $expositores = $this->returnSitio($expositores);
+
+                $res['status'] = 1;
+                $res['mensaje'] = "success";
+                $res['sitio'] = $expositores;
+                return response()->json($res, 200);
+            } else {
+                $res['status'] = 0;
+                $res['mensaje'] = "No se encontro el sitio";
+                return response()->json($res, 400);
+            }
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    public function detailTelefono($user_id, $api_key, $id) {
+        try {
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+            $expositores = PueblaTelefonos::where('id', $id)->first();
+            if ($expositores) {
+                $expositores = $this->returnSitio($expositores);
+
+                $res['status'] = 1;
+                $res['mensaje'] = "success";
+                $res['telefono'] = $expositores;
+                return response()->json($res, 200);
+            } else {
+                $res['status'] = 0;
+                $res['mensaje'] = "No se encontro el sitio";
+                return response()->json($res, 400);
+            }
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
 }

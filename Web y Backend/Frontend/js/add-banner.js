@@ -73,7 +73,6 @@ function loadExpostitores(url) {
                     $('#tbl_eventos tr:last').after('<tr>' +
                         '<td>' + expositor.nombre + '</td>' +
                         '<td align="center"><a href="#" onclick="openModal(' + expositor.id + ')" class="btn btn-primary">Ver</a></td>' +
-                        '<td align="center"><a href="#" onclick="openEdit(' + expositor.id + ')" class="btn btn-primary">Editar</a></td>' +
                         '<td align="center"><a href="#" onclick="deletePrograma(' + expositor.id + ')" class="btn btn-danger">Eliminar</a></td>' +
                         '</tr>');
                     createModal(expositor);
@@ -113,7 +112,6 @@ function showAll() {
                     $('#tbl_eventos tr:last').after('<tr>' +
                         '<td>' + expositor.nombre + '</td>' +
                         '<td align="center"><a href="#" onclick="openModal(' + expositor.id + ')" class="btn btn-primary">Ver</a></td>' +
-                        '<td align="center"><a href="#" onclick="openEdit(' + expositor.id + ')" class="btn btn-primary">Editar</a></td>' +
                         '<td align="center"><a href="#" onclick="deletePrograma(' + expositor.id + ')" class="btn btn-danger">Eliminar</a></td>' +
                         '</tr>');
                     createModal(expositor);

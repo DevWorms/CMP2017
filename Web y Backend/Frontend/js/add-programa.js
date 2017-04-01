@@ -2,8 +2,21 @@
  * Created by rk521 on 18.03.17.
  */
 
+var hash_num = null;
+
 $('document').ready(function() {
     loadCategorias();
+
+    if (isUpdate()) {
+        $("#btn_crearEvento").html('<i class="fa fa-plus-circle"></i> &nbsp; Actualizar evento');
+        if (window.location.hash !== '') {
+            hash_num = parseInt(window.location.hash.substring(4));
+            $("#crearEvento input, textarea, button").prop("disabled", true);
+            if (hash_num > 0) {
+                getElement(hash_num);
+            }
+        }
+    }
 
     $("form#crearEvento").submit(function() {
         $("#error").fadeIn(1000, function() {
@@ -14,8 +27,14 @@ $('document').ready(function() {
         formData.append('user_id', user_id);
         formData.append('api_key', api_key);
 
+        var url = API_URL + 'programa/create';
+        if (isUpdate()) {
+            formData.append('id', $("#id").val());
+            url = API_URL + 'programa/update';
+        }
+
         $.ajax({
-            url: API_URL + 'programa/create',
+            url: url,
             type: 'POST',
             data: formData,
             success: function (data) {
@@ -40,7 +59,6 @@ $('document').ready(function() {
 });
 
 function loadCategorias() {
-    console.log("Test");
     $.ajax({
         url: API_URL + 'categoria/all/' + user_id + '/' + api_key,
         type: 'GET',
@@ -57,6 +75,49 @@ function loadCategorias() {
             $("#error").fadeIn(1000, function() {
                 $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
             });
+        }
+    });
+}
+
+function isUpdate() {
+    if (window.location.hash !== '') {
+        var check = parseInt(window.location.hash.substring(4));
+        return check > 0;
+    } else {
+        return false;
+    }
+}
+
+function getElement(id) {
+    $.ajax({
+        type : 'GET',
+        url  : API_URL + 'programa/detail/' + user_id + '/' + api_key + '/' + id,
+        success :  function(response) {
+            if (response.status == 1) {
+                var el = response.programa;
+                $("#id").val(el.id);
+                $("#nombre").val(el.nombre);
+                $("#lugar").val(el.lugar);
+                $("#fecha").val(el.fecha);
+                $("#hora_inicio").val(el.hora_inicio);
+                $("#hora_fin").val(el.hora_fin);
+                $("#recomendaciones").val(el.recomendaciones);
+
+                $("#crearEvento input, textarea, button").prop("disabled", false);
+            } else {
+                $("#error").fadeIn(1000, function() {
+                    $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
+                });
+
+                $("#crearEvento input, textarea, button").prop("disabled", true);
+            }
+        },
+        error : function (response) {
+            var response = $.parseJSON(response.responseText);
+            $("#error").fadeIn(1000, function() {
+                $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
+            });
+            $("#crearEvento input, textarea, button").prop("disabled", true);
         }
     });
 }

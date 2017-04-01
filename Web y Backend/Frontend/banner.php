@@ -126,7 +126,6 @@
                         <tr>
                             <th>Nombre</th>
                             <th align="center">Ver</th>
-                            <th align="center">Editar</th>
                             <th align="center">Eliminar</th>
                         </tr>
                         </thead>

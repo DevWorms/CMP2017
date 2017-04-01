@@ -97,6 +97,7 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div id="error"></div>
+                <input type="hidden" id="id">
                 <form enctype="multipart/form-data" method="POST" id="crearPatrocinador" name="crearPatrocinador">
                     <div class="row page-header">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
@@ -104,7 +105,7 @@
                         </div>
 
                         <div class="col-xs-12 col-md-6" align="right">
-                            <button type="submit" class="btn basico" name="" id=""><i class="fa fa-plus-circle"></i> &nbsp;Agregar Patrocinador</button>   
+                            <button type="submit" class="btn basico" name="" id="btn_patrocinador"><i class="fa fa-plus-circle"></i> &nbsp;Agregar Patrocinador</button>
                         </div>
                     </div>
                     <!-- Fin Fila -->
@@ -144,6 +145,12 @@
                                 <label for="tipo">Tipo de patrocinador</label>
                                 <br>
                                 <input type="text" name="tipo" id="tipo" class="form-control" required>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="stand">Número de stand</label>
+                                <br>
+                                <input type="number" name="stand" id="stand" class="form-control" required>
                             </div>
                             <br>
                         </div>

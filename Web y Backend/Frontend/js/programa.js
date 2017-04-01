@@ -219,3 +219,7 @@ function deletePrograma(id) {
         });
     }
 }
+
+function openEdit(id) {
+    window.location.href = "agregar-evento.php#id=" + id;
+}

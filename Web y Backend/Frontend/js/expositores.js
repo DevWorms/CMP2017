@@ -189,3 +189,7 @@ function deletePrograma(id) {
         });
     }
 }
+
+function openEdit(id) {
+    window.location.href = "agregar-expositor.php#id=" + id;
+}

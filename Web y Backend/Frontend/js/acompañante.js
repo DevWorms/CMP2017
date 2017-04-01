@@ -212,3 +212,7 @@ function deletePrograma(id) {
         });
     }
 }
+
+function openEdit(id) {
+    window.location.href = "acompanantes-add-evento.php#id=" + id;
+}

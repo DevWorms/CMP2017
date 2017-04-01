@@ -2,19 +2,22 @@
  * Created by rk521 on 18.03.17.
  */
 
+var hash_num = null;
+
 $('document').ready(function() {
+
     if (isUpdate()) {
-        $("#btn_crearExpositor").html('<i class="fa fa-plus-circle"></i> &nbsp; Actualizar expositor');
+        $("#guardar").html('<i class="fa fa-plus-circle"></i> &nbsp; Actualizar ruta');
         if (window.location.hash !== '') {
             hash_num = parseInt(window.location.hash.substring(4));
-            $("#crearExpositor input, textarea, button").prop("disabled", true);
+            $("#crearRuta input, textarea, button").prop("disabled", true);
             if (hash_num > 0) {
                 getElement(hash_num);
             }
         }
     }
 
-    $("form#crearExpositor").submit(function() {
+    $("form#crearRuta").submit(function() {
         $("#error").fadeIn(1000, function() {
             $("#error").html("");
         });
@@ -23,10 +26,10 @@ $('document').ready(function() {
         formData.append('user_id', user_id);
         formData.append('api_key', api_key);
 
-        var url = API_URL + 'expositor/create';
+        var url = API_URL + 'ruta/create';
         if (isUpdate()) {
             formData.append('id', $("#id").val());
-            url = API_URL + 'expositor/update';
+            url = API_URL + 'ruta/update';
         }
 
         $.ajax({
@@ -38,7 +41,7 @@ $('document').ready(function() {
                     $("#error").html('<div class="alert alert-success"> &nbsp; ' + data.mensaje + '</div>');
                 });
 
-                $('#crearExpositor')[0].reset();
+                $('#crearRuta')[0].reset();
             },
             cache: false,
             contentType: false,
@@ -66,26 +69,21 @@ function isUpdate() {
 function getElement(id) {
     $.ajax({
         type : 'GET',
-        url  : API_URL + 'expositor/detail/' + user_id + '/' + api_key + '/' + id,
+        url  : API_URL + 'ruta/detail/' + user_id + '/' + api_key + '/' + id,
         success :  function(response) {
             if (response.status == 1) {
-                var el = response.expositor;
+                var el = response.ruta;
                 $("#id").val(el.id);
-                $("#nombre").val(el.nombre);
-                $("#acerca").val(el.acerca);
-                $("#email").val(el.email);
-                $("#hora_inicio").val(el.hora_inicio);
-                $("#stand").val(el.stand);
-                $("#telefono").val(el.telefono);
-                $("#url").val(el.url);
+                $("#titulo").val(el.titulo);
+                $("#descripcion").val(el.descripcion);
 
-                $("#crearExpositor input, textarea, button").prop("disabled", false);
+                $("#crearRuta input, textarea, button").prop("disabled", false);
             } else {
                 $("#error").fadeIn(1000, function() {
                     $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
                 });
 
-                $("#crearExpositor input, textarea, button").prop("disabled", true);
+                $("#crearRuta input, textarea, button").prop("disabled", true);
             }
         },
         error : function (response) {
@@ -93,7 +91,7 @@ function getElement(id) {
             $("#error").fadeIn(1000, function() {
                 $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
             });
-            $("#crearExpositor input, textarea, button").prop("disabled", true);
+            $("#crearRuta input, textarea, button").prop("disabled", true);
         }
     });
 }

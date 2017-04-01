@@ -191,3 +191,7 @@ function deletePrograma(id) {
         });
     }
 }
+
+function openEdit(id) {
+    window.location.href = "agregar-patrocinador.php#id=" + id;
+}

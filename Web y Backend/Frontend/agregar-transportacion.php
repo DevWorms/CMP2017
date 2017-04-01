@@ -97,6 +97,7 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div id="error"></div>
+                <input type="hidden" id="id">
                 <form enctype="multipart/form-data" method="POST" id="crearRuta" name="crearRuta">
                     <div class="row page-header">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
@@ -171,7 +172,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/js.php"></script>
     <script src="js/lodash.js"></script>
-    <script src="js/transporte.js"></script>
+    <script src="js/add-transporte.js"></script>
 
 </body>
 

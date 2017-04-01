@@ -97,6 +97,7 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div id="error"></div>
+                <input type="hidden" id="id">
                 <form enctype="multipart/form-data" method="POST" id="crearExpositor" name="crearExpositor">
                     <div class="row page-header">
                         <div class="col-xs-12 col-md-6">

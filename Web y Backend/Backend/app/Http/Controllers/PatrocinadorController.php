@@ -540,7 +540,7 @@ class PatrocinadorController extends Controller {
                     $expositor = $this->returnPatrocinador($expositor);
 
                     $res['status'] = 1;
-                    $res['mensaje'] = "Patrocinador creado correctamente";
+                    $res['mensaje'] = "Patrocinador actualizado correctamente";
                     $res['patrocinador'] = $expositor;
                     return response()->json($res, 200);
                 } else {

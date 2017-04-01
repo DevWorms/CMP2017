@@ -96,6 +96,7 @@
         <!-- Contenido -->
         <div id="page-wrapper">
             <div class="container-fluid">
+                <input type="hidden" id="id">
                 <div id="error"></div>
                 <form enctype="multipart/form-data" method="POST" id="crearEvento" name="crearEvento">
                     <div class="row page-header">
@@ -151,7 +152,7 @@
                             <div class="form-group">
                                 <label for="archivo">Imágen del evento</label>
                                 <br>
-                                <input type="file" name="archivo" id="archivo" class="form-control" required>
+                                <input type="file" name="archivo" id="archivo" class="form-control">
                             </div>
                             <br>
 

@@ -126,10 +126,9 @@ $app->get('/api/eventos/removefavorito/{user_id}/{api_key}/{evento_id}', ['middl
 $app->get('/api/eventos/miagenda/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'MisEventosController@getMyAgenda']);
 
 /*
- * TODO Actualizaciones
+ * Actualizaciones
  */
 $app->get('/api/updates/check/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'UpdatesController@checkUpdates']);
-$app->get('/api/updates/getupdate/{user_id}/{api_key}/{update_id}', ['middleware' => 'cors', 'uses' => 'UpdatesController@getUpdate']);
 
 /*
  * Rutas

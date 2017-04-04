@@ -95,6 +95,7 @@ class RutasController extends Controller {
 
                     // Devuelve el programa
                     $ruta = $this->returnRuta($ruta);
+                    $this->createUpdate();
 
                     $res['status'] = 1;
                     $res['mensaje'] = "Ruta creada correctamente";
@@ -128,6 +129,7 @@ class RutasController extends Controller {
                 $ruta = $this->returnRuta($ruta);
             }
 
+            $this->markUpdate($user_id);
             $res['status'] = 1;
             $res['mensaje'] = "Ruta creada correctamente";
             $res['rutas'] = $rutas;
@@ -279,6 +281,7 @@ class RutasController extends Controller {
 
                         // Devuelve el programa
                         $ruta = $this->returnRuta($ruta);
+                        $this->createUpdate();
 
                         $res['status'] = 1;
                         $res['mensaje'] = "Ruta actualizada correctamente";
@@ -361,5 +364,15 @@ class RutasController extends Controller {
             $res['mensaje'] = $ex->getMessage();
             return response()->json($res, 500);
         }
+    }
+
+    public function createUpdate() {
+        $up = new UpdatesController();
+        $up->createUpdate(7);
+    }
+
+    public function markUpdate($user_id) {
+        $up = new UpdatesController();
+        $up->markUpdateAsRead($user_id, 7);
     }
 }

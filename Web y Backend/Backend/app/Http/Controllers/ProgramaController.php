@@ -150,6 +150,7 @@ class ProgramaController extends Controller {
 
                     // Devuelve el programa
                     $programa = $this->returnPrograma($programa);
+                    $this->createUpdate();
 
                     $res['status'] = 1;
                     $res['mensaje'] = "Evento creado correctamente";
@@ -189,6 +190,8 @@ class ProgramaController extends Controller {
                 $programa = $this->returnPrograma($programa);
             }
 
+            $this->markUpdate($user_id);
+
             $res['status'] = 1;
             $res['mensaje'] = "success";
             $res['programas'] = $programas;
@@ -227,7 +230,7 @@ class ProgramaController extends Controller {
             }
             $tipo = $request->get('categoria_id');
 
-            $programas = Programa::where('type', 1)->get();
+            $programas = Programa::where('type', 1)->orderBy('fecha', 'asc')->get();
 
             if ($fecha) {
                 $programas = $programas->where('fecha', $fecha)->values();
@@ -501,6 +504,7 @@ class ProgramaController extends Controller {
 
                         // Devuelve el programa
                         $programa = $this->returnPrograma($programa);
+                        $this->createUpdate();
 
                         $res['status'] = 1;
                         $res['mensaje'] = "Evento actualizado correctamente";
@@ -559,5 +563,15 @@ class ProgramaController extends Controller {
             $res['mensaje'] = $ex->getMessage();
             return response()->json($res, 500);
         }
+    }
+
+    public function createUpdate() {
+        $up = new UpdatesController();
+        $up->createUpdate(6);
+    }
+
+    public function markUpdate($user_id) {
+        $up = new UpdatesController();
+        $up->markUpdateAsRead($user_id, 6);
     }
 }

@@ -184,6 +184,7 @@ class PatrocinadorController extends Controller {
                 ]);
 
                 $expositor = $this->returnPatrocinador($expositor);
+                $this->createUpdate();
 
                 $res['status'] = 1;
                 $res['mensaje'] = "Patrocinador creado correctamente";
@@ -217,6 +218,8 @@ class PatrocinadorController extends Controller {
                 $expositor = $this->returnPatrocinador($expositor);
             }
 
+            $this->markUpdate($user_id);
+
             $res['status'] = 1;
             $res['mensaje'] = "success";
             $res['patrocinadores'] = $expositores;
@@ -248,6 +251,8 @@ class PatrocinadorController extends Controller {
                 $expositor = $this->returnPatrocinador($expositor);
             }
 
+            $this->markUpdate($user_id);
+
             $res['status'] = 1;
             $res['mensaje'] = "success";
             $res['patrocinadores'] = $expositores;
@@ -271,6 +276,8 @@ class PatrocinadorController extends Controller {
             foreach ($expositores as $expositor) {
                 $expositor = $this->returnPatrocinador($expositor);
             }
+
+            $this->markUpdate($user_id);
 
             $res['status'] = 1;
             $res['mensaje'] = "success";
@@ -538,6 +545,7 @@ class PatrocinadorController extends Controller {
                     $expositor->save();
 
                     $expositor = $this->returnPatrocinador($expositor);
+                    $this->createUpdate();
 
                     $res['status'] = 1;
                     $res['mensaje'] = "Patrocinador actualizado correctamente";
@@ -591,5 +599,15 @@ class PatrocinadorController extends Controller {
             $res['mensaje'] = $ex->getMessage();
             return response()->json($res, 500);
         }
+    }
+
+    public function createUpdate() {
+        $up = new UpdatesController();
+        $up->createUpdate(5);
+    }
+
+    public function markUpdate($user_id) {
+        $up = new UpdatesController();
+        $up->markUpdateAsRead($user_id, 5);
     }
 }

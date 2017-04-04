@@ -131,6 +131,8 @@ class ConocePueblaController extends Controller {
                         'url' => $url_sitio
                     ]);
 
+                    $this->createUpdate(10);
+
                     $sitio = $this->returnSitio($sitio);
 
                     $res['status'] = 1;
@@ -230,6 +232,7 @@ class ConocePueblaController extends Controller {
                         'telefono' => $telefono
                     ]);
 
+                    $this->createUpdate(9);
                     $tel = $this->returnSitio($tel);
 
                     $res['status'] = 1;
@@ -348,6 +351,8 @@ class ConocePueblaController extends Controller {
                 $sitio = $this->returnSitio($sitio);
             }
 
+            $this->markUpdate($user_id, 10);
+
             $res['status'] = 1;
             $res['mensaje'] = "success";
             $res['sitios'] = $sitios;
@@ -376,6 +381,8 @@ class ConocePueblaController extends Controller {
             foreach ($sitios as $sitio) {
                 $sitio = $this->returnSitio($sitio);
             }
+
+            $this->markUpdate($user_id, 9);
 
             $res['status'] = 1;
             $res['mensaje'] = "success";
@@ -555,6 +562,8 @@ class ConocePueblaController extends Controller {
                     $sitio->url = $url_sitio;
                     $sitio->save();
 
+                    $this->createUpdate(10);
+
                     $sitio = $this->returnSitio($sitio);
 
                     $res['status'] = 1;
@@ -690,6 +699,7 @@ class ConocePueblaController extends Controller {
                     $tel->telefono = $telefono;
                     $tel->save();
 
+                    $this->createUpdate(9);
                     $tel = $this->returnSitio($tel);
 
                     $res['status'] = 1;
@@ -878,5 +888,15 @@ class ConocePueblaController extends Controller {
             $res['mensaje'] = $ex->getMessage();
             return response()->json($res, 500);
         }
+    }
+
+    public function createUpdate($modulo) {
+        $up = new UpdatesController();
+        $up->createUpdate($modulo);
+    }
+
+    public function markUpdate($user_id, $modulo) {
+        $up = new UpdatesController();
+        $up->markUpdateAsRead($user_id, $modulo);
     }
 }

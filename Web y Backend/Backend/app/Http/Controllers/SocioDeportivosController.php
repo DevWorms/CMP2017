@@ -155,6 +155,7 @@ class SocioDeportivosController extends Controller {
 
                 // Devuelve el programa
                 $programa = $this->tool->returnPrograma($programa);
+                $this->createUpdate();
 
                 $res['status'] = 1;
                 $res['mensaje'] = "Evento creado correctamente";
@@ -187,6 +188,8 @@ class SocioDeportivosController extends Controller {
             foreach ($programas as $programa) {
                 $programa = $this->tool->returnPrograma($programa);
             }
+
+            $this->markUpdate($user_id);
 
             $res['status'] = 1;
             $res['mensaje'] = "success";
@@ -425,6 +428,7 @@ class SocioDeportivosController extends Controller {
 
                     // Devuelve el programa
                     $programa = $this->tool->returnPrograma($programa);
+                    $this->createUpdate();
 
                     $res['status'] = 1;
                     $res['mensaje'] = "Evento actualizado correctamente";
@@ -479,5 +483,15 @@ class SocioDeportivosController extends Controller {
             $res['mensaje'] = $ex->getMessage();
             return response()->json($res, 500);
         }
+    }
+
+    public function createUpdate() {
+        $up = new UpdatesController();
+        $up->createUpdate(8);
+    }
+
+    public function markUpdate($user_id) {
+        $up = new UpdatesController();
+        $up->markUpdateAsRead($user_id, 8);
     }
 }

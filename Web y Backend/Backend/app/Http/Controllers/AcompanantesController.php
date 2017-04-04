@@ -153,6 +153,8 @@ class AcompanantesController extends Controller {
                     'foto_id' => $file_id
                 ]);
 
+                $this->createUpdate();
+
                 // Devuelve el programa
                 $programa = $this->tool->returnPrograma($programa);
 
@@ -188,6 +190,7 @@ class AcompanantesController extends Controller {
                 $programa = $this->tool->returnPrograma($programa);
             }
 
+            $this->markUpdate($user_id);
             $res['status'] = 1;
             $res['mensaje'] = "success";
             $res['acompanantes'] = $programas;
@@ -461,6 +464,8 @@ class AcompanantesController extends Controller {
                     $evento->foto_id = $file_id;
                     $evento->save();
 
+                    $this->createUpdate();
+
                     // Devuelve el programa
                     $evento = $this->tool->returnPrograma($evento);
 
@@ -516,5 +521,15 @@ class AcompanantesController extends Controller {
             $res['mensaje'] = $ex->getMessage();
             return response()->json($res, 500);
         }
+    }
+
+    public function createUpdate() {
+        $up = new UpdatesController();
+        $up->createUpdate(1);
+    }
+
+    public function markUpdate($user_id) {
+        $up = new UpdatesController();
+        $up->markUpdateAsRead($user_id, 1);
     }
 }

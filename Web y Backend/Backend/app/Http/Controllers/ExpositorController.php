@@ -187,6 +187,7 @@ class ExpositorController extends Controller {
                 ]);
 
                 $expositor = $this->returnExpositor($expositor);
+                $this->createUpdate();
 
                 $res['status'] = 1;
                 $res['mensaje'] = "Expositor creado correctamente";
@@ -219,6 +220,8 @@ class ExpositorController extends Controller {
             foreach ($expositores as $expositor) {
                 $expositor = $this->returnExpositor($expositor);
             }
+
+            $this->markUpdate($user_id);
 
             $res['status'] = 1;
             $res['mensaje'] = "success";
@@ -310,6 +313,8 @@ class ExpositorController extends Controller {
                 $expositor = $this->returnExpositor($expositor);
             }
 
+            $this->markUpdate($user_id);
+
             $res['status'] = 1;
             $res['mensaje'] = "success";
             $res['expositores'] = $expositores;
@@ -340,6 +345,8 @@ class ExpositorController extends Controller {
             foreach ($expositores as $expositor) {
                 $expositor = $this->returnExpositor($expositor);
             }
+
+            $this->markUpdate($user_id);
 
             $res['status'] = 1;
             $res['mensaje'] = "success";
@@ -648,6 +655,7 @@ class ExpositorController extends Controller {
                     $expositor->save();
 
                     $expositor = $this->returnExpositor($expositor);
+                    $this->createUpdate();
 
                     $res['status'] = 1;
                     $res['mensaje'] = "Expositor actualizado correctamente";
@@ -732,5 +740,15 @@ class ExpositorController extends Controller {
             $res['mensaje'] = $ex->getMessage();
             return response()->json($res, 500);
         }
+    }
+
+    public function createUpdate() {
+        $up = new UpdatesController();
+        $up->createUpdate(4);
+    }
+
+    public function markUpdate($user_id) {
+        $up = new UpdatesController();
+        $up->markUpdateAsRead($user_id, 4);
     }
 }

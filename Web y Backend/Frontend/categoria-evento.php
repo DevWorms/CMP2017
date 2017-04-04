@@ -99,7 +99,7 @@
                 <div id="error"></div>
                 <div class="row page-header__2">
                     <div class="col-md-6 col-md-offset-1">
-                        <form method="POST" id="crearBanner"name="crearBanner">
+                        <form method="POST" enctype="multipart/form-data" id="crearBanner" name="crearBanner">
                             <div class="form-group">
                                 <label for="nombre">Nombre de la Categoría</label>
                                     <br>
@@ -126,6 +126,5 @@
     <script src="js/js.php"></script>
     <script src="js/lodash.js"></script>
     <script src="js/add-categoria.js"></script>
-
 </body>
 </html>

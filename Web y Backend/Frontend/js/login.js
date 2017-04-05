@@ -19,7 +19,7 @@ $("#login").click(
                 },
                 dataType: "json",
                 success: function (response) {
-                    if (response.status == 1) {
+                    if (response.status === 1) {
                         $("#error").html('<div class="alert alert-success"> &nbsp; Bienvenido</div>');
                         writeSession(response);
                     }

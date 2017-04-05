@@ -16,6 +16,8 @@
     <!-- CSS -->
     <link href="css/main.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="js/jquery-ui-1.12.1/jquery-ui.css">
+    <link rel="stylesheet" href="js/jquery-ui-timepicker-addon.css">
 </head>
 
 <body>
@@ -233,7 +235,9 @@
 <!-- Scripts -->
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
-
+<script type="text/javascript" src="js/jquery-ui-1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="js/moment-with-locales.js"></script>
+<script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
 <script src="js/js.php"></script>
 <script src="js/lodash.js"></script>
 <script src="js/programa.js"></script>

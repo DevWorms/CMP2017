@@ -24,6 +24,7 @@ class ConocePueViewController: UIViewController {
     }
     
     @IBAction func mapaPuebla(_ sender: Any) {
+        self.performSegue(withIdentifier: "puebla", sender: nil)
     }
     
     @IBAction func clima(_ sender: Any) {
@@ -39,8 +40,10 @@ class ConocePueViewController: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "clima"{
+        if segue.identifier == "clima" {
             (segue.destination as! MapaSimpleViewController).tipoMapa = 1
+        } else if segue.identifier == "puebla" {
+            (segue.destination as! MapaSimpleViewController).tipoMapa = 2
         }
     }
 

@@ -557,9 +557,6 @@
                                                     <rect key="frame" x="74" y="139" width="227" height="39"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" image="04Revisar_Rutas"/>
-                                                    <connections>
-                                                        <segue destination="Ike-SW-6Fr" kind="show" id="Hqu-sl-Rm1"/>
-                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -599,6 +596,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Tax-4l-WG8" id="INc-D3-Iim"/>
+                        <segue destination="Ike-SW-6Fr" kind="show" identifier="ruta" id="z9v-TW-n8m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ran-Nx-uua" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1502,6 +1500,7 @@
                     </navigationItem>
                     <connections>
                         <segue destination="Ike-SW-6Fr" kind="show" identifier="clima" id="fdM-hd-29f"/>
+                        <segue destination="Ike-SW-6Fr" kind="show" identifier="puebla" id="Cs4-CN-RMn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gK9-MU-KEK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1643,11 +1642,11 @@
         <image name="fondoCMP" width="1242" height="2208"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="eRA-mI-tof"/>
-        <segue reference="psR-II-8MZ"/>
         <segue reference="Euz-ZR-EEI"/>
         <segue reference="0FK-uA-KfA"/>
-        <segue reference="Hqu-sl-Rm1"/>
+        <segue reference="psR-II-8MZ"/>
         <segue reference="GKY-3m-4VQ"/>
+        <segue reference="z9v-TW-n8m"/>
+        <segue reference="Iza-Fr-z8V"/>
     </inferredMetricsTieBreakers>
 </document>

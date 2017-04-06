@@ -24,6 +24,7 @@ public class MiPerfilFragment  extends Fragment
 {
     EditText edtNombre, edtApellido, edtClave;
     String userId, apiKey,resp,nombre,apellido,clave;
+    Button btnGuarCamb, btnCambioContra;
     private ProgressDialog pDialog;
 
     @Override
@@ -38,11 +39,36 @@ public class MiPerfilFragment  extends Fragment
         edtApellido = (EditText)view.findViewById(R.id.editApellidoPerfil);
         edtClave = (EditText)view.findViewById(R.id.editClavePerfil);
 
+        btnGuarCamb = (Button)view.findViewById(R.id.btnGuarCamb);
+        btnGuarCamb.setOnClickListener(new GuardarCambios());
+        btnCambioContra = (Button)view.findViewById(R.id.btnRecuperarContra) ;
+        btnCambioContra.setOnClickListener(new RecuperarContra());
+
         new getPerfil().execute();
         return view;
 
 
     }
+
+    class GuardarCambios implements View.OnClickListener {
+        public void onClick(View v) {
+            if  (!edtApellido.getText().toString().equals("") || !edtNombre.getText().toString().equals("")){
+                new getCambios().execute();
+            }else{
+                Toast.makeText(getActivity(), "Nombre y Apellido son obligatorios", Toast.LENGTH_SHORT).show();
+
+            }
+        }
+    }
+    class RecuperarContra implements View.OnClickListener {
+        public void onClick(View v) {
+
+                Toast.makeText(getActivity(), "Proximamente", Toast.LENGTH_SHORT).show();
+
+
+        }
+    }
+
     class getPerfil extends AsyncTask<String, String, String> {
 
         /**
@@ -128,6 +154,93 @@ public class MiPerfilFragment  extends Fragment
                     }
 
 
+
+                }
+            });
+
+        }
+    }
+
+    class getCambios extends AsyncTask<String, String, String> {
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(getActivity());
+            pDialog.setMessage("Guardando cambios...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        /**
+         * getting Albums JSON
+         */
+        protected String doInBackground(String... args) {
+            // Building Parameters
+            //add your data
+
+
+            String body = "{\n\t\"user_id\" : \""+userId+"\",\n\t\"api_key\" : \""+apiKey+"\",\n\t\"name\" : \""+edtNombre.getText().toString()+"\",\n\t\"last_name\" : \""+edtApellido.getText().toString()+"\",\n\t\"clave\" : \""+edtClave.getText().toString()+"\"\n}";
+            JSONParser jsp = new JSONParser();
+
+
+
+            String respuesta= jsp.makeHttpRequest("http://cmp.devworms.com/api/user/edit","POST",body,"");
+            Log.d("LoginRes : ", "> " + respuesta);
+            String rest = respuesta.substring(0,5);
+            if (!rest.equals("error")) {
+                try {
+                    JSONObject json = new JSONObject(respuesta);
+
+
+
+
+                    nombre = json.getString("mensaje");
+
+
+                    SharedPreferences sp = getActivity().getSharedPreferences("prefe", Activity.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp.edit();
+
+                    editor.putString("Nombre","Bienvenido "+edtNombre.getText().toString() + edtApellido.getText().toString() );
+
+
+                    editor.commit();
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                resp  = nombre;
+
+
+            } else {
+                resp  = "No es posible actualizar sus datos";
+            }
+            return null;
+        }
+
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog after getting all albums
+
+            pDialog.dismiss();
+
+            // updating UI from Background Thread
+            getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    Toast.makeText(getActivity(), resp, Toast.LENGTH_SHORT).show();
+                    if(resp.equals("Tu perfil se actualizo correctamente")) {
+
+                        ((MenuPrincipal) getActivity()).getSupportActionBar().setTitle("Bienvenido " + edtNombre.getText().toString() + edtApellido.getText().toString());
+                    }
 
                 }
             });

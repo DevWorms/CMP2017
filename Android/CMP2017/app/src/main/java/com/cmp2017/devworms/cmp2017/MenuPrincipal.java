@@ -2,6 +2,8 @@ package com.cmp2017.devworms.cmp2017;
 
 import android.app.Activity;
 import android.app.Application;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -173,6 +175,8 @@ public class MenuPrincipal extends AppCompatActivity
             }else{
 
                 Toast.makeText(MenuPrincipal.this,"Próximamente",Toast.LENGTH_SHORT).show();
+                /*getFragmentManager().beginTransaction()
+                        .replace(R.id.actividad, new Agenda()).commit();*/
 
 
             }
@@ -182,8 +186,24 @@ public class MenuPrincipal extends AppCompatActivity
                 Toast.makeText(MenuPrincipal.this,"Registrate para activar esta sección",Toast.LENGTH_SHORT).show();
 
             }else{
+                Fragment fragment = new ExpositoresFrgament();
 
-                Toast.makeText(MenuPrincipal.this,"Próximamente",Toast.LENGTH_SHORT).show();
+                Bundle parametro = new Bundle();
+
+
+                parametro.putString("MiExpo","Si");
+
+                fragment.setArguments(parametro);
+
+                final FragmentTransaction ft = getFragmentManager()
+                        .beginTransaction();
+                ft.replace(R.id.actividad, fragment, "tag");
+
+                ft.addToBackStack("tag");
+
+                ft.commit();
+
+                //Toast.makeText(MenuPrincipal.this,"Próximamente",Toast.LENGTH_SHORT).show();
 
 
             }

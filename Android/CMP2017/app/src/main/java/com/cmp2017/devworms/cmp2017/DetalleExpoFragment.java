@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
@@ -14,8 +16,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,13 +29,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class DetalleExpoFragment extends Fragment {
-    String userId, apiKey,resp,expoId,strNomEmpre,strPagina,strTelefono,strCorreo,strAcercaDe,urlImage;
+    String userId, apiKey,resp,expoId,strNomEmpre,strPagina,strTelefono,strCorreo,strAcercaDe,urlImage,urlPresenta,misExpo,miExpo;
     TextView txtNomEmpre, txtPagina,txtTelefono,txtCorreo, txtAcercaDe;
     ProgressDialog pDialog;
     ImageView imgFoto;
     URL imageUrl ;
     Bitmap imagen;
     HttpURLConnection conn;
+    Button btnLocalizar,btnAgreExpo,btnPresent;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detalle_expo, container, false);
         SharedPreferences sp = getActivity().getSharedPreferences("prefe", Activity.MODE_PRIVATE);
@@ -45,20 +50,79 @@ public class DetalleExpoFragment extends Fragment {
             userId = sp.getString("IdUser","");
         }
         expoId = getArguments().getString("expoId");
+        misExpo = getArguments().getString("miExpositores");
+
         txtNomEmpre = (TextView)view.findViewById(R.id.txtNomEmpre);
         txtPagina = (TextView)view.findViewById(R.id.txtPaginaExpo);
         txtTelefono = (TextView)view.findViewById(R.id.txtTelefono);
         txtCorreo = (TextView)view.findViewById(R.id.txtEmail);
         txtAcercaDe = (TextView)view.findViewById(R.id.txtAcercaDe);
         imgFoto = (ImageView)view.findViewById(R.id.imgFoto);
-        new getDetalle().execute();
+        btnLocalizar = (Button)view.findViewById(R.id.btnLocalizar);
+        btnLocalizar.setOnClickListener(new Localizar());
+        btnAgreExpo = (Button)view.findViewById(R.id.btnAgreExpo);
+        btnAgreExpo.setOnClickListener(new AgregarExpo());
+        btnPresent = (Button)view.findViewById(R.id.btnPresent);
+        btnPresent.setOnClickListener(new Presentacion());
+        if(misExpo.equals("si")){
+            AdminSQLiteOpenHelper dbHandler;
+            dbHandler = new AdminSQLiteOpenHelper(getActivity(), null, null, 1);
+            SQLiteDatabase db = dbHandler.getWritableDatabase();
+            Cursor cursor = dbHandler.personabyid(expoId);
+            txtNomEmpre.setText(cursor.getString(2));
+            txtAcercaDe.setText(cursor.getString(3));
+            txtTelefono.setText(cursor.getString(4));
+            txtCorreo.setText(cursor.getString(5));
+            txtPagina.setText(cursor.getString(6));
+
+        }else {
+            new getDetalle().execute();
+        }
         return view;
 
 
 
     }
+    class AgregarExpo implements View.OnClickListener {
+        public void onClick(View v) {
+
+            AgregarExpoFav();
+
+        }
+    }
+    class Presentacion implements View.OnClickListener {
+        public void onClick(View v) {
+
+            Toast.makeText(getActivity(),"Próximamente",Toast.LENGTH_SHORT).show();
+            /*getFragmentManager().beginTransaction()
+                    .replace(R.id.actividad, new MapaFragment()).addToBackStack(null).commit();*/
 
 
+        }
+    }
+    class Localizar implements View.OnClickListener {
+        public void onClick(View v) {
+
+            Toast.makeText(getActivity(),"Próximamente",Toast.LENGTH_SHORT).show();
+            /*getFragmentManager().beginTransaction()
+                    .replace(R.id.actividad, new MapaFragment()).addToBackStack(null).commit();*/
+
+
+        }
+    }
+   public void AgregarExpoFav(){
+        AdminSQLiteOpenHelper dbHandler;
+        dbHandler = new AdminSQLiteOpenHelper(getActivity(), null, null, 1);
+        SQLiteDatabase db = dbHandler.getWritableDatabase();
+
+        dbHandler.addExpo(expoId,txtNomEmpre.getText().toString(),txtAcercaDe.getText().toString(),txtTelefono.getText().toString(),txtCorreo.getText().toString(),txtPagina.getText().toString(), urlPresenta);
+
+
+
+
+        Toast.makeText(getActivity(), "Se guardo en Mis expositores",
+                Toast.LENGTH_SHORT).show();
+    }
     class getDetalle extends AsyncTask<String, String, String> {
 
         /**
@@ -106,6 +170,9 @@ public class DetalleExpoFragment extends Fragment {
                     String urlImageJson = jsonExpo.getString("logo");
                     JSONObject jsonImagen = new JSONObject(urlImageJson);
                     urlImage = jsonImagen.getString("url");
+                    String urlPreseJson = jsonExpo.getString("pdf");
+                    JSONObject jsonPrese = new JSONObject(urlPreseJson);
+                    urlPresenta = jsonPrese.getString("url");
                     mostrarImagen(urlImage);
 
 

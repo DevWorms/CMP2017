@@ -18,9 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        CoreDataHelper.deleteEntity(entityName: "Banners")
+        ServerConnection.getBanners()
         
-        //ServerConnection.getBanners()
-        //CoreDataHelper.deleteEntity(entityName: "MisExpositores")
+        //
         
         
         let apiKey = UserDefaults.standard.value(forKey: "api_key") as? String

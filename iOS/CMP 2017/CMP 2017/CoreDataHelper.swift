@@ -13,9 +13,7 @@ class CoreDataHelper {
     
     // MARK: - Core Data
     
-    class func saveData(data: [String:Any], entityName: String, keyName: String) {
-        
-        
+    class func saveData(data: Any, entityName: String, keyName: String) {
         let entity = NSEntityDescription.entity(forEntityName: entityName, in: managedContext)
         let item = NSManagedObject(entity: entity!, insertInto: managedContext)
         
@@ -29,10 +27,35 @@ class CoreDataHelper {
         
     }
     
+    class func updateData(index: Int, data: Any, entityName: String, keyName: String) {
+        
+        let requestFetch = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        
+        do {
+            let fetched = try managedContext.fetch(requestFetch) as! [NSManagedObject]
+            
+            //for ftd in fetched {
+                
+                fetched[index].setValue(data, forKey: keyName)
+                
+                do {
+                    try managedContext.save()
+                } catch {
+                    fatalError("Failure to update context: \(entityName),\(keyName): \(error)")
+                }
+            //}
+            
+        } catch {
+            fatalError("Failed to update: \(entityName),\(keyName): \(error)")
+        }
+    }
+    
     class func fetchData(entityName: String, keyName: String) -> [[String : Any]]? {
         
         let requestFetch = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-        //employeesFetch.returnsObjectsAsFaults = false
+        //requestFetch.resultType = NSFetchRequestResultType.dictionaryResultType
+        //requestFetch.propertiesToFetch = ["banner"]
+        //requestFetch.returnsObjectsAsFaults = false
         
         do {
             let fetched = try managedContext.fetch(requestFetch)
@@ -52,12 +75,41 @@ class CoreDataHelper {
                 }
             }
             
-            print(fetched.count)
+            print("Count fetchData: \(results.count)")
             
             return results
             
         } catch {
-            fatalError("Failed to fetch: \(entityName),\(keyName): \(error)")
+            fatalError("Failed to fetchData: \(entityName),\(keyName): \(error)")
+        }
+        
+    }
+    
+    class func fetchItem(entityName: String, keyName: String) -> [Any]? {
+        
+        let requestFetch = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        //requestFetch.predicate = NSPredicate.init(format: String, args: CVarArg...)
+        
+        do {
+            let fetched = try managedContext.fetch(requestFetch) as! [NSManagedObject]
+            
+            var results = [Any]()
+            
+            for ftd in fetched {
+                
+                if let dato = (ftd as AnyObject).value(forKey: keyName)  {
+                    results.append(dato)
+                }
+                
+                //print((ftd as AnyObject).value(forKey: keyName) ?? "no data")
+            }
+            
+            print("Count fetchItem: \(results.count)")
+            
+            return results
+            
+        } catch {
+            fatalError("Failed to fetchItem: \(entityName),\(keyName): \(error)")
         }
         
     }

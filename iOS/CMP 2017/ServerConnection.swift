@@ -56,16 +56,30 @@ class ServerConnection {
                         }*/
                         
                         if let jsonResult = json as? [String: Any] {
-                            for dato in jsonResult["banners"] as! [[String:Any]] {
-                                CoreDataHelper.saveData(data: dato, entityName: "MisExpositores", keyName: "banner")
+                            for (index, dato) in (jsonResult["banners"] as! [[String:Any]]).enumerated() {
+                                
+                                
+                                DispatchQueue.global(qos: .userInitiated).async { // 1
+                                    let dataImg = try? Data(contentsOf: URL(string: dato["url"] as! String)!)
+                                    
+                                    DispatchQueue.main.async { // 2
+                                        
+                                        print("cuantas")
+                                        
+                                        CoreDataHelper.saveData(data: dato, entityName: "Banners", keyName: "banner")
+                                        
+                                        CoreDataHelper.updateData(index: index, data: dataImg!, entityName: "Banners", keyName: "imgBanner")
+                                        
+                                    }
+                                }
+                                
                             }
                         }
                         
-                        //for img in self.datos {
-                        //    self.imgs.append(img["url"] as! String)
-                        //}
                         
-                        //self.cargarImg()
+                        
+                        
+                        
                     }
                     
                 } else {

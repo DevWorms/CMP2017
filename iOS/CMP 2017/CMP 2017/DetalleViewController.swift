@@ -14,7 +14,9 @@ class DetalleViewController: UIViewController {
     @IBOutlet weak var titulo: UILabel!
     @IBOutlet weak var lugar: UILabel!
     @IBOutlet weak var recomendaciones: UILabel!
+    @IBOutlet weak var horario: UILabel!
     
+    @IBOutlet weak var lbl1: UILabel!
     @IBOutlet weak var lbl2: UILabel!
     @IBOutlet weak var lbl3: UILabel!
     

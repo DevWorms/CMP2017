@@ -20,8 +20,8 @@ class MenuPrincipalViewController: UIViewController {
     @IBOutlet weak var expositoresBtn: UIButton!
     @IBOutlet weak var banner: UIImageView!
     
-    var datos = [[String : Any]]()
-    var imgs = [String]()
+    //var datos = [[String : Any]]()
+    var imgs = [Data]()
     var imagenes = [UIImage]()
     var noImg = 0
     
@@ -64,24 +64,15 @@ class MenuPrincipalViewController: UIViewController {
     
     func cargarImg() {
         
-        self.datos = CoreDataHelper.fetchData(entityName: "MisExpositores", keyName: "banner")!
-        
-        for img in self.datos {
-            self.imgs.append(img["url"] as! String)
-        }
+        self.imgs = CoreDataHelper.fetchItem(entityName: "Banners", keyName: "imgBanner") as! [Data]
         
         for img in imgs {
-            // thread para que cargue en segundo plano la imagen
-            DispatchQueue.global(qos: .userInitiated).async { // 1
-                let data = try? Data(contentsOf: URL(string: img)!)
-                
-                DispatchQueue.main.async { // 2
-                    self.imagenes.append( UIImage(data: data!)! )
-                }
-            }
+            self.imagenes.append( UIImage(data: img)! )
         }
         
-        Timer.scheduledTimer(timeInterval: 1.2, target: self, selector: #selector(self.update), userInfo: nil, repeats: true);
+        update()
+        
+        Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.update), userInfo: nil, repeats: true);
         
     }
     

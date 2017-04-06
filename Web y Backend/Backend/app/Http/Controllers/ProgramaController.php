@@ -150,6 +150,7 @@ class ProgramaController extends Controller {
 
                     // Devuelve el programa
                     $programa = $this->returnPrograma($programa);
+                    $this->createUpdate();
 
                     $res['status'] = 1;
                     $res['mensaje'] = "Evento creado correctamente";
@@ -189,6 +190,8 @@ class ProgramaController extends Controller {
                 $programa = $this->returnPrograma($programa);
             }
 
+            $this->markUpdate($user_id);
+
             $res['status'] = 1;
             $res['mensaje'] = "success";
             $res['programas'] = $programas;
@@ -227,7 +230,7 @@ class ProgramaController extends Controller {
             }
             $tipo = $request->get('categoria_id');
 
-            $programas = Programa::where('type', 1)->get();
+            $programas = Programa::where('type', 1)->orderBy('fecha', 'asc')->get();
 
             if ($fecha) {
                 $programas = $programas->where('fecha', $fecha)->values();
@@ -388,5 +391,187 @@ class ProgramaController extends Controller {
         unset($programa['foto_id']);
         unset($programa['categoria_id']);
         return $programa;
+    }
+
+    public function update(Request $request) {
+        try {
+            $user_id = $request->get('user_id');
+            $api_key = $request->get('api_key');
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+
+            $categoria_id = $request->get('categoria_id');
+            $nombre = $request->get('nombre');
+            $lugar = $request->get('lugar');
+            $recomendaciones = $request->get('recomendaciones');
+            $latitude = $request->get('latitude');
+            $longitude = $request->get('longitude');
+            $fecha = Carbon::parse($request->get('fecha'))->toDateString();
+            $id = $request->get('id');
+
+            // Si tiene hora de inicio, la valida, si no es null
+            if ($request->get('hora_inicio')) {
+                $hora_inicio = Carbon::parse($request->get('hora_inicio'))->toTimeString();
+            } else {
+                $hora_inicio = null;
+            }
+
+            // Si tiene hora de fin, la valida, si no es null
+            if ($request->get('hora_fin')) {
+                $hora_fin = Carbon::parse($request->get('hora_fin'))->toTimeString();
+            } else {
+                $hora_fin = null;
+            }
+
+            /*
+             * Valida los datos obligatorios
+             */
+            $validator = Validator::make($request->all(), [
+                'nombre' => 'required',
+                'categoria_id' => 'required',
+                'lugar' => 'required',
+                'recomendaciones' => 'required',
+                'fecha' => 'required'
+            ], $this->messages());
+
+            if ($validator->fails()) {
+                //Si los datos no estan completos, devuelve error
+                $errors = $validator->errors();
+
+                $res['status'] = 0;
+                $res['mensaje'] = $errors->first();
+                return response()->json($res, 400);
+            } else {
+                $programa = Programa::where('id', $id)->first();
+                if ($programa) {
+                    if ($programa->foto_id) {
+                        $file_id = $programa->foto_id;
+                    } else {
+                        $file_id = null;
+                    }
+
+                    // Valida que exista la categoría a la que pertenecerá
+                    $id_cat = Categoria::where('id', $categoria_id)->first();
+                    if ($id_cat) {
+                        $file = $request->file('archivo');
+                        // Si se adjunta un archivo, se sube
+                        if ($file) {
+                            $rules = array('file' => 'required|mimes:jpeg,jpg,gif,png|max:10000000');
+                            $validator = Validator::make(array('file' => $file), $rules);
+
+                            // Si el archivo tiene extensión valida
+                            if ($validator->passes()) {
+                                // Si el archivo es mayor a 10mb
+                                if ($file->getSize() > 10000000) {
+                                    $response['estado'] = 0;
+                                    $response['mensaje'] = "El archivo excede el límite de 10mb";
+                                    return response()->json($response, 400);
+                                } else {
+                                    // Si va bien, lo mueve a la carpeta y guarda el registro
+                                    $path = $this->destinationPath . Carbon::now()->year . "/" . Carbon::now()->month . "/";
+                                    $uploadedFile = $request->file('archivo')->move($path, uniqid() . "." . $file->getClientOriginalExtension());
+                                    $url = $this->url_server . substr($uploadedFile->getPathname(), 7);
+
+                                    $file_id = File::create([
+                                        'user_id' => $user_id,
+                                        'url' => $url,
+                                        'nombre' => $file->getClientOriginalName(),
+                                        'size' => $file->getClientSize()
+                                    ]);
+
+                                    $file_id = $file_id->id;
+                                }
+                            } else {
+                                $response['estado'] = 0;
+                                $response['mensaje'] = "Error, tipo de archivo invalido";
+
+                                return response()->json($response, 400);
+                            }
+                        }
+
+                        // Crea el programa
+                        $programa->nombre = $nombre;
+                        $programa->categoria_id = $categoria_id;
+                        $programa->lugar = $lugar;
+                        $programa->recomendaciones = $recomendaciones;
+                        $programa->latitude = $latitude;
+                        $programa->longitude = $longitude;
+                        $programa->fecha = $fecha;
+                        $programa->hora_inicio = $hora_inicio;
+                        $programa->hora_fin = $hora_fin;
+                        $programa->type = 1;
+                        $programa->foto_id = $file_id;
+                        $programa->save();
+
+                        // Devuelve el programa
+                        $programa = $this->returnPrograma($programa);
+                        $this->createUpdate();
+
+                        $res['status'] = 1;
+                        $res['mensaje'] = "Evento actualizado correctamente";
+                        $res['evento'] = $programa;
+                        return response()->json($res, 200);
+
+                    } else {
+                        $res['status'] = 0;
+                        $res['mensaje'] = "Categoría invalida";
+                        return response()->json($res, 400);
+                    }
+                } else {
+                    $res['status'] = 0;
+                    $res['mensaje'] = "No se encontró el evento: " . $id;
+                    return response()->json($res, 400);
+                }
+            }
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    /**
+     * @param $user_id
+     * @param $api_key
+     * @param $expositor
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function delete($user_id, $api_key, $id) {
+        try {
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+            $programa = Programa::where('id', $id)->first();
+            if ($programa) {
+                $programa->delete();
+
+                $res['status'] = 1;
+                $res['mensaje'] = "El patrocinador se eliminó correctamente.";
+                return response()->json($res, 200);
+            } else {
+                $res['status'] = 0;
+                $res['mensaje'] = "No se encontro el evento: " . $programa;
+                return response()->json($res, 400);
+            }
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    public function createUpdate() {
+        $up = new UpdatesController();
+        $up->createUpdate(6);
+    }
+
+    public function markUpdate($user_id) {
+        $up = new UpdatesController();
+        $up->markUpdateAsRead($user_id, 6);
     }
 }

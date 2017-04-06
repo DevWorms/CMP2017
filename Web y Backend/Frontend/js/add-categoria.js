@@ -21,8 +21,11 @@ $('document').ready(function() {
                     $("#error").html('<div class="alert alert-success"> &nbsp; ' + data.mensaje + '</div>');
                 });
 
-                $('#crearEvento')[0].reset();
+                $('#crearBanner')[0].reset();
             },
+            cache: false,
+            contentType: false,
+            processData: false,
             error : function (response) {
                 response = response.responseJSON;
                 $("#error").fadeIn(1000, function() {

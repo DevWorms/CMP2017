@@ -16,6 +16,8 @@
     <!-- CSS -->
     <link href="css/main.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="js/jquery-ui-1.12.1/jquery-ui.css">
+    <link rel="stylesheet" href="js/jquery-ui-timepicker-addon.css">
 </head>
 
 <body>
@@ -97,6 +99,7 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div id="error"></div>
+                <input type="hidden" id="id">
                 <form enctype="multipart/form-data" method="POST" id="crearEvento" name="crearEvento">
                     <div class="row page-header">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
@@ -190,7 +193,9 @@
     <!-- Scripts -->
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
-
+    <script type="text/javascript" src="js/jquery-ui-1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/moment-with-locales.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
     <script src="js/js.php"></script>
     <script src="js/lodash.js"></script>
     <script src="js/add-syd.js"></script>

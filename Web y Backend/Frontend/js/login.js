@@ -1,5 +1,7 @@
-var baseUrl = "http://webapp.cmp.devworms.com";
+var baseUrl = "http://congreso.digital";
+//var baseUrl = "http://localhost:8000";
 var api_base = "http://cmp.devworms.com/api/";
+//var api_base = "http://localhost:8001/api/";
 
 $("#login").click(
     function () {
@@ -17,7 +19,7 @@ $("#login").click(
                 },
                 dataType: "json",
                 success: function (response) {
-                    if (response.status == 1) {
+                    if (response.status === 1) {
                         $("#error").html('<div class="alert alert-success"> &nbsp; Bienvenido</div>');
                         writeSession(response);
                     }

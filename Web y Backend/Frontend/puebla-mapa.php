@@ -16,6 +16,8 @@
     <!-- CSS -->
     <link href="css/main.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="js/jquery-ui-1.12.1/jquery-ui.css">
+    <link rel="stylesheet" href="js/jquery-ui-timepicker-addon.css">
 </head>
 
 <body>
@@ -106,7 +108,7 @@
 
                 <div class="row">
                     <div class="col-xs-12 col-md-offset-1 col-md-4">
-                        <h4>Mapa del Puebla</h4>
+                        <h4>Mapa de Puebla</h4>
                     </div>
                 </div>
                 <br><br>
@@ -145,7 +147,9 @@
     <!-- Scripts -->
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
-
+    <script type="text/javascript" src="js/jquery-ui-1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/moment-with-locales.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
     <script src="js/js.php"></script>
     <script src="js/lodash.js"></script>
     <script src="js/add-map.js"></script>

@@ -35,6 +35,8 @@
 		3B8B4C7B1E824B7B00983CD4 /* TransportacionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8B4C7A1E824B7B00983CD4 /* TransportacionTableViewCell.swift */; };
 		3B8B4C7D1E82501200983CD4 /* SitioTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8B4C7C1E82501200983CD4 /* SitioTableViewCell.swift */; };
 		3B8B4C7F1E825F7400983CD4 /* NotificacionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8B4C7E1E825F7400983CD4 /* NotificacionTableViewCell.swift */; };
+		3BAEAA131E95A48900B1E7DA /* ServerConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAEAA121E95A48900B1E7DA /* ServerConnection.swift */; };
+		3BAEAA151E95CBCF00B1E7DA /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAEAA141E95CBCF00B1E7DA /* CoreDataHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +105,8 @@
 		3B8B4C7A1E824B7B00983CD4 /* TransportacionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransportacionTableViewCell.swift; sourceTree = "<group>"; };
 		3B8B4C7C1E82501200983CD4 /* SitioTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SitioTableViewCell.swift; sourceTree = "<group>"; };
 		3B8B4C7E1E825F7400983CD4 /* NotificacionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificacionTableViewCell.swift; sourceTree = "<group>"; };
+		3BAEAA121E95A48900B1E7DA /* ServerConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServerConnection.swift; path = ../ServerConnection.swift; sourceTree = "<group>"; };
+		3BAEAA141E95CBCF00B1E7DA /* CoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,7 +178,9 @@
 		3B5B8F6F1E7083ED00F0D6AA /* CMP 2017 */ = {
 			isa = PBXGroup;
 			children = (
+				3B5B8F771E7083ED00F0D6AA /* CMP_2017.xcdatamodeld */,
 				3B4AC3771E85ECFF00570A99 /* Font */,
+				3BAEAA111E95A45200B1E7DA /* Utilities */,
 				3B5B8F741E7083ED00F0D6AA /* Main.storyboard */,
 				3B5B8F701E7083ED00F0D6AA /* AppDelegate.swift */,
 				3B5B8F721E7083ED00F0D6AA /* ViewController.swift */,
@@ -197,11 +203,9 @@
 				3B396C0F1E766E0900C4611E /* NotificacionesViewController.swift */,
 				3B8B4C7E1E825F7400983CD4 /* NotificacionTableViewCell.swift */,
 				3B396C111E76725F00C4611E /* BuscadorViewController.swift */,
-				3B4AC3751E858A2B00570A99 /* Accesibilidad.swift */,
 				3B5B8F7A1E7083ED00F0D6AA /* Assets.xcassets */,
 				3B5B8F7C1E7083ED00F0D6AA /* LaunchScreen.storyboard */,
 				3B5B8F7F1E7083ED00F0D6AA /* Info.plist */,
-				3B5B8F771E7083ED00F0D6AA /* CMP_2017.xcdatamodeld */,
 			);
 			path = "CMP 2017";
 			sourceTree = "<group>";
@@ -222,6 +226,16 @@
 				3B5B8F951E7083ED00F0D6AA /* Info.plist */,
 			);
 			path = "CMP 2017UITests";
+			sourceTree = "<group>";
+		};
+		3BAEAA111E95A45200B1E7DA /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				3B4AC3751E858A2B00570A99 /* Accesibilidad.swift */,
+				3BAEAA121E95A48900B1E7DA /* ServerConnection.swift */,
+				3BAEAA141E95CBCF00B1E7DA /* CoreDataHelper.swift */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -369,12 +383,14 @@
 				3B4AC3761E858A2B00570A99 /* Accesibilidad.swift in Sources */,
 				3B8B4C7F1E825F7400983CD4 /* NotificacionTableViewCell.swift in Sources */,
 				3B396C161E773C3900C4611E /* SitiosViewController.swift in Sources */,
+				3BAEAA151E95CBCF00B1E7DA /* CoreDataHelper.swift in Sources */,
 				3B396C021E764CCD00C4611E /* MenuMapaViewController.swift in Sources */,
 				3B396BF81E70DF2F00C4611E /* RegistroViewController.swift in Sources */,
 				3B396BFA1E70E4F400C4611E /* MenuPrincipalViewController.swift in Sources */,
 				3B396C0C1E76628200C4611E /* TelsViewController.swift in Sources */,
 				3B396C041E764F5F00C4611E /* TransportacionViewController.swift in Sources */,
 				3B396C141E77392B00C4611E /* MapaSimpleViewController.swift in Sources */,
+				3BAEAA131E95A48900B1E7DA /* ServerConnection.swift in Sources */,
 				3B8B4C7D1E82501200983CD4 /* SitioTableViewCell.swift in Sources */,
 				3B8B4C7B1E824B7B00983CD4 /* TransportacionTableViewCell.swift in Sources */,
 				3B5B8F711E7083ED00F0D6AA /* AppDelegate.swift in Sources */,

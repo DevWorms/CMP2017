@@ -22,22 +22,55 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user",
-                        "in": "formData",
-                        "description": "Email del usuario",
-                        "required": true,
-                        "type": "string"
+                "parameters": [{
+                    "name": "user",
+                    "in": "formData",
+                    "description": "Email del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "password",
+                    "in": "formData",
+                    "description": "Contraseña del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
                     },
-                    {
-                        "name": "password",
-                        "in": "formData",
-                        "description": "Contraseña del usuario",
-                        "required": true,
-                        "type": "string"
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
                     }
+                }
+            }
+        },
+        "/user/login/root": {
+            "post": {
+                "tags": [
+                    "user"
                 ],
+                "summary": "Login de usuario para panel de Webapp",
+                "description": "Login de usuario devuelve el api_key del usuario para panel de Webapp",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "name": "user",
+                    "in": "formData",
+                    "description": "Email del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "password",
+                    "in": "formData",
+                    "description": "Contraseña del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -62,57 +95,49 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "name",
-                        "in": "formData",
-                        "description": "Nombre(s)",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "last_name",
-                        "in": "formData",
-                        "description": "Apellido(s)",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "email",
-                        "in": "formData",
-                        "description": "Email, no puede repetirse en la BD",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "password",
-                        "in": "formData",
-                        "description": "Contraseña (mínimo 6 caracteres)",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "clave",
-                        "in": "formData",
-                        "description": "Clave de inscripción",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "type",
-                        "in": "formData",
-                        "description": "Tipo de usuario. Puede ser null ó 1=Congresista, 2=Expositor, 3=Estudiante, 4=Acompañante",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "association",
-                        "in": "formData",
-                        "description": "Asociación. Puede ser null ó 1=AIPM, 2=CIPM, 3=AMGE, 4=AMGP, 5=SPE / México",
-                        "required": false,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "name",
+                    "in": "formData",
+                    "description": "Nombre(s)",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "last_name",
+                    "in": "formData",
+                    "description": "Apellido(s)",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "email",
+                    "in": "formData",
+                    "description": "Email, no puede repetirse en la BD",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "password",
+                    "in": "formData",
+                    "description": "Contraseña (mínimo 6 caracteres)",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "clave",
+                    "in": "formData",
+                    "description": "Clave de inscripción",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "name": "type",
+                    "in": "formData",
+                    "description": "Tipo de usuario. Puede ser null ó 1=Congresista, 2=Expositor, 3=Estudiante, 4=Acompañante",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "name": "association",
+                    "in": "formData",
+                    "description": "Asociación. Puede ser null ó 1=AIPM, 2=CIPM, 3=AMGE, 4=AMGP, 5=SPE / México",
+                    "required": false,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -136,43 +161,37 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "formData",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "formData",
-                        "description": "Api key del usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "name",
-                        "in": "formData",
-                        "description": "Nombre(s)",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "last_name",
-                        "in": "formData",
-                        "description": "Apellido(s)",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "clave",
-                        "in": "formData",
-                        "description": "Clave de inscripción",
-                        "required": false,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "formData",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "formData",
+                    "description": "Api key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "name",
+                    "in": "formData",
+                    "description": "Nombre(s)",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "last_name",
+                    "in": "formData",
+                    "description": "Apellido(s)",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "clave",
+                    "in": "formData",
+                    "description": "Clave de inscripción",
+                    "required": false,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -197,22 +216,19 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key de usuario",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key de usuario",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -284,29 +300,25 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "formData",
-                        "description": "Id del usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "formData",
-                        "description": "Api key del usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "password",
-                        "in": "formData",
-                        "description": "Nueva contraseña del usuario. Mínimo 6 caracteres.",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "formData",
+                    "description": "Id del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "formData",
+                    "description": "Api key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "password",
+                    "in": "formData",
+                    "description": "Nueva contraseña del usuario. Mínimo 6 caracteres.",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -331,92 +343,79 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "formData",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "formData",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "categoria_id",
-                        "in": "formData",
-                        "description": "Categoría a la que pertenecerá el evento",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "nombre",
-                        "in": "formData",
-                        "description": "Nombre del evento",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "lugar",
-                        "in": "formData",
-                        "description": "Lugar donde se llevara a cabo el evento",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "recomendaciones",
-                        "in": "formData",
-                        "description": "Recomendaciones del evento",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "fecha",
-                        "in": "formData",
-                        "description": "Fecha del evento. Ej: 2016-03-20 ó 20-03-2017",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "latitude",
-                        "in": "formData",
-                        "description": "Coordenadas del mapa latitude",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "longitude",
-                        "in": "formData",
-                        "description": "Coordenadas del mapa longitude",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "hora_inicio",
-                        "in": "formData",
-                        "description": "Hora de inicio del evento. Ej: 10:00:00",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "hora_fin",
-                        "in": "formData",
-                        "description": "Hora de fin del evento. Ej: 12:00:00",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "archivo",
-                        "in": "formData",
-                        "description": "Imágen del evento. Max 10mb. Formatos válidos: jpeg,jpg,gif,png",
-                        "required": false,
-                        "type": "file"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "formData",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "formData",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "categoria_id",
+                    "in": "formData",
+                    "description": "Categoría a la que pertenecerá el evento",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "nombre",
+                    "in": "formData",
+                    "description": "Nombre del evento",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "lugar",
+                    "in": "formData",
+                    "description": "Lugar donde se llevara a cabo el evento",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "recomendaciones",
+                    "in": "formData",
+                    "description": "Recomendaciones del evento",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "fecha",
+                    "in": "formData",
+                    "description": "Fecha del evento. Ej: 2016-03-20 ó 20-03-2017",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "latitude",
+                    "in": "formData",
+                    "description": "Coordenadas del mapa latitude",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "name": "longitude",
+                    "in": "formData",
+                    "description": "Coordenadas del mapa longitude",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "name": "hora_inicio",
+                    "in": "formData",
+                    "description": "Hora de inicio del evento. Ej: 10:00:00",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "name": "hora_fin",
+                    "in": "formData",
+                    "description": "Hora de fin del evento. Ej: 12:00:00",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "name": "archivo",
+                    "in": "formData",
+                    "description": "Imágen del evento. Max 10mb. Formatos válidos: jpeg,jpg,gif,png",
+                    "required": false,
+                    "type": "file"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -441,22 +440,19 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -481,29 +477,25 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "programa_id",
-                        "in": "path",
-                        "description": "Id del evento",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "programa_id",
+                    "in": "path",
+                    "description": "Id del evento",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -528,36 +520,31 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "formData",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "formData",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "categoria_id",
-                        "in": "formData",
-                        "description": "Categoría a la que pertenece el evento, si es null, o no se envia, devuelve los programas de TODAS las categorias. Si el id es 0, devuelve las 'otras' categorías.",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "fecha",
-                        "in": "formData",
-                        "description": "Fecha del evento, si es null, o no se envia, devuelve los programas sin importar la fecha. Ej: 2016-03-20 ó 20-03-2017",
-                        "required": false,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "formData",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "formData",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "categoria_id",
+                    "in": "formData",
+                    "description": "Categoría a la que pertenece el evento, si es null, o no se envia, devuelve los programas de TODAS las categorias. Si el id es 0, devuelve las 'otras' categorías.",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "name": "fecha",
+                    "in": "formData",
+                    "description": "Fecha del evento, si es null, o no se envia, devuelve los programas sin importar la fecha. Ej: 2016-03-20 ó 20-03-2017",
+                    "required": false,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -581,22 +568,19 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -621,29 +605,25 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "formData",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "formData",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "nombre",
-                        "in": "formData",
-                        "description": "Nombre de la categoría",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "formData",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "formData",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "nombre",
+                    "in": "formData",
+                    "description": "Nombre de la categoría",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -667,22 +647,19 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -707,92 +684,79 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "formData",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "formData",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "nombre",
-                        "in": "formData",
-                        "description": "Nombre del expositor",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "email",
-                        "in": "formData",
-                        "description": "Email del expositor",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "url",
-                        "in": "formData",
-                        "description": "Url del expositor",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "telefono",
-                        "in": "formData",
-                        "description": "Telefono del expositor",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "acerca",
-                        "in": "formData",
-                        "description": "Acerca del expositor",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "latitude",
-                        "in": "formData",
-                        "description": "Coordenadas del mapa latitude",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "longitude",
-                        "in": "formData",
-                        "description": "Coordenadas del mapa longitude",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "stand",
-                        "in": "formData",
-                        "description": "Stand del expositor",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "archivo_pdf",
-                        "in": "formData",
-                        "description": "PDF descripción del Expositor. Max 10mb. Formatos válidos: pdf",
-                        "required": false,
-                        "type": "file"
-                    },
-                    {
-                        "name": "archivo_logo",
-                        "in": "formData",
-                        "description": "Imágen logo del expositor. Max 10mb. Formatos válidos: jpeg,jpg,gif,png",
-                        "required": false,
-                        "type": "file"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "formData",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "formData",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "nombre",
+                    "in": "formData",
+                    "description": "Nombre del expositor",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "email",
+                    "in": "formData",
+                    "description": "Email del expositor",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "url",
+                    "in": "formData",
+                    "description": "Url del expositor",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "telefono",
+                    "in": "formData",
+                    "description": "Telefono del expositor",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "acerca",
+                    "in": "formData",
+                    "description": "Acerca del expositor",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "latitude",
+                    "in": "formData",
+                    "description": "Coordenadas del mapa latitude",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "name": "longitude",
+                    "in": "formData",
+                    "description": "Coordenadas del mapa longitude",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "name": "stand",
+                    "in": "formData",
+                    "description": "Stand del expositor",
+                    "required": true,
+                    "type": "integer"
+                }, {
+                    "name": "archivo_pdf",
+                    "in": "formData",
+                    "description": "PDF descripción del Expositor. Max 10mb. Formatos válidos: pdf",
+                    "required": false,
+                    "type": "file"
+                }, {
+                    "name": "archivo_logo",
+                    "in": "formData",
+                    "description": "Imágen logo del expositor. Max 10mb. Formatos válidos: jpeg,jpg,gif,png",
+                    "required": false,
+                    "type": "file"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -817,22 +781,19 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -856,22 +817,19 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -895,22 +853,19 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -934,29 +889,25 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "expositor_id",
-                        "in": "path",
-                        "description": "Id del expositor",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "expositor_id",
+                    "in": "path",
+                    "description": "Id del expositor",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -970,7 +921,7 @@
                 }
             }
         },
-        "/expositor/addfavorito/{user_id}/{api_key}/{expositor_id}":  {
+        "/expositor/addfavorito/{user_id}/{api_key}/{expositor_id}": {
             "get": {
                 "tags": [
                     "expositor",
@@ -981,29 +932,25 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "expositor_id",
-                        "in": "path",
-                        "description": "Id del expositor que se agrega a la lista de favoritos",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "expositor_id",
+                    "in": "path",
+                    "description": "Id del expositor que se agrega a la lista de favoritos",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -1028,22 +975,19 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -1067,22 +1011,19 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -1106,29 +1047,25 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "formData",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "formData",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "search",
-                        "in": "formData",
-                        "description": "Parámetro a buscar",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "formData",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "formData",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "search",
+                    "in": "formData",
+                    "description": "Parámetro a buscar",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -1152,71 +1089,61 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "formData",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "formData",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "nombre",
-                        "in": "formData",
-                        "description": "Nombre del evento",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "lugar",
-                        "in": "formData",
-                        "description": "Lugar del evento",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "recomendaciones",
-                        "in": "formData",
-                        "description": "Recomendaciones del evento",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "fecha",
-                        "in": "formData",
-                        "description": "Fecha del evento. Ej: 2016-03-20 ó 20-03-2017",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "hora_inicio",
-                        "in": "formData",
-                        "description": "Hora de inicio del evento. 10:00:00 ó 10:00",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "hora_fin",
-                        "in": "formData",
-                        "description": "Hora de fin del evento. 10:00:00 ó 10:00",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "archivo",
-                        "in": "formData",
-                        "description": "Imágen del evento. Max 10mb. Formatos válidos: jpeg,jpg,gif,png",
-                        "required": false,
-                        "type": "file"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "formData",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "formData",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "nombre",
+                    "in": "formData",
+                    "description": "Nombre del evento",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "lugar",
+                    "in": "formData",
+                    "description": "Lugar del evento",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "recomendaciones",
+                    "in": "formData",
+                    "description": "Recomendaciones del evento",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "fecha",
+                    "in": "formData",
+                    "description": "Fecha del evento. Ej: 2016-03-20 ó 20-03-2017",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "hora_inicio",
+                    "in": "formData",
+                    "description": "Hora de inicio del evento. 10:00:00 ó 10:00",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "name": "hora_fin",
+                    "in": "formData",
+                    "description": "Hora de fin del evento. 10:00:00 ó 10:00",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "name": "archivo",
+                    "in": "formData",
+                    "description": "Imágen del evento. Max 10mb. Formatos válidos: jpeg,jpg,gif,png",
+                    "required": false,
+                    "type": "file"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -1240,29 +1167,25 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "formData",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "formData",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "fecha",
-                        "in": "formData",
-                        "description": "Día del evento. Ej: 2016-03-20 ó 20-03-2017",
-                        "required": false,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "formData",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "formData",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "fecha",
+                    "in": "formData",
+                    "description": "Día del evento. Ej: 2016-03-20 ó 20-03-2017",
+                    "required": false,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -1286,22 +1209,19 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -1325,29 +1245,25 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "programa_id",
-                        "in": "path",
-                        "description": "Id del programa",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "programa_id",
+                    "in": "path",
+                    "description": "Id del programa",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -1371,22 +1287,19 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -1410,71 +1323,61 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "formData",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "formData",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "nombre",
-                        "in": "formData",
-                        "description": "Nombre del evento",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "lugar",
-                        "in": "formData",
-                        "description": "Lugar del evento",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "recomendaciones",
-                        "in": "formData",
-                        "description": "Recomendaciones del evento",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "fecha",
-                        "in": "formData",
-                        "description": "Fecha del evento. Ej: 2016-03-20 ó 20-03-2017",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "hora_inicio",
-                        "in": "formData",
-                        "description": "Hora de inicio del evento. 10:00:00 ó 10:00",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "hora_fin",
-                        "in": "formData",
-                        "description": "Hora de fin del evento. 10:00:00 ó 10:00",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "archivo",
-                        "in": "formData",
-                        "description": "Imágen del evento. Max 10mb. Formatos válidos: jpeg,jpg,gif,png",
-                        "required": false,
-                        "type": "file"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "formData",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "formData",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "nombre",
+                    "in": "formData",
+                    "description": "Nombre del evento",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "lugar",
+                    "in": "formData",
+                    "description": "Lugar del evento",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "recomendaciones",
+                    "in": "formData",
+                    "description": "Recomendaciones del evento",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "fecha",
+                    "in": "formData",
+                    "description": "Fecha del evento. Ej: 2016-03-20 ó 20-03-2017",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "hora_inicio",
+                    "in": "formData",
+                    "description": "Hora de inicio del evento. 10:00:00 ó 10:00",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "name": "hora_fin",
+                    "in": "formData",
+                    "description": "Hora de fin del evento. 10:00:00 ó 10:00",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "name": "archivo",
+                    "in": "formData",
+                    "description": "Imágen del evento. Max 10mb. Formatos válidos: jpeg,jpg,gif,png",
+                    "required": false,
+                    "type": "file"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -1498,29 +1401,25 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "formData",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "formData",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "fecha",
-                        "in": "formData",
-                        "description": "Día del evento. Ej: 2016-03-20 ó 20-03-2017",
-                        "required": false,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "formData",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "formData",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "fecha",
+                    "in": "formData",
+                    "description": "Día del evento. Ej: 2016-03-20 ó 20-03-2017",
+                    "required": false,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -1544,22 +1443,19 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -1583,29 +1479,25 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "programa_id",
-                        "in": "path",
-                        "description": "Id del programa",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "programa_id",
+                    "in": "path",
+                    "description": "Id del programa",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -1629,22 +1521,19 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -1668,92 +1557,79 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "formData",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "formData",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "nombre",
-                        "in": "formData",
-                        "description": "Nombre del patrocinador",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "email",
-                        "in": "formData",
-                        "description": "Email del patrocinador",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "url",
-                        "in": "formData",
-                        "description": "Url del patrocinador",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "telefono",
-                        "in": "formData",
-                        "description": "Telefono del patrocinador",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "acerca",
-                        "in": "formData",
-                        "description": "Acerca del patrocinador",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "latitude",
-                        "in": "formData",
-                        "description": "Coordenadas del mapa latitude",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "longitude",
-                        "in": "formData",
-                        "description": "Coordenadas del mapa longitude",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "tipo",
-                        "in": "formData",
-                        "description": "Tipo de patrocinador",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "archivo_pdf",
-                        "in": "formData",
-                        "description": "PDF descripción del Expositor. Max 10mb. Formatos válidos: pdf",
-                        "required": false,
-                        "type": "file"
-                    },
-                    {
-                        "name": "archivo_logo",
-                        "in": "formData",
-                        "description": "Imágen logo del expositor. Max 10mb. Formatos válidos: jpeg,jpg,gif,png",
-                        "required": false,
-                        "type": "file"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "formData",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "formData",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "nombre",
+                    "in": "formData",
+                    "description": "Nombre del patrocinador",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "email",
+                    "in": "formData",
+                    "description": "Email del patrocinador",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "url",
+                    "in": "formData",
+                    "description": "Url del patrocinador",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "telefono",
+                    "in": "formData",
+                    "description": "Telefono del patrocinador",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "acerca",
+                    "in": "formData",
+                    "description": "Acerca del patrocinador",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "latitude",
+                    "in": "formData",
+                    "description": "Coordenadas del mapa latitude",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "name": "longitude",
+                    "in": "formData",
+                    "description": "Coordenadas del mapa longitude",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "name": "tipo",
+                    "in": "formData",
+                    "description": "Tipo de patrocinador",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "archivo_pdf",
+                    "in": "formData",
+                    "description": "PDF descripción del Expositor. Max 10mb. Formatos válidos: pdf",
+                    "required": false,
+                    "type": "file"
+                }, {
+                    "name": "archivo_logo",
+                    "in": "formData",
+                    "description": "Imágen logo del expositor. Max 10mb. Formatos válidos: jpeg,jpg,gif,png",
+                    "required": false,
+                    "type": "file"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -1777,22 +1653,19 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -1816,22 +1689,19 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -1855,22 +1725,19 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -1894,29 +1761,25 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "patrocinador_id",
-                        "in": "path",
-                        "description": "Id del patrocinador",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "patrocinador_id",
+                    "in": "path",
+                    "description": "Id del patrocinador",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -1940,22 +1803,19 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -1979,29 +1839,25 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "formData",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "formData",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "search",
-                        "in": "formData",
-                        "description": "Parámetro a buscar",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "formData",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "formData",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "search",
+                    "in": "formData",
+                    "description": "Parámetro a buscar",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -2025,36 +1881,31 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "formData",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "formData",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "notificacion",
-                        "in": "formData",
-                        "description": "Texto de la notificacion",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "leido",
-                        "in": "formData",
-                        "description": "Status de la notificación 0 (Default) = no leido, 1 = leido",
-                        "required": false,
-                        "type": "integer"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "formData",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "formData",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "notificacion",
+                    "in": "formData",
+                    "description": "Texto de la notificacion",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "leido",
+                    "in": "formData",
+                    "description": "Status de la notificación 0 (Default) = no leido, 1 = leido",
+                    "required": false,
+                    "type": "integer"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -2078,22 +1929,19 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -2117,22 +1965,19 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -2151,34 +1996,30 @@
                 "tags": [
                     "notificacion"
                 ],
-                "summary": "Devuelve todas las notificaciones no leidas",
-                "description": "Devuelve todas las notificaciones no leidas de un usuario",
+                "summary": "Marca una notificación como leída",
+                "description": "Marca una notificación como leída",
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "notificacion_id",
-                        "in": "path",
-                        "description": "Id de la notificación",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "notificacion_id",
+                    "in": "path",
+                    "description": "Id de la notificación",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -2206,29 +2047,25 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "evento_id",
-                        "in": "path",
-                        "description": "Id del evento",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "evento_id",
+                    "in": "path",
+                    "description": "Id del evento",
+                    "required": true,
+                    "type": "integer"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -2256,22 +2093,19 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -2295,50 +2129,37 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "formData",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "formData",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "titulo",
-                        "in": "formData",
-                        "description": "Titulo de la ruta",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "descripcion",
-                        "in": "formData",
-                        "description": "Descripcion de la ruta",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "user_asignado",
-                        "in": "formData",
-                        "description": "id del usuario al que se asignará la ruta",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "archivo",
-                        "in": "formData",
-                        "description": "PDF con la información de la ruta",
-                        "required": false,
-                        "type": "file"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "formData",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "formData",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "titulo",
+                    "in": "formData",
+                    "description": "Titulo de la ruta",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "descripcion",
+                    "in": "formData",
+                    "description": "Descripcion de la ruta",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "archivo",
+                    "in": "formData",
+                    "description": "PDF con la información de la ruta",
+                    "required": false,
+                    "type": "file"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -2362,22 +2183,19 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -2401,29 +2219,25 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "ruta_id",
-                        "in": "path",
-                        "description": "Id de la ruta",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "ruta_id",
+                    "in": "path",
+                    "description": "Id de la ruta",
+                    "required": true,
+                    "type": "integer"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -2447,57 +2261,49 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "formData",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "formData",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "titulo",
-                        "in": "formData",
-                        "description": "Titulo del sitio",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "maps_link",
-                        "in": "formData",
-                        "description": "Link de google maps",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "descripcion",
-                        "in": "formData",
-                        "description": "Descripción del sitio. Máximo 300 caracteres",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "url",
-                        "in": "formData",
-                        "description": "URL del sitio",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "imagen",
-                        "in": "formData",
-                        "description": "Imágen del sitio",
-                        "required": false,
-                        "type": "file"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "formData",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "formData",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "titulo",
+                    "in": "formData",
+                    "description": "Titulo del sitio",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "maps_link",
+                    "in": "formData",
+                    "description": "Link de google maps",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "descripcion",
+                    "in": "formData",
+                    "description": "Descripción del sitio. Máximo 300 caracteres",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "url",
+                    "in": "formData",
+                    "description": "URL del sitio",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "imagen",
+                    "in": "formData",
+                    "description": "Imágen del sitio",
+                    "required": false,
+                    "type": "file"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -2521,43 +2327,37 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "formData",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "formData",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "titulo",
-                        "in": "formData",
-                        "description": "Titulo del teléfono",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "telefono",
-                        "in": "formData",
-                        "description": "Número telefónico",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "imagen",
-                        "in": "formData",
-                        "description": "imagen del teléfono",
-                        "required": false,
-                        "type": "file"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "formData",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "formData",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "titulo",
+                    "in": "formData",
+                    "description": "Titulo del teléfono",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "telefono",
+                    "in": "formData",
+                    "description": "Número telefónico",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "imagen",
+                    "in": "formData",
+                    "description": "imagen del teléfono",
+                    "required": false,
+                    "type": "file"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -2581,22 +2381,19 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -2620,22 +2417,19 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -2659,29 +2453,25 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "formData",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "formData",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "mapa",
-                        "in": "formData",
-                        "description": "PDF del mapa",
-                        "required": true,
-                        "type": "file"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "formData",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "formData",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "mapa",
+                    "in": "formData",
+                    "description": "PDF del mapa",
+                    "required": true,
+                    "type": "file"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -2705,22 +2495,19 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -2744,22 +2531,101 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id de usuario",
-                        "required": true,
-                        "type": "string"
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
                     },
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "description": "Api Key del usuario",
-                        "required": true,
-                        "type": "string"
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
                     }
+                }
+            }
+        },
+        "/eventos/removefavorito/{user_id}/{api_key}/{evento_id}": {
+            "get": {
+                "tags": [
+                    "eventos",
+                    "acompañantes",
+                    "programa",
+                    "Sociales y Deportivos",
+                    "agenda"
                 ],
+                "summary": "Remueve un evento de la agenda del usuario",
+                "description": "Remueve un evento del programa, de acompañantes o Social/deportivo de la agenda del usuario",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "evento_id",
+                    "in": "path",
+                    "description": "Id del evento",
+                    "required": true,
+                    "type": "integer"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/updates/check/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "Actualizaciones"
+                ],
+                "summary": "Devuelve el modulo que el usuario debe actualizar",
+                "description": "Devuelve el modulo que el user debe consumir para actualizar: \n 1 = Eventos de acompañantes \n 4 = Expositores \n 5 = Patrocinadores \n 6 = Programas \n 7 = Rutas / Transportación \n 8 = Eventos Sociales y Deportivos \n 9 = Conoce Puebla, teléfonos \n 10 = Conoce Puebla, sitios de interés",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -2773,7 +2639,6 @@
                 }
             }
         }
-
     },
     "definitions": {
         "User": {

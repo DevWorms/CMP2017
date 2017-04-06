@@ -36,29 +36,36 @@ import static android.R.attr.fragment;
 public class MenuFragment extends Fragment {
 
 
-
-    String resp,userId, apiKey, urlImage;
+    String resp, userId, apiKey, urlImage;
     ProgressDialog pDialog;
     ImageView imgFoto;
-    URL imageUrl ;
-    Bitmap [] imagen;
+    URL imageUrl;
+    Bitmap[] imagen;
     HttpURLConnection conn;
-    String [] ArrayBanners;
+    String[] ArrayBanners;
     ImageView imageAnim;
     View viewBanner;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
         SharedPreferences sp = getActivity().getSharedPreferences("prefe", Activity.MODE_PRIVATE);
-        String inicioComo = sp.getString("Nombre","");
-        apiKey = sp.getString("APIkey","");
-        userId = sp.getString("IdUser","");
-        imageAnim =  (ImageView) view.findViewById(R.id.imgBanner);
+        String inicioComo = sp.getString("Nombre", "");
+
+        apiKey = sp.getString("APIkey", "");
+        userId = sp.getString("IdUser", "");
+        if(inicioComo.equals("invi")){
+            apiKey = "0";
+            userId = "1";
+        }
 
 
-        new getBanner().execute();
+        imageAnim = (ImageView) view.findViewById(R.id.imgBanner);
 
-
-        cambioBanner();
+        if(imagen == null){
+            //new getBanner().execute();
+            BannerSinBloqueo();
+            cambioBanner();
+        }
 
 
         ImageView imgbtnProgramas = (ImageView) view.findViewById(R.id.imagbtnPrograma);
@@ -112,6 +119,93 @@ public class MenuFragment extends Fragment {
 
 
     }
+    public void BannerSinBloqueo(){
+        new Thread(new Runnable() {
+            public void run() {
+                //Aquí ejecutamos nuestras tareas costosas
+                String body= "";
+
+
+
+                body = "http://cmp.devworms.com/api/banners/all/"+userId+"/"+apiKey+"";
+
+
+                JSONParser jsp = new JSONParser();
+                SharedPreferences sp = getActivity().getSharedPreferences("prefe", Activity.MODE_PRIVATE);
+                String jsonBannerOffline = sp.getString("respuestaBanner", "");
+                SharedPreferences.Editor editor = sp.edit();
+
+                String respuesta= "";
+                if(jsonBannerOffline.equals("")) {
+                    respuesta = jsp.makeHttpRequest(body, "GET", body, "");
+                }else{
+                    respuesta = jsonBannerOffline;
+                }
+
+
+
+                Log.d("LoginRes : ", "> " + respuesta);
+                if (respuesta != "error") {
+                    try {
+                        editor.putString("respuestaBanner", respuesta);
+                        editor.commit();
+                        JSONObject json = new JSONObject(respuesta);
+                        String banners = "";
+
+                        banners = json.getString("banners");
+
+                        JSONArray jsonBanner = new JSONArray(banners);
+
+                        ArrayBanners = new String[jsonBanner.length()];
+
+                        // looping through All albums
+                        for (int i = 0; i < jsonBanner.length(); i++) {
+                            JSONObject c = jsonBanner.getJSONObject(i);
+
+
+                            // creating new HashMap
+
+                            ArrayBanners[i] = c.getString("url");
+
+
+
+                        }
+                        try {
+                            imagen = new Bitmap[ArrayBanners.length];
+                            for (int cou = 0; cou < imagen.length; cou++) {
+                                imageUrl = new URL(ArrayBanners[cou]);
+                                conn = (HttpURLConnection) imageUrl.openConnection();
+                                conn.connect();
+
+                                BitmapFactory.Options options = new BitmapFactory.Options();
+                                options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
+
+                                imagen[cou] = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
+
+
+                            }
+
+
+                        } catch (MalformedURLException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        resp = "ok";
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+
+                    }
+                }
+
+            }
+        }).start();
+
+
+
+    }
 public void cambioBanner(){
     final Handler handler = new Handler();
     Runnable runnable = new Runnable() {
@@ -158,7 +252,7 @@ public void cambioBanner(){
 
             Bundle parametro = new Bundle();
 
-            parametro.putString("nombre","Eventos de \n Acompañantes");
+            parametro.putString("nombre","Eventos para \n Acompañantes");
             parametro.putString("seccion","acomp");
 
             fragment.setArguments(parametro);
@@ -190,7 +284,7 @@ public void cambioBanner(){
 
             Bundle parametro = new Bundle();
 
-            parametro.putString("nombre","Eventos de Sociales \n y Deportivos");
+            parametro.putString("nombre","Eventos Sociales \n y Deportivos");
             parametro.putString("seccion","social");
 
             fragment.setArguments(parametro);
@@ -223,7 +317,7 @@ public void cambioBanner(){
             Bundle parametro = new Bundle();
 
             parametro.putString("nombre","Patrocinadores");
-
+            parametro.putString("MiExpo","No");
 
             fragment.setArguments(parametro);
 
@@ -243,7 +337,7 @@ public void cambioBanner(){
     class SecMapa implements View.OnClickListener {
         public void onClick(View v) {
 
-            Toast.makeText(getActivity(),"En Desarrollo",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),"Próximamente",Toast.LENGTH_SHORT).show();
             /*getFragmentManager().beginTransaction()
                     .replace(R.id.actividad, new MapaFragment()).addToBackStack(null).commit();*/
 
@@ -253,11 +347,11 @@ public void cambioBanner(){
 
     class SecTrans implements View.OnClickListener {
         public void onClick(View v) {
-            Toast.makeText(getActivity(),"En Desarrollo",Toast.LENGTH_SHORT).show();
 
 
-            /*getFragmentManager().beginTransaction()
-                    .replace(R.id.actividad, new TransportacionFragment()).addToBackStack(null).commit();*/
+
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.actividad, new TransportacionFragment()).addToBackStack(null).commit();
 
 
         }
@@ -282,7 +376,7 @@ public void cambioBanner(){
         protected void onPreExecute() {
             super.onPreExecute();
             pDialog = new ProgressDialog(getActivity());
-            pDialog.setMessage("Buscando");
+            pDialog.setMessage("Cargando...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(false);
             pDialog.show();
@@ -303,13 +397,24 @@ public void cambioBanner(){
 
 
             JSONParser jsp = new JSONParser();
+            SharedPreferences sp = getActivity().getSharedPreferences("prefe", Activity.MODE_PRIVATE);
+            String jsonBannerOffline = sp.getString("respuestaBanner", "");
+            SharedPreferences.Editor editor = sp.edit();
+
+            String respuesta= "";
+            if(jsonBannerOffline.equals("")) {
+                respuesta = jsp.makeHttpRequest(body, "GET", body, "");
+            }else{
+                respuesta = jsonBannerOffline;
+            }
 
 
 
-            String respuesta= jsp.makeHttpRequest(body,"GET",body,"");
             Log.d("LoginRes : ", "> " + respuesta);
             if (respuesta != "error") {
                 try {
+                    editor.putString("respuestaBanner", respuesta);
+                    editor.commit();
                     JSONObject json = new JSONObject(respuesta);
                     String banners = "";
 

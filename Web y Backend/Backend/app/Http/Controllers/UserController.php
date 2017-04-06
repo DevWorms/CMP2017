@@ -99,7 +99,6 @@ class UserController extends Controller {
         }
     }
 
-    // TODO
     public function resetPassword(Request $request) {
         try {
             $user_id = $request->get('user_id');
@@ -302,6 +301,52 @@ class UserController extends Controller {
                     $res['mensaje'] = "Bienvenido " . $user->name . " " . $user->last_name;
                     $res['api_key'] = $user->api_token;
                     $res['user_id'] = $user->id;
+                    return response()->json($res, 200);
+                } else {
+                    $res['status'] = 0;
+                    $res['mensaje'] = "Usuario o contraseña incorrecto";
+                    return response()->json($res, 400);
+                }
+            }
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Usuario o contraseña incorrecto";
+            return response()->json($res, 400);
+        } catch (FatalThrowableError $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    public function loginRoot(Request $request) {
+        try {
+            $validator = Validator::make($request->all(), [
+                'user' => 'required',
+                'password' => 'required|min:5'
+            ], $this->messagesLogin());
+
+            if ($validator->fails()) {
+                $errors = $validator->errors();
+
+                $res['status'] = 0;
+                $res['mensaje'] = $errors->first();
+                return response()->json($res, 400);
+            } else {
+                $user = $request->get('user');
+                $password = $request->get('password');
+                $user = User::where(['email' => $user, 'id' => 1])->firstOrFail();
+
+                if (Hash::check($password, $user->password)) {
+                    $res['status'] = 1;
+                    $res['mensaje'] = "Bienvenido " . $user->name . " " . $user->last_name;
+                    $res['api_key'] = $user->api_token;
+                    $res['user_id'] = $user->id;
+                    $res['key'] = hash('sha256', $user->id);
                     return response()->json($res, 200);
                 } else {
                     $res['status'] = 0;

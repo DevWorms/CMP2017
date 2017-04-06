@@ -1,3 +1,4 @@
+<?php require dirname(__FILE__) . '/sesion/validar.php'; ?>
 <!DOCTYPE html>
 <html lang="">
 
@@ -15,6 +16,8 @@
     <!-- CSS -->
     <link href="css/main.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="js/jquery-ui-1.12.1/jquery-ui.css">
+    <link rel="stylesheet" href="js/jquery-ui-timepicker-addon.css">
 </head>
 
 <body>
@@ -84,6 +87,9 @@
                     <li>
                         <a href="puebla.php">Puebla</a>
                     </li>
+                    <li>
+                        <a href="banner.php">Banners</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -91,41 +97,39 @@
 
         <!-- Contenido -->
         <div id="page-wrapper">
-
             <div class="container-fluid">
-                
+                <div id="error"></div>
                 <div class="row page-header__2">
                     <div class="col-md-6 col-md-offset-1">
-                        <form action="" method="" id="" name="" role="">
-                           
+                        <form method="POST" enctype="multipart/form-data" id="crearBanner" name="crearBanner">
                             <div class="form-group">
-                                <label for="">Nombre de la Categoría</label>
+                                <label for="nombre">Nombre de la Categoría</label>
                                     <br>
-                                <input type="" name="" id="" class="form-control">
+                                <input type="text" name="nombre" id="nombre" class="form-control" required>
                             </div> 
                             <br>
 							
-							<button type="submit" class="btn basico" name="" id=""><i class="fa fa-plus-circle"></i> &nbsp;Agregar Categoría</button>
+							<button type="submit" class="btn basico" name="guardar" id="guardar"><i class="fa fa-plus-circle"></i> &nbsp;Agregar Categoría</button>
                         </form>
                     </div>
                     <div class="col-md-6"></div>
                 </div>
                 <!-- Fin Fila -->
-                
-                
             </div>
             <!-- /.container-fluid -->
-
         </div>
         <!-- /#page-wrapper -->
-
     </div>
     <!-- /#wrapper -->
     
     <!-- Scripts -->
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
-
+    <script type="text/javascript" src="js/jquery-ui-1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/moment-with-locales.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
+    <script src="js/js.php"></script>
+    <script src="js/lodash.js"></script>
+    <script src="js/add-categoria.js"></script>
 </body>
-
 </html>

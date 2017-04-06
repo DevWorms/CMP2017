@@ -42,46 +42,13 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="30dp"
-                android:text="Revisa los horarios y las rutas que tenemos disponible para el transporte aeropuerto hotel-recinto y viceversa"
+                android:text="Revisa las rutas  de transportación que tenemos preparadas para el congreso"
                 android:textSize="18sp" />
 
-            <Button
-                android:id="@+id/btnRevisaRutas"
+            <ListView
+                android:id="@+id/lvListaTrans"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/btnrevisarutas"
-                android:gravity="center"
-                android:paddingBottom="5dp"
-                android:textSize="17sp"
-                android:textStyle="normal" />
-
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="50dp"
-                android:text="¿Viajas de algún lugar a la ciudad de Puebla? Revisa las intinerarios de vuelo de las diferentes aerolineas"
-                android:textSize="18sp" />
-
-            <Button
-                android:id="@+id/btnMapExp"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/btnrevisavuelos"
-                android:gravity="center"
-                android:paddingBottom="5dp"
-                android:textSize="17sp"
-                android:textStyle="normal" />
+                android:layout_height="match_parent" />
 
         </LinearLayout>
 

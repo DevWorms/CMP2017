@@ -4,10 +4,14 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.system.ErrnoException;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -21,6 +25,7 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,106 +38,164 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ExpositoresFrgament extends Fragment {
-    String userId, apiKey,resp, nombre;
+    String userId, apiKey,resp, nombre,miExpo;
     ProgressDialog pDialog;
     ArrayList<HashMap<String, String>> albumsList;
     ListView lista;
     AutoCompleteTextView acTextView;
     ConnectionDetector cd;
     TextView txtTitulo;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_expo, container, false);
-        SharedPreferences sp = getActivity().getSharedPreferences("prefe", Activity.MODE_PRIVATE);
-        String inicioComo = sp.getString("Nombre","");
-        cd = new ConnectionDetector(getActivity());
-       if (inicioComo.equals("invi")){
-           apiKey = "0";
-           userId = "1";
-       } else{
-           apiKey = sp.getString("APIkey","");
-           userId = sp.getString("IdUser","");
-       }
 
-        nombre = getArguments() != null ? getArguments().getString("nombre"):"Expositores";
-        txtTitulo= (TextView) view.findViewById(R.id.txtDescrip);
-        txtTitulo.setText(nombre);
-        lista=  (ListView) view.findViewById(R.id.lvExpo);
-        if (!cd.isConnectingToInternet()) {
-            // Internet Connection is not present
-            Toast.makeText(getActivity(), "Se necesita internet", Toast.LENGTH_SHORT).show();
-            // stop executing code by return
+           SharedPreferences sp = getActivity().getSharedPreferences("prefe", Activity.MODE_PRIVATE);
+           String inicioComo = sp.getString("Nombre","");
+           cd = new ConnectionDetector(getActivity());
+           if (inicioComo.equals("invi")){
+               apiKey = "0";
+               userId = "1";
+           } else{
+               apiKey = sp.getString("APIkey","");
+               userId = sp.getString("IdUser","");
+           }
 
-        }else{
-        new getListaAlfabetica().execute();
+           nombre = getArguments() != null ? getArguments().getString("nombre"):"Expositores";
+            miExpo = getArguments() != null ? getArguments().getString("MiExpo"):"No";
+           txtTitulo= (TextView) view.findViewById(R.id.txtDescrip);
+           txtTitulo.setText(nombre);
+           lista=  (ListView) view.findViewById(R.id.lvExpo);
+           if (!cd.isConnectingToInternet()) {
+               // Internet Connection is not present
+               Toast.makeText(getActivity(), "Se necesita internet", Toast.LENGTH_SHORT).show();
+               // stop executing code by return
+
+           }else{
+               if(miExpo.equals("Si")){
+
+               }else {
+                   new getListaAlfabetica().execute();
+               }
+           }
+           cd = new ConnectionDetector(getActivity());
+           Button btnAlfabetico = (Button)view.findViewById(R.id.btnOrdAlf);
+           btnAlfabetico.setOnClickListener(new Alfabetico());
+
+           Button btnNumerico = (Button)view.findViewById(R.id.btnNumStand);
+           btnNumerico.setOnClickListener(new Numerico());
+
+           acTextView = (AutoCompleteTextView) view.findViewById(R.id.autoCompleteEcpo);
+
+        if (miExpo.equals("Si")){
+            AdminSQLiteOpenHelper dbHandler;
+            dbHandler = new AdminSQLiteOpenHelper(getActivity(), null, null, 2);
+            SQLiteDatabase db = dbHandler.getWritableDatabase();
+            Cursor cursor = dbHandler.listarpersonas();
+            cursor.getColumnCount();
+
+
+
+            String[] from = new String[]{"idExpo", "nombre"};
+            int[] to = new int[]{
+                    R.id.txtid,
+                    R.id.txtNombre
+            };
+
+
+
+            SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(getActivity(), R.layout.formato_lista_alfabetica, cursor, from, to);
+
+
+            lista.setAdapter(cursorAdapter);
+            lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView parent, View view, int position, long id) {
+                    String expoId = ((TextView) view.findViewById(R.id.txtid)).getText().toString();
+                    Fragment fragment = new DetalleExpoFragment();
+
+                    Bundle parametro = new Bundle();
+
+
+                    parametro.putString("expoId", expoId);
+                    parametro.putString("miExpositores", "si");
+
+                    fragment.setArguments(parametro);
+
+                    final FragmentTransaction ft = getFragmentManager()
+                            .beginTransaction();
+                    ft.replace(R.id.actividad, fragment, "tag");
+
+                    ft.addToBackStack("tag");
+
+                    ft.commit();
+
+                }
+            });
+
+        }else {
+
+            acTextView.addTextChangedListener(new TextWatcher() {
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    if (!cd.isConnectingToInternet()) {
+                        // Internet Connection is not present
+                        Toast.makeText(getActivity(), "Se necesita internet", Toast.LENGTH_SHORT).show();
+                        // stop executing code by return
+
+                    } else {
+                        lista.setAdapter(null);
+                        albumsList.clear();
+                        new getListaBuscar().execute();
+                    }
+                }
+            });
+            lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> arg0, View view, int arg2,
+                                        long arg3) {
+                    // on selecting a single album
+                    // TrackListActivity will be launched to show tracks inside the album
+                    if (!cd.isConnectingToInternet()) {
+                        // Internet Connection is not present
+                        Toast.makeText(getActivity(), "Se necesita internet", Toast.LENGTH_SHORT).show();
+                        // stop executing code by return
+                        return;
+                    }
+                    String expoId = ((TextView) view.findViewById(R.id.txtid)).getText().toString();
+                    Fragment fragment = new DetalleExpoFragment();
+
+                    Bundle parametro = new Bundle();
+
+
+                    parametro.putString("expoId", expoId);
+                    parametro.putString("miExpositores", "No");
+
+                    fragment.setArguments(parametro);
+
+                    final FragmentTransaction ft = getFragmentManager()
+                            .beginTransaction();
+                    ft.replace(R.id.actividad, fragment, "tag");
+
+                    ft.addToBackStack("tag");
+
+                    ft.commit();
+                }
+            });
+
         }
-        cd = new ConnectionDetector(getActivity());
-        Button btnAlfabetico = (Button)view.findViewById(R.id.btnOrdAlf);
-        btnAlfabetico.setOnClickListener(new Alfabetico());
 
-        Button btnNumerico = (Button)view.findViewById(R.id.btnNumStand);
-        btnNumerico.setOnClickListener(new Numerico());
-
-        acTextView = (AutoCompleteTextView) view.findViewById(R.id.autoCompleteEcpo);
-
-        acTextView.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!cd.isConnectingToInternet()) {
-                    // Internet Connection is not present
-                    Toast.makeText(getActivity(), "Se necesita internet", Toast.LENGTH_SHORT).show();
-                    // stop executing code by return
-
-                }else{
-                lista.setAdapter(null);
-                albumsList.clear();
-                new getListaBuscar().execute();
-                }
-            }
-        });
-        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View view, int arg2,
-                                    long arg3) {
-                // on selecting a single album
-                // TrackListActivity will be launched to show tracks inside the album
-                if (!cd.isConnectingToInternet()) {
-                    // Internet Connection is not present
-                    Toast.makeText(getActivity(), "Se necesita internet", Toast.LENGTH_SHORT).show();
-                    // stop executing code by return
-                    return;
-                }
-                String expoId= ((TextView)view.findViewById(R.id.txtid)).getText().toString();
-                Fragment fragment = new DetalleExpoFragment();
-
-                Bundle parametro = new Bundle();
-
-
-                parametro.putString("expoId",expoId);
-
-
-                fragment.setArguments(parametro);
-
-                final FragmentTransaction ft = getFragmentManager()
-                        .beginTransaction();
-                ft.replace(R.id.actividad, fragment, "tag");
-
-                ft.addToBackStack("tag");
-
-                ft.commit();
-            }
-        });
         return view;
 
 

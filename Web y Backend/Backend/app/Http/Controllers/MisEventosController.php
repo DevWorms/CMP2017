@@ -123,6 +123,36 @@ class MisEventosController extends Controller {
         }
     }
 
+    public function removeFavorito($user_id, $api_key, $expositor_id) {
+        try {
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+            $expositor = Programa::where('id', $expositor_id)->first();
+            if ($expositor) {
+                $valida = MisEventos::where(['user_id' => $user_id, 'evento_id' => $expositor_id])->first();
+
+                if ($valida) {
+                    $valida->delete();
+                }
+
+                $res['status'] = 1;
+                $res['mensaje'] = "Se removio " . $expositor->nombre . " de tu agenda";
+                return response()->json($res, 200);
+            } else {
+                $res['status'] = 0;
+                $res['mensaje'] = "No se encontro el Evento";
+                return response()->json($res, 400);
+            }
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
     /**
      * Agrega la categoría y foto del evento
      *

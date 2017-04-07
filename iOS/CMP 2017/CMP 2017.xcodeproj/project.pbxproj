@@ -184,24 +184,20 @@
 				3B5B8F741E7083ED00F0D6AA /* Main.storyboard */,
 				3B5B8F701E7083ED00F0D6AA /* AppDelegate.swift */,
 				3B5B8F721E7083ED00F0D6AA /* ViewController.swift */,
-				3B396BF51E70DF2200C4611E /* LoginViewController.swift */,
-				3B396BF71E70DF2F00C4611E /* RegistroViewController.swift */,
+				3B396BFD1E76388400C4611E /* ProgramaViewController.swift */,
+				3B396C091E7655CE00C4611E /* ConocePueViewController.swift */,
+				3B396C0B1E76628200C4611E /* TelsViewController.swift */,
+				3BAEAA161E983E8900B1E7DA /* Con Internet */,
 				3B396BF91E70E4F400C4611E /* MenuPrincipalViewController.swift */,
 				3B396C151E773C3900C4611E /* SitiosViewController.swift */,
 				3B8B4C7C1E82501200983CD4 /* SitioTableViewCell.swift */,
 				3B396C031E764F5F00C4611E /* TransportacionViewController.swift */,
 				3B8B4C7A1E824B7B00983CD4 /* TransportacionTableViewCell.swift */,
-				3B396BFD1E76388400C4611E /* ProgramaViewController.swift */,
+				3B4608101E7CD687005264D4 /* ResultadosViewController.swift */,
+				3B396C111E76725F00C4611E /* BuscadorViewController.swift */,
 				3B396BFF1E764CA400C4611E /* DetalleViewController.swift */,
 				3B396C011E764CCD00C4611E /* MenuMapaViewController.swift */,
-				3B396C091E7655CE00C4611E /* ConocePueViewController.swift */,
-				3B396C0B1E76628200C4611E /* TelsViewController.swift */,
-				3B396C0D1E766AF800C4611E /* MiPerfilViewController.swift */,
-				3B396C0F1E766E0900C4611E /* NotificacionesViewController.swift */,
-				3B8B4C7E1E825F7400983CD4 /* NotificacionTableViewCell.swift */,
-				3B396C111E76725F00C4611E /* BuscadorViewController.swift */,
 				3B396C131E77392B00C4611E /* MapaSimpleViewController.swift */,
-				3B4608101E7CD687005264D4 /* ResultadosViewController.swift */,
 				3B396BFB1E762CA500C4611E /* MenuUsuarioViewController.swift */,
 				3B5B8F7A1E7083ED00F0D6AA /* Assets.xcassets */,
 				3B5B8F7C1E7083ED00F0D6AA /* LaunchScreen.storyboard */,
@@ -236,6 +232,18 @@
 				3BAEAA141E95CBCF00B1E7DA /* CoreDataHelper.swift */,
 			);
 			name = Utilities;
+			sourceTree = "<group>";
+		};
+		3BAEAA161E983E8900B1E7DA /* Con Internet */ = {
+			isa = PBXGroup;
+			children = (
+				3B396BF51E70DF2200C4611E /* LoginViewController.swift */,
+				3B396BF71E70DF2F00C4611E /* RegistroViewController.swift */,
+				3B396C0D1E766AF800C4611E /* MiPerfilViewController.swift */,
+				3B396C0F1E766E0900C4611E /* NotificacionesViewController.swift */,
+				3B8B4C7E1E825F7400983CD4 /* NotificacionTableViewCell.swift */,
+			);
+			name = "Con Internet";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

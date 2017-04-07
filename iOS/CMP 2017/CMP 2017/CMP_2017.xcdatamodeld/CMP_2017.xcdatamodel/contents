@@ -4,7 +4,12 @@
         <attribute name="banner" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="imgBanner" optional="YES" attributeType="Transformable" syncable="YES"/>
     </entity>
+    <entity name="Sitios" representedClassName="Sitios" syncable="YES" codeGenerationType="class">
+        <attribute name="imgSitio" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="sitio" optional="YES" attributeType="Transformable" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Banners" positionX="-63" positionY="-18" width="128" height="73"/>
+        <element name="Sitios" positionX="-63" positionY="0" width="128" height="75"/>
     </elements>
 </model>

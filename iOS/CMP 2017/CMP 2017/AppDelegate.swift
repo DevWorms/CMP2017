@@ -18,12 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        CoreDataHelper.deleteEntity(entityName: "Banners")
-        ServerConnection.getBanners()
-        
-        //
-        
-        
         let apiKey = UserDefaults.standard.value(forKey: "api_key") as? String
         
         if ( apiKey == "" || apiKey == nil ){
@@ -34,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //print("current key: \( NSUserDefaults.standardUserDefaults().stringForKey("ApiKey")!)")
             
             let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "MenuPrincipal") 
+            let vc = storyboard.instantiateViewController(withIdentifier: "MenuPrincipal")
             self.window?.rootViewController = vc
         }
                 

@@ -27,7 +27,7 @@
             <ImageView
                 android:id="@+id/imgFoto"
                 android:layout_width="match_parent"
-                android:layout_height="165dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="top"
                 android:background="@android:color/transparent"
                 android:minHeight="80dp"
@@ -42,14 +42,22 @@
                 android:id="@+id/txtNombreEven"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:paddingLeft="20dp"
-                android:paddingTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="20dp"
                 android:text=""
                 android:textColor="#1e2747"
-                android:textSize="18sp"
+                android:textSize="24sp"
                 android:textStyle="normal|bold"
                 android:typeface="sans" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lugar:"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtLugarEven"
@@ -62,17 +70,16 @@
 
             <!-- Album Name -->
 
+            <!-- Song Duration -->
+
             <TextView
-                android:id="@+id/email"
-                android:layout_width="fill_parent"
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="20dp"
-                android:text=""
-                android:textColor="#1e2747"
+                android:text="Recomendaciones:"
+                android:textColor="#000000"
                 android:textSize="18sp"
                 android:textStyle="bold" />
-
-            <!-- Song Duration -->
 
             <TextView
                 android:id="@+id/txtRecomEven"
@@ -81,6 +88,22 @@
                 android:paddingLeft="20dp"
                 android:text=""
                 android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Horario:"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtHorario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:textColor="#1e2747" />
 
             <Button
                 android:id="@+id/btnLocalizar"

@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,26 +22,37 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.loopj.android.http.Base64;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.ByteBuffer;
+
+import static android.R.attr.bitmap;
 
 public class DetalleExpoFragment extends Fragment {
-    String userId, apiKey,resp,expoId,strNomEmpre,strPagina,strTelefono,strCorreo,strAcercaDe,urlImage,urlPresenta,misExpo,miExpo;
+    String userId, apiKey,nombreSec,resp,expoId,strNomEmpre,strStand,strPagina,strTelefono,strCorreo,strAcercaDe,urlImage,urlPresenta,misExpo,miExpo;
     TextView txtNomEmpre, txtPagina,txtTelefono,txtCorreo, txtAcercaDe;
     ProgressDialog pDialog;
     ImageView imgFoto;
     URL imageUrl ;
     Bitmap imagen;
+    View viewR;
+    int cursorEncontrado;
+    byte[] imageArray;
     HttpURLConnection conn;
+    String inicioComo;
     Button btnLocalizar,btnAgreExpo,btnPresent;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detalle_expo, container, false);
+        viewR = view;
         SharedPreferences sp = getActivity().getSharedPreferences("prefe", Activity.MODE_PRIVATE);
-        String inicioComo = sp.getString("Nombre","");
+        inicioComo = sp.getString("Nombre","");
 
         if (inicioComo.equals("invi")){
             apiKey = "0";
@@ -51,7 +63,7 @@ public class DetalleExpoFragment extends Fragment {
         }
         expoId = getArguments().getString("expoId");
         misExpo = getArguments().getString("miExpositores");
-
+        nombreSec = getArguments().getString("nombre");
         txtNomEmpre = (TextView)view.findViewById(R.id.txtNomEmpre);
         txtPagina = (TextView)view.findViewById(R.id.txtPaginaExpo);
         txtTelefono = (TextView)view.findViewById(R.id.txtTelefono);
@@ -62,18 +74,39 @@ public class DetalleExpoFragment extends Fragment {
         btnLocalizar.setOnClickListener(new Localizar());
         btnAgreExpo = (Button)view.findViewById(R.id.btnAgreExpo);
         btnAgreExpo.setOnClickListener(new AgregarExpo());
+        if(nombreSec.equals("Patrocinadores")){
+            btnAgreExpo.setVisibility(View.INVISIBLE);
+        }
         btnPresent = (Button)view.findViewById(R.id.btnPresent);
         btnPresent.setOnClickListener(new Presentacion());
+
+        AdminSQLiteOpenHelper dbHandler;
+        dbHandler = new AdminSQLiteOpenHelper(getActivity(), null, null, 1);
+        SQLiteDatabase db = dbHandler.getWritableDatabase();
+        Cursor cursor = dbHandler.personabyid(expoId);
+        cursorEncontrado = cursor.getCount();
+
+        if(cursorEncontrado == 1){
+            btnAgreExpo.setBackground(getResources().getDrawable(R.drawable.btneliminarexpo));
+
+        }
+
         if(misExpo.equals("si")){
-            AdminSQLiteOpenHelper dbHandler;
-            dbHandler = new AdminSQLiteOpenHelper(getActivity(), null, null, 1);
-            SQLiteDatabase db = dbHandler.getWritableDatabase();
-            Cursor cursor = dbHandler.personabyid(expoId);
+
             txtNomEmpre.setText(cursor.getString(2));
             txtAcercaDe.setText(cursor.getString(3));
             txtTelefono.setText(cursor.getString(4));
             txtCorreo.setText(cursor.getString(5));
             txtPagina.setText(cursor.getString(6));
+            String imageF = cursor.getString(8);
+
+
+            if(!imageF.equals("no")){
+                Bitmap bmimage = getImage(imageF);
+                imgFoto.setImageBitmap(bmimage);
+            }
+
+
 
         }else {
             new getDetalle().execute();
@@ -85,9 +118,15 @@ public class DetalleExpoFragment extends Fragment {
     }
     class AgregarExpo implements View.OnClickListener {
         public void onClick(View v) {
-
-            AgregarExpoFav();
-
+            if (inicioComo.equals("invi")){
+                Toast.makeText(getActivity(),"Registrate para activar esta función",Toast.LENGTH_SHORT).show();
+            }else {
+                if (cursorEncontrado == 1) {
+                    EliminarExpoFav();
+                } else {
+                    AgregarExpoFav();
+                }
+            }
         }
     }
     class Presentacion implements View.OnClickListener {
@@ -110,19 +149,41 @@ public class DetalleExpoFragment extends Fragment {
 
         }
     }
+
    public void AgregarExpoFav(){
         AdminSQLiteOpenHelper dbHandler;
         dbHandler = new AdminSQLiteOpenHelper(getActivity(), null, null, 1);
         SQLiteDatabase db = dbHandler.getWritableDatabase();
+       String imageString = "no";
+       if(imagen != null) {
+           imageString = getBytes(imagen);
+       }
 
-        dbHandler.addExpo(expoId,txtNomEmpre.getText().toString(),txtAcercaDe.getText().toString(),txtTelefono.getText().toString(),txtCorreo.getText().toString(),txtPagina.getText().toString(), urlPresenta);
+        dbHandler.addExpo(expoId,txtNomEmpre.getText().toString(),txtAcercaDe.getText().toString(),txtTelefono.getText().toString(),txtCorreo.getText().toString(),txtPagina.getText().toString(), urlPresenta, imageString,"Stand "+strStand);
 
 
-
+       btnAgreExpo.setBackground(getResources().getDrawable(R.drawable.btneliminarexpo));
 
         Toast.makeText(getActivity(), "Se guardo en Mis expositores",
                 Toast.LENGTH_SHORT).show();
     }
+
+    public void EliminarExpoFav(){
+        AdminSQLiteOpenHelper dbHandler;
+        dbHandler = new AdminSQLiteOpenHelper(getActivity(), null, null, 1);
+        SQLiteDatabase db = dbHandler.getWritableDatabase();
+        String imageString = "no";
+        if(imagen != null) {
+            imageString = getBytes(imagen);
+        }
+
+        dbHandler.borrarPersona(expoId);
+        btnAgreExpo.setBackground(getResources().getDrawable(R.drawable.btnagregarespo));
+
+        Toast.makeText(getActivity(), "Se Elimino de Mis expositores",
+                Toast.LENGTH_SHORT).show();
+    }
+
     class getDetalle extends AsyncTask<String, String, String> {
 
         /**
@@ -167,13 +228,15 @@ public class DetalleExpoFragment extends Fragment {
                     strTelefono = jsonExpo.getString("telefono");
                     strCorreo = jsonExpo.getString("email");
                     strAcercaDe = jsonExpo.getString("acerca");
+                    strStand = jsonExpo.getString("stand");
                     String urlImageJson = jsonExpo.getString("logo");
                     JSONObject jsonImagen = new JSONObject(urlImageJson);
                     urlImage = jsonImagen.getString("url");
+                    mostrarImagen(urlImage);
                     String urlPreseJson = jsonExpo.getString("pdf");
                     JSONObject jsonPrese = new JSONObject(urlPreseJson);
                     urlPresenta = jsonPrese.getString("url");
-                    mostrarImagen(urlImage);
+
 
 
                 } catch (JSONException e) {
@@ -216,6 +279,30 @@ public class DetalleExpoFragment extends Fragment {
             });
 
         }
+    }
+    // convert from bitmap to byte array
+    public static String getBytes(Bitmap bitmap) {
+        ByteArrayOutputStream blob = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0 /* Ignored for PNGs */, blob);
+        byte[] bitmapdata = blob.toByteArray();
+
+        String encodedImage = Base64.encodeToString(bitmapdata, Base64.DEFAULT);
+        //---------------
+       /* ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);*/
+        return encodedImage;
+    }
+
+    // convert from byte array to bitmap
+    public static Bitmap getImage(String imageS) {
+
+        byte[] b = Base64.decode(imageS , Base64.DEFAULT);
+        //-----------------
+       Bitmap bmp = BitmapFactory.decodeByteArray(b, 0, b.length);
+
+
+        return  bmp;
+
     }
 
     public void mostrarImagen(String url){

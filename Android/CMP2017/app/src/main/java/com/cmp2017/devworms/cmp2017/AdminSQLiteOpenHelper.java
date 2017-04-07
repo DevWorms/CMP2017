@@ -21,6 +21,8 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     public static final String COLUMN_EMAIL = "email";
     public static final String COLUMN_WEB = "web";
     public static final String COLUMN_PRESENTA = "presentacion";
+    public static final String COLUMN_IMAGE = "image";
+    public static final String COLUMN_STAND = "stand";
 
 
     public AdminSQLiteOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -37,7 +39,9 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
                 COLUMN_TELEFONO + " TEXT, " +
                 COLUMN_EMAIL + " TEXT, " +
                 COLUMN_WEB + " TEXT," +
-                COLUMN_PRESENTA + " TEXT" +
+                COLUMN_PRESENTA + " TEXT," +
+                COLUMN_IMAGE + " TEXT," +
+                COLUMN_STAND + " TEXT" +
 
                 ");";
 
@@ -53,7 +57,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
     //Añade un nuevo Row a la Base de Datos
 
-    public void addExpo(String idExpo,String nombre, String descri, String tel, String email, String web, String prese) {
+    public void addExpo(String idExpo,String nombre, String descri, String tel, String email, String web, String prese, String image, String stand) {
 
         ContentValues values = new ContentValues();
         values.put(COLUMN_IDEXPO, idExpo);
@@ -63,6 +67,8 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put(COLUMN_EMAIL, email);
         values.put(COLUMN_WEB, web);
         values.put(COLUMN_PRESENTA, prese);
+        values.put(COLUMN_IMAGE, image);
+        values.put(COLUMN_STAND, stand);
         SQLiteDatabase db = getWritableDatabase();
         db.insert(TABLA_PERSONAS, null, values);
         db.close();
@@ -73,9 +79,9 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
     // Borrar una persona de la Base de Datos
 
-    public void borrarPersona(int persona_id){
+    public void borrarPersona(String persona_id){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM " + TABLA_PERSONAS + " WHERE " + COLUMN_ID + " = " + persona_id + ";");
+        db.execSQL("DELETE FROM " + TABLA_PERSONAS + " WHERE " + COLUMN_IDEXPO + " = " + persona_id + ";");
         db.close();
     }
 
@@ -105,6 +111,19 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
         return c;
     }
+
+    public Cursor listarpersonasStand(){
+        SQLiteDatabase db = getReadableDatabase();
+        String query = ("SELECT * FROM " + TABLA_PERSONAS + " ORDER BY stand ASC ;");
+        Cursor c = db.rawQuery(query, null);
+
+        if (c != null) {
+            c.moveToFirst();
+        }
+
+        return c;
+    }
+
     public Cursor listarpersonasb(String b){
         SQLiteDatabase db = getReadableDatabase();
         String query = ("SELECT * FROM " + TABLA_PERSONAS + " where nombre LIKE  '"+ b +"%';");

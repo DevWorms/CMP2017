@@ -10,7 +10,7 @@
         <item
             android:id="@+id/nav_mi_perfil"
             android:icon="@drawable/icoperfil"
-            android:title="Mi perfil" />
+            android:title="Mi Perfil" />
     </group>
 
     <group
@@ -21,7 +21,7 @@
         <item
             android:id="@+id/nav_agenda"
             android:icon="@drawable/icoagenda"
-            android:title="Mi agenda" />
+            android:title="Mi Agenda" />
     </group>
 
     <group
@@ -43,17 +43,9 @@
         <item
             android:id="@+id/nav_encuestas"
             android:icon="@drawable/icoencuestas"
-            android:title="Mis encuestas" />
+            android:title="Mis Encuestas" />
     </group>
-    <group
 
-        android:id="@+id/menu_bottom5"
-        android:checkableBehavior="none">
-        <item
-            android:id="@+id/nav_contactos"
-            android:icon="@drawable/icocontactos"
-            android:title="Mis contactos" />
-    </group>
     <group
 
         android:id="@+id/menu_bottom6"
@@ -71,7 +63,7 @@
         <item
             android:id="@+id/nav_informacion"
             android:icon="@drawable/icoctualizarinformacion"
-            android:title="Actualizar información" />
+            android:title="Actualizar Información" />
     </group>
     <group
 

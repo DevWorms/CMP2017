@@ -41,6 +41,7 @@ public class DetalleEventoFragment extends Fragment {
     URL imageUrl ;
     Bitmap imagen;
     HttpURLConnection conn;
+    Button btnLocalizar,btnAgreExpo;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detalle_evento, container, false);
@@ -52,13 +53,36 @@ public class DetalleEventoFragment extends Fragment {
         txtNombreEven = (TextView)view.findViewById(R.id.txtNombreEven);
         txtLugarEven = (TextView)view.findViewById(R.id.txtLugarEven);
         txtRecomendaEven = (TextView)view.findViewById(R.id.txtRecomEven);
+        btnLocalizar = (Button)view.findViewById(R.id.btnLocalizar);
+        btnLocalizar.setOnClickListener(new Localizar());
+        btnAgreExpo = (Button)view.findViewById(R.id.btnAgreExpo);
+        btnAgreExpo.setOnClickListener(new AgregarExpo());
         new getDetalle().execute();
         return view;
 
 
 
     }
+    class AgregarExpo implements View.OnClickListener {
+        public void onClick(View v) {
 
+            Toast.makeText(getActivity(),"Próximamente",Toast.LENGTH_SHORT).show();
+            /*getFragmentManager().beginTransaction()
+                    .replace(R.id.actividad, new MapaFragment()).addToBackStack(null).commit();*/
+
+
+        }
+    }
+    class Localizar implements View.OnClickListener {
+        public void onClick(View v) {
+
+            Toast.makeText(getActivity(),"Próximamente",Toast.LENGTH_SHORT).show();
+            /*getFragmentManager().beginTransaction()
+                    .replace(R.id.actividad, new MapaFragment()).addToBackStack(null).commit();*/
+
+
+        }
+    }
     class getDetalle extends AsyncTask<String, String, String> {
 
         /**

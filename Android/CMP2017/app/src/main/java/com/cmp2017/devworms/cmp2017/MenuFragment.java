@@ -252,7 +252,7 @@ public void cambioBanner(){
 
             Bundle parametro = new Bundle();
 
-            parametro.putString("nombre","Eventos de \n Acompañantes");
+            parametro.putString("nombre","Eventos para \n Acompañantes");
             parametro.putString("seccion","acomp");
 
             fragment.setArguments(parametro);
@@ -284,7 +284,7 @@ public void cambioBanner(){
 
             Bundle parametro = new Bundle();
 
-            parametro.putString("nombre","Eventos de Sociales \n y Deportivos");
+            parametro.putString("nombre","Eventos Sociales \n y Deportivos");
             parametro.putString("seccion","social");
 
             fragment.setArguments(parametro);
@@ -317,7 +317,7 @@ public void cambioBanner(){
             Bundle parametro = new Bundle();
 
             parametro.putString("nombre","Patrocinadores");
-
+            parametro.putString("MiExpo","No");
 
             fragment.setArguments(parametro);
 

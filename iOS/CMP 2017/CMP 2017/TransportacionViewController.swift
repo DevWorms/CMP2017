@@ -13,6 +13,7 @@ class TransportacionViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var tableView: UITableView!
     
     var datos = [[String : Any]]()
+    var pdfEnviar = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,19 +109,30 @@ class TransportacionViewController: UIViewController, UITableViewDelegate, UITab
         cell.descripcion.text = datos[indexPath.row]["descripcion"] as! String?
         
         cell.btnCell.tag = indexPath.row
-        //touch btn
+        cell.btnCell.addTarget(self, action: #selector(self.buttonClicked(_:)), for: UIControlEvents.touchUpInside)
+        
         
         return cell
     }
+    
+    func buttonClicked(_ sender:UIButton) {
+        
+        let json = datos[sender.tag]["pdf"] as! [String:Any]
+        self.pdfEnviar = json["url"] as! String
+        
+        self.performSegue(withIdentifier: "ruta", sender: nil)
+    }
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "ruta" {
+            (segue.destination as! MapaSimpleViewController).tipoMapa = 3
+            (segue.destination as! MapaSimpleViewController).pdfEnviado = self.pdfEnviar
+        }
     }
-    */
 
 }

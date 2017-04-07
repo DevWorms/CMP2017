@@ -557,9 +557,6 @@
                                                     <rect key="frame" x="74" y="139" width="227" height="39"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" image="04Revisar_Rutas"/>
-                                                    <connections>
-                                                        <segue destination="Ike-SW-6Fr" kind="show" id="Hqu-sl-Rm1"/>
-                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -599,6 +596,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Tax-4l-WG8" id="INc-D3-Iim"/>
+                        <segue destination="Ike-SW-6Fr" kind="show" identifier="ruta" id="z9v-TW-n8m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ran-Nx-uua" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -833,7 +831,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l0G-B2-VYX">
-                                <rect key="frame" x="52" y="537" width="270" height="46"/>
+                                <rect key="frame" x="52" y="547" width="270" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="05Boton_Agregar_Agenda"/>
                                 <connections>
@@ -841,7 +839,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sIf-mf-txP">
-                                <rect key="frame" x="52" y="484" width="270" height="45"/>
+                                <rect key="frame" x="52" y="494" width="270" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="06Boton_Localizar_en_el_mapa"/>
                                 <connections>
@@ -856,41 +854,55 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lugar:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gu2-nj-jDl">
-                                <rect key="frame" x="16" y="250" width="343" height="21"/>
+                                <rect key="frame" x="16" y="285" width="343" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Recomendaciones:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NYc-Xk-NbI">
-                                <rect key="frame" x="16" y="367" width="343" height="21"/>
+                                <rect key="frame" x="16" y="365" width="343" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Llevar ropa cómoda y zapato deportivo" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kOt-TJ-7bZ">
-                                <rect key="frame" x="16" y="396" width="343" height="80"/>
+                                <rect key="frame" x="16" y="394" width="343" height="92"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Muli-Regular" family="Muli" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Club Campestre de Puebla" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XwB-cG-Jqa">
-                                <rect key="frame" x="16" y="279" width="343" height="80"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Club Campestre de Puebla y muchas mas cosas para generar dos renglones" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XwB-cG-Jqa">
+                                <rect key="frame" x="16" y="314" width="343" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Muli-Regular" family="Muli" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c5c-30-Ada">
-                                <rect key="frame" x="52" y="591" width="270" height="46"/>
+                                <rect key="frame" x="52" y="601" width="270" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="05Boton_Presentacion_de_la_empresa"/>
                                 <connections>
                                     <action selector="btnTres:" destination="E5i-1x-Kko" eventType="touchUpInside" id="sD5-2a-OY2"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Horario:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXv-5h-LLO">
+                                <rect key="frame" x="16" y="256" width="80" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="horario" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JNZ-Fp-syY">
+                                <rect key="frame" x="104" y="256" width="255" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -915,6 +927,8 @@
                         <outlet property="btn2" destination="l0G-B2-VYX" id="B1x-9R-GkB"/>
                         <outlet property="btn3" destination="c5c-30-Ada" id="lLp-Y9-xAQ"/>
                         <outlet property="foto" destination="uAX-0j-wpn" id="HNf-0W-3GD"/>
+                        <outlet property="horario" destination="JNZ-Fp-syY" id="w7a-0J-Z64"/>
+                        <outlet property="lbl1" destination="QXv-5h-LLO" id="Lla-9W-foh"/>
                         <outlet property="lbl2" destination="gu2-nj-jDl" id="Yzs-9d-i6c"/>
                         <outlet property="lbl3" destination="NYc-Xk-NbI" id="Toa-3O-hqw"/>
                         <outlet property="lugar" destination="XwB-cG-Jqa" id="imd-yi-0wp"/>
@@ -924,7 +938,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zQy-h9-r1Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5705" y="152"/>
+            <point key="canvasLocation" x="5704.8000000000002" y="151.57421289355324"/>
         </scene>
         <!--Menu Usuario View Controller-->
         <scene sceneID="adq-I6-afJ">
@@ -1502,6 +1516,7 @@
                     </navigationItem>
                     <connections>
                         <segue destination="Ike-SW-6Fr" kind="show" identifier="clima" id="fdM-hd-29f"/>
+                        <segue destination="Ike-SW-6Fr" kind="show" identifier="puebla" id="Cs4-CN-RMn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gK9-MU-KEK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1643,11 +1658,11 @@
         <image name="fondoCMP" width="1242" height="2208"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="eRA-mI-tof"/>
-        <segue reference="psR-II-8MZ"/>
         <segue reference="Euz-ZR-EEI"/>
         <segue reference="0FK-uA-KfA"/>
-        <segue reference="Hqu-sl-Rm1"/>
+        <segue reference="psR-II-8MZ"/>
         <segue reference="GKY-3m-4VQ"/>
+        <segue reference="GJj-eU-EjN"/>
+        <segue reference="z9v-TW-n8m"/>
     </inferredMetricsTieBreakers>
 </document>

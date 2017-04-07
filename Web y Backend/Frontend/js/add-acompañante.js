@@ -70,7 +70,7 @@ function getElement(id) {
         type : 'GET',
         url  : API_URL + 'acompanantes/detail/' + user_id + '/' + api_key + '/' + id,
         success :  function(response) {
-            if (response.status == 1) {
+            if (response.status === 1) {
                 var el = response.acompanante;
                 $("#id").val(el.id);
                 $("#nombre").val(el.nombre);
@@ -79,6 +79,11 @@ function getElement(id) {
                 $("#hora_inicio").val(el.hora_inicio);
                 $("#hora_fin").val(el.hora_fin);
                 $("#recomendaciones").val(el.recomendaciones);
+
+                if (el.foto.nombre) {
+                    $("label[for='archivo']").text("Actualizar imágen");
+                    $("#file_img").html("<br><img height='250px' src='" + el.foto.url + "' title='" + el.foto.nombre + "'>");
+                }
 
                 $("#crearEvento input, textarea, button").prop("disabled", false);
             } else {
@@ -90,7 +95,7 @@ function getElement(id) {
             }
         },
         error : function (response) {
-            var response = $.parseJSON(response.responseText);
+            response = $.parseJSON(response.responseText);
             $("#error").fadeIn(1000, function() {
                 $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
             });

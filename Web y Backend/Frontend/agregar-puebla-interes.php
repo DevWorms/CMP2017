@@ -148,7 +148,7 @@
                                 <label for="imagen">Imágen (fotográfia)</label>
                                     <br><br>
                                 <input type="file" id="imagen" name="imagen">
-                            </div> 
+                            </div>
                         </div>
                     </div>
                     <br>
@@ -162,6 +162,9 @@
                                 <input type="text" name="url" id="url" class="form-control" required>
                             </div>
                             <br>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div id="file_img"></div>
                         </div>
                     </div>
                     <!-- Fin Fila -->

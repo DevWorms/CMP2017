@@ -64,7 +64,7 @@ function showAll() {
         type : 'GET',
         url  : API_URL + 'puebla/sitio/all/' + user_id + '/' + api_key,
         success :  function(response) {
-            if (response.status == 1) {
+            if (response.status === 1) {
                 var table = document.getElementById("tbl_eventos");
                 for (var i = table.rows.length - 1; i > 0; i--) {
                     table.deleteRow(i);
@@ -77,7 +77,7 @@ function showAll() {
                 response.sitios.forEach(function (expositor) {
                     $('#tbl_eventos tr:last').after('<tr>' +
                         '<td>' + expositor.titulo + '</td>' +
-                        '<td>' + expositor.url + '</td>' +
+                        '<td>' + expositor.descripcion + '</td>' +
                         '<td align="center"><a href="#" onclick="openModal(' + expositor.id + ')" class="btn btn-primary">Ver</a></td>' +
                         '<td align="center"><a href="#" onclick="openEdit(' + expositor.id + ')" class="btn btn-primary">Editar</a></td>' +
                         '<td align="center"><a href="#" onclick="deletePrograma(' + expositor.id + ')" class="btn btn-danger">Eliminar</a></td>' +
@@ -101,7 +101,7 @@ function loadExpostitores(url) {
         type : 'GET',
         url  : decodeURIComponent(url),
         success :  function(response) {
-            if (response.status == 1) {
+            if (response.status === 1) {
                 var table = document.getElementById("tbl_eventos");
                 for (var i = table.rows.length - 1; i > 0; i--) {
                     table.deleteRow(i);
@@ -121,7 +121,7 @@ function loadExpostitores(url) {
                 data.data.forEach(function (expositor) {
                     $('#tbl_eventos tr:last').after('<tr>' +
                         '<td>' + expositor.titulo + '</td>' +
-                        '<td>' + expositor.url + '</td>' +
+                        '<td>' + expositor.descripcion + '</td>' +
                         '<td align="center"><a href="#" onclick="openModal(' + expositor.id + ')" class="btn btn-primary">Ver</a></td>' +
                         '<td align="center"><a href="#" onclick="openEdit(' + expositor.id + ')" class="btn btn-primary">Editar</a></td>' +
                         '<td align="center"><a href="#" onclick="deletePrograma(' + expositor.id + ')" class="btn btn-danger">Eliminar</a></td>' +
@@ -159,7 +159,7 @@ function deletePrograma(id) {
             type : 'GET',
             url  : API_URL + 'puebla/sitio/delete/' + user_id + '/' + api_key + '/' + id,
             success :  function(response) {
-                if (response.status == 1) {
+                if (response.status === 1) {
                     $("#error").fadeIn(1000, function() {
                         $("#error").html('<div class="alert alert-success"> &nbsp; ' + response.mensaje + '</div>');
                     });
@@ -202,13 +202,18 @@ function getElement(id) {
         type : 'GET',
         url  : API_URL + 'puebla/sitio/detail/' + user_id + '/' + api_key + '/' + id,
         success :  function(response) {
-            if (response.status == 1) {
+            if (response.status === 1) {
                 var el = response.sitio;
                 $("#id").val(el.id);
                 $("#descripcion").val(el.descripcion);
                 $("#titulo").val(el.titulo);
                 $("#url").val(el.url);
                 $("#maps_link").val(el.maps_link);
+
+                if (el.imagen.nombre) {
+                    $("label[for='imagen']").text("Actualizar imágen");
+                    $("#file_img").html("<br><img height='250px' src='" + el.imagen.url + "' title='" + el.imagen.nombre + "'>");
+                }
 
                 $("#crearEvento input, textarea, button").prop("disabled", false);
             } else {
@@ -220,7 +225,7 @@ function getElement(id) {
             }
         },
         error : function (response) {
-            var response = $.parseJSON(response.responseText);
+            response = $.parseJSON(response.responseText);
             $("#error").fadeIn(1000, function() {
                 $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
             });

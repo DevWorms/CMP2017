@@ -44,7 +44,7 @@ function loadExpostitores(url) {
         type : 'GET',
         url  : decodeURIComponent(url),
         success :  function(response) {
-            if (response.status == 1) {
+            if (response.status === 1) {
                 var table = document.getElementById("tbl_eventos");
                 for (var i = table.rows.length - 1; i > 0; i--) {
                     table.deleteRow(i);
@@ -98,7 +98,7 @@ function showAll() {
         type : 'GET',
         url  : API_URL + 'banners/all/' + user_id + '/' + api_key,
         success :  function(response) {
-            if (response.status == 1) {
+            if (response.status === 1) {
                 var table = document.getElementById("tbl_eventos");
                 for (var i = table.rows.length - 1; i > 0; i--) {
                     table.deleteRow(i);

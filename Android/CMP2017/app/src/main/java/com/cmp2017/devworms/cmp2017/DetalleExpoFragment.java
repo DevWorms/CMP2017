@@ -163,7 +163,7 @@ public class DetalleExpoFragment extends Fragment {
 
 
        btnAgreExpo.setBackground(getResources().getDrawable(R.drawable.btneliminarexpo));
-
+       cursorEncontrado = 1;
         Toast.makeText(getActivity(), "Se guardo en Mis expositores",
                 Toast.LENGTH_SHORT).show();
     }
@@ -178,8 +178,9 @@ public class DetalleExpoFragment extends Fragment {
         }
 
         dbHandler.borrarPersona(expoId);
-        btnAgreExpo.setBackground(getResources().getDrawable(R.drawable.btnagregarespo));
 
+        btnAgreExpo.setBackground(getResources().getDrawable(R.drawable.btnagregarespo));
+        cursorEncontrado = 0;
         Toast.makeText(getActivity(), "Se Elimino de Mis expositores",
                 Toast.LENGTH_SHORT).show();
     }

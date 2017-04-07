@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\File;
 use App\MisEventos;
 use App\Programa;
 use App\User;
-use Carbon\Carbon;
-use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class MisEventosController extends Controller {
 

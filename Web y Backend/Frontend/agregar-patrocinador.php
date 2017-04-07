@@ -175,7 +175,8 @@
                                 <label for="archivo_pdf">Agregar archivo PDF</label>
                                     <br><br>
                                 <input type="file" name="archivo_pdf" id="archivo_pdf">
-                            </div> 
+                            </div>
+                            <div id="file_pdf"></div>
                         </div>
                     </div>
                     <br>
@@ -195,7 +196,8 @@
                                 <label for="archivo_logo">Agregar imagen de logotipo</label>
                                     <br><br>
                                 <input type="file" name="archivo_logo" id="archivo_logo">
-                            </div> 
+                            </div>
+                            <div id="file_img"></div>
                         </div>
                     </div>
                     <br>

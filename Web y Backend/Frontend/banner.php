@@ -83,13 +83,13 @@
                 <li>
                     <a href="mapa.php">Mapa</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="transportacion.php">Transportación</a>
                 </li>
                 <li>
                     <a href="puebla.php">Puebla</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="banner.php">Banners</a>
                 </li>
             </ul>
@@ -174,7 +174,7 @@
                     <div class="col-md-2"></div>
                     <div class="col-md-8">
                         <div class="col-md-12">
-                            <img src="${url}" title="${nombre}" style="width: 100%">
+                            <a href="${url}" target="_blank"><img src="${url}" title="${nombre}" style="width: 100%"></a>
                         </div>
                         <div class="col-md-12">
                             <br>

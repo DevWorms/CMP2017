@@ -155,6 +155,7 @@
                                 <label for="archivo">Imágen del evento</label>
                                 <br>
                                 <input type="file" name="archivo" id="archivo" class="form-control">
+                                <div id="file_img"></div>
                             </div>
                             <br>
 

@@ -58,7 +58,7 @@ function loadExpostitores(url) {
         type : 'GET',
         url  : decodeURIComponent(url),
         success :  function(response) {
-            if (response.status == 1) {
+            if (response.status === 1) {
                 var table = document.getElementById("tbl_expositores");
                 for (var i = table.rows.length - 1; i > 0; i--) {
                     table.deleteRow(i);

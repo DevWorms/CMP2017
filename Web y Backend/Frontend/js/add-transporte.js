@@ -71,11 +71,16 @@ function getElement(id) {
         type : 'GET',
         url  : API_URL + 'ruta/detail/' + user_id + '/' + api_key + '/' + id,
         success :  function(response) {
-            if (response.status == 1) {
+            if (response.status === 1) {
                 var el = response.ruta;
                 $("#id").val(el.id);
                 $("#titulo").val(el.titulo);
                 $("#descripcion").val(el.descripcion);
+
+                if (el.pdf.nombre) {
+                    $("label[for='archivo_pdf']").text("Actualizar PDF");
+                    $("#file_pdf").html("<br><a href='" + el.pdf.url + "' target='_blank'>" + el.pdf.nombre + "</a>");
+                }
 
                 $("#crearRuta input, textarea, button").prop("disabled", false);
             } else {
@@ -87,7 +92,7 @@ function getElement(id) {
             }
         },
         error : function (response) {
-            var response = $.parseJSON(response.responseText);
+            response = $.parseJSON(response.responseText);
             $("#error").fadeIn(1000, function() {
                 $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
             });

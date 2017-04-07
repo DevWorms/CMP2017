@@ -141,6 +141,9 @@
                             </div>
                             <br>
                         </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div id="file_img"></div>
+                        </div>
                     </div>
                     <!-- Fin Fila -->
                     

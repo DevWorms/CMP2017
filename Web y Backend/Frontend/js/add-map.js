@@ -35,4 +35,21 @@ $('document').ready(function() {
         });
         return false;
     });
+
+    $.ajax({
+        url: API_URL + 'puebla/mapa/' + user_id + '/' + api_key,
+        type: 'GET',
+        success: function (data) {
+            if (data.status === 1) {
+                $("label[for='mapa']").text("Actualizar mapa");
+                $("#file_map").html("<a href='data.mapa.url' target='_blank'>" + data.mapa.nombre + "</a>");
+            }
+        },
+        error : function (response) {
+            response = response.responseJSON;
+            $("#error").fadeIn(1000, function() {
+                $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
+            });
+        }
+    });
 });

@@ -121,7 +121,8 @@
                                     <br>
                                 <input type="file" name="mapa" id="mapa" class="form-control" required>
                             </div>
-                            <br> 
+                            <div id="file_map"></div>
+                            <br>
                         </div>
                     </div>
                     <!-- Fin Fila -->

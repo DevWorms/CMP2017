@@ -161,17 +161,19 @@
                     <div class="row">    
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
                            <div class="form-group">
-                                <label for="">Agregar archivo PDF</label>
+                                <label for="archivo_pdf">Agregar archivo PDF</label>
                                     <br>
                                 <input type="file" name="archivo_pdf" id="archivo_pdf" class="form-control">
-                            </div> 
+                            </div>
+                            <div id="file_pdf"></div>
                         </div>
                         <div class="col-xs-12 col-md-5">
                             <div class="form-group">
-                                <label for="">Agregar imágen (logotipo)</label>
+                                <label for="archivo_logo">Agregar imágen (logotipo)</label>
                                     <br>
                                 <input type="file" name="archivo_logo" id="archivo_logo" class="form-control">
                             </div>
+                            <div id="file_img"></div>
                         </div>                    
                     </div>
                     <br>

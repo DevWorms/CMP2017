@@ -31,6 +31,7 @@ class DetalleViewController: UIViewController {
     // 5 patrocinadores
     var seccion = 0
     var detalle = [String: Any]()
+    var imgData = Data()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,11 +46,8 @@ class DetalleViewController: UIViewController {
             self.lugar.text = detalle["lugar"] as! String?
             self.recomendaciones.text = detalle["recomendaciones"] as! String?
             
-            let foto = detalle["foto"] as! [String: Any]
-            let data = try? Data(contentsOf: URL(string: foto["url"] as! String)!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-            DispatchQueue.main.async {
-                self.foto.image = UIImage(data: data!)
-            }
+            self.foto.image = UIImage(data: self.imgData)
+            
         case 2:
             btn2.imageView?.image = #imageLiteral(resourceName: "04Agregar_a_mis_expositores")
             

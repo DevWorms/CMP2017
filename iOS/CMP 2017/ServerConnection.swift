@@ -322,13 +322,23 @@ class ServerConnection {
                 if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
                     //print(json)
                     
-                    DispatchQueue.main.async {
-                        
-                        if let jsonResult = json as? [String: Any] {
-                            for dato in jsonResult["acompanantes"] as! [[String:Any]] {
+                    if let jsonResult = json as? [String: Any] {
+                        for (index, dato) in (jsonResult["acompanantes"] as! [[String:Any]]).enumerated() {
+                            
+                            CoreDataHelper.saveData(data: dato, entityName: "Acompanantes", keyName: "acompanante")
+                            
+                            DispatchQueue.global(qos: .userInitiated).async { // 1
                                 
-                                CoreDataHelper.saveData(data: dato, entityName: "Acompanantes", keyName: "acompanante")
-                                
+                                if let img = dato["foto"] as? [String: Any] {
+                                    
+                                    let dataImg = try? Data(contentsOf: URL(string: img["url"] as! String)!)
+                                    
+                                    DispatchQueue.main.async { // 2
+                                        
+                                        CoreDataHelper.updateData(index: index, data: dataImg!, entityName: "Acompanantes", keyName: "imgAcompanante")
+                                        
+                                    }
+                                }
                             }
                         }
                     }
@@ -387,13 +397,23 @@ class ServerConnection {
                 if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
                     //print(json)
                     
-                    DispatchQueue.main.async {
-                        
-                        if let jsonResult = json as? [String: Any] {
-                            for dato in jsonResult["eventos"] as! [[String:Any]] {
+                    if let jsonResult = json as? [String: Any] {
+                        for (index, dato) in (jsonResult["eventos"] as! [[String:Any]]).enumerated() {
+                            
+                            CoreDataHelper.saveData(data: dato, entityName: "Deportivos", keyName: "evento")
+                            
+                            DispatchQueue.global(qos: .userInitiated).async { // 1
                                 
-                                CoreDataHelper.saveData(data: dato, entityName: "Deportivos", keyName: "evento")
-                                
+                                if let img = dato["foto"] as? [String: Any] {
+                                    
+                                    let dataImg = try? Data(contentsOf: URL(string: img["url"] as! String)!)
+                                    
+                                    DispatchQueue.main.async { // 2
+                                        
+                                        CoreDataHelper.updateData(index: index, data: dataImg!, entityName: "Deportivos", keyName: "imgDeportivo")
+                                        
+                                    }
+                                }
                             }
                         }
                     }

@@ -23,6 +23,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
     var tipoPrograma = ""
     
     var datos = [[String : Any]]()
+    var imgs = [Data]()
     var fechas = [String]()
     var datoXfecha = [[], [], [], [], []]
     var idXdato = [[], [], [], [], []]
@@ -31,6 +32,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
     var idDato = [[Int]]()
     
     var datoAmostrar = [String : Any]()
+    var imgAmostrar = Data()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,9 +62,11 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
                 }
             case 3:
                 self.datos = CoreDataHelper.fetchData(entityName: "Acompanantes", keyName: "acompanante")!
+                self.imgs = CoreDataHelper.fetchItem(entityName: "Acompanantes", keyName: "imgAcompanante") as! [Data]
                 
             case 4:
                 self.datos = CoreDataHelper.fetchData(entityName: "Deportivos", keyName: "evento")!
+                self.imgs = CoreDataHelper.fetchItem(entityName: "Deportivos", keyName: "imgDeportivo") as! [Data]
                 
             default: break
             }
@@ -290,9 +294,12 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
         
         switch self.seccion {
         case 1,3,4:
-            for dato in self.datos {
+            for (index, dato) in self.datos.enumerated() {
                 if dato["id"] as! Int == idDato[indexPath.section][indexPath.row] {
                     self.datoAmostrar = dato
+                    
+                    self.imgAmostrar = imgs[index]
+                    
                     self.performSegue(withIdentifier: "detalle", sender: nil)
                 }
             }
@@ -312,6 +319,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
         if segue.identifier == "detalle" {
             (segue.destination as! DetalleViewController).seccion = self.seccion
             (segue.destination as! DetalleViewController).detalle = self.datoAmostrar
+            (segue.destination as! DetalleViewController).imgData = self.imgAmostrar
         }
     }
 

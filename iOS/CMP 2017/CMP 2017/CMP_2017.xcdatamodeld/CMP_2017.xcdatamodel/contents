@@ -10,6 +10,9 @@
     <entity name="Deportivos" representedClassName="Deportivos" syncable="YES" codeGenerationType="class">
         <attribute name="evento" optional="YES" attributeType="Transformable" syncable="YES"/>
     </entity>
+    <entity name="Expositores" representedClassName="Expositores" syncable="YES" codeGenerationType="class">
+        <attribute name="expositor" optional="YES" attributeType="Transformable" syncable="YES"/>
+    </entity>
     <entity name="Patrocinadores" representedClassName="Patrocinadores" syncable="YES" codeGenerationType="class">
         <attribute name="patrocinador" optional="YES" attributeType="Transformable" syncable="YES"/>
     </entity>
@@ -27,5 +30,6 @@
         <element name="Acompanantes" positionX="-36" positionY="27" width="128" height="60"/>
         <element name="Deportivos" positionX="-18" positionY="45" width="128" height="30"/>
         <element name="Patrocinadores" positionX="0" positionY="54" width="128" height="30"/>
+        <element name="Expositores" positionX="18" positionY="63" width="128" height="30"/>
     </elements>
 </model>

@@ -92,7 +92,8 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
                 
                 
             } else {
-                //strUrl = "http://cmp.devworms.com/api/expositor/order/name/\(userID!)/\(apiKey!)"
+                let data = CoreDataHelper.fetchData(entityName: "Expositores", keyName: "expositor")!
+                self.expositores = data.sorted(by: { (a,b) in (a["nombre"] as! String) < (b["nombre"] as! String) })
             }
             
             // llenar las secciones
@@ -132,7 +133,8 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
                 self.expositores = data.sorted(by: { (a,b) in (a["stand"] as! String) < (b["stand"] as! String) })
                 
             } else {
-                //strUrl = "http://cmp.devworms.com/api/expositor/order/stand/\(userID!)/\(apiKey!)"
+                let data = CoreDataHelper.fetchData(entityName: "Expositores", keyName: "expositor")!
+                self.expositores = data.sorted(by: { (a,b) in (a["stand"] as! String) < (b["stand"] as! String) })
             }
             
             // llenar las secciones
@@ -169,134 +171,6 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         
         self.tableView.reloadData()
-        
-    }
-    
-    
-    
-    func parseJson(data: Data?, urlResponse: URLResponse?, error: Error?) {
-        if error != nil {
-            print(error!)
-        } else if urlResponse != nil {
-            if (urlResponse as! HTTPURLResponse).statusCode == 200 {
-                if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
-                    //print(json)
-                    
-                    DispatchQueue.main.async {
-                        
-                        if self.expositores.count > 0 {
-                            self.expositores.removeAll()
-                            self.abcArray.removeAll()
-                            self.idExpositores.removeAll()
-                            self.expositoresArray.removeAll()
-                            self.expositorAmostrar.removeAll()
-                        }
-                        
-                        if let jsonResult = json as? [String: Any] {
-                            if self.seccion == 5 { // patrocinadores
-                                for programa in jsonResult["patrocinadores"] as! [[String:Any]] {
-                                    self.expositores.append(programa)
-                                }
-                            } else {
-                                for programa in jsonResult["expositores"] as! [[String:Any]] {
-                                    self.expositores.append(programa)
-                                }
-                            }
-                            
-                            
-                            if self.alphabet {
-                                
-                                // llenar las secciones
-                                for letra in self.expositores {
-                                    
-                                    if !self.abcArray.contains( String(describing: (letra["nombre"] as! String).characters.first!).uppercased() ) {
-                                        self.abcArray.append( String(describing: (letra["nombre"] as! String).characters.first!).uppercased() )
-                                    }
-                                }
-                                
-                                // llenar las rows
-                                
-                                var expositoresOrdText = [String]()
-                                var expositoresOrdId = [Int]()
-                                
-                                for letra in self.abcArray {
-                                    for result in self.expositores {
-                                        
-                                        if (result["nombre"] as! String).uppercased().hasPrefix( letra) {
-                                            expositoresOrdText.append( result["nombre"] as! String )
-                                            expositoresOrdId.append( result["id"] as! Int )
-                                        }
-                                    }
-                                    
-                                    self.idExpositores.append(expositoresOrdId)
-                                    self.expositoresArray.append(expositoresOrdText)
-                                    expositoresOrdId.removeAll()
-                                    expositoresOrdText.removeAll()
-                                }
-                                
-                            } else {
-                                // llenar las secciones
-                                for letra in self.expositores {
-                                    
-                                    if !self.abcArray.contains( letra["stand"] as! String ) {
-                                        self.abcArray.append( letra["stand"] as! String )
-                                    }
-                                }
-                                
-                                // llenar las rows
-                                
-                                var expositoresOrdText = [String]()
-                                var expositoresOrdId = [Int]()
-                                
-                                for letra in self.abcArray {
-                                    for result in self.expositores {
-                                        
-                                        if (result["stand"] as! String) ==  letra {
-                                            expositoresOrdText.append( result["nombre"] as! String )
-                                            expositoresOrdId.append( result["id"] as! Int )
-                                        }
-                                    }
-                                    
-                                    self.idExpositores.append(expositoresOrdId)
-                                    self.expositoresArray.append(expositoresOrdText)
-                                    expositoresOrdId.removeAll()
-                                    expositoresOrdText.removeAll()
-                                }
-                                
-                                for index in 0 ... self.abcArray.count-1 {
-                                    self.abcArray[index] = "Stand " + self.abcArray[index]
-                                }
-                                
-                            }
-                            
-                            //self.abcArray = self.abcArray.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedDescending }
-                        }
-                        
-                        self.tableView.reloadData()
-                    }
-                    
-                } else {
-                    print("HTTP Status Code: 200")
-                    print("El JSON de respuesta es inválido.")
-                }
-            } else {
-                
-                DispatchQueue.main.async {
-                    if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
-                        if let jsonResult = json as? [String: Any] {
-                            let vc_alert = UIAlertController(title: nil, message: jsonResult["mensaje"] as? String, preferredStyle: .alert)
-                            vc_alert.addAction(UIAlertAction(title: "OK", style: .cancel , handler: nil))
-                            self.present(vc_alert, animated: true, completion: nil)
-                        }
-                        
-                        
-                    } else {
-                        print("HTTP Status Code: 400 o 500")
-                        print("El JSON de respuesta es inválido.")
-                    }
-                }
-            }
-        }
         
     }
 

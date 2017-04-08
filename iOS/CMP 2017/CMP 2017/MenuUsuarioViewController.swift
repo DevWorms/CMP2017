@@ -14,7 +14,6 @@ class MenuUsuarioViewController: ViewController {
     @IBOutlet weak var miAgenda: UIButton!
     @IBOutlet weak var misExpositores: UIButton!
     @IBOutlet weak var misEncuestas: UIButton!
-    @IBOutlet weak var misContactos: UIButton!
     @IBOutlet weak var notif: UIButton!
     @IBOutlet weak var actualizar: UIButton!
     
@@ -30,7 +29,6 @@ class MenuUsuarioViewController: ViewController {
             miAgenda.isEnabled = false
             misExpositores.isEnabled = false
             misEncuestas.isEnabled = false
-            misContactos.isEnabled = false
             notif.isEnabled = false
             actualizar.isEnabled = false
             
@@ -38,7 +36,6 @@ class MenuUsuarioViewController: ViewController {
             miAgenda.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .normal)
             misExpositores.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .normal)
             misEncuestas.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .normal)
-            misContactos.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .normal)
             notif.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .normal)
             actualizar.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .normal)
         }
@@ -53,6 +50,10 @@ class MenuUsuarioViewController: ViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func actualizarInfo(_ sender: Any) {
+        let methodsCMP = ServerConnection()
+        methodsCMP.getCMP(myView: self)
+    }
     @IBAction func cerrarSesion(_ sender: Any) {
         UserDefaults.standard.set("", forKey: "api_key")
         UserDefaults.standard.set("", forKey: "user_id")

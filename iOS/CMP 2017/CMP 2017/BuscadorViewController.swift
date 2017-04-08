@@ -66,42 +66,113 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
     
     
     func alfabeticamente(alph: Bool) {
-        let apiKey = UserDefaults.standard.value(forKey: "api_key")
-        let userID = UserDefaults.standard.value(forKey: "user_id")
         
-        var strUrl = ""
+        /*
+         let arr = [ ["hola": 2, "hola2" : "mm1"], ["hola": 3, "hola2" : "mm2"], ["hola": 1, "hola2" : "mm0"] ]
+         
+         print(arr.sorted(by: { (a,b) in (a["hola"] as! Int) < (b["hola"] as! Int) }))
+         print(arr.sorted(by: { (a,b) in (a["hola2"] as! String) < (b["hola2"] as! String) }))
+         */
+        
+        if self.expositores.count > 0 {
+            self.expositores.removeAll()
+            self.abcArray.removeAll()
+            self.idExpositores.removeAll()
+            self.expositoresArray.removeAll()
+            self.expositorAmostrar.removeAll()
+        }
         
         if alph {
             
             alphabet = true
             
             if self.seccion == 5 { // patrocinadores
-                strUrl = "http://cmp.devworms.com/api/patrocinador/order/name/\(userID!)/\(apiKey!)"
+                let data = CoreDataHelper.fetchData(entityName: "Patrocinadores", keyName: "patrocinador")!
+                self.expositores = data.sorted(by: { (a,b) in (a["nombre"] as! String) < (b["nombre"] as! String) })
+                
+                
             } else {
-                strUrl = "http://cmp.devworms.com/api/expositor/order/name/\(userID!)/\(apiKey!)"
+                //strUrl = "http://cmp.devworms.com/api/expositor/order/name/\(userID!)/\(apiKey!)"
             }
+            
+            // llenar las secciones
+            for letra in self.expositores {
+                
+                if !self.abcArray.contains( String(describing: (letra["nombre"] as! String).characters.first!).uppercased() ) {
+                    self.abcArray.append( String(describing: (letra["nombre"] as! String).characters.first!).uppercased() )
+                }
+            }
+            
+            // llenar las rows
+            
+            var expositoresOrdText = [String]()
+            var expositoresOrdId = [Int]()
+            
+            for letra in self.abcArray {
+                for result in self.expositores {
+                    
+                    if (result["nombre"] as! String).uppercased().hasPrefix( letra) {
+                        expositoresOrdText.append( result["nombre"] as! String )
+                        expositoresOrdId.append( result["id"] as! Int )
+                    }
+                }
+                
+                self.idExpositores.append(expositoresOrdId)
+                self.expositoresArray.append(expositoresOrdText)
+                expositoresOrdId.removeAll()
+                expositoresOrdText.removeAll()
+            }
+            
         } else {
             
             alphabet = false
             
             if self.seccion == 5 { // patrocinadores
-                strUrl = "http://cmp.devworms.com/api/patrocinador/order/stand/\(userID!)/\(apiKey!)"
+                let data = CoreDataHelper.fetchData(entityName: "Patrocinadores", keyName: "patrocinador")!
+                self.expositores = data.sorted(by: { (a,b) in (a["stand"] as! String) < (b["stand"] as! String) })
+                
             } else {
-                strUrl = "http://cmp.devworms.com/api/expositor/order/stand/\(userID!)/\(apiKey!)"
+                //strUrl = "http://cmp.devworms.com/api/expositor/order/stand/\(userID!)/\(apiKey!)"
+            }
+            
+            // llenar las secciones
+            for letra in self.expositores {
+                
+                if !self.abcArray.contains( letra["stand"] as! String ) {
+                    self.abcArray.append( letra["stand"] as! String )
+                }
+            }
+            
+            // llenar las rows
+            
+            var expositoresOrdText = [String]()
+            var expositoresOrdId = [Int]()
+            
+            for letra in self.abcArray {
+                for result in self.expositores {
+                    
+                    if (result["stand"] as! String) ==  letra {
+                        expositoresOrdText.append( result["nombre"] as! String )
+                        expositoresOrdId.append( result["id"] as! Int )
+                    }
+                }
+                
+                self.idExpositores.append(expositoresOrdId)
+                self.expositoresArray.append(expositoresOrdText)
+                expositoresOrdId.removeAll()
+                expositoresOrdText.removeAll()
+            }
+            
+            for index in 0 ... self.abcArray.count-1 {
+                self.abcArray[index] = "Stand " + self.abcArray[index]
             }
         }
         
-        print(strUrl)
-        if Accesibilidad.isConnectedToNetwork() == true {
-            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
-        } else {
-            let vc_alert = UIAlertController(title: "Sin conexión a internet", message: "Asegúrate de estar conectado a internet.", preferredStyle: .alert)
-            vc_alert.addAction(UIAlertAction(title: "OK",
-                                             style: UIAlertActionStyle.default,
-                                             handler: nil))
-            self.present(vc_alert, animated: true, completion: nil)
-        }
+        self.tableView.reloadData()
+        
     }
+    
+    
     
     func parseJson(data: Data?, urlResponse: URLResponse?, error: Error?) {
         if error != nil {

@@ -987,15 +987,8 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2SK-rw-a88">
-                                <rect key="frame" x="16" y="354" width="343" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Mis Contactos" image="05_Mis-Contactos">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MhV-p7-rgD">
-                                <rect key="frame" x="16" y="426" width="343" height="64"/>
+                                <rect key="frame" x="16" y="354" width="343" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Centro de Notificaciones" image="06_Centro_Notificaciones">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1005,11 +998,14 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0th-Jn-Ql8">
-                                <rect key="frame" x="16" y="498" width="343" height="64"/>
+                                <rect key="frame" x="16" y="426" width="343" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Actualizar Información" image="07_Actualizar_Informacion">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="actualizarInfo:" destination="6J5-cF-d15" eventType="touchUpInside" id="oWw-Zj-vsi"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Igw-1g-X4k">
                                 <rect key="frame" x="16" y="138" width="343" height="64"/>
@@ -1019,7 +1015,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rMt-uC-enV">
-                                <rect key="frame" x="16" y="561" width="343" height="64"/>
+                                <rect key="frame" x="16" y="498" width="343" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Cerrar Sesión" image="08_Cerrar_Sesion">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1035,7 +1031,6 @@
                         <outlet property="actualizar" destination="0th-Jn-Ql8" id="II8-3n-JJn"/>
                         <outlet property="miAgenda" destination="Igw-1g-X4k" id="aeN-Di-qeX"/>
                         <outlet property="miPerfil" destination="24r-qL-fCT" id="j8y-DX-kbt"/>
-                        <outlet property="misContactos" destination="2SK-rw-a88" id="azC-oS-6d2"/>
                         <outlet property="misEncuestas" destination="hQd-df-VMV" id="jOj-E5-454"/>
                         <outlet property="misExpositores" destination="d2M-hq-kU6" id="LNR-Wl-HVo"/>
                         <outlet property="notif" destination="MhV-p7-rgD" id="ehH-d1-fjB"/>
@@ -1640,7 +1635,6 @@
         <image name="05Boton_Telefonos_taxis_emergencias" width="489" height="170"/>
         <image name="05Boton_guardar_cambios" width="489" height="170"/>
         <image name="05Patrocinadores" width="390" height="346"/>
-        <image name="05_Mis-Contactos" width="1246" height="263"/>
         <image name="06Boton_Localizar_en_el_mapa" width="841" height="158"/>
         <image name="06Boton_Recuperar_Contraseña" width="489" height="170"/>
         <image name="06Boton_num_de_pagina" width="489" height="170"/>

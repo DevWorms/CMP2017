@@ -69,6 +69,7 @@ class ServerConnection {
         CoreDataHelper.deleteEntity(entityName: "Rutas")
         CoreDataHelper.deleteEntity(entityName: "Acompanantes")
         CoreDataHelper.deleteEntity(entityName: "Deportivos")
+        CoreDataHelper.deleteEntity(entityName: "Patrocinadores")
         
         //Cargar BD
         self.getBanners()
@@ -76,6 +77,7 @@ class ServerConnection {
         self.getRutas()
         self.getAcompañantes()
         self.getDeportivos()
+        self.getPatrocinadores()
         
         //quita el alert
         self.mView.dismiss(animated: false, completion: nil)
@@ -112,12 +114,12 @@ class ServerConnection {
                     if let jsonResult = json as? [String: Any] {
                         for (index, dato) in (jsonResult["banners"] as! [[String:Any]]).enumerated() {
                             
+                            CoreDataHelper.saveData(data: dato, entityName: "Banners", keyName: "banner")
+                            
                             DispatchQueue.global(qos: .userInitiated).async { // 1
                                 let dataImg = try? Data(contentsOf: URL(string: dato["url"] as! String)!)
                                 
                                 DispatchQueue.main.async { // 2
-                                    
-                                    CoreDataHelper.saveData(data: dato, entityName: "Banners", keyName: "banner")
                                     
                                     CoreDataHelper.updateData(index: index, data: dataImg!, entityName: "Banners", keyName: "imgBanner")
                                     
@@ -183,6 +185,8 @@ class ServerConnection {
                     if let jsonResult = json as? [String: Any] {
                         for (index, dato) in (jsonResult["sitios"] as! [[String:Any]]).enumerated() {
                             
+                            CoreDataHelper.saveData(data: dato, entityName: "Sitios", keyName: "sitio")
+                            
                             DispatchQueue.global(qos: .userInitiated).async { // 1
                                 
                                 if let img = dato["imagen"] as? [String: Any] {
@@ -191,8 +195,6 @@ class ServerConnection {
                                     
                                     DispatchQueue.main.async { // 2
                                         
-                                        CoreDataHelper.saveData(data: dato, entityName: "Sitios", keyName: "sitio")
-                                        
                                         CoreDataHelper.updateData(index: index, data: dataImg!, entityName: "Sitios", keyName: "imgSitio")
                                         
                                     }
@@ -200,10 +202,6 @@ class ServerConnection {
                             }
                         }
                     }
-                    
-                    
-                    
-                    
                 }
                 
             } else {
@@ -250,7 +248,7 @@ class ServerConnection {
         }
     }
     
-    func parseJsonRutas(data: Data?, urlResponse: URLResponse?, error: Error?) {
+    private func parseJsonRutas(data: Data?, urlResponse: URLResponse?, error: Error?) {
         if error != nil {
             print(error!)
         } else if urlResponse != nil {
@@ -314,7 +312,7 @@ class ServerConnection {
         }
     }
     
-    func parseJsonAcompañantes(data: Data?, urlResponse: URLResponse?, error: Error?) {
+    private func parseJsonAcompañantes(data: Data?, urlResponse: URLResponse?, error: Error?) {
         if error != nil {
             print(error!)
         } else if urlResponse != nil {
@@ -379,7 +377,7 @@ class ServerConnection {
         }
     }
     
-    func parseJsonDeportivos(data: Data?, urlResponse: URLResponse?, error: Error?) {
+    private func parseJsonDeportivos(data: Data?, urlResponse: URLResponse?, error: Error?) {
         if error != nil {
             print(error!)
         } else if urlResponse != nil {
@@ -393,6 +391,71 @@ class ServerConnection {
                             for dato in jsonResult["eventos"] as! [[String:Any]] {
                                 
                                 CoreDataHelper.saveData(data: dato, entityName: "Deportivos", keyName: "evento")
+                                
+                            }
+                        }
+                    }
+                    
+                } else {
+                    print("HTTP Status Code: 200")
+                    print("El JSON de respuesta es inválido.")
+                }
+            } else {
+                
+                DispatchQueue.main.async {
+                    if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                        if let jsonResult = json as? [String: Any] {
+                            /*let vc_alert = UIAlertController(title: nil, message: jsonResult["mensaje"] as? String, preferredStyle: .alert)
+                             vc_alert.addAction(UIAlertAction(title: "OK", style: .cancel , handler: nil))
+                             self.present(vc_alert, animated: true, completion: nil)*/
+                            print("Error json: \(jsonResult["mensaje"])")
+                        }
+                        
+                        
+                    } else {
+                        print("HTTP Status Code: 400 o 500")
+                        print("El JSON de respuesta es inválido.")
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    // MARK: - Patrocinadores
+    
+    private func getPatrocinadores() {
+        if Accesibilidad.isConnectedToNetwork() == true {
+            
+            let strUrl = "http://cmp.devworms.com/api/patrocinador/all/\(userID)/\(apiKey)"
+            print(strUrl)
+            
+            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJsonPatrocinadores).resume()
+            
+        } else {
+            /*let vc_alert = UIAlertController(title: "Sin conexión a internet", message: "Asegúrate de estar conectado a internet.", preferredStyle: .alert)
+             vc_alert.addAction(UIAlertAction(title: "OK",
+             style: UIAlertActionStyle.default,
+             handler: nil))
+             context.present(vc_alert, animated: true, completion: nil)*/
+            
+        }
+    }
+    
+    private func parseJsonPatrocinadores(data: Data?, urlResponse: URLResponse?, error: Error?) {
+        if error != nil {
+            print(error!)
+        } else if urlResponse != nil {
+            if (urlResponse as! HTTPURLResponse).statusCode == 200 {
+                if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                    //print(json)
+                    
+                    DispatchQueue.main.async {
+                        
+                        if let jsonResult = json as? [String: Any] {
+                            for dato in jsonResult["patrocinadores"] as! [[String:Any]] {
+                                
+                                CoreDataHelper.saveData(data: dato, entityName: "Patrocinadores", keyName: "patrocinador")
                                 
                             }
                         }

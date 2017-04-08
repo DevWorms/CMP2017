@@ -57,13 +57,8 @@ class DetalleViewController: UIViewController {
             self.lbl3.text = "Acerca de:"
             self.recomendaciones.text = detalle["acerca"] as! String?
             
-            if let foto = detalle["logo"] as? [String: Any] {
-                let data = try? Data(contentsOf: URL(string: foto["url"] as! String)!)
-                DispatchQueue.main.async {
-                    self.foto.image = UIImage(data: data!)
-                }
-            }
-
+            self.foto.image = UIImage(data: imgData)
+            
         case 5:
             btn2.imageView?.image = #imageLiteral(resourceName: "05Boton_Presentacion_de_la_empresa")
             btn3.isHidden = true
@@ -74,12 +69,7 @@ class DetalleViewController: UIViewController {
             self.lbl3.text = "Acerca de:"
             self.recomendaciones.text = detalle["acerca"] as! String?
             
-            if let foto = detalle["logo"] as? [String: Any] {
-                let data = try? Data(contentsOf: URL(string: foto["url"] as! String)!)
-                DispatchQueue.main.async {
-                    self.foto.image = UIImage(data: data!)
-                }
-            }
+            self.foto.image = UIImage(data: imgData)
 
         default:
             break

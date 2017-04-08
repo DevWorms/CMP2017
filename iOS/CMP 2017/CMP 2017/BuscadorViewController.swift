@@ -17,6 +17,8 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
     
     var abcArray = [String]()
     
+    var datos = [[String : Any]]()
+    
     var expositores = [[String : Any]]()
     
     // variables finales sin basura
@@ -28,6 +30,9 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
     var filtered:[String] = []
     var filteredProvisional:[String] = []
     var filteredID:[Int] = []
+    
+    var imgs = [Data]()
+    var imgAmostrar = Data()
     
     var seccion = 2
     var alphabet = true
@@ -87,13 +92,15 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
             alphabet = true
             
             if self.seccion == 5 { // patrocinadores
-                let data = CoreDataHelper.fetchData(entityName: "Patrocinadores", keyName: "patrocinador")!
-                self.expositores = data.sorted(by: { (a,b) in (a["nombre"] as! String) < (b["nombre"] as! String) })
+                self.datos = CoreDataHelper.fetchData(entityName: "Patrocinadores", keyName: "patrocinador")!
+                self.imgs = CoreDataHelper.fetchItem(entityName: "Patrocinadores", keyName: "imgPatrocinador") as! [Data]
+                self.expositores = self.datos.sorted(by: { (a,b) in (a["nombre"] as! String) < (b["nombre"] as! String) })
                 
                 
             } else {
-                let data = CoreDataHelper.fetchData(entityName: "Expositores", keyName: "expositor")!
-                self.expositores = data.sorted(by: { (a,b) in (a["nombre"] as! String) < (b["nombre"] as! String) })
+                self.datos = CoreDataHelper.fetchData(entityName: "Expositores", keyName: "expositor")!
+                self.imgs = CoreDataHelper.fetchItem(entityName: "Expositores", keyName: "imgExpositor") as! [Data]
+                self.expositores = self.datos.sorted(by: { (a,b) in (a["nombre"] as! String) < (b["nombre"] as! String) })
             }
             
             // llenar las secciones
@@ -129,12 +136,14 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
             alphabet = false
             
             if self.seccion == 5 { // patrocinadores
-                let data = CoreDataHelper.fetchData(entityName: "Patrocinadores", keyName: "patrocinador")!
-                self.expositores = data.sorted(by: { (a,b) in (a["stand"] as! String) < (b["stand"] as! String) })
+                self.datos = CoreDataHelper.fetchData(entityName: "Patrocinadores", keyName: "patrocinador")!
+                self.imgs = CoreDataHelper.fetchItem(entityName: "Patrocinadores", keyName: "imgPatrocinador") as! [Data]
+                self.expositores = self.datos.sorted(by: { (a,b) in (a["stand"] as! String) < (b["stand"] as! String) })
                 
             } else {
-                let data = CoreDataHelper.fetchData(entityName: "Expositores", keyName: "expositor")!
-                self.expositores = data.sorted(by: { (a,b) in (a["stand"] as! String) < (b["stand"] as! String) })
+                self.datos = CoreDataHelper.fetchData(entityName: "Expositores", keyName: "expositor")!
+                self.imgs = CoreDataHelper.fetchItem(entityName: "Expositores", keyName: "imgExpositor") as! [Data]
+                self.expositores = self.datos.sorted(by: { (a,b) in (a["stand"] as! String) < (b["stand"] as! String) })
             }
             
             // llenar las secciones
@@ -275,17 +284,19 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
         if(searchActive){
             let cellText = tableView.cellForRow(at: indexPath)?.textLabel?.text
             
-            for expositor in self.expositores {
+            for (index, expositor) in self.datos.enumerated() {
                 if expositor["id"] as! Int == filteredID[filteredProvisional.index(of: cellText!)!] {
                     expositorAmostrar = expositor
+                    self.imgAmostrar = imgs[index]
                     self.performSegue(withIdentifier: "detalle", sender: nil)
                 }
             }
             
         } else {
-            for expositor in self.expositores {
+            for (index, expositor) in self.datos.enumerated() {
                 if expositor["id"] as! Int == idExpositores[indexPath.section][indexPath.row] {
                     expositorAmostrar = expositor
+                    self.imgAmostrar = imgs[index]
                     self.performSegue(withIdentifier: "detalle", sender: nil)
                 }
             }
@@ -304,6 +315,7 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
         if segue.identifier == "detalle" {
             (segue.destination as! DetalleViewController).seccion = self.seccion
             (segue.destination as! DetalleViewController).detalle = self.expositorAmostrar
+            (segue.destination as! DetalleViewController).imgData = self.imgAmostrar
         }
     }
 

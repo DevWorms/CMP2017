@@ -79,7 +79,7 @@ class ServerConnection {
         self.getAcompañantes()
         self.getDeportivos()
         self.getPatrocinadores()
-        self.getExpositores()
+        //self.getExpositores()
         
         //quita el alert
         self.mView.dismiss(animated: false, completion: nil)
@@ -472,13 +472,23 @@ class ServerConnection {
                 if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
                     //print(json)
                     
-                    DispatchQueue.main.async {
-                        
-                        if let jsonResult = json as? [String: Any] {
-                            for dato in jsonResult["patrocinadores"] as! [[String:Any]] {
+                    if let jsonResult = json as? [String: Any] {
+                        for (index, dato) in (jsonResult["patrocinadores"] as! [[String:Any]]).enumerated() {
+                            
+                            CoreDataHelper.saveData(data: dato, entityName: "Patrocinadores", keyName: "patrocinador")
+                            
+                            DispatchQueue.global(qos: .userInitiated).async { // 1
                                 
-                                CoreDataHelper.saveData(data: dato, entityName: "Patrocinadores", keyName: "patrocinador")
-                                
+                                if let img = dato["logo"] as? [String: Any] {
+                                    
+                                    let dataImg = try? Data(contentsOf: URL(string: img["url"] as! String)!)
+                                    
+                                    DispatchQueue.main.async { // 2
+                                        
+                                        CoreDataHelper.updateData(index: index, data: dataImg!, entityName: "Patrocinadores", keyName: "imgPatrocinador")
+                                        
+                                    }
+                                }
                             }
                         }
                     }
@@ -537,13 +547,23 @@ class ServerConnection {
                 if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
                     //print(json)
                     
-                    DispatchQueue.main.async {
-                        
-                        if let jsonResult = json as? [String: Any] {
-                            for dato in jsonResult["expositores"] as! [[String:Any]] {
+                    if let jsonResult = json as? [String: Any] {
+                        for (index, dato) in (jsonResult["expositores"] as! [[String:Any]]).enumerated() {
+                            
+                            CoreDataHelper.saveData(data: dato, entityName: "Expositores", keyName: "expositor")
+                            
+                            DispatchQueue.global(qos: .userInitiated).async { // 1
                                 
-                                CoreDataHelper.saveData(data: dato, entityName: "Expositores", keyName: "expositor")
-                                
+                                if let img = dato["logo"] as? [String: Any] {
+                                    
+                                    let dataImg = try? Data(contentsOf: URL(string: img["url"] as! String)!)
+                                    
+                                    DispatchQueue.main.async { // 2
+                                        
+                                        CoreDataHelper.updateData(index: index, data: dataImg!, entityName: "Expositores", keyName: "imgExpositor")
+                                        
+                                    }
+                                }
                             }
                         }
                     }

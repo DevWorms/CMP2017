@@ -14,8 +14,10 @@
     </entity>
     <entity name="Expositores" representedClassName="Expositores" syncable="YES" codeGenerationType="class">
         <attribute name="expositor" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="imgExpositor" optional="YES" attributeType="Transformable" syncable="YES"/>
     </entity>
     <entity name="Patrocinadores" representedClassName="Patrocinadores" syncable="YES" codeGenerationType="class">
+        <attribute name="imgPatrocinador" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="patrocinador" optional="YES" attributeType="Transformable" syncable="YES"/>
     </entity>
     <entity name="Rutas" representedClassName="Rutas" syncable="YES" codeGenerationType="class">

@@ -35,8 +35,8 @@ import java.util.HashMap;
 
 public class DetalleEventoFragment extends Fragment {
     ProgressDialog pDialog;
-    String resp,userId, apiKey,idProgram, strNomEven,strLugEven,strRecomEven,urlImage;
-    TextView txtNombreEven, txtLugarEven, txtRecomendaEven;
+    String resp,userId, apiKey,idProgram, strNomEven,strLugEven,strRecomEven,urlImage, horaIni,horaFin;
+    TextView txtNombreEven, txtLugarEven, txtRecomendaEven, txtHorario;
     ImageView imgFoto;
     URL imageUrl ;
     Bitmap imagen;
@@ -53,6 +53,7 @@ public class DetalleEventoFragment extends Fragment {
         txtNombreEven = (TextView)view.findViewById(R.id.txtNombreEven);
         txtLugarEven = (TextView)view.findViewById(R.id.txtLugarEven);
         txtRecomendaEven = (TextView)view.findViewById(R.id.txtRecomEven);
+        txtHorario = (TextView)view.findViewById(R.id.txtHorario);
         btnLocalizar = (Button)view.findViewById(R.id.btnLocalizar);
         btnLocalizar.setOnClickListener(new Localizar());
         btnAgreExpo = (Button)view.findViewById(R.id.btnAgreExpo);
@@ -123,6 +124,8 @@ public class DetalleEventoFragment extends Fragment {
                    strNomEven = jsonProgramas.getString("nombre");
                     strLugEven = jsonProgramas.getString("lugar");
                     strRecomEven = jsonProgramas.getString("recomendaciones");
+                    horaIni = jsonProgramas.getString("hora_inicio");
+                    horaFin = jsonProgramas.getString("hora_fin");
                     String urlImageJson = jsonProgramas.getString("foto");
                     JSONObject jsonImagen = new JSONObject(urlImageJson);
                     urlImage = jsonImagen.getString("url");
@@ -160,6 +163,7 @@ public class DetalleEventoFragment extends Fragment {
                         txtNombreEven.setText(strNomEven);
                         txtLugarEven.setText(strLugEven);
                         txtRecomendaEven.setText(strRecomEven);
+                        txtHorario.setText(horaIni + " - " + horaFin);
 
                     }
 

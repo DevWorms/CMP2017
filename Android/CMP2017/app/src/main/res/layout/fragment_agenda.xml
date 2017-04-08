@@ -13,32 +13,61 @@
     tools:context="com.cmp2017.devworms.cmp2017.LoginActivity">
 
 
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <TabWidget
-                android:id="@android:id/tabs"
+            <Button
+                android:id="@+id/btnLunes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="#2844A8"
+                android:text="Lunes 5"
+                android:textColor="#FFFFFF" />
 
-                android:orientation="horizontal"
+            <Button
+                android:id="@+id/btnMartes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="#2844A8"
+                android:text="Martes 6"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/btnMiercoles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="#2844A8"
+                android:text="Miercoles 7"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/btnJueves"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"/>
+                android:layout_marginRight="10dp"
+                android:background="#2844A8"
+                android:text="Jueves 8"
+                android:textColor="#FFFFFF" />
 
-            <FrameLayout
-                android:id="@android:id/tabcontent"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="0"/>
-
-            <FrameLayout
-                android:id="@+id/realtabcontent"
+            <Button
+                android:id="@+id/btnViernes"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-
+                android:layout_height="wrap_content"
+                android:background="#2844A8"
+                android:text="Viernes 9"
+                android:textColor="#FFFFFF" />
         </LinearLayout>
-
+    </HorizontalScrollView>
 </LinearLayout>

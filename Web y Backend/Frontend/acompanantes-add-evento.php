@@ -177,6 +177,7 @@
                                 <input type="file" name="archivo" id="archivo">
                             </div> 
                         </div>
+                        <div id="file_img"></div>
                     </div>
                     <br>
                     <!-- Fin Fila -->

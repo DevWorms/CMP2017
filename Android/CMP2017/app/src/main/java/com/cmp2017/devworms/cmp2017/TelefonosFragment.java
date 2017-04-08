@@ -38,7 +38,7 @@ public class TelefonosFragment extends Fragment
     }
     class Ambulancia implements View.OnClickListener {
         public void onClick(View v) {
-            Intent callIntent = new Intent(Intent.ACTION_CALL);
+            Intent callIntent = new Intent(Intent.ACTION_DIAL);
             callIntent.setData(Uri.parse("tel:055"));
 
             startActivity(callIntent);
@@ -47,7 +47,7 @@ public class TelefonosFragment extends Fragment
     }
     class Policia implements View.OnClickListener {
         public void onClick(View v) {
-            Intent callIntent = new Intent(Intent.ACTION_CALL);
+            Intent callIntent = new Intent(Intent.ACTION_DIAL);
             callIntent.setData(Uri.parse("tel:060"));
 
             startActivity(callIntent);
@@ -56,7 +56,7 @@ public class TelefonosFragment extends Fragment
     }
     class Bomberos implements View.OnClickListener {
         public void onClick(View v) {
-            Intent callIntent = new Intent(Intent.ACTION_CALL);
+            Intent callIntent = new Intent(Intent.ACTION_DIAL);
             callIntent.setData(Uri.parse("tel:080"));
 
             startActivity(callIntent);
@@ -65,7 +65,7 @@ public class TelefonosFragment extends Fragment
     }
     class TaxisPuebla implements View.OnClickListener {
         public void onClick(View v) {
-            Intent callIntent = new Intent(Intent.ACTION_CALL);
+            Intent callIntent = new Intent(Intent.ACTION_DIAL);
             callIntent.setData(Uri.parse("tel:21542222"));
 
             startActivity(callIntent);
@@ -74,7 +74,7 @@ public class TelefonosFragment extends Fragment
     }
     class TaxisSitio implements View.OnClickListener {
         public void onClick(View v) {
-            Intent callIntent = new Intent(Intent.ACTION_CALL);
+            Intent callIntent = new Intent(Intent.ACTION_DIAL);
             callIntent.setData(Uri.parse("tel:21137431"));
 
             startActivity(callIntent);

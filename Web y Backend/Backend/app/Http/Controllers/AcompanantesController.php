@@ -118,7 +118,7 @@ class AcompanantesController extends Controller {
                             // Si va bien, lo mueve a la carpeta y guarda el registro
                             $path = $this->tool->destinationPath . Carbon::now()->year . "/" . Carbon::now()->month . "/";
                             $uploadedFile = $request->file('archivo')->move($path, uniqid() . "." . $file->getClientOriginalExtension());
-                            $url = $this->tool->url_server . substr($uploadedFile->getPathname(), 1);
+                            $url = $this->tool->url_server . substr($uploadedFile->getPathname(), 7);
 
                             $file_id = File::create([
                                 'user_id' => $user_id,
@@ -432,7 +432,7 @@ class AcompanantesController extends Controller {
                                 // Si va bien, lo mueve a la carpeta y guarda el registro
                                 $path = $this->tool->destinationPath . Carbon::now()->year . "/" . Carbon::now()->month . "/";
                                 $uploadedFile = $request->file('archivo')->move($path, uniqid() . "." . $file->getClientOriginalExtension());
-                                $url = $this->tool->url_server . substr($uploadedFile->getPathname(), 1);
+                                $url = $this->tool->url_server . substr($uploadedFile->getPathname(), 7);
 
                                 $file_id = File::create([
                                     'user_id' => $user_id,

@@ -217,10 +217,10 @@ public void cambioBanner(){
             if (i > imagen.length - 1) {
                 i = 0;
             }
-            handler.postDelayed(this, 2000);
+            handler.postDelayed(this, 5000);
         }
     };
-    handler.postDelayed(runnable, 2000);
+    handler.postDelayed(runnable, 5000);
 }
     class SecProgram implements View.OnClickListener {
         public void onClick(View v) {

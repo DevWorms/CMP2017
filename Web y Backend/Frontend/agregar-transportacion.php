@@ -135,6 +135,7 @@
                                 <label for="">Agregar archivo PDF</label>
                                     <br>
                                 <input type="file" class="btn btn-default" id="archivo" name="archivo">
+                                <div id="file_pdf"></div>
                             </div> 
                         </div>
                     </div>

@@ -57,7 +57,7 @@ public class MenuPrincipal extends AppCompatActivity
         SharedPreferences sp = getSharedPreferences("prefe", Activity.MODE_PRIVATE);
         inicioComo = sp.getString("Nombre","");
         if(inicioComo.equals("invi")){
-            nombre = "Bienvenido Usuario";
+            nombre = "Hola Usuario";
 
         }else{
 
@@ -174,9 +174,9 @@ public class MenuPrincipal extends AppCompatActivity
 
             }else{
 
-                Toast.makeText(MenuPrincipal.this,"Próximamente",Toast.LENGTH_SHORT).show();
-                /*getFragmentManager().beginTransaction()
-                        .replace(R.id.actividad, new Agenda()).commit();*/
+                //Toast.makeText(MenuPrincipal.this,"Próximamente",Toast.LENGTH_SHORT).show();
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.actividad, new Agenda()).commit();
 
 
             }
@@ -192,7 +192,7 @@ public class MenuPrincipal extends AppCompatActivity
 
 
                 parametro.putString("MiExpo","Si");
-
+                parametro.putString("nombre","Mis Expositores");
                 fragment.setArguments(parametro);
 
                 final FragmentTransaction ft = getFragmentManager()
@@ -217,17 +217,7 @@ public class MenuPrincipal extends AppCompatActivity
 
 
             }
-        } else if (id == R.id.nav_contactos) {
-            if(inicioComo.equals("invi")){
-                Toast.makeText(MenuPrincipal.this,"Registrate para activar esta sección",Toast.LENGTH_SHORT).show();
-
-            }else{
-
-                Toast.makeText(MenuPrincipal.this,"Próximamente",Toast.LENGTH_SHORT).show();
-
-
-            }
-        } else if (id == R.id.nav_notifiaciones) {
+        }  else if (id == R.id.nav_notifiaciones) {
             if(inicioComo.equals("invi")){
                 Toast.makeText(MenuPrincipal.this,"Registrate para activar esta sección",Toast.LENGTH_SHORT).show();
 

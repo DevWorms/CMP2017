@@ -119,6 +119,7 @@ public class ExpositoresFrgament extends Fragment {
 
                     parametro.putString("expoId", expoId);
                     parametro.putString("miExpositores", "si");
+                    parametro.putString("nombre", nombre);
 
                     fragment.setArguments(parametro);
 
@@ -129,6 +130,70 @@ public class ExpositoresFrgament extends Fragment {
                     ft.addToBackStack("tag");
 
                     ft.commit();
+
+                }
+            });
+            acTextView.addTextChangedListener(new TextWatcher() {
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+
+                    AdminSQLiteOpenHelper dbHandler;
+                    dbHandler = new AdminSQLiteOpenHelper(getActivity(), null, null, 2);
+                    SQLiteDatabase db = dbHandler.getWritableDatabase();
+                    Cursor cursor = dbHandler.listarpersonasb(acTextView.getText().toString());
+                    cursor.getColumnCount();
+
+
+
+                    String[] from = new String[]{"idExpo", "nombre"};
+                    int[] to = new int[]{
+                            R.id.txtid,
+                            R.id.txtNombre
+                    };
+
+
+
+                    SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(getActivity(), R.layout.formato_lista_alfabetica, cursor, from, to);
+
+
+                    lista.setAdapter(cursorAdapter);
+                    lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView parent, View view, int position, long id) {
+                            String expoId = ((TextView) view.findViewById(R.id.txtid)).getText().toString();
+                            Fragment fragment = new DetalleExpoFragment();
+
+                            Bundle parametro = new Bundle();
+
+
+                            parametro.putString("expoId", expoId);
+                            parametro.putString("miExpositores", "si");
+                            parametro.putString("nombre", nombre);
+
+                            fragment.setArguments(parametro);
+
+                            final FragmentTransaction ft = getFragmentManager()
+                                    .beginTransaction();
+                            ft.replace(R.id.actividad, fragment, "tag");
+
+                            ft.addToBackStack("tag");
+
+                            ft.commit();
+
+                        }
+                    });
 
                 }
             });
@@ -181,7 +246,7 @@ public class ExpositoresFrgament extends Fragment {
 
                     parametro.putString("expoId", expoId);
                     parametro.putString("miExpositores", "No");
-
+                    parametro.putString("nombre", nombre);
                     fragment.setArguments(parametro);
 
                     final FragmentTransaction ft = getFragmentManager()
@@ -204,17 +269,65 @@ public class ExpositoresFrgament extends Fragment {
 
     class Alfabetico implements View.OnClickListener {
         public void onClick(View v) {
+            if (miExpo.equals("Si")){
 
-            if (!cd.isConnectingToInternet()) {
-                // Internet Connection is not present
-                Toast.makeText(getActivity(), "Se necesita internet", Toast.LENGTH_SHORT).show();
-                // stop executing code by return
-
-            }else{
-
-            new getListaAlfabetica().execute();}
+                AdminSQLiteOpenHelper dbHandler;
+                dbHandler = new AdminSQLiteOpenHelper(getActivity(), null, null, 2);
+                SQLiteDatabase db = dbHandler.getWritableDatabase();
+                Cursor cursor = dbHandler.listarpersonas();
+                cursor.getColumnCount();
 
 
+
+                String[] from = new String[]{"idExpo", "nombre"};
+                int[] to = new int[]{
+                        R.id.txtid,
+                        R.id.txtNombre
+                };
+
+
+
+                SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(getActivity(), R.layout.formato_lista_alfabetica, cursor, from, to);
+
+
+                lista.setAdapter(cursorAdapter);
+                lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView parent, View view, int position, long id) {
+                        String expoId = ((TextView) view.findViewById(R.id.txtid)).getText().toString();
+                        Fragment fragment = new DetalleExpoFragment();
+
+                        Bundle parametro = new Bundle();
+
+
+                        parametro.putString("expoId", expoId);
+                        parametro.putString("miExpositores", "si");
+                        parametro.putString("nombre", nombre);
+                        fragment.setArguments(parametro);
+
+                        final FragmentTransaction ft = getFragmentManager()
+                                .beginTransaction();
+                        ft.replace(R.id.actividad, fragment, "tag");
+
+                        ft.addToBackStack("tag");
+
+                        ft.commit();
+
+                    }
+                });
+
+            } else {
+                if (!cd.isConnectingToInternet()) {
+                    // Internet Connection is not present
+                    Toast.makeText(getActivity(), "Se necesita internet", Toast.LENGTH_SHORT).show();
+                    // stop executing code by return
+
+                } else {
+
+                    new getListaAlfabetica().execute();
+                }
+
+            }
 
         }
     }
@@ -222,17 +335,67 @@ public class ExpositoresFrgament extends Fragment {
     class Numerico implements View.OnClickListener {
         public void onClick(View v) {
 
-            if (!cd.isConnectingToInternet()) {
-                // Internet Connection is not present
-                Toast.makeText(getActivity(), "Se necesita internet", Toast.LENGTH_SHORT).show();
-                // stop executing code by return
+            if (miExpo.equals("Si")){
 
-            }else {
+                AdminSQLiteOpenHelper dbHandler;
+                dbHandler = new AdminSQLiteOpenHelper(getActivity(), null, null, 2);
+                SQLiteDatabase db = dbHandler.getWritableDatabase();
+                Cursor cursor = dbHandler.listarpersonasStand();
+                cursor.getColumnCount();
 
-                new getListaNumerico().execute();
+
+
+                String[] from = new String[]{"idExpo", "nombre", "stand"};
+                int[] to = new int[]{
+                        R.id.txtid,
+                        R.id.txtNombre,
+                        R.id.txtLetra
+                };
+
+
+
+                SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(getActivity(), R.layout.formato_lista_alfabetica, cursor, from, to);
+
+
+                lista.setAdapter(cursorAdapter);
+                lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView parent, View view, int position, long id) {
+                        String expoId = ((TextView) view.findViewById(R.id.txtid)).getText().toString();
+                        Fragment fragment = new DetalleExpoFragment();
+
+                        Bundle parametro = new Bundle();
+
+
+                        parametro.putString("expoId", expoId);
+                        parametro.putString("miExpositores", "si");
+                        parametro.putString("nombre", nombre);
+                        fragment.setArguments(parametro);
+
+                        final FragmentTransaction ft = getFragmentManager()
+                                .beginTransaction();
+                        ft.replace(R.id.actividad, fragment, "tag");
+
+                        ft.addToBackStack("tag");
+
+                        ft.commit();
+
+                    }
+                });
+
+            } else {
+
+                if (!cd.isConnectingToInternet()) {
+                    // Internet Connection is not present
+                    Toast.makeText(getActivity(), "Se necesita internet", Toast.LENGTH_SHORT).show();
+                    // stop executing code by return
+
+                } else {
+
+                    new getListaNumerico().execute();
+                }
+
             }
-
-
         }
     }
 

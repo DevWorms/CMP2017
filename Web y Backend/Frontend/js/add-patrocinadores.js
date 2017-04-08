@@ -79,6 +79,16 @@ function getElement(id) {
                 $("#tipo").val(el.tipo);
                 $("#url").val(el.url);
 
+                if (el.logo.nombre) {
+                    $("label[for='archivo_logo']").text("Actualizar imágen");
+                    $("#file_img").html("<br><img height='250px' src='" + el.logo.url + "' title='" + el.logo.nombre + "'>");
+                }
+
+                if (el.pdf.nombre) {
+                    $("label[for='archivo_pdf']").text("Actualizar PDF");
+                    $("#file_pdf").html("<br><a href='" + el.pdf.url + "' target='_blank'>" + el.pdf.nombre + "</a>");
+                }
+
                 $("#crearPatrocinador input, textarea, button").prop("disabled", false);
             } else {
                 $("#error").fadeIn(1000, function() {
@@ -89,7 +99,7 @@ function getElement(id) {
             }
         },
         error : function (response) {
-            var response = $.parseJSON(response.responseText);
+            response = $.parseJSON(response.responseText);
             $("#error").fadeIn(1000, function() {
                 $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
             });

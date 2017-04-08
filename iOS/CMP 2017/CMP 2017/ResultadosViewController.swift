@@ -23,6 +23,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
     var tipoPrograma = ""
     
     var datos = [[String : Any]]()
+    var imgs = [Data]()
     var fechas = [String]()
     var datoXfecha = [[], [], [], [], []]
     var idXdato = [[], [], [], [], []]
@@ -31,6 +32,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
     var idDato = [[Int]]()
     
     var datoAmostrar = [String : Any]()
+    var imgAmostrar = Data()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,18 +61,66 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
                     print("Error de codificación de caracteres.")
                 }
             case 3:
-                let strUrl = "http://cmp.devworms.com/api/acompanantes/all/\(userID!)/\(apiKey!)"
-                print(strUrl)
+                self.datos = CoreDataHelper.fetchData(entityName: "Acompanantes", keyName: "acompanante")!
+                self.imgs = CoreDataHelper.fetchItem(entityName: "Acompanantes", keyName: "imgAcompanante") as! [Data]
                 
-                URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
             case 4:
-                let strUrl = "http://cmp.devworms.com/api/deportivos/all/\(userID!)/\(apiKey!)"
-                print(strUrl)
-                
-                URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
+                self.datos = CoreDataHelper.fetchData(entityName: "Deportivos", keyName: "evento")!
+                self.imgs = CoreDataHelper.fetchItem(entityName: "Deportivos", keyName: "imgDeportivo") as! [Data]
                 
             default: break
             }
+            
+            //para titulos
+            for date in self.datos {
+                if self.fechas.contains(date["fecha"] as! String) {
+                    
+                } else {
+                    self.fechas.append(date["fecha"] as! String)
+                }
+                
+                if date["fecha"] as! String == "2017-06-05" {
+                    self.datoXfecha[0].append(date["nombre"] as! String)
+                    self.idXdato[0].append(date["id"] as! Int)
+                }else if date["fecha"] as! String == "2017-06-06" {
+                    self.datoXfecha[1].append(date["nombre"] as! String)
+                    self.idXdato[1].append(date["id"] as! Int)
+                }else if date["fecha"] as! String == "2017-06-07" {
+                    self.datoXfecha[2].append(date["nombre"] as! String)
+                    self.idXdato[2].append(date["id"] as! Int)
+                }else if date["fecha"] as! String == "2017-06-08" {
+                    self.datoXfecha[3].append(date["nombre"] as! String)
+                    self.idXdato[3].append(date["id"] as! Int)
+                }else if date["fecha"] as! String == "2017-06-09" {
+                    self.datoXfecha[4].append(date["nombre"] as! String)
+                    self.idXdato[4].append(date["id"] as! Int)
+                }
+            }
+            
+            // agregar los datos que no estan vacios
+            if self.datoXfecha[0].count != 0 {
+                self.datoFecha.append(self.datoXfecha[0] as! [String])
+                self.idDato.append(self.idXdato[0] as! [Int])
+            }
+            if self.datoXfecha[1].count != 0 {
+                self.datoFecha.append(self.datoXfecha[1] as! [String])
+                self.idDato.append(self.idXdato[1] as! [Int])
+            }
+            if self.datoXfecha[2].count != 0 {
+                self.datoFecha.append(self.datoXfecha[2] as! [String])
+                self.idDato.append(self.idXdato[2] as! [Int])
+            }
+            if self.datoXfecha[3].count != 0 {
+                self.datoFecha.append(self.datoXfecha[3] as! [String])
+                self.idDato.append(self.idXdato[3] as! [Int])
+            }
+            if self.datoXfecha[4].count != 0 {
+                self.datoFecha.append(self.datoXfecha[4] as! [String])
+                self.idDato.append(self.idXdato[4] as! [Int])
+            }
+            
+            //self.tableView.reloadData()
+            
         } else {
             let vc_alert = UIAlertController(title: "Sin conexión a internet", message: "Asegúrate de estar conectado a internet.", preferredStyle: .alert)
             vc_alert.addAction(UIAlertAction(title: "OK",
@@ -95,22 +145,10 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
                         }
                         
                         if let jsonResult = json as? [String: Any] {
-                            switch self.seccion {
-                            case 1:
-                                for dato in jsonResult["programas"] as! [[String:Any]] {
-                                    self.datos.append(dato)
-                                }
-                            case 3:
-                                for dato in jsonResult["acompanantes"] as! [[String:Any]] {
-                                    self.datos.append(dato)
-                                }
-                            case 4:
-                                for dato in jsonResult["eventos"] as! [[String:Any]] {
-                                    self.datos.append(dato)
-                                }
-                            default: break
-                            }
                             
+                            for dato in jsonResult["programas"] as! [[String:Any]] {
+                                    self.datos.append(dato)
+                            }
                             
                             //para titulos
                             for date in self.datos {
@@ -256,9 +294,12 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
         
         switch self.seccion {
         case 1,3,4:
-            for dato in self.datos {
+            for (index, dato) in self.datos.enumerated() {
                 if dato["id"] as! Int == idDato[indexPath.section][indexPath.row] {
                     self.datoAmostrar = dato
+                    
+                    self.imgAmostrar = imgs[index]
+                    
                     self.performSegue(withIdentifier: "detalle", sender: nil)
                 }
             }
@@ -278,6 +319,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
         if segue.identifier == "detalle" {
             (segue.destination as! DetalleViewController).seccion = self.seccion
             (segue.destination as! DetalleViewController).detalle = self.datoAmostrar
+            (segue.destination as! DetalleViewController).imgData = self.imgAmostrar
         }
     }
 

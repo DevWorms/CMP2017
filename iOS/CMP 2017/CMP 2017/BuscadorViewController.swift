@@ -17,6 +17,8 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
     
     var abcArray = [String]()
     
+    var datos = [[String : Any]]()
+    
     var expositores = [[String : Any]]()
     
     // variables finales sin basura
@@ -28,6 +30,9 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
     var filtered:[String] = []
     var filteredProvisional:[String] = []
     var filteredID:[Int] = []
+    
+    var imgs = [Data]()
+    var imgAmostrar = Data()
     
     var seccion = 2
     var alphabet = true
@@ -66,166 +71,115 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
     
     
     func alfabeticamente(alph: Bool) {
-        let apiKey = UserDefaults.standard.value(forKey: "api_key")
-        let userID = UserDefaults.standard.value(forKey: "user_id")
         
-        var strUrl = ""
+        /*
+         let arr = [ ["hola": 2, "hola2" : "mm1"], ["hola": 3, "hola2" : "mm2"], ["hola": 1, "hola2" : "mm0"] ]
+         
+         print(arr.sorted(by: { (a,b) in (a["hola"] as! Int) < (b["hola"] as! Int) }))
+         print(arr.sorted(by: { (a,b) in (a["hola2"] as! String) < (b["hola2"] as! String) }))
+         */
+        
+        if self.expositores.count > 0 {
+            self.expositores.removeAll()
+            self.abcArray.removeAll()
+            self.idExpositores.removeAll()
+            self.expositoresArray.removeAll()
+            self.expositorAmostrar.removeAll()
+        }
         
         if alph {
             
             alphabet = true
             
             if self.seccion == 5 { // patrocinadores
-                strUrl = "http://cmp.devworms.com/api/patrocinador/order/name/\(userID!)/\(apiKey!)"
+                self.datos = CoreDataHelper.fetchData(entityName: "Patrocinadores", keyName: "patrocinador")!
+                self.imgs = CoreDataHelper.fetchItem(entityName: "Patrocinadores", keyName: "imgPatrocinador") as! [Data]
+                self.expositores = self.datos.sorted(by: { (a,b) in (a["nombre"] as! String) < (b["nombre"] as! String) })
+                
+                
             } else {
-                strUrl = "http://cmp.devworms.com/api/expositor/order/name/\(userID!)/\(apiKey!)"
+                self.datos = CoreDataHelper.fetchData(entityName: "Expositores", keyName: "expositor")!
+                self.imgs = CoreDataHelper.fetchItem(entityName: "Expositores", keyName: "imgExpositor") as! [Data]
+                self.expositores = self.datos.sorted(by: { (a,b) in (a["nombre"] as! String) < (b["nombre"] as! String) })
             }
+            
+            // llenar las secciones
+            for letra in self.expositores {
+                
+                if !self.abcArray.contains( String(describing: (letra["nombre"] as! String).characters.first!).uppercased() ) {
+                    self.abcArray.append( String(describing: (letra["nombre"] as! String).characters.first!).uppercased() )
+                }
+            }
+            
+            // llenar las rows
+            
+            var expositoresOrdText = [String]()
+            var expositoresOrdId = [Int]()
+            
+            for letra in self.abcArray {
+                for result in self.expositores {
+                    
+                    if (result["nombre"] as! String).uppercased().hasPrefix( letra) {
+                        expositoresOrdText.append( result["nombre"] as! String )
+                        expositoresOrdId.append( result["id"] as! Int )
+                    }
+                }
+                
+                self.idExpositores.append(expositoresOrdId)
+                self.expositoresArray.append(expositoresOrdText)
+                expositoresOrdId.removeAll()
+                expositoresOrdText.removeAll()
+            }
+            
         } else {
             
             alphabet = false
             
             if self.seccion == 5 { // patrocinadores
-                strUrl = "http://cmp.devworms.com/api/patrocinador/order/stand/\(userID!)/\(apiKey!)"
+                self.datos = CoreDataHelper.fetchData(entityName: "Patrocinadores", keyName: "patrocinador")!
+                self.imgs = CoreDataHelper.fetchItem(entityName: "Patrocinadores", keyName: "imgPatrocinador") as! [Data]
+                self.expositores = self.datos.sorted(by: { (a,b) in (a["stand"] as! String) < (b["stand"] as! String) })
+                
             } else {
-                strUrl = "http://cmp.devworms.com/api/expositor/order/stand/\(userID!)/\(apiKey!)"
+                self.datos = CoreDataHelper.fetchData(entityName: "Expositores", keyName: "expositor")!
+                self.imgs = CoreDataHelper.fetchItem(entityName: "Expositores", keyName: "imgExpositor") as! [Data]
+                self.expositores = self.datos.sorted(by: { (a,b) in (a["stand"] as! String) < (b["stand"] as! String) })
+            }
+            
+            // llenar las secciones
+            for letra in self.expositores {
+                
+                if !self.abcArray.contains( letra["stand"] as! String ) {
+                    self.abcArray.append( letra["stand"] as! String )
+                }
+            }
+            
+            // llenar las rows
+            
+            var expositoresOrdText = [String]()
+            var expositoresOrdId = [Int]()
+            
+            for letra in self.abcArray {
+                for result in self.expositores {
+                    
+                    if (result["stand"] as! String) ==  letra {
+                        expositoresOrdText.append( result["nombre"] as! String )
+                        expositoresOrdId.append( result["id"] as! Int )
+                    }
+                }
+                
+                self.idExpositores.append(expositoresOrdId)
+                self.expositoresArray.append(expositoresOrdText)
+                expositoresOrdId.removeAll()
+                expositoresOrdText.removeAll()
+            }
+            
+            for index in 0 ... self.abcArray.count-1 {
+                self.abcArray[index] = "Stand " + self.abcArray[index]
             }
         }
         
-        print(strUrl)
-        if Accesibilidad.isConnectedToNetwork() == true {
-            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
-        } else {
-            let vc_alert = UIAlertController(title: "Sin conexión a internet", message: "Asegúrate de estar conectado a internet.", preferredStyle: .alert)
-            vc_alert.addAction(UIAlertAction(title: "OK",
-                                             style: UIAlertActionStyle.default,
-                                             handler: nil))
-            self.present(vc_alert, animated: true, completion: nil)
-        }
-    }
-    
-    func parseJson(data: Data?, urlResponse: URLResponse?, error: Error?) {
-        if error != nil {
-            print(error!)
-        } else if urlResponse != nil {
-            if (urlResponse as! HTTPURLResponse).statusCode == 200 {
-                if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
-                    //print(json)
-                    
-                    DispatchQueue.main.async {
-                        
-                        if self.expositores.count > 0 {
-                            self.expositores.removeAll()
-                            self.abcArray.removeAll()
-                            self.idExpositores.removeAll()
-                            self.expositoresArray.removeAll()
-                            self.expositorAmostrar.removeAll()
-                        }
-                        
-                        if let jsonResult = json as? [String: Any] {
-                            if self.seccion == 5 { // patrocinadores
-                                for programa in jsonResult["patrocinadores"] as! [[String:Any]] {
-                                    self.expositores.append(programa)
-                                }
-                            } else {
-                                for programa in jsonResult["expositores"] as! [[String:Any]] {
-                                    self.expositores.append(programa)
-                                }
-                            }
-                            
-                            
-                            if self.alphabet {
-                                
-                                // llenar las secciones
-                                for letra in self.expositores {
-                                    
-                                    if !self.abcArray.contains( String(describing: (letra["nombre"] as! String).characters.first!).uppercased() ) {
-                                        self.abcArray.append( String(describing: (letra["nombre"] as! String).characters.first!).uppercased() )
-                                    }
-                                }
-                                
-                                // llenar las rows
-                                
-                                var expositoresOrdText = [String]()
-                                var expositoresOrdId = [Int]()
-                                
-                                for letra in self.abcArray {
-                                    for result in self.expositores {
-                                        
-                                        if (result["nombre"] as! String).uppercased().hasPrefix( letra) {
-                                            expositoresOrdText.append( result["nombre"] as! String )
-                                            expositoresOrdId.append( result["id"] as! Int )
-                                        }
-                                    }
-                                    
-                                    self.idExpositores.append(expositoresOrdId)
-                                    self.expositoresArray.append(expositoresOrdText)
-                                    expositoresOrdId.removeAll()
-                                    expositoresOrdText.removeAll()
-                                }
-                                
-                            } else {
-                                // llenar las secciones
-                                for letra in self.expositores {
-                                    
-                                    if !self.abcArray.contains( letra["stand"] as! String ) {
-                                        self.abcArray.append( letra["stand"] as! String )
-                                    }
-                                }
-                                
-                                // llenar las rows
-                                
-                                var expositoresOrdText = [String]()
-                                var expositoresOrdId = [Int]()
-                                
-                                for letra in self.abcArray {
-                                    for result in self.expositores {
-                                        
-                                        if (result["stand"] as! String) ==  letra {
-                                            expositoresOrdText.append( result["nombre"] as! String )
-                                            expositoresOrdId.append( result["id"] as! Int )
-                                        }
-                                    }
-                                    
-                                    self.idExpositores.append(expositoresOrdId)
-                                    self.expositoresArray.append(expositoresOrdText)
-                                    expositoresOrdId.removeAll()
-                                    expositoresOrdText.removeAll()
-                                }
-                                
-                                for index in 0 ... self.abcArray.count-1 {
-                                    self.abcArray[index] = "Stand " + self.abcArray[index]
-                                }
-                                
-                            }
-                            
-                            //self.abcArray = self.abcArray.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedDescending }
-                        }
-                        
-                        self.tableView.reloadData()
-                    }
-                    
-                } else {
-                    print("HTTP Status Code: 200")
-                    print("El JSON de respuesta es inválido.")
-                }
-            } else {
-                
-                DispatchQueue.main.async {
-                    if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
-                        if let jsonResult = json as? [String: Any] {
-                            let vc_alert = UIAlertController(title: nil, message: jsonResult["mensaje"] as? String, preferredStyle: .alert)
-                            vc_alert.addAction(UIAlertAction(title: "OK", style: .cancel , handler: nil))
-                            self.present(vc_alert, animated: true, completion: nil)
-                        }
-                        
-                        
-                    } else {
-                        print("HTTP Status Code: 400 o 500")
-                        print("El JSON de respuesta es inválido.")
-                    }
-                }
-            }
-        }
+        self.tableView.reloadData()
         
     }
 
@@ -330,17 +284,19 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
         if(searchActive){
             let cellText = tableView.cellForRow(at: indexPath)?.textLabel?.text
             
-            for expositor in self.expositores {
+            for (index, expositor) in self.datos.enumerated() {
                 if expositor["id"] as! Int == filteredID[filteredProvisional.index(of: cellText!)!] {
                     expositorAmostrar = expositor
+                    self.imgAmostrar = imgs[index]
                     self.performSegue(withIdentifier: "detalle", sender: nil)
                 }
             }
             
         } else {
-            for expositor in self.expositores {
+            for (index, expositor) in self.datos.enumerated() {
                 if expositor["id"] as! Int == idExpositores[indexPath.section][indexPath.row] {
                     expositorAmostrar = expositor
+                    self.imgAmostrar = imgs[index]
                     self.performSegue(withIdentifier: "detalle", sender: nil)
                 }
             }
@@ -359,6 +315,7 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
         if segue.identifier == "detalle" {
             (segue.destination as! DetalleViewController).seccion = self.seccion
             (segue.destination as! DetalleViewController).detalle = self.expositorAmostrar
+            (segue.destination as! DetalleViewController).imgData = self.imgAmostrar
         }
     }
 

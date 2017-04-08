@@ -20,6 +20,8 @@ class MapaSimpleViewController: UIViewController, UIWebViewDelegate {
     
     var pdfEnviado = String()
     
+    var alert = UIAlertController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,8 +31,10 @@ class MapaSimpleViewController: UIViewController, UIWebViewDelegate {
         
         if Accesibilidad.isConnectedToNetwork() == true {
             
-            if webView.isLoading {
-                let alert = UIAlertController(title: nil, message: "Cargando...", preferredStyle: .alert)
+            if webView.isLoading { // pedo
+                
+                alert = UIAlertController(title: nil, message: "Cargando...", preferredStyle: .alert)
+                
                 alert.view.tintColor = UIColor.black
                 
                 let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50)) as UIActivityIndicatorView
@@ -84,8 +88,9 @@ class MapaSimpleViewController: UIViewController, UIWebViewDelegate {
     }
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
-        //quita el alert
-        self.dismiss(animated: false, completion: nil)
+        
+        alert.dismiss(animated: false, completion: nil)
+        
     }
     
     func parseJson(data: Data?, urlResponse: URLResponse?, error: Error?) {

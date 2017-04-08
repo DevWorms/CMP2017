@@ -15,6 +15,10 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "fondoCMP.png")!)
+        
+        let methodsCMP = ServerConnection()
+        
+        methodsCMP.getCMP(myView: self)
     }
 
     override func didReceiveMemoryWarning() {

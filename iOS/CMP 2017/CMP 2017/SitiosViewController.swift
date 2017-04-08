@@ -13,102 +13,19 @@ class SitiosViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var tableView: UITableView!
     
     var datos = [[String : Any]]()
+    var imgs = [Data]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "fondo.png")!)
         
-        if Accesibilidad.isConnectedToNetwork() == true {
-            
-            let alert = UIAlertController(title: nil, message: "Cargando...", preferredStyle: .alert)
-            alert.view.tintColor = UIColor.black
-            
-            let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50)) as UIActivityIndicatorView
-            loadingIndicator.hidesWhenStopped = true
-            loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-            loadingIndicator.startAnimating()
-            
-            /*let callAction = UIAlertAction(title: "Cancelar", style: .Default, handler: {
-             action in
-             
-             self.hurryPrintMethods.cancelConnection()
-             return
-             })
-             alert.addAction(callAction)*/
-            
-            alert.view.addSubview(loadingIndicator)
-            self.present(alert, animated: true, completion: self.prueba)
-            
-            
-        } else {
-            let vc_alert = UIAlertController(title: "Sin conexión a internet", message: "Asegúrate de estar conectado a internet.", preferredStyle: .alert)
-            vc_alert.addAction(UIAlertAction(title: "OK",
-                                             style: UIAlertActionStyle.default,
-                                             handler: nil))
-            self.present(vc_alert, animated: true, completion: nil)
-        }
-    }
-    
-    func prueba() {
+        self.datos = CoreDataHelper.fetchData(entityName: "Sitios", keyName: "sitio")!
         
-        let apiKey = UserDefaults.standard.value(forKey: "api_key")
-        let userID = UserDefaults.standard.value(forKey: "user_id")
+        self.imgs = CoreDataHelper.fetchItem(entityName: "Sitios", keyName: "imgSitio") as! [Data]
         
-        let strUrl = "http://cmp.devworms.com/api/puebla/sitio/all/\(userID!)/\(apiKey!)"
-        print(strUrl)
+        //self.tableView.reloadData()
         
-        URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
-    }
-    
-    func parseJson(data: Data?, urlResponse: URLResponse?, error: Error?) {
-        if error != nil {
-            print(error!)
-        } else if urlResponse != nil {
-            if (urlResponse as! HTTPURLResponse).statusCode == 200 {
-                if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
-                    //print(json)
-                    
-                    DispatchQueue.main.async {
-                        
-                        if self.datos.count > 0 {
-                            self.datos.removeAll()
-                        }
-                        
-                        if let jsonResult = json as? [String: Any] {
-                            for dato in jsonResult["sitios"] as! [[String:Any]] {
-                                self.datos.append(dato)
-                            }
-                        }
-                        
-                        //quita el alert
-                        self.dismiss(animated: false, completion: nil)
-                        
-                        self.tableView.reloadData()
-                    }
-                    
-                } else {
-                    print("HTTP Status Code: 200")
-                    print("El JSON de respuesta es inválido.")
-                }
-            } else {
-                
-                DispatchQueue.main.async {
-                    if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
-                        if let jsonResult = json as? [String: Any] {
-                            let vc_alert = UIAlertController(title: nil, message: jsonResult["mensaje"] as? String, preferredStyle: .alert)
-                            vc_alert.addAction(UIAlertAction(title: "OK", style: .cancel , handler: nil))
-                            self.present(vc_alert, animated: true, completion: nil)
-                        }
-                        
-                        
-                    } else {
-                        print("HTTP Status Code: 400 o 500")
-                        print("El JSON de respuesta es inválido.")
-                    }
-                }
-            }
-        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -128,12 +45,7 @@ class SitiosViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! SitioTableViewCell
         
-        if let foto = datos[indexPath.row]["imagen"] as? [String: Any] {
-            let data = try? Data(contentsOf: URL(string: foto["url"] as! String)!)
-            DispatchQueue.main.async {
-                cell.foto.image = UIImage(data: data!)
-            }
-        }
+        cell.foto.image = UIImage(data: imgs[indexPath.row])
         
         cell.titulo.text = datos[indexPath.row]["titulo"] as! String?
         cell.descripcion.text = datos[indexPath.row]["descripcion"] as! String?

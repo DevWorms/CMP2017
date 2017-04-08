@@ -1,10 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Acompanantes" representedClassName="Acompanantes" syncable="YES" codeGenerationType="class">
+        <attribute name="acompanante" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="imgAcompanante" optional="YES" attributeType="Transformable" syncable="YES"/>
+    </entity>
     <entity name="Banners" representedClassName="MisExpositoresMO" syncable="YES" codeGenerationType="class">
         <attribute name="banner" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="imgBanner" optional="YES" attributeType="Transformable" syncable="YES"/>
     </entity>
+    <entity name="Deportivos" representedClassName="Deportivos" syncable="YES" codeGenerationType="class">
+        <attribute name="evento" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="imgDeportivo" optional="YES" attributeType="Transformable" syncable="YES"/>
+    </entity>
+    <entity name="Expositores" representedClassName="Expositores" syncable="YES" codeGenerationType="class">
+        <attribute name="expositor" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="imgExpositor" optional="YES" attributeType="Transformable" syncable="YES"/>
+    </entity>
+    <entity name="Patrocinadores" representedClassName="Patrocinadores" syncable="YES" codeGenerationType="class">
+        <attribute name="imgPatrocinador" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="patrocinador" optional="YES" attributeType="Transformable" syncable="YES"/>
+    </entity>
+    <entity name="Rutas" representedClassName="Rutas" syncable="YES" codeGenerationType="class">
+        <attribute name="ruta" optional="YES" attributeType="Transformable" syncable="YES"/>
+    </entity>
+    <entity name="Sitios" representedClassName="Sitios" syncable="YES" codeGenerationType="class">
+        <attribute name="imgSitio" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="sitio" optional="YES" attributeType="Transformable" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Banners" positionX="-63" positionY="-18" width="128" height="73"/>
+        <element name="Rutas" positionX="-54" positionY="18" width="128" height="60"/>
+        <element name="Sitios" positionX="-63" positionY="0" width="128" height="75"/>
+        <element name="Acompanantes" positionX="-36" positionY="27" width="128" height="30"/>
+        <element name="Deportivos" positionX="-18" positionY="45" width="128" height="30"/>
+        <element name="Patrocinadores" positionX="0" positionY="54" width="128" height="30"/>
+        <element name="Expositores" positionX="18" positionY="63" width="128" height="30"/>
     </elements>
 </model>

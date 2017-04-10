@@ -826,7 +826,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="04Fotografia" translatesAutoresizingMaskIntoConstraints="NO" id="uAX-0j-wpn">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uAX-0j-wpn">
                                 <rect key="frame" x="0.0" y="64" width="375" height="149"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -1155,7 +1155,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="284"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="04Foto_Puebla" translatesAutoresizingMaskIntoConstraints="NO" id="KRS-je-5M3">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KRS-je-5M3">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="132"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -1523,7 +1523,7 @@
             <objects>
                 <navigationController storyboardIdentifier="Inicio" automaticallyAdjustsScrollViewInsets="NO" id="hsC-4U-TeZ" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="1nL-t7-c76">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1nL-t7-c76">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1541,7 +1541,7 @@
             <objects>
                 <navigationController storyboardIdentifier="MenuPrincipal" automaticallyAdjustsScrollViewInsets="NO" id="ojg-qp-URi" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="4R6-43-AVe">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4R6-43-AVe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1622,8 +1622,6 @@
         <image name="03_Mis_Expositores" width="1246" height="263"/>
         <image name="04Boton_Mapa_Puebla" width="489" height="170"/>
         <image name="04Eventos_Deportivos" width="390" height="346"/>
-        <image name="04Foto_Puebla" width="1235" height="429"/>
-        <image name="04Fotografia" width="1242" height="552"/>
         <image name="04Revisar_Rutas" width="841" height="158"/>
         <image name="04_Boton_Mapa_Expositores" width="841" height="158"/>
         <image name="04_Mis_Encuestas" width="1246" height="263"/>
@@ -1656,7 +1654,7 @@
         <segue reference="0FK-uA-KfA"/>
         <segue reference="psR-II-8MZ"/>
         <segue reference="GKY-3m-4VQ"/>
-        <segue reference="GJj-eU-EjN"/>
         <segue reference="z9v-TW-n8m"/>
+        <segue reference="zrc-cq-o1r"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -25,7 +25,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
     var datosGlobal = [[String : Any]]()
     
     var datos = [[String : Any]]()
-    var imgs = [Data]()
+    var imgs = [Any?]()
     var fechas = [String]()
     var datoXfecha = [[], [], [], [], []]
     var idXdato = [[], [], [], [], []]
@@ -34,7 +34,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
     var idDato = [[Int]]()
     
     var datoAmostrar = [String : Any]()
-    var imgAmostrar = Data()
+    var imgAmostrar: Any?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +47,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
             case 1:
                 
                 self.datosGlobal = CoreDataHelper.fetchData(entityName: "Programas", keyName: "programa")!
-                self.imgs = CoreDataHelper.fetchItem(entityName: "Programas", keyName: "imgPrograma") as! [Data]
+                self.imgs = CoreDataHelper.fetchItem(entityName: "Programas", keyName: "imgPrograma")!
                 
                 if diaPrograma == "" && tipoPrograma == "" { //  Todos
                     self.datos = self.datosGlobal
@@ -91,12 +91,12 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
             case 3:
                 self.datosGlobal = CoreDataHelper.fetchData(entityName: "Acompanantes", keyName: "acompanante")!
                 self.datos = CoreDataHelper.fetchData(entityName: "Acompanantes", keyName: "acompanante")!
-                self.imgs = CoreDataHelper.fetchItem(entityName: "Acompanantes", keyName: "imgAcompanante") as! [Data]
+                self.imgs = CoreDataHelper.fetchItem(entityName: "Acompanantes", keyName: "imgAcompanante")!
                 
             case 4:
                 self.datosGlobal = CoreDataHelper.fetchData(entityName: "Deportivos", keyName: "evento")!
                 self.datos = CoreDataHelper.fetchData(entityName: "Deportivos", keyName: "evento")!
-                self.imgs = CoreDataHelper.fetchItem(entityName: "Deportivos", keyName: "imgDeportivo") as! [Data]
+                self.imgs = CoreDataHelper.fetchItem(entityName: "Deportivos", keyName: "imgDeportivo")!
                 
             default: break
             }

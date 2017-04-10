@@ -80,7 +80,7 @@ class ServerConnection {
         self.getAcompañantes()
         self.getDeportivos()
         self.getPatrocinadores()
-        //self.getExpositores()
+        self.getExpositores()
         self.getProgramas()
         
         //quita el alert

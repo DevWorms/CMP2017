@@ -93,15 +93,16 @@ class CoreDataHelper {
         do {
             let fetched = try managedContext.fetch(requestFetch) as! [NSManagedObject]
             
-            var results = [Any]()
+            var results = [Any?]()
             
             for ftd in fetched {
                 
-                if let dato = (ftd as AnyObject).value(forKey: keyName)  {
-                    results.append(dato)
-                }
+                //if let dato = (ftd as? AnyObject)?.value(forKey: keyName)  {
                 
-                //print((ftd as AnyObject).value(forKey: keyName) ?? "no data")
+                let dato = (ftd as AnyObject).value(forKey: keyName)
+                    
+                results.append(dato)
+                //}
             }
             
             print("Count fetchItem: \(results.count)")

@@ -9,15 +9,13 @@
     <meta name="description" content="CMP 2017 - ADMIN">
     <meta name="author" content="DevWorms">
 
-    <title>CMP 2017 - Teléfonos de Emergencia y Taxis</title>
+    <title>CMP 2017 - Encuestas</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- CSS -->
     <link href="css/main.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="js/jquery-ui-1.12.1/jquery-ui.css">
-    <link rel="stylesheet" href="js/jquery-ui-timepicker-addon.css">
 </head>
 
 <body>
@@ -84,13 +82,13 @@
                     <li>
                         <a href="transportacion.php">Transportación</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="puebla.php">Puebla</a>
                     </li>
                     <li>
                         <a href="banner.php">Banners</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="encuestas.php">Encuestas</a>
                     </li>
                 </ul>
@@ -100,36 +98,20 @@
 
         <!-- Contenido -->
         <div id="page-wrapper">
+
             <div class="container-fluid">
-                <div id="error"></div>
-                <input type="hidden" id="id">
-                <form enctype="multipart/form-data" method="POST" id="crearEvento" name="crearEvento">
+                
+                <form action="" method="" id="" name="" role="">    
                     <div class="row page-header">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
-                            <h4 style="color: #10375e;">Puebla</h4>
-                        </div>
-
-                        <div class="col-xs-12 col-md-5" align="right">
-                            <h4>Teléfonos</h4>   
+                            <h4 style="color: #10375e;">Encuestas</h4>
                         </div>
                     </div>
                     <!-- Fin Fila -->
+                    
                     <div class="row">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
-                            <div class="form-group">
-                                <label for="titulo">Titulo</label>
-                                <br>
-                                <input type="text" name="titulo" id="titulo" class="form-control" required>
-                            </div>
-                            <br>
-                        </div>
-
-                        <div class="col-xs-12 col-md-5 col-md-offset-1">
-                            <div class="form-group">
-                                <label for="imagen">Imágen (fotográfia)</label>
-                                    <br><br>
-                                <input type="file" id="imagen" name="imagen">
-                            </div>
+                            <h4><b>Encuesta 1</b></h4>
                         </div>
                     </div>
                     <br>
@@ -138,26 +120,63 @@
                     <div class="row">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
                             <div class="form-group">
-                                <label for="telefono">Teléfono</label>
-                                    <br>
-                                <input type="number" name="telefono" id="telefono" class="form-control" required>
+                                <label for="archivo">Imagen Chica</label>
+                                <br>
+                                <input type="file" name="" id="" class="form-control" required>
                             </div>
                             <br>
                         </div>
-                        <div class="col-xs-12 col-md-6">
-                            <div id="file_img"></div>
+
+                        <div class="col-xs-12 col-md-5">
+                            <div class="form-group">
+                                <label for="archivo">Imagen Grande</label>
+                                <br>
+                                <input type="file" name="" id="" class="form-control" required>
+                            </div> 
+                        </div>
+                    </div>
+                    <br>
+                    <!-- Fin Fila -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <div class="form-group">
+                                <label for="">Pregunta 1</label>
+                                    <br>
+                                <input type="" name="" id="" class="form-control">
+                            </div>
+                            <br>
+                        </div>
+
+                        <div class="col-xs-12 col-md-5">
+                            <div class="form-group">
+                                <label for="">Pregunta 2</label>
+                                    <br>
+                                <input type="" name="" id="" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Fin Fila -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <div class="form-group">
+                                <label for="">Pregunta 3</label>
+                                    <br>
+                                <input type="" name="" id="" class="form-control">
+                            </div>
+                            <br>
                         </div>
                     </div>
                     <!-- Fin Fila -->
                     
                     <div class="row">
                         <col-xs-12 class="col-xs-offset-2 col-xs-8 col-md-2 col-md-offset-1">
-                            <button type="submit" class="btn basico btn-block" name="" id="save">Guardar</button>
+                            <button type="submit" class="btn basico btn-block" name="" id="">Crear</button>    
                         </col-xs-12>
                     </div>
                 </form>
 
-                <br>
             </div>
             <!-- /.container-fluid -->
 
@@ -170,12 +189,7 @@
     <!-- Scripts -->
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/jquery-ui-1.12.1/jquery-ui.js"></script>
-    <script type="text/javascript" src="js/moment-with-locales.js"></script>
-    <script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
-    <script src="js/js.php"></script>
-    <script src="js/lodash.js"></script>
-    <script src="js/add-tel.js"></script>
+
 </body>
 
 </html>

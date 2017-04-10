@@ -90,6 +90,9 @@
                     <li>
                         <a href="banner.php">Banners</a>
                     </li>
+                    <li>
+                        <a href="encuestas.php">Encuestas</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

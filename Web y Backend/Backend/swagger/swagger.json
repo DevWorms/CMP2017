@@ -2638,6 +2638,147 @@
                     }
                 }
             }
+        },
+        "/encuesta/all/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "Encuestas"
+                ],
+                "summary": "Devuelve todas las encuestas disponibles",
+                "description": "Devuelve las imágenes e ids de todas las encuestas disponibles",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/encuesta/detail/{user_id}/{api_key}/{encuesta_id}": {
+            "get": {
+                "tags": [
+                    "Encuestas"
+                ],
+                "summary": "Devuelve una encuesta",
+                "description": "Devuelve toda la info y preguntas de una encuesta",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "encuesta_id",
+                    "in": "path",
+                    "description": "Id de la encuesta",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/encuesta/response": {
+            "post": {
+                "tags": [
+                    "Encuestas"
+                ],
+                "summary": "Agrega las respuestas a una encuesta",
+                "description": "Guarda las respuestas de un usuario a una encuesta",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "formData",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "formData",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "encuesta_id",
+                    "in": "formData",
+                    "description": "Id de la encuesta",
+                    "required": true,
+                    "type": "integer"
+                }, {
+                    "name": "respuesta_1",
+                    "in": "formData",
+                    "description": "Puntuación de la pregunta 1, flotante >= 0 y <= 5",
+                    "required": true,
+                    "type": "number",
+                    "format": "float"
+                }, {
+                    "name": "respuesta_2",
+                    "in": "formData",
+                    "description": "Puntuación de la pregunta 2, flotante >= 0 y <= 5",
+                    "required": true,
+                    "type": "number",
+                    "format": "float"
+                }, {
+                    "name": "respuesta_3",
+                    "in": "formData",
+                    "description": "Puntuación de la pregunta 3, flotante >= 0 y <= 5",
+                    "required": true,
+                    "type": "number",
+                    "format": "float"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
         }
     },
     "definitions": {

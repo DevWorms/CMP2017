@@ -156,6 +156,7 @@ public class MenuFragment extends Fragment {
         return  bmp;
 
     }
+
     public void BannerSinBloqueo(){
         new Thread(new Runnable() {
             public void run() {
@@ -243,6 +244,7 @@ public class MenuFragment extends Fragment {
 
 
     }
+
     public void cambioBanner(){
         final Handler handler = new Handler();
         Runnable runnable = new Runnable() {

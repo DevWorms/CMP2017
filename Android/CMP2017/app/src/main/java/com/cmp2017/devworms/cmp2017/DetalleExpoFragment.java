@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.loopj.android.http.Base64;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,22 +33,27 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import static android.R.attr.bitmap;
 
 public class DetalleExpoFragment extends Fragment {
-    String userId, apiKey,nombreSec,resp,expoId,strNomEmpre,strStand,strPagina,strTelefono,strCorreo,strAcercaDe,urlImage,urlPresenta,misExpo,miExpo;
+
+    String userId, apiKey,nombreSec,resp,expoId,strNomEmpre,strStand,strPagina,strTelefono,strCorreo,strAcercaDe,urlImage,urlPresenta,misExpo,miExpo,tipoOrden;
     TextView txtNomEmpre, txtPagina,txtTelefono,txtCorreo, txtAcercaDe;
     ProgressDialog pDialog;
     ImageView imgFoto;
     URL imageUrl ;
     Bitmap imagen;
     View viewR;
-    int cursorEncontrado;
+    int cursorEncontrado,posJson;
     byte[] imageArray;
     HttpURLConnection conn;
     String inicioComo;
     Button btnLocalizar,btnAgreExpo,btnPresent;
+    Cursor cursor;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detalle_expo, container, false);
         viewR = view;
@@ -64,6 +70,8 @@ public class DetalleExpoFragment extends Fragment {
         expoId = getArguments().getString("expoId");
         misExpo = getArguments().getString("miExpositores");
         nombreSec = getArguments().getString("nombre");
+        tipoOrden = getArguments().getString("tipooreden");
+        posJson = getArguments().getInt("posicion");
         txtNomEmpre = (TextView)view.findViewById(R.id.txtNomEmpre);
         txtPagina = (TextView)view.findViewById(R.id.txtPaginaExpo);
         txtTelefono = (TextView)view.findViewById(R.id.txtTelefono);
@@ -209,19 +217,62 @@ public class DetalleExpoFragment extends Fragment {
             //add your data
 
 
-            String body = "http://cmp.devworms.com/api/expositor/detail/"+userId+"/"+apiKey+"/"+expoId+"";
+           /* String body = "http://cmp.devworms.com/api/expositor/detail/"+userId+"/"+apiKey+"/"+expoId+"";
             JSONParser jsp = new JSONParser();
 
 
 
-            String respuesta= jsp.makeHttpRequest(body,"GET",body,"");
+            String respuesta= jsp.makeHttpRequest(body,"GET",body,"");*/
+            AdminSQLiteOffline dbHandler;
+            if (tipoOrden.equals("alfa")){
+                if(nombreSec.equals("Expositores")) {
+                    dbHandler = new AdminSQLiteOffline(getActivity(), null, null, 1);
+                    SQLiteDatabase db = dbHandler.getWritableDatabase();
+                    cursor = dbHandler.jsonAlfa();
+                } else if(nombreSec.equals("Patrocinadores")){
+                    dbHandler = new AdminSQLiteOffline(getActivity(), null, null, 1);
+                    SQLiteDatabase db = dbHandler.getWritableDatabase();
+                    cursor = dbHandler.jsonPatroAlfa();
+                }
+            }else if (tipoOrden.equals("nume")){
+                if(nombreSec.equals("Expositores")) {
+                    dbHandler = new AdminSQLiteOffline(getActivity(), null, null, 1);
+                    SQLiteDatabase db = dbHandler.getWritableDatabase();
+                    cursor = dbHandler.jsonNume();
+                } else if(nombreSec.equals("Patrocinadores")){
+                    dbHandler = new AdminSQLiteOffline(getActivity(), null, null, 1);
+                    SQLiteDatabase db = dbHandler.getWritableDatabase();
+                    cursor = dbHandler.jsonPatroNume();
+                }
+            }
+
+            String respuesta = cursor.getString(0);
+
             Log.d("LoginRes : ", "> " + respuesta);
             if (respuesta != "error") {
                 try {
                     JSONObject json = new JSONObject(respuesta);
-                    String expositor = json.getString("expositor");
+                    String exposi = "";
+                    if(nombreSec.equals("Expositores")){
+                        exposi = json.getString("expositores");
+                    } else if(nombreSec.equals("Patrocinadores")){
+                        exposi = json.getString("patrocinadores");
+                    }
 
-                    JSONObject jsonExpo = new JSONObject(expositor);
+
+                    JSONArray jsonExpositores = new JSONArray(exposi);
+
+                    int cuanto = jsonExpositores.length();
+
+
+
+                    JSONObject jsonExpo = jsonExpositores.getJSONObject(posJson);
+
+
+
+
+
+                    ////////////////////////////////////////////
 
 
                     strNomEmpre = jsonExpo.getString("nombre");
@@ -230,10 +281,19 @@ public class DetalleExpoFragment extends Fragment {
                     strCorreo = jsonExpo.getString("email");
                     strAcercaDe = jsonExpo.getString("acerca");
                     strStand = jsonExpo.getString("stand");
+
+                    dbHandler = new AdminSQLiteOffline(getActivity(), null, null, 1);
+                    SQLiteDatabase db = dbHandler.getWritableDatabase();
+                    cursor = dbHandler.ImagenPorId(expoId);
+                    if(cursor.getCount()>0) {
+                        imagen = getImage(cursor.getString(0));
+                    }
+                    /*
                     String urlImageJson = jsonExpo.getString("logo");
                     JSONObject jsonImagen = new JSONObject(urlImageJson);
                     urlImage = jsonImagen.getString("url");
-                    mostrarImagen(urlImage);
+                    mostrarImagen(urlImage);*/
+
                     String urlPreseJson = jsonExpo.getString("pdf");
                     JSONObject jsonPrese = new JSONObject(urlPreseJson);
                     urlPresenta = jsonPrese.getString("url");
@@ -272,6 +332,7 @@ public class DetalleExpoFragment extends Fragment {
                         txtTelefono.setText(strTelefono);
                         txtCorreo.setText(strCorreo);
                         txtAcercaDe.setText(strAcercaDe);
+                        imgFoto.setImageBitmap(imagen);
                     }
 
 

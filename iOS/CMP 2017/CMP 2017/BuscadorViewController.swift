@@ -31,8 +31,8 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
     var filteredProvisional:[String] = []
     var filteredID:[Int] = []
     
-    var imgs = [Data]()
-    var imgAmostrar = Data()
+    var imgs = [Any?]()
+    var imgAmostrar: Any?
     
     var seccion = 2
     var alphabet = true
@@ -93,13 +93,13 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
             
             if self.seccion == 5 { // patrocinadores
                 self.datos = CoreDataHelper.fetchData(entityName: "Patrocinadores", keyName: "patrocinador")!
-                self.imgs = CoreDataHelper.fetchItem(entityName: "Patrocinadores", keyName: "imgPatrocinador") as! [Data]
+                self.imgs = CoreDataHelper.fetchItem(entityName: "Patrocinadores", keyName: "imgPatrocinador")!
                 self.expositores = self.datos.sorted(by: { (a,b) in (a["nombre"] as! String) < (b["nombre"] as! String) })
                 
                 
             } else {
                 self.datos = CoreDataHelper.fetchData(entityName: "Expositores", keyName: "expositor")!
-                self.imgs = CoreDataHelper.fetchItem(entityName: "Expositores", keyName: "imgExpositor") as! [Data]
+                self.imgs = CoreDataHelper.fetchItem(entityName: "Expositores", keyName: "imgExpositor")!
                 self.expositores = self.datos.sorted(by: { (a,b) in (a["nombre"] as! String) < (b["nombre"] as! String) })
             }
             
@@ -137,12 +137,12 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
             
             if self.seccion == 5 { // patrocinadores
                 self.datos = CoreDataHelper.fetchData(entityName: "Patrocinadores", keyName: "patrocinador")!
-                self.imgs = CoreDataHelper.fetchItem(entityName: "Patrocinadores", keyName: "imgPatrocinador") as! [Data]
+                self.imgs = CoreDataHelper.fetchItem(entityName: "Patrocinadores", keyName: "imgPatrocinador")!
                 self.expositores = self.datos.sorted(by: { (a,b) in (a["stand"] as! String) < (b["stand"] as! String) })
                 
             } else {
                 self.datos = CoreDataHelper.fetchData(entityName: "Expositores", keyName: "expositor")!
-                self.imgs = CoreDataHelper.fetchItem(entityName: "Expositores", keyName: "imgExpositor") as! [Data]
+                self.imgs = CoreDataHelper.fetchItem(entityName: "Expositores", keyName: "imgExpositor")!
                 self.expositores = self.datos.sorted(by: { (a,b) in (a["stand"] as! String) < (b["stand"] as! String) })
             }
             

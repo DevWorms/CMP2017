@@ -22,8 +22,10 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
     var diaPrograma = ""
     var tipoPrograma = ""
     
+    var datosGlobal = [[String : Any]]()
+    
     var datos = [[String : Any]]()
-    var imgs = [Data]()
+    var imgs = [Any?]()
     var fechas = [String]()
     var datoXfecha = [[], [], [], [], []]
     var idXdato = [[], [], [], [], []]
@@ -32,41 +34,69 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
     var idDato = [[Int]]()
     
     var datoAmostrar = [String : Any]()
-    var imgAmostrar = Data()
+    var imgAmostrar: Any?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "fondo.png")!)
         
-        let apiKey = UserDefaults.standard.value(forKey: "api_key")
-        let userID = UserDefaults.standard.value(forKey: "user_id")
-        
         if Accesibilidad.isConnectedToNetwork() == true {
         
             switch self.seccion {
             case 1:
-                let parameterString = "user_id=\(userID!)&api_key=\(apiKey!)&categoria_id=\(tipoPrograma)&fecha=\(diaPrograma)"
                 
-                print(parameterString)
+                self.datosGlobal = CoreDataHelper.fetchData(entityName: "Programas", keyName: "programa")!
+                self.imgs = CoreDataHelper.fetchItem(entityName: "Programas", keyName: "imgPrograma")!
                 
-                let strUrl = "http://cmp.devworms.com/api/programa/search"
-                
-                if let httpBody = parameterString.data(using: String.Encoding.utf8) {
-                    var urlRequest = URLRequest(url: URL(string: strUrl)!)
-                    urlRequest.httpMethod = "POST"
+                if diaPrograma == "" && tipoPrograma == "" { //  Todos
+                    self.datos = self.datosGlobal
                     
-                    URLSession.shared.uploadTask(with: urlRequest, from: httpBody, completionHandler: parseJson).resume()
-                } else {
-                    print("Error de codificación de caracteres.")
+                    
+                } else { // busqueda
+                    
+                    if diaPrograma != "" && tipoPrograma != "" { // por dia y tipo
+                        for item in self.datosGlobal {
+                            if item["fecha"] as! String == diaPrograma {
+                                if let a = item["categoria"] as? [String:Any] {
+                                    if a["id"] as! Int == Int(tipoPrograma)! {
+                                        self.datos.append(item)
+                                    }
+                                    
+                                }
+                            }
+                        }
+                        
+                    } else if diaPrograma != "" && tipoPrograma == "" { // por dia
+                        for item in self.datosGlobal {
+                            if item["fecha"] as! String == diaPrograma {
+                                self.datos.append(item)
+                            }
+                        }
+                        
+                    } else if diaPrograma == "" && tipoPrograma != "" { // por tipo
+                        for item in self.datosGlobal {
+                            if let a = item["categoria"] as? [String:Any] {
+                                if a["id"] as! Int == Int(tipoPrograma)! {
+                                    self.datos.append(item)
+                                }
+                                
+                            }
+                        }
+
+                    }
                 }
+                
+                
             case 3:
+                self.datosGlobal = CoreDataHelper.fetchData(entityName: "Acompanantes", keyName: "acompanante")!
                 self.datos = CoreDataHelper.fetchData(entityName: "Acompanantes", keyName: "acompanante")!
-                self.imgs = CoreDataHelper.fetchItem(entityName: "Acompanantes", keyName: "imgAcompanante") as! [Data]
+                self.imgs = CoreDataHelper.fetchItem(entityName: "Acompanantes", keyName: "imgAcompanante")!
                 
             case 4:
+                self.datosGlobal = CoreDataHelper.fetchData(entityName: "Deportivos", keyName: "evento")!
                 self.datos = CoreDataHelper.fetchData(entityName: "Deportivos", keyName: "evento")!
-                self.imgs = CoreDataHelper.fetchItem(entityName: "Deportivos", keyName: "imgDeportivo") as! [Data]
+                self.imgs = CoreDataHelper.fetchItem(entityName: "Deportivos", keyName: "imgDeportivo")!
                 
             default: break
             }
@@ -128,104 +158,6 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
                                              handler: nil))
             self.present(vc_alert, animated: true, completion: nil)
         }
-    }
-    
-    func parseJson(data: Data?, urlResponse: URLResponse?, error: Error?) {
-        if error != nil {
-            print(error!)
-        } else if urlResponse != nil {
-            if (urlResponse as! HTTPURLResponse).statusCode == 200 {
-                if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
-                    //print(json)
-                    
-                    DispatchQueue.main.async {
-                        
-                        if self.datos.count > 0 {
-                            self.datos.removeAll()
-                        }
-                        
-                        if let jsonResult = json as? [String: Any] {
-                            
-                            for dato in jsonResult["programas"] as! [[String:Any]] {
-                                    self.datos.append(dato)
-                            }
-                            
-                            //para titulos
-                            for date in self.datos {
-                                if self.fechas.contains(date["fecha"] as! String) {
-                                    
-                                } else {
-                                    self.fechas.append(date["fecha"] as! String)
-                                }
-                                
-                                if date["fecha"] as! String == "2017-06-05" {
-                                    self.datoXfecha[0].append(date["nombre"] as! String)
-                                    self.idXdato[0].append(date["id"] as! Int)
-                                }else if date["fecha"] as! String == "2017-06-06" {
-                                    self.datoXfecha[1].append(date["nombre"] as! String)
-                                    self.idXdato[1].append(date["id"] as! Int)
-                                }else if date["fecha"] as! String == "2017-06-07" {
-                                    self.datoXfecha[2].append(date["nombre"] as! String)
-                                    self.idXdato[2].append(date["id"] as! Int)
-                                }else if date["fecha"] as! String == "2017-06-08" {
-                                    self.datoXfecha[3].append(date["nombre"] as! String)
-                                    self.idXdato[3].append(date["id"] as! Int)
-                                }else if date["fecha"] as! String == "2017-06-09" {
-                                    self.datoXfecha[4].append(date["nombre"] as! String)
-                                    self.idXdato[4].append(date["id"] as! Int)
-                                }
-                            }
-                            
-                            // agregar los datos que no estan vacios
-                            if self.datoXfecha[0].count != 0 {
-                                self.datoFecha.append(self.datoXfecha[0] as! [String])
-                                self.idDato.append(self.idXdato[0] as! [Int])
-                            }
-                            if self.datoXfecha[1].count != 0 {
-                                self.datoFecha.append(self.datoXfecha[1] as! [String])
-                                self.idDato.append(self.idXdato[1] as! [Int])
-                            }
-                            if self.datoXfecha[2].count != 0 {
-                                self.datoFecha.append(self.datoXfecha[2] as! [String])
-                                self.idDato.append(self.idXdato[2] as! [Int])
-                            }
-                            if self.datoXfecha[3].count != 0 {
-                                self.datoFecha.append(self.datoXfecha[3] as! [String])
-                                self.idDato.append(self.idXdato[3] as! [Int])
-                            }
-                            if self.datoXfecha[4].count != 0 {
-                                self.datoFecha.append(self.datoXfecha[4] as! [String])
-                                self.idDato.append(self.idXdato[4] as! [Int])
-                            }
-                            
-                        }
-                        
-                        self.tableView.reloadData()
-                    }
-                    
-                } else {
-                    print("HTTP Status Code: 200")
-                    print("El JSON de respuesta es inválido.")
-                }
-            } else {
-                
-                DispatchQueue.main.async {
-                    if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
-                        if let jsonResult = json as? [String: Any] {
-                            let vc_alert = UIAlertController(title: nil, message: jsonResult["mensaje"] as? String, preferredStyle: .alert)
-                            vc_alert.addAction(UIAlertAction(title: "OK", style: .cancel , handler: nil))
-                            self.present(vc_alert, animated: true, completion: nil)
-                        }
-                        
-                        
-                    } else {
-                        print("HTTP Status Code: 400 o 500")
-                        print("El JSON de respuesta es inválido.")
-                    }
-                }
-            }
-        }
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -294,7 +226,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
         
         switch self.seccion {
         case 1,3,4:
-            for (index, dato) in self.datos.enumerated() {
+            for (index, dato) in self.datosGlobal.enumerated() {
                 if dato["id"] as! Int == idDato[indexPath.section][indexPath.row] {
                     self.datoAmostrar = dato
                     

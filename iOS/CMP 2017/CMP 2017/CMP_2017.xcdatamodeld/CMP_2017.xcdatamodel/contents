@@ -20,6 +20,10 @@
         <attribute name="imgPatrocinador" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="patrocinador" optional="YES" attributeType="Transformable" syncable="YES"/>
     </entity>
+    <entity name="Programas" representedClassName="Programas" syncable="YES" codeGenerationType="class">
+        <attribute name="imgPrograma" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="programa" optional="YES" attributeType="Transformable" syncable="YES"/>
+    </entity>
     <entity name="Rutas" representedClassName="Rutas" syncable="YES" codeGenerationType="class">
         <attribute name="ruta" optional="YES" attributeType="Transformable" syncable="YES"/>
     </entity>
@@ -28,12 +32,13 @@
         <attribute name="sitio" optional="YES" attributeType="Transformable" syncable="YES"/>
     </entity>
     <elements>
+        <element name="Acompanantes" positionX="-36" positionY="27" width="128" height="30"/>
         <element name="Banners" positionX="-63" positionY="-18" width="128" height="73"/>
+        <element name="Deportivos" positionX="-18" positionY="45" width="128" height="30"/>
+        <element name="Expositores" positionX="18" positionY="63" width="128" height="30"/>
+        <element name="Patrocinadores" positionX="0" positionY="54" width="128" height="30"/>
         <element name="Rutas" positionX="-54" positionY="18" width="128" height="60"/>
         <element name="Sitios" positionX="-63" positionY="0" width="128" height="75"/>
-        <element name="Acompanantes" positionX="-36" positionY="27" width="128" height="30"/>
-        <element name="Deportivos" positionX="-18" positionY="45" width="128" height="30"/>
-        <element name="Patrocinadores" positionX="0" positionY="54" width="128" height="30"/>
-        <element name="Expositores" positionX="18" positionY="63" width="128" height="30"/>
+        <element name="Programas" positionX="36" positionY="72" width="128" height="75"/>
     </elements>
 </model>

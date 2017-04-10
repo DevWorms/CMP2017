@@ -31,45 +31,42 @@ class DetalleViewController: UIViewController {
     // 5 patrocinadores
     var seccion = 0
     var detalle = [String: Any]()
-    var imgData = Data()
+    var imgData: Any?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "fondo.png")!)
         
+        if let img = self.imgData as? Data {
+            self.foto.image = UIImage(data: img)
+        }
+        
+        self.titulo.text = detalle["nombre"] as! String?
+        
         switch self.seccion {
         case 1,3,4:
             btn3.isHidden = true
             
-            self.titulo.text = detalle["nombre"] as! String?
             self.lugar.text = detalle["lugar"] as! String?
             self.recomendaciones.text = detalle["recomendaciones"] as! String?
-            
-            self.foto.image = UIImage(data: self.imgData)
             
         case 2:
             btn2.imageView?.image = #imageLiteral(resourceName: "04Agregar_a_mis_expositores")
             
-            self.titulo.text = detalle["nombre"] as! String?
             self.lbl2.text = "Contacto"
             self.lugar.text = (detalle["url"] as! String) + "\n" + (detalle["telefono"] as! String) + "\n" + (detalle["email"] as! String)
             self.lbl3.text = "Acerca de:"
             self.recomendaciones.text = detalle["acerca"] as! String?
-            
-            self.foto.image = UIImage(data: imgData)
             
         case 5:
             btn2.imageView?.image = #imageLiteral(resourceName: "05Boton_Presentacion_de_la_empresa")
             btn3.isHidden = true
             
-            self.titulo.text = detalle["nombre"] as! String?
             self.lbl2.text = "Contacto"
             self.lugar.text = (detalle["url"] as! String) + "\n" + (detalle["telefono"] as! String) + "\n" + (detalle["email"] as! String)
             self.lbl3.text = "Acerca de:"
             self.recomendaciones.text = detalle["acerca"] as! String?
-            
-            self.foto.image = UIImage(data: imgData)
 
         default:
             break

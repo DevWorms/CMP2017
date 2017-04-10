@@ -38,14 +38,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ExpositoresFrgament extends Fragment {
-    String userId, apiKey,resp, nombre,miExpo;
+    String userId, apiKey,resp, nombre,miExpo, tipoOrden;
     ProgressDialog pDialog;
     ArrayList<HashMap<String, String>> albumsList;
     ListView lista;
     AutoCompleteTextView acTextView;
     ConnectionDetector cd;
     TextView txtTitulo;
-
+    Cursor cursor;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_expo, container, false);
@@ -66,18 +66,14 @@ public class ExpositoresFrgament extends Fragment {
            txtTitulo= (TextView) view.findViewById(R.id.txtDescrip);
            txtTitulo.setText(nombre);
            lista=  (ListView) view.findViewById(R.id.lvExpo);
-           if (!cd.isConnectingToInternet()) {
-               // Internet Connection is not present
-               Toast.makeText(getActivity(), "Se necesita internet", Toast.LENGTH_SHORT).show();
-               // stop executing code by return
 
-           }else{
                if(miExpo.equals("Si")){
-
+                   tipoOrden = "alfa";
                }else {
+                   tipoOrden = "alfa";
                    new getListaAlfabetica().execute();
                }
-           }
+
            cd = new ConnectionDetector(getActivity());
            Button btnAlfabetico = (Button)view.findViewById(R.id.btnOrdAlf);
            btnAlfabetico.setOnClickListener(new Alfabetico());
@@ -87,7 +83,7 @@ public class ExpositoresFrgament extends Fragment {
 
            acTextView = (AutoCompleteTextView) view.findViewById(R.id.autoCompleteEcpo);
 
-        if (miExpo.equals("Si")){
+        if (miExpo.equals("Si")){ ////////////// Sección Mis Expositores
             AdminSQLiteOpenHelper dbHandler;
             dbHandler = new AdminSQLiteOpenHelper(getActivity(), null, null, 2);
             SQLiteDatabase db = dbHandler.getWritableDatabase();
@@ -120,7 +116,8 @@ public class ExpositoresFrgament extends Fragment {
                     parametro.putString("expoId", expoId);
                     parametro.putString("miExpositores", "si");
                     parametro.putString("nombre", nombre);
-
+                    parametro.putString("tipooreden", tipoOrden);
+                    parametro.putInt("posicion",position);
                     fragment.setArguments(parametro);
 
                     final FragmentTransaction ft = getFragmentManager()
@@ -181,6 +178,8 @@ public class ExpositoresFrgament extends Fragment {
                             parametro.putString("expoId", expoId);
                             parametro.putString("miExpositores", "si");
                             parametro.putString("nombre", nombre);
+                            parametro.putString("tipooreden", tipoOrden);
+                            parametro.putInt("posicion",position);
 
                             fragment.setArguments(parametro);
 
@@ -198,7 +197,7 @@ public class ExpositoresFrgament extends Fragment {
                 }
             });
 
-        }else {
+        }else { ////////////// Sección Expositores y Patrocinadores
 
             acTextView.addTextChangedListener(new TextWatcher() {
 
@@ -230,14 +229,7 @@ public class ExpositoresFrgament extends Fragment {
                 @Override
                 public void onItemClick(AdapterView<?> arg0, View view, int arg2,
                                         long arg3) {
-                    // on selecting a single album
-                    // TrackListActivity will be launched to show tracks inside the album
-                    if (!cd.isConnectingToInternet()) {
-                        // Internet Connection is not present
-                        Toast.makeText(getActivity(), "Se necesita internet", Toast.LENGTH_SHORT).show();
-                        // stop executing code by return
-                        return;
-                    }
+
                     String expoId = ((TextView) view.findViewById(R.id.txtid)).getText().toString();
                     Fragment fragment = new DetalleExpoFragment();
 
@@ -247,6 +239,9 @@ public class ExpositoresFrgament extends Fragment {
                     parametro.putString("expoId", expoId);
                     parametro.putString("miExpositores", "No");
                     parametro.putString("nombre", nombre);
+                    parametro.putString("tipooreden", tipoOrden);
+                    parametro.putInt("posicion",arg2);
+
                     fragment.setArguments(parametro);
 
                     final FragmentTransaction ft = getFragmentManager()
@@ -269,6 +264,7 @@ public class ExpositoresFrgament extends Fragment {
 
     class Alfabetico implements View.OnClickListener {
         public void onClick(View v) {
+            tipoOrden = "alfa";
             if (miExpo.equals("Si")){
 
                 AdminSQLiteOpenHelper dbHandler;
@@ -334,7 +330,7 @@ public class ExpositoresFrgament extends Fragment {
 
     class Numerico implements View.OnClickListener {
         public void onClick(View v) {
-
+            tipoOrden = "nume";
             if (miExpo.equals("Si")){
 
                 AdminSQLiteOpenHelper dbHandler;
@@ -420,7 +416,20 @@ public class ExpositoresFrgament extends Fragment {
         protected String doInBackground(String... args) {
             // Building Parameters
             //add your data
-            String body= "";
+
+
+            AdminSQLiteOffline dbHandler;
+            if(nombre.equals("Expositores")) {
+                dbHandler = new AdminSQLiteOffline(getActivity(), null, null, 1);
+                SQLiteDatabase db = dbHandler.getWritableDatabase();
+                cursor = dbHandler.jsonAlfa();
+            } else if(nombre.equals("Patrocinadores")){
+                dbHandler = new AdminSQLiteOffline(getActivity(), null, null, 1);
+                SQLiteDatabase db = dbHandler.getWritableDatabase();
+                cursor = dbHandler.jsonPatroAlfa();
+            }
+            String respuesta = cursor.getString(0);
+           /* String body= ""; ///con internet
 
             if(nombre.equals("Expositores")){
                 body = "http://cmp.devworms.com/api/expositor/order/name/"+userId+"/"+apiKey+"";
@@ -433,7 +442,8 @@ public class ExpositoresFrgament extends Fragment {
 
 
 
-            String respuesta= jsp.makeHttpRequest(body,"GET",body,"");
+            String respuesta= jsp.makeHttpRequest(body,"GET",body,""); */
+
             Log.d("LoginRes : ", "> " + respuesta);
             if (respuesta != "error") {
                 try {
@@ -657,7 +667,18 @@ public class ExpositoresFrgament extends Fragment {
         protected String doInBackground(String... args) {
             // Building Parameters
             //add your data
-            String body= "";
+
+            AdminSQLiteOffline dbHandler;
+            if(nombre.equals("Expositores")) {
+                dbHandler = new AdminSQLiteOffline(getActivity(), null, null, 1);
+                SQLiteDatabase db = dbHandler.getWritableDatabase();
+                cursor = dbHandler.jsonNume();
+            } else if(nombre.equals("Patrocinadores")){
+                dbHandler = new AdminSQLiteOffline(getActivity(), null, null, 1);
+                SQLiteDatabase db = dbHandler.getWritableDatabase();
+                cursor = dbHandler.jsonPatroNume();
+            }
+            /*String body= "";
 
             if(nombre.equals("Expositores")){
                 body = "http://cmp.devworms.com/api/expositor/order/stand/"+userId+"/"+apiKey+"";
@@ -670,7 +691,8 @@ public class ExpositoresFrgament extends Fragment {
 
 
 
-            String respuesta= jsp.makeHttpRequest(body,"GET",body,"");
+            String respuesta= jsp.makeHttpRequest(body,"GET",body,"");*/
+            String respuesta = cursor.getString(0);
             Log.d("LoginRes : ", "> " + respuesta);
             if (respuesta != "error") {
                 try {

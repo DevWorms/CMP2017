@@ -168,3 +168,14 @@ $app->post('/api/banners/create', ['middleware' => 'cors', 'uses' => 'BannerCont
 $app->post('/api/banners/update', ['middleware' => 'cors', 'uses' => 'BannerController@update']);
 $app->get('/api/banners/delete/{user_id}/{api_key}/{banner_id}', ['middleware' => 'cors', 'uses' => 'BannerController@delete']);
 $app->get('/api/banners/paginate/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'BannerController@paginate']);
+
+/*
+ * Encuestas
+ */
+$app->post('/api/encuesta/create', ['middleware' => 'cors', 'uses' => 'EncuestasController@create']);
+$app->post('/api/encuesta/update', ['middleware' => 'cors', 'uses' => 'EncuestasController@update']);
+$app->post('/api/encuesta/response', ['middleware' => 'cors', 'uses' => 'EncuestasController@response']);
+$app->get('/api/encuesta/all/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'EncuestasController@getAll']);
+$app->get('/api/encuesta/detail/{user_id}/{api_key}/{encuesta_id}', ['middleware' => 'cors', 'uses' => 'EncuestasController@getEncuesta']);
+$app->get('/api/encuesta/delete/{user_id}/{api_key}/{encuesta_id}', ['middleware' => 'cors', 'uses' => 'EncuestasController@delete']);
+$app->get('/api/encuesta/paginate/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'EncuestasController@paginate']);

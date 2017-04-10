@@ -71,6 +71,7 @@ class ServerConnection {
         CoreDataHelper.deleteEntity(entityName: "Deportivos")
         CoreDataHelper.deleteEntity(entityName: "Patrocinadores")
         CoreDataHelper.deleteEntity(entityName: "Expositores")
+        CoreDataHelper.deleteEntity(entityName: "Programas")
         
         //Cargar BD
         self.getBanners()
@@ -80,6 +81,7 @@ class ServerConnection {
         self.getDeportivos()
         self.getPatrocinadores()
         //self.getExpositores()
+        self.getProgramas()
         
         //quita el alert
         self.mView.dismiss(animated: false, completion: nil)
@@ -594,7 +596,80 @@ class ServerConnection {
         
     }
 
+    // MARK: - Programas
     
+    private func getProgramas() {
+        if Accesibilidad.isConnectedToNetwork() == true {
+            
+            let strUrl = "http://cmp.devworms.com/api/programa/all/\(userID)/\(apiKey)"
+            print(strUrl)
+            
+            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJsonProgramas).resume()
+            
+        } else {
+            /*let vc_alert = UIAlertController(title: "Sin conexión a internet", message: "Asegúrate de estar conectado a internet.", preferredStyle: .alert)
+             vc_alert.addAction(UIAlertAction(title: "OK",
+             style: UIAlertActionStyle.default,
+             handler: nil))
+             context.present(vc_alert, animated: true, completion: nil)*/
+            
+        }
+    }
+    
+    private func parseJsonProgramas(data: Data?, urlResponse: URLResponse?, error: Error?) {
+        if error != nil {
+            print(error!)
+        } else if urlResponse != nil {
+            if (urlResponse as! HTTPURLResponse).statusCode == 200 {
+                if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                    //print(json)
+                    
+                    if let jsonResult = json as? [String: Any] {
+                        for (index, dato) in (jsonResult["programas"] as! [[String:Any]]).enumerated() {
+                            
+                            CoreDataHelper.saveData(data: dato, entityName: "Programas", keyName: "programa")
+                            
+                            DispatchQueue.global(qos: .userInitiated).async { // 1
+                                
+                                if let img = dato["foto"] as? [String: Any] {
+                                    
+                                    let dataImg = try? Data(contentsOf: URL(string: img["url"] as! String)!)
+                                    
+                                    DispatchQueue.main.async { // 2
+                                        
+                                        CoreDataHelper.updateData(index: index, data: dataImg!, entityName: "Programas", keyName: "imgPrograma")
+                                        
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                } else {
+                    print("HTTP Status Code: 200")
+                    print("El JSON de respuesta es inválido.")
+                }
+            } else {
+                
+                DispatchQueue.main.async {
+                    if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                        if let jsonResult = json as? [String: Any] {
+                            /*let vc_alert = UIAlertController(title: nil, message: jsonResult["mensaje"] as? String, preferredStyle: .alert)
+                             vc_alert.addAction(UIAlertAction(title: "OK", style: .cancel , handler: nil))
+                             self.present(vc_alert, animated: true, completion: nil)*/
+                            print("Error json: \(jsonResult["mensaje"])")
+                        }
+                        
+                        
+                    } else {
+                        print("HTTP Status Code: 400 o 500")
+                        print("El JSON de respuesta es inválido.")
+                    }
+                }
+            }
+        }
+        
+    }
     
     
     

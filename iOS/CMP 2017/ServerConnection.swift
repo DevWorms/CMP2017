@@ -13,8 +13,8 @@ import UIKit
 //let apiKey = UserDefaults.standard.value(forKey: "api_key")!
 //let userID = UserDefaults.standard.value(forKey: "user_id")!
 
-let apiKey = 0
-let userID = 1
+private let  apiKey = 0
+private let userID = 1
 
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 let managedContext = appDelegate.managedObjectContext

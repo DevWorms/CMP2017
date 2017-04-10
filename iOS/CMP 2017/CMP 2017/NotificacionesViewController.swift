@@ -13,6 +13,7 @@ class NotificacionesViewController: UIViewController, UITableViewDataSource, UIT
     @IBOutlet weak var tableView: UITableView!
     
     var datos = [[String : Any]]()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,13 +114,70 @@ class NotificacionesViewController: UIViewController, UITableViewDataSource, UIT
         
         cell.titulo.text = datos[indexPath.row]["notificacion"] as! String?
         
-        if (datos[indexPath.row]["leido"] as! String) == "1" {
+        if (datos[indexPath.row]["leido"] as! String) == "0" {
             cell.img.image = #imageLiteral(resourceName: "04mensaje")
         } else {
             cell.img.image = #imageLiteral(resourceName: "05mensaje_recibido")
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+ 
+        
+        let apiKey = UserDefaults.standard.value(forKey: "api_key")
+        let userID = UserDefaults.standard.value(forKey: "user_id")
+        let idNotification = datos[indexPath.row]["id"]
+
+        let strUrlN = "http://cmp.devworms.com/api/notificacion/markasread/\(userID!)/\(apiKey!)/\(idNotification!)"
+
+     
+        URLSession.shared.dataTask(with: URL(string: strUrlN)!, completionHandler: parseJsonNotificacionLeida).resume()
+  
+    }
+    
+    func parseJsonNotificacionLeida(data: Data?, urlResponse: URLResponse?, error: Error?) {
+        if error != nil {
+            print(error!)
+        } else if urlResponse != nil {
+            if (urlResponse as! HTTPURLResponse).statusCode == 200 {
+                if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                    //print(json)
+                        let apiKey = UserDefaults.standard.value(forKey: "api_key")!
+                        let userID = UserDefaults.standard.value(forKey: "user_id")
+                        
+                        let strUrl = "http://cmp.devworms.com/api/notificacion/all/\(userID!)/\(apiKey)"
+                        
+                        print(strUrl)
+                       
+                        URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: self.parseJson).resume()
+        
+                    
+                
+                    
+                } else {
+                    print("HTTP Status Code: 200")
+                    print("El JSON de respuesta es inválido.")
+                }
+            } else {
+                
+                DispatchQueue.main.async {
+                    if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                        if let jsonResult = json as? [String: Any] {
+                            let vc_alert = UIAlertController(title: nil, message: jsonResult["mensaje"] as? String, preferredStyle: .alert)
+                            vc_alert.addAction(UIAlertAction(title: "OK", style: .cancel , handler: nil))
+                            self.present(vc_alert, animated: true, completion: nil)
+                        }
+                        
+                        
+                    } else {
+                        print("HTTP Status Code: 400 o 500")
+                        print("El JSON de respuesta es inválido.")
+                    }
+                }
+            }
+        }
     }
 
     /*

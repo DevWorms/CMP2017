@@ -63,7 +63,7 @@
             <!-- Sidebar -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li class="active">
+                    <li>
                         <a href="programa.php">Programa</a>
                     </li>
                     <li>
@@ -93,6 +93,9 @@
                     <li>
                         <a href="encuestas.php">Encuestas</a>
                     </li>
+                    <li class="active">
+                        <a href="categorias.php">Categorías</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -102,6 +105,7 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div id="error"></div>
+                <input type="hidden" id="id" value="">
                 <div class="row page-header__2">
                     <div class="col-md-6 col-md-offset-1">
                         <form method="POST" enctype="multipart/form-data" id="crearBanner" name="crearBanner">

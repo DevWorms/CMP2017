@@ -2,22 +2,22 @@
  * Created by rk521 on 18.03.17.
  */
 
-var init_url = encodeURIComponent(API_URL + 'categoria/paginate/' + user_id + '/' + api_key);
+var init_url = encodeURIComponent(API_URL + 'encuesta/paginate/' + user_id + '/' + api_key);
 
 $('document').ready(function() {
 
     if (isUpdate()) {
-        $("#guardar").html('<i class="fa fa-plus-circle"></i> &nbsp; Actualizar categoría');
+        $("#btn_crearEvento").html('<i class="fa fa-plus-circle"></i> &nbsp; Actualizar encuesta');
         if (window.location.hash !== '') {
             hash_num = parseInt(window.location.hash.substring(4));
-            $("#crearBanner input, textarea, button").prop("disabled", true);
+            $("#crearEvento input, textarea, button").prop("disabled", true);
             if (hash_num > 0) {
                 getElement(hash_num);
             }
         }
     }
 
-    $("form#crearBanner").submit(function() {
+    $("form#crearEvento").submit(function() {
         $("#error").fadeIn(1000, function() {
             $("#error").html("");
         });
@@ -26,10 +26,10 @@ $('document').ready(function() {
         formData.append('user_id', user_id);
         formData.append('api_key', api_key);
 
-        var url = API_URL + 'categoria/create';
+        var url = API_URL + 'encuesta/create';
         if (isUpdate()) {
-            formData.append('id', $("#id").val());
-            url = API_URL + 'categoria/update';
+            formData.append('encuesta_id', $("#id").val());
+            url = API_URL + 'encuesta/update';
         }
 
         $.ajax({
@@ -41,7 +41,9 @@ $('document').ready(function() {
                     $("#error").html('<div class="alert alert-success"> &nbsp; ' + data.mensaje + '</div>');
                 });
 
-                $('#crearBanner')[0].reset();
+                $('#crearEvento')[0].reset();
+                $("#file_sm").html("");
+                $("#file_xl").html("");
             },
             cache: false,
             contentType: false,
@@ -67,7 +69,7 @@ function loadExpostitores(url) {
                 for (var i = table.rows.length - 1; i > 0; i--) {
                     table.deleteRow(i);
                 }
-                var data = response.categorias;
+                var data = response.encuestas;
 
                 $('#page-counter').html("<p>" + data.current_page + " de " + data.last_page + "</p>");
                 $('#pagination').html("");
@@ -81,7 +83,7 @@ function loadExpostitores(url) {
 
                 data.data.forEach(function (expositor) {
                     $('#tbl_eventos tr:last').after('<tr>' +
-                        '<td>' + expositor.nombre + '</td>' +
+                        '<td><img src="' + expositor.filesm.url + '" width="10%"></td>' +
                         '<td align="center"><a href="#" onclick="openEdit(' + expositor.id + ')" class="btn btn-primary">Editar</a></td>' +
                         '<td align="center"><a href="#" onclick="deletePrograma(' + expositor.id + ')" class="btn btn-danger">Eliminar</a></td>' +
                         '</tr>');
@@ -105,7 +107,7 @@ function showAll() {
 
     $.ajax({
         type : 'GET',
-        url  : API_URL + 'categoria/all/' + user_id + '/' + api_key,
+        url  : API_URL + 'encuesta/all/' + user_id + '/' + api_key,
         success :  function(response) {
             if (response.status === 1) {
                 var table = document.getElementById("tbl_eventos");
@@ -117,9 +119,9 @@ function showAll() {
                 $('#pagination').html("");
                 $('#pagination').append('<li id="actual"><a href="#" onclick="loadExpostitores(init_url);">1</a></li>');
 
-                response.categorias.forEach(function (expositor) {
+                response.encuestas.forEach(function (expositor) {
                     $('#tbl_eventos tr:last').after('<tr>' +
-                        '<td>' + expositor.nombre + '</td>' +
+                        '<td><img src="' + expositor.filesm.url + '" width="10%"></td>' +
                         '<td align="center"><a href="#" onclick="openEdit(' + expositor.id + ')" class="btn btn-primary">Editar</a></td>' +
                         '<td align="center"><a href="#" onclick="deletePrograma(' + expositor.id + ')" class="btn btn-danger">Eliminar</a></td>' +
                         '</tr>');
@@ -136,17 +138,13 @@ function showAll() {
     });
 }
 
-function openEdit(id) {
-    window.location.href = "categoria-evento.php#id=" + id;
-}
-
 function deletePrograma(id) {
-    var r = window.confirm("¿Deseas eliminar la categoría?");
+    var r = window.confirm("¿Deseas eliminar la encuesta?");
 
     if (r === true) {
         $.ajax({
             type : 'GET',
-            url  : API_URL + 'categoria/delete/' + user_id + '/' + api_key + '/' + id,
+            url  : API_URL + 'encuesta/delete/' + user_id + '/' + api_key + '/' + id,
             success :  function(response) {
                 if (response.status === 1) {
                     $("#error").fadeIn(1000, function() {
@@ -182,23 +180,47 @@ function isUpdate() {
     }
 }
 
+function openEdit(id) {
+    window.location.href = "agregar-encuestas.php#id=" + id;
+}
+
 function getElement(id) {
     $.ajax({
         type : 'GET',
-        url  : API_URL + 'categoria/detail/' + user_id + '/' + api_key + '/' + id,
+        url  : API_URL + 'encuesta/detail/' + user_id + '/' + api_key + '/' + id,
         success :  function(response) {
             if (response.status === 1) {
-                var el = response.categoria;
+                var el = response.encuesta;
+
+                if (el.filesm.nombre) {
+                    $("label[for='archivo_sm']").text("Actualizar imágen");
+                    $("#file_sm").html("<br><a href='" + el.filesm.url + "' title='" + el.filesm.nombre + "' target='_blank'><img height='250px' src='" + el.filesm.url + "' title='" + el.filesm.nombre + "'></a>");
+                }
+
+                if (el.filexl.nombre) {
+                    $("label[for='archivo_xl']").text("Actualizar imágen");
+                    $("#file_xl").html("<br><img height='250px' src='" + el.filexl.url + "' title='" + el.filexl.nombre + "'>");
+                }
 
                 $("#id").val(el.id);
-                $("#nombre").val(el.nombre);
-                $("#crearBanner input, textarea, button").prop("disabled", false);
+
+                var preguntas = el.preguntas;
+
+                for (var i = 1; i < 4; i++) {
+                    $('#pregunta' + i).val(
+                        preguntas[i-1].pregunta
+                    );
+                }
+
+                $("#archivo_sm").removeAttr('required');
+                $("#archivo_xl").removeAttr('required');
+                $("#crearEvento input, textarea, button").prop("disabled", false);
             } else {
                 $("#error").fadeIn(1000, function() {
                     $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
                 });
 
-                $("#crearBanner input, textarea, button").prop("disabled", true);
+                $("#crearEvento input, textarea, button").prop("disabled", true);
             }
         },
         error : function (response) {
@@ -206,7 +228,7 @@ function getElement(id) {
             $("#error").fadeIn(1000, function() {
                 $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
             });
-            $("#crearBanner input, textarea, button").prop("disabled", true);
+            $("#crearEvento input, textarea, button").prop("disabled", true);
         }
     });
 }

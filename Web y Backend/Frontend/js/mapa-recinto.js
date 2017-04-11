@@ -13,13 +13,18 @@ $('document').ready(function() {
         formData.append('api_key', api_key);
 
         $.ajax({
-            url: API_URL + 'puebla/mapa/upload',
+            url: API_URL + 'mapa/recinto/create',
             type: 'POST',
             data: formData,
             success: function (data) {
                 $("#error").fadeIn(1000, function() {
                     $("#error").html('<div class="alert alert-success"> &nbsp; ' + data.mensaje + '</div>');
                 });
+
+                if (data.mapa.url) {
+                    $("label[for='archivo']").text("Actualizar mapa");
+                    $("#file_map").html("<a href='" + data.mapa.url + "' target='_blank'><img height='250px' src='" + data.mapa.url + "' title='" + data.mapa.nombre + "'></a>");
+                }
 
                 $('#crearEvento')[0].reset();
             },
@@ -37,12 +42,12 @@ $('document').ready(function() {
     });
 
     $.ajax({
-        url: API_URL + 'puebla/mapa/' + user_id + '/' + api_key,
+        url: API_URL + 'mapa/recinto/' + user_id + '/' + api_key,
         type: 'GET',
         success: function (data) {
-            if (data.status === 1) {
-                $("label[for='mapa']").text("Actualizar mapa");
-                $("#file_map").html("<a href='" + data.mapa.url + "' target='_blank'>" + data.mapa.nombre + "</a>");
+            if (data.mapa.url) {
+                $("label[for='archivo']").text("Actualizar mapa");
+                $("#file_map").html("<a href='" + data.mapa.url + "' target='_blank'><img height='250px' src='" + data.mapa.url + "' title='" + data.mapa.nombre + "' height='25%'></a>");
             }
         },
         error : function (response) {

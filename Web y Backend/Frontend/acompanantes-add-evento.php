@@ -93,6 +93,9 @@
                     <li>
                         <a href="encuestas.php">Encuestas</a>
                     </li>
+                    <li>
+                        <a href="categorias.php">Categorías</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

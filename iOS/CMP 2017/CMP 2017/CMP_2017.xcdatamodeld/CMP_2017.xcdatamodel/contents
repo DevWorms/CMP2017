@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16E195" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Acompanantes" representedClassName="Acompanantes" syncable="YES" codeGenerationType="class">
         <attribute name="acompanante" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="imgAcompanante" optional="YES" attributeType="Transformable" syncable="YES"/>
@@ -7,6 +7,9 @@
     <entity name="Banners" representedClassName="MisExpositoresMO" syncable="YES" codeGenerationType="class">
         <attribute name="banner" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="imgBanner" optional="YES" attributeType="Transformable" syncable="YES"/>
+    </entity>
+    <entity name="Categorias" representedClassName="Categorias" syncable="YES" codeGenerationType="class">
+        <attribute name="categoria" optional="YES" attributeType="Transformable" syncable="YES"/>
     </entity>
     <entity name="Deportivos" representedClassName="Deportivos" syncable="YES" codeGenerationType="class">
         <attribute name="evento" optional="YES" attributeType="Transformable" syncable="YES"/>
@@ -25,6 +28,7 @@
         <attribute name="programa" optional="YES" attributeType="Transformable" syncable="YES"/>
     </entity>
     <entity name="Rutas" representedClassName="Rutas" syncable="YES" codeGenerationType="class">
+        <attribute name="imgRuta" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="ruta" optional="YES" attributeType="Transformable" syncable="YES"/>
     </entity>
     <entity name="Sitios" representedClassName="Sitios" syncable="YES" codeGenerationType="class">
@@ -34,11 +38,12 @@
     <elements>
         <element name="Acompanantes" positionX="-36" positionY="27" width="128" height="30"/>
         <element name="Banners" positionX="-63" positionY="-18" width="128" height="73"/>
+        <element name="Categorias" positionX="-9" positionY="45" width="128" height="60"/>
         <element name="Deportivos" positionX="-18" positionY="45" width="128" height="30"/>
         <element name="Expositores" positionX="18" positionY="63" width="128" height="30"/>
         <element name="Patrocinadores" positionX="0" positionY="54" width="128" height="30"/>
-        <element name="Rutas" positionX="-54" positionY="18" width="128" height="60"/>
-        <element name="Sitios" positionX="-63" positionY="0" width="128" height="75"/>
         <element name="Programas" positionX="36" positionY="72" width="128" height="75"/>
+        <element name="Rutas" positionX="-54" positionY="18" width="128" height="75"/>
+        <element name="Sitios" positionX="-63" positionY="0" width="128" height="75"/>
     </elements>
 </model>

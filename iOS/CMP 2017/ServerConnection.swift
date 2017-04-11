@@ -13,7 +13,7 @@ import UIKit
 //let apiKey = UserDefaults.standard.value(forKey: "api_key")!
 //let userID = UserDefaults.standard.value(forKey: "user_id")!
 
-private let  apiKey = 0
+private let apiKey = 0
 private let userID = 1
 
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -72,6 +72,7 @@ class ServerConnection {
         CoreDataHelper.deleteEntity(entityName: "Patrocinadores")
         CoreDataHelper.deleteEntity(entityName: "Expositores")
         CoreDataHelper.deleteEntity(entityName: "Programas")
+        CoreDataHelper.deleteEntity(entityName: "Categorias")
         
         //Cargar BD
         self.getBanners()
@@ -82,6 +83,7 @@ class ServerConnection {
         self.getPatrocinadores()
         self.getExpositores()
         self.getProgramas()
+        self.getCategorias()
         
         //quita el alert
         self.mView.dismiss(animated: false, completion: nil)
@@ -263,9 +265,23 @@ class ServerConnection {
                     DispatchQueue.main.async {
                         
                         if let jsonResult = json as? [String: Any] {
-                            for dato in jsonResult["rutas"] as! [[String:Any]] {
+                            for (index, dato) in (jsonResult["rutas"] as! [[String:Any]]).enumerated() {
                                 
                                 CoreDataHelper.saveData(data: dato, entityName: "Rutas", keyName: "ruta")
+                                
+                                DispatchQueue.global(qos: .userInitiated).async { // 1
+                                    
+                                    if let img = dato["pdf"] as? [String: Any] {
+                                        
+                                        let dataImg = try? Data(contentsOf: URL(string: img["url"] as! String)!)
+                                        
+                                        DispatchQueue.main.async { // 2
+                                            
+                                            CoreDataHelper.updateData(index: index, data: dataImg!, entityName: "Rutas", keyName: "imgRuta")
+                                            
+                                        }
+                                    }
+                                }
                                 
                             }
                         }
@@ -671,7 +687,67 @@ class ServerConnection {
         
     }
     
+    // MARK: - Categorias
     
+    private func getCategorias() {
+        if Accesibilidad.isConnectedToNetwork() == true {
+            
+            let strUrl = "http://cmp.devworms.com/api/categoria/all/\(userID)/\(apiKey)"
+            print(strUrl)
+            
+            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJsonCategorias).resume()
+            
+        } else {
+            /*let vc_alert = UIAlertController(title: "Sin conexión a internet", message: "Asegúrate de estar conectado a internet.", preferredStyle: .alert)
+             vc_alert.addAction(UIAlertAction(title: "OK",
+             style: UIAlertActionStyle.default,
+             handler: nil))
+             context.present(vc_alert, animated: true, completion: nil)*/
+            
+        }
+    }
+    
+    private func parseJsonCategorias(data: Data?, urlResponse: URLResponse?, error: Error?) {
+        if error != nil {
+            print(error!)
+        } else if urlResponse != nil {
+            if (urlResponse as! HTTPURLResponse).statusCode == 200 {
+                if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                    //print(json)
+                    
+                    if let jsonResult = json as? [String: Any] {
+                        for dato in jsonResult["categorias"] as! [[String:Any]] {
+                            
+                            CoreDataHelper.saveData(data: dato, entityName: "Categorias", keyName: "categoria")
+                            
+                        }
+                    }
+                    
+                } else {
+                    print("HTTP Status Code: 200")
+                    print("El JSON de respuesta es inválido.")
+                }
+            } else {
+                
+                DispatchQueue.main.async {
+                    if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                        if let jsonResult = json as? [String: Any] {
+                            /*let vc_alert = UIAlertController(title: nil, message: jsonResult["mensaje"] as? String, preferredStyle: .alert)
+                             vc_alert.addAction(UIAlertAction(title: "OK", style: .cancel , handler: nil))
+                             self.present(vc_alert, animated: true, completion: nil)*/
+                            print("Error json: \(jsonResult["mensaje"])")
+                        }
+                        
+                        
+                    } else {
+                        print("HTTP Status Code: 400 o 500")
+                        print("El JSON de respuesta es inválido.")
+                    }
+                }
+            }
+        }
+        
+    }
     
     
     

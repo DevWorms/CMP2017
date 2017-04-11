@@ -13,7 +13,8 @@ class TransportacionViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var tableView: UITableView!
     
     var datos = [[String : Any]]()
-    var pdfEnviar = String()
+    var imgs = [Any?]()
+    var imgAmostrar: Any?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +23,7 @@ class TransportacionViewController: UIViewController, UITableViewDelegate, UITab
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "fondo.png")!)
         
         self.datos = CoreDataHelper.fetchData(entityName: "Rutas", keyName: "ruta")!
+        self.imgs = CoreDataHelper.fetchItem(entityName: "Rutas", keyName: "imgRuta")!
         
     }
     
@@ -55,8 +57,7 @@ class TransportacionViewController: UIViewController, UITableViewDelegate, UITab
     
     func buttonClicked(_ sender:UIButton) {
         
-        let json = datos[sender.tag]["pdf"] as! [String:Any]
-        self.pdfEnviar = json["url"] as! String
+        self.imgAmostrar = imgs[sender.tag]
         
         self.performSegue(withIdentifier: "ruta", sender: nil)
     }
@@ -69,7 +70,7 @@ class TransportacionViewController: UIViewController, UITableViewDelegate, UITab
         // Pass the selected object to the new view controller.
         if segue.identifier == "ruta" {
             (segue.destination as! MapaSimpleViewController).tipoMapa = 3
-            (segue.destination as! MapaSimpleViewController).pdfEnviado = self.pdfEnviar
+            (segue.destination as! MapaSimpleViewController).imgData = self.imgAmostrar
         }
     }
 

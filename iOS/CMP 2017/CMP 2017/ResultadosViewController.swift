@@ -27,8 +27,8 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
     var datos = [[String : Any]]()
     var imgs = [Any?]()
     var fechas = [String]()
-    var datoXfecha = [[], [], [], [], []]
-    var idXdato = [[], [], [], [], []]
+    var datoXfecha = [[], [], [], [], [], []]
+    var idXdato = [[], [], [], [], [], []]
     // variables finales sin basura
     var datoFecha = [[String]]()
     var idDato = [[Int]]()
@@ -124,6 +124,9 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
                 }else if date["fecha"] as! String == "2017-06-09" {
                     self.datoXfecha[4].append(date["nombre"] as! String)
                     self.idXdato[4].append(date["id"] as! Int)
+                }else if date["fecha"] as! String == "2017-06-10" {
+                    self.datoXfecha[5].append(date["nombre"] as! String)
+                    self.idXdato[5].append(date["id"] as! Int)
                 }
             }
             
@@ -147,6 +150,10 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
             if self.datoXfecha[4].count != 0 {
                 self.datoFecha.append(self.datoXfecha[4] as! [String])
                 self.idDato.append(self.idXdato[4] as! [Int])
+            }
+            if self.datoXfecha[5].count != 0 {
+                self.datoFecha.append(self.datoXfecha[5] as! [String])
+                self.idDato.append(self.idXdato[5] as! [Int])
             }
             
             //self.tableView.reloadData()
@@ -200,6 +207,8 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
                 diaMostrar = "Jueves 8 de Junio"
             case "2017-06-09":
                 diaMostrar = "Viernes 9 de Junio"
+            case "2017-06-10":
+                diaMostrar = "Sábado 10 de Junio"
             default:
                 diaMostrar = ""
             }

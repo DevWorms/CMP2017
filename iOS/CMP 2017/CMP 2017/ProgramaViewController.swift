@@ -13,10 +13,11 @@ class ProgramaViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     @IBOutlet weak var dia: UIPickerView!
     @IBOutlet weak var tipoEvento: UIPickerView!
     
-    var pickerTipo = ["Todos", "Sesiones Técnicas", "Comidas / Conferencias", "E-Póster", "Otros"]
-    var pickerDia = ["Todos", "Lunes 5 de Junio", "Martes 6 de Junio", "Miércoles 7 de Junio", "Jueves 8 de Junio", "Viernes 9 de Junio"]
+    var datos = [[String:Any]]()
+    var pickerTipo = ["Todos"]
+    var pickerDia = ["Todos", "Lunes 5 de Junio", "Martes 6 de Junio", "Miércoles 7 de Junio", "Jueves 8 de Junio", "Viernes 9 de Junio", "Sábado 10 de Junio"]
     
-    var selectedTipo = "Todos"
+    var selectedTipo = ""
     var selectedDia = "Todos"
     
     override func viewDidLoad() {
@@ -28,6 +29,12 @@ class ProgramaViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         tipoEvento.dataSource = self
         dia.delegate = self
         dia.dataSource = self
+        
+        self.datos = CoreDataHelper.fetchData(entityName: "Categorias", keyName: "categoria")!
+        
+        for item in self.datos {
+            pickerTipo.append(item["nombre"] as! String)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -63,7 +70,13 @@ class ProgramaViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         if pickerView == self.dia {
             selectedDia = self.pickerDia[row]
         } else  {
-            selectedTipo = self.pickerTipo[row]
+            
+            
+            if (row-1) == -1 {
+                self.selectedTipo = ""
+            } else {
+                self.selectedTipo = String(self.datos[row-1]["id"] as! Int)
+            }
         }
     }
     
@@ -93,30 +106,15 @@ class ProgramaViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
                 diaEnviar = "2017-06-08"
             case "Viernes 9 de Junio":
                 diaEnviar = "2017-06-09"
+            case "Sábado 10 de Junio":
+                diaEnviar = "2017-06-10"
             default:
                 diaEnviar = ""
             }
             
-            var tipoEnviar = ""
-            
-            switch selectedTipo {
-            case "Todos":
-                tipoEnviar = ""
-            case "Sesiones Técnicas":
-                tipoEnviar = "1"
-            case "Comidas / Conferencias":
-                tipoEnviar = "3"
-            case "E-Póster":
-                tipoEnviar = "4"
-            case "Otros":
-                tipoEnviar = "0"
-            default:
-                tipoEnviar = ""
-            }
-            
             (segue.destination as! ResultadosViewController).seccion = 1
             (segue.destination as! ResultadosViewController).diaPrograma = diaEnviar
-            (segue.destination as! ResultadosViewController).tipoPrograma = tipoEnviar
+            (segue.destination as! ResultadosViewController).tipoPrograma = self.selectedTipo
         }
     }
 

@@ -49,6 +49,8 @@ $app->get('/api/categoria/all/{user_id}/{api_key}', ['middleware' => 'cors', 'us
 $app->get('/api/categoria/complete/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'CategoriaController@getAllComplete']);
 $app->post('/api/categoria/update', ['middleware' => 'cors', 'uses' => 'CategoriaController@update']);
 $app->get('/api/categoria/delete/{user_id}/{api_key}/{banner_id}', ['middleware' => 'cors', 'uses' => 'CategoriaController@delete']);
+$app->get('/api/categoria/paginate/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'CategoriaController@paginate']);
+$app->get('/api/categoria/detail/{user_id}/{api_key}/{categoria_id}', ['middleware' => 'cors', 'uses' => 'CategoriaController@get']);
 
 /*
  * Expositores
@@ -179,3 +181,9 @@ $app->get('/api/encuesta/all/{user_id}/{api_key}', ['middleware' => 'cors', 'use
 $app->get('/api/encuesta/detail/{user_id}/{api_key}/{encuesta_id}', ['middleware' => 'cors', 'uses' => 'EncuestasController@getEncuesta']);
 $app->get('/api/encuesta/delete/{user_id}/{api_key}/{encuesta_id}', ['middleware' => 'cors', 'uses' => 'EncuestasController@delete']);
 $app->get('/api/encuesta/paginate/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'EncuestasController@paginate']);
+
+/*
+ * Mapa recinto & mapa expositores
+ */
+$app->post('/api/mapa/recinto/upload', ['middleware' => 'cors', 'uses' => 'MapasController@createMapaRecinto']);
+$app->get('/api/mapa/recinto/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'MapasController@getMapaRecinto']);

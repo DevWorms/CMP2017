@@ -125,6 +125,11 @@ class NotificacionesViewController: UIViewController, UITableViewDataSource, UIT
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
  
+        let vc_alert = UIAlertController(title: "Notificación", message: datos[indexPath.row]["notificacion"] as! String, preferredStyle: .alert)
+        vc_alert.addAction(UIAlertAction(title: "OK",
+                                         style: UIAlertActionStyle.default,
+                                         handler: nil))
+        self.present(vc_alert, animated: true, completion: nil)
         
         let apiKey = UserDefaults.standard.value(forKey: "api_key")
         let userID = UserDefaults.standard.value(forKey: "user_id")

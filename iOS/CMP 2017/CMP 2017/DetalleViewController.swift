@@ -32,6 +32,7 @@ class DetalleViewController: UIViewController {
     var seccion = 0
     var detalle = [String: Any]()
     var imgData: Any?
+      var misExpositores = [String: Any]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +53,7 @@ class DetalleViewController: UIViewController {
             self.recomendaciones.text = detalle["recomendaciones"] as! String?
             
         case 2:
+        
             btn2.imageView?.image = #imageLiteral(resourceName: "04Agregar_a_mis_expositores")
             
             self.lbl2.text = "Contacto"
@@ -86,7 +88,19 @@ class DetalleViewController: UIViewController {
     }
     
     @IBAction func btnDos(_ sender: Any) {
+        if  self.seccion == 2 {
+        print("hola presion")
+         
+                
+                print ("hola" )
+                
+            
+           
+        }
+        
     }
+    
+    
     
     @IBAction func btnTres(_ sender: Any) {
     }

@@ -52,7 +52,7 @@ class RutasController extends Controller {
                 if ($this->validarRutas()) {
                     // Si se adjunta un archivo, se sube
                     if ($file) {
-                        $rules = array('file' => 'required|mimes:jpeg,jpg,gif,png,pdf|max:10000000');
+                        $rules = array('file' => 'required|mimes:jpeg,jpg,gif,png|max:10000000');
                         $validator = Validator::make(array('file' => $file), $rules);
 
                         // Si el archivo tiene extensión valida
@@ -240,7 +240,7 @@ class RutasController extends Controller {
                     if ($this->validarRutas()) {
                         // Si se adjunta un archivo, se sube
                         if ($file) {
-                            $rules = array('file' => 'required|mimes:jpeg,jpg,gif,png,pdf|max:10000000');
+                            $rules = array('file' => 'required|mimes:jpeg,jpg,gif,png|max:10000000');
                             $validator = Validator::make(array('file' => $file), $rules);
 
                             // Si el archivo tiene extensión valida

@@ -18,7 +18,7 @@ class ViewController: UIViewController {
         
         let methodsCMP = ServerConnection()
         
-        methodsCMP.getCMP(myView: self)
+        methodsCMP.getCMP(myView: self) //descarga datos para offline
     }
 
     override func didReceiveMemoryWarning() {

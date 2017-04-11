@@ -91,6 +91,9 @@
                     <li>
                         <a href="encuestas.php">Encuestas</a>
                     </li>
+                    <li>
+                        <a href="categorias.php">Categorías</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -100,7 +103,7 @@
         <div id="page-wrapper">
 
             <div class="container-fluid">
-                
+                <div id="error"></div>
                 <div class="row page-header">
                    <div class="col-xs-12 col-md-offset-1 col-md-4">
                         <h3 style="color: #10375e;">Mapa</h3>
@@ -116,18 +119,17 @@
                 <br><br>
                 <!-- Fin Fila -->
 
-                <form action="" method="" id="" name="" role="">    
-                    
+                <form enctype="multipart/form-data" method="POST" id="crearEvento" name="crearEvento">
                     <div class="row">
                         <div class="col-xs-12 col-md-offset-1 col-md-5">
                             <div class="form-group">
-                                <label for="">Seleccionar PDF</label>
+                                <label for="archivo">Seleccionar imágen</label>
                                     <br>
-                                <input type="" name="" id="" class="form-control">
-                                    <br>
-                                <button class="btn basico2">Seleccionar</button>
+                                <input type="file" name="archivo" id="archivo" class="form-control">
                             </div>
-                            <br> 
+                            <br>
+                            <div id="file_map"></div>
+                            <br>
                         </div>
                     </div>
                     <!-- Fin Fila -->
@@ -153,7 +155,12 @@
     <!-- Scripts -->
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
-
+    <script type="text/javascript" src="js/jquery-ui-1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/moment-with-locales.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
+    <script src="js/js.php"></script>
+    <script src="js/lodash.js"></script>
+    <script src="js/mapa-recinto.js"></script>
 </body>
 
 </html>

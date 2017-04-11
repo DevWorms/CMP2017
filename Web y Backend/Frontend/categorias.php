@@ -65,7 +65,7 @@
         <!-- Sidebar -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li class="active">
+                <li>
                     <a href="programa.php">Programa</a>
                 </li>
                 <li>
@@ -95,7 +95,7 @@
                 <li>
                     <a href="encuestas.php">Encuestas</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="categorias.php">Categorías</a>
                 </li>
             </ul>
@@ -113,16 +113,6 @@
                         <div class="form-group row">
                             <div class="col-md-10">
 
-                                <form name="" action="" method="post" class="form-inline" role="form">
-                                    <div class="input-group">
-                                        <input type="date" class="form-control" placeholder="Buscar ..." name="q"
-                                               id="q">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-default" type="button" name="search" id="search"><i
-                                                        class="glyphicon glyphicon-search"></i></button>
-                                        </div>
-                                    </div>
-                                </form>
 
                             </div>
                         </div>
@@ -130,8 +120,8 @@
                 </div>
 
                 <div class="col-xs-12 col-md-6" align="right">
-                    <a href="agregar-evento.php" class="btn basico" id="btn_crearEvento"><i
-                                class="fa fa-plus-circle"></i> &nbsp;Agregar Evento</a>
+                    <a href="categoria-evento.php" class="btn basico" id="btn_crearEvento"><i
+                                class="fa fa-plus-circle"></i> &nbsp;Agregar Categoría</a>
                 </div>
             </div>
             <!-- Fin Fila -->
@@ -142,11 +132,8 @@
                     <table class="table table-striped" id="tbl_eventos">
                         <thead>
                         <tr>
-                            <th>Nombre</th>
-                            <th>Tipo de Evento</th>
-                            <th>Fecha</th>
-                            <th align="center">Ver</th>
-                            <th align="center">Editar</th>
+                            <th>Categoría</th>
+                            <th align="center">Ver/Editar</th>
                             <th align="center">Eliminar</th>
                         </tr>
                         </thead>
@@ -187,37 +174,19 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title" style="text-align:center;">Evento: ${nombre}</h4>
+                    <h4 class="modal-title" style="text-align:center;">Encuesta: ${id}</h4>
                 </div>
                 <div class="modal-body">
                     <div class="col-md-2"></div>
                     <div class="col-md-8">
                         <div class="col-md-12">
-                            <% if (foto.nombre) { %> <img src="${foto.url}" width="200px" height="200px"> <% } %>
+                            <a href="${filesm.url}" target="_blank"><img src="${filesm.url}" title="${filesm.nombre}" style="width: 100%"></a>
                         </div>
                         <div class="col-md-12">
                             <br>
                         </div>
                         <div class="col-md-12">
-                            <p><strong>Nombre</strong>: ${nombre}</p>
-                        </div>
-                        <div class="col-md-12">
-                            <p><strong>Lugar</strong>: ${lugar}</p>
-                        </div>
-                        <div class="col-md-12">
-                            <p><strong>Fecha</strong>: ${fecha}</p>
-                        </div>
-                        <div class="col-md-12">
-                            <p><strong>Hora de inicio</strong>: <% if (hora_inicio) { %> ${hora_inicio} <% } %></p>
-                        </div>
-                        <div class="col-md-12">
-                            <p><strong>Hora de fin</strong>: <% if (hora_fin) { %> ${hora_fin} <% } %></p>
-                        </div>
-                        <div class="col-md-12">
-                            <p><strong>Categoría</strong>: ${categoria.nombre}</p>
-                        </div>
-                        <div class="col-md-12">
-                            <p><strong>Recomendaciones</strong>: ${recomendaciones}</p>
+                            <!--<p><strong>Nombre</strong>: <a href="" target="_blank"></a></p>-->
                         </div>
                     </div>
                     <div class="col-md-2"></div>
@@ -246,7 +215,11 @@
 <script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
 <script src="js/js.php"></script>
 <script src="js/lodash.js"></script>
-<script src="js/programa.js"></script>
+<script src="js/add-categoria.js"></script>
+
+<script>
+    loadExpostitores(init_url);
+</script>
 
 </body>
 

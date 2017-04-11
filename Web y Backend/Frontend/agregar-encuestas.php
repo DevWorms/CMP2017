@@ -9,15 +9,13 @@
     <meta name="description" content="CMP 2017 - ADMIN">
     <meta name="author" content="DevWorms">
 
-    <title>CMP 2017 - Agregar Evento</title>
+    <title>CMP 2017 - Encuestas</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- CSS -->
     <link href="css/main.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="js/jquery-ui-1.12.1/jquery-ui.css">
-    <link rel="stylesheet" href="js/jquery-ui-timepicker-addon.css">
 </head>
 
 <body>
@@ -63,7 +61,7 @@
             <!-- Sidebar -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li class="active">
+                    <li>
                         <a href="programa.php">Programa</a>
                     </li>
                     <li>
@@ -90,7 +88,7 @@
                     <li>
                         <a href="banner.php">Banners</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="encuestas.php">Encuestas</a>
                     </li>
                     <li>
@@ -104,94 +102,89 @@
         <!-- Contenido -->
         <div id="page-wrapper">
             <div class="container-fluid">
-                <input type="hidden" id="id">
                 <div id="error"></div>
+                <input type="hidden" id="id" value="">
                 <form enctype="multipart/form-data" method="POST" id="crearEvento" name="crearEvento">
                     <div class="row page-header">
-                        <div class="col-xs-12 col-md-6">
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <h4 style="color: #10375e;">Encuestas</h4>
+                        </div>
+                    </div>
+                    <!-- Fin Fila -->
+                    
+                    <div class="row">
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <h4><b>Crear encuesta</b></h4>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- Fin Fila -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <div class="form-group">
+                                <label for="archivo_sm">Imagen Chica</label>
+                                <br>
+                                <input type="file" name="archivo_sm" id="archivo_sm" class="form-control" required>
+                            </div>
+                            <br>
+                            <div id="file_sm"></div>
+                            <br>
                         </div>
 
-                        <div class="col-xs-12 col-md-6" align="right">
-                            <button type="submit" class="btn basico" id="btn_crearEvento"><i class="fa fa-plus-circle"></i> &nbsp;Agregar Evento</button>
+                        <div class="col-xs-12 col-md-5">
+                            <div class="form-group">
+                                <label for="archivo_xl">Imagen Grande</label>
+                                <br>
+                                <input type="file" name="archivo_xl" id="archivo_xl" class="form-control" required>
+                            </div>
+                            <br>
+                            <div id="file_xl"></div>
+                            <br>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- Fin Fila -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <div class="form-group">
+                                <label for="">Pregunta 1</label>
+                                    <br>
+                                <input type="text" name="pregunta[]" id="pregunta1" class="form-control">
+                            </div>
+                            <br>
+                        </div>
+
+                        <div class="col-xs-12 col-md-5">
+                            <div class="form-group">
+                                <label for="">Pregunta 2</label>
+                                    <br>
+                                <input type="text" name="pregunta[]" id="pregunta2" class="form-control">
+                            </div>
                         </div>
                     </div>
                     <!-- Fin Fila -->
 
                     <div class="row">
-                        <div class="col-md-5 col-md-offset-1">
-                            
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
                             <div class="form-group">
-                                <label for="nombre">Nombre del Evento</label>
+                                <label for="">Pregunta 3</label>
                                     <br>
-                                <input type="text" name="nombre" id="nombre" class="form-control" required>
+                                <input type="text" name="pregunta[]" id="pregunta3" class="form-control">
                             </div>
                             <br>
-
-                            <div class="form-group">
-                              <label for="sel1">Tipo de Evento</label>
-                              <select class="form-control" id="categoria_id" name="categoria_id">
-                              </select>
-                              <br>
-                              <a href="categoria-evento.php" class="btn basico2">Agregar categoría de evento</a>
-                            </div>
-                            <br>
-
-                            <div class="form-group">
-                                <label for="lugar">Lugar</label>
-                                    <br>
-                                <input type="text" name="lugar" id="lugar" class="form-control" required>
-                            </div> 
-                            <br>
-
-                            <div class="form-group">
-                                <label for="recomendaciones">Recomendaciones</label>
-                                    <br>
-                                <textarea class="form-control" rows="5" id="recomendaciones" name="recomendaciones" required></textarea>
-                            </div>
-                            <br>
-
-                            <div class="form-group">
-                                <label for="fecha">Fecha del evento</label>
-                                <br>
-                                <input type="date" name="fecha" id="fecha" class="form-control" required>
-                            </div>
-                            <br>
-
-                            <div class="form-group">
-                                <label for="archivo">Imágen del evento</label>
-                                <br>
-                                <input type="file" name="archivo" id="archivo" class="form-control">
-                                <div id="file_img"></div>
-                            </div>
-                            <br>
-
-                            <div class="form-group">
-                                <label for="hora_inicio">Hora de inicio del evento</label>
-                                <br>
-                                <input type="time" name="hora_inicio" id="hora_inicio" class="form-control" required>
-                            </div>
-                            <br>
-
-                            <div class="form-group">
-                                <label for="hora_fin">Hora de fin del evento</label>
-                                <br>
-                                <input type="time" name="hora_fin" id="hora_fin" class="form-control">
-                            </div>
-                            <br>
-
-                            <div class="form-group">
-                                <label for="">Agregar ubicación en el mapa</label>
-                                    <br><br>
-                                <button class="btn basico2">Examinar</button>
-                            </div> 
-                            <br>
-                            
                         </div>
-                        <div class="col-md-6"></div>
                     </div>
                     <!-- Fin Fila -->
-                
+                    
+                    <div class="row">
+                        <col-xs-12 class="col-xs-offset-2 col-xs-8 col-md-2 col-md-offset-1">
+                            <button type="submit" class="btn basico btn-block" name="btn_crearEvento" id="btn_crearEvento">Crear</button>
+                        </col-xs-12>
+                    </div>
                 </form>
+
             </div>
             <!-- /.container-fluid -->
 
@@ -209,7 +202,7 @@
     <script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
     <script src="js/js.php"></script>
     <script src="js/lodash.js"></script>
-    <script src="js/add-programa.js"></script>
+    <script src="js/encuesta.js"></script>
 </body>
 
 </html>

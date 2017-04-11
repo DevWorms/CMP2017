@@ -17,12 +17,8 @@
         <attribute name="imgExpositor" optional="YES" attributeType="Transformable" syncable="YES"/>
     </entity>
     <entity name="MisExpositores" representedClassName="MisExpositores" syncable="YES" codeGenerationType="class">
-        <attribute name="acercaExpo" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="emailExpo" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="idExpo" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="nombreExpo" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="telefonoExpo" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="urlExpo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imgMisExpositores" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="misExpositores" optional="YES" attributeType="Transformable" syncable="YES"/>
     </entity>
     <entity name="Patrocinadores" representedClassName="Patrocinadores" syncable="YES" codeGenerationType="class">
         <attribute name="imgPatrocinador" optional="YES" attributeType="Transformable" syncable="YES"/>
@@ -44,10 +40,10 @@
         <element name="Banners" positionX="-63" positionY="-18" width="128" height="73"/>
         <element name="Deportivos" positionX="-18" positionY="45" width="128" height="30"/>
         <element name="Expositores" positionX="18" positionY="63" width="128" height="30"/>
+        <element name="MisExpositores" positionX="-137" positionY="99" width="128" height="75"/>
         <element name="Patrocinadores" positionX="0" positionY="54" width="128" height="73"/>
         <element name="Programas" positionX="36" positionY="72" width="128" height="75"/>
         <element name="Rutas" positionX="-54" positionY="18" width="128" height="60"/>
         <element name="Sitios" positionX="-63" positionY="0" width="128" height="75"/>
-        <element name="MisExpositores" positionX="-137" positionY="99" width="128" height="133"/>
     </elements>
 </model>

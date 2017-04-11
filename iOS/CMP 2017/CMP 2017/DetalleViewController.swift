@@ -92,7 +92,7 @@ class DetalleViewController: UIViewController {
         print("hola presion")
          
                 
-                //print ("Datos: \(item)" )
+                print ("hola" )
                 
             
            

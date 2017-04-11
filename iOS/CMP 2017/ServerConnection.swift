@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-
+//http://stackoverflow.com/questions/5473/how-can-i-undo-git-reset-hard-head1 recuperar commits (historial local y versionado)
 //let apiKey = UserDefaults.standard.value(forKey: "api_key")!
 //let userID = UserDefaults.standard.value(forKey: "user_id")!
 
@@ -97,7 +97,48 @@ class ServerConnection {
             let strUrl = "http://cmp.devworms.com/api/banners/all/\(userID)/\(apiKey)"
             print(strUrl)
             
-            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJsonBanner).resume()
+            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: { (data: Data?, urlResponse: URLResponse?, error: Error?) in
+                if error != nil {
+                    print(error!)
+                } else if urlResponse != nil {
+                    if (urlResponse as! HTTPURLResponse).statusCode == 200 {
+                        if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                            //print(json)
+                            
+                            if let jsonResult = json as? [String: Any] {
+                                for (index, dato) in (jsonResult["banners"] as! [[String:Any]]).enumerated() {
+                                    
+                                    CoreDataHelper.saveData(data: dato, entityName: "Banners", keyName: "banner")
+                                    
+                                    DispatchQueue.global(qos: .userInitiated).async { // 1
+                                        let dataImg = try? Data(contentsOf: URL(string: dato["url"] as! String)!)
+                                        
+                                        DispatchQueue.main.async { // 2
+                                            
+                                            CoreDataHelper.updateData(index: index, data: dataImg!, entityName: "Banners", keyName: "imgBanner")
+                                            
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                    } else {
+                        print("HTTP Status Code: 200")
+                        print("El JSON de respuesta es inválido.")
+                    }
+                } else {
+                    
+                    if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                        if let jsonResult = json as? [String: Any] {
+                            print("Error json: \(jsonResult["mensaje"])")
+                        }
+                    } else {
+                        print("HTTP Status Code: 400 o 500")
+                        print("El JSON de respuesta es inválido.")
+                    }
+                }
+            }).resume()
             
         } else {
             /*let vc_alert = UIAlertController(title: "Sin conexión a internet", message: "Asegúrate de estar conectado a internet.", preferredStyle: .alert)
@@ -105,58 +146,7 @@ class ServerConnection {
                                              style: UIAlertActionStyle.default,
                                              handler: nil))
             context.present(vc_alert, animated: true, completion: nil)*/
-
-        }
-    }
-    
-    private func parseJsonBanner(data: Data?, urlResponse: URLResponse?, error: Error?) {
-        if error != nil {
-            print(error!)
-        } else if urlResponse != nil {
-            if (urlResponse as! HTTPURLResponse).statusCode == 200 {
-                if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
-                    //print(json)
-                    
-                    if let jsonResult = json as? [String: Any] {
-                        for (index, dato) in (jsonResult["banners"] as! [[String:Any]]).enumerated() {
-                            
-                            CoreDataHelper.saveData(data: dato, entityName: "Banners", keyName: "banner")
-                            
-                            DispatchQueue.global(qos: .userInitiated).async { // 1
-                                let dataImg = try? Data(contentsOf: URL(string: dato["url"] as! String)!)
-                                
-                                DispatchQueue.main.async { // 2
-                                    
-                                    CoreDataHelper.updateData(index: index, data: dataImg!, entityName: "Banners", keyName: "imgBanner")
-                                    
-                                }
-                            }
-                        }
-                    }
-                    
-                }
-                
-            } else {
-                print("HTTP Status Code: 200")
-                print("El JSON de respuesta es inválido.")
-            }
-        } else {
-            
-            DispatchQueue.main.async {
-                if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
-                    if let jsonResult = json as? [String: Any] {
-                        /*let vc_alert = UIAlertController(title: nil, message: jsonResult["mensaje"] as? String, preferredStyle: .alert)
-                         vc_alert.addAction(UIAlertAction(title: "OK", style: .cancel , handler: nil))
-                         self.present(vc_alert, animated: true, completion: nil)*/
-                        print("Error json: \(jsonResult["mensaje"])")
-                    }
-                    
-                    
-                } else {
-                    print("HTTP Status Code: 400 o 500")
-                    print("El JSON de respuesta es inválido.")
-                }
-            }
+            print("Sin conexión a internet Banners")
         }
     }
     
@@ -168,69 +158,57 @@ class ServerConnection {
             let strUrl = "http://cmp.devworms.com/api/puebla/sitio/all/\(userID)/\(apiKey)"
             print(strUrl)
             
-            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJsonSitios).resume()
-            
-        } else {
-            /*let vc_alert = UIAlertController(title: "Sin conexión a internet", message: "Asegúrate de estar conectado a internet.", preferredStyle: .alert)
-             vc_alert.addAction(UIAlertAction(title: "OK",
-             style: UIAlertActionStyle.default,
-             handler: nil))
-             context.present(vc_alert, animated: true, completion: nil)*/
-            
-        }
-    }
-    
-    private func parseJsonSitios(data: Data?, urlResponse: URLResponse?, error: Error?) {
-        if error != nil {
-            print(error!)
-        } else if urlResponse != nil {
-            if (urlResponse as! HTTPURLResponse).statusCode == 200 {
-                if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
-                    //print(json)
-                    
-                    if let jsonResult = json as? [String: Any] {
-                        for (index, dato) in (jsonResult["sitios"] as! [[String:Any]]).enumerated() {
+            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: { (data: Data?, urlResponse: URLResponse?, error: Error?) in
+                if error != nil {
+                    print(error!)
+                } else if urlResponse != nil {
+                    if (urlResponse as! HTTPURLResponse).statusCode == 200 {
+                        if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                            //print(json)
                             
-                            CoreDataHelper.saveData(data: dato, entityName: "Sitios", keyName: "sitio")
-                            
-                            DispatchQueue.global(qos: .userInitiated).async { // 1
-                                
-                                if let img = dato["imagen"] as? [String: Any] {
+                            if let jsonResult = json as? [String: Any] {
+                                for (index, dato) in (jsonResult["sitios"] as! [[String:Any]]).enumerated() {
                                     
-                                    let dataImg = try? Data(contentsOf: URL(string: img["url"] as! String)!)
+                                    CoreDataHelper.saveData(data: dato, entityName: "Sitios", keyName: "sitio")
                                     
-                                    DispatchQueue.main.async { // 2
+                                    DispatchQueue.global(qos: .userInitiated).async { // 1
                                         
-                                        CoreDataHelper.updateData(index: index, data: dataImg!, entityName: "Sitios", keyName: "imgSitio")
-                                        
+                                        if let img = dato["imagen"] as? [String: Any] {
+                                            
+                                            let dataImg = try? Data(contentsOf: URL(string: img["url"] as! String)!)
+                                            
+                                            DispatchQueue.main.async { // 2
+                                                
+                                                CoreDataHelper.updateData(index: index, data: dataImg!, entityName: "Sitios", keyName: "imgSitio")
+                                                
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
-                }
-                
-            } else {
-                    print("HTTP Status Code: 200")
-                    print("El JSON de respuesta es inválido.")
-            }
-        } else {
-                
-            DispatchQueue.main.async {
-                if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
-                    if let jsonResult = json as? [String: Any] {
-                        /*let vc_alert = UIAlertController(title: nil, message: jsonResult["mensaje"] as? String, preferredStyle: .alert)
-                        vc_alert.addAction(UIAlertAction(title: "OK", style: .cancel , handler: nil))
-                        self.present(vc_alert, animated: true, completion: nil)*/
-                        print("Error json: \(jsonResult["mensaje"])")
-                    }
                         
-                        
+                    } else {
+                        print("HTTP Status Code: 200")
+                        print("El JSON de respuesta es inválido.")
+                    }
                 } else {
-                    print("HTTP Status Code: 400 o 500")
-                    print("El JSON de respuesta es inválido.")
+                    
+                    if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                        if let jsonResult = json as? [String: Any] {
+                            print("Error json: \(jsonResult["mensaje"])")
+                        }
+                            
+                            
+                    } else {
+                        print("HTTP Status Code: 400 o 500")
+                        print("El JSON de respuesta es inválido.")
+                    }
                 }
-            }
+            }).resume()
+            
+        } else {
+            print("Sin conexión a internet Sitios")
         }
     }
     
@@ -242,73 +220,59 @@ class ServerConnection {
             let strUrl = "http://cmp.devworms.com/api/ruta/all/\(userID)/\(apiKey)"
             print(strUrl)
             
-            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJsonRutas).resume()
-            
-        } else {
-            /*let vc_alert = UIAlertController(title: "Sin conexión a internet", message: "Asegúrate de estar conectado a internet.", preferredStyle: .alert)
-             vc_alert.addAction(UIAlertAction(title: "OK",
-             style: UIAlertActionStyle.default,
-             handler: nil))
-             context.present(vc_alert, animated: true, completion: nil)*/
-            
-        }
-    }
-    
-    private func parseJsonRutas(data: Data?, urlResponse: URLResponse?, error: Error?) {
-        if error != nil {
-            print(error!)
-        } else if urlResponse != nil {
-            if (urlResponse as! HTTPURLResponse).statusCode == 200 {
-                if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
-                    //print(json)
-                    
-                    DispatchQueue.main.async {
-                        
-                        if let jsonResult = json as? [String: Any] {
-                            for (index, dato) in (jsonResult["rutas"] as! [[String:Any]]).enumerated() {
+            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: { (data: Data?, urlResponse: URLResponse?, error: Error?) in
+                if error != nil {
+                    print(error!)
+                } else if urlResponse != nil {
+                    if (urlResponse as! HTTPURLResponse).statusCode == 200 {
+                        if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                            //print(json)
+                            
+                            DispatchQueue.main.async {
                                 
-                                CoreDataHelper.saveData(data: dato, entityName: "Rutas", keyName: "ruta")
-                                
-                                DispatchQueue.global(qos: .userInitiated).async { // 1
-                                    
-                                    if let img = dato["pdf"] as? [String: Any] {
+                                if let jsonResult = json as? [String: Any] {
+                                    for (index, dato) in (jsonResult["rutas"] as! [[String:Any]]).enumerated() {
                                         
-                                        let dataImg = try? Data(contentsOf: URL(string: img["url"] as! String)!)
+                                        CoreDataHelper.saveData(data: dato, entityName: "Rutas", keyName: "ruta")
                                         
-                                        DispatchQueue.main.async { // 2
+                                        DispatchQueue.global(qos: .userInitiated).async { // 1
                                             
-                                            CoreDataHelper.updateData(index: index, data: dataImg!, entityName: "Rutas", keyName: "imgRuta")
-                                            
+                                            if let img = dato["pdf"] as? [String: Any] {
+                                                
+                                                let dataImg = try? Data(contentsOf: URL(string: img["url"] as! String)!)
+                                                
+                                                DispatchQueue.main.async { // 2
+                                                    
+                                                    CoreDataHelper.updateData(index: index, data: dataImg!, entityName: "Rutas", keyName: "imgRuta")
+                                                    
+                                                }
+                                            }
                                         }
                                     }
                                 }
-                                
                             }
+                            
+                        } else {
+                            print("HTTP Status Code: 200")
+                            print("El JSON de respuesta es inválido.")
                         }
-                    }
-                    
-                } else {
-                    print("HTTP Status Code: 200")
-                    print("El JSON de respuesta es inválido.")
-                }
-            } else {
-                
-                DispatchQueue.main.async {
-                    if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
-                        if let jsonResult = json as? [String: Any] {
-                            /*let vc_alert = UIAlertController(title: nil, message: jsonResult["mensaje"] as? String, preferredStyle: .alert)
-                            vc_alert.addAction(UIAlertAction(title: "OK", style: .cancel , handler: nil))
-                            self.present(vc_alert, animated: true, completion: nil)*/
-                            print("Error json: \(jsonResult["mensaje"])")
-                        }
-                        
-                        
                     } else {
-                        print("HTTP Status Code: 400 o 500")
-                        print("El JSON de respuesta es inválido.")
+                        
+                        if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                            if let jsonResult = json as? [String: Any] {
+                                print("Error json: \(jsonResult["mensaje"])")
+                            }
+                            
+                        } else {
+                            print("HTTP Status Code: 400 o 500")
+                            print("El JSON de respuesta es inválido.")
+                        }
                     }
                 }
-            }
+            }).resume()
+            
+        } else {
+            print("Sin conexión a internet Rutas")
         }
     }
     
@@ -320,73 +284,59 @@ class ServerConnection {
             let strUrl = "http://cmp.devworms.com/api/acompanantes/all/\(userID)/\(apiKey)"
             print(strUrl)
             
-            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJsonAcompañantes).resume()
-            
-        } else {
-            /*let vc_alert = UIAlertController(title: "Sin conexión a internet", message: "Asegúrate de estar conectado a internet.", preferredStyle: .alert)
-             vc_alert.addAction(UIAlertAction(title: "OK",
-             style: UIAlertActionStyle.default,
-             handler: nil))
-             context.present(vc_alert, animated: true, completion: nil)*/
-            
-        }
-    }
-    
-    private func parseJsonAcompañantes(data: Data?, urlResponse: URLResponse?, error: Error?) {
-        if error != nil {
-            print(error!)
-        } else if urlResponse != nil {
-            if (urlResponse as! HTTPURLResponse).statusCode == 200 {
-                if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
-                    //print(json)
-                    
-                    if let jsonResult = json as? [String: Any] {
-                        for (index, dato) in (jsonResult["acompanantes"] as! [[String:Any]]).enumerated() {
+            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: { (data: Data?, urlResponse: URLResponse?, error: Error?) in
+                if error != nil {
+                    print(error!)
+                } else if urlResponse != nil {
+                    if (urlResponse as! HTTPURLResponse).statusCode == 200 {
+                        if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                            //print(json)
                             
-                            CoreDataHelper.saveData(data: dato, entityName: "Acompanantes", keyName: "acompanante")
-                            
-                            DispatchQueue.global(qos: .userInitiated).async { // 1
-                                
-                                if let img = dato["foto"] as? [String: Any] {
+                            if let jsonResult = json as? [String: Any] {
+                                for (index, dato) in (jsonResult["acompanantes"] as! [[String:Any]]).enumerated() {
                                     
-                                    let dataImg = try? Data(contentsOf: URL(string: img["url"] as! String)!)
+                                    CoreDataHelper.saveData(data: dato, entityName: "Acompanantes", keyName: "acompanante")
                                     
-                                    DispatchQueue.main.async { // 2
+                                    DispatchQueue.global(qos: .userInitiated).async { // 1
                                         
-                                        CoreDataHelper.updateData(index: index, data: dataImg!, entityName: "Acompanantes", keyName: "imgAcompanante")
-                                        
+                                        if let img = dato["foto"] as? [String: Any] {
+                                            
+                                            let dataImg = try? Data(contentsOf: URL(string: img["url"] as! String)!)
+                                            
+                                            DispatchQueue.main.async { // 2
+                                                
+                                                CoreDataHelper.updateData(index: index, data: dataImg!, entityName: "Acompanantes", keyName: "imgAcompanante")
+                                                
+                                            }
+                                        }
                                     }
                                 }
                             }
+                            
+                        } else {
+                            print("HTTP Status Code: 200")
+                            print("El JSON de respuesta es inválido.")
                         }
-                    }
-                    
-                } else {
-                    print("HTTP Status Code: 200")
-                    print("El JSON de respuesta es inválido.")
-                }
-            } else {
-                
-                DispatchQueue.main.async {
-                    if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
-                        if let jsonResult = json as? [String: Any] {
-                            /*let vc_alert = UIAlertController(title: nil, message: jsonResult["mensaje"] as? String, preferredStyle: .alert)
-                             vc_alert.addAction(UIAlertAction(title: "OK", style: .cancel , handler: nil))
-                             self.present(vc_alert, animated: true, completion: nil)*/
-                            print("Error json: \(jsonResult["mensaje"])")
-                        }
-                        
-                        
                     } else {
-                        print("HTTP Status Code: 400 o 500")
-                        print("El JSON de respuesta es inválido.")
+                        
+                        if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                            if let jsonResult = json as? [String: Any] {
+                                print("Error json: \(jsonResult["mensaje"])")
+                            }
+                                
+                        } else {
+                            print("HTTP Status Code: 400 o 500")
+                            print("El JSON de respuesta es inválido.")
+                        }
                     }
                 }
-            }
+            }).resume()
+            
+        } else {
+            print("Sin conexión a internet Acompañantes")
         }
-        
     }
-
+    
     // MARK: - Deportivos
     
     private func getDeportivos() {
@@ -395,71 +345,57 @@ class ServerConnection {
             let strUrl = "http://cmp.devworms.com/api/deportivos/all/\(userID)/\(apiKey)"
             print(strUrl)
             
-            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJsonDeportivos).resume()
-            
-        } else {
-            /*let vc_alert = UIAlertController(title: "Sin conexión a internet", message: "Asegúrate de estar conectado a internet.", preferredStyle: .alert)
-             vc_alert.addAction(UIAlertAction(title: "OK",
-             style: UIAlertActionStyle.default,
-             handler: nil))
-             context.present(vc_alert, animated: true, completion: nil)*/
-            
-        }
-    }
-    
-    private func parseJsonDeportivos(data: Data?, urlResponse: URLResponse?, error: Error?) {
-        if error != nil {
-            print(error!)
-        } else if urlResponse != nil {
-            if (urlResponse as! HTTPURLResponse).statusCode == 200 {
-                if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
-                    //print(json)
-                    
-                    if let jsonResult = json as? [String: Any] {
-                        for (index, dato) in (jsonResult["eventos"] as! [[String:Any]]).enumerated() {
+            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: { (data: Data?, urlResponse: URLResponse?, error: Error?) in
+                if error != nil {
+                    print(error!)
+                } else if urlResponse != nil {
+                    if (urlResponse as! HTTPURLResponse).statusCode == 200 {
+                        if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                            //print(json)
                             
-                            CoreDataHelper.saveData(data: dato, entityName: "Deportivos", keyName: "evento")
-                            
-                            DispatchQueue.global(qos: .userInitiated).async { // 1
-                                
-                                if let img = dato["foto"] as? [String: Any] {
+                            if let jsonResult = json as? [String: Any] {
+                                for (index, dato) in (jsonResult["eventos"] as! [[String:Any]]).enumerated() {
                                     
-                                    let dataImg = try? Data(contentsOf: URL(string: img["url"] as! String)!)
+                                    CoreDataHelper.saveData(data: dato, entityName: "Deportivos", keyName: "evento")
                                     
-                                    DispatchQueue.main.async { // 2
+                                    DispatchQueue.global(qos: .userInitiated).async { // 1
                                         
-                                        CoreDataHelper.updateData(index: index, data: dataImg!, entityName: "Deportivos", keyName: "imgDeportivo")
-                                        
+                                        if let img = dato["foto"] as? [String: Any] {
+                                            
+                                            let dataImg = try? Data(contentsOf: URL(string: img["url"] as! String)!)
+                                            
+                                            DispatchQueue.main.async { // 2
+                                                
+                                                CoreDataHelper.updateData(index: index, data: dataImg!, entityName: "Deportivos", keyName: "imgDeportivo")
+                                                
+                                            }
+                                        }
                                     }
                                 }
                             }
+                            
+                        } else {
+                            print("HTTP Status Code: 200")
+                            print("El JSON de respuesta es inválido.")
                         }
-                    }
-                    
-                } else {
-                    print("HTTP Status Code: 200")
-                    print("El JSON de respuesta es inválido.")
-                }
-            } else {
-                
-                DispatchQueue.main.async {
-                    if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
-                        if let jsonResult = json as? [String: Any] {
-                            /*let vc_alert = UIAlertController(title: nil, message: jsonResult["mensaje"] as? String, preferredStyle: .alert)
-                             vc_alert.addAction(UIAlertAction(title: "OK", style: .cancel , handler: nil))
-                             self.present(vc_alert, animated: true, completion: nil)*/
-                            print("Error json: \(jsonResult["mensaje"])")
-                        }
-                        
-                        
                     } else {
-                        print("HTTP Status Code: 400 o 500")
-                        print("El JSON de respuesta es inválido.")
+                        
+                        if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                            if let jsonResult = json as? [String: Any] {
+                                print("Error json: \(jsonResult["mensaje"])")
+                            }
+                                
+                        } else {
+                            print("HTTP Status Code: 400 o 500")
+                            print("El JSON de respuesta es inválido.")
+                        }
                     }
                 }
-            }
+            }).resume()
+            
+        } else {
+            print("Sin conexión a internet Deportivos")
         }
-        
     }
     
     // MARK: - Patrocinadores
@@ -470,71 +406,58 @@ class ServerConnection {
             let strUrl = "http://cmp.devworms.com/api/patrocinador/all/\(userID)/\(apiKey)"
             print(strUrl)
             
-            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJsonPatrocinadores).resume()
-            
-        } else {
-            /*let vc_alert = UIAlertController(title: "Sin conexión a internet", message: "Asegúrate de estar conectado a internet.", preferredStyle: .alert)
-             vc_alert.addAction(UIAlertAction(title: "OK",
-             style: UIAlertActionStyle.default,
-             handler: nil))
-             context.present(vc_alert, animated: true, completion: nil)*/
-            
-        }
-    }
-    
-    private func parseJsonPatrocinadores(data: Data?, urlResponse: URLResponse?, error: Error?) {
-        if error != nil {
-            print(error!)
-        } else if urlResponse != nil {
-            if (urlResponse as! HTTPURLResponse).statusCode == 200 {
-                if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
-                    //print(json)
-                    
-                    if let jsonResult = json as? [String: Any] {
-                        for (index, dato) in (jsonResult["patrocinadores"] as! [[String:Any]]).enumerated() {
+            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: { (data: Data?, urlResponse: URLResponse?, error: Error?) in
+                if error != nil {
+                    print(error!)
+                } else if urlResponse != nil {
+                    if (urlResponse as! HTTPURLResponse).statusCode == 200 {
+                        if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                            //print(json)
                             
-                            CoreDataHelper.saveData(data: dato, entityName: "Patrocinadores", keyName: "patrocinador")
-                            
-                            DispatchQueue.global(qos: .userInitiated).async { // 1
-                                
-                                if let img = dato["logo"] as? [String: Any] {
+                            if let jsonResult = json as? [String: Any] {
+                                for (index, dato) in (jsonResult["patrocinadores"] as! [[String:Any]]).enumerated() {
                                     
-                                    let dataImg = try? Data(contentsOf: URL(string: img["url"] as! String)!)
+                                    CoreDataHelper.saveData(data: dato, entityName: "Patrocinadores", keyName: "patrocinador")
                                     
-                                    DispatchQueue.main.async { // 2
+                                    DispatchQueue.global(qos: .userInitiated).async { // 1
                                         
-                                        CoreDataHelper.updateData(index: index, data: dataImg!, entityName: "Patrocinadores", keyName: "imgPatrocinador")
-                                        
+                                        if let img = dato["logo"] as? [String: Any] {
+                                            
+                                            let dataImg = try? Data(contentsOf: URL(string: img["url"] as! String)!)
+                                            
+                                            DispatchQueue.main.async { // 2
+                                                
+                                                CoreDataHelper.updateData(index: index, data: dataImg!, entityName: "Patrocinadores", keyName: "imgPatrocinador")
+                                                
+                                            }
+                                        }
                                     }
                                 }
                             }
+                            
+                        } else {
+                            print("HTTP Status Code: 200")
+                            print("El JSON de respuesta es inválido.")
                         }
-                    }
-                    
-                } else {
-                    print("HTTP Status Code: 200")
-                    print("El JSON de respuesta es inválido.")
-                }
-            } else {
-                
-                DispatchQueue.main.async {
-                    if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
-                        if let jsonResult = json as? [String: Any] {
-                            /*let vc_alert = UIAlertController(title: nil, message: jsonResult["mensaje"] as? String, preferredStyle: .alert)
-                             vc_alert.addAction(UIAlertAction(title: "OK", style: .cancel , handler: nil))
-                             self.present(vc_alert, animated: true, completion: nil)*/
-                            print("Error json: \(jsonResult["mensaje"])")
-                        }
-                        
-                        
                     } else {
-                        print("HTTP Status Code: 400 o 500")
-                        print("El JSON de respuesta es inválido.")
+                        
+                        if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                            if let jsonResult = json as? [String: Any] {
+                                print("Error json: \(jsonResult["mensaje"])")
+                            }
+                                
+                                
+                        } else {
+                            print("HTTP Status Code: 400 o 500")
+                            print("El JSON de respuesta es inválido.")
+                        }
                     }
                 }
-            }
+            }).resume()
+            
+        } else {
+            print("Sin conexión a internet Patrocinadores")
         }
-        
     }
     
     // MARK: - Expositores
@@ -545,71 +468,57 @@ class ServerConnection {
             let strUrl = "http://cmp.devworms.com/api/expositor/all/\(userID)/\(apiKey)"
             print(strUrl)
             
-            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJsonExpositores).resume()
-            
-        } else {
-            /*let vc_alert = UIAlertController(title: "Sin conexión a internet", message: "Asegúrate de estar conectado a internet.", preferredStyle: .alert)
-             vc_alert.addAction(UIAlertAction(title: "OK",
-             style: UIAlertActionStyle.default,
-             handler: nil))
-             context.present(vc_alert, animated: true, completion: nil)*/
-            
-        }
-    }
-    
-    private func parseJsonExpositores(data: Data?, urlResponse: URLResponse?, error: Error?) {
-        if error != nil {
-            print(error!)
-        } else if urlResponse != nil {
-            if (urlResponse as! HTTPURLResponse).statusCode == 200 {
-                if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
-                    //print(json)
-                    
-                    if let jsonResult = json as? [String: Any] {
-                        for (index, dato) in (jsonResult["expositores"] as! [[String:Any]]).enumerated() {
+            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: { (data: Data?, urlResponse: URLResponse?, error: Error?) in
+                if error != nil {
+                    print(error!)
+                } else if urlResponse != nil {
+                    if (urlResponse as! HTTPURLResponse).statusCode == 200 {
+                        if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                            //print(json)
                             
-                            CoreDataHelper.saveData(data: dato, entityName: "Expositores", keyName: "expositor")
-                            
-                            DispatchQueue.global(qos: .userInitiated).async { // 1
-                                
-                                if let img = dato["logo"] as? [String: Any] {
+                            if let jsonResult = json as? [String: Any] {
+                                for (index, dato) in (jsonResult["expositores"] as! [[String:Any]]).enumerated() {
                                     
-                                    let dataImg = try? Data(contentsOf: URL(string: img["url"] as! String)!)
+                                    CoreDataHelper.saveData(data: dato, entityName: "Expositores", keyName: "expositor")
                                     
-                                    DispatchQueue.main.async { // 2
+                                    DispatchQueue.global(qos: .userInitiated).async { // 1
                                         
-                                        CoreDataHelper.updateData(index: index, data: dataImg!, entityName: "Expositores", keyName: "imgExpositor")
-                                        
+                                        if let img = dato["logo"] as? [String: Any] {
+                                            
+                                            let dataImg = try? Data(contentsOf: URL(string: img["url"] as! String)!)
+                                            
+                                            DispatchQueue.main.async { // 2
+                                                
+                                                CoreDataHelper.updateData(index: index, data: dataImg!, entityName: "Expositores", keyName: "imgExpositor")
+                                                
+                                            }
+                                        }
                                     }
                                 }
                             }
+                            
+                        } else {
+                            print("HTTP Status Code: 200")
+                            print("El JSON de respuesta es inválido.")
                         }
-                    }
-                    
-                } else {
-                    print("HTTP Status Code: 200")
-                    print("El JSON de respuesta es inválido.")
-                }
-            } else {
-                
-                DispatchQueue.main.async {
-                    if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
-                        if let jsonResult = json as? [String: Any] {
-                            /*let vc_alert = UIAlertController(title: nil, message: jsonResult["mensaje"] as? String, preferredStyle: .alert)
-                             vc_alert.addAction(UIAlertAction(title: "OK", style: .cancel , handler: nil))
-                             self.present(vc_alert, animated: true, completion: nil)*/
-                            print("Error json: \(jsonResult["mensaje"])")
-                        }
-                        
-                        
                     } else {
-                        print("HTTP Status Code: 400 o 500")
-                        print("El JSON de respuesta es inválido.")
+                        
+                        if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                            if let jsonResult = json as? [String: Any] {
+                                print("Error json: \(jsonResult["mensaje"])")
+                            }
+                            
+                        } else {
+                            print("HTTP Status Code: 400 o 500")
+                            print("El JSON de respuesta es inválido.")
+                        }
                     }
                 }
-            }
+            }).resume()
+            
+        } else {
+            print("Sin conexión a internet Expositores")
         }
-        
     }
 
     // MARK: - Programas
@@ -620,71 +529,57 @@ class ServerConnection {
             let strUrl = "http://cmp.devworms.com/api/programa/all/\(userID)/\(apiKey)"
             print(strUrl)
             
-            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJsonProgramas).resume()
-            
-        } else {
-            /*let vc_alert = UIAlertController(title: "Sin conexión a internet", message: "Asegúrate de estar conectado a internet.", preferredStyle: .alert)
-             vc_alert.addAction(UIAlertAction(title: "OK",
-             style: UIAlertActionStyle.default,
-             handler: nil))
-             context.present(vc_alert, animated: true, completion: nil)*/
-            
-        }
-    }
-    
-    private func parseJsonProgramas(data: Data?, urlResponse: URLResponse?, error: Error?) {
-        if error != nil {
-            print(error!)
-        } else if urlResponse != nil {
-            if (urlResponse as! HTTPURLResponse).statusCode == 200 {
-                if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
-                    //print(json)
-                    
-                    if let jsonResult = json as? [String: Any] {
-                        for (index, dato) in (jsonResult["programas"] as! [[String:Any]]).enumerated() {
+            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: { (data: Data?, urlResponse: URLResponse?, error: Error?) in
+                if error != nil {
+                    print(error!)
+                } else if urlResponse != nil {
+                    if (urlResponse as! HTTPURLResponse).statusCode == 200 {
+                        if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                            //print(json)
                             
-                            CoreDataHelper.saveData(data: dato, entityName: "Programas", keyName: "programa")
-                            
-                            DispatchQueue.global(qos: .userInitiated).async { // 1
-                                
-                                if let img = dato["foto"] as? [String: Any] {
+                            if let jsonResult = json as? [String: Any] {
+                                for (index, dato) in (jsonResult["programas"] as! [[String:Any]]).enumerated() {
                                     
-                                    let dataImg = try? Data(contentsOf: URL(string: img["url"] as! String)!)
+                                    CoreDataHelper.saveData(data: dato, entityName: "Programas", keyName: "programa")
                                     
-                                    DispatchQueue.main.async { // 2
+                                    DispatchQueue.global(qos: .userInitiated).async { // 1
                                         
-                                        CoreDataHelper.updateData(index: index, data: dataImg!, entityName: "Programas", keyName: "imgPrograma")
-                                        
+                                        if let img = dato["foto"] as? [String: Any] {
+                                            
+                                            let dataImg = try? Data(contentsOf: URL(string: img["url"] as! String)!)
+                                            
+                                            DispatchQueue.main.async { // 2
+                                                
+                                                CoreDataHelper.updateData(index: index, data: dataImg!, entityName: "Programas", keyName: "imgPrograma")
+                                                
+                                            }
+                                        }
                                     }
                                 }
                             }
+                            
+                        } else {
+                            print("HTTP Status Code: 200")
+                            print("El JSON de respuesta es inválido.")
                         }
-                    }
-                    
-                } else {
-                    print("HTTP Status Code: 200")
-                    print("El JSON de respuesta es inválido.")
-                }
-            } else {
-                
-                DispatchQueue.main.async {
-                    if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
-                        if let jsonResult = json as? [String: Any] {
-                            /*let vc_alert = UIAlertController(title: nil, message: jsonResult["mensaje"] as? String, preferredStyle: .alert)
-                             vc_alert.addAction(UIAlertAction(title: "OK", style: .cancel , handler: nil))
-                             self.present(vc_alert, animated: true, completion: nil)*/
-                            print("Error json: \(jsonResult["mensaje"])")
-                        }
-                        
-                        
                     } else {
-                        print("HTTP Status Code: 400 o 500")
-                        print("El JSON de respuesta es inválido.")
+                        
+                        if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                            if let jsonResult = json as? [String: Any] {
+                                print("Error json: \(jsonResult["mensaje"])")
+                            }
+                                
+                        } else {
+                            print("HTTP Status Code: 400 o 500")
+                            print("El JSON de respuesta es inválido.")
+                        }
                     }
                 }
-            }
+            }).resume()
+            
+        } else {
+            print("Sin conexión a internet Programas")
         }
-        
     }
     
     // MARK: - Categorias
@@ -695,70 +590,45 @@ class ServerConnection {
             let strUrl = "http://cmp.devworms.com/api/categoria/all/\(userID)/\(apiKey)"
             print(strUrl)
             
-            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJsonCategorias).resume()
+            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: { (data: Data?, urlResponse: URLResponse?, error: Error?) in
+                if error != nil {
+                    print(error!)
+                } else if urlResponse != nil {
+                    if (urlResponse as! HTTPURLResponse).statusCode == 200 {
+                        if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                            //print(json)
+                            
+                            if let jsonResult = json as? [String: Any] {
+                                for dato in jsonResult["categorias"] as! [[String:Any]] {
+                                    
+                                    CoreDataHelper.saveData(data: dato, entityName: "Categorias", keyName: "categoria")
+                                    
+                                }
+                            }
+                            
+                        } else {
+                            print("HTTP Status Code: 200")
+                            print("El JSON de respuesta es inválido.")
+                        }
+                    } else {
+                        
+                        if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                            if let jsonResult = json as? [String: Any] {
+                                print("Error json: \(jsonResult["mensaje"])")
+                            }
+                            
+                        } else {
+                            print("HTTP Status Code: 400 o 500")
+                            print("El JSON de respuesta es inválido.")
+                        }
+                    }
+                }
+            }).resume()
             
         } else {
-            /*let vc_alert = UIAlertController(title: "Sin conexión a internet", message: "Asegúrate de estar conectado a internet.", preferredStyle: .alert)
-             vc_alert.addAction(UIAlertAction(title: "OK",
-             style: UIAlertActionStyle.default,
-             handler: nil))
-             context.present(vc_alert, animated: true, completion: nil)*/
-            
+            print("Sin conexión a internet Categorias")
         }
     }
-    
-    private func parseJsonCategorias(data: Data?, urlResponse: URLResponse?, error: Error?) {
-        if error != nil {
-            print(error!)
-        } else if urlResponse != nil {
-            if (urlResponse as! HTTPURLResponse).statusCode == 200 {
-                if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
-                    //print(json)
-                    
-                    if let jsonResult = json as? [String: Any] {
-                        for dato in jsonResult["categorias"] as! [[String:Any]] {
-                            
-                            CoreDataHelper.saveData(data: dato, entityName: "Categorias", keyName: "categoria")
-                            
-                        }
-                    }
-                    
-                } else {
-                    print("HTTP Status Code: 200")
-                    print("El JSON de respuesta es inválido.")
-                }
-            } else {
-                
-                DispatchQueue.main.async {
-                    if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
-                        if let jsonResult = json as? [String: Any] {
-                            /*let vc_alert = UIAlertController(title: nil, message: jsonResult["mensaje"] as? String, preferredStyle: .alert)
-                             vc_alert.addAction(UIAlertAction(title: "OK", style: .cancel , handler: nil))
-                             self.present(vc_alert, animated: true, completion: nil)*/
-                            print("Error json: \(jsonResult["mensaje"])")
-                        }
-                        
-                        
-                    } else {
-                        print("HTTP Status Code: 400 o 500")
-                        print("El JSON de respuesta es inválido.")
-                    }
-                }
-            }
-        }
-        
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
     
     
     

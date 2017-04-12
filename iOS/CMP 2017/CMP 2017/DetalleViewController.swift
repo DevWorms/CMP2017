@@ -53,8 +53,14 @@ class DetalleViewController: UIViewController {
             self.recomendaciones.text = detalle["recomendaciones"] as! String?
             
         case 2:
-        
-            btn2.imageView?.image = #imageLiteral(resourceName: "04Agregar_a_mis_expositores")
+            let misExpositores = CoreDataHelper.fetchData(entityName: "MisExpositores", keyName: "misExpositores")!
+            print("MisExpositores Count:  \(misExpositores.count)")
+            if misExpositores.count > 0 {
+                btn2.imageView?.image = #imageLiteral(resourceName: "btneliminarexpo")
+            }else{
+                 btn2.imageView?.image = #imageLiteral(resourceName: "04Agregar_a_mis_expositores")
+            }
+            
             
             self.lbl2.text = "Contacto"
             self.lugar.text = (detalle["url"] as! String) + "\n" + (detalle["telefono"] as! String) + "\n" + (detalle["email"] as! String)
@@ -89,10 +95,18 @@ class DetalleViewController: UIViewController {
     
     @IBAction func btnDos(_ sender: Any) {
         if  self.seccion == 2 {
-        print("hola presion")
-         
+             let misExpositores = CoreDataHelper.fetchData(entityName: "MisExpositores", keyName: "misExpositores")!
             
-            CoreDataHelper.saveData(entityName: "MisExpositores", data: detalle ,keyName: "misExpositores",dataImg: imgData, keyNameImg: "imgMisExpositores" )
+            print("MisExpositores boton:  \(misExpositores.count)")
+            if misExpositores.count > 0 {
+                        print("Eliminar")
+             CoreDataHelper.deleteObject(entityName: "MisExpositores", keyName: "misExpositores", id: detalle["id"] as! Int16)
+            } else {
+                print("Agregar")
+                 CoreDataHelper.saveData(entityName: "MisExpositores", data: detalle ,keyName: "misExpositores",dataImg: imgData, keyNameImg: "imgMisExpositores" )
+            }
+
+           
             
         }
         

@@ -171,5 +171,43 @@ class CoreDataHelper {
         }
         
     }
+    
+    class func deleteObject(entityName: String,keyName: String, id: Int16 ) {
+     
+        let requestFetch = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        //requestFetch.resultType = NSFetchRequestResultType.dictionaryResultType
+        //requestFetch.propertiesToFetch = ["banner"]
+        //requestFetch.returnsObjectsAsFaults = false
+        
+        do {
+            let fetched = try managedContext.fetch(requestFetch)
+            
+            var results = [[String : Any]]()
+            
+            for ftd in fetched {
+                
+                //transformar Transformable(Core Data) a Dictionary
+                let res = ftd as! NSManagedObject
+                let keys = Array(res.entity.attributesByName.keys)
+                let dict = res.dictionaryWithValues(forKeys: keys)
+                
+                if let result = dict[ keyName ] as? [String:Any] {
+                    
+                    if result["id"] as! Int16 == id {
+                    managedContext.delete(ftd as! NSManagedObject)
+                    }
+                 
+                }
+            }
+            
+            print("Count fetchData: \(results.count)")
+            
+          
+            
+        } catch {
+            fatalError("Failed to fetchData: \(entityName),\(keyName): \(error)")
+        }
+        
+    }
  
 }

@@ -19,8 +19,47 @@ class CoreDataHelper {
         
         item.setValue(data, forKey: keyName)
         
+        let privateMOC = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        privateMOC.parent = managedContext
+        
         do {
-            try managedContext.save()
+            try privateMOC.save()
+            managedContext.performAndWait {
+                do {
+                    try managedContext.save()
+                } catch {
+                    fatalError("Failure to save context private: \(entityName),\(keyName): \(error)")
+                }
+            }
+        } catch {
+            fatalError("Failure to save context: \(entityName),\(keyName): \(error)")
+        }
+        
+    }
+    
+    // la imagen puede ir vacia y guardarse nils en su campo
+    //la imagen puede ir vacia y no guardar nada en ningun campo (img)
+    class func saveData(entityName: String, data: Any,  keyName: String, dataImg: Any?,  keyNameImg: String?) {
+        let entity = NSEntityDescription.entity(forEntityName: entityName, in: managedContext)
+        let item = NSManagedObject(entity: entity!, insertInto: managedContext)
+        
+        item.setValue(data, forKey: keyName)
+        if keyNameImg != nil {
+            item.setValue(dataImg, forKey: keyNameImg!)
+        }
+        
+        let privateMOC = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        privateMOC.parent = managedContext
+        
+        do {
+            try privateMOC.save()
+            managedContext.performAndWait {
+                do {
+                    try managedContext.save()
+                } catch {
+                    fatalError("Failure to save context private: \(entityName),\(keyName): \(error)")
+                }
+            }
         } catch {
             fatalError("Failure to save context: \(entityName),\(keyName): \(error)")
         }
@@ -34,15 +73,22 @@ class CoreDataHelper {
         do {
             let fetched = try managedContext.fetch(requestFetch) as! [NSManagedObject]
             
-            //for ftd in fetched {
-                
-                fetched[index].setValue(data, forKey: keyName)
-                
-                do {
-                    try managedContext.save()
-                } catch {
-                    fatalError("Failure to update context: \(entityName),\(keyName): \(error)")
-                }
+            fetched[index].setValue(data, forKey: keyName)
+            
+            //let privateMOC = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+            //privateMOC.parent = managedContext
+            
+            //do {
+            //    try privateMOC.save()
+            //    managedContext.performAndWait {
+                    do {
+                        try managedContext.save()
+                    } catch {
+                        fatalError("Failure to save update private: \(entityName),\(keyName): \(error)")
+                    }
+            //    }
+            //} catch {
+            //    fatalError("Failure to update context: \(entityName),\(keyName): \(error)")
             //}
             
         } catch {

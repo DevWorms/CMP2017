@@ -91,12 +91,9 @@ class DetalleViewController: UIViewController {
         if  self.seccion == 2 {
         print("hola presion")
          
-                CoreDataHelper.saveData(data: detalle, entityName: "MisExpositores", keyName: "misExpositores")
-          
             
-                
-             btn2.imageView?.image = #imageLiteral(resourceName: "04Agregar_a_mis_expositores")
-           
+            CoreDataHelper.saveData(entityName: "MisExpositores", data: detalle ,keyName: "misExpositores",dataImg: imgData, keyNameImg: "imgMisExpositores" )
+            
         }
         
     }

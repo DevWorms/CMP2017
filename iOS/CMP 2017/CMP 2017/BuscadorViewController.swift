@@ -99,7 +99,7 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
                 
             }else if self.seccion == 6{
                 self.datos = CoreDataHelper.fetchData(entityName: "MisExpositores", keyName: "misExpositores")!
-                
+                  self.imgs = CoreDataHelper.fetchItem(entityName: "MisExpositores", keyName: "imgMisExpositores")!
                 self.expositores = self.datos.sorted(by: { (a,b) in (a["nombre"] as! String) < (b["nombre"] as! String) })
 
             }else {

@@ -1650,11 +1650,11 @@
         <image name="fondoCMP" width="1242" height="2208"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="NTs-h7-V0z"/>
         <segue reference="Euz-ZR-EEI"/>
         <segue reference="z9v-TW-n8m"/>
-        <segue reference="Eck-C4-SEN"/>
-        <segue reference="psR-II-8MZ"/>
         <segue reference="YXB-CT-Ovq"/>
+        <segue reference="GJj-eU-EjN"/>
         <segue reference="p9G-ew-iHC"/>
     </inferredMetricsTieBreakers>
 </document>

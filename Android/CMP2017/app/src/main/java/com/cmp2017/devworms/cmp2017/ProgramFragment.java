@@ -34,6 +34,8 @@ public class ProgramFragment extends Fragment {
         Typeface TF = Typeface.createFromAsset(getActivity().getAssets(),font_path);
         txtTituloP.setTypeface(TF);
         cd = new ConnectionDetector(getActivity());
+
+
         ArrayAdapter adapterTiposEven = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_dropdown_item, tipoEvento);
         spinTipoEven.setAdapter(adapterTiposEven);

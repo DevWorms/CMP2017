@@ -46,7 +46,7 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let nav = self.navigationController?.navigationBar
         nav?.tintColor = UIColor.white
-        nav!.setBackgroundImage(navBackgroundImage, for:.default)
+        nav?.setBackgroundImage(navBackgroundImage, for:.default)
         
         nav?.titleTextAttributes = [NSForegroundColorAttributeName: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)]
         nav?.topItem?.title = UserDefaults.standard.value(forKey: "name") as! String?
@@ -97,7 +97,12 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
                 self.expositores = self.datos.sorted(by: { (a,b) in (a["nombre"] as! String) < (b["nombre"] as! String) })
                 
                 
-            } else {
+            }else if self.seccion == 6{
+                self.datos = CoreDataHelper.fetchData(entityName: "MisExpositores", keyName: "misExpositores")!
+                  self.imgs = CoreDataHelper.fetchItem(entityName: "MisExpositores", keyName: "imgMisExpositores")!
+                self.expositores = self.datos.sorted(by: { (a,b) in (a["nombre"] as! String) < (b["nombre"] as! String) })
+
+            }else {
                 self.datos = CoreDataHelper.fetchData(entityName: "Expositores", keyName: "expositor")!
                 self.imgs = CoreDataHelper.fetchItem(entityName: "Expositores", keyName: "imgExpositor")!
                 self.expositores = self.datos.sorted(by: { (a,b) in (a["nombre"] as! String) < (b["nombre"] as! String) })

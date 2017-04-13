@@ -54,6 +54,9 @@ class MenuUsuarioViewController: ViewController {
         let methodsCMP = ServerConnection()
         methodsCMP.getCMP(myView: self)
     }
+    @IBAction func misExpositores(_ sender: Any) {
+          self.performSegue(withIdentifier: "misexpositores", sender: nil)
+    }
     @IBAction func cerrarSesion(_ sender: Any) {
         UserDefaults.standard.set("", forKey: "api_key")
         UserDefaults.standard.set("", forKey: "user_id")
@@ -62,6 +65,12 @@ class MenuUsuarioViewController: ViewController {
         let vc = storyboard!.instantiateViewController(withIdentifier: "Inicio")
         self.present( vc , animated: true, completion: nil)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "misexpositores" {
+            (segue.destination as! BuscadorViewController).seccion = 6
+        }    }
+
     /*
     // MARK: - Navigation
 

@@ -284,7 +284,13 @@ public class DetalleExpoFragment extends Fragment {
 
                     dbHandler = new AdminSQLiteOffline(getActivity(), null, null, 1);
                     SQLiteDatabase db = dbHandler.getWritableDatabase();
-                    cursor = dbHandler.ImagenPorId(expoId);
+
+                    if(nombreSec.equals("Expositores")){
+                        cursor = dbHandler.ImagenPorId(expoId);
+                    } else if(nombreSec.equals("Patrocinadores")){
+                        cursor = dbHandler.ImagenPorIdPatro(expoId);
+                    }
+
                     if(cursor.getCount()>0) {
                         imagen = getImage(cursor.getString(0));
                     }

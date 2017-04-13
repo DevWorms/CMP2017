@@ -30,10 +30,16 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
     public static final String COLUMN_EXPOIMAGESTR = "imageExpo";
 
 
+
     public static final String TABLA_PATROCINADORES = "Patrocinadores";
     public static final String COLUMN_IDPA = "_id";
     public static final String COLUMN_JSONPATROALFABETICO = "jsonPatroAlfa";
     public static final String COLUMN_JSONPATRONumerico = "jsonPatroNume";
+
+    public static final String TABLA_PATROIMAGENES = "PatroImagenes";
+    public static final String COLUMN_IDPATRO = "_id";
+    public static final String COLUMN_IDPATROCINADOR = "idPatro";
+    public static final String COLUMN_PATROIMAGESTR = "imagePatro";
 
 
 
@@ -78,6 +84,15 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
 
         db.execSQL(queryPatro);
 
+        String queryPatroIma = "CREATE TABLE " + TABLA_PATROIMAGENES + "(" +
+                COLUMN_IDPATRO + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_IDPATROCINADOR + " TEXT," +
+                COLUMN_PATROIMAGESTR + " TEXT" +
+                ");";
+
+        db.execSQL(queryPatroIma);
+
+
     }
 
     @Override
@@ -92,6 +107,9 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
         onCreate(db);
 
         db.execSQL("DROP TABLE IF EXISTS " + TABLA_PATROCINADORES);
+        onCreate(db);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_PATROIMAGENES);
         onCreate(db);
     }
 
@@ -226,6 +244,28 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
     public Cursor jsonPatroNume(){
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT jsonPatroNume FROM " + TABLA_PATROCINADORES + " ;";
+        Cursor c = db.rawQuery(query, null);
+
+        if (c != null) {
+            c.moveToFirst();
+        }
+
+        return c;
+    }
+
+    public void addPatroImag(String idImage, String image) {
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_IDPATROCINADOR, idImage);
+        values.put(COLUMN_PATROIMAGESTR, image);
+        SQLiteDatabase db = getWritableDatabase();
+        db.insert(TABLA_PATROIMAGENES, null, values);
+        db.close();
+
+    }
+    public Cursor ImagenPorIdPatro(String idPatro){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT imagePatro FROM " + TABLA_PATROIMAGENES + " WHERE idPatro = "+idPatro+";";
         Cursor c = db.rawQuery(query, null);
 
         if (c != null) {

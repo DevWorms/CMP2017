@@ -33,6 +33,7 @@ class DetalleViewController: UIViewController {
     var detalle = [String: Any]()
     var imgData: Any?
     var misExpositores = [String: Any]()
+    var encontro = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,10 +53,23 @@ class DetalleViewController: UIViewController {
             self.lugar.text = detalle["lugar"] as! String?
             self.recomendaciones.text = detalle["recomendaciones"] as! String?
             
-        case 2:
+        case 2,6:
             let misExpositores = CoreDataHelper.fetchData(entityName: "MisExpositores", keyName: "misExpositores")!
-            print("MisExpositores Count:  \(misExpositores.count)")
-            if misExpositores.count > 0 {
+           
+            
+            for ftd in misExpositores {
+            print("ftd: \(ftd["id"] as! Int16)")
+            print("detalle: \(detalle["id"] as! Int16)")
+
+                
+                if ftd["id"] as! Int == detalle["id"] as! Int{
+                    
+                    encontro = 1
+                    print("entro \(encontro)" )
+                }
+            }
+            print("MisExpositores Count:  \(encontro)")
+            if encontro > 0 {
                 btn2.imageView?.image = #imageLiteral(resourceName: "btneliminarexpo")
             }else{
                  btn2.imageView?.image = #imageLiteral(resourceName: "04Agregar_a_mis_expositores")
@@ -94,16 +108,22 @@ class DetalleViewController: UIViewController {
     }
     
     @IBAction func btnDos(_ sender: Any) {
-        if  self.seccion == 2 {
+        if  self.seccion == 2 || self.seccion == 6  {
              let misExpositores = CoreDataHelper.fetchData(entityName: "MisExpositores", keyName: "misExpositores")!
             
             print("MisExpositores boton:  \(misExpositores.count)")
-            if misExpositores.count > 0 {
+            
+            if encontro > 0 {
                         print("Eliminar")
              CoreDataHelper.deleteObject(entityName: "MisExpositores", keyName: "misExpositores", id: detalle["id"] as! Int16)
+                encontro = 0
+                
+                btn2.imageView?.image = #imageLiteral(resourceName: "04Agregar_a_mis_expositores")
             } else {
                 print("Agregar")
                  CoreDataHelper.saveData(entityName: "MisExpositores", data: detalle ,keyName: "misExpositores",dataImg: imgData, keyNameImg: "imgMisExpositores" )
+                 encontro = 1
+                btn2.imageView?.image = #imageLiteral(resourceName: "btneliminarexpo")
             }
 
            

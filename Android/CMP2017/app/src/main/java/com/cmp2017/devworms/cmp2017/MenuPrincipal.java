@@ -212,8 +212,9 @@ public class MenuPrincipal extends AppCompatActivity
                 Toast.makeText(MenuPrincipal.this,"Registrate para activar esta sección",Toast.LENGTH_SHORT).show();
 
             }else{
-
-                Toast.makeText(MenuPrincipal.this,"Próximamente",Toast.LENGTH_SHORT).show();
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.actividad, new EncuestasFragment()).commit();
+                //Toast.makeText(MenuPrincipal.this,"Próximamente",Toast.LENGTH_SHORT).show();
 
 
             }

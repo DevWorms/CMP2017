@@ -2,6 +2,7 @@ package com.cmp2017.devworms.cmp2017;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -39,7 +40,7 @@ public class EncuestaDetalleFragment  extends Fragment implements View.OnClickLi
     TextView preguntaDos;
     TextView preguntaTres;
     ImageView imagenEvento;
-
+    ProgressDialog pDialog;
     String strPreguntaUno;
     String strPreguntaDos;
     String strPreguntaTres;
@@ -48,7 +49,10 @@ public class EncuestaDetalleFragment  extends Fragment implements View.OnClickLi
     RatingBar ratingDos;
     RatingBar ratingTres;
     Button btnRespuestas;
-
+    float valorRatingUno;
+    float valorRatingDos;
+    float valorRatingTres;
+    String mensajeRespuestas;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_encuesta_detalle, container, false);
@@ -78,21 +82,32 @@ public class EncuestaDetalleFragment  extends Fragment implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
+        // obtenemos el valor de lso rating bar
+        this.valorRatingUno=this.ratingUno.getRating();
+        this.valorRatingDos = this.ratingDos.getRating();
+        this.valorRatingTres = this.ratingTres.getRating();
+        SendRespuestasEncuesta send = new SendRespuestasEncuesta();
+        send.execute();
 
-        String calificacion = "Calificacion 1: " + this.ratingUno.getRating() + " Calificacion 2: " + this.ratingDos.getRating() + " Calificacion 3: " + this.ratingTres.getRating();
-        Toast.makeText(getActivity(), calificacion, Toast.LENGTH_LONG).show();
 
     }
 
     class GetDetalleEncuesta extends AsyncTask<String, String, String> {
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(getActivity());
+            pDialog.setMessage("Obteniendo encuesta...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        @Override
         protected String doInBackground(String... params) {
-
             String fromUrl = "http://cmp.devworms.com/api/encuesta/detail/"+userId+"/"+apiKey+"/"+idEncuesta;
-
             JSONParser jsonParser = new JSONParser();
-
             String respuesta = jsonParser.makeHttpRequest(fromUrl, "GET", fromUrl, "");
 
             if (respuesta != "error") {
@@ -132,7 +147,66 @@ public class EncuestaDetalleFragment  extends Fragment implements View.OnClickLi
         protected void onPostExecute(String file_url) {
             if ( response.equals("OK") ) {
                 fillEncuesta();
+
             }
+            pDialog.dismiss();
+        }
+    }
+    class SendRespuestasEncuesta extends AsyncTask<String, String, String>{
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(getActivity());
+            pDialog.setMessage("Enviando calificación...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+        @Override
+        protected String doInBackground(String... params) {
+            String response = "";
+            JSONParser jsonParser = new JSONParser();
+            JSONObject jparamentros = new JSONObject();
+            try{
+                jparamentros.put("user_id",userId);
+                jparamentros.put("api_key",apiKey);
+                jparamentros.put("encuesta_id",idEncuesta);
+                jparamentros.put("respuesta_1",valorRatingUno);
+                jparamentros.put("respuesta_2",valorRatingDos);
+                jparamentros.put("respuesta_3",valorRatingTres);
+            }catch (JSONException jex){
+                jex.printStackTrace();
+            }
+
+            String parametros = jparamentros.toString();
+            String toUrl = "http://cmp.devworms.com/api/encuesta/response";
+            String respuesta = jsonParser.makeHttpRequest(toUrl, "POST", parametros, "");
+            mensajeRespuestas = "No se pudieron enviar las respuesta";
+            try{
+                JSONObject jRespuesta = new JSONObject(respuesta);
+                if(jRespuesta.getInt("status") == 1){
+                    mensajeRespuestas = jRespuesta.getString("mensaje");
+                    response = "OK";
+                }else{
+                    mensajeRespuestas = jRespuesta.getString("mensaje");
+                    response = "NO";
+                }
+            }catch(JSONException jex){
+                mensajeRespuestas = jex.getMessage();
+                response = "NO";
+            }
+
+            return response;
+        }
+        protected void onPostExecute(String file_url) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getActivity(), mensajeRespuestas, Toast.LENGTH_LONG).show();
+                }
+            });
+
+            pDialog.dismiss();
         }
     }
     public void fillEncuesta(){

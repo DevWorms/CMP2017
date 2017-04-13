@@ -912,6 +912,547 @@ class DatabaseSeeder extends Seeder
                 'user_id' => 1,
                 'file_id' => 11
             ]);
+
+            // Estantes - mapa expositores
+            // Primera fila
+            $y = 542;
+            $id = 1;
+            for ($k = 0; $k < 2; $k++) {
+                $x = 144;
+                $espacio = 39;
+
+                for ($j = 0; $j < 3; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 29;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+
+                $x = 605;
+                $espacio = 40;
+                for ($j = 3; $j < 6; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 28;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+
+                $x = 1064;
+                $espacio = 40;
+                for ($j = 6; $j < 9; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 28;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+
+                $x = 1526;
+                $espacio = 40;
+                for ($j = 9; $j < 13; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 28;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+
+                $x = 2138;
+                $espacio = 40;
+                for ($j = 13; $j < 15; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 28;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+                $y += 26;
+            }
+
+            // Fila 1.5
+            $y = 594;
+            $x = 2288;
+            for ($i = 0; $i < 4; $i++) {
+                \App\MapaExpositores::create([
+                    'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                ]);
+                $x += 28;
+                $id++;
+            }
+
+            // Segunda fila
+            $y = 636;
+            for ($k = 0; $k < 2; $k++) {
+                $x = 144;
+                $espacio = 39;
+
+                for ($j = 0; $j < 3; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 29;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+
+                $x = 605;
+                $espacio = 40;
+                for ($j = 3; $j < 6; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 28;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+
+                $x = 1064;
+                $espacio = 40;
+                for ($j = 6; $j < 9; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 28;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+
+                $x = 1526;
+                $espacio = 40;
+                for ($j = 9; $j < 13; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 28;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+
+                $x = 2138;
+                $espacio = 40;
+                for ($j = 13; $j < 14; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 28;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+                $y += 26;
+            }
+
+            $y = 626;
+            $x = 2288;
+            for ($i = 0; $i < 4; $i++) {
+                \App\MapaExpositores::create([
+                    'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                ]);
+                $x += 28;
+                $id++;
+            }
+
+            $y = 652;
+            $x = 2288;
+            for ($i = 0; $i < 4; $i++) {
+                \App\MapaExpositores::create([
+                    'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                ]);
+                $x += 28;
+                $id++;
+            }
+
+            // Tercera fila
+            $y = 734;
+            for ($k = 0; $k < 2; $k++) {
+                $x = 144;
+                $espacio = 39;
+
+                for ($j = 0; $j < 3; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 29;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+
+                $x = 605;
+                $espacio = 40;
+                for ($j = 3; $j < 6; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 28;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+
+                $x = 1064;
+                $espacio = 40;
+                for ($j = 6; $j < 9; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 28;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+
+                $x = 1526;
+                $espacio = 40;
+                for ($j = 9; $j < 13; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 28;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+
+                $x = 2138;
+                $espacio = 40;
+                for ($j = 13; $j < 15; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 28;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+                $y += 26;
+            }
+
+            // cuarta Fila
+            $y = 830;
+            for ($k = 0; $k < 4; $k++) {
+                $x = 173;
+                $espacio = 39;
+
+                for ($i = 0; $i < 2; $i++) {
+                    \App\MapaExpositores::create([
+                        'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                    ]);
+                    $x += 29;
+                    $id++;
+                }
+                $x += 70;
+
+                for ($j = 3; $j < 6; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 28;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+
+                $x = 605;
+                $espacio = 40;
+                for ($j = 3; $j < 6; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 28;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+
+                $x = 1064;
+                $espacio = 40;
+                for ($j = 6; $j < 9; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 28;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+
+                $x = 1526;
+                $espacio = 40;
+                for ($j = 9; $j < 13; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 28;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+
+                $x = 2138;
+                $espacio = 40;
+                for ($j = 13; $j < 15; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 28;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+                $y += 30;
+            }
+
+            // Quinta Fila
+            $y = 1005;
+            for ($k = 0; $k < 4; $k++) {
+                $x = 173;
+                $espacio = 39;
+
+                for ($i = 0; $i < 2; $i++) {
+                    \App\MapaExpositores::create([
+                        'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                    ]);
+                    $x += 29;
+                    $id++;
+                }
+                $x += 70;
+
+                for ($j = 3; $j < 6; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 28;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+
+                $x = 605;
+                $espacio = 40;
+                for ($j = 3; $j < 6; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 28;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+
+                $x = 1064;
+                $espacio = 40;
+                for ($j = 6; $j < 9; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 28;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+
+                $x = 1526;
+                $espacio = 40;
+                for ($j = 9; $j < 13; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 28;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+
+                $x = 2138;
+                $espacio = 40;
+                for ($j = 13; $j < 15; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 28;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+                $y += 30;
+            }
+
+            // Primera fila
+            $y = 1159;
+            for ($k = 0; $k < 2; $k++) {
+                $x = 144;
+                $espacio = 39;
+
+                for ($j = 0; $j < 3; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 29;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+
+                $x = 605;
+                $espacio = 40;
+                for ($j = 3; $j < 6; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 28;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+
+                $x = 1064;
+                $espacio = 40;
+                for ($j = 6; $j < 9; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 28;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+
+                $x = 1526;
+                $espacio = 40;
+                for ($j = 9; $j < 13; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 28;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+                $y += 26;
+            }
+
+            // Primera fila
+            $y = 1258;
+            for ($k = 0; $k < 2; $k++) {
+                $x = 144;
+                $espacio = 39;
+
+                for ($j = 0; $j < 3; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 29;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+
+                $x = 605;
+                $espacio = 40;
+                for ($j = 3; $j < 6; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 28;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+
+                $x = 1064;
+                $espacio = 40;
+                for ($j = 6; $j < 9; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 28;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+
+                $x = 1526;
+                $espacio = 40;
+                for ($j = 9; $j < 12; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 28;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+
+                $y += 26;
+            }
+
+            $y = 1218;
+            for ($k = 0; $k < 2; $k++) {
+                $x = 1982;
+                $espacio = 39;
+
+                for ($j = 0; $j < 1; $j++) {
+                    for ($i = 0; $i < 4; $i++) {
+                        \App\MapaExpositores::create([
+                            'coords' => $x . ',' . $y . ',' . ($x + 28) . ',' . ($y+26)
+                        ]);
+                        $x += 29;
+                        $id++;
+                    }
+                    $x += $espacio;
+                }
+                $y += 28;
+            }
         } catch (Exception $ex) {
             echo $ex->getLine() . " " . $ex->getMessage();
         }

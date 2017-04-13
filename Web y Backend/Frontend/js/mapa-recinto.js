@@ -13,7 +13,7 @@ $('document').ready(function() {
         formData.append('api_key', api_key);
 
         $.ajax({
-            url: API_URL + 'mapa/recinto/create',
+            url: API_URL + 'mapa/recinto/upload',
             type: 'POST',
             data: formData,
             success: function (data) {

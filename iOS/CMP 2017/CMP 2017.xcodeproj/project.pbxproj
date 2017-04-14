@@ -10,6 +10,7 @@
 		0401F1421E9FD8D0006A41FB /* EncuestasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0401F1411E9FD8D0006A41FB /* EncuestasViewController.swift */; };
 		0421216F1EA0403D005FC5E3 /* EncuentaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0421216E1EA0403D005FC5E3 /* EncuentaTableViewCell.swift */; };
 		042121711EA04C8B005FC5E3 /* DetalleEncuestaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042121701EA04C8B005FC5E3 /* DetalleEncuestaViewController.swift */; };
+		042121731EA090F5005FC5E3 /* CosmosDistrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042121721EA090F4005FC5E3 /* CosmosDistrib.swift */; };
 		3B396BF61E70DF2200C4611E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396BF51E70DF2200C4611E /* LoginViewController.swift */; };
 		3B396BF81E70DF2F00C4611E /* RegistroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396BF71E70DF2F00C4611E /* RegistroViewController.swift */; };
 		3B396BFA1E70E4F400C4611E /* MenuPrincipalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396BF91E70E4F400C4611E /* MenuPrincipalViewController.swift */; };
@@ -63,6 +64,7 @@
 		0401F1411E9FD8D0006A41FB /* EncuestasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncuestasViewController.swift; sourceTree = "<group>"; };
 		0421216E1EA0403D005FC5E3 /* EncuentaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncuentaTableViewCell.swift; sourceTree = "<group>"; };
 		042121701EA04C8B005FC5E3 /* DetalleEncuestaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetalleEncuestaViewController.swift; sourceTree = "<group>"; };
+		042121721EA090F4005FC5E3 /* CosmosDistrib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosDistrib.swift; sourceTree = "<group>"; };
 		3B396BF51E70DF2200C4611E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3B396BF71E70DF2F00C4611E /* RegistroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistroViewController.swift; sourceTree = "<group>"; };
 		3B396BF91E70E4F400C4611E /* MenuPrincipalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuPrincipalViewController.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				0401F1411E9FD8D0006A41FB /* EncuestasViewController.swift */,
 				0421216E1EA0403D005FC5E3 /* EncuentaTableViewCell.swift */,
 				042121701EA04C8B005FC5E3 /* DetalleEncuestaViewController.swift */,
+				042121721EA090F4005FC5E3 /* CosmosDistrib.swift */,
 			);
 			name = "Con Internet";
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 				3B8B4C7F1E825F7400983CD4 /* NotificacionTableViewCell.swift in Sources */,
 				3B396C161E773C3900C4611E /* SitiosViewController.swift in Sources */,
 				3BAEAA151E95CBCF00B1E7DA /* CoreDataHelper.swift in Sources */,
+				042121731EA090F5005FC5E3 /* CosmosDistrib.swift in Sources */,
 				3B396C021E764CCD00C4611E /* MenuMapaViewController.swift in Sources */,
 				3B396BF81E70DF2F00C4611E /* RegistroViewController.swift in Sources */,
 				3B396BFA1E70E4F400C4611E /* MenuPrincipalViewController.swift in Sources */,

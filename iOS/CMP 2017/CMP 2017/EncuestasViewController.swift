@@ -14,6 +14,7 @@ class EncuestaViewController: UIViewController, UITableViewDataSource, UITableVi
     
     var datos = [[String : Any]]()
     var idEncuesta: Int!
+    var json:[String : Any] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,7 +112,7 @@ class EncuestaViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! EncuestaTableViewCell
-        let json  = self.datos[indexPath.row]
+        self.json  = self.datos[indexPath.row]
         let filesm = json["filesm"] as! [String : Any]
         let urlImage = filesm["url"] as! String
         
@@ -132,12 +133,11 @@ class EncuestaViewController: UIViewController, UITableViewDataSource, UITableVi
                 func display_image()
                 {
                       cell.imgEncuesta.image = UIImage(data: data!)
-                     cell.btnCalificar.addTarget(self, action: "click:", for: UIControlEvents.touchUpInside)
+                     /* cell.btnCalificar.addTarget(self, action: "click:", for: UIControlEvents.touchUpInside)
                      
                     func click(sender: UIButton) {
-                        self.idEncuesta = json["id"] as! Int
-                       self.performSegue(withIdentifier: "detalleEncuestas", sender: nil)
-                    }
+                        
+                    }*/
                    
                         
                         
@@ -154,15 +154,20 @@ class EncuestaViewController: UIViewController, UITableViewDataSource, UITableVi
      
         return cell
     }
-  
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "detalleEncuestas" {
-            //(segue.destination as! BuscadorViewController).seccion = 6
-            let nav = segue.destination as! UINavigationController
-            let svc = nav.topViewController as! DetalleEncuestaViewController
-            svc.idEncuesta = self.idEncuesta;
-        }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.idEncuesta = self.json["id"] as! Int
+        self.performSegue(withIdentifier: "detalleEncuestas", sender: nil)
+      
+        
     }
+   /* override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detalleEncuestas" {
+            (segue.destination as! DetalleEncuestaViewController).idEncuesta = self.idEncuesta
+            /*let nav = segue.destination as! UINavigationController
+            let svc = nav.topViewController as! DetalleEncuestaViewController
+            svc.idEncuesta = self.idEncuesta;*/
+        }
+    }*/
 
     
     /*

@@ -26,6 +26,9 @@
 	.st20{fill:#344A75;}
 	.st21{fill:#344A75;stroke:#000000;stroke-miterlimit:10;}
 </style>
+	  <g
+     id="layer3"
+     style="display:inline">
 <rect x="145" y="569.6" class="st0" width="56.5" height="27.9"/>
 <path class="st1" d="M580.3,468.3"/>
 <path class="st1" d="M566.5,468.3"/>
@@ -33,8 +36,8 @@
 <line class="st2" x1="1269.8" y1="471" x2="1269.8" y2="471"/>
 <rect x="145.1" y="541.7" class="st0" width="56.5" height="27.9"/>
 <rect x="201.5" y="541.7" class="st0" width="56.4" height="55.8"/>
-<rect x="144.9" y="569.6" class="st0" width="28.2" height="27.9"/>
-<rect x="201.5" y="569.6" class="st0" width="28.2" height="27.9"/>
+<rect id="estante1" x="144.9" y="569.6" class="st0" width="28.2" height="27.9"/>
+<rect id="estante1" x="201.5" y="569.6" class="st0" width="28.2" height="27.9"/>
 <rect x="229.7" y="541.7" class="st0" width="28.2" height="27.9"/>
 <rect x="173.2" y="541.7" class="st0" width="28.2" height="27.9"/>
 <rect x="299" y="569.6" class="st0" width="56.5" height="27.9"/>
@@ -2110,4 +2113,5 @@
 <rect x="2040.1" y="1244" class="st0" width="28.2" height="27.9"/>
 <rect x="2068.3" y="1216.2" class="st0" width="28.2" height="27.9"/>
 <rect x="2011.8" y="1216.2" class="st0" width="28.2" height="27.9"/>
+	  </g>
 </svg>

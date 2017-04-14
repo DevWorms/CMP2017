@@ -976,9 +976,6 @@
                                 <state key="normal" title="Mis Expositores" image="03_Mis_Expositores">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="91U-Vc-odF" kind="show" identifier="misexpositores" id="YXB-CT-Ovq"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hQd-df-VMV">
                                 <rect key="frame" x="16" y="282" width="343" height="64"/>
@@ -986,6 +983,9 @@
                                 <state key="normal" title="Mis Encuestas" image="04_Mis_Encuestas">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="ECH-yc-ql3" kind="show" id="ciQ-f9-oWM"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MhV-p7-rgD">
                                 <rect key="frame" x="16" y="354" width="343" height="64"/>
@@ -1022,6 +1022,16 @@
                                 </state>
                                 <connections>
                                     <action selector="cerrarSesion:" destination="6J5-cF-d15" eventType="touchUpInside" id="yzi-wi-LVF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6p-Ct-Ad0">
+                                <rect key="frame" x="16" y="210" width="343" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Mis Expositores" image="03_Mis_Expositores">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="RcV-Hr-1oF" kind="show" identifier="misexpositores" id="aP8-fv-M3d"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1572,6 +1582,213 @@
             </objects>
             <point key="canvasLocation" x="6884" y="3065.217391304348"/>
         </scene>
+        <!--Encuesta View Controller-->
+        <scene sceneID="60b-tR-9FC">
+            <objects>
+                <viewController id="Gal-xb-DDD" customClass="EncuestaViewController" customModule="CMP_2017" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gIM-Sv-UUR"/>
+                        <viewControllerLayoutGuide type="bottom" id="pyX-Vq-clj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="juw-x2-sSF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="uEq-m5-KBS">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="IAX-PI-J1p">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <subviews>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="125" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ylp-1S-sfy">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <prototypes>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="125" id="bhG-LO-sW8" customClass="EncuestaTableViewCell" customModule="CMP_2017" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="28" width="375" height="125"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bhG-LO-sW8" id="Ukl-UJ-ed6">
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="124.5"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zaU-P0-jQp">
+                                                                    <rect key="frame" x="8" y="0.0" width="173" height="116"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                </imageView>
+                                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uq4-A4-WUQ">
+                                                                    <rect key="frame" x="202" y="38" width="134" height="41"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <state key="normal" title="Button" image="Boton_calificar"/>
+                                                                </button>
+                                                            </subviews>
+                                                        </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="btnCalificar" destination="uq4-A4-WUQ" id="btp-Ij-THk"/>
+                                                            <outlet property="imgEncuesta" destination="zaU-P0-jQp" id="JAp-9F-fXE"/>
+                                                        </connections>
+                                                    </tableViewCell>
+                                                </prototypes>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="Gal-xb-DDD" id="fcZ-XV-fIm"/>
+                                                    <outlet property="delegate" destination="Gal-xb-DDD" id="4lT-fC-hrZ"/>
+                                                </connections>
+                                            </tableView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="uEq-m5-KBS" firstAttribute="centerX" secondItem="juw-x2-sSF" secondAttribute="centerX" id="9H9-jC-BYJ"/>
+                            <constraint firstItem="Ylp-1S-sfy" firstAttribute="width" secondItem="juw-x2-sSF" secondAttribute="width" id="I7s-rR-ejy"/>
+                            <constraint firstItem="uEq-m5-KBS" firstAttribute="centerY" secondItem="juw-x2-sSF" secondAttribute="centerY" id="lKg-Hz-EuJ"/>
+                            <constraint firstItem="Ylp-1S-sfy" firstAttribute="height" secondItem="juw-x2-sSF" secondAttribute="height" id="lxb-1k-zm1"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="9Aa-5e-KnA">
+                        <barButtonItem key="backBarButtonItem" title="Encuestas" id="gMq-Hq-OZo"/>
+                        <rightBarButtonItems>
+                            <barButtonItem image="12Menu" id="kab-s4-GHX">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </barButtonItem>
+                            <barButtonItem image="11Casa" id="8jl-op-gnl">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="menu:" destination="P6W-w9-gHR" id="Um9-P3-gy5"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="Ylp-1S-sfy" id="GFk-zM-db6"/>
+                        <segue destination="yeX-kf-rF2" kind="show" identifier="detalleEncuestas" id="Fse-C6-cDc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eXn-0T-9O3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8988" y="2319"/>
+        </scene>
+        <!--Detalle Encuesta View Controller-->
+        <scene sceneID="Gwt-Ul-7hQ">
+            <objects>
+                <viewController id="yeX-kf-rF2" customClass="DetalleEncuestaViewController" customModule="CMP_2017" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="A6E-3W-NFE"/>
+                        <viewControllerLayoutGuide type="bottom" id="FeG-vh-NVF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XDc-Ux-6cG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9ZX-Vo-P1d">
+                                <rect key="frame" x="16" y="72" width="343" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="ratingLabel" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y68-lH-JfV">
+                                <rect key="frame" x="16" y="220" width="343" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9qi-0W-0O4">
+                                <rect key="frame" x="16" y="403" width="343" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Y8-v3-IkO">
+                                <rect key="frame" x="16" y="313" width="343" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="erU-Im-sMB" customClass="CosmosView" customModule="CMP_2017" customModuleProvider="target">
+                                <rect key="frame" x="54" y="268" width="305" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="emptyColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
+                                        <color key="value" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                        <real key="value" value="50"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="fillMode">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rating">
+                                        <real key="value" value="-1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ajm-7u-LFR" customClass="CosmosView" customModule="CMP_2017" customModuleProvider="target">
+                                <rect key="frame" x="54" y="361" width="305" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="emptyColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
+                                        <color key="value" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                        <real key="value" value="50"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="fillMode">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rating">
+                                        <real key="value" value="-1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1kB-yy-lYX" customClass="CosmosView" customModule="CMP_2017" customModuleProvider="target">
+                                <rect key="frame" x="54" y="451" width="305" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="emptyColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
+                                        <color key="value" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                        <real key="value" value="50"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="fillMode">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rating">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Xj-TT-Bu9">
+                                <rect key="frame" x="82" y="573" width="202" height="62"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="Boton_calificar"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="ratingBar" destination="erU-Im-sMB" id="aA1-Td-aUq"/>
+                        <outlet property="ratingLabel" destination="y68-lH-JfV" id="nws-6u-l5e"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Wr-TO-rfY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9776.7999999999993" y="2318.5907046476764"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="xQ3-dY-0hF">
             <objects>
@@ -1607,6 +1824,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O7s-0V-M7N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6841" y="904"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Utg-x4-uUi">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ECH-yc-ql3" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kS6-Dp-See">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Gal-xb-DDD" kind="relationship" relationship="rootViewController" id="VFB-Vu-UwS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F2a-8g-eyp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7832.8000000000002" y="2318.5907046476764"/>
         </scene>
     </scenes>
     <resources>
@@ -1647,14 +1882,15 @@
         <image name="10Close" width="91" height="89"/>
         <image name="11Casa" width="32" height="25"/>
         <image name="12Menu" width="32" height="17"/>
+        <image name="Boton_calificar" width="535" height="161"/>
         <image name="fondoCMP" width="1242" height="2208"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NTs-h7-V0z"/>
         <segue reference="Euz-ZR-EEI"/>
+        <segue reference="NTs-h7-V0z"/>
         <segue reference="z9v-TW-n8m"/>
-        <segue reference="YXB-CT-Ovq"/>
-        <segue reference="GJj-eU-EjN"/>
         <segue reference="p9G-ew-iHC"/>
+        <segue reference="ZdW-HO-l3u"/>
+        <segue reference="eG2-Ou-XTa"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -2,9 +2,11 @@ package com.cmp2017.devworms.cmp2017;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +17,19 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class ProgramFragment extends Fragment {
 
     Spinner spinTipoEven,spinDia;
-    private final static String[] tipoEvento = { "Seleciona un tipo de evento", "Todos", "Sesiones Técnicas",
-            "Comidas Conferencias","e-Poster", "Otros" };
+    AdminSQLiteOffline dbHandlerOffline;
+
+
+
     private final static String[] diaSelec = { "Seleciona un día", "Todos", "Lunes 5 de Junio",
-            "Martes 6 de Junio", "Miercoles 7 de Junio","Jueves 8 de Junio","Viernes 9 de Junio" };
+            "Martes 6 de Junio", "Miercoles 7 de Junio","Jueves 8 de Junio","Viernes 9 de Junio","Sabado 10 de Junio" };
     ConnectionDetector cd;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,10 +43,33 @@ public class ProgramFragment extends Fragment {
         txtTituloP.setTypeface(TF);
         cd = new ConnectionDetector(getActivity());
 
+        dbHandlerOffline = new AdminSQLiteOffline(getActivity(), null, null, 1);
+        Cursor rs = dbHandlerOffline.getJsonCategorias();
+        String strCategorias = rs.getString(0);
+        String tipoEvento[];
+        try{
+            JSONObject json = new JSONObject(strCategorias);
 
-        ArrayAdapter adapterTiposEven = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_spinner_dropdown_item, tipoEvento);
-        spinTipoEven.setAdapter(adapterTiposEven);
+            JSONArray jCategoria = new JSONArray(json.getString("categorias"));
+            tipoEvento = new String[jCategoria.length() + 2];
+            tipoEvento [0] = "Seleciona un tipo de evento";
+            int longitudFinal = 0;
+            for(int cont= 0; cont < jCategoria.length() ; cont++){
+                JSONObject tempPrograma = jCategoria.getJSONObject(cont);
+                tipoEvento[cont + 1] = tempPrograma.getInt("id") + "-" +  tempPrograma.getString("nombre");
+                longitudFinal +=1;
+                Log.e("TIPO EVENTO",tipoEvento[cont]);
+            }
+            tipoEvento[longitudFinal + 1] = "0-TODOS";
+            ArrayAdapter adapterTiposEven = new ArrayAdapter<String>(getActivity(),
+                    android.R.layout.simple_spinner_dropdown_item, tipoEvento);
+            spinTipoEven.setAdapter(adapterTiposEven);
+
+        }catch(JSONException jex){
+            Log.e("EVENTOS JEX " , jex.getMessage());
+        }
+
+
 
         ArrayAdapter adapterDia = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_dropdown_item, diaSelec);

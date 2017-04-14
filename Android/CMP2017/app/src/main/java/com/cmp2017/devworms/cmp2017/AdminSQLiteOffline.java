@@ -41,6 +41,9 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
     public static final String COLUMN_IDPATROCINADOR = "idPatro";
     public static final String COLUMN_PATROIMAGESTR = "imagePatro";
 
+    public static final String TABLA_CATEGORIAS = "Categorias";
+    public static final String COLUMN_IDCAT = "idCategoria";
+    public static final String COLUMN_JSONCATEGORIA= "jsonCategoria";
 
 
 
@@ -92,6 +95,12 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
 
         db.execSQL(queryPatroIma);
 
+        String queryCategoria = "CREATE TABLE " + TABLA_CATEGORIAS + "(" +
+                COLUMN_IDCAT+ " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_JSONCATEGORIA + " TEXT" +
+                ");";
+
+        db.execSQL(queryCategoria);
 
     }
 
@@ -110,6 +119,9 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
         onCreate(db);
 
         db.execSQL("DROP TABLE IF EXISTS " + TABLA_PATROIMAGENES);
+        onCreate(db);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_CATEGORIAS);
         onCreate(db);
     }
 
@@ -273,5 +285,25 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
         }
 
         return c;
+    }
+    // INSERTAMOS EL JSON DE PROGRAMAS
+    public void addJsonCategorias(String jsonPrograma){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_JSONCATEGORIA, jsonPrograma);
+        SQLiteDatabase db = getWritableDatabase();
+        db.insert(TABLA_CATEGORIAS, null, values);
+        db.close();
+    }
+
+    public Cursor getJsonCategorias(){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT "+COLUMN_JSONCATEGORIA+" FROM " + TABLA_CATEGORIAS + " ;";
+        Cursor cursorRs = db.rawQuery(query, null);
+
+        if (cursorRs != null) {
+            cursorRs.moveToFirst();
+        }
+
+        return cursorRs;
     }
 }

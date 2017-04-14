@@ -117,18 +117,20 @@ class DetalleViewController: UIViewController {
                         print("Eliminar")
              CoreDataHelper.deleteObject(entityName: "MisExpositores", keyName: "misExpositores", id: detalle["id"] as! Int16)
                 encontro = 0
-                
-                btn2.imageView?.image = #imageLiteral(resourceName: "04Agregar_a_mis_expositores")
+                btn2.setImage(UIImage(named: "04Agregar_a_mis_expositores"), for: UIControlState.normal)
+        
+
             } else {
                 print("Agregar")
                  CoreDataHelper.saveData(entityName: "MisExpositores", data: detalle ,keyName: "misExpositores",dataImg: imgData, keyNameImg: "imgMisExpositores" )
                  encontro = 1
-                btn2.imageView?.image = #imageLiteral(resourceName: "btneliminarexpo")
+                 btn2.setImage(UIImage(named: "btneliminarexpo"), for: UIControlState.normal)
             }
 
            
             
         }
+   
         
     }
     

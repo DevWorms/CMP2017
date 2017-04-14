@@ -52,17 +52,13 @@ public class ListadoFragment extends Fragment {
         if(seccion.equals("programas")){
 
             tipoProgram =  getArguments().getString("tipoProgra");
-            if(tipoProgram.equals("Sesiones Técnicas")){
-                cateId = "1";
-            }else if(tipoProgram.equals("Comidas Conferencias")){
-                cateId = "3";
-            }else if(tipoProgram.equals("e-Poster")){
-                cateId = "4";
-            } else if(tipoProgram.equals("Otros")){
-                cateId = "0";
-            }else{
+            if(tipoProgram.split("-")[0].equals("0")){
                 cateId = "";
+            }else{
+                cateId = tipoProgram.split("-")[0];
             }
+            Log.e("cateId" , cateId);
+
             diaProgram =  getArguments().getString("diaProgra");
             if(diaProgram.equals("Lunes 5 de Junio")){
                 fecha = "2017-06-05";
@@ -74,6 +70,8 @@ public class ListadoFragment extends Fragment {
                 fecha = "2017-06-08";
             }else if(diaProgram.equals("Viernes 9 de Junio")){
                 fecha = "2017-06-09";
+            }else if(diaProgram.equals("Sabado 10 de Junio")){
+                fecha = "2017-06-10";
             }else {
                 fecha = "";
             }
@@ -83,6 +81,7 @@ public class ListadoFragment extends Fragment {
                 // stop executing code by return
 
             }else{
+
                 new getListaPrograma().execute();
             }
 

@@ -1,0 +1,9 @@
+.chart {
+
+}
+
+.chart text {
+    fill: white;
+    font: 5px sans-serif;
+    text-anchor: end;
+}

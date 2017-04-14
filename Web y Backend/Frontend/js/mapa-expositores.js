@@ -18,33 +18,77 @@ $('document').ready(function() {
             });
         }
     });
-
-    window.onload = function () {
-        var ImageMap = function (map) {
-                var n,
-                    areas = map.getElementsByTagName('area'),
-                    len = areas.length,
-                    coords = [],
-                    previousWidth = 1920;
-                for (n = 0; n < len; n++) {
-                    coords[n] = areas[n].coords.split(',');
-                }
-                this.resize = function () {
-                    var n, m, clen,
-                        x = document.body.clientWidth / previousWidth;
-                    for (n = 0; n < len; n++) {
-                        clen = coords[n].length;
-                        for (m = 0; m < clen; m++) {
-                            coords[n][m] *= x;
-                        }
-                        areas[n].coords = coords[n].join(',');
-                    }
-                    previousWidth = document.body.clientWidth;
-                    return true;
-                };
-                window.onresize = this.resize;
-            },
-            imageMap = new ImageMap(document.getElementById('map_ID'));
-        imageMap.resize();
-    }
 });
+
+function seating(xml) {
+    var svg = d3.select(xml);
+    var seats = svg.select("#layer3");
+    var data = [];
+    seats.selectAll("rect").each(function() {
+        var r = d3.select(this);
+        data.push({
+            id: r.attr("id"),
+            title: r.attr("id"),
+            reserved: false
+        });
+    });
+
+    var room = d3.select(".room");
+    room.node().appendChild(xml.documentElement);
+
+    handleResevations(data);
+
+}
+
+function handleResevations(data) {
+
+    data.forEach(function(value, index) {
+        var seat = d3.select("#" + value.id);
+        seat.datum(value);
+
+        seat.on("click", function(d) {
+            console.log("rect");
+            reserve(seat, d, data);
+        });
+
+        seat.append("title")
+            .text(function(d) {
+                return d.title;
+            });
+
+    });
+}
+
+function saveResevations(data) {
+    var res = d3.select(".resevations")
+        .selectAll("div")
+        .data(data);
+
+    res.enter().append("div");
+
+    res.text(function(d) {
+        return d.title + " (" + d.id + ") : " + d.reserved;
+    });
+}
+
+
+function reserve(o, data, allData) {
+    data.reserved = !data.reserved;
+    o.style("fill", seatColor(data, o));
+    saveResevations(allData);
+}
+
+function seatColor(data, node) {
+    if (!data.origColor) {
+        data.origColor = node.style("fill");
+    }
+    node.style("fill");
+    return data.reserved ? "red" : data.origColor;
+}
+
+function type(d) {
+    //d.x = +d.x; // coerce to number
+    //d.y = +d.y;
+    d.reserved = d.reserved == 'R';
+    return d;
+}

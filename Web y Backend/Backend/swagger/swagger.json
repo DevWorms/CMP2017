@@ -2779,42 +2779,118 @@
                     }
                 }
             }
-        }
-    },
-    "definitions": {
-        "User": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "name": {
+        },
+        "/mapa/recinto/upload": {
+            "post": {
+                "tags": [
+                    "Mapas"
+                ],
+                "summary": "Sube el mapa del recinto",
+                "description": "Guarda las respuestas de un usuario a una encuesta",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "formData",
+                    "description": "Id de usuario",
+                    "required": true,
                     "type": "string"
-                },
-                "last_Name": {
+                }, {
+                    "name": "api_key",
+                    "in": "formData",
+                    "description": "Api Key del usuario",
+                    "required": true,
                     "type": "string"
-                },
-                "email": {
-                    "type": "string"
-                },
-                "type": {
-                    "type": "string"
-                },
-                "association": {
-                    "type": "string"
+                }, {
+                    "name": "archivo",
+                    "in": "formData",
+                    "description": "Imágen del mapa del recinto",
+                    "required": true,
+                    "type": "file"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
                 }
             }
         },
-        "ApiResponse": {
-            "type": "object",
-            "properties": {
-                "status": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "mensaje": {
+        "/mapa/recinto/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "Mapas"
+                ],
+                "summary": "Devuelve el mapa del recinto",
+                "description": "Devuelve el mapa del recinto",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
                     "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/mapa/expositores/{user_id}/{api_key}": {
+            "get": {
+                "tags": [
+                    "Mapas"
+                ],
+                "summary": "Devuelve la matriz de coordenadas del mapa de expositores",
+                "description": "Devuelve la matriz de coordenadas del mapa de expositores (BETA)",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Id de usuario",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "api_key",
+                    "in": "path",
+                    "description": "Api Key del usuario",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
                 }
             }
         }

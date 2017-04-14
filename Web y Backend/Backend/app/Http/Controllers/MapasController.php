@@ -10,11 +10,13 @@ namespace App\Http\Controllers;
 
 use App\Categoria;
 use App\File;
+use App\MapaExpositores;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Mockery\Exception;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
 
 class MapasController extends Controller {
@@ -127,6 +129,27 @@ class MapasController extends Controller {
 
                 return response()->json($response, 200);
             }
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    public function getStands($user_id, $api_key) {
+        try {
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+
+            $stands = MapaExpositores::all();
+
+            $res['status'] = 1;
+            $res['mensaje'] = "success";
+            $res['stands'] = $stands;
+            return response()->json($res, 200);
         } catch (ModelNotFoundException $ex) {
             $res['status'] = 0;
             $res['mensaje'] = "Error de credenciales";

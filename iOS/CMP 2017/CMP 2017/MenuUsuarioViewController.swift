@@ -57,6 +57,9 @@ class MenuUsuarioViewController: ViewController {
     @IBAction func misExpositores(_ sender: Any) {
           self.performSegue(withIdentifier: "misexpositores", sender: nil)
     }
+    @IBAction func misEncuestas(_ sender: Any) {
+        self.performSegue(withIdentifier: "encuestas", sender: nil)
+    }
     @IBAction func cerrarSesion(_ sender: Any) {
         UserDefaults.standard.set("", forKey: "api_key")
         UserDefaults.standard.set("", forKey: "user_id")
@@ -68,8 +71,12 @@ class MenuUsuarioViewController: ViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "misexpositores" {
-            (segue.destination as! BuscadorViewController).seccion = 6
-        }    }
+            //(segue.destination as! BuscadorViewController).seccion = 6
+            let nav = segue.destination as! UINavigationController
+            let svc = nav.topViewController as! BuscadorViewController
+            svc.seccion = 6;
+        }
+    }
 
     /*
     // MARK: - Navigation

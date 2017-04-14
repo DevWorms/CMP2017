@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0401F1421E9FD8D0006A41FB /* EncuestasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0401F1411E9FD8D0006A41FB /* EncuestasViewController.swift */; };
+		0421216F1EA0403D005FC5E3 /* EncuentaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0421216E1EA0403D005FC5E3 /* EncuentaTableViewCell.swift */; };
+		042121711EA04C8B005FC5E3 /* DetalleEncuestaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042121701EA04C8B005FC5E3 /* DetalleEncuestaViewController.swift */; };
 		3B396BF61E70DF2200C4611E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396BF51E70DF2200C4611E /* LoginViewController.swift */; };
 		3B396BF81E70DF2F00C4611E /* RegistroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396BF71E70DF2F00C4611E /* RegistroViewController.swift */; };
 		3B396BFA1E70E4F400C4611E /* MenuPrincipalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396BF91E70E4F400C4611E /* MenuPrincipalViewController.swift */; };
@@ -57,6 +60,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0401F1411E9FD8D0006A41FB /* EncuestasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncuestasViewController.swift; sourceTree = "<group>"; };
+		0421216E1EA0403D005FC5E3 /* EncuentaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncuentaTableViewCell.swift; sourceTree = "<group>"; };
+		042121701EA04C8B005FC5E3 /* DetalleEncuestaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetalleEncuestaViewController.swift; sourceTree = "<group>"; };
 		3B396BF51E70DF2200C4611E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3B396BF71E70DF2F00C4611E /* RegistroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistroViewController.swift; sourceTree = "<group>"; };
 		3B396BF91E70E4F400C4611E /* MenuPrincipalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuPrincipalViewController.swift; sourceTree = "<group>"; };
@@ -242,6 +248,9 @@
 				3B396C0D1E766AF800C4611E /* MiPerfilViewController.swift */,
 				3B396C0F1E766E0900C4611E /* NotificacionesViewController.swift */,
 				3B8B4C7E1E825F7400983CD4 /* NotificacionTableViewCell.swift */,
+				0401F1411E9FD8D0006A41FB /* EncuestasViewController.swift */,
+				0421216E1EA0403D005FC5E3 /* EncuentaTableViewCell.swift */,
+				042121701EA04C8B005FC5E3 /* DetalleEncuestaViewController.swift */,
 			);
 			name = "Con Internet";
 			sourceTree = "<group>";
@@ -383,6 +392,7 @@
 			files = (
 				3B396C0A1E7655CE00C4611E /* ConocePueViewController.swift in Sources */,
 				3B396BF61E70DF2200C4611E /* LoginViewController.swift in Sources */,
+				0421216F1EA0403D005FC5E3 /* EncuentaTableViewCell.swift in Sources */,
 				3B396C101E766E0900C4611E /* NotificacionesViewController.swift in Sources */,
 				3B5B8F731E7083ED00F0D6AA /* ViewController.swift in Sources */,
 				3B5B8F791E7083ED00F0D6AA /* CMP_2017.xcdatamodeld in Sources */,
@@ -401,8 +411,10 @@
 				3BAEAA131E95A48900B1E7DA /* ServerConnection.swift in Sources */,
 				3B8B4C7D1E82501200983CD4 /* SitioTableViewCell.swift in Sources */,
 				3B8B4C7B1E824B7B00983CD4 /* TransportacionTableViewCell.swift in Sources */,
+				0401F1421E9FD8D0006A41FB /* EncuestasViewController.swift in Sources */,
 				3B5B8F711E7083ED00F0D6AA /* AppDelegate.swift in Sources */,
 				3B4608111E7CD687005264D4 /* ResultadosViewController.swift in Sources */,
+				042121711EA04C8B005FC5E3 /* DetalleEncuestaViewController.swift in Sources */,
 				3B396BFC1E762CA500C4611E /* MenuUsuarioViewController.swift in Sources */,
 				3B396C0E1E766AF800C4611E /* MiPerfilViewController.swift in Sources */,
 				3B396BFE1E76388400C4611E /* ProgramaViewController.swift in Sources */,

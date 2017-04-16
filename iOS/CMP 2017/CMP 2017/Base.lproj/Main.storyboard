@@ -1533,7 +1533,7 @@
             <objects>
                 <navigationController storyboardIdentifier="Inicio" automaticallyAdjustsScrollViewInsets="NO" id="hsC-4U-TeZ" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="1nL-t7-c76">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1nL-t7-c76">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1551,7 +1551,7 @@
             <objects>
                 <navigationController storyboardIdentifier="MenuPrincipal" automaticallyAdjustsScrollViewInsets="NO" id="ojg-qp-URi" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="4R6-43-AVe">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4R6-43-AVe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1569,7 +1569,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pvC-jS-sCu" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="qRq-fn-w9u">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qRq-fn-w9u">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1651,11 +1651,15 @@
                         <rightBarButtonItems>
                             <barButtonItem image="12Menu" id="kab-s4-GHX">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="6J5-cF-d15" kind="presentation" id="kbO-K4-QMt"/>
+                                </connections>
                             </barButtonItem>
                             <barButtonItem image="11Casa" id="8jl-op-gnl">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <action selector="menu:" destination="P6W-w9-gHR" id="Um9-P3-gy5"/>
+                                    <segue destination="qGG-wh-1rt" kind="show" id="PZa-vy-a6z"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -1685,21 +1689,21 @@
                                 <rect key="frame" x="16" y="72" width="343" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="ratingLabel" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y68-lH-JfV">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="ratingLabel1" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y68-lH-JfV">
                                 <rect key="frame" x="16" y="220" width="343" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9qi-0W-0O4">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="rantingLabel3" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9qi-0W-0O4">
                                 <rect key="frame" x="16" y="403" width="343" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Y8-v3-IkO">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="ratingLabel2" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Y8-v3-IkO">
                                 <rect key="frame" x="16" y="313" width="343" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1709,7 +1713,6 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="erU-Im-sMB" customClass="CosmosView" customModule="CMP_2017" customModuleProvider="target">
                                 <rect key="frame" x="54" y="268" width="305" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="emptyColor">
                                         <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1731,7 +1734,6 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ajm-7u-LFR" customClass="CosmosView" customModule="CMP_2017" customModuleProvider="target">
                                 <rect key="frame" x="54" y="361" width="305" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="emptyColor">
                                         <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1753,7 +1755,6 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1kB-yy-lYX" customClass="CosmosView" customModule="CMP_2017" customModuleProvider="target">
                                 <rect key="frame" x="54" y="451" width="305" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="emptyColor">
                                         <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1776,13 +1777,22 @@
                                 <rect key="frame" x="82" y="573" width="202" height="62"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="Boton_calificar"/>
+                                <connections>
+                                    <action selector="btnCalificar:" destination="yeX-kf-rF2" eventType="touchUpInside" id="a7a-R7-8cV"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="btnCalificar" destination="3Xj-TT-Bu9" id="lqT-Fk-f6E"/>
+                        <outlet property="imgDetalleEncuesta" destination="9ZX-Vo-P1d" id="rFM-vs-7Zf"/>
                         <outlet property="ratingBar" destination="erU-Im-sMB" id="aA1-Td-aUq"/>
-                        <outlet property="ratingLabel" destination="y68-lH-JfV" id="nws-6u-l5e"/>
+                        <outlet property="ratingBar2" destination="Ajm-7u-LFR" id="lce-05-iBh"/>
+                        <outlet property="ratingBar3" destination="1kB-yy-lYX" id="1oC-6e-3RT"/>
+                        <outlet property="ratingLabel1" destination="y68-lH-JfV" id="ebQ-i3-V3T"/>
+                        <outlet property="ratingLabel2" destination="8Y8-v3-IkO" id="4zZ-Zm-Ugl"/>
+                        <outlet property="ratingLabel3" destination="9qi-0W-0O4" id="pv0-o9-NGR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Wr-TO-rfY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1794,7 +1804,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ubV-vj-2zv" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="HAX-Ru-0G4">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HAX-Ru-0G4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1812,7 +1822,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RcV-Hr-1oF" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="MgG-wp-f2A">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MgG-wp-f2A">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1830,7 +1840,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ECH-yc-ql3" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kS6-Dp-See">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kS6-Dp-See">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1886,11 +1896,12 @@
         <image name="fondoCMP" width="1242" height="2208"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Euz-ZR-EEI"/>
         <segue reference="NTs-h7-V0z"/>
-        <segue reference="z9v-TW-n8m"/>
-        <segue reference="p9G-ew-iHC"/>
+        <segue reference="PZa-vy-a6z"/>
+        <segue reference="kbO-K4-QMt"/>
         <segue reference="ZdW-HO-l3u"/>
-        <segue reference="eG2-Ou-XTa"/>
+        <segue reference="p9G-ew-iHC"/>
+        <segue reference="z9v-TW-n8m"/>
+        <segue reference="Euz-ZR-EEI"/>
     </inferredMetricsTieBreakers>
 </document>

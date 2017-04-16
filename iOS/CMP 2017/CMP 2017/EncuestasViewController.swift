@@ -160,14 +160,19 @@ class EncuestaViewController: UIViewController, UITableViewDataSource, UITableVi
       
         
     }
-   /* override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detalleEncuestas" {
-            (segue.destination as! DetalleEncuestaViewController).idEncuesta = self.idEncuesta
-            /*let nav = segue.destination as! UINavigationController
+            //(segue.destination as! DetalleEncuestaViewController).idEncuesta = self.idEncuesta
+           /* let nav = segue.destination as! UINavigationController
             let svc = nav.topViewController as! DetalleEncuestaViewController
             svc.idEncuesta = self.idEncuesta;*/
+            let destino = segue.destination as! DetalleEncuestaViewController
+            
+            destino.idEncuesta = self.idEncuesta
+            
+       
         }
-    }*/
+    }
 
     
     /*

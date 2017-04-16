@@ -17,7 +17,9 @@ class Notificacion extends Migration
             $table->increments('id');
             $table->unsignedBigInteger('user_id');
             $table->text('notificacion');
+            $table->string('asunto');
             $table->tinyInteger('leido');
+            $table->dateTime('saved_at');
             $table->timestamps();
         });
     }

@@ -81,6 +81,8 @@ $app->singleton(
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
+$app->register(Aws\Laravel\AwsServiceProvider::class);
+$app->register(Lab123\AwsSns\AwsSnsServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------

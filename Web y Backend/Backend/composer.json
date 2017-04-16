@@ -9,7 +9,11 @@
         "laravel/lumen-framework": "5.4.*",
         "vlucas/phpdotenv": "~2.2",
         "palanik/lumen-cors": "dev-master",
-        "illuminate/mail": "5.4.*"
+        "illuminate/mail": "5.4.*",
+        "aws/aws-sdk-php": "^3.25",
+        "aws/aws-sdk-php-laravel": "~3.0",
+        "laravelista/lumen-vendor-publish": "^2.0",
+        "lab123/aws-sns": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

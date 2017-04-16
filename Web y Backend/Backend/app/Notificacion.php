@@ -25,7 +25,7 @@ class Notificacion extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'user_id', 'notificacion', 'leido'
+        'id', 'user_id', 'notificacion', 'leido', 'asunto', 'saved_at'
     ];
 
     /**

@@ -141,8 +141,7 @@
                                 <label for="">Agregar imágen</label>
                                     <br>
                                 <input type="file" class="btn btn-default" id="archivo" name="archivo">
-                                <div id="file_pdf"></div>
-                            </div> 
+                            </div>
                         </div>
                     </div>
                     <br>
@@ -160,6 +159,7 @@
 
                         <div class="col-xs-12 col-md-6">
                             <div id="file"></div>
+                            <div id="file_pdf"></div>
                         </div>
                     </div>
                     <!-- Fin Fila -->

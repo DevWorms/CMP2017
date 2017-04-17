@@ -189,11 +189,21 @@ class RutasController extends Controller {
      * @return mixed
      */
     public function returnRuta($ruta) {
+        /*
+         * Se cambia el PDF por una imágen
         if ($ruta->pdf_file) {
             $ruta->pdf;
             unset($ruta->pdf['is_banner']);
         } else {
             $ruta->pdf = [];
+        }
+        */
+
+        if ($ruta->pdf_file) {
+            $ruta->image;
+            unset($ruta->image['is_banner']);
+        } else {
+            $ruta->image = [];
         }
 
         unset($ruta['pdf_file']);

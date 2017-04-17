@@ -181,7 +181,7 @@
                     <div class="col-md-2"></div>
                     <div class="col-md-8">
                         <div class="col-md-12">
-                            <% if (pdf.nombre) { %> <a href="${pdf.url}">${pdf.nombre}</a> <% } %>
+                            <% if (image.nombre) { %> <a href="${image.url}"><img src="${image.url}" title="${image.nombre}"></a> <% } %>
                         </div>
                         <div class="col-md-12">
                             <br>

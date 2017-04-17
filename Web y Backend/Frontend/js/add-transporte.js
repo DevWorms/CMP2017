@@ -77,9 +77,9 @@ function getElement(id) {
                 $("#titulo").val(el.titulo);
                 $("#descripcion").val(el.descripcion);
 
-                if (el.pdf.nombre) {
-                    $("label[for='archivo_pdf']").text("Actualizar PDF");
-                    $("#file_pdf").html("<br><a href='" + el.pdf.url + "' target='_blank'>" + el.pdf.nombre + "</a>");
+                if (el.image.nombre) {
+                    $("label1[for='archivo_pdf']").text("Actualizar PDF");
+                    $("#file_pdf").html("<br><a href='" + el.image.url + "' target='_blank'><img height='250px' src='" + el.image.url + "'></a>");
                 }
 
                 $("#crearRuta input, textarea, button").prop("disabled", false);

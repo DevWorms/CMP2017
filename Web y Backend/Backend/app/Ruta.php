@@ -38,4 +38,8 @@ class Ruta extends Model
     public function pdf() {
         return $this->hasOne('App\File', 'id', 'pdf_file');
     }
+
+    public function image() {
+        return $this->hasOne('App\File', 'id', 'pdf_file');
+    }
 }

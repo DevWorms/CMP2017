@@ -17,6 +17,13 @@ class MenuUsuarioViewController: ViewController {
     @IBOutlet weak var notif: UIButton!
     @IBOutlet weak var actualizar: UIButton!
     
+    @IBOutlet weak var claseButton: UIButton!
+    @IBOutlet weak var scrollView: UIScrollView!
+    override func viewWillLayoutSubviews(){
+        super.viewWillLayoutSubviews()
+        self.scrollView.contentSize = CGSize(width: view.bounds.width, height: miPerfil.bounds.height * 7)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

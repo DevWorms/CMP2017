@@ -19,6 +19,8 @@ class ViewController: UIViewController {
         let methodsCMP = ServerConnection()
         
         methodsCMP.getCMP(myView: self) //descarga datos para offline
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,6 +34,14 @@ class ViewController: UIViewController {
             UserDefaults.standard.setValue(0, forKey: "api_key")
             UserDefaults.standard.setValue(1, forKey: "user_id")
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
     }
 
 

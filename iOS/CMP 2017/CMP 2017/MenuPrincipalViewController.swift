@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MenuPrincipalViewController: UIViewController {
+class MenuPrincipalViewController: UITableViewController {
     
     @IBOutlet weak var programaBtn: UIButton!
     @IBOutlet weak var acompañantesBtn: UIButton!

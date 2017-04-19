@@ -24,6 +24,8 @@ class DetalleViewController: UIViewController {
     @IBOutlet weak var btn2: UIButton!
     @IBOutlet weak var btn3: UIButton!
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     // 1 Programa
     // 2 Expositores
     // 3 acompañantes
@@ -35,6 +37,11 @@ class DetalleViewController: UIViewController {
     var misExpositores = [String: Any]()
     var encontro = 0
 
+    override func viewWillLayoutSubviews(){
+        super.viewWillLayoutSubviews()
+        self.scrollView.contentSize = CGSize(width: view.bounds.width, height: view.bounds.height - foto.bounds.height)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

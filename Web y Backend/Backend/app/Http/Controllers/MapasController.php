@@ -9,8 +9,10 @@
 namespace App\Http\Controllers;
 
 use App\Categoria;
+use App\Expositor;
 use App\File;
 use App\MapaExpositores;
+use App\MapaHasExpositores;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -145,6 +147,76 @@ class MapasController extends Controller {
             User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
 
             $stands = MapaExpositores::all();
+
+            $res['status'] = 1;
+            $res['mensaje'] = "success";
+            $res['stands'] = $stands;
+            return response()->json($res, 200);
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    public function reservar(Request $request) {
+        try {
+            $user_id = $request->get('user_id');
+            $api_key = $request->get('api_key');
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+
+            $stands = $request->get('estantes');
+            $expositor_id = $request->get('expositor_id');
+
+            $expositor = Expositor::where('id', $expositor_id)->first();
+            if ($expositor) {
+                $coma = substr($stands, -1);
+                if ($coma == ",") {
+                    $stands = substr($stands, 0, -1);
+                }
+                $estantes = explode(",", $stands);
+
+                $estantes_ids = [];
+                foreach ($estantes as $estante) {
+                    $id = substr($estante, 8);
+                    array_push($estantes_ids, $id);
+
+                    MapaHasExpositores::create([
+                        'estante_id' => $id,
+                        'expositor_id' => $expositor->id
+                    ]);
+                }
+
+                $estantes = MapaExpositores::whereIn('id', $estantes_ids)->update(['available' => 0]);
+
+                $res['status'] = 1;
+                $res['mensaje'] = "Los cambios se guardaron correctamente";
+                $res['estantes'] = $estantes;
+                $res['expositor'] = $expositor->nombre;
+                return response()->json($res, 200);
+            } else {
+                $res['status'] = 0;
+                $res['mensaje'] = "No se encontró el expositor: " . $expositor_id;
+                return response()->json($res, 400);
+            }
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    public function getPublicStands() {
+        try {
+            $stands = MapaExpositores::select('id', 'available')->get();
 
             $res['status'] = 1;
             $res['mensaje'] = "success";

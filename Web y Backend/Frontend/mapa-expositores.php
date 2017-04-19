@@ -20,16 +20,51 @@
     <!-- Seat & d3 -->
     <link rel="stylesheet" type="text/css" href="css/seats.css" media="screen" />
     <script src="http://d3js.org/d3.v3.min.js"  charset="utf-8"></script>
-
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!--<link rel="stylesheet" href="http:/resources/demos/style.css">-->
     <style>
-        .chart {
-
+        .custom-combobox {
+            position: relative;
+            display: inline-block;
+        }
+        .custom-combobox-toggle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin-left: -1px;
+            padding: 0;
         }
 
-        .chart text {
-            fill: white;
-            font: 5px sans-serif;
-            text-anchor: end;
+        .expositores {
+            position:absolute;
+            left: 1000px;
+            top: 120px;
+            display:inline-block;
+            z-index:10
+        }
+
+        #expositores {
+            position:absolute;
+            left: 1000px;
+            top: 120px;
+            display:inline-block;
+            z-index:10
+        }
+
+        .expos {
+            position:absolute;
+            left: 840px;
+            top: 120px;
+            display:inline-block;
+            z-index:10
+        }
+
+        .expos_btn {
+            position:absolute;
+            left: 1138px;
+            top: 160px;
+            display:inline-block;
+            z-index:10
         }
     </style>
 
@@ -126,12 +161,18 @@
         <!-- Contenido -->
         <div id="page-wrapper">
             <div class="container-fluid">
+                <div id="error"></div>
                 <div class="row">
+                    <form>
+                        <div class="col-md-2">
+                            <label class="expos" for="expositores">Asignar expositor:</label>
+                            <select id="expositores" class="form-control">
+                                <option selected></option>
+                            </select>
+                            <button class="btn btn-info expos_btn" id="asignar">Asignar</button>
+                        </div>
+                    </form>
                     <div class="room"></div>
-                    <div>Name | (Id) | Reserved</div>
-                    <div class="resevations"></div>
-                    <img class="map" src="img/plano.svg" width="100%" usemap="#expositores">
-                    <map id="expositores" name="expositores"></map>
                 </div>
                 <!-- Fin Fila -->
             </div>
@@ -150,7 +191,7 @@
     <script src="js/lodash.js"></script>
     <script src="js/mapa-expositores.js"></script>
     <script type="text/javascript" >
-        d3.xml("img/plano.svg",  "image/svg+xml",  function(xml) {
+        d3.xml("img/plano3.svg",  "image/svg+xml",  function(xml) {
             seating(xml);
         });
     </script>

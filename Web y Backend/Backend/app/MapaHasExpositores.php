@@ -17,7 +17,7 @@ class MapaHasExpositores extends Model
      *
      * @var string
      */
-    protected $table = 'mapa_expositores';
+    protected $table = 'mapa_has_expositor';
 
     /**
      * The attributes that are mass assignable.

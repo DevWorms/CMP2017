@@ -123,7 +123,7 @@ public class TransportacionFragment extends Fragment
                         idAr[i] = c.getString("id");
                         nameAr[i] = c.getString("titulo");
                         descrpAr[i] = c.getString("descripcion");
-                        String urlTrans = c.getString("pdf");
+                        String urlTrans = c.getString("image");
                         JSONObject jsonUrl = new JSONObject(urlTrans);
 
                         urlAr[i] = jsonUrl.getString("url");

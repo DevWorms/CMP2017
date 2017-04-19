@@ -377,9 +377,9 @@ public class MenuFragment extends Fragment {
     class SecMapa implements View.OnClickListener {
         public void onClick(View v) {
 
-            Toast.makeText(getActivity(),"Próximamente",Toast.LENGTH_SHORT).show();
-            /*getFragmentManager().beginTransaction()
-                    .replace(R.id.actividad, new MapaFragment()).addToBackStack(null).commit();*/
+
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.actividad, new MapaFragment()).addToBackStack(null).commit();
 
 
         }

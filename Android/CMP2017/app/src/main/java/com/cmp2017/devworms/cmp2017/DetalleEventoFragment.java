@@ -169,6 +169,8 @@ public class DetalleEventoFragment extends Fragment {
                         exposi = json.getString("acompanantes");
                     } else if(seccion.equals("social")) {
                         exposi = json.getString("eventos");
+                    } else {
+                        exposi = json.getString("programa");
                     }
 
                     JSONArray jsonExpositores = new JSONArray(exposi);

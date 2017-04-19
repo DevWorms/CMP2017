@@ -155,7 +155,8 @@ public class LoginActivity extends AppCompatActivity {
                     SharedPreferences sp = getSharedPreferences("prefe", Activity.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sp.edit();
                     editor.putString("APIkey", apikey);
-                    editor.putString("Nombre", nombre);
+                    editor.putString("Nombre","Hola "+ nombre.substring(11,nombre.length()));
+
                     editor.putString("IdUser", iduser);
 
                     editor.commit();

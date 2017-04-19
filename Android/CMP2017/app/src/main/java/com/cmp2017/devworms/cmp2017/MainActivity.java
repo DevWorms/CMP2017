@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.amazonaws.AmazonClientException;
 import com.cmp2017.devworms.cmp2017.mobile.AWSMobileClient;
@@ -61,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences sp = getSharedPreferences("prefe", Activity.MODE_PRIVATE);
        String nombre = sp.getString("APIkey","");
+        String DescargaC = sp.getString("Descarga","");
+
         apiKey = "0";
         userId = "1";
 
@@ -69,8 +72,9 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("parametro", "no");
             startActivity(intent);
         }
-
-        new getDescaragaDatosOffline().execute();
+        if(!DescargaC.equals("1")) {
+            new getDescaragaDatosOffline().execute();
+        }
 
 
         Button btnIniSesion = (Button) findViewById(R.id.btnIniSe);
@@ -78,38 +82,45 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnIniInv = (Button) findViewById(R.id.btnIngreInvi);
         btnIniInv.setOnClickListener(new IniciInvi());
-
+        ConnectionDetector cd = new ConnectionDetector(MainActivity.this);
         // Obtain a reference to the mobile client. It is created in the Application class,
         // but in case a custom Application class is not used, we initialize it here if necessary.
-        AWSMobileClient.initializeMobileClientIfNecessary(this);
+        if (!cd.isConnectingToInternet()) {
+            // Internet Connection is not present
+            //Toast.makeText(MainActivity.this, "Se necesita internet", Toast.LENGTH_SHORT).show();
+            // stop executing code by return
 
-        pushManager = AWSMobileClient.defaultMobileClient().getPushManager();
+        }else {
 
-        new AsyncTask<Void, Void, String>() {
-            @Override
-            protected String doInBackground(final Void... params) {
-                // register device first to ensure we have a push endpoint.
-                pushManager.registerDevice();
+            AWSMobileClient.initializeMobileClientIfNecessary(this);
 
-                // if registration succeeded.
-                if (pushManager.isRegistered()) {
-                    try {
-                        pushManager.setPushEnabled(true);
-                        // Automatically subscribe to the default SNS topic
-                        if (true) {
-                            pushManager.subscribeToTopic(pushManager.getDefaultTopic());
+            pushManager = AWSMobileClient.defaultMobileClient().getPushManager();
+
+            new AsyncTask<Void, Void, String>() {
+                @Override
+                protected String doInBackground(final Void... params) {
+                    // register device first to ensure we have a push endpoint.
+                    pushManager.registerDevice();
+
+                    // if registration succeeded.
+                    if (pushManager.isRegistered()) {
+                        try {
+                            pushManager.setPushEnabled(true);
+                            // Automatically subscribe to the default SNS topic
+                            if (true) {
+                                pushManager.subscribeToTopic(pushManager.getDefaultTopic());
+                            }
+                            return null;
+                        } catch (final AmazonClientException ace) {
+                            Log.e("erro", "Failed to change push notification status", ace);
+                            return ace.getMessage();
                         }
-                        return null;
-                    } catch (final AmazonClientException ace) {
-                        Log.e("erro", "Failed to change push notification status", ace);
-                        return ace.getMessage();
                     }
+                    return "Failed to register for push notifications.";
                 }
-                return "Failed to register for push notifications.";
-            }
 
-            @Override
-            protected void onPostExecute(final String errorMessage) {
+                @Override
+                protected void onPostExecute(final String errorMessage) {
                 /*dialog.dismiss();
                 topicsAdapter.notifyDataSetChanged();
                 enablePushCheckBox.setChecked(pushManager.isPushEnabled());
@@ -118,9 +129,9 @@ public class MainActivity extends AppCompatActivity {
                     showErrorMessage(R.string.push_demo_error_message_update_notification,
                             errorMessage);
                 }*/
-            }
-        }.execute();
-
+                }
+            }.execute();
+        }
 
     }
 
@@ -182,6 +193,7 @@ public class MainActivity extends AppCompatActivity {
             String body= "";
 
 ////////////////////////////////////////////////////Descarga de Datos Banner
+            Log.d("Descarga: ", "> Datos Banner" );
 
             body = "http://cmp.devworms.com/api/banners/all/"+userId+"/"+apiKey+"";
 
@@ -195,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
 
             respuesta = jsp.makeHttpRequest(body, "GET", body, "");
 
-            Log.d("LoginRes : ", "> " + respuesta);
+
             if (respuesta != "error") {
                 try {
 
@@ -237,7 +249,7 @@ public class MainActivity extends AppCompatActivity {
 
                             dbHandlerOffline = new AdminSQLiteOffline(MainActivity.this, null, null, 1);
                             SQLiteDatabase db = dbHandlerOffline.getWritableDatabase();
-                            Log.d("Imagen deco : ", "> " + ImagenDeco[cou]);
+
                             dbHandlerOffline.addBanner(ArrayBanners[cou],ImagenDeco[cou]);
 
                         }
@@ -256,7 +268,9 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             }
+            Log.d("Descarga: ", "> Datos Banner completo" );
 //////////////////////////////////////// Descarga de Datos Expositores
+            Log.d("Descarga: ", "> Datos Expositores" );
             String bodyExpo= "";
 
 
@@ -269,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             String respuestaAlfa= jspExpo.makeHttpRequest(bodyExpo,"GET",bodyExpo,"");
-            Log.d("RespuestaALfa : ", "> " + respuestaAlfa);
+
             if (respuestaAlfa != "error") {
 
 
@@ -282,7 +296,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             String respuestaNumerico= jspNumerico.makeHttpRequest(bodyExpo,"GET",body,"");
-            Log.d("RespuestaNumerico : ", "> " + respuestaNumerico);
+
             if (respuestaNumerico != "error") {
 
 
@@ -330,20 +344,6 @@ public class MainActivity extends AppCompatActivity {
                 }
 
 
-
-
-
-
-
-                ////////////////////////////////////////////
-
-
-
-
-
-
-
-
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (MalformedURLException e) {
@@ -352,9 +352,9 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-
+            Log.d("Descarga: ", "> Datos Expositores completo" );
 ////////////////////////////////////////////// Descarga de Datos Patrocinadores
-
+            Log.d("Descarga: ", "> Datos Patrocinadores" );
             String bodyPatro= "";
 
 
@@ -367,7 +367,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             String respuestaAlfaPatro= jspPatro.makeHttpRequest(bodyPatro,"GET",bodyPatro,"");
-            Log.d("RespuestaALfa : ", "> " + respuestaAlfaPatro);
+
             if (respuestaAlfa != "error") {
 
 
@@ -380,7 +380,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             String respuestaNumericoPatro= jspNumericoPatro.makeHttpRequest(bodyPatro,"GET",bodyPatro,"");
-            Log.d("RespuestaNumerico : ", "> " + respuestaNumerico);
+
             if (respuestaNumerico != "error") {
 
 
@@ -390,14 +390,236 @@ public class MainActivity extends AppCompatActivity {
             SQLiteDatabase db = dbHandlerOffline.getWritableDatabase();
             dbHandlerOffline.addPatro(respuestaAlfaPatro,respuestaNumericoPatro);
 
+            JSONObject jsonimageP = null;
+            try {
+                jsonimageP = new JSONObject(respuestaAlfaPatro);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            String patro = "";
+
+            try {
+                patro = jsonimageP.getString("patrocinadores");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+            JSONArray jsonPatroimage = null;
+            try {
+                jsonPatroimage = new JSONArray(patro);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            int cuanto = jsonPatroimage.length();
+
+            for (int i = 0; i <= jsonPatroimage.length(); i++) {
+                JSONObject c = null;
+                try {
+                    c = jsonPatroimage.getJSONObject(i);
+
+
+
+                String urlImageJson = c.getString("logo");
+                JSONObject jsonImagen = new JSONObject(urlImageJson);
+                urlImage = jsonImagen.getString("url");
+
+                imageUrl = new URL(urlImage);
+                conn = (HttpURLConnection) imageUrl.openConnection();
+                conn.connect();
+
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
+
+                expoImg = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
+                ImageDecoExpo = getBytes(expoImg);
+
+                dbHandlerOffline = new AdminSQLiteOffline(MainActivity.this, null, null, 1);
+                SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
+
+                String idExpoImagen = c.getString("id");
+
+                dbHandlerOffline.addPatroImag(idExpoImagen,ImageDecoExpo);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            Log.d("Descarga: ", "> Datos Patrocinadores completo" );
             /************************************************ DESCARGAR DATOS PROGRAMA +*************************/
+            Log.d("Descarga: ", "> Datos Programa" );
             String fromUrlCat= "http://cmp.devworms.com/api/categoria/all/"+userId+"/"+apiKey+"";
             JSONParser jspPrograma = new JSONParser();
             String strProgramas = jspPrograma.makeHttpRequest(fromUrlCat,"GET",fromUrlCat,"");
             dbHandlerOffline = new AdminSQLiteOffline(MainActivity.this, null, null, 1);
             dbHandlerOffline.addJsonCategorias(strProgramas);
+            Log.d("Descarga: ", "> Datos Programa completo" );
+            //////////////////////////////////////ACOMPAÑANTE////////////////////////////
+            Log.d("Descarga: ", "> Datos Acompañante" );
+            String bodyAco= "";
 
-            return null;
+
+            bodyAco = "http://cmp.devworms.com/api/acompanantes/all/" + userId + "/" + apiKey + "";
+
+
+            JSONParser jspAco = new JSONParser();
+
+
+            String respuestaAco = jspAco.makeHttpRequest(bodyAco, "GET", bodyAco, "");
+
+            if (respuesta != "error") {
+                dbHandlerOffline = new AdminSQLiteOffline(MainActivity.this, null, null, 1);
+                dbHandlerOffline.addAcomp(respuestaAco);
+
+                JSONObject jsonimageA = null;
+                try {
+                    jsonimageA = new JSONObject(respuestaAco);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String acomp = "";
+
+                try {
+                    acomp = jsonimageA.getString("acompanantes");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+                JSONArray jsonAcoimage = null;
+                try {
+                    jsonAcoimage = new JSONArray(acomp);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+
+                for (int i = 0; i <= jsonAcoimage.length(); i++) {
+                    JSONObject c = null;
+                    try {
+                        c = jsonAcoimage.getJSONObject(i);
+
+
+
+                        String urlImageJson = c.getString("foto");
+                        JSONObject jsonImagen = new JSONObject(urlImageJson);
+                        urlImage = jsonImagen.getString("url");
+
+                        imageUrl = new URL(urlImage);
+                        conn = (HttpURLConnection) imageUrl.openConnection();
+                        conn.connect();
+
+                        BitmapFactory.Options options = new BitmapFactory.Options();
+                        options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
+
+                        expoImg = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
+                        ImageDecoExpo = getBytes(expoImg);
+
+                        dbHandlerOffline = new AdminSQLiteOffline(MainActivity.this, null, null, 1);
+                        SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
+
+                        String idAcoImagen = c.getString("id");
+
+                        dbHandlerOffline.addAcoImag(idAcoImagen,ImageDecoExpo);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+            }
+            Log.d("Descarga: ", "> Datos Acompañante completo" );
+            //////////////////////////////////////SOCIAL DEPORTIVOS////////////////////////////
+            Log.d("Descarga: ", "> Datos Social deportivo" );
+            String bodySD= "";
+
+
+            bodySD = "http://cmp.devworms.com/api/deportivos/all/" + userId + "/" + apiKey + "";
+
+
+            JSONParser jspSoci = new JSONParser();
+
+
+            String respuestaSocialDepo = jspSoci.makeHttpRequest(bodySD, "GET", bodySD, "");
+
+            if (respuesta != "error") {
+                dbHandlerOffline = new AdminSQLiteOffline(MainActivity.this, null, null, 1);
+                dbHandlerOffline.addSocialDepo(respuestaSocialDepo);
+
+                JSONObject jsonimageS = null;
+                try {
+                    jsonimageS = new JSONObject(respuestaSocialDepo);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String socialdepo = "";
+
+                try {
+                    socialdepo = jsonimageS.getString("eventos");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+                JSONArray jsonSDimage = null;
+                try {
+                    jsonSDimage = new JSONArray(socialdepo);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+
+                for (int i = 0; i <= jsonSDimage.length(); i++) {
+                    JSONObject c = null;
+                    try {
+                        c = jsonSDimage.getJSONObject(i);
+
+
+
+                        String urlImageJson = c.getString("foto");
+                        JSONObject jsonImagen = new JSONObject(urlImageJson);
+                        urlImage = jsonImagen.getString("url");
+
+                        imageUrl = new URL(urlImage);
+                        conn = (HttpURLConnection) imageUrl.openConnection();
+                        conn.connect();
+
+                        BitmapFactory.Options options = new BitmapFactory.Options();
+                        options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
+
+                        expoImg = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
+                        ImageDecoExpo = getBytes(expoImg);
+
+                        dbHandlerOffline = new AdminSQLiteOffline(MainActivity.this, null, null, 1);
+                        SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
+
+                        String idSDImagen = c.getString("id");
+
+                        dbHandlerOffline.addSociaDepoImag(idSDImagen,ImageDecoExpo);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+            }
+            Log.d("Descarga: ", "> Datos Social Deportivo completo" );
+
+                return null;
         }
 
 
@@ -406,7 +628,13 @@ public class MainActivity extends AppCompatActivity {
          **/
         protected void onPostExecute(String file_url) {
             // dismiss the dialog after getting all albums
-            Log.d("Login : ", "> " + resp);
+            Log.d("Descarga: ", "> 100%" );
+            SharedPreferences sp = getSharedPreferences("prefe", Activity.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putString("Descarga", "1");
+
+
+            editor.commit();
             pDialog.dismiss();
 
 

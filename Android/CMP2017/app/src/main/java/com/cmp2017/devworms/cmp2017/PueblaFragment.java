@@ -69,8 +69,8 @@ public class PueblaFragment extends Fragment
         public void onClick(View v) {
 
 
-            Toast.makeText(getActivity(),"En Desarrollo",Toast.LENGTH_SHORT).show();
-
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.actividad, new MapaPueblaFragment()).addToBackStack(null).commit();
 
 
         }

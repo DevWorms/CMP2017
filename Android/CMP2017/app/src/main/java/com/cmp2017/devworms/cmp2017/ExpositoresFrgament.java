@@ -315,7 +315,7 @@ public class ExpositoresFrgament extends Fragment {
             } else {
                 if (!cd.isConnectingToInternet()) {
                     // Internet Connection is not present
-                    Toast.makeText(getActivity(), "Se necesita internet", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(), "Se necesita internet", Toast.LENGTH_SHORT).show();
                     // stop executing code by return
 
                 } else {
@@ -383,7 +383,7 @@ public class ExpositoresFrgament extends Fragment {
 
                 if (!cd.isConnectingToInternet()) {
                     // Internet Connection is not present
-                    Toast.makeText(getActivity(), "Se necesita internet", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getActivity(), "Se necesita internet", Toast.LENGTH_SHORT).show();
                     // stop executing code by return
 
                 } else {

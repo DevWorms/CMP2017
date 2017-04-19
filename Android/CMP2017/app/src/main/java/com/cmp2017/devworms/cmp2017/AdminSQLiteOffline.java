@@ -36,10 +36,30 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
     public static final String COLUMN_JSONPATROALFABETICO = "jsonPatroAlfa";
     public static final String COLUMN_JSONPATRONumerico = "jsonPatroNume";
 
+
     public static final String TABLA_PATROIMAGENES = "PatroImagenes";
     public static final String COLUMN_IDPATRO = "_id";
     public static final String COLUMN_IDPATROCINADOR = "idPatro";
     public static final String COLUMN_PATROIMAGESTR = "imagePatro";
+
+    public static final String TABLA_ACOMPAÑANTE = "Acompañantes";
+    public static final String COLUMN_IDACO = "_id";
+    public static final String COLUMN_JSONACOMPAÑANTE = "jsonAcomp";
+
+    public static final String TABLA_ACOMPAÑANTEIMAGENES = "AcompImagenes";
+    public static final String COLUMN_IDACOIMA = "_id";
+    public static final String COLUMN_IDACOMPAÑANTES = "idAcomp";
+    public static final String COLUMN_ACOMPIMAGESTR = "imageAcomp";
+
+    public static final String TABLA_SOCIALDEPO = "SocialDeportivo";
+    public static final String COLUMN_IDSOCIADEPO = "_id";
+    public static final String COLUMN_JSONSOCIALDEPORTIVO= "jsonSocialDepo";
+
+    public static final String TABLA_SOCIALDEPOIMAGENES = "SociaDepoImagenes";
+    public static final String COLUMN_IDSOCIA = "_id";
+    public static final String COLUMN_IDSOCIADEPORTIVO = "idSociaDepo";
+    public static final String COLUMN_SOCIALDEPOIMAGESTR = "imageSociaDepo";
+
 
     public static final String TABLA_CATEGORIAS = "Categorias";
     public static final String COLUMN_IDCAT = "idCategoria";
@@ -95,6 +115,35 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
 
         db.execSQL(queryPatroIma);
 
+        String queryAco = "CREATE TABLE " + TABLA_ACOMPAÑANTE + "(" +
+                COLUMN_IDACO + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_JSONACOMPAÑANTE + " TEXT" +
+                ");";
+
+        db.execSQL(queryAco);
+
+        String queryAcoIma = "CREATE TABLE " + TABLA_ACOMPAÑANTEIMAGENES + "(" +
+                COLUMN_IDACOIMA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_IDACOMPAÑANTES + " TEXT," +
+                COLUMN_ACOMPIMAGESTR + " TEXT" +
+                ");";
+        db.execSQL(queryAcoIma);
+
+
+        String querySocia = "CREATE TABLE " + TABLA_SOCIALDEPO + "(" +
+                COLUMN_IDSOCIADEPO + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_JSONSOCIALDEPORTIVO + " TEXT" +
+                ");";
+
+        db.execSQL(querySocia);
+
+        String querySociaIma = "CREATE TABLE " + TABLA_SOCIALDEPOIMAGENES + "(" +
+                COLUMN_IDSOCIA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_IDSOCIADEPORTIVO + " TEXT," +
+                COLUMN_SOCIALDEPOIMAGESTR + " TEXT" +
+                ");";
+        db.execSQL(querySociaIma);
+
         String queryCategoria = "CREATE TABLE " + TABLA_CATEGORIAS + "(" +
                 COLUMN_IDCAT+ " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_JSONCATEGORIA + " TEXT" +
@@ -119,6 +168,18 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
         onCreate(db);
 
         db.execSQL("DROP TABLE IF EXISTS " + TABLA_PATROIMAGENES);
+        onCreate(db);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_ACOMPAÑANTE);
+        onCreate(db);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_ACOMPAÑANTEIMAGENES);
+        onCreate(db);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_SOCIALDEPO);
+        onCreate(db);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_SOCIALDEPOIMAGENES);
         onCreate(db);
 
         db.execSQL("DROP TABLE IF EXISTS " + TABLA_CATEGORIAS);
@@ -306,4 +367,107 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
 
         return cursorRs;
     }
+
+    //Añade El JSON ACOMPAÑANTE  a la Base de Datos
+
+    public void addAcomp(String jsonAlfa) {
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_JSONACOMPAÑANTE, jsonAlfa);
+        SQLiteDatabase db = getWritableDatabase();
+        db.insert(TABLA_ACOMPAÑANTE, null, values);
+        db.close();
+
+    }
+    //Regresa el jsonAcomp de la Base de Datos
+    public Cursor jsonAcompa(){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT jsonAcomp FROM " + TABLA_ACOMPAÑANTE + " ;";
+        Cursor c = db.rawQuery(query, null);
+
+        if (c != null) {
+            c.moveToFirst();
+        }
+
+        return c;
+
+
+    }
+
+    //Añade Las Imagenes de Los acompañantes
+
+    public void addAcoImag(String idImage, String image) {
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_IDACOMPAÑANTES, idImage);
+        values.put(COLUMN_ACOMPIMAGESTR, image);
+        SQLiteDatabase db = getWritableDatabase();
+        db.insert(TABLA_ACOMPAÑANTEIMAGENES, null, values);
+        db.close();
+
+    }
+
+    public Cursor ImagenPorIdAco(String idAco){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT imageAcomp FROM " + TABLA_ACOMPAÑANTEIMAGENES + " WHERE idAcomp = "+idAco+";";
+        Cursor c = db.rawQuery(query, null);
+
+        if (c != null) {
+            c.moveToFirst();
+        }
+
+        return c;
+    }
+
+    //Añade El JSON SOCIAL DEPO  a la Base de Datos
+
+    public void addSocialDepo(String jsonAlfa) {
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_JSONSOCIALDEPORTIVO, jsonAlfa);
+        SQLiteDatabase db = getWritableDatabase();
+        db.insert(TABLA_SOCIALDEPO, null, values);
+        db.close();
+
+    }
+    //Regresa el jsonAcomp de la Base de Datos
+    public Cursor jsonSocialDepo(){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT jsonSocialDepo FROM " + TABLA_SOCIALDEPO + " ;";
+        Cursor c = db.rawQuery(query, null);
+
+        if (c != null) {
+            c.moveToFirst();
+        }
+
+        return c;
+
+
+    }
+
+    //Añade Las Imagenes de Social depo
+
+    public void addSociaDepoImag(String idImage, String image) {
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_IDSOCIADEPORTIVO, idImage);
+        values.put(COLUMN_SOCIALDEPOIMAGESTR, image);
+        SQLiteDatabase db = getWritableDatabase();
+        db.insert(TABLA_SOCIALDEPOIMAGENES, null, values);
+        db.close();
+
+    }
+
+    public Cursor ImagenPorIdSocialDepo(String idSocial){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT "+ COLUMN_SOCIALDEPOIMAGESTR +" FROM " + TABLA_SOCIALDEPOIMAGENES + " WHERE "+ COLUMN_IDSOCIADEPORTIVO +" = "+idSocial+";";
+        Cursor c = db.rawQuery(query, null);
+
+        if (c != null) {
+            c.moveToFirst();
+        }
+
+        return c;
+    }
+
 }

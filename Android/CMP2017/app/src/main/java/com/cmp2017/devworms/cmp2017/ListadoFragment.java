@@ -7,6 +7,8 @@ import android.app.ListFragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -36,6 +38,7 @@ public class ListadoFragment extends Fragment {
     ProgressDialog pDialog;
     ListView lista;
     ConnectionDetector cd;
+    Cursor cursor;
     ArrayList<HashMap<String, String>> albumsList;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -103,7 +106,8 @@ public class ListadoFragment extends Fragment {
 
 
                 parametro.putString("idProgram",idProgram);
-
+                parametro.putString("seccion",seccion);
+                parametro.putInt("posicion",arg2);
 
                 fragment.setArguments(parametro);
 
@@ -282,17 +286,26 @@ public class ListadoFragment extends Fragment {
             // Building Parameters
             //add your data
             String body= "";
-
+            AdminSQLiteOffline dbHandler;
             if( seccion.equals("acomp")) {
-                body = "http://cmp.devworms.com/api/acompanantes/all/" + userId + "/" + apiKey + "";
+                //body = "http://cmp.devworms.com/api/acompanantes/all/" + userId + "/" + apiKey + "";
+                dbHandler = new AdminSQLiteOffline(getActivity(), null, null, 1);
+                SQLiteDatabase db = dbHandler.getWritableDatabase();
+                cursor = dbHandler.jsonAcompa();
+
+            }else if(seccion.equals("social")) {
+                dbHandler = new AdminSQLiteOffline(getActivity(), null, null, 1);
+                SQLiteDatabase db = dbHandler.getWritableDatabase();
+                cursor = dbHandler.jsonSocialDepo();
 
             }else{
-                body = "http://cmp.devworms.com/api/deportivos/all/"+userId+"/"+apiKey+"";
+                //body = "http://cmp.devworms.com/api/deportivos/all/"+userId+"/"+apiKey+"";
             }
             JSONParser jsp = new JSONParser();
 
 
-            String respuesta = jsp.makeHttpRequest(body, "GET", body, "");
+            //String respuesta = jsp.makeHttpRequest(body, "GET", body, "");
+            String respuesta = cursor.getString(0);
             Log.d("LoginRes : ", "> " + respuesta);
             if (respuesta != "error") {
                 try {
@@ -301,8 +314,10 @@ public class ListadoFragment extends Fragment {
                     if( seccion.equals("acomp")) {
                         elemBus = json.getString("acompanantes");
 
-                    }else{
+                    }else if(seccion.equals("social")) {
                         elemBus = json.getString("eventos");
+                    }else{
+
                     }
 
 
@@ -310,7 +325,7 @@ public class ListadoFragment extends Fragment {
 
                     int cuanto = jsonProgramas.length();
                     albumsList = new ArrayList<HashMap<String, String>>();
-                    Log.d("ListadoProgra : ", "> " + cuanto);
+
                     String actFecha="";
                     // looping through All albums
                     for (int i = 0; i <= jsonProgramas.length(); i++) {

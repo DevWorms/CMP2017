@@ -25,10 +25,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.loopj.android.http.Base64;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -37,14 +40,15 @@ import java.util.HashMap;
 
 public class DetalleEventoFragment extends Fragment {
     ProgressDialog pDialog;
-    String resp,userId, apiKey,idProgram, strNomEven,strLugEven,strRecomEven,urlImage, horaIni,horaFin,strdia;
+    String resp,userId, apiKey,idProgram, strNomEven,strLugEven,strRecomEven,urlImage, horaIni,horaFin,strdia, seccion;
     TextView txtNombreEven, txtLugarEven, txtRecomendaEven, txtHorario;
-    int strcursorEncontrado;
+    int strcursorEncontrado, posJson;
     ImageView imgFoto;
     URL imageUrl ;
     Bitmap imagen;
     HttpURLConnection conn;
     Button btnLocalizar,btnAgreAgenda;
+    Cursor cursor;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detalle_evento, container, false);
@@ -53,6 +57,8 @@ public class DetalleEventoFragment extends Fragment {
         userId = sp.getString("IdUser","");
         imgFoto = (ImageView)view.findViewById(R.id.imgFoto);
         idProgram = getArguments().getString("idProgram");
+        seccion = getArguments().getString("seccion");
+        posJson = getArguments().getInt("posicion");
         txtNombreEven = (TextView)view.findViewById(R.id.txtNombreEven);
         txtLugarEven = (TextView)view.findViewById(R.id.txtLugarEven);
         txtRecomendaEven = (TextView)view.findViewById(R.id.txtRecomEven);
@@ -132,38 +138,74 @@ public class DetalleEventoFragment extends Fragment {
         protected String doInBackground(String... args) {
             // Building Parameters
             //add your data
+            AdminSQLiteOffline dbHandler;
+            String respuesta ="";
+            if (seccion.equals("acomp")){
+                dbHandler = new AdminSQLiteOffline(getActivity(), null, null, 1);
+                SQLiteDatabase db = dbHandler.getWritableDatabase();
+                cursor = dbHandler.jsonAcompa();
+                respuesta = cursor.getString(0);
+            }else if(seccion.equals("social")) {
+                dbHandler = new AdminSQLiteOffline(getActivity(), null, null, 1);
+                SQLiteDatabase db = dbHandler.getWritableDatabase();
+                cursor = dbHandler.jsonSocialDepo();
+                respuesta = cursor.getString(0);
+            }else {
+                JSONParser jsp = new JSONParser();
+                String body = "http://cmp.devworms.com/api/programa/detail/" + userId + "/" + apiKey + "/" + idProgram + "";
+                 respuesta= jsp.makeHttpRequest(body,"GET",body,"");
+            }
 
 
-            String body ="http://cmp.devworms.com/api/programa/detail/"+userId+"/"+apiKey+"/"+idProgram+"";
-            JSONParser jsp = new JSONParser();
 
 
 
-            String respuesta= jsp.makeHttpRequest(body,"GET",body,"");
             Log.d("LoginRes : ", "> " + respuesta);
             if (respuesta != "error") {
                 try {
                     JSONObject json = new JSONObject(respuesta);
-                    String programs = json.getString("programa");
+                    String exposi = "";
+                    if(seccion.equals("acomp")){
+                        exposi = json.getString("acompanantes");
+                    } else if(seccion.equals("social")) {
+                        exposi = json.getString("eventos");
+                    }
 
-                    JSONObject jsonProgramas = new JSONObject(programs);
+                    JSONArray jsonExpositores = new JSONArray(exposi);
 
-                   strNomEven = jsonProgramas.getString("nombre");
-                    strLugEven = jsonProgramas.getString("lugar");
-                    strRecomEven = jsonProgramas.getString("recomendaciones");
-                    horaIni = jsonProgramas.getString("hora_inicio");
-                    horaFin = jsonProgramas.getString("hora_fin");
-                    strdia = jsonProgramas.getString("fecha");
-                    String urlImageJson = jsonProgramas.getString("foto");
-                    JSONObject jsonImagen = new JSONObject(urlImageJson);
-                    urlImage = jsonImagen.getString("url");
+                    JSONObject jsonExpo = jsonExpositores.getJSONObject(posJson);
 
-                    mostrarImagen(urlImage);
+
+                    ////////////////////////////////////////////
+                    strNomEven = jsonExpo.getString("nombre");
+                    strLugEven = jsonExpo.getString("lugar");
+                    strRecomEven = jsonExpo.getString("recomendaciones");
+                    horaIni = jsonExpo.getString("hora_inicio");
+                    horaFin = jsonExpo.getString("hora_fin");
+                    strdia = jsonExpo.getString("fecha");
+
+
+                    dbHandler = new AdminSQLiteOffline(getActivity(), null, null, 1);
+                    SQLiteDatabase db = dbHandler.getWritableDatabase();
+
+                    if(seccion.equals("acomp")){
+                        cursor = dbHandler.ImagenPorIdAco(idProgram);
+                    } else if(seccion.equals("social")) {
+                        cursor = dbHandler.ImagenPorIdSocialDepo(idProgram);
+                    }
+
+                    if(cursor.getCount()>0) {
+                        imagen = getImage(cursor.getString(0));
+
+                    }
+
+
 
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
                 resp = "ok";
 
 
@@ -192,7 +234,7 @@ public class DetalleEventoFragment extends Fragment {
                         txtLugarEven.setText(strLugEven);
                         txtRecomendaEven.setText(strRecomEven);
                         txtHorario.setText(horaIni + " - " + horaFin);
-
+                        imgFoto.setImageBitmap(imagen);
                     }
 
 
@@ -202,7 +244,30 @@ public class DetalleEventoFragment extends Fragment {
 
         }
     }
+    // convert from bitmap to byte array
+    public static String getBytes(Bitmap bitmap) {
+        ByteArrayOutputStream blob = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0 /* Ignored for PNGs */, blob);
+        byte[] bitmapdata = blob.toByteArray();
 
+        String encodedImage = Base64.encodeToString(bitmapdata, Base64.DEFAULT);
+        //---------------
+       /* ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);*/
+        return encodedImage;
+    }
+
+    // convert from byte array to bitmap
+    public static Bitmap getImage(String imageS) {
+
+        byte[] b = Base64.decode(imageS , Base64.DEFAULT);
+        //-----------------
+        Bitmap bmp = BitmapFactory.decodeByteArray(b, 0, b.length);
+
+
+        return  bmp;
+
+    }
     public void mostrarImagen(String url){
 
 

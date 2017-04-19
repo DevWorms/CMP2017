@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
@@ -79,7 +81,7 @@ public class TransportacionFragment extends Fragment
         protected String doInBackground(String... args) {
             // Building Parameters
             //add your data
-            String body= "";
+           /* String body= "";
 
 
             body = "http://cmp.devworms.com/api/ruta/all/"+userId+"/"+apiKey+"";
@@ -87,8 +89,12 @@ public class TransportacionFragment extends Fragment
             JSONParser jsp = new JSONParser();
 
 
-            String respuesta = jsp.makeHttpRequest(body, "GET", body, "");
-
+            String respuesta = jsp.makeHttpRequest(body, "GET", body, "");*/
+            AdminSQLiteOffline dbHandler;
+            dbHandler = new AdminSQLiteOffline(getActivity(), null, null, 1);
+            SQLiteDatabase db = dbHandler.getWritableDatabase();
+            Cursor cursor = dbHandler.jsonTrans();
+            String respuesta = cursor.getString(0);
             if (respuesta != "error") {
                 try {
                     JSONObject json = new JSONObject(respuesta);

@@ -30,7 +30,6 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
     public static final String COLUMN_EXPOIMAGESTR = "imageExpo";
 
 
-
     public static final String TABLA_PATROCINADORES = "Patrocinadores";
     public static final String COLUMN_IDPA = "_id";
     public static final String COLUMN_JSONPATROALFABETICO = "jsonPatroAlfa";
@@ -60,10 +59,13 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
     public static final String COLUMN_IDSOCIADEPORTIVO = "idSociaDepo";
     public static final String COLUMN_SOCIALDEPOIMAGESTR = "imageSociaDepo";
 
-
     public static final String TABLA_CATEGORIAS = "Categorias";
     public static final String COLUMN_IDCAT = "idCategoria";
     public static final String COLUMN_JSONCATEGORIA= "jsonCategoria";
+
+    public static final String TABLA_TRANSP = "Transportacion";
+    public static final String COLUMN_IDTRANS = "idTransportacion";
+    public static final String COLUMN_JSONTRANS= "jsonTranspo";
 
 
 
@@ -150,6 +152,13 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
                 ");";
 
         db.execSQL(queryCategoria);
+
+        String queryTrans = "CREATE TABLE " + TABLA_TRANSP+ "(" +
+                COLUMN_IDTRANS+ " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_JSONTRANS + " TEXT" +
+                ");";
+
+        db.execSQL(queryTrans);
 
     }
 
@@ -468,6 +477,33 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
         }
 
         return c;
+    }
+
+
+    //Añade El JSON TRANSPORTACION  a la Base de Datos
+
+    public void addTrans(String jsonAlfa) {
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_JSONTRANS, jsonAlfa);
+        SQLiteDatabase db = getWritableDatabase();
+        db.insert(TABLA_TRANSP, null, values);
+        db.close();
+
+    }
+
+    public Cursor jsonTrans(){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT jsonTranspo FROM " + TABLA_TRANSP + " ;";
+        Cursor c = db.rawQuery(query, null);
+
+        if (c != null) {
+            c.moveToFirst();
+        }
+
+        return c;
+
+
     }
 
 }

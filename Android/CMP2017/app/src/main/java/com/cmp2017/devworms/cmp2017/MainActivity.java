@@ -618,6 +618,23 @@ public class MainActivity extends AppCompatActivity {
 
             }
             Log.d("Descarga: ", "> Datos Social Deportivo completo" );
+            //////////////////////////TRANSPORTACION////////////////
+            Log.d("Descarga: ", "> Datos Transportacion" );
+            String bodyT= "";
+
+
+            bodyT = "http://cmp.devworms.com/api/ruta/all/"+userId+"/"+apiKey+"";
+
+            JSONParser jspT = new JSONParser();
+
+
+            String respuestaT = jspT.makeHttpRequest(bodyT, "GET", bodyT, "");
+
+            if (respuestaT != "error") {
+
+                dbHandlerOffline = new AdminSQLiteOffline(MainActivity.this, null, null, 1);
+                dbHandlerOffline.addTrans(respuestaT);
+            }
 
                 return null;
         }

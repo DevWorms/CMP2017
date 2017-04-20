@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
@@ -52,9 +54,59 @@ public class TransportacionFragment extends Fragment
         apiKey = sp.getString("APIkey", "");
         userId = sp.getString("IdUser", "");
         lista = (ListView) view.findViewById(R.id.lvListaTrans);
-        new getListaTrans().execute();
+        fillTransportacion();
         return view;
 
+
+    }
+    public void fillTransportacion(){
+
+        AdminSQLiteOffline dbHandler;
+        dbHandler = new AdminSQLiteOffline(getActivity(), null, null, 1);
+        SQLiteDatabase db = dbHandler.getWritableDatabase();
+        Cursor cursor = dbHandler.jsonTrans();
+        String respuesta = cursor.getString(0);
+
+        try{
+            JSONObject json = new JSONObject(respuesta);
+            String elemBus = "";
+
+            elemBus = json.getString("rutas");
+            Log.e("TRANSPORTACION ",elemBus);
+            JSONArray jsonRutas = new JSONArray(elemBus);
+
+            int cuanto = jsonRutas.length();
+            albumsList = new ArrayList<HashMap<String, Object>>();
+            String actFecha="";
+
+            idAr = new String[jsonRutas.length()];
+            nameAr = new String[jsonRutas.length()];
+            descrpAr = new String[jsonRutas.length()];
+            urlAr = new String[jsonRutas.length()];
+
+
+            // looping through All albums
+            for (int i = 0; i <= jsonRutas.length(); i++) {
+                JSONObject c = jsonRutas.getJSONObject(i);
+
+                // Storing each json item values in variable
+                idAr[i] = c.getString("id");
+                nameAr[i] = c.getString("titulo");
+                descrpAr[i] = c.getString("descripcion");
+                String urlTrans = c.getString("image");
+                JSONObject jsonUrl = new JSONObject(urlTrans);
+
+                urlAr[i] = jsonUrl.getString("url");
+                // adding HashList to ArrayList
+
+
+            }
+        }catch (JSONException jex){
+            Log.e("TransportacionList", jex.getMessage());
+        }
+
+        ListAdapterTransportacion adapter=new ListAdapterTransportacion(getActivity(),nameAr,descrpAr,urlAr);
+        lista.setAdapter(adapter);
 
     }
 
@@ -77,33 +129,23 @@ public class TransportacionFragment extends Fragment
          * getting Albums JSON
          */
         protected String doInBackground(String... args) {
-            // Building Parameters
-            //add your data
-            String body= "";
 
-
-            body = "http://cmp.devworms.com/api/ruta/all/"+userId+"/"+apiKey+"";
-
-            JSONParser jsp = new JSONParser();
-
-
-            String respuesta = jsp.makeHttpRequest(body, "GET", body, "");
-
+            AdminSQLiteOffline dbHandler;
+            dbHandler = new AdminSQLiteOffline(getActivity(), null, null, 1);
+            SQLiteDatabase db = dbHandler.getWritableDatabase();
+            Cursor cursor = dbHandler.jsonTrans();
+            String respuesta = cursor.getString(0);
             if (respuesta != "error") {
                 try {
                     JSONObject json = new JSONObject(respuesta);
                     String elemBus = "";
 
                     elemBus = json.getString("rutas");
-
-
-
-
+                    Log.e("TRANSPORTACION ",elemBus);
                     JSONArray jsonRutas = new JSONArray(elemBus);
 
                     int cuanto = jsonRutas.length();
                     albumsList = new ArrayList<HashMap<String, Object>>();
-
                     String actFecha="";
 
                     idAr = new String[jsonRutas.length()];
@@ -115,9 +157,6 @@ public class TransportacionFragment extends Fragment
                     // looping through All albums
                     for (int i = 0; i <= jsonRutas.length(); i++) {
                         JSONObject c = jsonRutas.getJSONObject(i);
-
-
-
 
                         // Storing each json item values in variable
                         idAr[i] = c.getString("id");
@@ -151,20 +190,12 @@ public class TransportacionFragment extends Fragment
          * After completing background task Dismiss the progress dialog
          **/
         protected void onPostExecute(String file_url) {
-            // dismiss the dialog after getting all albums
-            Log.d("Login : ", "> " + resp);
             pDialog.dismiss();
             if (resp.equals("ok") ) {
                 ListAdapterTransportacion adapter=new ListAdapterTransportacion(getActivity(),nameAr,descrpAr,urlAr);
-
-                // updating listview
-
                 lista.setAdapter(adapter);
 
             }
-            // updating UI from Background Thread
-
-
         }
     }
 

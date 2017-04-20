@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MenuPrincipalViewController: UIViewController {
+class MenuPrincipalViewController: UITableViewController {
     
     @IBOutlet weak var programaBtn: UIButton!
     @IBOutlet weak var acompañantesBtn: UIButton!
@@ -25,6 +25,11 @@ class MenuPrincipalViewController: UIViewController {
     var imagenes = [UIImage]()
     var noImg = 0
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = false
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,7 +39,8 @@ class MenuPrincipalViewController: UIViewController {
         
         let nav = self.navigationController?.navigationBar
         nav?.tintColor = UIColor.white
-        nav!.setBackgroundImage(navBackgroundImage, for:.default)
+        
+        nav?.setBackgroundImage(navBackgroundImage, for:.default)
         
         nav?.titleTextAttributes = [NSForegroundColorAttributeName: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)]
         nav?.topItem?.title = UserDefaults.standard.value(forKey: "name") as! String?

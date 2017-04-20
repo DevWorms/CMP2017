@@ -55,7 +55,7 @@ public class ListAdapterTransportacion extends ArrayAdapter<String> {
                 Bundle parametro = new Bundle();
 
                 parametro.putString("url",itemurl[posicion]);
-
+                parametro.putInt("posicion",posicion);
 
                 fragment.setArguments(parametro);
 

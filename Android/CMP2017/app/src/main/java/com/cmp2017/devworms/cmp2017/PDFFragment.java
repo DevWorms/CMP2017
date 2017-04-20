@@ -5,6 +5,8 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
@@ -23,10 +25,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.loopj.android.http.Base64;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -37,16 +42,18 @@ import java.util.HashMap;
 public class PDFFragment extends Fragment
 
 {
-    WebView wbPdf;
-    String url;
+    ImageView imgRuta;
+    String url, idRuta;
+    Cursor cursor;
+    int posJson;
+    Bitmap imagen;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pdffragment, container, false);
         url =  getArguments().getString("url");
-        wbPdf = (WebView) view.findViewById(R.id.wbPdf);
-        WebSettings wbs=wbPdf.getSettings();
-        wbs.setBuiltInZoomControls(true);
-        wbs.setJavaScriptEnabled(true);
+        imgRuta = (ImageView) view.findViewById(R.id.imgRuta);
+        posJson = getArguments().getInt("posicion");
+
         new LoadSingleTrack().execute();
         return view;
 
@@ -67,7 +74,68 @@ public class PDFFragment extends Fragment
          * getting song json and parsing
          * */
         protected String doInBackground(String... args) {
-            // Building Parameters
+
+            AdminSQLiteOffline dbHandler;
+
+                    dbHandler = new AdminSQLiteOffline(getActivity(), null, null, 1);
+                    SQLiteDatabase db = dbHandler.getWritableDatabase();
+                    cursor = dbHandler.jsonTrans();
+
+
+            String respuesta = cursor.getString(0);
+
+            Log.d("LoginRes : ", "> " + respuesta);
+            if (respuesta != "error") {
+                try {
+                    JSONObject json = new JSONObject(respuesta);
+                    String ruta = "";
+
+                    ruta = json.getString("rutas");
+
+
+
+                    JSONArray jsonExpositores = new JSONArray(ruta);
+
+
+
+
+
+                    JSONObject jsonExpo = jsonExpositores.getJSONObject(posJson);
+
+
+
+
+
+                    ////////////////////////////////////////////
+
+
+                    idRuta = jsonExpo.getString("id");
+
+
+                    dbHandler = new AdminSQLiteOffline(getActivity(), null, null, 1);
+                    SQLiteDatabase dbP = dbHandler.getWritableDatabase();
+
+
+                        cursor = dbHandler.ImagenPorIdRuta(idRuta);
+
+
+                    if(cursor.getCount()>0) {
+                        imagen = getImage(cursor.getString(0));
+                    }
+
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+
+            } else {
+
+            }
+
 
             return null;
         }
@@ -83,35 +151,41 @@ public class PDFFragment extends Fragment
                 public void run() {
 
 
+                        imgRuta.setImageBitmap(imagen);
 
-                    wbPdf.setWebViewClient(new WebViewClient() {
-                        public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-
-                        }
-
-                        @Override
-                        public void onPageStarted(WebView view, String url, Bitmap favicon)
-                        {
-
-                        }
-
-
-                        @Override
-                        public void onPageFinished(WebView view, String url) {
-                            String webUrl = wbPdf.getUrl();
-
-                        }
-
-                    });
-
-                    wbPdf.loadUrl("http://docs.google.com/gview?embedded=true&url="+url);
 
 
 
                 }
             });
 
+
         }
+
+    }
+
+    // convert from bitmap to byte array
+    public static String getBytes(Bitmap bitmap) {
+        ByteArrayOutputStream blob = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0 /* Ignored for PNGs */, blob);
+        byte[] bitmapdata = blob.toByteArray();
+
+        String encodedImage = Base64.encodeToString(bitmapdata, Base64.DEFAULT);
+        //---------------
+       /* ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);*/
+        return encodedImage;
+    }
+
+    // convert from byte array to bitmap
+    public static Bitmap getImage(String imageS) {
+
+        byte[] b = Base64.decode(imageS , Base64.DEFAULT);
+        //-----------------
+        Bitmap bmp = BitmapFactory.decodeByteArray(b, 0, b.length);
+
+
+        return  bmp;
 
     }
 

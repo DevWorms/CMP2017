@@ -34,7 +34,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ListadoFragment extends Fragment {
-    String seccion, nombre, tipoProgram, diaProgram, userId, apiKey, cateId, fecha, resp;
+    String seccion, nombre, diaProgram, userId, apiKey, cateId, fecha, resp;
+    int tipoEvento;
     ProgressDialog pDialog;
     ListView lista;
     ConnectionDetector cd;
@@ -54,12 +55,13 @@ public class ListadoFragment extends Fragment {
         cd = new ConnectionDetector(getActivity());
         if(seccion.equals("programas")){
 
-            tipoProgram =  getArguments().getString("tipoProgra");
-            if(tipoProgram.split("-")[0].equals("0")){
+            tipoEvento =  getArguments().getInt("tipoEvento");
+            if(tipoEvento == 0){
                 cateId = "";
             }else{
-                cateId = tipoProgram.split("-")[0];
+                cateId = tipoEvento +"";
             }
+
             Log.e("cateId" , cateId);
 
             diaProgram =  getArguments().getString("diaProgra");

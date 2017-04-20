@@ -618,7 +618,80 @@ public class MainActivity extends AppCompatActivity {
 
             }
             Log.d("Descarga: ", "> Datos Social Deportivo completo" );
+            //////////////////////////TRANSPORTACION////////////////
+            Log.d("Descarga: ", "> Datos Transportacion" );
+            String bodyT= "";
 
+
+            bodyT = "http://cmp.devworms.com/api/ruta/all/"+userId+"/"+apiKey+"";
+
+            JSONParser jspT = new JSONParser();
+
+
+            String respuestaT = jspT.makeHttpRequest(bodyT, "GET", bodyT, "");
+            Log.e("Tabla Trans", respuestaT);
+
+            if (respuestaT != "error") {
+
+                dbHandlerOffline = new AdminSQLiteOffline(MainActivity.this, null, null, 1);
+                dbHandlerOffline.addTrans(respuestaT);
+
+                try {
+
+
+                    JSONObject jsonimageT = null;
+
+                    jsonimageT = new JSONObject(respuestaT);
+
+                    String ruta = "";
+
+                    ruta = jsonimageT.getString("rutas");
+
+
+                    JSONArray jsonSDimage = null;
+                    jsonSDimage = new JSONArray(ruta);
+
+                    for (int i = 0; i <= jsonSDimage.length(); i++) {
+                        JSONObject c = null;
+                        try {
+                            c = jsonSDimage.getJSONObject(i);
+
+                            String urlImageJson = c.getString("image");
+                            JSONObject jsonImagen = new JSONObject(urlImageJson);
+                            urlImage = jsonImagen.getString("url");
+
+                            imageUrl = new URL(urlImage);
+                            conn = (HttpURLConnection) imageUrl.openConnection();
+                            conn.connect();
+
+                            BitmapFactory.Options options = new BitmapFactory.Options();
+                            options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
+
+                            expoImg = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
+                            ImageDecoExpo = getBytes(expoImg);
+
+                            dbHandlerOffline = new AdminSQLiteOffline(MainActivity.this, null, null, 1);
+                            SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
+
+                            String idTRImagen = c.getString("id");
+
+                            dbHandlerOffline.addRutaImag(idTRImagen,ImageDecoExpo);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (MalformedURLException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            Log.d("Descarga: ", "> Transportacion Completa" );
                 return null;
         }
 

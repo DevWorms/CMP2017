@@ -30,7 +30,6 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
     public static final String COLUMN_EXPOIMAGESTR = "imageExpo";
 
 
-
     public static final String TABLA_PATROCINADORES = "Patrocinadores";
     public static final String COLUMN_IDPA = "_id";
     public static final String COLUMN_JSONPATROALFABETICO = "jsonPatroAlfa";
@@ -60,11 +59,18 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
     public static final String COLUMN_IDSOCIADEPORTIVO = "idSociaDepo";
     public static final String COLUMN_SOCIALDEPOIMAGESTR = "imageSociaDepo";
 
-
     public static final String TABLA_CATEGORIAS = "Categorias";
     public static final String COLUMN_IDCAT = "idCategoria";
     public static final String COLUMN_JSONCATEGORIA= "jsonCategoria";
 
+    public static final String TABLA_TRANSP = "Transportacion";
+    public static final String COLUMN_IDTRANS = "idTransportacion";
+    public static final String COLUMN_JSONTRANS= "jsonTranspo";
+
+    public static final String TABLA_TRANSPOIMAGENES = "TransportacionImagenes";
+    public static final String COLUMN_IDTRANSRUTA = "_id";
+    public static final String COLUMN_IDRUTA = "idRuta";
+    public static final String COLUMN_RUTAIMAGESTR = "imageRuta";
 
 
     public AdminSQLiteOffline(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -151,6 +157,20 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
 
         db.execSQL(queryCategoria);
 
+        String queryTrans = "CREATE TABLE " + TABLA_TRANSP+ "(" +
+                COLUMN_IDTRANS+ " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_JSONTRANS + " TEXT" +
+                ");";
+
+        db.execSQL(queryTrans);
+
+        String queryTransIma = "CREATE TABLE " + TABLA_TRANSPOIMAGENES + "(" +
+                COLUMN_IDTRANSRUTA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_IDRUTA + " TEXT," +
+                COLUMN_RUTAIMAGESTR + " TEXT" +
+                ");";
+        db.execSQL(queryTransIma);
+
     }
 
     @Override
@@ -184,7 +204,14 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
 
         db.execSQL("DROP TABLE IF EXISTS " + TABLA_CATEGORIAS);
         onCreate(db);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_TRANSP);
+        onCreate(db);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_TRANSPOIMAGENES);
+        onCreate(db);
     }
+
 
     //Añade los Banners a la Base de Datos
 
@@ -461,6 +488,58 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
     public Cursor ImagenPorIdSocialDepo(String idSocial){
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT "+ COLUMN_SOCIALDEPOIMAGESTR +" FROM " + TABLA_SOCIALDEPOIMAGENES + " WHERE "+ COLUMN_IDSOCIADEPORTIVO +" = "+idSocial+";";
+        Cursor c = db.rawQuery(query, null);
+
+        if (c != null) {
+            c.moveToFirst();
+        }
+
+        return c;
+    }
+
+
+    //Añade El JSON TRANSPORTACION  a la Base de Datos
+
+    public void addTrans(String jsonAlfa) {
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_JSONTRANS, jsonAlfa);
+        SQLiteDatabase db = getWritableDatabase();
+        db.insert(TABLA_TRANSP, null, values);
+        db.close();
+
+    }
+
+    public Cursor jsonTrans(){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT "+COLUMN_JSONTRANS+" FROM " + TABLA_TRANSP + " ;";
+        Cursor c = db.rawQuery(query, null);
+
+        if (c != null) {
+            c.moveToFirst();
+        }
+
+        return c;
+
+
+    }
+
+    //Añade Las Imagenes de Social depo
+
+    public void addRutaImag(String idImage, String image) {
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_IDRUTA, idImage);
+        values.put(COLUMN_RUTAIMAGESTR, image);
+        SQLiteDatabase db = getWritableDatabase();
+        db.insert(TABLA_TRANSPOIMAGENES, null, values);
+        db.close();
+
+    }
+
+    public Cursor ImagenPorIdRuta(String idRuta){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT "+ COLUMN_RUTAIMAGESTR +" FROM " + TABLA_TRANSPOIMAGENES + " WHERE "+ COLUMN_IDRUTA +" = "+idRuta+";";
         Cursor c = db.rawQuery(query, null);
 
         if (c != null) {

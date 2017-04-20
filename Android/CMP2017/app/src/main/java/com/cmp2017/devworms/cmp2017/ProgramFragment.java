@@ -21,6 +21,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class ProgramFragment extends Fragment {
 
     Spinner spinTipoEven,spinDia;
@@ -46,23 +50,22 @@ public class ProgramFragment extends Fragment {
         dbHandlerOffline = new AdminSQLiteOffline(getActivity(), null, null, 1);
         Cursor rs = dbHandlerOffline.getJsonCategorias();
         String strCategorias = rs.getString(0);
-        String tipoEvento[];
+        List<TiposEventos> eventos;
         try{
             JSONObject json = new JSONObject(strCategorias);
 
             JSONArray jCategoria = new JSONArray(json.getString("categorias"));
-            tipoEvento = new String[jCategoria.length() + 2];
-            tipoEvento [0] = "Seleciona un tipo de evento";
-            int longitudFinal = 0;
+            eventos = new ArrayList<TiposEventos>();
+            TiposEventos sinEvento = new TiposEventos("Seleciona un tipo de evento",0);
+            eventos.add(sinEvento);
+            eventos.add(new TiposEventos("Todos",0));
             for(int cont= 0; cont < jCategoria.length() ; cont++){
                 JSONObject tempPrograma = jCategoria.getJSONObject(cont);
-                tipoEvento[cont + 1] = tempPrograma.getInt("id") + "-" +  tempPrograma.getString("nombre");
-                longitudFinal +=1;
-                Log.e("TIPO EVENTO",tipoEvento[cont]);
+                eventos.add(new TiposEventos(tempPrograma.getString("nombre"),tempPrograma.getInt("id")));
             }
-            tipoEvento[longitudFinal + 1] = "0-TODOS";
-            ArrayAdapter adapterTiposEven = new ArrayAdapter<String>(getActivity(),
-                    android.R.layout.simple_spinner_dropdown_item, tipoEvento);
+
+
+            ArrayAdapter adapterTiposEven = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, eventos);
             spinTipoEven.setAdapter(adapterTiposEven);
 
         }catch(JSONException jex){
@@ -106,7 +109,9 @@ public class ProgramFragment extends Fragment {
             Bundle parametro = new Bundle();
 
             parametro.putString("diaProgra",spinDia.getSelectedItem().toString());
-            parametro.putString("tipoProgra",spinTipoEven.getSelectedItem().toString());
+            // en lugar de mandar el dato mostrado en el spiner mandamos el id
+            TiposEventos sentEvento = (TiposEventos) spinTipoEven.getSelectedItem();
+            parametro.putInt("tipoEvento",sentEvento.id);
             parametro.putString("seccion","programas");
 
 
@@ -123,6 +128,23 @@ public class ProgramFragment extends Fragment {
 
 
 
+        }
+    }
+
+    // para poder mostrar un valor en el spiner y mandar otro (nombre,id)
+    class TiposEventos{
+
+        public String nombre;
+        public Integer id;
+
+        public TiposEventos(String nombre, Integer id){
+            this.nombre = nombre;
+            this.id = id;
+        }
+
+        @Override
+        public  String toString(){
+            return this.nombre;
         }
     }
 }

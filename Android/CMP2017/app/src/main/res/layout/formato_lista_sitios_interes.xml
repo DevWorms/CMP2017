@@ -33,6 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:text="Sitio Web"
+        android:textColor="#0431B4"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -42,6 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
+        android:textColor="#0431B4"
         android:text="Link de Google Maps"
         android:textSize="18sp"
         android:textStyle="bold" />

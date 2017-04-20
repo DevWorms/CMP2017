@@ -60,22 +60,6 @@ public class SitiosInteresFragment extends Fragment
         userId = sp.getString("IdUser","");
         new getListaSitios().execute();
 
-        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View view, int arg2,
-                                    long arg3) {
-                // on selecting a single album
-                // TrackListActivity will be launched to show tracks inside the album
-                TextView txtSitio= (TextView)view.findViewById(R.id.txtSitioweb);
-                nume= arg2;
-                pagianweb = txtSitio.getText().toString();
-                txtSitio.setOnClickListener(new SitiosInteres());
-                TextView txtMaps= (TextView)view.findViewById(R.id.txtUrlMapLugar);
-
-                txtMaps.setOnClickListener(new SitiosMaps());
-
-            }
-        });
         return view;
 
 

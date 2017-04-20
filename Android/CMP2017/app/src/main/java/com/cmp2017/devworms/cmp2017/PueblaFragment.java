@@ -36,7 +36,7 @@ public class PueblaFragment extends Fragment
     class SitiosInteres implements View.OnClickListener {
         public void onClick(View v) {
 
-
+    //comentario commit
             getFragmentManager().beginTransaction()
                     .replace(R.id.actividad, new SitiosInteresFragment()).addToBackStack(null).commit();
 

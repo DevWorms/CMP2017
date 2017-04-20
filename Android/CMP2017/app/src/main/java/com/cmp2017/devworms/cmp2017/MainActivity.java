@@ -629,6 +629,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             String respuestaT = jspT.makeHttpRequest(bodyT, "GET", bodyT, "");
+            Log.e("Tabla Trans", respuestaT);
 
             if (respuestaT != "error") {
 

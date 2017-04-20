@@ -512,7 +512,7 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
 
     public Cursor jsonTrans(){
         SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT jsonTranspo FROM " + TABLA_TRANSP + " ;";
+        String query = "SELECT "+COLUMN_JSONTRANS+" FROM " + TABLA_TRANSP + " ;";
         Cursor c = db.rawQuery(query, null);
 
         if (c != null) {

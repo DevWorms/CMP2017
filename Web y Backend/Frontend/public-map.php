@@ -1,4 +1,4 @@
-<?php require dirname(__FILE__) . '/sesion/validar.php'; ?>
+<?php //require dirname(__FILE__) . '/sesion/validar.php'; ?>
 <!DOCTYPE html>
 <html lang="">
 

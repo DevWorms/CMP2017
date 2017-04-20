@@ -191,7 +191,7 @@
     <script src="js/lodash.js"></script>
     <script src="js/mapa-expositores.js"></script>
     <script type="text/javascript" >
-        d3.xml("img/plano3.svg",  "image/svg+xml",  function(xml) {
+        d3.xml("img/plano4.svg",  "image/svg+xml",  function(xml) {
             seating(xml);
         });
     </script>

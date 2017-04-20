@@ -178,6 +178,11 @@ function saveEstantes(estantes, id) {
                 $("#error").fadeIn(1000, function() {
                     $("#error").html('<div class="alert alert-success"> &nbsp; ' + response.mensaje + '</div>');
                 });
+
+                $(".room").html("");
+                d3.xml("img/plano4.svg",  "image/svg+xml",  function(xml) {
+                    seating(xml);
+                });
             } else {
                 $("#error").fadeIn(1000, function() {
                     $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
@@ -233,10 +238,10 @@ function seating(xml) {
             seats.selectAll("rect").each(function() {
                 var r = d3.select(this);
 
-                if (r.attr('height') == 27.9) {
+                if (r.attr('height') == 27.9 || ((r.attr('height') == 28.2) && (r.attr('width') == 27.9) ) ) {
                     var locked = false;
 
-                    if (stands[i-1].available === 0) {
+                    if (stands[i-1].available == 0) {
                         locked = true;
                     }
 
@@ -274,6 +279,7 @@ function handleResevations(data) {
 
         if (value.locked === false) {
             seat.on("click", function (d) {
+                console.log(seat);
                 reserve(seat, d, data);
             });
         } else {

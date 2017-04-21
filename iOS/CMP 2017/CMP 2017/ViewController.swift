@@ -24,10 +24,10 @@ class ViewController: UIViewController {
         
         //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "fondoCMP.png")!)
         
-        /*let methodsCMP = ServerConnection()
+        let methodsCMP = ServerConnection()
         
         methodsCMP.getCMP(myView: self) //descarga datos para offline
-        */
+ 
         
     }
 

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AWSMobileHubHelper
+
 
 class MenuPrincipalViewController: UITableViewController {
     
@@ -25,10 +27,27 @@ class MenuPrincipalViewController: UITableViewController {
     var imagenes = [UIImage]()
     var noImg = 0
     
+    //push
+    fileprivate var pushManager: AWSPushManager!
+    
+    #if RELEASE
+    let ServiceKey: String = "Prod";
+    #else
+    let ServiceKey: String = "Devo";
+    #endif
+    // para push notification
+    
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = false
     }
 
+    
+    // para cuadrar las imagenes
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        
+        return pantallaSizeHeight(row: indexPath.row);//Choose your custom row height
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +85,22 @@ class MenuPrincipalViewController: UITableViewController {
         
         cargarImg()
         
+    ////// copiar desde aqui para puush notifications
+        setupPushManager()
+        
     }
+    
+    
+    func setupPushManager() {
+        pushManager = AWSPushManager(forKey: ServiceKey)
+        pushManager?.delegate = self
+        pushManager?.registerForPushNotifications()
+        if let topicARNs = pushManager?.topicARNs {
+            pushManager.registerTopicARNs(topicARNs)
+        }
+    }
+    
+    // hasta aqui
     
     func cargarImg() {
         
@@ -112,4 +146,126 @@ class MenuPrincipalViewController: UITableViewController {
         }
     }
 
+    func pantallaSizeHeight(row: Int)->CGFloat!
+    {
+        var strPantalla = 143 //iphone 5
+        
+        if(row == 0){
+            strPantalla = 163
+        }
+        
+        if (UIDevice.current.userInterfaceIdiom == .pad)
+        {
+            if(row == 0){
+                strPantalla = 446
+            }
+            else{
+                strPantalla = 350
+            }
+           
+        }
+        else
+        {
+            
+            if UIScreen.main.bounds.size.width > 320 {
+                if UIScreen.main.scale == 3 { //iphone 6 plus
+                    
+                    strPantalla = 143
+                }
+                else{
+                    strPantalla = 143 //iphone 6
+                }
+            }
+        }
+        return CGFloat(strPantalla)
+    }
+
 }
+
+
+// extenciones para recibir norificaciones dentro de la view actual
+// MARK:- AWSPushManagerDelegate
+
+extension MenuPrincipalViewController : AWSPushManagerDelegate {
+    
+    func pushManagerDidRegister(_ pushManager: AWSPushManager) {
+        print("Successfully enabled Push Notifications.")
+        
+        print("Subscribing to the first topic among the configured topics (all-device topic).");
+        if let defaultSubscribeTopic = pushManager.topicARNs?.first {
+            let topic = pushManager.topic(forTopicARN: defaultSubscribeTopic)
+            topic.subscribe()
+        }
+    }
+    
+    func pushManager(_ pushManager: AWSPushManager, didFailToRegisterWithError error: Error) {
+        print("Failed to Register for Push Notification: \(error)")
+    }
+    
+    func pushManager(_ pushManager: AWSPushManager, didReceivePushNotification userInfo: [AnyHashable: Any]) {
+        print("Received a Push Notification: \(userInfo.description)")
+        
+        
+        let aps = userInfo[AnyHashable("aps")]! as! NSDictionary
+        
+        let alert = aps["alert"]! as! String
+        
+        
+        showAlertWithTitle("Mensaje", message: alert as! String)
+    }
+    
+  /*  private func getAlert(notification: [NSObject:AnyObject]) -> (String, String) {
+        let aps = notification["aps" as NSString] as? [String:AnyObject]
+        let alert = aps?["alert"] as? [String:AnyObject]
+        let title = alert?["title"] as? String
+        let body = alert?["body"] as? String
+        return (title ?? "-", body ?? "-")
+    }
+    */
+    
+    func pushManagerDidDisable(_ pushManager: AWSPushManager) {
+        print("Successfully disabled Push Notification.")
+    }
+    
+    func pushManager(_ pushManager: AWSPushManager, didFailToDisableWithError error: Error) {
+        print("Failed to subscribe to a topic: \(error)")
+    }
+    
+  
+}
+
+// MARK:- AWSPushTopicDelegate
+
+extension MenuPrincipalViewController: AWSPushTopicDelegate {
+    
+    func topicDidSubscribe(_ topic: AWSPushTopic) {
+        print("Successfully subscribed to a topic: \(topic.topicName)")
+    }
+    
+    func topic(_ topic: AWSPushTopic, didFailToSubscribeWithError error: Error) {
+        print("Failed to subscribe to topic: \(topic.topicName)")
+    }
+    
+    func topicDidUnsubscribe(_ topic: AWSPushTopic) {
+        print("Successfully unsubscribed from a topic: \(topic)")
+    }
+    
+    func topic(_ topic: AWSPushTopic, didFailToUnsubscribeWithError error: Error) {
+        print("Failed to subscribe to a topic: \(error)")
+    }
+}
+
+// MARK:- Utility methods
+
+extension MenuPrincipalViewController {
+    
+    fileprivate func showAlertWithTitle(_ title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
+    }
+}
+
+
+

@@ -2,13 +2,59 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSAppTransportSecurity</key>
+    <key>AWS</key>
 	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
+		<key>CredentialsProvider</key>
+		<dict>
+			<key>CognitoIdentity</key>
+			<dict>
+				<key>Default</key>
+				<dict>
+					<key>PoolId</key>
+					<string>us-east-1:c92a4607-d651-4141-8534-1f2f327f815e</string>
+					<key>Region</key>
+					<string>us-east-1</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>IdentityManager</key>
+		<dict>
+			<key>Default</key>
+			<dict/>
+		</dict>
+		<key>MobileHub</key>
+		<dict>
+			<key>ProjectClientId</key>
+			<string>MobileHub 304e22c1-7825-4b09-92a3-145f2d1165f9 aws-my-sample-app-ios-swift-v0.13</string>
+		</dict>
+		<key>PushManager</key>
+		<dict>
+			<key>Devo</key>
+			<dict>
+				<key>Region</key>
+				<string>us-east-1</string>
+				<key>SNSConfiguredTopics</key>
+				<array>
+					<string>arn:aws:sns:us-east-1:291812403953:cmp_alldevices_MOBILEHUB_41832316</string>
+					<string></string>
+				</array>
+				<key>SNSPlatformApplicationARN</key>
+				<string>arn:aws:sns:us-east-1:291812403953:app/APNS_SANDBOX/cmp_MOBILEHUB_41832316</string>
+			</dict>
+			<key>Prod</key>
+			<dict>
+				<key>Region</key>
+				<string>us-east-1</string>
+				<key>SNSConfiguredTopics</key>
+				<array>
+					<string>arn:aws:sns:us-east-1:291812403953:cmp_alldevices_MOBILEHUB_41832316</string>
+					<string></string>
+				</array>
+				<key>SNSPlatformApplicationARN</key>
+				<string>arn:aws:sns:us-east-1:291812403953:app/APNS/cmp_MOBILEHUB_41832316</string>
+			</dict>
+		</dict>
 	</dict>
-	<key>LSApplicationCategoryType</key>
-	<dict/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -22,11 +68,48 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>3.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>3</string>
+	<key>LSApplicationCategoryType</key>
+	<dict/>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>tel</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+        <key>NSExceptionDomains</key>
+        <dict>
+            <key>amazonaws.com</key>
+            <dict>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+                <key>NSThirdPartyExceptionMinimumTLSVersion</key>
+                <string>TLSv1.0</string>
+                <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+                <false/>
+            </dict>
+            <key>cloudfront.net</key>
+            <dict>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+                <key>NSThirdPartyExceptionMinimumTLSVersion</key>
+                <string>TLSv1.0</string>
+                <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+                <false/>
+            </dict>
+        </dict>
+
+	</dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -45,10 +128,6 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>tel</string>
 	</array>
 </dict>
 </plist>

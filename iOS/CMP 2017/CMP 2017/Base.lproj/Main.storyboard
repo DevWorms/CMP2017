@@ -1180,6 +1180,9 @@
                                         <state key="normal" title="Mi Agenda" image="02_Mi_Agenda">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="9J5-td-au1" kind="show" id="iQg-dh-zcO"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d2M-hq-kU6" customClass="UIButtonWithImageAspectFit" customModule="CMP_2017" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="135" width="343" height="64"/>
@@ -1332,6 +1335,97 @@
             </objects>
             <point key="canvasLocation" x="5943.75" y="2317.3828125"/>
         </scene>
+        <!--Mi Agenda-->
+        <scene sceneID="lQi-Qf-cjd">
+            <objects>
+                <viewController id="ij3-qk-T0t" customClass="MiAgenda" customModule="CMP_2017" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fxd-3Z-15j"/>
+                        <viewControllerLayoutGuide type="bottom" id="Rnn-H6-2XR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DQa-tq-3Be">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="123" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="D6d-kb-7kF">
+                                <rect key="frame" x="0.0" y="169" width="375" height="490"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="123" id="Kuw-BG-VJz" customClass="MiAgendaTableViewCell" customModule="CMP_2017" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="123"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kuw-BG-VJz" id="2ez-tS-Edr">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="122.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2zt-Pk-pIH">
+                                                    <rect key="frame" x="8" y="22" width="85" height="78"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZMa-Db-uQx">
+                                                    <rect key="frame" x="134" y="51" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9E7-aS-SfE">
+                                                    <rect key="frame" x="271" y="50" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="horarioEvento" destination="9E7-aS-SfE" id="tnu-o0-DiJ"/>
+                                            <outlet property="imageViewFoto" destination="2zt-Pk-pIH" id="g92-Ce-l3C"/>
+                                            <outlet property="nombreEvento" destination="ZMa-Db-uQx" id="iPz-yA-yeo"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gXl-A1-7A6">
+                                <rect key="frame" x="16" y="107" width="343" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Lunes 5"/>
+                                    <segment title="Martes 6"/>
+                                    <segment title="Miércoles 7"/>
+                                    <segment title="Jueves 8"/>
+                                    <segment title="Viernes 9"/>
+                                    <segment title="Sabado 10"/>
+                                </segments>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="fuq-Gt-wiy">
+                        <rightBarButtonItems>
+                            <barButtonItem image="12Menu" id="JQp-bP-XVF">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </barButtonItem>
+                            <barButtonItem image="11Casa" id="0BT-4b-dg2">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="menu:" destination="wY0-lq-IPD" id="yDi-7Z-JhS"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="SegmentControlDias" destination="gXl-A1-7A6" id="4zf-Ml-cB8"/>
+                        <outlet property="TableView" destination="D6d-kb-7kF" id="cfK-zy-Ec1"/>
+                        <outlet property="segmentControlDias" destination="gXl-A1-7A6" id="eHN-fj-uEm"/>
+                        <outlet property="tableView" destination="D6d-kb-7kF" id="X6k-RV-iEe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ssL-dk-Gdx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5509.6000000000004" y="3891.9040479760124"/>
+        </scene>
         <!--Notificaciones View Controller-->
         <scene sceneID="hXf-08-nwU">
             <objects>
@@ -1345,7 +1439,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notificaciones" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5si-gK-uK8">
-                                <rect key="frame" x="116.5" y="72" width="142" height="26.5"/>
+                                <rect key="frame" x="117" y="72" width="142" height="26.5"/>
                                 <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="21"/>
                                 <color key="textColor" red="0.16038369599999999" green="0.32152638290000002" blue="0.6560517132" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1434,7 +1528,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hyj-6S-40q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7595.625" y="3780"/>
+            <point key="canvasLocation" x="8533.6000000000004" y="3779.4602698650679"/>
         </scene>
         <!--Sitios View Controller-->
         <scene sceneID="65K-tn-Wiw">
@@ -1716,18 +1810,15 @@
                             <constraint firstAttribute="trailingMargin" secondItem="gcG-Q7-w8i" secondAttribute="trailing" id="pE7-Y6-Lm1"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="soN-Gp-o4a">
+                    <navigationItem key="navigationItem" id="eDS-Z1-vgB">
                         <rightBarButtonItems>
-                            <barButtonItem image="12Menu" id="epT-6T-FYm">
+                            <barButtonItem image="12Menu" id="mzs-Ht-FIl">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <segue destination="6J5-cF-d15" kind="presentation" id="QzB-g8-4A3"/>
-                                </connections>
                             </barButtonItem>
-                            <barButtonItem image="11Casa" id="Cep-1S-s0W">
+                            <barButtonItem image="11Casa" id="CGw-C6-Z61">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <action selector="menu:" destination="wY0-lq-IPD" id="Cyg-Ux-bOA"/>
+                                    <action selector="menu:" destination="wY0-lq-IPD" id="7IG-wu-Kt2"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -1740,7 +1831,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yO1-0m-F6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6883.125" y="3768.75"/>
+            <point key="canvasLocation" x="7821.6000000000004" y="3768.6656671664173"/>
         </scene>
         <!--Registro View Controller-->
         <scene sceneID="FFI-NK-0XR">
@@ -1957,7 +2048,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Conoce Puebla" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LPg-8X-M3p">
-                                <rect key="frame" x="113" y="116" width="149" height="26.5"/>
+                                <rect key="frame" x="113.5" y="116" width="149" height="26.5"/>
                                 <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="21"/>
                                 <color key="textColor" red="0.16038369599999999" green="0.32152638290000002" blue="0.6560517132" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -2726,6 +2817,24 @@
             </objects>
             <point key="canvasLocation" x="3260.625" y="150"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="PGd-Xy-v9y">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9J5-td-au1" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="J8G-4k-b2u">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ij3-qk-T0t" kind="relationship" relationship="rootViewController" id="bLr-fX-uUu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z3d-QR-RZK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5423" y="3065"/>
+        </scene>
     </scenes>
     <resources>
         <image name="01Boton_Ingresar_como_invitado" width="508" height="187"/>
@@ -2769,11 +2878,11 @@
         <image name="fondoCMP" width="1242" height="2208"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="SYf-Ru-mT8"/>
         <segue reference="C9o-NW-2zu"/>
-        <segue reference="eG2-Ou-XTa"/>
-        <segue reference="yIx-rV-XWI"/>
+        <segue reference="GJj-eU-EjN"/>
         <segue reference="GKY-3m-4VQ"/>
+        <segue reference="yIx-rV-XWI"/>
+        <segue reference="SYf-Ru-mT8"/>
         <segue reference="z9v-TW-n8m"/>
     </inferredMetricsTieBreakers>
 </document>

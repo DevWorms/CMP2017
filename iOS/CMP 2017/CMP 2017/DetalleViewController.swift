@@ -31,6 +31,7 @@ class DetalleViewController: UIViewController {
     // 3 acompañantes
     // 4 deportivo
     // 5 patrocinadores
+    // 6 mis expositores
     var seccion = 0
     var detalle = [String: Any]()
     var imgData: Any?
@@ -136,6 +137,10 @@ class DetalleViewController: UIViewController {
 
            
             
+        } else if self.seccion == 1 || self.seccion == 3 || self.seccion == 4 {
+             print("Agregar a agenda")
+        
+        
         }
    
         

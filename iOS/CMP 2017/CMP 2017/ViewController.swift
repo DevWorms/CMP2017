@@ -9,9 +9,17 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+       
+        
+        
+        
+        
         // Do any additional setup after loading the view, typically from a nib.
         
         //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "fondoCMP.png")!)
@@ -19,7 +27,7 @@ class ViewController: UIViewController {
         let methodsCMP = ServerConnection()
         
         methodsCMP.getCMP(myView: self) //descarga datos para offline
-        
+ 
         
     }
 
@@ -43,7 +51,7 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
     }
-
-
 }
+    
+   
 

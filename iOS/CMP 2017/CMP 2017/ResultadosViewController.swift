@@ -41,7 +41,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
 
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "fondo.png")!)
         
-        if Accesibilidad.isConnectedToNetwork() == true {
+  
         
             switch self.seccion {
             case 1:
@@ -158,13 +158,8 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
             
             //self.tableView.reloadData()
             
-        } else {
-            let vc_alert = UIAlertController(title: "Sin conexión a internet", message: "Asegúrate de estar conectado a internet.", preferredStyle: .alert)
-            vc_alert.addAction(UIAlertAction(title: "OK",
-                                             style: UIAlertActionStyle.default,
-                                             handler: nil))
-            self.present(vc_alert, animated: true, completion: nil)
-        }
+        
+        
     }
 
     override func didReceiveMemoryWarning() {

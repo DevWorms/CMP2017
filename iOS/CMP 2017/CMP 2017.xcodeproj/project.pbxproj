@@ -11,6 +11,8 @@
 		0421216F1EA0403D005FC5E3 /* EncuentaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0421216E1EA0403D005FC5E3 /* EncuentaTableViewCell.swift */; };
 		042121711EA04C8B005FC5E3 /* DetalleEncuestaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042121701EA04C8B005FC5E3 /* DetalleEncuestaViewController.swift */; };
 		042121731EA090F5005FC5E3 /* CosmosDistrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042121721EA090F4005FC5E3 /* CosmosDistrib.swift */; };
+		04D5DFB41EAA986A00699A4B /* MiAgenda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5DFB31EAA986A00699A4B /* MiAgenda.swift */; };
+		04D5DFB61EAA9C7E00699A4B /* MiAgendaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5DFB51EAA9C7E00699A4B /* MiAgendaTableViewCell.swift */; };
 		3B396BF61E70DF2200C4611E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396BF51E70DF2200C4611E /* LoginViewController.swift */; };
 		3B396BF81E70DF2F00C4611E /* RegistroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396BF71E70DF2F00C4611E /* RegistroViewController.swift */; };
 		3B396BFA1E70E4F400C4611E /* MenuPrincipalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B396BF91E70E4F400C4611E /* MenuPrincipalViewController.swift */; };
@@ -41,6 +43,16 @@
 		3B8B4C7F1E825F7400983CD4 /* NotificacionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8B4C7E1E825F7400983CD4 /* NotificacionTableViewCell.swift */; };
 		3BAEAA131E95A48900B1E7DA /* ServerConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAEAA121E95A48900B1E7DA /* ServerConnection.swift */; };
 		3BAEAA151E95CBCF00B1E7DA /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAEAA141E95CBCF00B1E7DA /* CoreDataHelper.swift */; };
+		491CA6161EA95BDE00476182 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 491CA6151EA95BDE00476182 /* libz.tbd */; };
+		491CA6181EA95BE500476182 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 491CA6171EA95BE500476182 /* libsqlite3.tbd */; };
+		491CA6211EA95C6700476182 /* Sdk in Resources */ = {isa = PBXBuildFile; fileRef = 491CA6201EA95C6700476182 /* Sdk */; };
+		491CA6231EA95C7C00476182 /* AWSSNS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 491CA6221EA95C7C00476182 /* AWSSNS.framework */; };
+		491CA6241EA95C7C00476182 /* AWSSNS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 491CA6221EA95C7C00476182 /* AWSSNS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		491CA6271EA95C9C00476182 /* AWSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 491CA6251EA95C8E00476182 /* AWSCore.framework */; };
+		491CA6281EA95C9C00476182 /* AWSCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 491CA6251EA95C8E00476182 /* AWSCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		491CA62E1EA95D2200476182 /* AWSConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491CA62B1EA95D2200476182 /* AWSConfiguration.swift */; };
+		491CA62F1EA95D2200476182 /* AWSMobileClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491CA62C1EA95D2200476182 /* AWSMobileClient.swift */; };
+		491CA6301EA95D2200476182 /* AWSMobileHubHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 491CA62D1EA95D2200476182 /* AWSMobileHubHelper.framework */; };
 		49902A231EA6937C00E2C75D /* UIButtonWithImageAspectFit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49902A221EA6937C00E2C75D /* UIButtonWithImageAspectFit.swift */; };
 /* End PBXBuildFile section */
 
@@ -61,11 +73,28 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		491CA61E1EA95C2E00476182 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				491CA6241EA95C7C00476182 /* AWSSNS.framework in Embed Frameworks */,
+				491CA6281EA95C9C00476182 /* AWSCore.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0401F1411E9FD8D0006A41FB /* EncuestasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncuestasViewController.swift; sourceTree = "<group>"; };
 		0421216E1EA0403D005FC5E3 /* EncuentaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncuentaTableViewCell.swift; sourceTree = "<group>"; };
 		042121701EA04C8B005FC5E3 /* DetalleEncuestaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetalleEncuestaViewController.swift; sourceTree = "<group>"; };
 		042121721EA090F4005FC5E3 /* CosmosDistrib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosDistrib.swift; sourceTree = "<group>"; };
+		04D5DFB31EAA986A00699A4B /* MiAgenda.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiAgenda.swift; sourceTree = "<group>"; };
+		04D5DFB51EAA9C7E00699A4B /* MiAgendaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiAgendaTableViewCell.swift; sourceTree = "<group>"; };
 		3B396BF51E70DF2200C4611E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3B396BF71E70DF2F00C4611E /* RegistroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistroViewController.swift; sourceTree = "<group>"; };
 		3B396BF91E70E4F400C4611E /* MenuPrincipalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuPrincipalViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +145,15 @@
 		3B8B4C7E1E825F7400983CD4 /* NotificacionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificacionTableViewCell.swift; sourceTree = "<group>"; };
 		3BAEAA121E95A48900B1E7DA /* ServerConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServerConnection.swift; path = ../ServerConnection.swift; sourceTree = "<group>"; };
 		3BAEAA141E95CBCF00B1E7DA /* CoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
+		491CA6151EA95BDE00476182 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		491CA6171EA95BE500476182 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		491CA6201EA95C6700476182 /* Sdk */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sdk; sourceTree = "<group>"; };
+		491CA6221EA95C7C00476182 /* AWSSNS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSSNS.framework; path = "CMP 2017/Sdk/Aws/AWSSNS.framework"; sourceTree = "<group>"; };
+		491CA6251EA95C8E00476182 /* AWSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSCore.framework; path = "CMP 2017/Sdk/Aws/AWSCore.framework"; sourceTree = "<group>"; };
+		491CA62B1EA95D2200476182 /* AWSConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSConfiguration.swift; sourceTree = "<group>"; };
+		491CA62C1EA95D2200476182 /* AWSMobileClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSMobileClient.swift; sourceTree = "<group>"; };
+		491CA62D1EA95D2200476182 /* AWSMobileHubHelper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSMobileHubHelper.framework; path = "CMP 2017/AmazonAws/AWSMobileHubHelper.framework"; sourceTree = "<group>"; };
+		491CA6321EA9B73100476182 /* CMP 2017.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "CMP 2017.entitlements"; sourceTree = "<group>"; };
 		49902A221EA6937C00E2C75D /* UIButtonWithImageAspectFit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonWithImageAspectFit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,6 +162,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				491CA6301EA95D2200476182 /* AWSMobileHubHelper.framework in Frameworks */,
+				491CA6181EA95BE500476182 /* libsqlite3.tbd in Frameworks */,
+				491CA6271EA95C9C00476182 /* AWSCore.framework in Frameworks */,
+				491CA6231EA95C7C00476182 /* AWSSNS.framework in Frameworks */,
+				491CA6161EA95BDE00476182 /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,6 +215,7 @@
 				3B5B8F871E7083ED00F0D6AA /* CMP 2017Tests */,
 				3B5B8F921E7083ED00F0D6AA /* CMP 2017UITests */,
 				3B5B8F6E1E7083ED00F0D6AA /* Products */,
+				491CA6141EA95BDE00476182 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -188,6 +232,9 @@
 		3B5B8F6F1E7083ED00F0D6AA /* CMP 2017 */ = {
 			isa = PBXGroup;
 			children = (
+				491CA6321EA9B73100476182 /* CMP 2017.entitlements */,
+				491CA62A1EA95D2200476182 /* AmazonAws */,
+				491CA6201EA95C6700476182 /* Sdk */,
 				3B5B8F771E7083ED00F0D6AA /* CMP_2017.xcdatamodeld */,
 				3B4AC3771E85ECFF00570A99 /* Font */,
 				3BAEAA111E95A45200B1E7DA /* Utilities */,
@@ -212,6 +259,8 @@
 				3B5B8F7A1E7083ED00F0D6AA /* Assets.xcassets */,
 				3B5B8F7C1E7083ED00F0D6AA /* LaunchScreen.storyboard */,
 				3B5B8F7F1E7083ED00F0D6AA /* Info.plist */,
+				04D5DFB31EAA986A00699A4B /* MiAgenda.swift */,
+				04D5DFB51EAA9C7E00699A4B /* MiAgendaTableViewCell.swift */,
 			);
 			path = "CMP 2017";
 			sourceTree = "<group>";
@@ -261,6 +310,27 @@
 			name = "Con Internet";
 			sourceTree = "<group>";
 		};
+		491CA6141EA95BDE00476182 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				491CA62D1EA95D2200476182 /* AWSMobileHubHelper.framework */,
+				491CA6251EA95C8E00476182 /* AWSCore.framework */,
+				491CA6221EA95C7C00476182 /* AWSSNS.framework */,
+				491CA6171EA95BE500476182 /* libsqlite3.tbd */,
+				491CA6151EA95BDE00476182 /* libz.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		491CA62A1EA95D2200476182 /* AmazonAws */ = {
+			isa = PBXGroup;
+			children = (
+				491CA62B1EA95D2200476182 /* AWSConfiguration.swift */,
+				491CA62C1EA95D2200476182 /* AWSMobileClient.swift */,
+			);
+			path = AmazonAws;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -271,6 +341,8 @@
 				3B5B8F691E7083EC00F0D6AA /* Sources */,
 				3B5B8F6A1E7083EC00F0D6AA /* Frameworks */,
 				3B5B8F6B1E7083EC00F0D6AA /* Resources */,
+				491CA61E1EA95C2E00476182 /* Embed Frameworks */,
+				491CA6291EA95CCF00476182 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -329,8 +401,13 @@
 				TargetAttributes = {
 					3B5B8F6C1E7083EC00F0D6AA = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = FN75477QMR;
+						DevelopmentTeam = B9E9GA7RYJ;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					3B5B8F831E7083ED00F0D6AA = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -370,6 +447,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B5B8F7E1E7083ED00F0D6AA /* LaunchScreen.storyboard in Resources */,
+				491CA6211EA95C6700476182 /* Sdk in Resources */,
 				3B5B8F7B1E7083ED00F0D6AA /* Assets.xcassets in Resources */,
 				3B5B8F761E7083ED00F0D6AA /* Main.storyboard in Resources */,
 			);
@@ -390,6 +468,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		491CA6291EA95CCF00476182 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework/strip-frameworks.sh\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3B5B8F691E7083EC00F0D6AA /* Sources */ = {
@@ -414,6 +508,7 @@
 				3B396BF81E70DF2F00C4611E /* RegistroViewController.swift in Sources */,
 				3B396BFA1E70E4F400C4611E /* MenuPrincipalViewController.swift in Sources */,
 				3B396C0C1E76628200C4611E /* TelsViewController.swift in Sources */,
+				491CA62F1EA95D2200476182 /* AWSMobileClient.swift in Sources */,
 				3B396C041E764F5F00C4611E /* TransportacionViewController.swift in Sources */,
 				3B396C141E77392B00C4611E /* MapaSimpleViewController.swift in Sources */,
 				3BAEAA131E95A48900B1E7DA /* ServerConnection.swift in Sources */,
@@ -425,7 +520,10 @@
 				042121711EA04C8B005FC5E3 /* DetalleEncuestaViewController.swift in Sources */,
 				3B396BFC1E762CA500C4611E /* MenuUsuarioViewController.swift in Sources */,
 				3B396C0E1E766AF800C4611E /* MiPerfilViewController.swift in Sources */,
+				491CA62E1EA95D2200476182 /* AWSConfiguration.swift in Sources */,
+				04D5DFB41EAA986A00699A4B /* MiAgenda.swift in Sources */,
 				3B396BFE1E76388400C4611E /* ProgramaViewController.swift in Sources */,
+				04D5DFB61EAA9C7E00699A4B /* MiAgendaTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,6 +599,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Oswaldo Olvera (YSZVJY3588)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -551,6 +650,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Oswaldo Olvera (YSZVJY3588)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -577,12 +677,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = FN75477QMR;
+				CODE_SIGN_ENTITLEMENTS = "CMP 2017/CMP 2017.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = B9E9GA7RYJ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CMP\\ 2017/Sdk/**",
+					"$(PROJECT_DIR)/CMP\\ 2017/Sdk/Aws",
+					"$(PROJECT_DIR)/CMP\\ 2017/AmazonAws",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "CMP 2017/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.devworms.CMP-2017";
+				PRODUCT_BUNDLE_IDENTIFIER = com.devworms.CMP2017;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -591,12 +702,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = FN75477QMR;
+				CODE_SIGN_ENTITLEMENTS = "CMP 2017/CMP 2017.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = B9E9GA7RYJ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CMP\\ 2017/Sdk/**",
+					"$(PROJECT_DIR)/CMP\\ 2017/Sdk/Aws",
+					"$(PROJECT_DIR)/CMP\\ 2017/AmazonAws",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "CMP 2017/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.devworms.CMP-2017";
+				PRODUCT_BUNDLE_IDENTIFIER = com.devworms.CMP2017;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

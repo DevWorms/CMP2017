@@ -56,6 +56,36 @@ class SitiosViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         return cell
     }
+    
+    // para cuadrar las imagenes
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        return pantallaSizeHeight();//Choose your custom row height
+    }
+    
+    func pantallaSizeHeight()->CGFloat!
+    {
+        var strPantalla = 285 //iphone 5
+        if (UIDevice.current.userInterfaceIdiom == .pad)
+        {
+            strPantalla = 471
+        }
+        else
+        {
+            
+            if UIScreen.main.bounds.size.width > 320 {
+                if UIScreen.main.scale == 3 { //iphone 6 plus
+                    strPantalla = 285
+                }
+                else{
+                    strPantalla = 285 //iphone 6
+                }
+            }
+        }
+        return CGFloat(strPantalla)
+    }
+    
+
 
     /*
     // MARK: - Navigation

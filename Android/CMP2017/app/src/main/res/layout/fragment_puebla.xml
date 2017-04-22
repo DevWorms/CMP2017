@@ -35,55 +35,72 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="80dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginBottom="30dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btnTelefonos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/btntelefonos" />
-
-                <Button
-                    android:id="@+id/btnClima"
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/btnclima" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_weight= "1"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnSitiosInteres"
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
                     android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/btnsitiosint" />
-
+                    android:textColor="#FFF"
+                    android:background="#2844A8"
+                    android:textSize="18dp"
+                    android:text="Sitos de    interés" />
                 <Button
                     android:id="@+id/btnMapa"
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
                     android:layout_marginLeft="10dp"
+                    android:textColor="#FFF"
+                    android:background="#2844A8"
+                    android:textSize="18dp"
+                    android:text="Mapa de       Puebla"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight= "1"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnTelefonos"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
                     android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/btnmapapuebla" />
+                    android:layout_marginBottom="35dp"
+                    android:textColor="#FFF"
+                    android:background="#2844A8"
+                    android:textSize="18dp"
+                    android:text="Teléfonos de emergencia y taxis"/>
+
+                <Button
+                    android:id="@+id/btnClima"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="35dp"
+                    android:textColor="#FFF"
+                    android:background="#2844A8"
+                    android:textSize="18dp"
+                    android:text="Clima"/>
+
+
             </LinearLayout>
         </LinearLayout>
 

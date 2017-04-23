@@ -21,6 +21,8 @@ class MapaExpositores extends Migration
              */
             $table->tinyInteger('available')->default(1);
             $table->string('coords');
+            $table->unsignedBigInteger('expositor_id')->nullable();
+            $table->string('color')->nullable();
             $table->timestamps();
         });
     }

@@ -190,6 +190,7 @@ $app->get('/api/mapa/recinto/{user_id}/{api_key}', ['middleware' => 'cors', 'use
 $app->get('/api/mapa/expositores/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'MapasController@getStands']);
 $app->post('/api/mapa/expositores/reservar', ['middleware' => 'cors', 'uses' => 'MapasController@reservar']);
 $app->get('/api/mapa/expositores/public', ['middleware' => 'cors', 'uses' => 'MapasController@getPublicStands']);
+$app->get('/api/mapa/expositores/public/expositor/{expositor_id}', ['middleware' => 'cors', 'uses' => 'MapasController@loadExpositorLocation']);
 
 /*
  * Push

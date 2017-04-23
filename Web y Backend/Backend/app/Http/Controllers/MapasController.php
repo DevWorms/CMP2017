@@ -180,23 +180,21 @@ class MapasController extends Controller {
                 }
                 $estantes = explode(",", $stands);
 
+                $color = $this->rand_color();
                 $estantes_ids = [];
                 foreach ($estantes as $estante) {
                     $id = substr($estante, 8);
                     array_push($estantes_ids, $id);
 
-                    MapaHasExpositores::create([
-                        'estante_id' => $id,
-                        'expositor_id' => $expositor->id
+                    MapaExpositores::where('id', $id)->update([
+                        'available' => 0,
+                        'expositor_id' => $expositor->id,
+                        'color' => $color
                     ]);
                 }
 
-                $estantes = MapaExpositores::whereIn('id', $estantes_ids)->update(['available' => 0]);
-
                 $res['status'] = 1;
                 $res['mensaje'] = "Los cambios se guardaron correctamente";
-                $res['estantes'] = $estantes;
-                $res['expositor'] = $expositor->nombre;
                 return response()->json($res, 200);
             } else {
                 $res['status'] = 0;
@@ -209,22 +207,74 @@ class MapasController extends Controller {
             return response()->json($res, 400);
         } catch (\Exception $ex) {
             $res['status'] = 0;
-            $res['mensaje'] = $ex->getMessage();
+            $res['mensaje'] = $ex->getMessage() . $ex->getLine() . $ex->getFile();
             return response()->json($res, 500);
         }
     }
 
+    function rand_color() {
+        return '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
+    }
+
     public function getPublicStands() {
         try {
-            $stands = MapaExpositores::select('id', 'available')->get();
+            $stands = MapaExpositores::with('expositor')->get();
+
+            foreach ($stands as $stand) {
+
+                if ($stand->expositor) {
+                    $stand->expo = $stand->expositor->nombre;
+                    unset($stand["expositor"]);
+                } else {
+                    $stand->expositor = null;
+                }
+            }
 
             $res['status'] = 1;
             $res['mensaje'] = "success";
             $res['stands'] = $stands;
             return response()->json($res, 200);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    public function loadExpositorLocation($id) {
+        try {
+            $expositor = Expositor::where('id', $id)
+                ->select('id', 'nombre', 'email', 'url', 'telefono', 'acerca', 'logo_file')
+                ->with('estantes', 'logo')
+                ->firstOrFail();
+
+            unset($expositor["logo_file"]);
+            unset($expositor["id"]);
+            unset($expositor["logo"]["is_banner"]);
+            unset($expositor["logo"]["user_id"]);
+            unset($expositor["logo"]["id"]);
+            unset($expositor["logo"]["created_at"]);
+
+            $estantes = collect($expositor->estantes)->groupBy('coords');
+            unset($expositor["estantes"]);
+
+            $flag = 0;
+            $coords = null;
+            foreach ($estantes as $estante) {
+                if ($estante->count() > $flag) {
+                    $flag = $estante->count();
+                    $coords = $estante[0]->coords;
+                }
+            }
+            $expositor["coords"] = $coords;
+
+            $res['status'] = 1;
+            $res['mensaje'] = "success";
+            $res['expositor'] = $expositor;
+            return response()->json($res, 200);
         } catch (ModelNotFoundException $ex) {
             $res['status'] = 0;
-            $res['mensaje'] = "Error de credenciales";
+            $res['mensaje'] = "No se encontró el Expositor: " . $id;
             return response()->json($res, 400);
         } catch (\Exception $ex) {
             $res['status'] = 0;

@@ -25,7 +25,7 @@ class MapaExpositores extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'available', 'coords'
+        'id', 'available', 'coords', 'expositor_id', 'color'
     ];
 
     /**
@@ -35,4 +35,7 @@ class MapaExpositores extends Model
      */
     protected $hidden = ['updated_at'];
 
+    public function expositor() {
+        return $this->hasOne('App\Expositor', 'id', 'expositor_id');
+    }
 }

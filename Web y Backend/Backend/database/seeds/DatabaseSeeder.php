@@ -1453,8 +1453,18 @@ class DatabaseSeeder extends Seeder
                 }
                 $y += 28;
             }
+
+            $x = -1850;
+            for ($i = 1; $i < 113; $i++) {
+                $x -= 600;
+                for ($j = 1; $j < 9; $j++) {
+                    \App\MapaExpositores::where('id', $i)->update([
+                        'coords' => $x . ',-454'
+                    ]);
+                }
+            }
         } catch (Exception $ex) {
-            echo $ex->getLine() . " " . $ex->getMessage();
+            echo $ex->getMessage();
         }
     }
 }

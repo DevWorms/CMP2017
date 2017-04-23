@@ -43,4 +43,8 @@ class Expositor extends Model
     public function logo() {
         return $this->hasOne('App\File', 'id', 'logo_file');
     }
+
+    public function estantes() {
+        return $this->hasMany('App\MapaExpositores', 'expositor_id', 'id');
+    }
 }

@@ -228,6 +228,7 @@ class MapasController extends Controller {
                 } else {
                     $stand->expositor = null;
                 }
+                unset($stand["created_at"]);
             }
 
             $res['status'] = 1;

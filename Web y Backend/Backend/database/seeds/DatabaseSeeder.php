@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
                 'type' => 0,
                 'association' => 0,
                 'email' => "contacto@congreso.digital",
-                'password' => "$2y$10\$jyblYgb2MUdLD6JOCKCzu.6oVqhaVFl.HmLwTCeuaNDHo.UJr6Czy", // "123456"
+                'password' => "$2y$10\$jyblYgb2MUdLD6JOCKCzu.6oVqhaVFl.HmLwTCeuaNDHo.UJr6Czy",
                 'api_token' => 0
             ]);
 
@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
                 'type' => 1,
                 'association' => 1,
                 'email' => "vale@devworms.com",
-                'password' => "$2y$10\$jyblYgb2MUdLD6JOCKCzu.6oVqhaVFl.HmLwTCeuaNDHo.UJr6Czy", // "123456"
+                'password' => "$2y$10\$jyblYgb2MUdLD6JOCKCzu.6oVqhaVFl.HmLwTCeuaNDHo.UJr6Czy",
                 'api_token' => 1
             ]);
 
@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
                 'type' => 2,
                 'association' => "",
                 'email' => "smunguia@devworms.com",
-                'password' => "$2y$10\$jyblYgb2MUdLD6JOCKCzu.6oVqhaVFl.HmLwTCeuaNDHo.UJr6Czy", // "123456"
+                'password' => "$2y$10\$jyblYgb2MUdLD6JOCKCzu.6oVqhaVFl.HmLwTCeuaNDHo.UJr6Czy",
                 'api_token' => 2
             ]);
 
@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
                 'type' => 3,
                 'association' => 3,
                 'email' => "richard@devworms.com",
-                'password' => "$2y$10\$jyblYgb2MUdLD6JOCKCzu.6oVqhaVFl.HmLwTCeuaNDHo.UJr6Czy", // "123456"
+                'password' => "$2y$10\$jyblYgb2MUdLD6JOCKCzu.6oVqhaVFl.HmLwTCeuaNDHo.UJr6Czy",
                 'api_token' => 3
             ]);
 

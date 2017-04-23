@@ -7,6 +7,7 @@ var data = [];
 function seating(xml) {
     var svg = d3.select(xml);
     var seats = svg.select("#layer3");
+    var gE = svg.select("#gE");
     var i = 1;
 
     $.ajax({
@@ -32,11 +33,24 @@ function seating(xml) {
 
                     r.attr("id", 'estante_' + i);
 
-                    r.append("text").text("sample!!!").attr("transform", "matrix(144,542,172,568)");
+                    var title = "Estante " + i;
+                    if (stand.expo) {
+                        title = title + ": " + stand.expo;
+
+                        console.log(gE);
+
+                        gE
+                            .append("text")
+                            .text(stand.expo)
+                            .attr("transform", "matrix(" + stand.coords + ")")
+                            .attr("font-size", 5)
+                            .attr("x", r.attr("x"))
+                            .attr("y", r.attr("y"));
+                    }
 
                     data.push({
                         id: r.attr("id"),
-                        title: "Estante " + i,
+                        title: title,
                         locked: locked,
                         color: color,
                         coords: stand.coords
@@ -60,15 +74,6 @@ function seating(xml) {
             });
         }
     });
-
-    if (window.location.hash !== '') {
-        var id = parseInt(window.location.hash.substring(1));
-        if (id > 0) {
-            if (id) {
-                loadExpositorLocation(id);
-            }
-        }
-    }
 }
 
 function loadExpositorLocation(id) {
@@ -78,8 +83,6 @@ function loadExpositorLocation(id) {
         success: function (response) {
             var expositor = response.expositor;
             g.attr("transform", "translate(" + expositor.coords + ")scale(" + 4 + ")");
-
-            //TODO Mostrar info del expositor
         },
         error : function (response) {
             response = response.responseJSON;
@@ -92,11 +95,21 @@ function loadExpositorLocation(id) {
 
 function zoom() {
     g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+    svg.select("#gE").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 }
 
 function handleResevations(data) {
     svg = d3.select("#Layer_2");
     g = d3.select("#layer3");
+
+    if (window.location.hash !== '') {
+        var id = parseInt(window.location.hash.substring(1));
+        if (id > 0) {
+            if (id) {
+                loadExpositorLocation(id);
+            }
+        }
+    }
 
     data.forEach(function(value, index) {
         var seat = d3.select("#" + value.id);

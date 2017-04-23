@@ -36,7 +36,9 @@ class DetalleViewController: UIViewController {
     var detalle = [String: Any]()
     var imgData: Any?
     var misExpositores = [String: Any]()
+    var miAgendaEventos = [String: Any]()
     var encontro = 0
+    var estaMiagenda = 0
 
     override func viewWillLayoutSubviews(){
         super.viewWillLayoutSubviews()
@@ -60,29 +62,45 @@ class DetalleViewController: UIViewController {
             
             self.lugar.text = detalle["lugar"] as! String?
             self.recomendaciones.text = detalle["recomendaciones"] as! String?
+            self.horario.text = "\(detalle["hora_inicio"]!) - \(detalle["hora_fin"]!)"
+            let miAgendaEventos = CoreDataHelper.fetchData(entityName: "MiAgendaT", keyName: "miAgenda")!
+            
+            for ftdA in miAgendaEventos {
+                print("ftdA: \(ftdA["id"] as! Int16)")
+                print("detalle: \(detalle["id"] as! Int16)")
+                
+                
+                if ftdA["id"] as! Int == detalle["id"] as! Int{
+                    
+                    estaMiagenda = 1
+                    print("entro en mi agenda \(estaMiagenda)" )
+                }
+            }
             
         case 2,6:
             let misExpositores = CoreDataHelper.fetchData(entityName: "MisExpositores", keyName: "misExpositores")!
            
             
             for ftd in misExpositores {
-            print("ftd: \(ftd["id"] as! Int16)")
-            print("detalle: \(detalle["id"] as! Int16)")
+
 
                 
                 if ftd["id"] as! Int == detalle["id"] as! Int{
                     
                     encontro = 1
-                    print("entro \(encontro)" )
+                   
                 }
             }
-            print("MisExpositores Count:  \(encontro)")
+            
             if encontro > 0 {
                 btn2.imageView?.image = #imageLiteral(resourceName: "btneliminarexpo")
             }else{
                  btn2.imageView?.image = #imageLiteral(resourceName: "04Agregar_a_mis_expositores")
             }
-            
+        
+
+            self.lbl1.isHidden = true
+            self.horario.isHidden = true
             
             self.lbl2.text = "Contacto"
             self.lugar.text = (detalle["url"] as! String) + "\n" + (detalle["telefono"] as! String) + "\n" + (detalle["email"] as! String)
@@ -92,7 +110,8 @@ class DetalleViewController: UIViewController {
         case 5:
             btn2.imageView?.image = #imageLiteral(resourceName: "05Boton_Presentacion_de_la_empresa")
             btn3.isHidden = true
-            
+            self.lbl1.isHidden = true
+             self.horario.isHidden = true
             self.lbl2.text = "Contacto"
             self.lugar.text = (detalle["url"] as! String) + "\n" + (detalle["telefono"] as! String) + "\n" + (detalle["email"] as! String)
             self.lbl3.text = "Acerca de:"
@@ -139,8 +158,18 @@ class DetalleViewController: UIViewController {
             
         } else if self.seccion == 1 || self.seccion == 3 || self.seccion == 4 {
              print("Agregar a agenda")
-        
-        
+            if estaMiagenda > 0 {
+                let vc_alert = UIAlertController(title: "", message: "Ya tienes este evento agregado en tu agenda", preferredStyle: .alert)
+                vc_alert.addAction(UIAlertAction(title: "OK",
+                                                 style: UIAlertActionStyle.default,
+                                                 handler: nil))
+                self.present(vc_alert, animated: true, completion: nil)
+
+            }else{
+             CoreDataHelper.saveData(entityName: "MiAgendaT", data: detalle ,keyName: "miAgenda",dataImg: imgData, keyNameImg: "imgMiAgenda" )
+                  print("Se agrego a la base")
+                 estaMiagenda = 1
+            }
         }
    
         

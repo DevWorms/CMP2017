@@ -19,6 +19,7 @@ import UIKit
 class MiAgendaTableViewCell: UITableViewCell {
     @IBOutlet weak var horarioEvento: UILabel!
   
+  
     @IBOutlet weak var nombreEvento: UILabel!
     @IBOutlet weak var imageViewFoto: UIImageView!
     

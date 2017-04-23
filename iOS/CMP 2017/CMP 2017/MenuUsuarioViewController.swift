@@ -67,6 +67,9 @@ class MenuUsuarioViewController: ViewController {
     @IBAction func misEncuestas(_ sender: Any) {
         self.performSegue(withIdentifier: "encuestas", sender: nil)
     }
+    @IBAction func miAgenda(_ sender: Any) {
+        self.performSegue(withIdentifier: "miagenda", sender: nil)
+    }
     @IBAction func cerrarSesion(_ sender: Any) {
         UserDefaults.standard.set("", forKey: "api_key")
         UserDefaults.standard.set("", forKey: "user_id")

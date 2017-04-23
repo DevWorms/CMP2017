@@ -48,31 +48,31 @@ public class MainActivity extends AppCompatActivity {
     Bitmap[] imagen;
     Bitmap expoImg;
     HttpURLConnection conn;
-    String[] ArrayBanners,ImagenDeco;
+    String[] ArrayBanners, ImagenDeco;
     ImageView imageAnim;
     View viewBanner;
 
     AdminSQLiteOffline dbHandlerOffline;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
 
-
         SharedPreferences sp = getSharedPreferences("prefe", Activity.MODE_PRIVATE);
-       String nombre = sp.getString("APIkey","");
-        String DescargaC = sp.getString("Descarga","");
+        String nombre = sp.getString("APIkey", "");
+        String DescargaC = sp.getString("Descarga", "");
 
         apiKey = "0";
         userId = "1";
 
-        if(nombre != ""){
+        if (nombre != "") {
             Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
             intent.putExtra("parametro", "no");
             startActivity(intent);
         }
-        if(!DescargaC.equals("1")) {
+        if (!DescargaC.equals("1")) {
             new getDescaragaDatosOffline().execute();
         }
 
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             //Toast.makeText(MainActivity.this, "Se necesita internet", Toast.LENGTH_SHORT).show();
             // stop executing code by return
 
-        }else {
+        } else {
 
             AWSMobileClient.initializeMobileClientIfNecessary(this);
 
@@ -143,10 +143,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
 
 
-
-
-
-
         }
     }
 
@@ -163,9 +159,6 @@ public class MainActivity extends AppCompatActivity {
             editor.commit();
             Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
             startActivity(intent);
-
-
-
 
 
         }
@@ -190,12 +183,12 @@ public class MainActivity extends AppCompatActivity {
          * getting Albums JSON
          */
         protected String doInBackground(String... args) {
-            String body= "";
+            String body = "";
 
 ////////////////////////////////////////////////////Descarga de Datos Banner
-            Log.d("Descarga: ", "> Datos Banner" );
+            Log.d("Descarga: ", "> Datos Banner");
 
-            body = "http://cmp.devworms.com/api/banners/all/"+userId+"/"+apiKey+"";
+            body = "http://cmp.devworms.com/api/banners/all/" + userId + "/" + apiKey + "";
 
 
             JSONParser jsp = new JSONParser();
@@ -203,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
 
             SharedPreferences.Editor editor = sp.edit();
 
-            String respuesta= "";
+            String respuesta = "";
 
             respuesta = jsp.makeHttpRequest(body, "GET", body, "");
 
@@ -230,7 +223,6 @@ public class MainActivity extends AppCompatActivity {
                         ArrayBanners[i] = c.getString("url");
 
 
-
                     }
                     try {
                         imagen = new Bitmap[ArrayBanners.length];
@@ -250,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
                             dbHandlerOffline = new AdminSQLiteOffline(MainActivity.this, null, null, 1);
                             SQLiteDatabase db = dbHandlerOffline.getWritableDatabase();
 
-                            dbHandlerOffline.addBanner(ArrayBanners[cou],ImagenDeco[cou]);
+                            dbHandlerOffline.addBanner(ArrayBanners[cou], ImagenDeco[cou]);
 
                         }
 
@@ -268,21 +260,19 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             }
-            Log.d("Descarga: ", "> Datos Banner completo" );
+            Log.d("Descarga: ", "> Datos Banner completo");
 //////////////////////////////////////// Descarga de Datos Expositores
-            Log.d("Descarga: ", "> Datos Expositores" );
-            String bodyExpo= "";
+            Log.d("Descarga: ", "> Datos Expositores");
+            String bodyExpo = "";
 
 
-            bodyExpo = "http://cmp.devworms.com/api/expositor/order/name/"+userId+"/"+apiKey+"";
-
+            bodyExpo = "http://cmp.devworms.com/api/expositor/order/name/" + userId + "/" + apiKey + "";
 
 
             JSONParser jspExpo = new JSONParser();
 
 
-
-            String respuestaAlfa= jspExpo.makeHttpRequest(bodyExpo,"GET",bodyExpo,"");
+            String respuestaAlfa = jspExpo.makeHttpRequest(bodyExpo, "GET", bodyExpo, "");
 
             if (respuestaAlfa != "error") {
 
@@ -290,12 +280,11 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 resp = "No hay resultados";
             }
-            bodyExpo = "http://cmp.devworms.com/api/expositor/order/stand/"+userId+"/"+apiKey+"";
+            bodyExpo = "http://cmp.devworms.com/api/expositor/order/stand/" + userId + "/" + apiKey + "";
             JSONParser jspNumerico = new JSONParser();
 
 
-
-            String respuestaNumerico= jspNumerico.makeHttpRequest(bodyExpo,"GET",body,"");
+            String respuestaNumerico = jspNumerico.makeHttpRequest(bodyExpo, "GET", body, "");
 
             if (respuestaNumerico != "error") {
 
@@ -304,13 +293,12 @@ public class MainActivity extends AppCompatActivity {
             dbHandlerOffline = new AdminSQLiteOffline(MainActivity.this, null, null, 1);
             SQLiteDatabase dbExpo = dbHandlerOffline.getWritableDatabase();
 
-            dbHandlerOffline.addExpo(respuestaAlfa,respuestaNumerico);
+            dbHandlerOffline.addExpo(respuestaAlfa, respuestaNumerico);
             try {
                 JSONObject json = new JSONObject(respuestaAlfa);
                 String exposi = "";
 
-                    exposi = json.getString("expositores");
-
+                exposi = json.getString("expositores");
 
 
                 JSONArray jsonExpositores = new JSONArray(exposi);
@@ -340,7 +328,7 @@ public class MainActivity extends AppCompatActivity {
 
                     String idExpoImagen = c.getString("id");
 
-                    dbHandlerOffline.addExpoImag(idExpoImagen,ImageDecoExpo);
+                    dbHandlerOffline.addExpoImag(idExpoImagen, ImageDecoExpo);
                 }
 
 
@@ -352,21 +340,19 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            Log.d("Descarga: ", "> Datos Expositores completo" );
+            Log.d("Descarga: ", "> Datos Expositores completo");
 ////////////////////////////////////////////// Descarga de Datos Patrocinadores
-            Log.d("Descarga: ", "> Datos Patrocinadores" );
-            String bodyPatro= "";
+            Log.d("Descarga: ", "> Datos Patrocinadores");
+            String bodyPatro = "";
 
 
-            bodyPatro = "http://cmp.devworms.com/api/patrocinador/order/name/"+userId+"/"+apiKey+"";
-
+            bodyPatro = "http://cmp.devworms.com/api/patrocinador/order/name/" + userId + "/" + apiKey + "";
 
 
             JSONParser jspPatro = new JSONParser();
 
 
-
-            String respuestaAlfaPatro= jspPatro.makeHttpRequest(bodyPatro,"GET",bodyPatro,"");
+            String respuestaAlfaPatro = jspPatro.makeHttpRequest(bodyPatro, "GET", bodyPatro, "");
 
             if (respuestaAlfa != "error") {
 
@@ -374,12 +360,11 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 resp = "No hay resultados";
             }
-            bodyPatro = "http://cmp.devworms.com/api/patrocinador/order/stand/"+userId+"/"+apiKey+"";
+            bodyPatro = "http://cmp.devworms.com/api/patrocinador/order/stand/" + userId + "/" + apiKey + "";
             JSONParser jspNumericoPatro = new JSONParser();
 
 
-
-            String respuestaNumericoPatro= jspNumericoPatro.makeHttpRequest(bodyPatro,"GET",bodyPatro,"");
+            String respuestaNumericoPatro = jspNumericoPatro.makeHttpRequest(bodyPatro, "GET", bodyPatro, "");
 
             if (respuestaNumerico != "error") {
 
@@ -388,7 +373,7 @@ public class MainActivity extends AppCompatActivity {
 
             dbHandlerOffline = new AdminSQLiteOffline(MainActivity.this, null, null, 1);
             SQLiteDatabase db = dbHandlerOffline.getWritableDatabase();
-            dbHandlerOffline.addPatro(respuestaAlfaPatro,respuestaNumericoPatro);
+            dbHandlerOffline.addPatro(respuestaAlfaPatro, respuestaNumericoPatro);
 
             JSONObject jsonimageP = null;
             try {
@@ -420,27 +405,26 @@ public class MainActivity extends AppCompatActivity {
                     c = jsonPatroimage.getJSONObject(i);
 
 
+                    String urlImageJson = c.getString("logo");
+                    JSONObject jsonImagen = new JSONObject(urlImageJson);
+                    urlImage = jsonImagen.getString("url");
 
-                String urlImageJson = c.getString("logo");
-                JSONObject jsonImagen = new JSONObject(urlImageJson);
-                urlImage = jsonImagen.getString("url");
+                    imageUrl = new URL(urlImage);
+                    conn = (HttpURLConnection) imageUrl.openConnection();
+                    conn.connect();
 
-                imageUrl = new URL(urlImage);
-                conn = (HttpURLConnection) imageUrl.openConnection();
-                conn.connect();
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
 
-                BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
+                    expoImg = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
+                    ImageDecoExpo = getBytes(expoImg);
 
-                expoImg = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
-                ImageDecoExpo = getBytes(expoImg);
+                    dbHandlerOffline = new AdminSQLiteOffline(MainActivity.this, null, null, 1);
+                    SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
 
-                dbHandlerOffline = new AdminSQLiteOffline(MainActivity.this, null, null, 1);
-                SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
+                    String idExpoImagen = c.getString("id");
 
-                String idExpoImagen = c.getString("id");
-
-                dbHandlerOffline.addPatroImag(idExpoImagen,ImageDecoExpo);
+                    dbHandlerOffline.addPatroImag(idExpoImagen, ImageDecoExpo);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 } catch (MalformedURLException e) {
@@ -449,18 +433,18 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-            Log.d("Descarga: ", "> Datos Patrocinadores completo" );
-            /************************************************ DESCARGAR DATOS PROGRAMA +*************************/
-            Log.d("Descarga: ", "> Datos Programa" );
-            String fromUrlCat= "http://cmp.devworms.com/api/categoria/all/"+userId+"/"+apiKey+"";
-            JSONParser jspPrograma = new JSONParser();
-            String strProgramas = jspPrograma.makeHttpRequest(fromUrlCat,"GET",fromUrlCat,"");
+            Log.d("Descarga: ", "> Datos Patrocinadores completo");
+            /************************************************ DESCARGAR DATOS CATEGORIAS +*************************/
+            String fromUrlCat = "http://cmp.devworms.com/api/categoria/all/" + userId + "/" + apiKey + "";
+            JSONParser jspCat= new JSONParser();
+            String strCat = jspCat.makeHttpRequest(fromUrlCat, "GET", fromUrlCat, "");
             dbHandlerOffline = new AdminSQLiteOffline(MainActivity.this, null, null, 1);
-            dbHandlerOffline.addJsonCategorias(strProgramas);
-            Log.d("Descarga: ", "> Datos Programa completo" );
+            dbHandlerOffline.addJsonCategorias(strCat);
+            Log.d("Descarga: ", "> Datos Programa completo");
+
             //////////////////////////////////////ACOMPAÑANTE////////////////////////////
-            Log.d("Descarga: ", "> Datos Acompañante" );
-            String bodyAco= "";
+            Log.d("Descarga: ", "> Datos Acompañante");
+            String bodyAco = "";
 
 
             bodyAco = "http://cmp.devworms.com/api/acompanantes/all/" + userId + "/" + apiKey + "";
@@ -498,12 +482,10 @@ public class MainActivity extends AppCompatActivity {
                 }
 
 
-
                 for (int i = 0; i <= jsonAcoimage.length(); i++) {
                     JSONObject c = null;
                     try {
                         c = jsonAcoimage.getJSONObject(i);
-
 
 
                         String urlImageJson = c.getString("foto");
@@ -525,7 +507,7 @@ public class MainActivity extends AppCompatActivity {
 
                         String idAcoImagen = c.getString("id");
 
-                        dbHandlerOffline.addAcoImag(idAcoImagen,ImageDecoExpo);
+                        dbHandlerOffline.addAcoImag(idAcoImagen, ImageDecoExpo);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     } catch (MalformedURLException e) {
@@ -537,10 +519,10 @@ public class MainActivity extends AppCompatActivity {
 
 
             }
-            Log.d("Descarga: ", "> Datos Acompañante completo" );
+            Log.d("Descarga: ", "> Datos Acompañante completo");
             //////////////////////////////////////SOCIAL DEPORTIVOS////////////////////////////
-            Log.d("Descarga: ", "> Datos Social deportivo" );
-            String bodySD= "";
+            Log.d("Descarga: ", "> Datos Social deportivo");
+            String bodySD = "";
 
 
             bodySD = "http://cmp.devworms.com/api/deportivos/all/" + userId + "/" + apiKey + "";
@@ -578,12 +560,10 @@ public class MainActivity extends AppCompatActivity {
                 }
 
 
-
                 for (int i = 0; i <= jsonSDimage.length(); i++) {
                     JSONObject c = null;
                     try {
                         c = jsonSDimage.getJSONObject(i);
-
 
 
                         String urlImageJson = c.getString("foto");
@@ -605,7 +585,7 @@ public class MainActivity extends AppCompatActivity {
 
                         String idSDImagen = c.getString("id");
 
-                        dbHandlerOffline.addSociaDepoImag(idSDImagen,ImageDecoExpo);
+                        dbHandlerOffline.addSociaDepoImag(idSDImagen, ImageDecoExpo);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     } catch (MalformedURLException e) {
@@ -617,13 +597,13 @@ public class MainActivity extends AppCompatActivity {
 
 
             }
-            Log.d("Descarga: ", "> Datos Social Deportivo completo" );
+            Log.d("Descarga: ", "> Datos Social Deportivo completo");
             //////////////////////////TRANSPORTACION////////////////
-            Log.d("Descarga: ", "> Datos Transportacion" );
-            String bodyT= "";
+            Log.d("Descarga: ", "> Datos Transportacion");
+            String bodyT = "";
 
 
-            bodyT = "http://cmp.devworms.com/api/ruta/all/"+userId+"/"+apiKey+"";
+            bodyT = "http://cmp.devworms.com/api/ruta/all/" + userId + "/" + apiKey + "";
 
             JSONParser jspT = new JSONParser();
 
@@ -675,7 +655,7 @@ public class MainActivity extends AppCompatActivity {
 
                             String idTRImagen = c.getString("id");
 
-                            dbHandlerOffline.addRutaImag(idTRImagen,ImageDecoExpo);
+                            dbHandlerOffline.addRutaImag(idTRImagen, ImageDecoExpo);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         } catch (MalformedURLException e) {
@@ -686,13 +666,22 @@ public class MainActivity extends AppCompatActivity {
                     }
 
 
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-            Log.d("Descarga: ", "> Transportacion Completa" );
-                return null;
+            Log.d("Descarga: ", "> Transportacion Completa");
+
+            /************************************************ DESCARGAR DATOS PROGRAMA +*************************/
+            String fromUrlPrograma = "http://cmp.devworms.com/api/programa/all/" + userId + "/" + apiKey + "";
+            JSONParser jspPrograma = new JSONParser();
+            String strProgramas = jspPrograma.makeHttpRequest(fromUrlPrograma, "GET", fromUrlPrograma, "");
+            dbHandlerOffline = new AdminSQLiteOffline(MainActivity.this, null, null, 1);
+            dbHandlerOffline.addJsonProgramas(strProgramas);
+
+            Log.e("JSON PROGRAMAS",strProgramas);
+
+            return null;
         }
 
 
@@ -701,7 +690,7 @@ public class MainActivity extends AppCompatActivity {
          **/
         protected void onPostExecute(String file_url) {
             // dismiss the dialog after getting all albums
-            Log.d("Descarga: ", "> 100%" );
+            Log.d("Descarga: ", "> 100%");
             SharedPreferences sp = getSharedPreferences("prefe", Activity.MODE_PRIVATE);
             SharedPreferences.Editor editor = sp.edit();
             editor.putString("Descarga", "1");
@@ -713,7 +702,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-
 
 
     public static String getBytes(Bitmap bitmap) {

@@ -136,6 +136,13 @@ public class DetalleEventoFragment extends Fragment {
                     horaIni = detalle.getString("hora_inicio");
                     horaFin = detalle.getString("hora_fin");
                     strdia = detalle.getString("fecha");
+                    try{
+                        JSONObject foto = new JSONObject(detalle.getString("foto"));
+                        new CargarImagen().execute(foto.getString("url"));
+                    }catch (JSONException x){
+                        Log.e("FOTO","no tenia foto");
+                    }
+
 
                 }
 
@@ -238,6 +245,31 @@ public class DetalleEventoFragment extends Fragment {
         } catch (IOException e) {
 
             e.printStackTrace();
+
+        }
+    }
+
+    class CargarImagen extends AsyncTask<String,String,String>{
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(getActivity());
+            pDialog.setMessage("Cargando imagen del evento");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            mostrarImagen(params[0]);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String str) {
+            pDialog.dismiss();
 
         }
     }

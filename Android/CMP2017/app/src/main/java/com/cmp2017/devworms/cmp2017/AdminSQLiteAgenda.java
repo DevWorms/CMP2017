@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by mac on 07/04/17.
@@ -13,7 +14,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class AdminSQLiteAgenda extends SQLiteOpenHelper {
     //Se crean variables para la Base de Datos
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "Agenda.db";
+    private static final String DATABASE_NAME = "AgendaFragment.db";
     public static final String TABLA_AGENDA = "agenda";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_IDEVENTO = "idEvento";
@@ -80,13 +81,16 @@ public class AdminSQLiteAgenda extends SQLiteOpenHelper {
     //Regresa todos los eventos por dia y los acomoda segun su hora de inicio
 
     public Cursor listaPorDia(String dia){
-        SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT * FROM " + TABLA_AGENDA + " WHERE " + COLUMN_DIA + " = " + dia + "ORDER BY horainicio ASC ;";
-        Cursor c = db.rawQuery(query, null);
 
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + TABLA_AGENDA + " WHERE " + COLUMN_DIA + " = '" + dia + "' ORDER BY horainicio ASC ;";
+
+        Cursor c = db.rawQuery(query, null);
         if (c != null) {
             c.moveToFirst();
         }
+
+
 
         return c;
     }

@@ -24,7 +24,7 @@
 
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -84,4 +84,16 @@
                 android:textColor="#FFFFFF" />
         </LinearLayout>
     </HorizontalScrollView>
+
+    <ListView
+        android:id="@+id/lvAgenda"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="5dp"
+        android:cacheColorHint="#00000000"
+        android:dividerHeight="1dp"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false">
+    </ListView>
+
 </LinearLayout>

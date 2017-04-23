@@ -14,7 +14,9 @@ class EncuestaViewController: UIViewController, UITableViewDataSource, UITableVi
     
     var datos = [[String : Any]]()
     var idEncuesta: Int!
+     var idEncuesta1: Int!
     var json:[String : Any] = [:]
+    var jsonSelec:[String : Any] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,16 +134,16 @@ class EncuestaViewController: UIViewController, UITableViewDataSource, UITableVi
                 
                 func display_image()
                 {
-                      cell.imgEncuesta.image = UIImage(data: data!)
-                     /* cell.btnCalificar.addTarget(self, action: "click:", for: UIControlEvents.touchUpInside)
-                     
-                    func click(sender: UIButton) {
-                        
-                    }*/
-                   
-                        
-                        
-                  
+                    cell.imgEncuesta.image = UIImage(data: data!)
+                    
+                    cell.btnCalificar.tag = indexPath.row
+                    cell.btnCalificar.addTarget(self, action: #selector(self.buttonClicked(_:)), for: UIControlEvents.touchUpInside)
+                    
+                    self.idEncuesta = self.json["id"] as! Int
+                    print ("id: \(self.idEncuesta!)")
+                    
+                    
+                    
                     
                 }
                 
@@ -151,29 +153,37 @@ class EncuestaViewController: UIViewController, UITableViewDataSource, UITableVi
         })
         
         task.resume()
-     
+        
         return cell
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.idEncuesta = self.json["id"] as! Int
+    
+    func buttonClicked(_ sender:UIButton) {
+        jsonSelec = self.datos[sender.tag]
+            print ("Tag \(sender.tag)")
+        self.idEncuesta = self.jsonSelec["id"] as! Int
+        print ("id \(self.idEncuesta!)")
+        
         self.performSegue(withIdentifier: "detalleEncuestas", sender: nil)
-      
+        
         
     }
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detalleEncuestas" {
-            //(segue.destination as! DetalleEncuestaViewController).idEncuesta = self.idEncuesta
-           /* let nav = segue.destination as! UINavigationController
-            let svc = nav.topViewController as! DetalleEncuestaViewController
-            svc.idEncuesta = self.idEncuesta;*/
-            let destino = segue.destination as! DetalleEncuestaViewController
+           print ("id manda\(self.idEncuesta!)")
+            (segue.destination as! DetalleEncuestaViewController).idEncuesta = self.idEncuesta!
             
-            destino.idEncuesta = self.idEncuesta
+            /*let nav = segue.destination as! UINavigationController
+             let svc = nav.topViewController as! DetalleEncuestaViewController
+             svc.idEncuesta = self.idEncuesta;*/
+            /*let destino = segue.destination as! DetalleEncuestaViewController
+             
+             destino.idEncuesta = self.idEncuesta*/
             
-       
+            
         }
     }
-
+    
     
     /*
      // MARK: - Navigation

@@ -254,7 +254,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Programa" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWH-kW-uD4">
-                                <rect key="frame" x="138" y="157" width="100.5" height="26.5"/>
+                                <rect key="frame" x="137.5" y="157" width="100.5" height="26.5"/>
                                 <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="21"/>
                                 <color key="textColor" red="0.16038369600646102" green="0.32152638291275665" blue="0.65605171319796951" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -539,7 +539,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transportación" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FW1-4Y-qHU">
-                                <rect key="frame" x="112" y="116" width="152.5" height="26.5"/>
+                                <rect key="frame" x="111.5" y="116" width="152.5" height="26.5"/>
                                 <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="21"/>
                                 <color key="textColor" red="0.16038369599999999" green="0.32152638290000002" blue="0.6560517132" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -985,7 +985,7 @@
                                 </constraints>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CpU-Tb-FFa">
-                                <rect key="frame" x="0.0" y="255" width="375" height="368"/>
+                                <rect key="frame" x="0.0" y="255" width="375" height="412"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Torneo de Golf" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mMF-nr-YKw">
                                         <rect key="frame" x="16" y="20" width="118" height="21.5"/>
@@ -2233,7 +2233,7 @@
             <objects>
                 <navigationController storyboardIdentifier="Inicio" automaticallyAdjustsScrollViewInsets="NO" id="hsC-4U-TeZ" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1nL-t7-c76">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="1nL-t7-c76">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2251,7 +2251,7 @@
             <objects>
                 <navigationController storyboardIdentifier="MenuPrincipal" automaticallyAdjustsScrollViewInsets="NO" id="ojg-qp-URi" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4R6-43-AVe">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="4R6-43-AVe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2269,7 +2269,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pvC-jS-sCu" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qRq-fn-w9u">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="qRq-fn-w9u">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2381,7 +2381,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Ylp-1S-sfy" id="GFk-zM-db6"/>
-                        <segue destination="yeX-kf-rF2" kind="show" identifier="detalleEncuestas" id="Fse-C6-cDc"/>
+                        <segue destination="yeX-kf-rF2" kind="show" identifier="detalleEncuestas" id="PLD-D5-lKO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eXn-0T-9O3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2539,7 +2539,7 @@
             <objects>
                 <navigationController storyboardIdentifier="notificaciones" automaticallyAdjustsScrollViewInsets="NO" id="ubV-vj-2zv" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HAX-Ru-0G4">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="HAX-Ru-0G4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2557,7 +2557,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RcV-Hr-1oF" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MgG-wp-f2A">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="MgG-wp-f2A">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2575,7 +2575,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ECH-yc-ql3" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kS6-Dp-See">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kS6-Dp-See">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2865,7 +2865,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9J5-td-au1" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="J8G-4k-b2u">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="J8G-4k-b2u">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2922,10 +2922,10 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="C9o-NW-2zu"/>
-        <segue reference="xsM-6l-BFs"/>
+        <segue reference="kbO-K4-QMt"/>
         <segue reference="rHH-3X-Jaz"/>
         <segue reference="ZdW-HO-l3u"/>
-        <segue reference="psR-II-8MZ"/>
         <segue reference="z9v-TW-n8m"/>
+        <segue reference="psR-II-8MZ"/>
     </inferredMetricsTieBreakers>
 </document>

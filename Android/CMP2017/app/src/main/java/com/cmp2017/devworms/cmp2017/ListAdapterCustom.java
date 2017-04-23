@@ -25,30 +25,31 @@ public class ListAdapterCustom extends ArrayAdapter<String> {
     private final Bitmap[] itemBipmap;
     private String paginaWeb;
     private String googleMaps;
-    public ListAdapterCustom(Activity context, String[] itemname,String[] itemdescrip,String[] itemmapa,String[] itempag, Bitmap[] itemBipmap) {
+
+    public ListAdapterCustom(Activity context, String[] itemname, String[] itemdescrip, String[] itemmapa, String[] itempag, Bitmap[] itemBipmap) {
         super(context, R.layout.formato_lista_sitios_interes, itemname);
         // TODO Auto-generated constructor stub
 
-        this.context=context;
+        this.context = context;
 
-        this.itemname=itemname;
-        this.itemdescrip=itemdescrip;
-        this.itemmapa=itemmapa;
-        this.itempag=itempag;
+        this.itemname = itemname;
+        this.itemdescrip = itemdescrip;
+        this.itemmapa = itemmapa;
+        this.itempag = itempag;
 
-        this.itemBipmap=itemBipmap;
+        this.itemBipmap = itemBipmap;
     }
 
-    public View getView(int posicion, View view, ViewGroup parent){
+    public View getView(int posicion, View view, ViewGroup parent) {
 
-        LayoutInflater inflater=context.getLayoutInflater();
-        View rowView=inflater.inflate(R.layout.formato_lista_sitios_interes,null,true);
+        LayoutInflater inflater = context.getLayoutInflater();
+        View rowView = inflater.inflate(R.layout.formato_lista_sitios_interes, null, true);
 
         TextView txtNombreLugar = (TextView) rowView.findViewById(R.id.txtNombreLugar);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.imgLugar);
         TextView txtDescrip = (TextView) rowView.findViewById(R.id.txtDescripLugar);
         TextView txtSitioweb = (TextView) rowView.findViewById(R.id.txtSitioweb);
-        TextView txtMap = (TextView) rowView.findViewById(R.id.txtUrlMapLugar) ;
+        TextView txtMap = (TextView) rowView.findViewById(R.id.txtUrlMapLugar);
 
         txtNombreLugar.setText(itemname[posicion]);
         imageView.setImageBitmap(itemBipmap[posicion]);

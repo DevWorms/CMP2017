@@ -86,6 +86,7 @@ public class DetalleEventoFragment extends Fragment {
     }
 
     public void loadDetalleEventos(String cualSeccion){
+
         Log.e("Seccion",seccion);
         AdminSQLiteOffline dbHandler;
         String respuesta = "";
@@ -94,6 +95,7 @@ public class DetalleEventoFragment extends Fragment {
         String cualDetalle = "";
         dbHandler = new AdminSQLiteOffline(getActivity(), null, null, 1);
         SQLiteDatabase db = dbHandler.getWritableDatabase();
+
         switch(cualSeccion){
             case "social" :
 
@@ -126,6 +128,7 @@ public class DetalleEventoFragment extends Fragment {
             detalles = new JSONArray(tempEventos.getString(cualDetalle));
             Log.e("DETALLES",detalles.toString());
             for (int c=0; c < tempEventos.length() ; c++) {
+
                 JSONObject detalle = detalles.getJSONObject(c);
 
                 if(detalle.getString("id").equals(idProgram)){
@@ -173,13 +176,14 @@ public class DetalleEventoFragment extends Fragment {
     }
 
     public void AgregarAgendaEvento() {
+
         AdminSQLiteAgenda dbHandlerAgenda;
         dbHandlerAgenda = new AdminSQLiteAgenda(getActivity(), null, null, 1);
         SQLiteDatabase db = dbHandlerAgenda.getWritableDatabase();
 
         dbHandlerAgenda.addEvento(idProgram, txtNombreEven.getText().toString(), strdia, horaIni, horaFin);
 
-        Toast.makeText(getActivity(), "Se guardo en Mi Agenda",
+        Toast.makeText(getActivity(), "Se guardo en Mi AgendaFragment",
                 Toast.LENGTH_SHORT).show();
     }
 

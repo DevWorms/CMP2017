@@ -78,8 +78,11 @@ public class EncuestasFragment extends Fragment{
                     JSONArray jEncuestas = new JSONArray(strEncuestas);
 
                     int cuentasEncuestas = jEncuestas.length();
+
                     modelo = new EncuestaModel[cuentasEncuestas];
+
                     for(int cont =0; cont< cuentasEncuestas ; cont++){
+
                         modelo[cont]= new EncuestaModel();
                         modelo[cont].setId(jEncuestas.getJSONObject(cont).getInt("id"));
                         JSONObject archivos = new JSONObject(jEncuestas.getJSONObject(cont).getString("filesm"));

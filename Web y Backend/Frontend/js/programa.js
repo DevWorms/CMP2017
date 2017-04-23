@@ -41,9 +41,17 @@ function showAll() {
                     if (expositor.hora_fin) {
                         fecha = fecha + " - " + expositor.hora_fin
                     }
+
+                    var categoria = null;
+                    if (expositor.categoria) {
+                        categoria = expositor.categoria.nombre;
+                    } else {
+                        categoria = "";
+                    }
+
                     $('#tbl_eventos tr:last').after('<tr>' +
                         '<td>' + expositor.nombre + '</td>' +
-                        '<td>' + expositor.categoria.nombre + '</td>' +
+                        '<td>' + categoria + '</td>' +
                         '<td>' + fecha + '</td>' +
                         '<td align="center"><a href="#" onclick="openModal(' + expositor.id + ')" class="btn btn-primary">Ver</a></td>' +
                         '<td align="center"><a href="#" onclick="openEdit(' + expositor.id + ')" class="btn btn-primary">Editar</a></td>' +

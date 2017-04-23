@@ -9,7 +9,6 @@
     tools:context="com.cmp2017.devworms.cmp2017.LoginActivity">
 
     <TextView
-        android:id="@+id/txtTituloP"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="20dp"

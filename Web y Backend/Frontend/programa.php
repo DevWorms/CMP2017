@@ -214,7 +214,7 @@
                             <p><strong>Hora de fin</strong>: <% if (hora_fin) { %> ${hora_fin} <% } %></p>
                         </div>
                         <div class="col-md-12">
-                            <p><strong>Categoría</strong>: ${categoria.nombre}</p>
+                            <p><strong>Categoría</strong>: <% if (categoria) { %> ${categoria.nombre} <% } %></p>
                         </div>
                         <div class="col-md-12">
                             <p><strong>Recomendaciones</strong>: ${recomendaciones}</p>

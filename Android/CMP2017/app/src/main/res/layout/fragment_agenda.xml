@@ -12,6 +12,15 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.cmp2017.devworms.cmp2017.LoginActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:text="Mi Agenda"
+        android:textAlignment="center"
+        android:textColor="#2844A8"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
     <HorizontalScrollView
         android:layout_width="match_parent"
@@ -30,6 +39,7 @@
                 android:layout_weight="1"
                 android:background="#2844A8"
                 android:text="Lunes 5"
+                android:textSize="12sp"
                 android:textColor="#FFFFFF" />
 
             <Button
@@ -40,6 +50,7 @@
                 android:layout_weight="1"
                 android:background="#2844A8"
                 android:text="Martes 6"
+                android:textSize="12sp"
                 android:textColor="#FFFFFF" />
 
             <Button
@@ -50,6 +61,7 @@
                 android:layout_weight="1"
                 android:background="#2844A8"
                 android:text="Miercoles 7"
+                android:textSize="12sp"
                 android:textColor="#FFFFFF" />
 
             <Button
@@ -59,6 +71,7 @@
                 android:layout_marginRight="10dp"
                 android:background="#2844A8"
                 android:text="Jueves 8"
+                android:textSize="12sp"
                 android:textColor="#FFFFFF" />
 
             <Button
@@ -67,6 +80,7 @@
                 android:layout_height="wrap_content"
                 android:background="#2844A8"
                 android:text="Viernes 9"
+                android:textSize="12sp"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
     </HorizontalScrollView>

@@ -162,7 +162,6 @@ public class DetalleEventoFragment extends Fragment {
     class AgregarAgenda implements View.OnClickListener {
         public void onClick(View v) {
 
-
             if (strcursorEncontrado == 0) {
                 AgregarAgendaEvento();
                 strcursorEncontrado = 1;
@@ -186,37 +185,8 @@ public class DetalleEventoFragment extends Fragment {
 
     class Localizar implements View.OnClickListener {
         public void onClick(View v) {
-
             Toast.makeText(getActivity(), "Próximamente", Toast.LENGTH_SHORT).show();
-            /*getFragmentManager().beginTransaction()
-                    .replace(R.id.actividad, new MapaFragment()).addToBackStack(null).commit();*/
-
-
         }
-    }
-
-
-    // convert from bitmap to byte array
-    public static String getBytes(Bitmap bitmap) {
-        ByteArrayOutputStream blob = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 0 /* Ignored for PNGs */, blob);
-        byte[] bitmapdata = blob.toByteArray();
-
-        String encodedImage = Base64.encodeToString(bitmapdata, Base64.DEFAULT);
-
-        return encodedImage;
-    }
-
-    // convert from byte array to bitmap
-    public static Bitmap getImage(String imageS) {
-
-        byte[] b = Base64.decode(imageS, Base64.DEFAULT);
-        //-----------------
-        Bitmap bmp = BitmapFactory.decodeByteArray(b, 0, b.length);
-
-
-        return bmp;
-
     }
 
     public void mostrarImagen(String url) {

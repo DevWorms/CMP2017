@@ -72,6 +72,12 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
     public static final String COLUMN_IDRUTA = "idRuta";
     public static final String COLUMN_RUTAIMAGESTR = "imageRuta";
 
+    public static final String TABLA_PROGRAMAS = "Programas";
+    public static final String COLUMN_IDJPROGRMA= "idPrograma";
+    public static final String COLUMN_JSONPROGRAMA= "jsonProgramas";
+
+
+
 
     public AdminSQLiteOffline(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
@@ -171,6 +177,11 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
                 ");";
         db.execSQL(queryTransIma);
 
+        String queryPorgramas = "CREATE TABLE " + TABLA_PROGRAMAS + "(" +
+                COLUMN_IDJPROGRMA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_JSONPROGRAMA + " TEXT" + ");";
+        db.execSQL(queryPorgramas);
+
     }
 
     @Override
@@ -209,6 +220,9 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
         onCreate(db);
 
         db.execSQL("DROP TABLE IF EXISTS " + TABLA_TRANSPOIMAGENES);
+        onCreate(db);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_PROGRAMAS);
         onCreate(db);
     }
 
@@ -374,10 +388,10 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
 
         return c;
     }
-    // INSERTAMOS EL JSON DE PROGRAMAS
-    public void addJsonCategorias(String jsonPrograma){
+    // INSERTAMOS EL JSON DE CATEGORIAS
+    public void addJsonCategorias(String jsonCat){
         ContentValues values = new ContentValues();
-        values.put(COLUMN_JSONCATEGORIA, jsonPrograma);
+        values.put(COLUMN_JSONCATEGORIA, jsonCat);
         SQLiteDatabase db = getWritableDatabase();
         db.insert(TABLA_CATEGORIAS, null, values);
         db.close();
@@ -547,6 +561,28 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
         }
 
         return c;
+    }
+
+    /*** PROGRAMAS ***/
+
+    public void addJsonProgramas(String jsonPrograma){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_JSONPROGRAMA, jsonPrograma);
+        SQLiteDatabase db = getWritableDatabase();
+        db.insert(TABLA_PROGRAMAS, null, values);
+        db.close();
+    }
+
+    public Cursor getJsonProgramas(){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT "+COLUMN_JSONPROGRAMA+" FROM " + TABLA_PROGRAMAS + " ;";
+        Cursor cursorRs = db.rawQuery(query, null);
+
+        if (cursorRs != null) {
+            cursorRs.moveToFirst();
+        }
+
+        return cursorRs;
     }
 
 }

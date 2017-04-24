@@ -24,6 +24,7 @@ public class MiPerfilFragment  extends Fragment
 {
     EditText edtNombre, edtApellido, edtClave;
     String userId, apiKey,resp,nombre,apellido,clave;
+    String paramNombre,paramApellido,paramClave;
     Button btnGuarCamb, btnCambioContra;
     private ProgressDialog pDialog;
 
@@ -53,6 +54,11 @@ public class MiPerfilFragment  extends Fragment
     class GuardarCambios implements View.OnClickListener {
         public void onClick(View v) {
             if  (!edtApellido.getText().toString().equals("") || !edtNombre.getText().toString().equals("")){
+
+
+                paramNombre = edtNombre.getText().toString();
+                paramApellido = edtApellido.getText().toString();
+                paramClave =edtClave.getText().toString() ;
                 new getCambios().execute();
             }else{
                 Toast.makeText(getActivity(), "Nombre y Apellido son obligatorios", Toast.LENGTH_SHORT).show();
@@ -63,7 +69,7 @@ public class MiPerfilFragment  extends Fragment
     class RecuperarContra implements View.OnClickListener {
         public void onClick(View v) {
 
-                Toast.makeText(getActivity(), "Proximamente", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(),ChangePassword.class));
 
 
         }
@@ -184,7 +190,7 @@ public class MiPerfilFragment  extends Fragment
             //add your data
 
 
-            String body = "{\n\t\"user_id\" : \""+userId+"\",\n\t\"api_key\" : \""+apiKey+"\",\n\t\"name\" : \""+edtNombre.getText().toString()+"\",\n\t\"last_name\" : \""+edtApellido.getText().toString()+"\",\n\t\"clave\" : \""+edtClave.getText().toString()+"\"\n}";
+            String body = "{\n\t\"user_id\" : \""+userId+"\",\n\t\"api_key\" : \""+apiKey+"\",\n\t\"name\" : \""+paramNombre+"\",\n\t\"last_name\" : \""+paramApellido+"\",\n\t\"clave\" : \""+paramClave+"\"\n}";
             JSONParser jsp = new JSONParser();
 
 
@@ -205,7 +211,7 @@ public class MiPerfilFragment  extends Fragment
                     SharedPreferences sp = getActivity().getSharedPreferences("prefe", Activity.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sp.edit();
 
-                    editor.putString("Nombre","Bienvenido "+edtNombre.getText().toString() + edtApellido.getText().toString() );
+                    editor.putString("Nombre","Bienvenido "+paramNombre + paramApellido );
 
 
                     editor.commit();

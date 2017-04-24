@@ -102,6 +102,7 @@ public class ListadoFragment extends Fragment {
                 // on selecting a single album
                 // TrackListActivity will be launched to show tracks inside the album
                 String idProgram= ((TextView)view.findViewById(R.id.txtid)).getText().toString();
+                Log.e("clickEVENTO",idProgram);
                 Fragment fragment = new DetalleEventoFragment();
 
                 Bundle parametro = new Bundle();
@@ -200,6 +201,8 @@ public class ListadoFragment extends Fragment {
                             fechaLetra = "Jueves 8 de Junio";
                         }else if(proFecha.equals("2017-06-09")){
                             fechaLetra = "Viernes 9 de Junio";
+                        }else if(proFecha.equals("2017-06-10")){
+                            fechaLetra = "Sabado 10 de Junio";
                         }
                         if(diaProgram.equals("Todos")){
                             if (actFecha.equals("")||  !actFecha.equals(proFecha)){

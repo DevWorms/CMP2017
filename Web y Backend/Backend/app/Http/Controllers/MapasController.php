@@ -242,6 +242,32 @@ class MapasController extends Controller {
         }
     }
 
+    public function getPublicStandsV2() {
+        try {
+            $stands = MapaExpositores::with('expositor')->get();
+
+            foreach ($stands as $stand) {
+
+                if ($stand->expositor) {
+                    $stand->expo = $stand->expositor->nombre;
+                    unset($stand["expositor"]);
+                } else {
+                    $stand->expositor = null;
+                }
+                unset($stand["created_at"]);
+            }
+
+            $res['status'] = 1;
+            $res['mensaje'] = "success";
+            $res['stands'] = $stands;
+            return response()->json($res, 200);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
     public function loadExpositorLocation($id) {
         try {
             $expositor = Expositor::where('id', $id)

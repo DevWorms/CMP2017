@@ -57,24 +57,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="public-map.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="public-map.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public-map.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2415">
-              <caret line="115" column="26" lean-forward="false" selection-start-line="115" selection-start-column="26" selection-end-line="115" selection-end-column="26" />
+            <state relative-caret-position="1848">
+              <caret line="115" column="44" lean-forward="false" selection-start-line="115" selection-start-column="44" selection-end-line="115" selection-end-column="44" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="public-map.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="public-map.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/public-map.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="47" column="65" lean-forward="false" selection-start-line="47" selection-start-column="65" selection-end-line="47" selection-end-column="65" />
+            <state relative-caret-position="252">
+              <caret line="12" column="28" lean-forward="false" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
               <folding>
-                <marker date="1492998841591" expanded="true" signature="2333:2339" ph=" " />
-                <marker date="1492998841591" expanded="true" signature="3039:3045" ph=" " />
+                <marker date="1493055760035" expanded="true" signature="2476:2482" ph=" " />
+                <marker date="1493055760035" expanded="true" signature="3182:3188" ph=" " />
               </folding>
             </state>
           </provider>
@@ -131,8 +131,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mapa</find>
-      <find>st1</find>
       <find>st17</find>
       <find>st0</find>
       <find>144.</find>
@@ -161,6 +159,8 @@
       <find>console</find>
       <find>||</find>
       <find>text</find>
+      <find>stands</find>
+      <find>room</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -247,7 +247,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -304,6 +303,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -450,12 +450,14 @@
       <workItem from="1492877699618" duration="12879000" />
       <workItem from="1492917550043" duration="599000" />
       <workItem from="1492961396978" duration="11722000" />
-      <workItem from="1492996523519" duration="1945000" />
+      <workItem from="1492996523519" duration="2281000" />
+      <workItem from="1493039774496" duration="5620000" />
+      <workItem from="1493054978054" duration="1995000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="176798000" />
+    <option name="totallyTimeSpent" value="184749000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -467,13 +469,13 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1050" extended-state="0" />
+    <frame x="0" y="0" width="1920" height="1050" extended-state="1" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1650641" sideWeight="0.49624062" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16826923" sideWeight="0.49624062" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.50427353" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12126068" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12126068" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -825,11 +827,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public-map.php">
+    <entry file="file://$PROJECT_DIR$/img/plano4.svg">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2415">
-          <caret line="115" column="26" lean-forward="false" selection-start-line="115" selection-start-column="26" selection-end-line="115" selection-end-column="26" />
-          <folding />
+        <state relative-caret-position="1176">
+          <caret line="2569" column="13" lean-forward="false" selection-start-line="2569" selection-start-column="11" selection-end-line="2569" selection-end-column="13" />
+          <folding>
+            <element signature="n#g#0;n#svg#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -848,16 +852,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/img/plano4.svg">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1176">
-          <caret line="2569" column="13" lean-forward="false" selection-start-line="2569" selection-start-column="11" selection-end-line="2569" selection-end-column="13" />
-          <folding>
-            <element signature="n#g#0;n#svg#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/js.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -868,12 +862,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/public-map.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="47" column="65" lean-forward="false" selection-start-line="47" selection-start-column="65" selection-end-line="47" selection-end-column="65" />
+        <state relative-caret-position="252">
+          <caret line="12" column="28" lean-forward="false" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
           <folding>
-            <marker date="1492998841591" expanded="true" signature="2333:2339" ph=" " />
-            <marker date="1492998841591" expanded="true" signature="3039:3045" ph=" " />
+            <marker date="1493055760035" expanded="true" signature="2476:2482" ph=" " />
+            <marker date="1493055760035" expanded="true" signature="3182:3188" ph=" " />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public-map.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1848">
+          <caret line="115" column="44" lean-forward="false" selection-start-line="115" selection-start-column="44" selection-end-line="115" selection-end-column="44" />
+          <folding />
         </state>
       </provider>
     </entry>

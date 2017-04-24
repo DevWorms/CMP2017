@@ -244,22 +244,17 @@ class MapasController extends Controller {
 
     public function getPublicStandsV2() {
         try {
-            $stands = MapaExpositores::with('expositor')->get();
+            $expositores = Expositor::select('id', 'nombre', 'email', 'url', 'telefono', 'acerca', 'logo_file')
+                ->whereHas('estantes')
+                ->with('estantes', 'logo')->get();
 
-            foreach ($stands as $stand) {
-
-                if ($stand->expositor) {
-                    $stand->expo = $stand->expositor->nombre;
-                    unset($stand["expositor"]);
-                } else {
-                    $stand->expositor = null;
-                }
-                unset($stand["created_at"]);
+            foreach ($expositores as $expositor) {
+                $expositor = $this->returnPublicExpositor($expositor);
             }
 
             $res['status'] = 1;
             $res['mensaje'] = "success";
-            $res['stands'] = $stands;
+            $res['expositores'] = $expositores;
             return response()->json($res, 200);
         } catch (\Exception $ex) {
             $res['status'] = 0;
@@ -275,25 +270,7 @@ class MapasController extends Controller {
                 ->with('estantes', 'logo')
                 ->firstOrFail();
 
-            unset($expositor["logo_file"]);
-            unset($expositor["id"]);
-            unset($expositor["logo"]["is_banner"]);
-            unset($expositor["logo"]["user_id"]);
-            unset($expositor["logo"]["id"]);
-            unset($expositor["logo"]["created_at"]);
-
-            $estantes = collect($expositor->estantes)->groupBy('coords');
-            unset($expositor["estantes"]);
-
-            $flag = 0;
-            $coords = null;
-            foreach ($estantes as $estante) {
-                if ($estante->count() > $flag) {
-                    $flag = $estante->count();
-                    $coords = $estante[0]->coords;
-                }
-            }
-            $expositor["coords"] = $coords;
+            $expositor = $this->returnPublicExpositor($expositor);
 
             $res['status'] = 1;
             $res['mensaje'] = "success";
@@ -308,5 +285,29 @@ class MapasController extends Controller {
             $res['mensaje'] = $ex->getMessage();
             return response()->json($res, 500);
         }
+    }
+
+    function returnPublicExpositor($expositor) {
+        unset($expositor["logo_file"]);
+        unset($expositor["id"]);
+        unset($expositor["logo"]["is_banner"]);
+        unset($expositor["logo"]["user_id"]);
+        unset($expositor["logo"]["id"]);
+        unset($expositor["logo"]["created_at"]);
+
+        $estantes = collect($expositor->estantes)->groupBy('coords');
+        //unset($expositor["estantes"]);
+
+        $flag = 0;
+        $coords = null;
+        foreach ($estantes as $estante) {
+            if ($estante->count() > $flag) {
+                $flag = $estante->count();
+                $coords = $estante[0]->coords;
+            }
+        }
+        $expositor["coords"] = $coords;
+
+        return $expositor;
     }
 }

@@ -1011,15 +1011,6 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Club Campestre de Puebla y muchas mas cosas para generar dos renglones" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XwB-cG-Jqa">
-                                        <rect key="frame" x="16" y="124" width="296" height="52"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="52" id="QvL-nh-Mdz"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Muli-Regular" family="Muli" pointSize="14"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recomendaciones:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NYc-Xk-NbI">
                                         <rect key="frame" x="16" y="176" width="151.5" height="21.5"/>
                                         <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="17"/>
@@ -1068,6 +1059,15 @@
                                             <action selector="btnTres:" destination="E5i-1x-Kko" eventType="touchUpInside" id="sD5-2a-OY2"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Club Campestre de Puebla y muchas mas cosas para generar dos renglones" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XwB-cG-Jqa">
+                                        <rect key="frame" x="74" y="88" width="296" height="52"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="52" id="QvL-nh-Mdz"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Muli-Regular" family="Muli" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="c5c-30-Ada" firstAttribute="top" secondItem="CpU-Tb-FFa" secondAttribute="top" constant="358" id="0Ab-xJ-IGY"/>
@@ -1666,6 +1666,13 @@
                                                         </constraint>
                                                     </constraints>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Google Maps" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60i-8v-REC">
+                                                    <rect key="frame" x="130" y="315" width="114" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="leadingMargin" secondItem="KRS-je-5M3" secondAttribute="leading" id="7Gx-7P-cbs"/>
@@ -1741,11 +1748,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="8s9-id-c2B" id="9WH-xo-eZm"/>
+                        <segue destination="Ike-SW-6Fr" kind="show" identifier="sitio" id="3cV-yQ-VMc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cXf-eN-U3i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1153.125" y="2574.0234375"/>
+            <point key="canvasLocation" x="1152.8" y="2573.1634182908547"/>
         </scene>
         <!--Mi Perfil View Controller-->
         <scene sceneID="8gp-7M-jFs">
@@ -2921,11 +2929,11 @@
         <image name="fondoCMP" width="1242" height="2208"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="C9o-NW-2zu"/>
-        <segue reference="kbO-K4-QMt"/>
+        <segue reference="Euz-ZR-EEI"/>
+        <segue reference="psR-II-8MZ"/>
+        <segue reference="3cV-yQ-VMc"/>
+        <segue reference="zrc-cq-o1r"/>
         <segue reference="rHH-3X-Jaz"/>
         <segue reference="ZdW-HO-l3u"/>
-        <segue reference="z9v-TW-n8m"/>
-        <segue reference="psR-II-8MZ"/>
     </inferredMetricsTieBreakers>
 </document>

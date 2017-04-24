@@ -19,6 +19,7 @@ class MapaSimpleViewController: UIViewController, UIWebViewDelegate {
     var tipoMapa = 0
     
     var imgData: Any?
+    var urlWeb = ""
     
     var alert = UIAlertController()
     
@@ -41,6 +42,9 @@ class MapaSimpleViewController: UIViewController, UIWebViewDelegate {
             
         } else if self.tipoMapa == 3 {
             titleLabel.text = "Ruta"
+        } else if self.tipoMapa == 4 {
+            titleLabel.text = "Sitios de Interes"
+        
         }
         
         if Accesibilidad.isConnectedToNetwork() == true {
@@ -54,6 +58,7 @@ class MapaSimpleViewController: UIViewController, UIWebViewDelegate {
             loadingIndicator.startAnimating()
                 
             alert.view.addSubview(loadingIndicator)
+            
             self.present(alert, animated: true, completion: self.inicial)
             
             /*let callAction = UIAlertAction(title: "Cancelar", style: .Default, handler: {
@@ -88,9 +93,12 @@ class MapaSimpleViewController: UIViewController, UIWebViewDelegate {
         } else if self.tipoMapa == 3 {
             
             if let img = self.imgData as? Data {
+              
                 webView.load(img, mimeType: "image/png", textEncodingName: "UTF-8", baseURL: NSURL() as URL)
             }
             
+        } else if self.tipoMapa == 4 {
+             webView.loadRequest(URLRequest(url: URL(string: urlWeb)!))
         }
     }
     

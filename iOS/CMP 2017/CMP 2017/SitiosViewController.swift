@@ -14,6 +14,7 @@ class SitiosViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var datos = [[String : Any]]()
     var imgs = [Data]()
+    var urlWeb = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,15 +53,35 @@ class SitiosViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         cell.link.setTitle((datos[indexPath.row]["url"] as! String?), for: .normal)
         cell.link.tag = indexPath.row
+        
+       
+        cell.link.addTarget(self, action: #selector(self.buttonClicked(_:)), for: UIControlEvents.touchUpInside)
         //touch btn
         
         return cell
     }
-    
+    func buttonClicked(_ sender:UIButton) {
+     
+        
+        self.urlWeb = (datos[sender.tag]["url"] as! String?)!
+        
+        self.performSegue(withIdentifier: "sitio", sender: nil)
+        
+        
+    }
     // para cuadrar las imagenes
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
         return pantallaSizeHeight();//Choose your custom row height
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        if segue.identifier == "sitio" {
+            (segue.destination as! MapaSimpleViewController).tipoMapa = 4
+            (segue.destination as! MapaSimpleViewController).urlWeb =  self.urlWeb
+        }
     }
     
     func pantallaSizeHeight()->CGFloat!
@@ -85,6 +106,7 @@ class SitiosViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return CGFloat(strPantalla)
     }
     
+  
 
 
     /*

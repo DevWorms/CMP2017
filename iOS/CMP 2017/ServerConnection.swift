@@ -85,7 +85,7 @@ class ServerConnection {
         })
         
         // Rutas
-        self.getGeneral(strUrl: "http://cmp.devworms.com/api/ruta/all/\(userID)/\(apiKey)", jsonString: "rutas", datoString: "pdf", imgString: "url", entityName: "Rutas", keyName: "ruta", keyNameImg: "imgRuta", completion: { (Bool) in
+        self.getGeneral(strUrl: "http://cmp.devworms.com/api/ruta/all/\(userID)/\(apiKey)", jsonString: "rutas", datoString: "image", imgString: "url", entityName: "Rutas", keyName: "ruta", keyNameImg: "imgRuta", completion: { (Bool) in
             
         })
         

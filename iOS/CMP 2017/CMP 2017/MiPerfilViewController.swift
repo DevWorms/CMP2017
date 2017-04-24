@@ -42,6 +42,80 @@ class MiPerfilViewController: UIViewController, UITextFieldDelegate {
         name.delegate = self
         lastName.delegate = self
         clave.delegate = self
+        
+        self.llenarDatos()
+    }
+    
+    func llenarDatos(){
+        let strUrl = "http://cmp.devworms.com/api/user/profile/\(userID!)/\(apiKey!)"
+      
+        print(strUrl)
+        
+        if Accesibilidad.isConnectedToNetwork() == true {
+            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJsonLlenado).resume()
+            
+        } else {
+            let vc_alert = UIAlertController(title: "Sin conexión a internet", message: "Asegúrate de estar conectado a internet.", preferredStyle: .alert)
+            vc_alert.addAction(UIAlertAction(title: "OK",
+                                             style: UIAlertActionStyle.default,
+                                             handler: nil))
+            self.present(vc_alert, animated: true, completion: nil)
+        }
+
+    
+    }
+    
+    func parseJsonLlenado(data: Data?, urlResponse: URLResponse?, error: Error?) {
+        if error != nil {
+            print(error!)
+        } else if urlResponse != nil {
+            if (urlResponse as! HTTPURLResponse).statusCode == 200 {
+                if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                    //print(json)
+                    if let jsonResult = json as? [String: Any] {
+                        
+                        DispatchQueue.main.async {
+                            
+                            
+                                let result = jsonResult["user"] as! [String: Any]
+                                
+                              
+                                
+                                self.name.text = result["name"] as! String
+                                self.lastName.text = result["last_name"] as! String
+                                self.clave.text = result["clave"] as! String
+                                
+                                self.cambiarNombreBarra()
+                            
+                            
+                       
+                            
+                        }
+                    }
+                    
+                } else {
+                    print("HTTP Status Code: 200")
+                    print("El JSON de respuesta es inválido.")
+                }
+            } else {
+                
+                DispatchQueue.main.async {
+                    if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                        if let jsonResult = json as? [String: Any] {
+                            let vc_alert = UIAlertController(title: nil, message: jsonResult["mensaje"] as? String, preferredStyle: .alert)
+                            vc_alert.addAction(UIAlertAction(title: "OK", style: .cancel , handler: nil))
+                            self.present(vc_alert, animated: true, completion: nil)
+                        }
+                        
+                        
+                    } else {
+                        print("HTTP Status Code: 400 o 500")
+                        print("El JSON de respuesta es inválido.")
+                    }
+                }
+            }
+        }
+        
     }
     
     func cambiarNombreBarra() {

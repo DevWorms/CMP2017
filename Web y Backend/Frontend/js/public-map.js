@@ -127,8 +127,9 @@ function handleResevations(data) {
                 .style("stroke", ColorLuminance(value.color, -0.2));
 
             seat.on("click", function (d) {
-                g.attr("transform", "translate(" + value.coords + ")scale(" + 4 + ")");
-                svg.select("#gE").attr("transform", "translate(" + value.coords + ")scale(" + 4 + ")");
+                //g.attr("transform", "translate(" + value.coords + ")scale(" + 4 + ")");
+                //svg.select("#gE").attr("transform", "translate(" + value.coords + ")scale(" + 4 + ")");
+                window.location.href = 'expositor.php#' + value.id;
             });
         }
 
@@ -138,6 +139,10 @@ function handleResevations(data) {
             });
 
     });
+}
+
+function openEdit(id) {
+    window.location.href = 'expositor.php#' + id;
 }
 
 function ColorLuminance(hex, lum) {

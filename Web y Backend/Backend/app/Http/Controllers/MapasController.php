@@ -244,9 +244,9 @@ class MapasController extends Controller {
 
     public function getPublicStandsV2() {
         try {
-            $expositores = Expositor::select('id', 'nombre', 'email', 'url', 'telefono', 'acerca', 'logo_file')
+            $expositores = Expositor::select('id', 'nombre', 'email', 'url', 'telefono', 'acerca', 'logo_file', 'pdf_file')
                 ->whereHas('estantes')
-                ->with('estantes', 'logo')->get();
+                ->with('estantes', 'logo', 'pdf')->get();
 
             foreach ($expositores as $expositor) {
                 $expositor = $this->returnPublicExpositor($expositor);
@@ -266,8 +266,8 @@ class MapasController extends Controller {
     public function loadExpositorLocation($id) {
         try {
             $expositor = Expositor::where('id', $id)
-                ->select('id', 'nombre', 'email', 'url', 'telefono', 'acerca', 'logo_file')
-                ->with('estantes', 'logo')
+                ->select('id', 'nombre', 'email', 'url', 'telefono', 'acerca', 'logo_file', 'pdf_file')
+                ->with('estantes', 'logo', 'pdf')
                 ->firstOrFail();
 
             $expositor = $this->returnPublicExpositor($expositor);
@@ -307,6 +307,15 @@ class MapasController extends Controller {
             }
         }
         $expositor["coords"] = $coords;
+
+        if ($expositor->pdf_file) {
+            $expositor->pdf;
+            unset($expositor->pdf['is_banner']);
+        } else {
+            $expositor->pdf = [];
+        }
+
+        unset($expositor['pdf_file']);
 
         return $expositor;
     }

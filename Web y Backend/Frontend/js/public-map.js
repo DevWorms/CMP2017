@@ -45,7 +45,7 @@ function seating(xml) {
                             .attr("transform", "matrix(" + stand.coords + ")")
                             .attr("font-size", 5)
                             .attr("x", r.attr("x"))
-                            .attr("y", r.attr("y"));
+                            .attr("y", parseInt(r.attr("y")) + 15);
                     }
 
                     data.push({
@@ -83,6 +83,7 @@ function loadExpositorLocation(id) {
         success: function (response) {
             var expositor = response.expositor;
             g.attr("transform", "translate(" + expositor.coords + ")scale(" + 4 + ")");
+            svg.select("#gE").attr("transform", "translate(" + expositor.coords + ")scale(" + 4 + ")");
         },
         error : function (response) {
             response = response.responseJSON;
@@ -117,11 +118,12 @@ function handleResevations(data) {
 
         if (value.locked === true) {
             seat.style("fill", value.color);
-        }
 
-        seat.on("click", function (d) {
-            g.attr("transform", "translate(" + value.coords + ")scale(" + 4 + ")");
-        });
+            seat.on("click", function (d) {
+                g.attr("transform", "translate(" + value.coords + ")scale(" + 4 + ")");
+                svg.select("#gE").attr("transform", "translate(" + value.coords + ")scale(" + 4 + ")");
+            });
+        }
 
         seat.append("title")
             .text(function(d) {

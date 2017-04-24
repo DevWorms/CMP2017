@@ -1,12 +1,16 @@
 package com.cmp2017.devworms.cmp2017;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -22,6 +26,11 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.internal.bind.ArrayTypeAdapter;
+import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -45,6 +54,7 @@ public class ListAdapterAgenda extends ArrayAdapter<AgendaModel> {
     private Bitmap imagen;
     private Activity actividad;
     private int posicionGeneral;
+    private static int posicionColor = 1;
     //constructoe recibimos la lsita de objetos
     public ListAdapterAgenda(Context context, List<AgendaModel> objetos, Activity a) {
         super(context, R.layout.formato_lista_agenda, objetos);
@@ -60,6 +70,17 @@ public class ListAdapterAgenda extends ArrayAdapter<AgendaModel> {
         LayoutInflater inflater = this.actividad.getLayoutInflater();
         View formato = inflater.inflate(R.layout.formato_lista_agenda, null, true);
 
+        if(posicionColor == 1){
+            formato.setBackgroundColor(Color.CYAN);
+            posicionColor++;
+        }else if(posicionColor == 2){
+            formato.setBackgroundColor(Color.LTGRAY);
+            posicionColor++;
+        }else if(posicionColor == 3){
+            formato.setBackgroundColor(Color.YELLOW);
+            posicionColor = 1;
+        }
+
         this.posicionGeneral = position;
         this.miniatura = (ImageView) formato.findViewById(R.id.miniAgendaImg);
         this.descripcionAgenda = (TextView) formato.findViewById(R.id.descAgenda);
@@ -68,73 +89,50 @@ public class ListAdapterAgenda extends ArrayAdapter<AgendaModel> {
         // ponemos de manera directa los textos
         this.descripcionAgenda.setText(this.rowsAgenda.get(position).getNombreEvento());
         this.horarioAgenda.setText(this.rowsAgenda.get(position).getHorarioEvento());
-        //las imagenes son cargadas por url
-        CargarImagen cargar = new CargarImagen();
-        cargar.execute(this.rowsAgenda.get(position).getUrlImagen());
+
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this.actividad)
+                .discCacheFileNameGenerator(new HashCodeFileNameGenerator())
+                .build();
+
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .displayer(new RoundedBitmapDisplayer(350)) //rounded corner bitmap
+                .cacheInMemory(true)
+                .cacheOnDisc(true)
+                .build();
+
+        ImageLoader imageLoader = ImageLoader.getInstance();
+        imageLoader.init(config);
+        imageLoader.displayImage(this.rowsAgenda.get(position).getUrlImagen(),this.miniatura, options);
 
         // asignamos el evento onclick para que lleve al detalle
         formato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String ruta = "Seccion: " + rowsAgenda.get(posicionGeneral).getTipoEvento() + " Id evento " +  rowsAgenda.get(posicionGeneral).getIdEvento();
-                Toast.makeText(actividad, ruta, Toast.LENGTH_LONG).show();
+
+                String idProgram= rowsAgenda.get(posicionGeneral).getIdEvento();
+                Fragment fragment = new DetalleEventoFragment();
+
+                Bundle parametro = new Bundle();
+
+
+                parametro.putString("idProgram",idProgram);
+                parametro.putString("seccion",rowsAgenda.get(posicionGeneral).getTipoEvento());
+                parametro.putInt("posicion",0);
+
+                fragment.setArguments(parametro);
+
+                final FragmentTransaction ft = actividad.getFragmentManager()
+                        .beginTransaction();
+                ft.replace(R.id.actividad, fragment, "tag");
+
+                ft.addToBackStack("tag");
+
+                ft.commit();
             }
         });
 
         return formato;
     }
 
-    public void mostrarImagen(String url) {
 
-        try {
-
-            URL imageUrl = new URL(url);
-            HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
-            conn.connect();
-
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
-
-            imagen = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
-
-            actividad.runOnUiThread(new Runnable() {
-                public void run() {
-
-                    miniatura.setImageBitmap(imagen);
-
-                }
-            });
-
-
-        } catch (IOException e) {
-
-            e.printStackTrace();
-
-        }
-    }
-
-    class CargarImagen extends AsyncTask<String,String,String>{
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            pDialog = new ProgressDialog(actividad);
-            pDialog.setMessage("Cargando imagenes de eventos");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(false);
-            pDialog.show();
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-            mostrarImagen(params[0]);
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String str) {
-            pDialog.dismiss();
-
-        }
-    }
 }

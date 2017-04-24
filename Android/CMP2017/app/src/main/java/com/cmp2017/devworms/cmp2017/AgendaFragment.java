@@ -30,6 +30,7 @@ public class AgendaFragment extends Fragment implements View.OnClickListener{
     private Button btnMiercoles;
     private Button btnJueves;
     private Button btnViernes;
+    private Button btnSabado;
     private ListView listaAgenda;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,13 +42,14 @@ public class AgendaFragment extends Fragment implements View.OnClickListener{
         this.btnMiercoles = (Button) view.findViewById(R.id.btnMiercoles);
         this.btnJueves = (Button) view.findViewById(R.id.btnJueves);
         this.btnViernes = (Button) view.findViewById(R.id.btnViernes);
-
+        this.btnSabado = (Button) view.findViewById(R.id.btnSabado);
         // les agregamos un listener para el click
         this.btnLunes.setOnClickListener(this);
         this.btnMartes.setOnClickListener(this);
         this.btnMiercoles.setOnClickListener(this);
         this.btnJueves.setOnClickListener(this);
         this.btnViernes.setOnClickListener(this);
+        this.btnSabado.setOnClickListener(this);
         this.listaAgenda = (ListView) view.findViewById(R.id.lvAgenda);
         //por default cargamos el lunes
         this.loadEventoPorDia("2017-06-05");
@@ -74,7 +76,7 @@ public class AgendaFragment extends Fragment implements View.OnClickListener{
             this.btnMiercoles.setTextColor(colorNormal);
             this.btnJueves.setTextColor(colorNormal);
             this.btnViernes.setTextColor(colorNormal);
-
+            this.btnSabado.setTextColor(colorNormal);
             this.loadEventoPorDia(dias[0]);
         }else if(clicked == this.btnMartes){
 
@@ -83,7 +85,7 @@ public class AgendaFragment extends Fragment implements View.OnClickListener{
             this.btnMiercoles.setTextColor(colorNormal);
             this.btnJueves.setTextColor(colorNormal);
             this.btnViernes.setTextColor(colorNormal);
-
+            this.btnSabado.setTextColor(colorNormal);
             this.loadEventoPorDia(dias[1]);
         }else if(clicked == this.btnMiercoles){
 
@@ -92,7 +94,7 @@ public class AgendaFragment extends Fragment implements View.OnClickListener{
             this.btnMiercoles.setTextColor(colorResalto);
             this.btnJueves.setTextColor(colorNormal);
             this.btnViernes.setTextColor(colorNormal);
-
+            this.btnSabado.setTextColor(colorNormal);
             this.loadEventoPorDia(dias[2]);
 
         }else if(clicked == this.btnJueves){
@@ -102,7 +104,7 @@ public class AgendaFragment extends Fragment implements View.OnClickListener{
             this.btnMiercoles.setTextColor(colorNormal);
             this.btnJueves.setTextColor(colorResalto);
             this.btnViernes.setTextColor(colorNormal);
-
+            this.btnSabado.setTextColor(colorNormal);
             this.loadEventoPorDia(dias[3]);
 
         }else if(clicked == this.btnViernes){
@@ -112,7 +114,18 @@ public class AgendaFragment extends Fragment implements View.OnClickListener{
             this.btnMiercoles.setTextColor(colorNormal);
             this.btnJueves.setTextColor(colorNormal);
             this.btnViernes.setTextColor(colorResalto);
+            this.btnSabado.setTextColor(colorNormal);
             this.loadEventoPorDia(dias[4]);
+
+        }else if(clicked == this.btnSabado){
+
+            this.btnLunes.setTextColor(colorNormal);
+            this.btnMartes.setTextColor(colorNormal);
+            this.btnMiercoles.setTextColor(colorNormal);
+            this.btnJueves.setTextColor(colorNormal);
+            this.btnViernes.setTextColor(colorNormal);
+            this.btnSabado.setTextColor(colorResalto);
+            this.loadEventoPorDia(dias[5]);
         }
     }
 
@@ -135,15 +148,12 @@ public class AgendaFragment extends Fragment implements View.OnClickListener{
 
                 elemento = new AgendaModel();
                 elemento.setIdEvento(resultados.getString(1));
-                //agregar a tabla
-                elemento.setUrlImagen("");
                 elemento.setNombreEvento(resultados.getString(2));
                 elemento.setDiaEvento(resultados.getString(3));
-                //agregar a tabla para ver detalle
-                elemento.setTipoEvento("");
                 tempHorario = new String(resultados.getString(4) + "\n" + resultados.getString(5));
                 elemento.setHorarioEvento(tempHorario);
-
+                elemento.setTipoEvento(resultados.getString(6));
+                elemento.setUrlImagen(resultados.getString(7));
                 modelo.add(elemento);
 
                 resultados.moveToNext();

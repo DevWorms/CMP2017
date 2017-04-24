@@ -61,8 +61,10 @@
                 android:layout_weight="1"
                 android:background="#2844A8"
                 android:text="Miercoles 7"
-                android:textSize="12sp"
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFFFFF"
+                android:textSize="12sp" />
+
+
 
             <Button
                 android:id="@+id/btnJueves"
@@ -80,6 +82,18 @@
                 android:layout_height="wrap_content"
                 android:background="#2844A8"
                 android:text="Viernes 9"
+                android:textSize="12sp"
+                android:layout_marginRight="10dp"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/btnSabado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="#2844A8"
+                android:text="Sábado 10"
                 android:textSize="12sp"
                 android:textColor="#FFFFFF" />
         </LinearLayout>

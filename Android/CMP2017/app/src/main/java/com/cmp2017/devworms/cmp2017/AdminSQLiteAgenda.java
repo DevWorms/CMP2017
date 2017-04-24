@@ -17,6 +17,8 @@ public class AdminSQLiteAgenda extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "AgendaFragment.db";
     public static final String TABLA_AGENDA = "agenda";
     public static final String COLUMN_ID = "_id";
+    public static final String COLUMN_TIPOEVENTO = "tipoEvento";
+    public static final String COLUMN_URLIMAGE = "urlImagen";
     public static final String COLUMN_IDEVENTO = "idEvento";
     public static final String COLUMN_NOMBRE = "nombre";
     public static final String COLUMN_DIA = "dia";
@@ -37,8 +39,9 @@ public class AdminSQLiteAgenda extends SQLiteOpenHelper {
                 COLUMN_NOMBRE + " TEXT, " +
                 COLUMN_DIA + " TEXT, " +
                 COLUMN_HORA_INICIO + " TEXT," +
-                COLUMN_HORA_FIN + " TEXT " +
-
+                COLUMN_HORA_FIN + " TEXT, " +
+                COLUMN_TIPOEVENTO + " TEXT, " +
+                COLUMN_URLIMAGE + " TEXT " +
                 ");";
 
         db.execSQL(query);
@@ -53,7 +56,7 @@ public class AdminSQLiteAgenda extends SQLiteOpenHelper {
 
     //Añade un nuevo Row de evento a la Base de Datos
 
-    public void addEvento(String idEvento,String nombre, String dia, String horaini, String horafin) {
+    public void addEvento(String idEvento,String nombre, String dia, String horaini, String horafin,String tipoEvento,String url) {
 
         ContentValues values = new ContentValues();
         values.put(COLUMN_IDEVENTO, idEvento);
@@ -61,7 +64,8 @@ public class AdminSQLiteAgenda extends SQLiteOpenHelper {
         values.put(COLUMN_DIA, dia);
         values.put(COLUMN_HORA_INICIO, horaini);
         values.put(COLUMN_HORA_FIN, horafin);
-
+        values.put(COLUMN_TIPOEVENTO,tipoEvento);
+        values.put(COLUMN_URLIMAGE,url);
         SQLiteDatabase db = getWritableDatabase();
         db.insert(TABLA_AGENDA, null, values);
         db.close();

@@ -58,6 +58,7 @@ class MenuUsuarioViewController: ViewController {
     }
     
     @IBAction func actualizarInfo(_ sender: Any) {
+        UserDefaults.standard.setValue(0, forKey: "descarga")
         let methodsCMP = ServerConnection()
         methodsCMP.getCMP(myView: self)
     }

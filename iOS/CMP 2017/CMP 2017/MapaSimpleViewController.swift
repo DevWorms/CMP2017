@@ -107,7 +107,7 @@ class MapaSimpleViewController: UIViewController, UIWebViewDelegate {
             }
             
         } else if self.tipoMapa == 4 || self.tipoMapa == 6 {
-           
+           print("se mostrara\(urlWeb)")
              webView.loadRequest(URLRequest(url: URL(string: urlWeb)!))
         }
     }
@@ -132,6 +132,7 @@ class MapaSimpleViewController: UIViewController, UIWebViewDelegate {
         let vc = storyboard!.instantiateViewController(withIdentifier: "MenuPrincipal")
         self.present( vc , animated: true, completion: nil)
     }
+
 
     /*
     // MARK: - Navigation

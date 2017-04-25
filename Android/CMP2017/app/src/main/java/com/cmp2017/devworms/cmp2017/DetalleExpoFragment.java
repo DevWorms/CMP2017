@@ -2,6 +2,7 @@ package com.cmp2017.devworms.cmp2017;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -140,20 +141,48 @@ public class DetalleExpoFragment extends Fragment {
     class Presentacion implements View.OnClickListener {
         public void onClick(View v) {
 
-            Toast.makeText(getActivity(),"Próximamente",Toast.LENGTH_SHORT).show();
-            /*getFragmentManager().beginTransaction()
-                    .replace(R.id.actividad, new MapaFragment()).addToBackStack(null).commit();*/
+            Fragment fragment = new ClimaFragment();
+
+            Bundle parametro = new Bundle();
+
+            Log.d("Url Presentacion : ", "> " + urlPresenta);
+            parametro.putString("url",urlPresenta);
+            parametro.putString("tipo","2");
+
+
+            fragment.setArguments(parametro);
+
+            final FragmentTransaction ft = getActivity().getFragmentManager()
+                    .beginTransaction();
+            ft.replace(R.id.actividad, fragment, "tag");
+
+            ft.addToBackStack("tag");
+
+            ft.commit();
 
 
         }
     }
     class Localizar implements View.OnClickListener {
         public void onClick(View v) {
+            Fragment fragment = new ClimaFragment();
 
-            Toast.makeText(getActivity(),"Próximamente",Toast.LENGTH_SHORT).show();
-            /*getFragmentManager().beginTransaction()
-                    .replace(R.id.actividad, new MapaFragment()).addToBackStack(null).commit();*/
+            Bundle parametro = new Bundle();
 
+
+            parametro.putString("url","http://congreso.digital/public-map.php#"+expoId);
+            parametro.putString("tipo","3");
+
+
+            fragment.setArguments(parametro);
+
+            final FragmentTransaction ft = getActivity().getFragmentManager()
+                    .beginTransaction();
+            ft.replace(R.id.actividad, fragment, "tag");
+
+            ft.addToBackStack("tag");
+
+            ft.commit();
 
         }
     }

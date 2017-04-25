@@ -232,11 +232,11 @@ class DetalleViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        
-        (segue.destination as! MapaSimpleViewController).idMapa = self.idMapa
-        (segue.destination as! MapaSimpleViewController).urlWeb = self.urlMapa
-        (segue.destination as! MapaSimpleViewController).tipoMapa = self.tipoMapa
-        
+         if segue.identifier == "webView" {
+            (segue.destination as! MapaSimpleViewController).idMapa = self.idMapa
+            (segue.destination as! MapaSimpleViewController).urlWeb = self.urlMapa
+            (segue.destination as! MapaSimpleViewController).tipoMapa = self.tipoMapa
+        }
        
         
     }

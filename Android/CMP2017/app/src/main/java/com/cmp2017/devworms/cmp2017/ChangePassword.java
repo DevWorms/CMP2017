@@ -20,11 +20,11 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ChangePassword extends FragmentActivity implements View.OnClickListener {
+public class ChangePassword extends Activity implements View.OnClickListener {
     private ProgressDialog pDialog;
     private EditText nuevaContasena;
     private EditText repiteContrasena;
-    private Button btnCambiar;
+    private Button btnCambiar,btnCerrar;
     private Activity yo;
     private String apiKey;
     private String nuevaContrasena;
@@ -49,7 +49,7 @@ public class ChangePassword extends FragmentActivity implements View.OnClickList
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
         int width = (int) (metrics.widthPixels * 0.9);
-        int height = (int) (metrics.heightPixels * 0.55);
+        int height = (int) (metrics.heightPixels * 0.60);
 
         getWindow().setLayout(width, height);
 
@@ -59,21 +59,26 @@ public class ChangePassword extends FragmentActivity implements View.OnClickList
         this.yo = this;
         this.btnCambiar.setOnClickListener(this);
         this.status = "Lo sentimos no se pudo guardar \n revisa tu conexión a internet y \n que la contraseña sea de mas de 5 caracteres";
-
+        this.btnCerrar = (Button) findViewById(R.id.btnCerrar);
+        this.btnCerrar.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View v) {
+        if(v == this.btnCambiar){
+            nuevaContrasena = this.nuevaContasena.getText().toString();
+            repetirContra = this.repiteContrasena.getText().toString();
 
-        nuevaContrasena = this.nuevaContasena.getText().toString();
-        repetirContra = this.repiteContrasena.getText().toString();
+            if (nuevaContrasena.equals(repetirContra)) {
+                new CambiarPassword().execute();
 
-        if (nuevaContrasena.equals(repetirContra)) {
-            new CambiarPassword().execute();
+            } else {
+                Toast.makeText(this, "Las contraseñas no coinciden ", Toast.LENGTH_LONG).show();
+            }
 
-        } else {
-            Toast.makeText(this, "Las contraseñas no coinciden ", Toast.LENGTH_LONG).show();
+        }else if(v == this.btnCerrar){
+            this.finish();
         }
 
 

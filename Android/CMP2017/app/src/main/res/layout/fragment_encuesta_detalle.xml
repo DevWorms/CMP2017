@@ -39,7 +39,9 @@
 
             <RatingBar
                 android:id="@+id/ratingPregunta1"
-                style="?android:attr/ratingBarStyle"
+                style="@style/Widget.AppCompat.RatingBar"
+                android:progressTint="#F7FE2E"
+                android:secondaryProgressTint="#FFFF00"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -62,6 +64,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:progressTint="#F7FE2E"
+                android:secondaryProgressTint="#FFFF00"
                 android:isIndicator="false"
                 android:numStars="5"
                 android:rating="5"/>
@@ -80,6 +84,8 @@
                 style="?android:attr/ratingBarStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:progressTint="#F7FE2E"
+                android:secondaryProgressTint="#FFFF00"
                 android:layout_gravity="center"
                 android:isIndicator="false"
                 android:numStars="5"

@@ -9,10 +9,12 @@
 import UIKit
 
 
-class MiAgenda: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MiAgenda: UITableViewController {
     @IBOutlet weak var menu: UIBarButtonItem!
     
  
+    
+    @IBOutlet weak var scrollview: UIScrollView!
     
     var datos = [[String : Any]]()
     var imgs = [Any?]()
@@ -32,10 +34,15 @@ class MiAgenda: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var expositorAmostrar = [String : Any]()
     var imgAmostrar: Any?
-    
-    @IBOutlet weak var tableView: UITableView!
-
+   
     @IBOutlet weak var SegmentControlDias: UISegmentedControl!
+    
+    override func viewWillLayoutSubviews(){
+        super.viewWillLayoutSubviews()
+        
+        self.scrollview.contentSize = CGSize(width: SegmentControlDias.bounds.width + 60, height:SegmentControlDias.bounds.height)
+        }
+      
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +57,7 @@ class MiAgenda: UIViewController, UITableViewDataSource, UITableViewDelegate {
         nav?.titleTextAttributes = [NSForegroundColorAttributeName: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)]
         nav?.topItem?.title = UserDefaults.standard.value(forKey: "name") as! String?
         self.Buscardatos()
+       
 
         
     }
@@ -60,13 +68,13 @@ class MiAgenda: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
 
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        
             return self.eventosArray.count
        
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! MiAgendaTableViewCell
         
@@ -92,13 +100,13 @@ class MiAgenda: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
 
         if colorCell == 0{
-            cell.backgroundColor = UIColor.green
+            cell.backgroundColor = UIColor(red:0.85, green:0.93, blue:1.00, alpha:1.0)
             self.colorCell = self.colorCell + 1
         }else if colorCell == 1{
-              cell.backgroundColor = UIColor.yellow
+              cell.backgroundColor = UIColor(red:0.85, green:1.00, blue:1.00, alpha:1.0)
             self.colorCell = self.colorCell + 1
         }else if colorCell == 2{
-             cell.backgroundColor = UIColor.cyan
+             cell.backgroundColor = UIColor(red:0.93, green:1.00, blue:0.85, alpha:1.0)
             self.colorCell = 0
         }
     
@@ -107,7 +115,7 @@ class MiAgenda: UIViewController, UITableViewDataSource, UITableViewDelegate {
         
         return cell
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
   
         
@@ -197,7 +205,9 @@ class MiAgenda: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
        
     }
-    func menu(_ sender: Any) {
+    
+   
+    @IBAction func menu(_ sender: Any) {
         let vc = storyboard!.instantiateViewController(withIdentifier: "MenuPrincipal")
         self.present( vc , animated: true, completion: nil)
     }
@@ -209,5 +219,48 @@ class MiAgenda: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 (segue.destination as! DetalleViewController).imgData = self.imgAmostrar
             }
         }
+    
+    // para cuadrar las imagenes
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        
+        return 133//pantallaSizeHeight(row: indexPath.row);//Choose your custom row height
+    }
+    /*
+    func pantallaSizeHeight(row: Int)->CGFloat!
+    {
+        var strPantalla = 143 //iphone 5
+        
+        if(row == 0){
+            strPantalla = 163
+        }
+        
+        if (UIDevice.current.userInterfaceIdiom == .pad)
+        {
+            if(row == 0){
+                strPantalla = 446
+            }
+            else{
+                strPantalla = 350
+            }
+            
+        }
+        else
+        {
+            
+            if UIScreen.main.bounds.size.width > 320 {
+                if UIScreen.main.scale == 3 { //iphone 6 plus
+                    
+                    strPantalla = 143
+                }
+                else{
+                    strPantalla = 143 //iphone 6
+                }
+            }
+        }
+        return CGFloat(strPantalla)
+    }
+    */
+
     
 }

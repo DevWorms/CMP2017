@@ -41,7 +41,10 @@ public class ClimaFragment extends Fragment
 
         if (tipo.equals("2")){
             web.loadUrl("http://drive.google.com/viewerng/viewer?embedded=true&url="+url);
-        }else {
+        }else if (tipo.equals("3")){
+
+            web.loadUrl(url);
+        } else {
 
             web.loadUrl("https://es-us.noticias.yahoo.com/clima");
         }

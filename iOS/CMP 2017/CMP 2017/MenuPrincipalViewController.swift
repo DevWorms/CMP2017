@@ -42,13 +42,7 @@ class MenuPrincipalViewController: UITableViewController {
     }
 
     
-    // para cuadrar las imagenes
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-    {
-        
-        return pantallaSizeHeight(row: indexPath.row);//Choose your custom row height
-    }
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -146,6 +140,13 @@ class MenuPrincipalViewController: UITableViewController {
         }
     }
 
+    // para cuadrar las imagenes
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        
+        return pantallaSizeHeight(row: indexPath.row);//Choose your custom row height
+    }
+    
     func pantallaSizeHeight(row: Int)->CGFloat!
     {
         var strPantalla = 143 //iphone 5

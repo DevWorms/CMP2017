@@ -172,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+
             pDialog = new ProgressDialog(MainActivity.this);
             pDialog.setMessage("Descargando Datos CMP...");
             pDialog.setIndeterminate(false);
@@ -677,7 +678,52 @@ public class MainActivity extends AppCompatActivity {
             JSONParser jspPrograma = new JSONParser();
             String strProgramas = jspPrograma.makeHttpRequest(fromUrlPrograma, "GET", fromUrlPrograma, "");
             dbHandlerOffline = new AdminSQLiteOffline(MainActivity.this, null, null, 1);
+            Log.e("JSONPROGRAMAS",strProgramas);
             dbHandlerOffline.addJsonProgramas(strProgramas);
+            String strImg="";
+            try{
+                JSONObject jProgramas = new JSONObject(strProgramas);
+                String strProg = jProgramas.getString("programas");
+                JSONArray aProgramas = new JSONArray(strProg);
+                for(int c = 0; c < aProgramas.length() ; c++){
+                    try {
+                        JSONObject programa = aProgramas.getJSONObject(c);
+
+                        String strFoto = programa.getString("foto");
+
+                        JSONObject jFoto = new JSONObject(strFoto);
+
+                        urlImage = jFoto.getString("url");
+
+                        imageUrl = new URL(urlImage);
+                        conn = (HttpURLConnection) imageUrl.openConnection();
+                        conn.connect();
+
+                        BitmapFactory.Options options = new BitmapFactory.Options();
+                        options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
+
+                        expoImg = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
+                        ImageDecoExpo = getBytes(expoImg);
+
+                        dbHandlerOffline = new AdminSQLiteOffline(MainActivity.this, null, null, 1);
+                        SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
+
+                        String idProgImge = programa.getString("id");
+
+                        dbHandlerOffline.addProgramaImage(idProgImge, ImageDecoExpo);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }catch(JSONException jex){
+
+            }
+
 
             Log.e("JSON PROGRAMAS",strProgramas);
 

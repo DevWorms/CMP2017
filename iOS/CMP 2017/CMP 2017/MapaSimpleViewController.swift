@@ -17,6 +17,7 @@ class MapaSimpleViewController: UIViewController, UIWebViewDelegate {
     // 2 mapa puebla
     // 3 rutas
     var tipoMapa = 0
+    var idMapa = 0
     
     var imgData: Any?
     var urlWeb = ""
@@ -39,13 +40,21 @@ class MapaSimpleViewController: UIViewController, UIWebViewDelegate {
             
         } else if self.tipoMapa == 2 {
             titleLabel.text = "Mapa de Puebla"
+         
             
         } else if self.tipoMapa == 3 {
             titleLabel.text = "Ruta"
         } else if self.tipoMapa == 4 {
             titleLabel.text = "Sitios de Interes"
         
+        } else if self.tipoMapa == 5 {
+            titleLabel.text = "Mapa de Recinto"
+            
+        } else if self.tipoMapa == 6 {
+            titleLabel.text = "Mapa de Expositor"
+            
         }
+
         
         if Accesibilidad.isConnectedToNetwork() == true {
             
@@ -90,14 +99,15 @@ class MapaSimpleViewController: UIViewController, UIWebViewDelegate {
                 
             }
             
-        } else if self.tipoMapa == 3 {
+        } else if self.tipoMapa == 3 || self.tipoMapa == 5  {
             
             if let img = self.imgData as? Data {
               
                 webView.load(img, mimeType: "image/png", textEncodingName: "UTF-8", baseURL: NSURL() as URL)
             }
             
-        } else if self.tipoMapa == 4 {
+        } else if self.tipoMapa == 4 || self.tipoMapa == 6 {
+           
              webView.loadRequest(URLRequest(url: URL(string: urlWeb)!))
         }
     }

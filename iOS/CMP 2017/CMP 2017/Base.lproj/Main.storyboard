@@ -254,7 +254,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Programa" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWH-kW-uD4">
-                                <rect key="frame" x="137.5" y="157" width="100.5" height="26.5"/>
+                                <rect key="frame" x="138" y="157" width="100.5" height="26.5"/>
                                 <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="21"/>
                                 <color key="textColor" red="0.16038369600646102" green="0.32152638291275665" blue="0.65605171319796951" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -356,7 +356,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Resultados" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8gv-ea-vxB">
-                                <rect key="frame" x="131.5" y="116" width="112" height="26.5"/>
+                                <rect key="frame" x="132" y="116" width="112" height="26.5"/>
                                 <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="21"/>
                                 <color key="textColor" red="0.16038369599999999" green="0.32152638290000002" blue="0.6560517132" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -539,7 +539,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transportación" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FW1-4Y-qHU">
-                                <rect key="frame" x="111.5" y="116" width="152.5" height="26.5"/>
+                                <rect key="frame" x="112" y="116" width="152.5" height="26.5"/>
                                 <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="21"/>
                                 <color key="textColor" red="0.16038369599999999" green="0.32152638290000002" blue="0.6560517132" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -920,13 +920,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mapa del Recinto" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="laU-II-TsK">
-                                <rect key="frame" x="100.5" y="116" width="174" height="26.5"/>
+                                <rect key="frame" x="101" y="116" width="174" height="26.5"/>
                                 <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="21"/>
                                 <color key="textColor" red="0.16038369599999999" green="0.32152638290000002" blue="0.6560517132" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1qv-uI-9Rc">
-                                <rect key="frame" x="0.0" y="162" width="375" height="461"/>
+                                <rect key="frame" x="0.0" y="162" width="375" height="505"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
                         </subviews>
@@ -988,7 +988,7 @@
                                 <rect key="frame" x="0.0" y="255" width="375" height="412"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Torneo de Golf" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mMF-nr-YKw">
-                                        <rect key="frame" x="16" y="20" width="313.5" height="22"/>
+                                        <rect key="frame" x="16" y="20" width="313.5" height="21.5"/>
                                         <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1060,7 +1060,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Club Campestre de Puebla y muchas mas cosas para generar dos renglones" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XwB-cG-Jqa">
-                                        <rect key="frame" x="90" y="97" width="243.5" height="53"/>
+                                        <rect key="frame" x="90" y="78" width="243.5" height="53"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="53" id="rBa-hx-Rr3"/>
                                         </constraints>
@@ -1104,7 +1104,7 @@
                             <constraint firstItem="uAX-0j-wpn" firstAttribute="top" secondItem="MoL-Nu-p6W" secondAttribute="bottom" id="NwR-Yv-3y3"/>
                             <constraint firstItem="CpU-Tb-FFa" firstAttribute="top" secondItem="uAX-0j-wpn" secondAttribute="bottom" constant="-2" id="l4a-AU-1RA"/>
                             <constraint firstItem="CpU-Tb-FFa" firstAttribute="bottom" secondItem="ATO-M7-CeS" secondAttribute="top" id="l7h-aK-tIs"/>
-                            <constraint firstItem="XwB-cG-Jqa" firstAttribute="top" secondItem="uAX-0j-wpn" secondAttribute="bottom" constant="95" id="lq3-yV-jNX"/>
+                            <constraint firstItem="XwB-cG-Jqa" firstAttribute="top" secondItem="uAX-0j-wpn" secondAttribute="bottom" constant="76" id="lq3-yV-jNX"/>
                             <constraint firstItem="uAX-0j-wpn" firstAttribute="centerX" secondItem="fft-Eq-Ch5" secondAttribute="centerX" id="pnG-dG-kwQ"/>
                             <constraint firstItem="CpU-Tb-FFa" firstAttribute="width" secondItem="fft-Eq-Ch5" secondAttribute="width" id="rQQ-92-itK"/>
                         </constraints>
@@ -1138,6 +1138,7 @@
                         <outlet property="recomendaciones" destination="kOt-TJ-7bZ" id="y2t-5E-zo7"/>
                         <outlet property="scrollView" destination="CpU-Tb-FFa" id="4Xf-bn-ZRI"/>
                         <outlet property="titulo" destination="mMF-nr-YKw" id="Cv2-Uy-CBr"/>
+                        <segue destination="Ike-SW-6Fr" kind="show" identifier="webView" id="DNJ-qc-gaL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zQy-h9-r1Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1482,7 +1483,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notificaciones" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5si-gK-uK8">
-                                <rect key="frame" x="116.5" y="72" width="142" height="26.5"/>
+                                <rect key="frame" x="117" y="72" width="142" height="26.5"/>
                                 <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="21"/>
                                 <color key="textColor" red="0.16038369599999999" green="0.32152638290000002" blue="0.6560517132" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1586,7 +1587,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sitios de Interés" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8QA-ue-0QC">
-                                <rect key="frame" x="107.5" y="116" width="160" height="26.5"/>
+                                <rect key="frame" x="108" y="116" width="160" height="26.5"/>
                                 <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="21"/>
                                 <color key="textColor" red="0.16038369599999999" green="0.32152638290000002" blue="0.6560517132" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1707,6 +1708,7 @@
                                         <connections>
                                             <outlet property="descripcion" destination="kCt-0v-cSt" id="1Ix-vP-rEl"/>
                                             <outlet property="foto" destination="KRS-je-5M3" id="EtJ-hf-86i"/>
+                                            <outlet property="googlemaps" destination="60i-8v-REC" id="7vY-BW-UbT"/>
                                             <outlet property="link" destination="yWR-k8-gGz" id="lhE-89-4NN"/>
                                             <outlet property="titulo" destination="iqr-hq-bZs" id="9C6-3Y-qUw"/>
                                         </connections>
@@ -2100,7 +2102,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Conoce Puebla" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LPg-8X-M3p">
-                                <rect key="frame" x="113" y="116" width="149" height="26.5"/>
+                                <rect key="frame" x="113.5" y="116" width="149" height="26.5"/>
                                 <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="21"/>
                                 <color key="textColor" red="0.16038369599999999" green="0.32152638290000002" blue="0.6560517132" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -2930,11 +2932,11 @@
         <image name="fondoCMP" width="1242" height="2208"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="C9o-NW-2zu"/>
-        <segue reference="kbO-K4-QMt"/>
+        <segue reference="GJj-eU-EjN"/>
         <segue reference="rHH-3X-Jaz"/>
+        <segue reference="DNJ-qc-gaL"/>
         <segue reference="ZdW-HO-l3u"/>
+        <segue reference="C9o-NW-2zu"/>
         <segue reference="psR-II-8MZ"/>
-        <segue reference="3cV-yQ-VMc"/>
     </inferredMetricsTieBreakers>
 </document>

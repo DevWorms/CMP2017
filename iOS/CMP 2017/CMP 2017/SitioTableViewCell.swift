@@ -15,6 +15,7 @@ class SitioTableViewCell: UITableViewCell {
     @IBOutlet weak var descripcion: UILabel!
     @IBOutlet weak var link: UIButton!
     
+    @IBOutlet weak var googlemaps: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

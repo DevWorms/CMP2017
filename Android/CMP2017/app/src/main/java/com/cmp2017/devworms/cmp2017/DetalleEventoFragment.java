@@ -94,7 +94,7 @@ public class DetalleEventoFragment extends Fragment {
         String cualDetalle = "";
         dbHandler = new AdminSQLiteOffline(getActivity(), null, null, 1);
         SQLiteDatabase db = dbHandler.getWritableDatabase();
-
+        Cursor cImg;
         switch(cualSeccion){
             case "social" :
 
@@ -102,19 +102,38 @@ public class DetalleEventoFragment extends Fragment {
                 respuesta = cursor.getString(0);
                 cualDetalle = "eventos";
 
+                cImg = dbHandler.ImagenPorIdSocialDepo(idProgram);
+                if(cImg.getCount()>0){
+                    imgFoto.setImageBitmap(getImage(cImg.getString(0)));
+                }
+
+
                 break;
             case "programas":
 
                 cursor = dbHandler.getJsonProgramas();
                 respuesta = cursor.getString(0);
                 cualDetalle = "programas";
+                Log.e("CURSORPROGRAMA",cursor.getCount()+"");
+                Log.e("PROGRGRAL",respuesta);
+                cImg = dbHandler.imagenPorPrograma(idProgram);
+                if(cImg.getCount() > 0){
+                    imgFoto.setImageBitmap(getImage(cImg.getString(0)));
+                }
+
 
                 break;
             case "acomp":
 
                 cursor = dbHandler.jsonAcompa();
                 respuesta = cursor.getString(0);
+
                 cualDetalle = "acompanantes";
+                cImg = dbHandler.ImagenPorIdAco(idProgram);
+                if(cImg.getCount() > 0){
+                    imgFoto.setImageBitmap(getImage(cImg.getString(0)));
+                }
+
 
                 break;
             default:
@@ -124,6 +143,7 @@ public class DetalleEventoFragment extends Fragment {
         try{
             tempEventos = new JSONObject(respuesta);
             detalles = new JSONArray(tempEventos.getString(cualDetalle));
+            Log.e("DETALLES",detalles.toString());
             for (int c=0; c < detalles.length() ; c++) {
 
                 JSONObject detalle = detalles.getJSONObject(c);
@@ -137,12 +157,7 @@ public class DetalleEventoFragment extends Fragment {
                     horaIni = detalle.getString("hora_inicio");
                     horaFin = detalle.getString("hora_fin");
                     strdia = detalle.getString("fecha");
-                    try{
-                        JSONObject foto = new JSONObject(detalle.getString("foto"));
-                        new CargarImagen().execute(foto.getString("url"));
-                    }catch (JSONException x){
-                        Log.e("FOTO","no tenia foto");
-                    }
+
 
 
                 }
@@ -266,5 +281,11 @@ public class DetalleEventoFragment extends Fragment {
             pDialog.dismiss();
 
         }
+    }
+
+    public static Bitmap getImage(String imageS) {
+        byte[] b = Base64.decode(imageS , Base64.DEFAULT);
+        Bitmap bmp = BitmapFactory.decodeByteArray(b, 0, b.length);
+        return  bmp;
     }
 }

@@ -100,13 +100,13 @@ class MiAgenda: UITableViewController {
         }
 
         if colorCell == 0{
-            cell.backgroundColor = UIColor.green
+            cell.backgroundColor = UIColor(red:0.85, green:0.93, blue:1.00, alpha:1.0)
             self.colorCell = self.colorCell + 1
         }else if colorCell == 1{
-              cell.backgroundColor = UIColor.yellow
+              cell.backgroundColor = UIColor(red:0.85, green:1.00, blue:1.00, alpha:1.0)
             self.colorCell = self.colorCell + 1
         }else if colorCell == 2{
-             cell.backgroundColor = UIColor.cyan
+             cell.backgroundColor = UIColor(red:0.93, green:1.00, blue:0.85, alpha:1.0)
             self.colorCell = 0
         }
     

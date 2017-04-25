@@ -391,6 +391,14 @@ class EncuestasController extends Controller {
             User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
             $expositor = Encuesta::where('id', $id)->first();
             if ($expositor) {
+                foreach ($expositor->usersHas as $relation) {
+                    $relation->delete();
+                }
+
+                foreach ($expositor->preguntas as $relation) {
+                    $relation->delete();
+                }
+
                 $expositor->delete();
 
                 $res['status'] = 1;

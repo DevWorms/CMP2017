@@ -777,6 +777,43 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("DescargaPrograma", jex.getMessage());
             }
 
+            // ************************************* MAPA DEL RESINTO ****************
+            String fromMapa = "http://cmp.devworms.com/api/mapa/recinto/"+userId+"/"+apiKey;
+            JSONParser jpMapa = new JSONParser();
+
+            String rspmapa = jpMapa.makeHttpRequest(fromMapa, "GET", fromMapa, "");
+            try{
+
+                JSONObject jMapa = new JSONObject(rspmapa);
+                JSONObject jResinto = new JSONObject(jMapa.getString("mapa"));
+                String urlResinto = jResinto.getString("url");
+                urlImage = urlResinto;
+
+                imageUrl = new URL(urlImage);
+                conn = (HttpURLConnection) imageUrl.openConnection();
+                conn.connect();
+
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
+
+                expoImg = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
+                ImageDecoExpo = getBytes(expoImg);
+
+                dbHandlerOffline = new AdminSQLiteOffline(MainActivity.this, null, null, 1);
+                SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
+
+
+
+                dbHandlerOffline.addMapaResinto(ImageDecoExpo);
+            }catch (JSONException jex){
+                Log.e("Mapa",jex.getMessage());
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
             return null;
         }
 

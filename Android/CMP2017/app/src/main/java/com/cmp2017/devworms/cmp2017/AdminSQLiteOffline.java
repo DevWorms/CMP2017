@@ -95,6 +95,11 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
     public static final String COLUMN_IDSITIO = "idSitio";
     public static final String COLUMN_SITIOIMAGEN = "imageSitio";
 
+    // MAPA DEL RECINTO
+    public final String TABLA_MAPARESINTO = "mapaResinto";
+    public final String COLUMN_IDMAPA = "idMapa";
+    public final  String COLUMN_IMGMAPA = "imgMapa";
+
     public AdminSQLiteOffline(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
@@ -542,7 +547,28 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
         return c;
     }
 
+    // *** MAPA DEL RESINTO
+    public void addMapaResinto(String jsonPrograma){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_IMGMAPA, jsonPrograma);
+        SQLiteDatabase db = getWritableDatabase();
+        db.insert(TABLA_MAPARESINTO, null, values);
+        db.close();
+    }
 
+    public Cursor getMmapaResinto(){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT "+COLUMN_IMGMAPA+" FROM " + TABLA_MAPARESINTO + " ;";
+        Cursor cursorRs = db.rawQuery(query, null);
+
+        if (cursorRs != null) {
+            cursorRs.moveToFirst();
+        }
+
+        return cursorRs;
+    }
+
+    // metodos de crear y destruir
     public void crearTablas(SQLiteDatabase db){
         String queryBanner = "CREATE TABLE " + TABLA_BANNER + "(" +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -660,6 +686,13 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
                 COLUMN_SITIOIMAGEN + " TEXT" +
                 ");";
         db.execSQL(querySitioImg);
+
+        String queryMapaResinto = "CREATE TABLE " + TABLA_MAPARESINTO + "(" +
+                COLUMN_IDMAPA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_IMGMAPA + " TEXT " +
+                ");";
+
+        db.execSQL(queryMapaResinto);
     }
 
     public void borrarTablas(SQLiteDatabase db){
@@ -709,6 +742,9 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
         onCreate(db);
 
         db.execSQL("DROP TABLE IF EXISTS " + TABLA_SITIOIMAGENES);
+        onCreate(db);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_MAPARESINTO);
         onCreate(db);
 
     }

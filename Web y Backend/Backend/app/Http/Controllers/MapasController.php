@@ -171,6 +171,7 @@ class MapasController extends Controller {
 
             $stands = $request->get('estantes');
             $expositor_id = $request->get('expositor_id');
+            $color = $request->get('color');
 
             $expositor = Expositor::where('id', $expositor_id)->first();
             if ($expositor) {
@@ -180,7 +181,15 @@ class MapasController extends Controller {
                 }
                 $estantes = explode(",", $stands);
 
-                $color = $this->rand_color();
+                if (isset($color)) {
+                    $checkColor = substr($color, 0, 1);
+                    if ($checkColor != "#") {
+                        $color = "#" . $color;
+                    }
+                } else {
+                    $color = $this->rand_color();
+                }
+
                 $estantes_ids = [];
                 foreach ($estantes as $estante) {
                     $id = substr($estante, 8);
@@ -207,7 +216,7 @@ class MapasController extends Controller {
             return response()->json($res, 400);
         } catch (\Exception $ex) {
             $res['status'] = 0;
-            $res['mensaje'] = $ex->getMessage() . $ex->getLine() . $ex->getFile();
+            $res['mensaje'] = $ex->getMessage();
             return response()->json($res, 500);
         }
     }
@@ -324,5 +333,43 @@ class MapasController extends Controller {
         unset($expositor['pdf_file']);
 
         return $expositor;
+    }
+
+    public function removeReservations(Request $request) {
+        try {
+            $user_id = $request->get('user_id');
+            $api_key = $request->get('api_key');
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+
+            $stands = $request->get('estantes');
+
+            $coma = substr($stands, -1);
+            if ($coma == ",") {
+                $stands = substr($stands, 0, -1);
+            }
+            $estantes = explode(",", $stands);
+
+            foreach ($estantes as $estante) {
+                $id = substr($estante, 8);
+
+                MapaExpositores::where('id', $id)->update([
+                    'available' => 1,
+                    'expositor_id' => null,
+                    'color' => null
+                ]);
+            }
+
+            $res['status'] = 1;
+            $res['mensaje'] = "Los cambios se guardaron correctamente";
+            return response()->json($res, 200);
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
     }
 }

@@ -149,7 +149,6 @@ $("document").ready(function () {
             var expositores = "";
             r.each(function (i) {
                 expositores = expositores + r[i].id + ",";
-                console.log(r[i].id);
             });
             expositores = expositores.substring(0, expositores.length - 1);
             saveEstantes(expositores, expositor);
@@ -161,7 +160,37 @@ $("document").ready(function () {
             }
         }
     });
+
+    $("#color").on("change paste keyup", function() {
+        var backColor = color;
+        var rgb = hexToRgb(backColor);
+        color = "#" + $("#color").val();
+
+        var r = $('rect[style*="fill: rgb(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ');"]');
+        if (r.length > 0) {
+            r.each(function (i) {
+                var seat = d3.select("#" + r.attr("id"));
+                seat.style("fill", color);
+            });
+        }
+    });
 });
+
+function hexToRgb(hex) {
+    // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+    var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+    hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+        return r + r + g + g + b + b;
+    });
+
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+}
+
 
 function saveEstantes(estantes, id) {
     $.ajax({
@@ -171,7 +200,8 @@ function saveEstantes(estantes, id) {
             user_id: user_id,
             api_key: api_key,
             estantes: estantes,
-            expositor_id: id
+            expositor_id: id,
+            color: "#" + $("#color").val()
         },
         success :  function(response) {
             if (response.status === 1) {
@@ -250,7 +280,8 @@ function seating(xml) {
                         id: r.attr("id"),
                         title: r.attr("id"),
                         reserved: false,
-                        locked: locked
+                        locked: locked,
+                        color: stands[i-1].color
                     });
 
                     i = i+1;
@@ -279,11 +310,14 @@ function handleResevations(data) {
 
         if (value.locked === false) {
             seat.on("click", function (d) {
-                console.log(seat);
                 reserve(seat, d, data);
             });
         } else {
-            seat.style("fill", "#DF0101");
+            seat.style("fill", value.color);
+
+            seat.on("click", function (d) {
+                deleteReservation(value.id);
+            });
         }
         seat.append("title")
             .text(function(d) {
@@ -298,12 +332,43 @@ function reserve(o, data, allData) {
     o.style("fill", seatColor(data, o));
 }
 
+function deleteReservation(estantes) {
+    $.ajax({
+        type : 'POST',
+        url  : API_URL + 'mapa/expositores/remove/reservation',
+        data: {
+            user_id: user_id,
+            api_key: api_key,
+            estantes: estantes
+        },
+        success :  function(response) {
+            if (response.status == 1) {
+                $("#error").fadeIn(1000, function() {
+                    $("#error").html('<div class="alert alert-success"> &nbsp; ' + response.mensaje + '</div>');
+                });
+
+                location.reload();
+            } else {
+                $("#error").fadeIn(1000, function() {
+                    $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
+                });
+            }
+        },
+        error: function(response) {
+            response = response.responseJSON;
+            $("#error").fadeIn(1000, function() {
+                $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
+            });
+        }
+    });
+}
+
 function seatColor(data, node) {
     if (!data.origColor) {
         data.origColor = node.style("fill");
     }
     node.style("fill");
-    return data.reserved ? "#086A87" : data.origColor;
+    return data.reserved ? color : data.origColor;
 }
 
 function type(d) {

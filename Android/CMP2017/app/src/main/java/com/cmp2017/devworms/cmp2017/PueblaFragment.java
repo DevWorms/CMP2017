@@ -1,8 +1,10 @@
 package com.cmp2017.devworms.cmp2017;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,9 +50,24 @@ public class PueblaFragment extends Fragment
         public void onClick(View v) {
 
 
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.actividad, new ClimaFragment()).addToBackStack(null).commit();
+            Fragment fragment = new ClimaFragment();
 
+            Bundle parametro = new Bundle();
+
+
+            parametro.putString("url","a");
+            parametro.putString("tipo","1");
+
+
+            fragment.setArguments(parametro);
+
+            final FragmentTransaction ft = getActivity().getFragmentManager()
+                    .beginTransaction();
+            ft.replace(R.id.actividad, fragment, "tag");
+
+            ft.addToBackStack("tag");
+
+            ft.commit();
 
         }
     }

@@ -266,20 +266,20 @@
                                 </variation>
                             </label>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yo1-2C-Iy8">
-                                <rect key="frame" x="0.0" y="213" width="320" height="64"/>
+                                <rect key="frame" x="0.0" y="174" width="320" height="110"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="Uyn-Hm-pB1">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="64"/>
-                                        <variation key="heightClass=regular-widthClass=regular" constant="100"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="110"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="110"/>
                                     </constraint>
                                 </constraints>
                             </pickerView>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JWd-Hd-RbI">
-                                <rect key="frame" x="0.0" y="294" width="320" height="64"/>
+                                <rect key="frame" x="0.0" y="269" width="320" height="110"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="1MG-r6-Xu4">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="64"/>
-                                        <variation key="heightClass=regular-widthClass=regular" constant="100"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="110"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="110"/>
                                     </constraint>
                                 </constraints>
                             </pickerView>
@@ -304,13 +304,13 @@
                             <constraint firstItem="DWH-kW-uD4" firstAttribute="top" secondItem="gcC-yl-F4Q" secondAttribute="bottom" constant="93" id="IWO-ka-BJn"/>
                             <constraint firstItem="yo1-2C-Iy8" firstAttribute="centerX" secondItem="Idz-Dj-WlL" secondAttribute="centerX" id="NAN-v4-QH3"/>
                             <constraint firstItem="JWd-Hd-RbI" firstAttribute="top" secondItem="gcC-yl-F4Q" secondAttribute="bottom" constant="230" id="QuC-hn-w9n">
-                                <variation key="heightClass=regular-widthClass=compact" constant="230"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="205"/>
                                 <variation key="heightClass=regular-widthClass=regular" constant="290"/>
                             </constraint>
                             <constraint firstItem="JWd-Hd-RbI" firstAttribute="centerX" secondItem="Idz-Dj-WlL" secondAttribute="centerX" id="UuB-cT-2JV"/>
                             <constraint firstItem="KiJ-d3-D6r" firstAttribute="centerX" secondItem="Idz-Dj-WlL" secondAttribute="centerX" id="f1G-fk-LRm"/>
                             <constraint firstItem="yo1-2C-Iy8" firstAttribute="top" secondItem="gcC-yl-F4Q" secondAttribute="bottom" constant="149" id="fwm-M6-MWH">
-                                <variation key="heightClass=regular-widthClass=compact" constant="149"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="110"/>
                                 <variation key="heightClass=regular-widthClass=regular" constant="179"/>
                             </constraint>
                             <constraint firstItem="DWH-kW-uD4" firstAttribute="centerX" secondItem="Idz-Dj-WlL" secondAttribute="centerX" id="hq5-fD-DQ1"/>
@@ -2927,11 +2927,11 @@
         <image name="fondoCMP" width="1242" height="2208"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nZL-b0-SFg"/>
-        <segue reference="7E1-SN-eCj"/>
+        <segue reference="Eck-C4-SEN"/>
         <segue reference="C9o-NW-2zu"/>
-        <segue reference="yIx-rV-XWI"/>
         <segue reference="SYf-Ru-mT8"/>
         <segue reference="xQ8-EA-dMz"/>
+        <segue reference="psR-II-8MZ"/>
+        <segue reference="7E1-SN-eCj"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -1,7 +1,9 @@
 package com.cmp2017.devworms.cmp2017;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +28,7 @@ public class NotificacionFragment extends Fragment
     private ArrayList<NotificacionModelo> arrayNoti;
     private ListViewAdapter adapter;
     private int leido;
+    String apiKey,userId,idNoti;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -33,6 +36,11 @@ public class NotificacionFragment extends Fragment
         lvNoti = (ListView)view.findViewById(R.id.lvNoti);
         ivImagen = (ImageView)view.findViewById(R.id.ivImagen);
         arrayNoti = new ArrayList<>();
+        SharedPreferences sp = getActivity().getSharedPreferences("prefe", Activity.MODE_PRIVATE);
+
+
+        apiKey = sp.getString("APIkey", "");
+        userId = sp.getString("IdUser", "");
 
         new SendRespuestasEncuesta().execute();
 
@@ -61,7 +69,7 @@ public class NotificacionFragment extends Fragment
             String response = "";
             JSONParser jsonParser = new JSONParser();
 
-            String toUrl = "http://cmp.devworms.com/api/notificacion/all/5/5f3a4f132f40dcd7924ec795133c540f";
+            String toUrl = "http://cmp.devworms.com/api/notificacion/all/"+userId+"/"+apiKey+"";
             String respuesta = jsonParser.makeHttpRequest(toUrl, "GET", "", "");
             mensajeRespuestas = "No se pudieron enviar las respuesta";
             try{
@@ -77,6 +85,7 @@ public class NotificacionFragment extends Fragment
                         //modelo[cont]= new NotificacionModelo(jEncuestas.getJSONObject(cont).getString("notificacion"),jEncuestas.getJSONObject(cont).getInt("leido"));
                         arrayNoti.add(new NotificacionModelo(jEncuestas.getJSONObject(cont).getString("notificacion"),jEncuestas.getJSONObject(cont).getInt("leido")));
                         leido= jEncuestas.getJSONObject(cont).getInt("leido");
+                        idNoti = jEncuestas.getJSONObject(cont).getString("id");
                         //modelo[cont].setNotificacion(jEncuestas.getJSONObject(cont).getString("notificacion"));
                         //JSONObject archivos = new JSONObject(jEncuestas.getJSONObject(cont).getString("notificacion"));
 
@@ -99,7 +108,7 @@ public class NotificacionFragment extends Fragment
         }
         protected void onPostExecute(String file_url) {
             int cuentasEncuestas = arrayNoti.size();
-            adapter = new ListViewAdapter(getActivity(),arrayNoti);
+            adapter = new ListViewAdapter(getActivity(),arrayNoti,userId,apiKey,idNoti);
             lvNoti.setAdapter(adapter);
             pDialog.dismiss();
         }

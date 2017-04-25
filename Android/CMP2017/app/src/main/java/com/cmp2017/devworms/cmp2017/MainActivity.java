@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
             super.onPreExecute();
 
             pDialog = new ProgressDialog(MainActivity.this);
-            pDialog.setMessage("Descargando Datos CMP...");
+            pDialog.setMessage("Descargando información,por favor espera puede tardar 1 o 2 minutos.");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(false);
             pDialog.show();

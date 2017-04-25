@@ -6,8 +6,10 @@ package com.cmp2017.devworms.cmp2017;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.support.constraint.solver.ArrayLinkedVariables;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,10 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -27,11 +33,17 @@ public class ListViewAdapter extends BaseAdapter {
     private ArrayList<NotificacionModelo> arrayListNoti;
     private Context context;
     private LayoutInflater layoutInflater;
+    private String userId,apikey,idNoti,response;
+    ProgressDialog pDialog;
 
-    public ListViewAdapter(Activity contexto, ArrayList<NotificacionModelo> modelo) {
+
+    public ListViewAdapter(Activity contexto, ArrayList<NotificacionModelo> modelo,String userId,String apikey, String idNoti) {
         //super(contexto, R.layout.layout_notificacion, modelo);
         this.arrayListNoti = modelo;
         this.context = contexto;
+        this.userId = userId;
+        this.apikey = apikey;
+        this.idNoti = idNoti;
 
     }
 
@@ -72,8 +84,10 @@ public class ListViewAdapter extends BaseAdapter {
                 }
                 else
                 {
+                    ivImagen.setImageResource(R.mipmap.mensaje_recibido);
                     arrayListNoti.get(position).setLeido(1);
                 }
+                new MandarLeido().execute();
                 AlertDialog.Builder a_builder;
                 a_builder = new AlertDialog.Builder(vista.getContext());
                 a_builder.setMessage(arrayListNoti.get(position).notificacion)
@@ -91,5 +105,45 @@ public class ListViewAdapter extends BaseAdapter {
             }
         });
         return vista;
+    }
+    class MandarLeido extends AsyncTask<String, String, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String fromUrl = "http://cmp.devworms.com/api/notificacion/markasread/"+userId+"/"+apikey+"/"+idNoti+"";
+            JSONParser jsonParser = new JSONParser();
+            String respuesta = jsonParser.makeHttpRequest(fromUrl, "GET", fromUrl, "");
+
+            if (respuesta != "error") {
+                try {
+
+
+                    response = "OK";
+
+
+
+                }catch (Exception ex){
+                    response = "NO";
+                    ex.printStackTrace();
+                }
+
+            }else{
+                response = "NO";
+            }
+
+            return response;
+        }
+
+        protected void onPostExecute(String file_url) {
+
+
+        }
     }
 }

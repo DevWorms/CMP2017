@@ -270,12 +270,18 @@ class MapasController extends Controller {
                 ->with('estantes', 'logo', 'pdf')
                 ->firstOrFail();
 
-            $expositor = $this->returnPublicExpositor($expositor);
+            if ($expositor->estantes->count() > 0) {
+                $expositor = $this->returnPublicExpositor($expositor);
 
-            $res['status'] = 1;
-            $res['mensaje'] = "success";
-            $res['expositor'] = $expositor;
-            return response()->json($res, 200);
+                $res['status'] = 1;
+                $res['mensaje'] = "success";
+                $res['expositor'] = $expositor;
+                return response()->json($res, 200);
+            } else {
+                $res['status'] = 0;
+                $res['mensaje'] = "No se ha asignado ningún estante al expositor: " . $expositor->nombre;
+                return response()->json($res, 200);
+            }
         } catch (ModelNotFoundException $ex) {
             $res['status'] = 0;
             $res['mensaje'] = "No se encontró el Expositor: " . $id;
@@ -289,7 +295,7 @@ class MapasController extends Controller {
 
     function returnPublicExpositor($expositor) {
         unset($expositor["logo_file"]);
-        unset($expositor["id"]);
+        //unset($expositor["id"]);
         unset($expositor["logo"]["is_banner"]);
         unset($expositor["logo"]["user_id"]);
         unset($expositor["logo"]["id"]);

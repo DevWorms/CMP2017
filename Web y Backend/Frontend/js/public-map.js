@@ -31,7 +31,6 @@ function seating(xml) {
 
             expositores.forEach(function (expositor) {
                 var estantes = expositor.estantes;
-                console.log(estantes);
                 estantes.forEach(function (stand) {
                     var locked = false;
 
@@ -52,18 +51,19 @@ function seating(xml) {
                         title: title,
                         locked: locked,
                         color: color,
-                        coords: stand.coords
+                        coords: stand.coords,
+                        expositor: expositor.id
                     });
                 });
 
                 var r = seats.select("#estante_" + estantes[0].id);
-                console.log(r);
 
                 gE
                     .append("text")
                     .text(expositor.nombre)
                     //.attr("transform", "matrix(" + expositor.coords + ")")
                     .attr("font-size", 5)
+                    .attr("id", "txt_" + expositor.id)
                     .attr("x", r.attr("x"))
                     .attr("y", parseInt(r.attr("y")) + 15);
             });
@@ -84,9 +84,36 @@ function loadExpositorLocation(id) {
         url: API_URL + 'mapa/expositores/public/expositor/' + id,
         type: 'GET',
         success: function (response) {
-            var expositor = response.expositor;
-            g.attr("transform", "translate(" + expositor.coords + ")scale(" + 4 + ")");
-            svg.select("#gE").attr("transform", "translate(" + expositor.coords + ")scale(" + 4 + ")");
+            if (response.status == 1) {
+                var expositor = response.expositor;
+                g.attr("transform", "translate(" + expositor.coords + ")scale(" + 4 + ")");
+                svg.select("#gE").attr("transform", "translate(" + expositor.coords + ")scale(" + 4 + ")");
+
+                svg.selectAll("text").each(function() {
+                    d3.select(this).attr("font-size", 8);
+                });
+
+                svg.select("#txt_" + expositor.id).attr("font-size", 14);
+
+                expositor.estantes.forEach(function (stand) {
+                    data.forEach(function(value, index) {
+                        var seat = d3.select("#estante_" + value.id);
+                        seat.datum(value);
+                        seat.style("fill", "#A0A0A0");
+
+                    });
+
+                });
+
+                expositor.estantes.forEach(function (stand) {
+                    var seat = d3.select("#estante_" + stand.id);
+                    seat.style("fill", stand.color);
+                });
+            } else {
+                $("#error").fadeIn(1000, function() {
+                    $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
+                });
+            }
         },
         error : function (response) {
             response = response.responseJSON;
@@ -100,6 +127,18 @@ function loadExpositorLocation(id) {
 function zoom() {
     g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
     svg.select("#gE").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+
+    if (d3.event.scale > 3 && d3.event.scale < 4) {
+        svg.selectAll("text").each(function() {
+            d3.select(this).attr("font-size", 9);
+        });
+    }
+
+    if (d3.event.scale > 4) {
+        svg.selectAll("text").each(function() {
+            d3.select(this).attr("font-size", 11);
+        });
+    }
 }
 
 function handleResevations(data) {
@@ -120,7 +159,6 @@ function handleResevations(data) {
         seat.datum(value);
 
         if (value.locked === true) {
-
             seat
                 .style("fill", value.color)
                 .attr("stroke-width", 1)
@@ -129,7 +167,7 @@ function handleResevations(data) {
             seat.on("click", function (d) {
                 //g.attr("transform", "translate(" + value.coords + ")scale(" + 4 + ")");
                 //svg.select("#gE").attr("transform", "translate(" + value.coords + ")scale(" + 4 + ")");
-                window.location.href = 'expositor.php#' + value.id;
+                window.location.href = 'expositor.php#' + value.expositor;
             });
         }
 

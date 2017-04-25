@@ -60,8 +60,8 @@
       <file leaf-file-name="public-map.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public-map.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1848">
-              <caret line="115" column="44" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+            <state relative-caret-position="-126">
+              <caret line="75" column="22" lean-forward="false" selection-start-line="75" selection-start-column="19" selection-end-line="75" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -129,11 +129,13 @@
       <file leaf-file-name="public-map.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/public-map.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="131" column="64" lean-forward="false" selection-start-line="131" selection-start-column="64" selection-end-line="131" selection-end-column="64" />
+            <state relative-caret-position="630">
+              <caret line="54" column="33" lean-forward="false" selection-start-line="54" selection-start-column="24" selection-end-line="54" selection-end-column="33" />
               <folding>
-                <marker date="1493065571579" expanded="true" signature="2476:2482" ph=" " />
-                <marker date="1493065571579" expanded="true" signature="3182:3188" ph=" " />
+                <element signature="n#!!block;n#zoom#0" expanded="false" />
+                <marker date="1493080273465" expanded="true" signature="2509:2515" ph=" " />
+                <marker date="1493080273465" expanded="true" signature="3948:3954" ph=" " />
+                <marker date="1493080273465" expanded="true" signature="4235:4241" ph=" " />
               </folding>
             </state>
           </provider>
@@ -142,7 +144,7 @@
       <file leaf-file-name="mapa-expositores.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/mapa-expositores.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="21">
+            <state relative-caret-position="-105">
               <caret line="240" column="42" lean-forward="false" selection-start-line="240" selection-start-column="42" selection-end-line="240" selection-end-column="42" />
               <folding>
                 <marker date="1492727450321" expanded="true" signature="5829:5835" ph=" " />
@@ -215,11 +217,11 @@
       <find>g</find>
       <find>g.</find>
       <find>zoom =</find>
-      <find>console</find>
       <find>||</find>
       <find>text</find>
       <find>stands</find>
       <find>room</find>
+      <find>console</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -451,6 +453,9 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="dc7f00d2-d8d1-4a7f-affd-07c41938b3dd" name="Default" comment="" />
@@ -497,12 +502,12 @@
       <workItem from="1492961396978" duration="11722000" />
       <workItem from="1492996523519" duration="2281000" />
       <workItem from="1493039774496" duration="5620000" />
-      <workItem from="1493054978054" duration="6398000" />
+      <workItem from="1493054978054" duration="11889000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="189152000" />
+    <option name="totallyTimeSpent" value="194643000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -514,7 +519,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1050" extended-state="1" />
+    <frame x="0" y="0" width="1920" height="1050" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16826923" sideWeight="0.49624062" order="0" side_tool="false" content_ui="combo" />
@@ -840,22 +845,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/js.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public-map.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1848">
-          <caret line="115" column="44" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/img/plano.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -878,6 +867,37 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/js.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/mapa-expositores.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-105">
+          <caret line="240" column="42" lean-forward="false" selection-start-line="240" selection-start-column="42" selection-end-line="240" selection-end-column="42" />
+          <folding>
+            <marker date="1492727450321" expanded="true" signature="5829:5835" ph=" " />
+            <marker date="1492727450321" expanded="true" signature="6204:6210" ph=" " />
+            <marker date="1492727450321" expanded="true" signature="6491:6497" ph=" " />
+            <marker date="1492727450321" expanded="true" signature="7195:7201" ph=" " />
+            <marker date="1492727450321" expanded="true" signature="7482:7488" ph=" " />
+            <marker date="1492727450321" expanded="true" signature="8903:8909" ph=" " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public-map.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-126">
+          <caret line="75" column="22" lean-forward="false" selection-start-line="75" selection-start-column="19" selection-end-line="75" selection-end-column="22" />
           <folding />
         </state>
       </provider>
@@ -920,28 +940,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/mapa-expositores.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="240" column="42" lean-forward="false" selection-start-line="240" selection-start-column="42" selection-end-line="240" selection-end-column="42" />
-          <folding>
-            <marker date="1492727450321" expanded="true" signature="5829:5835" ph=" " />
-            <marker date="1492727450321" expanded="true" signature="6204:6210" ph=" " />
-            <marker date="1492727450321" expanded="true" signature="6491:6497" ph=" " />
-            <marker date="1492727450321" expanded="true" signature="7195:7201" ph=" " />
-            <marker date="1492727450321" expanded="true" signature="7482:7488" ph=" " />
-            <marker date="1492727450321" expanded="true" signature="8903:8909" ph=" " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/public-map.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="131" column="64" lean-forward="false" selection-start-line="131" selection-start-column="64" selection-end-line="131" selection-end-column="64" />
+        <state relative-caret-position="630">
+          <caret line="54" column="33" lean-forward="false" selection-start-line="54" selection-start-column="24" selection-end-line="54" selection-end-column="33" />
           <folding>
-            <marker date="1493065571579" expanded="true" signature="2476:2482" ph=" " />
-            <marker date="1493065571579" expanded="true" signature="3182:3188" ph=" " />
+            <element signature="n#!!block;n#zoom#0" expanded="false" />
+            <marker date="1493080273465" expanded="true" signature="2509:2515" ph=" " />
+            <marker date="1493080273465" expanded="true" signature="3948:3954" ph=" " />
+            <marker date="1493080273465" expanded="true" signature="4235:4241" ph=" " />
           </folding>
         </state>
       </provider>

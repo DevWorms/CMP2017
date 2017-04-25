@@ -87,6 +87,8 @@ public class Updates extends Activity implements View.OnClickListener {
         if(this.modulosParaActulizar.size()>0){
             UpdateModulos update = new UpdateModulos();
             update.execute();
+        }else{
+            this.finish();
         }
     }
 
@@ -128,7 +130,7 @@ public class Updates extends Activity implements View.OnClickListener {
 
                             }else{
                                 descActualizaciones.setText("No hay actualizaciones por el momento");
-                                btnActualizar.setEnabled(false);
+                                btnActualizar.setText("Cerrar");
                             }
                         }
                     });

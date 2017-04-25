@@ -214,8 +214,8 @@ public class MenuPrincipal extends AppCompatActivity
                 Toast.makeText(MenuPrincipal.this,"Registrate para activar esta sección",Toast.LENGTH_SHORT).show();
 
             }else{
-
-                Toast.makeText(MenuPrincipal.this,"Próximamente actualiza",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this,Updates.class));
+                //Toast.makeText(MenuPrincipal.this,"Próximamente actualiza",Toast.LENGTH_SHORT).show();
 
 
             }

@@ -38,6 +38,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.loopj.android.http.AsyncHttpClient.log;
+
 /**
  * Created by AndrewAlan on 23/04/2017.
  */
@@ -71,14 +73,17 @@ public class ListAdapterAgenda extends ArrayAdapter<AgendaModel> {
         View formato = inflater.inflate(R.layout.formato_lista_agenda, null, true);
 
         if(posicionColor == 1){
-            formato.setBackgroundColor(Color.CYAN);
-            posicionColor++;
+            formato.setBackgroundColor(Color.parseColor("#d8ecff"));
+            log.d("Color","uno");
+            posicionColor =2;
         }else if(posicionColor == 2){
-            formato.setBackgroundColor(Color.LTGRAY);
-            posicionColor++;
+            formato.setBackgroundColor(Color.parseColor("#d8ffff"));
+            posicionColor = 3;
+            log.d("Color","dos");
         }else if(posicionColor == 3){
-            formato.setBackgroundColor(Color.YELLOW);
+            formato.setBackgroundColor(Color.parseColor("#ecffd8"));
             posicionColor = 1;
+            log.d("Color","tres");
         }
 
         this.posicionGeneral = position;

@@ -76,6 +76,12 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
     public static final String COLUMN_IDJPROGRMA= "idPrograma";
     public static final String COLUMN_JSONPROGRAMA= "jsonProgramas";
 
+    // TABLA PARA IMAGENES
+    public static final String TABLA_PROGIMAGENES = "ProgramaImagenes";
+    public static final String COLUMN_IDPROGIMG = "_id";
+    public static final String COLUMN_IDPROG = "idRuta";
+    public static final String COLUMN_PROGRAMAIMAGEN = "imagePrograma";
+
 
 
 
@@ -85,145 +91,12 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
     //Se construye y se crea la Base de Datos
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String queryBanner = "CREATE TABLE " + TABLA_BANNER + "(" +
-                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_URL + " TEXT, " +
-                COLUMN_IMAGEN + " TEXT " +
-
-                ");";
-
-        db.execSQL(queryBanner);
-
-        String queryExpo = "CREATE TABLE " + TABLA_EXPOSITORES + "(" +
-                COLUMN_IDEX + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_JSONEXPOALFABETICO + " TEXT," +
-                COLUMN_JSONEXPONumerico + " TEXT" +
-                ");";
-
-        db.execSQL(queryExpo);
-
-
-        String queryExpoIma = "CREATE TABLE " + TABLA_EXPOSITORESIMAGENES + "(" +
-                COLUMN_IDEXIMA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_IDEXPOSITOR + " TEXT," +
-                COLUMN_EXPOIMAGESTR + " TEXT" +
-                ");";
-
-        db.execSQL(queryExpoIma);
-
-        String queryPatro = "CREATE TABLE " + TABLA_PATROCINADORES + "(" +
-                COLUMN_IDPA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_JSONPATROALFABETICO + " TEXT," +
-                COLUMN_JSONPATRONumerico + " TEXT" +
-                ");";
-
-        db.execSQL(queryPatro);
-
-        String queryPatroIma = "CREATE TABLE " + TABLA_PATROIMAGENES + "(" +
-                COLUMN_IDPATRO + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_IDPATROCINADOR + " TEXT," +
-                COLUMN_PATROIMAGESTR + " TEXT" +
-                ");";
-
-        db.execSQL(queryPatroIma);
-
-        String queryAco = "CREATE TABLE " + TABLA_ACOMPAÑANTE + "(" +
-                COLUMN_IDACO + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_JSONACOMPAÑANTE + " TEXT" +
-                ");";
-
-        db.execSQL(queryAco);
-
-        String queryAcoIma = "CREATE TABLE " + TABLA_ACOMPAÑANTEIMAGENES + "(" +
-                COLUMN_IDACOIMA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_IDACOMPAÑANTES + " TEXT," +
-                COLUMN_ACOMPIMAGESTR + " TEXT" +
-                ");";
-        db.execSQL(queryAcoIma);
-
-
-        String querySocia = "CREATE TABLE " + TABLA_SOCIALDEPO + "(" +
-                COLUMN_IDSOCIADEPO + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_JSONSOCIALDEPORTIVO + " TEXT" +
-                ");";
-
-        db.execSQL(querySocia);
-
-        String querySociaIma = "CREATE TABLE " + TABLA_SOCIALDEPOIMAGENES + "(" +
-                COLUMN_IDSOCIA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_IDSOCIADEPORTIVO + " TEXT," +
-                COLUMN_SOCIALDEPOIMAGESTR + " TEXT" +
-                ");";
-        db.execSQL(querySociaIma);
-
-        String queryCategoria = "CREATE TABLE " + TABLA_CATEGORIAS + "(" +
-                COLUMN_IDCAT+ " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_JSONCATEGORIA + " TEXT" +
-                ");";
-
-        db.execSQL(queryCategoria);
-
-        String queryTrans = "CREATE TABLE " + TABLA_TRANSP+ "(" +
-                COLUMN_IDTRANS+ " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_JSONTRANS + " TEXT" +
-                ");";
-
-        db.execSQL(queryTrans);
-
-        String queryTransIma = "CREATE TABLE " + TABLA_TRANSPOIMAGENES + "(" +
-                COLUMN_IDTRANSRUTA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_IDRUTA + " TEXT," +
-                COLUMN_RUTAIMAGESTR + " TEXT" +
-                ");";
-        db.execSQL(queryTransIma);
-
-        String queryPorgramas = "CREATE TABLE " + TABLA_PROGRAMAS + "(" +
-                COLUMN_IDJPROGRMA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_JSONPROGRAMA + " TEXT" + ");";
-        db.execSQL(queryPorgramas);
-
+        crearTablas(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLA_BANNER);
-        onCreate(db);
-
-        db.execSQL("DROP TABLE IF EXISTS " + TABLA_EXPOSITORES);
-        onCreate(db);
-
-        db.execSQL("DROP TABLE IF EXISTS " + TABLA_EXPOSITORESIMAGENES);
-        onCreate(db);
-
-        db.execSQL("DROP TABLE IF EXISTS " + TABLA_PATROCINADORES);
-        onCreate(db);
-
-        db.execSQL("DROP TABLE IF EXISTS " + TABLA_PATROIMAGENES);
-        onCreate(db);
-
-        db.execSQL("DROP TABLE IF EXISTS " + TABLA_ACOMPAÑANTE);
-        onCreate(db);
-
-        db.execSQL("DROP TABLE IF EXISTS " + TABLA_ACOMPAÑANTEIMAGENES);
-        onCreate(db);
-
-        db.execSQL("DROP TABLE IF EXISTS " + TABLA_SOCIALDEPO);
-        onCreate(db);
-
-        db.execSQL("DROP TABLE IF EXISTS " + TABLA_SOCIALDEPOIMAGENES);
-        onCreate(db);
-
-        db.execSQL("DROP TABLE IF EXISTS " + TABLA_CATEGORIAS);
-        onCreate(db);
-
-        db.execSQL("DROP TABLE IF EXISTS " + TABLA_TRANSP);
-        onCreate(db);
-
-        db.execSQL("DROP TABLE IF EXISTS " + TABLA_TRANSPOIMAGENES);
-        onCreate(db);
-
-        db.execSQL("DROP TABLE IF EXISTS " + TABLA_PROGRAMAS);
-        onCreate(db);
+        borrarTablas(db);
     }
 
 
@@ -585,4 +458,178 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
         return cursorRs;
     }
 
+    // imagenes programas
+
+    public void addProgramaImage(String idImage, String image) {
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_IDPROG, idImage);
+        values.put(COLUMN_PROGRAMAIMAGEN, image);
+        SQLiteDatabase db = getWritableDatabase();
+        db.insert(TABLA_PROGIMAGENES, null, values);
+        db.close();
+
+    }
+
+    public Cursor imagenPorPrograma(String idProg){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT "+ COLUMN_PROGRAMAIMAGEN +" FROM " + TABLA_PROGIMAGENES + " WHERE "+ COLUMN_IDPROG +" = "+idProg+";";
+        Cursor c = db.rawQuery(query, null);
+
+        if (c != null) {
+            c.moveToFirst();
+        }
+
+        return c;
+    }
+
+    public void crearTablas(SQLiteDatabase db){
+        String queryBanner = "CREATE TABLE " + TABLA_BANNER + "(" +
+                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_URL + " TEXT, " +
+                COLUMN_IMAGEN + " TEXT " +
+
+                ");";
+
+        db.execSQL(queryBanner);
+
+        String queryExpo = "CREATE TABLE " + TABLA_EXPOSITORES + "(" +
+                COLUMN_IDEX + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_JSONEXPOALFABETICO + " TEXT," +
+                COLUMN_JSONEXPONumerico + " TEXT" +
+                ");";
+
+        db.execSQL(queryExpo);
+
+
+        String queryExpoIma = "CREATE TABLE " + TABLA_EXPOSITORESIMAGENES + "(" +
+                COLUMN_IDEXIMA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_IDEXPOSITOR + " TEXT," +
+                COLUMN_EXPOIMAGESTR + " TEXT" +
+                ");";
+
+        db.execSQL(queryExpoIma);
+
+        String queryPatro = "CREATE TABLE " + TABLA_PATROCINADORES + "(" +
+                COLUMN_IDPA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_JSONPATROALFABETICO + " TEXT," +
+                COLUMN_JSONPATRONumerico + " TEXT" +
+                ");";
+
+        db.execSQL(queryPatro);
+
+        String queryPatroIma = "CREATE TABLE " + TABLA_PATROIMAGENES + "(" +
+                COLUMN_IDPATRO + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_IDPATROCINADOR + " TEXT," +
+                COLUMN_PATROIMAGESTR + " TEXT" +
+                ");";
+
+        db.execSQL(queryPatroIma);
+
+        String queryAco = "CREATE TABLE " + TABLA_ACOMPAÑANTE + "(" +
+                COLUMN_IDACO + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_JSONACOMPAÑANTE + " TEXT" +
+                ");";
+
+        db.execSQL(queryAco);
+
+        String queryAcoIma = "CREATE TABLE " + TABLA_ACOMPAÑANTEIMAGENES + "(" +
+                COLUMN_IDACOIMA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_IDACOMPAÑANTES + " TEXT," +
+                COLUMN_ACOMPIMAGESTR + " TEXT" +
+                ");";
+        db.execSQL(queryAcoIma);
+
+
+        String querySocia = "CREATE TABLE " + TABLA_SOCIALDEPO + "(" +
+                COLUMN_IDSOCIADEPO + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_JSONSOCIALDEPORTIVO + " TEXT" +
+                ");";
+
+        db.execSQL(querySocia);
+
+        String querySociaIma = "CREATE TABLE " + TABLA_SOCIALDEPOIMAGENES + "(" +
+                COLUMN_IDSOCIA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_IDSOCIADEPORTIVO + " TEXT," +
+                COLUMN_SOCIALDEPOIMAGESTR + " TEXT" +
+                ");";
+        db.execSQL(querySociaIma);
+
+        String queryCategoria = "CREATE TABLE " + TABLA_CATEGORIAS + "(" +
+                COLUMN_IDCAT+ " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_JSONCATEGORIA + " TEXT" +
+                ");";
+
+        db.execSQL(queryCategoria);
+
+        String queryTrans = "CREATE TABLE " + TABLA_TRANSP+ "(" +
+                COLUMN_IDTRANS+ " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_JSONTRANS + " TEXT" +
+                ");";
+
+        db.execSQL(queryTrans);
+
+        String queryTransIma = "CREATE TABLE " + TABLA_TRANSPOIMAGENES + "(" +
+                COLUMN_IDTRANSRUTA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_IDRUTA + " TEXT," +
+                COLUMN_RUTAIMAGESTR + " TEXT" +
+                ");";
+        db.execSQL(queryTransIma);
+
+        String queryPorgramas = "CREATE TABLE " + TABLA_PROGRAMAS + "(" +
+                COLUMN_IDJPROGRMA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_JSONPROGRAMA + " TEXT" + ");";
+        db.execSQL(queryPorgramas);
+
+        String queryProgImg = "CREATE TABLE " + TABLA_PROGIMAGENES + "(" +
+                COLUMN_IDPROGIMG + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_IDPROG + " TEXT," +
+                COLUMN_PROGRAMAIMAGEN + " TEXT" +
+                ");";
+        db.execSQL(queryProgImg);
+    }
+
+    public void borrarTablas(SQLiteDatabase db){
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_BANNER);
+        onCreate(db);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_EXPOSITORES);
+        onCreate(db);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_EXPOSITORESIMAGENES);
+        onCreate(db);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_PATROCINADORES);
+        onCreate(db);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_PATROIMAGENES);
+        onCreate(db);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_ACOMPAÑANTE);
+        onCreate(db);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_ACOMPAÑANTEIMAGENES);
+        onCreate(db);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_SOCIALDEPO);
+        onCreate(db);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_SOCIALDEPOIMAGENES);
+        onCreate(db);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_CATEGORIAS);
+        onCreate(db);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_TRANSP);
+        onCreate(db);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_TRANSPOIMAGENES);
+        onCreate(db);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_PROGRAMAS);
+        onCreate(db);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_PROGIMAGENES);
+        onCreate(db);
+    }
 }

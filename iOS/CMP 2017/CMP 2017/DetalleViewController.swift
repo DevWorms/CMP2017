@@ -39,6 +39,9 @@ class DetalleViewController: UIViewController {
     var miAgendaEventos = [String: Any]()
     var encontro = 0
     var estaMiagenda = 0
+    var idMapa = 0
+    var urlMapa = ""
+    var tipoMapa = 0
 
     override func viewWillLayoutSubviews(){
         super.viewWillLayoutSubviews()
@@ -132,6 +135,13 @@ class DetalleViewController: UIViewController {
     }
     
     @IBAction func btnUno(_ sender: Any) {
+        
+          self.idMapa = detalle["id"] as! Int
+          self.tipoMapa = 6
+          self.urlMapa = "http://congreso.digital/public-map.php#\(self.idMapa)"
+          self.performSegue(withIdentifier: "webView", sender: nil)
+        
+        
     }
     
     @IBAction func btnDos(_ sender: Any) {
@@ -170,6 +180,22 @@ class DetalleViewController: UIViewController {
                   print("Se agrego a la base")
                  estaMiagenda = 1
             }
+        } else if self.seccion == 5{
+         
+            self.idMapa = detalle["id"] as! Int
+            self.tipoMapa = 6
+            self.urlMapa = "n"
+            if let a = detalle["pdf"] as? [String:Any] {
+                
+                self.urlMapa = a["url"] as! String
+                print ( "url a mandar" + self.urlMapa )
+                
+            }
+            if  self.urlMapa != "n"  {
+                self.performSegue(withIdentifier: "webView", sender: nil)
+            } else {
+                print("no hay nada")
+            }
         }
    
         
@@ -178,6 +204,24 @@ class DetalleViewController: UIViewController {
     
     
     @IBAction func btnTres(_ sender: Any) {
+        self.idMapa = detalle["id"] as! Int
+        self.tipoMapa = 6
+       self.urlMapa = "n"
+        if let a = detalle["pdf"] as? [String:Any] {
+            
+               self.urlMapa = a["url"] as! String
+            print ( "url a mandar" + self.urlMapa )
+            
+        }
+        if  self.urlMapa != "n"  {
+            self.performSegue(withIdentifier: "webView", sender: nil)
+        } else {
+            print("no hay nada")
+        }
+      
+       
+        
+        
     }
     
     @IBAction func menu(_ sender: Any) {
@@ -185,6 +229,17 @@ class DetalleViewController: UIViewController {
         self.present( vc , animated: true, completion: nil)
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        
+        (segue.destination as! MapaSimpleViewController).idMapa = self.idMapa
+        (segue.destination as! MapaSimpleViewController).urlWeb = self.urlMapa
+        (segue.destination as! MapaSimpleViewController).tipoMapa = self.tipoMapa
+        
+       
+        
+    }
     /*
     // MARK: - Navigation
 

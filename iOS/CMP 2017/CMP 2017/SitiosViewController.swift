@@ -58,10 +58,32 @@ class SitiosViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.link.addTarget(self, action: #selector(self.buttonClicked(_:)), for: UIControlEvents.touchUpInside)
         //touch btn
         
+      
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.labelClicked))
+       cell.googlemaps.isUserInteractionEnabled = true
+       cell.googlemaps.tag = indexPath.row
+       cell.googlemaps.addGestureRecognizer(tap)
+   
+        
+        
+        
+        
         return cell
     }
-    func buttonClicked(_ sender:UIButton) {
+    func labelClicked(_ sender:UITapGestureRecognizer) {
      
+        var tag = sender.view!.tag
+        
+        self.urlWeb = (datos[tag]["maps_link"] as! String?)!
+        
+        self.performSegue(withIdentifier: "sitio", sender: nil)
+        
+        
+    }
+    
+    func buttonClicked(_ sender:UIButton) {
+        
         
         self.urlWeb = (datos[sender.tag]["url"] as! String?)!
         

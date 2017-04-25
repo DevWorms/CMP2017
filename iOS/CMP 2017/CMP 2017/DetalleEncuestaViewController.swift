@@ -23,6 +23,9 @@ class DetalleEncuestaViewController: UIViewController {
     var valorRB2 = 1.0
     var valorRB3 = 1.0
     var datos = [[String : Any]]()
+     var alert = UIAlertController()
+    let apiKey = UserDefaults.standard.value(forKey: "api_key")
+    let userID = UserDefaults.standard.value(forKey: "user_id")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -179,9 +182,24 @@ class DetalleEncuestaViewController: UIViewController {
     
     @IBAction func btnCalificar(_ sender: Any) {
         
-        let apiKey = UserDefaults.standard.value(forKey: "api_key")
-        let userID = UserDefaults.standard.value(forKey: "user_id")
+       
         
+        alert = UIAlertController(title: nil, message: "Cargando...", preferredStyle: .alert)
+        alert.view.tintColor = UIColor.black
+        
+        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50)) as UIActivityIndicatorView
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        loadingIndicator.startAnimating()
+        
+        alert.view.addSubview(loadingIndicator)
+        
+        self.present(alert, animated: true, completion: self.inicial)
+        
+        
+    }
+    
+    func inicial()  {
         let parameterString = "user_id=\(userID!)&api_key=\(apiKey!)&encuesta_id=\(self.idEncuesta)&respuesta_1=\(self.valorRB1)&respuesta_2=\(self.valorRB2)&respuesta_3=\(self.valorRB3)"
         
         print(parameterString)
@@ -201,7 +219,7 @@ class DetalleEncuestaViewController: UIViewController {
                                              handler: nil))
             self.present(vc_alert, animated: true, completion: nil)
         }
-        
+
     }
     func parseJsonCalificar(data: Data?, urlResponse: URLResponse?, error: Error?) {
         if error != nil {
@@ -213,13 +231,18 @@ class DetalleEncuestaViewController: UIViewController {
                     if let jsonResult = json as? [String: Any] {
                         
                         DispatchQueue.main.async {
-                            
+                         print("Ya lo envio")
                             let vc_alert = UIAlertController(title: nil, message: jsonResult["mensaje"] as? String, preferredStyle: .alert)
                             vc_alert.addAction(UIAlertAction(title: "OK", style: .cancel , handler: nil))
                             self.present(vc_alert, animated: true, completion: nil)
                             
+                            
+                            
                         }
+                        
+                          self.alert.dismiss(animated: false, completion: nil)
                     }
+                    
                     
                 } else {
                     print("HTTP Status Code: 200")
@@ -230,9 +253,11 @@ class DetalleEncuestaViewController: UIViewController {
                 DispatchQueue.main.async {
                     if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
                         if let jsonResult = json as? [String: Any] {
+                       print("no envio")
                             let vc_alert = UIAlertController(title: nil, message: jsonResult["mensaje"] as? String, preferredStyle: .alert)
                             vc_alert.addAction(UIAlertAction(title: "OK", style: .cancel , handler: nil))
                             self.present(vc_alert, animated: true, completion: nil)
+                                  self.alert.dismiss(animated: false, completion: nil)
                         }
                         
                         
@@ -243,6 +268,7 @@ class DetalleEncuestaViewController: UIViewController {
                 }
             }
         }
+       
         
     }
 

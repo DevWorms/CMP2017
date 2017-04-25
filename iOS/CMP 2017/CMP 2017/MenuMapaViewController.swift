@@ -10,11 +10,14 @@ import UIKit
 
 class MenuMapaViewController: UIViewController {
 
+    
+    var imgs = [Any?]()
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "fondo.png")!)
+         self.imgs = CoreDataHelper.fetchItem(entityName: "MapaRecinto", keyName: "imgMapa")!
         
     }
 
@@ -26,6 +29,15 @@ class MenuMapaViewController: UIViewController {
     @IBAction func menu(_ sender: Any) {
         let vc = storyboard!.instantiateViewController(withIdentifier: "MenuPrincipal")
         self.present( vc , animated: true, completion: nil)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+   
+            (segue.destination as! MapaSimpleViewController).tipoMapa = 5
+        
+            (segue.destination as! MapaSimpleViewController).imgData =  self.imgs[0]
+        
     }
 
     /*

@@ -17,6 +17,8 @@ class EncuestaViewController: UIViewController, UITableViewDataSource, UITableVi
      var idEncuesta1: Int!
     var json:[String : Any] = [:]
     var jsonSelec:[String : Any] = [:]
+    var alert = UIAlertController()
+    var strUrl = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,11 +38,23 @@ class EncuestaViewController: UIViewController, UITableViewDataSource, UITableVi
         let apiKey = UserDefaults.standard.value(forKey: "api_key")
         let userID = UserDefaults.standard.value(forKey: "user_id")
         
-        let strUrl = "http://cmp.devworms.com/api/encuesta/all/\(userID!)/\(apiKey!)"
+        self.strUrl = "http://cmp.devworms.com/api/encuesta/all/\(userID!)/\(apiKey!)"
         print(strUrl)
         
         if Accesibilidad.isConnectedToNetwork() == true {
-            URLSession.shared.dataTask(with: URL(string: strUrl)!, completionHandler: parseJson).resume()
+            alert = UIAlertController(title: nil, message: "Cargando...", preferredStyle: .alert)
+            alert.view.tintColor = UIColor.black
+            
+            let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50)) as UIActivityIndicatorView
+            loadingIndicator.hidesWhenStopped = true
+            loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+            loadingIndicator.startAnimating()
+            
+            alert.view.addSubview(loadingIndicator)
+            
+            self.present(alert, animated: true, completion: self.inicial )
+            
+            
             
         } else {
             let vc_alert = UIAlertController(title: "Sin conexión a internet", message: "Asegúrate de estar conectado a internet.", preferredStyle: .alert)
@@ -49,6 +63,11 @@ class EncuestaViewController: UIViewController, UITableViewDataSource, UITableVi
                                              handler: nil))
             self.present(vc_alert, animated: true, completion: nil)
         }
+    }
+    
+    func inicial()  {
+     
+      URLSession.shared.dataTask(with: URL(string: self.strUrl)!, completionHandler: parseJson).resume()
     }
     
     func parseJson(data: Data?, urlResponse: URLResponse?, error: Error?) {
@@ -66,6 +85,7 @@ class EncuestaViewController: UIViewController, UITableViewDataSource, UITableVi
                         }
                         
                         if let jsonResult = json as? [String: Any] {
+                            self.alert.dismiss(animated: false, completion: nil)
                             for dato in jsonResult["encuestas"] as! [[String:Any]] {
                                 self.datos.append(dato)
                             }
@@ -83,6 +103,7 @@ class EncuestaViewController: UIViewController, UITableViewDataSource, UITableVi
                 DispatchQueue.main.async {
                     if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
                         if let jsonResult = json as? [String: Any] {
+                            self.alert.dismiss(animated: false, completion: nil)
                             let vc_alert = UIAlertController(title: nil, message: jsonResult["mensaje"] as? String, preferredStyle: .alert)
                             vc_alert.addAction(UIAlertAction(title: "OK", style: .cancel , handler: nil))
                             self.present(vc_alert, animated: true, completion: nil)

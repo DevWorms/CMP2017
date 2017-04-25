@@ -865,7 +865,7 @@
                                 </constraints>
                                 <state key="normal" title="Button" image="05Boton_Mapas_del_Recinto"/>
                                 <connections>
-                                    <segue destination="Ike-SW-6Fr" kind="show" id="qYU-wa-L3H"/>
+                                    <action selector="mapaRecinto:" destination="rOA-Ss-ixe" eventType="touchUpInside" id="Dtk-Su-O2f"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kHv-Ks-W2w" customClass="UIButtonWithImageAspectFit" customModule="CMP_2017" customModuleProvider="target">
@@ -875,6 +875,9 @@
                                     <constraint firstAttribute="width" constant="273" id="fqF-RN-1pH"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="04_Boton_Mapa_Expositores"/>
+                                <connections>
+                                    <action selector="mapaExpositor:" destination="rOA-Ss-ixe" eventType="touchUpInside" id="CR6-kx-rAT"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -902,6 +905,9 @@
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <segue destination="Ike-SW-6Fr" kind="show" identifier="webView" id="xQ8-EA-dMz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zvH-bJ-4Mj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -926,7 +932,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1qv-uI-9Rc">
-                                <rect key="frame" x="0.0" y="162" width="375" height="505"/>
+                                <rect key="frame" x="0.0" y="162" width="375" height="461"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
                         </subviews>
@@ -2932,11 +2938,11 @@
         <image name="fondoCMP" width="1242" height="2208"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GJj-eU-EjN"/>
-        <segue reference="rHH-3X-Jaz"/>
-        <segue reference="DNJ-qc-gaL"/>
-        <segue reference="ZdW-HO-l3u"/>
+        <segue reference="eOr-Vk-OFl"/>
         <segue reference="C9o-NW-2zu"/>
         <segue reference="psR-II-8MZ"/>
+        <segue reference="xQ8-EA-dMz"/>
+        <segue reference="ZdW-HO-l3u"/>
+        <segue reference="rHH-3X-Jaz"/>
     </inferredMetricsTieBreakers>
 </document>

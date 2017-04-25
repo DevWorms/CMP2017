@@ -9,7 +9,9 @@
 import UIKit
 
 class MenuMapaViewController: UIViewController {
-
+    var idMapa = 0
+    var urlMapa = ""
+    var tipoMapa = 0
     
     var imgs = [Any?]()
     override func viewDidLoad() {
@@ -30,13 +32,31 @@ class MenuMapaViewController: UIViewController {
         let vc = storyboard!.instantiateViewController(withIdentifier: "MenuPrincipal")
         self.present( vc , animated: true, completion: nil)
     }
+   
+    @IBAction func mapaRecinto(_ sender: UIButton) {
+        
+       
+        self.tipoMapa = 5
+        self.urlMapa = "n"
+        self.performSegue(withIdentifier: "webView", sender: nil)
+      
+    }
+
+    @IBAction func mapaExpositor(_ sender: UIButton) {
+        self.tipoMapa = 6
+        self.urlMapa = "http://congreso.digital/public-map.php"
+        self.performSegue(withIdentifier: "webView", sender: nil)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-   
-            (segue.destination as! MapaSimpleViewController).tipoMapa = 5
-        
+        if segue.identifier == "webView" {
+            print( self.urlMapa)
+            (segue.destination as! MapaSimpleViewController).tipoMapa = self.tipoMapa
+            (segue.destination as! MapaSimpleViewController).urlWeb = self.urlMapa
             (segue.destination as! MapaSimpleViewController).imgData =  self.imgs[0]
+        }
         
     }
 

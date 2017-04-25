@@ -165,11 +165,24 @@ public class DetalleExpoFragment extends Fragment {
     }
     class Localizar implements View.OnClickListener {
         public void onClick(View v) {
+            Fragment fragment = new ClimaFragment();
 
-            Toast.makeText(getActivity(),"Próximamente",Toast.LENGTH_SHORT).show();
-            /*getFragmentManager().beginTransaction()
-                    .replace(R.id.actividad, new MapaFragment()).addToBackStack(null).commit();*/
+            Bundle parametro = new Bundle();
 
+
+            parametro.putString("url","http://congreso.digital/public-map.php#"+expoId);
+            parametro.putString("tipo","3");
+
+
+            fragment.setArguments(parametro);
+
+            final FragmentTransaction ft = getActivity().getFragmentManager()
+                    .beginTransaction();
+            ft.replace(R.id.actividad, fragment, "tag");
+
+            ft.addToBackStack("tag");
+
+            ft.commit();
 
         }
     }

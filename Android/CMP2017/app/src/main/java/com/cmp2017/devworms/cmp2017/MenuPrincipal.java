@@ -203,7 +203,9 @@ public class MenuPrincipal extends AppCompatActivity
 
             }else{
 
-                Toast.makeText(MenuPrincipal.this,"Próximamente",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MenuPrincipal.this,"Próximamente",Toast.LENGTH_SHORT).show();
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.actividad, new NotificacionFragment()).commit();
 
 
             }

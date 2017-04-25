@@ -183,7 +183,7 @@ public class Updates extends Activity implements View.OnClickListener {
                     updatePatrocinadores();
                 }else if(modulo == 6){ //Programas
                     updateCategorias();
-                    updateProramas();
+                    updateProgramas();
                 }else if(modulo == 7){ // Rutas / Transportación
                     updateTransportacion();
                 }else if(modulo == 8){ // Eventos Sociales y Deportivos
@@ -191,7 +191,7 @@ public class Updates extends Activity implements View.OnClickListener {
                 }else if(modulo == 9){ // Conoce Puebla, teléfonos
                     // code here
                 }else if(modulo == 10){ // Conoce Puebla, sitios interes
-                    // code here
+                    updateSitiosPuebla();
                 }
             }
 
@@ -533,12 +533,57 @@ public class Updates extends Activity implements View.OnClickListener {
         }
     }
 
-    public void updateProramas (){
+    public void updateProgramas (){
         String fromUrlPrograma = "http://cmp.devworms.com/api/programa/all/" + userId + "/" + apiKey + "";
         JSONParser jspPrograma = new JSONParser();
         String strProgramas = jspPrograma.makeHttpRequest(fromUrlPrograma, "GET", fromUrlPrograma, "");
         dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
+        Log.e("JSONPROGRAMAS",strProgramas);
         dbHandlerOffline.addJsonProgramas(strProgramas);
+
+        try{
+            JSONObject jProgramas = new JSONObject(strProgramas);
+            String strProg = jProgramas.getString("programas");
+            JSONArray aProgramas = new JSONArray(strProg);
+            for(int c = 0; c < aProgramas.length() ; c++){
+                try {
+                    JSONObject programa = aProgramas.getJSONObject(c);
+
+                    String strFoto = programa.getString("foto");
+
+                    JSONObject jFoto = new JSONObject(strFoto);
+
+                    urlImage = jFoto.getString("url");
+
+                    imageUrl = new URL(urlImage);
+                    conn = (HttpURLConnection) imageUrl.openConnection();
+                    conn.connect();
+
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
+
+                    expoImg = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
+                    ImageDecoExpo = getBytes(expoImg);
+
+                    dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
+                    SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
+
+                    String idProgImge = programa.getString("id");
+
+                    dbHandlerOffline.addProgramaImage(idProgImge, ImageDecoExpo);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }catch(JSONException jex){
+            Log.e("DescargaPrograma", jex.getMessage());
+        }
+
     }
 
     public void updatePatrocinadores(){
@@ -632,6 +677,57 @@ public class Updates extends Activity implements View.OnClickListener {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public void updateSitiosPuebla(){
+        String fromUrlSitio = "http://cmp.devworms.com/api/puebla/sitio/all/"+userId+"/"+apiKey+"";
+        JSONParser jspSitio = new JSONParser();
+        String strSitio = jspSitio.makeHttpRequest(fromUrlSitio, "GET", fromUrlSitio, "");
+        dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
+        Log.e("JSONSITIOS",strSitio);
+        dbHandlerOffline.addJsonSitiosPuebla(strSitio);
+        try{
+            JSONObject jSitios = new JSONObject(strSitio);
+            String strSit = jSitios.getString("sitios");
+            JSONArray aSitios = new JSONArray(strSit);
+            for(int c = 0; c < aSitios.length() ; c++){
+                try {
+                    JSONObject sitio = aSitios.getJSONObject(c);
+
+                    String strFoto = sitio.getString("imagen");
+
+                    JSONObject jFoto = new JSONObject(strFoto);
+
+                    urlImage = jFoto.getString("url");
+
+                    imageUrl = new URL(urlImage);
+                    conn = (HttpURLConnection) imageUrl.openConnection();
+                    conn.connect();
+
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
+
+                    expoImg = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
+                    ImageDecoExpo = getBytes(expoImg);
+
+                    dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
+                    SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
+
+                    String idProgImge = sitio.getString("id");
+
+                    dbHandlerOffline.addImgeSitio(idProgImge, ImageDecoExpo);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }catch(JSONException jex){
+            Log.e("DescargaPrograma", jex.getMessage());
         }
     }
 

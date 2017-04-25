@@ -5,6 +5,8 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -15,6 +17,8 @@ import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +30,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.internal.bind.ArrayTypeAdapter;
+import com.loopj.android.http.Base64;
 import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -95,20 +100,52 @@ public class ListAdapterAgenda extends ArrayAdapter<AgendaModel> {
         this.descripcionAgenda.setText(this.rowsAgenda.get(position).getNombreEvento());
         this.horarioAgenda.setText(this.rowsAgenda.get(position).getHorarioEvento());
 
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this.actividad)
-                .discCacheFileNameGenerator(new HashCodeFileNameGenerator())
-                .build();
 
-        DisplayImageOptions options = new DisplayImageOptions.Builder()
-                .displayer(new RoundedBitmapDisplayer(350)) //rounded corner bitmap
-                .cacheInMemory(true)
-                .cacheOnDisc(true)
-                .build();
+        AdminSQLiteOffline dbHandler;
+        dbHandler = new AdminSQLiteOffline(actividad, null, null, 1);
+        SQLiteDatabase db = dbHandler.getWritableDatabase();
+        Cursor cImg;
+        if(rowsAgenda.get(posicionGeneral).getTipoEvento().equals("social")){
+            cImg = dbHandler.ImagenPorIdSocialDepo(rowsAgenda.get(posicionGeneral).getIdEvento());
+            if(cImg.getCount() > 0){
+                Bitmap   originalBitmap  = getImage(cImg.getString(0));
+                //creamos el drawable redondeado
+                RoundedBitmapDrawable roundedDrawable =
+                        RoundedBitmapDrawableFactory.create(actividad.getResources(), originalBitmap);
 
-        ImageLoader imageLoader = ImageLoader.getInstance();
-        imageLoader.init(config);
-        imageLoader.displayImage(this.rowsAgenda.get(position).getUrlImagen(),this.miniatura, options);
+                //asignamos el CornerRadius
+                roundedDrawable.setCornerRadius(originalBitmap.getHeight());
+                roundedDrawable.setCircular(true);
+                this.miniatura.setImageDrawable(roundedDrawable);
+            }
 
+        }else if(rowsAgenda.get(posicionGeneral).getTipoEvento().equals("programas")){
+            cImg = dbHandler.imagenPorPrograma(rowsAgenda.get(posicionGeneral).getIdEvento());
+            if(cImg.getCount() > 0){
+                Bitmap   originalBitmap  = getImage(cImg.getString(0));
+                //creamos el drawable redondeado
+                RoundedBitmapDrawable roundedDrawable =
+                        RoundedBitmapDrawableFactory.create(actividad.getResources(), originalBitmap);
+
+                //asignamos el CornerRadius
+                roundedDrawable.setCornerRadius(originalBitmap.getHeight());
+                roundedDrawable.setCircular(true);
+                this.miniatura.setImageDrawable(roundedDrawable);
+            }
+        }else if(rowsAgenda.get(posicionGeneral).getTipoEvento().equals("acomp")){
+            cImg = dbHandler.ImagenPorIdAco(rowsAgenda.get(posicionGeneral).getIdEvento());
+            if(cImg.getCount() > 0){
+                Bitmap   originalBitmap  = getImage(cImg.getString(0));
+                //creamos el drawable redondeado
+                RoundedBitmapDrawable roundedDrawable =
+                        RoundedBitmapDrawableFactory.create(actividad.getResources(), originalBitmap);
+
+                //asignamos el CornerRadius
+                roundedDrawable.setCornerRadius(originalBitmap.getHeight());
+                roundedDrawable.setCircular(true);
+                this.miniatura.setImageDrawable(roundedDrawable);
+            }
+        }
         // asignamos el evento onclick para que lleve al detalle
         formato.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,6 +175,10 @@ public class ListAdapterAgenda extends ArrayAdapter<AgendaModel> {
 
         return formato;
     }
-
+    public static Bitmap getImage(String imageS) {
+        byte[] b = Base64.decode(imageS , Base64.DEFAULT);
+        Bitmap bmp = BitmapFactory.decodeByteArray(b, 0, b.length);
+        return  bmp;
+    }
 
 }

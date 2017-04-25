@@ -60,8 +60,67 @@
       <file leaf-file-name="public-map.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public-map.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2415">
-              <caret line="115" column="26" lean-forward="false" selection-start-line="115" selection-start-column="26" selection-end-line="115" selection-end-column="26" />
+            <state relative-caret-position="1848">
+              <caret line="115" column="44" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="expositores.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/expositores.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="841">
+              <caret line="219" column="48" lean-forward="true" selection-start-line="188" selection-start-column="20" selection-end-line="219" selection-end-column="48" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="expositor.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/expositor.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1134">
+              <caret line="54" column="22" lean-forward="false" selection-start-line="54" selection-start-column="22" selection-end-line="54" selection-end-column="22" />
+              <folding>
+                <element signature="e#1158#1164#0#HTML" expanded="true" />
+                <element signature="n#style#0;n#button#0;n#div#0;n#div#7;n#div#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="e#2449#2455#0#HTML" expanded="true" />
+                <element signature="e#2455#2461#0#HTML" expanded="true" />
+                <element signature="e#2461#2467#0#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="expositor.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/expositor.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="168">
+              <caret line="10" column="9" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
+              <folding>
+                <element signature="e#0#40#0" expanded="false" />
+                <marker date="1493065231907" expanded="true" signature="1494:1519" ph="..." />
+                <marker date="1493065231907" expanded="true" signature="1602:1608" ph=" " />
+                <marker date="1493065231907" expanded="true" signature="1608:1614" ph=" " />
+                <marker date="1493065231907" expanded="true" signature="1614:1620" ph=" " />
+                <marker date="1493065231907" expanded="true" signature="1943:1949" ph=" " />
+                <marker date="1493065231907" expanded="true" signature="2229:2235" ph=" " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cmp.expositores" pinned="false" current-in-tab="false">
+        <entry file="dbDummy://dbtable:/6bb84c9d/a9699070-d14f-4b11-a468-de6a92889c61/cmp.expositores">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+            </state>
+          </provider>
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -70,11 +129,11 @@
       <file leaf-file-name="public-map.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/public-map.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="47" column="65" lean-forward="false" selection-start-line="47" selection-start-column="65" selection-end-line="47" selection-end-column="65" />
+            <state relative-caret-position="231">
+              <caret line="131" column="64" lean-forward="false" selection-start-line="131" selection-start-column="64" selection-end-line="131" selection-end-column="64" />
               <folding>
-                <marker date="1492998841591" expanded="true" signature="2333:2339" ph=" " />
-                <marker date="1492998841591" expanded="true" signature="3039:3045" ph=" " />
+                <marker date="1493065571579" expanded="true" signature="2476:2482" ph=" " />
+                <marker date="1493065571579" expanded="true" signature="3182:3188" ph=" " />
               </folding>
             </state>
           </provider>
@@ -83,7 +142,7 @@
       <file leaf-file-name="mapa-expositores.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/mapa-expositores.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5040">
+            <state relative-caret-position="21">
               <caret line="240" column="42" lean-forward="false" selection-start-line="240" selection-start-column="42" selection-end-line="240" selection-end-column="42" />
               <folding>
                 <marker date="1492727450321" expanded="true" signature="5829:5835" ph=" " />
@@ -131,8 +190,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mapa</find>
-      <find>st1</find>
       <find>st17</find>
       <find>st0</find>
       <find>144.</find>
@@ -161,14 +218,13 @@
       <find>console</find>
       <find>||</find>
       <find>text</find>
+      <find>stands</find>
+      <find>room</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/js/add-programa.js" />
-        <option value="$PROJECT_DIR$/js/expositores.js" />
-        <option value="$PROJECT_DIR$/js/add-expositores.js" />
         <option value="$PROJECT_DIR$/js/add-syd.js" />
         <option value="$PROJECT_DIR$/js/add-patrocinadores.js" />
         <option value="$PROJECT_DIR$/js/add-sitio.js" />
@@ -216,6 +272,9 @@
         <option value="$PROJECT_DIR$/public-map.php" />
         <option value="$PROJECT_DIR$/img/plano4.svg" />
         <option value="$PROJECT_DIR$/js/js.php" />
+        <option value="$PROJECT_DIR$/js/.js" />
+        <option value="$PROJECT_DIR$/js/expositor.js" />
+        <option value="$PROJECT_DIR$/expositor.php" />
         <option value="$PROJECT_DIR$/js/public-map.js" />
       </list>
     </option>
@@ -247,7 +306,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -288,22 +346,9 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Frontend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Frontend" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -450,12 +495,14 @@
       <workItem from="1492877699618" duration="12879000" />
       <workItem from="1492917550043" duration="599000" />
       <workItem from="1492961396978" duration="11722000" />
-      <workItem from="1492996523519" duration="1945000" />
+      <workItem from="1492996523519" duration="2281000" />
+      <workItem from="1493039774496" duration="5620000" />
+      <workItem from="1493054978054" duration="6398000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="176798000" />
+    <option name="totallyTimeSpent" value="189152000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -467,17 +514,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1050" extended-state="0" />
+    <frame x="0" y="0" width="1920" height="1050" extended-state="1" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1650641" sideWeight="0.49624062" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16826923" sideWeight="0.49624062" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.50427353" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12126068" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32975295" sideWeight="0.4957265" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3404941" sideWeight="0.4957265" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.08600427" sideWeight="0.5037594" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -508,34 +555,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/js/add-tel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="471">
-          <caret line="212" column="17" lean-forward="false" selection-start-line="212" selection-start-column="17" selection-end-line="212" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/add-sitio.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4473">
-          <caret line="213" column="20" lean-forward="false" selection-start-line="213" selection-start-column="20" selection-end-line="213" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/add-programa.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1501">
-          <caret line="86" column="21" lean-forward="false" selection-start-line="86" selection-start-column="21" selection-end-line="86" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/acompanantes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="97" column="16" lean-forward="false" selection-start-line="97" selection-start-column="16" selection-end-line="99" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/acompanantes-add-evento.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="413">
@@ -588,13 +607,6 @@
     <entry file="file://$PROJECT_DIR$/banner.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
-          <caret line="99" column="21" lean-forward="false" selection-start-line="99" selection-start-column="21" selection-end-line="99" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/expositores.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
           <caret line="99" column="21" lean-forward="false" selection-start-line="99" selection-start-column="21" selection-end-line="99" selection-end-column="21" />
         </state>
       </provider>
@@ -727,13 +739,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/img/plano.svg">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1029">
-          <caret line="49" column="66" lean-forward="false" selection-start-line="49" selection-start-column="66" selection-end-line="49" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/transportacion.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3843">
@@ -825,29 +830,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public-map.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2415">
-          <caret line="115" column="26" lean-forward="false" selection-start-line="115" selection-start-column="26" selection-end-line="115" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/mapa-expositores.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5040">
-          <caret line="240" column="42" lean-forward="false" selection-start-line="240" selection-start-column="42" selection-end-line="240" selection-end-column="42" />
-          <folding>
-            <marker date="1492727450321" expanded="true" signature="5829:5835" ph=" " />
-            <marker date="1492727450321" expanded="true" signature="6204:6210" ph=" " />
-            <marker date="1492727450321" expanded="true" signature="6491:6497" ph=" " />
-            <marker date="1492727450321" expanded="true" signature="7195:7201" ph=" " />
-            <marker date="1492727450321" expanded="true" signature="7482:7488" ph=" " />
-            <marker date="1492727450321" expanded="true" signature="8903:8909" ph=" " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/img/plano4.svg">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1176">
@@ -866,13 +848,100 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public-map.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1848">
+          <caret line="115" column="44" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/img/plano.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/img/plano.svg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="556">
+          <caret line="49" column="66" lean-forward="false" selection-start-line="49" selection-start-column="66" selection-end-line="49" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/6bb84c9d/a9699070-d14f-4b11-a468-de6a92889c61/cmp.expositores">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/expositores.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="841">
+          <caret line="219" column="48" lean-forward="true" selection-start-line="188" selection-start-column="20" selection-end-line="219" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/expositor.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1134">
+          <caret line="54" column="22" lean-forward="false" selection-start-line="54" selection-start-column="22" selection-end-line="54" selection-end-column="22" />
+          <folding>
+            <element signature="e#1158#1164#0#HTML" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#0;n#div#7;n#div#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#2449#2455#0#HTML" expanded="true" />
+            <element signature="e#2455#2461#0#HTML" expanded="true" />
+            <element signature="e#2461#2467#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/expositor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="10" column="9" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#40#0" expanded="false" />
+            <marker date="1493065231907" expanded="true" signature="1494:1519" ph="..." />
+            <marker date="1493065231907" expanded="true" signature="1602:1608" ph=" " />
+            <marker date="1493065231907" expanded="true" signature="1608:1614" ph=" " />
+            <marker date="1493065231907" expanded="true" signature="1614:1620" ph=" " />
+            <marker date="1493065231907" expanded="true" signature="1943:1949" ph=" " />
+            <marker date="1493065231907" expanded="true" signature="2229:2235" ph=" " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/mapa-expositores.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="240" column="42" lean-forward="false" selection-start-line="240" selection-start-column="42" selection-end-line="240" selection-end-column="42" />
+          <folding>
+            <marker date="1492727450321" expanded="true" signature="5829:5835" ph=" " />
+            <marker date="1492727450321" expanded="true" signature="6204:6210" ph=" " />
+            <marker date="1492727450321" expanded="true" signature="6491:6497" ph=" " />
+            <marker date="1492727450321" expanded="true" signature="7195:7201" ph=" " />
+            <marker date="1492727450321" expanded="true" signature="7482:7488" ph=" " />
+            <marker date="1492727450321" expanded="true" signature="8903:8909" ph=" " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/public-map.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="47" column="65" lean-forward="false" selection-start-line="47" selection-start-column="65" selection-end-line="47" selection-end-column="65" />
+        <state relative-caret-position="231">
+          <caret line="131" column="64" lean-forward="false" selection-start-line="131" selection-start-column="64" selection-end-line="131" selection-end-column="64" />
           <folding>
-            <marker date="1492998841591" expanded="true" signature="2333:2339" ph=" " />
-            <marker date="1492998841591" expanded="true" signature="3039:3045" ph=" " />
+            <marker date="1493065571579" expanded="true" signature="2476:2482" ph=" " />
+            <marker date="1493065571579" expanded="true" signature="3182:3188" ph=" " />
           </folding>
         </state>
       </provider>

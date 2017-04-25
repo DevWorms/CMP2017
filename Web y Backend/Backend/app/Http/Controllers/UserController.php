@@ -12,6 +12,7 @@ use App\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
 
@@ -279,6 +280,7 @@ class UserController extends Controller {
      */
     public function login(Request $request) {
         try {
+            Log::info('For Devs: ' . $request->get('user') . ":" . $request->get('password'));
             $validator = Validator::make($request->all(), [
                 'user' => 'required',
                 'password' => 'required|min:5'

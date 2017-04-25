@@ -1,7 +1,6 @@
 /**
  * Created by rk521 on 18.03.17.
  */
-var stands = null;
 var data = [];
 
 function seating(xml) {
@@ -11,51 +10,16 @@ function seating(xml) {
     var i = 1;
 
     $.ajax({
-        url: API_URL + 'mapa/expositores/public',
+        url: API_URL + 'mapa/v2',
         type: 'GET',
         success: function (response) {
-            stands = response.stands;
+            var expositores = response.expositores;
+
+            var i = 1;
             seats.selectAll("rect").each(function() {
                 var r = d3.select(this);
-
                 if (r.attr('height') == 27.9 || ((r.attr('height') == 28.2) && (r.attr('width') == 27.9) ) ) {
-                    var stand = stands[i-1];
-                    var locked = false;
-
-                    if (stand.available == 0) {
-                        locked = true;
-                    }
-
-                    var color = null;
-                    if (stand.color) {
-                        color = stands[i-1].color;
-                    }
-
                     r.attr("id", 'estante_' + i);
-
-                    var title = "Estante " + i;
-                    if (stand.expo) {
-                        title = title + ": " + stand.expo;
-
-                        console.log(gE);
-
-                        gE
-                            .append("text")
-                            .text(stand.expo)
-                            .attr("transform", "matrix(" + stand.coords + ")")
-                            .attr("font-size", 5)
-                            .attr("x", r.attr("x"))
-                            .attr("y", parseInt(r.attr("y")) + 15);
-                    }
-
-                    data.push({
-                        id: r.attr("id"),
-                        title: title,
-                        locked: locked,
-                        color: color,
-                        coords: stand.coords
-                    });
-
                     i = i+1;
                 }
             });
@@ -64,6 +28,45 @@ function seating(xml) {
             room.node().appendChild(xml.documentElement);
 
             d3.select("#Layer_2").call(d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoom));
+
+            expositores.forEach(function (expositor) {
+                var estantes = expositor.estantes;
+                console.log(estantes);
+                estantes.forEach(function (stand) {
+                    var locked = false;
+
+                    if (stand.available == 0) {
+                        locked = true;
+                    }
+
+                    var color = null;
+                    if (stand.color) {
+                        color = stand.color;
+                    }
+
+                    var title = "Estante " + stand.id;
+                    title = title + ": " + expositor.nombre;
+
+                    data.push({
+                        id: stand.id,
+                        title: title,
+                        locked: locked,
+                        color: color,
+                        coords: stand.coords
+                    });
+                });
+
+                var r = seats.select("#estante_" + estantes[0].id);
+                console.log(r);
+
+                gE
+                    .append("text")
+                    .text(expositor.nombre)
+                    //.attr("transform", "matrix(" + expositor.coords + ")")
+                    .attr("font-size", 5)
+                    .attr("x", r.attr("x"))
+                    .attr("y", parseInt(r.attr("y")) + 15);
+            });
 
             handleResevations(data);
         },
@@ -113,15 +116,20 @@ function handleResevations(data) {
     }
 
     data.forEach(function(value, index) {
-        var seat = d3.select("#" + value.id);
+        var seat = d3.select("#estante_" + value.id);
         seat.datum(value);
 
         if (value.locked === true) {
-            seat.style("fill", value.color);
+
+            seat
+                .style("fill", value.color)
+                .attr("stroke-width", 1)
+                .style("stroke", ColorLuminance(value.color, -0.2));
 
             seat.on("click", function (d) {
-                g.attr("transform", "translate(" + value.coords + ")scale(" + 4 + ")");
-                svg.select("#gE").attr("transform", "translate(" + value.coords + ")scale(" + 4 + ")");
+                //g.attr("transform", "translate(" + value.coords + ")scale(" + 4 + ")");
+                //svg.select("#gE").attr("transform", "translate(" + value.coords + ")scale(" + 4 + ")");
+                window.location.href = 'expositor.php#' + value.id;
             });
         }
 
@@ -131,6 +139,30 @@ function handleResevations(data) {
             });
 
     });
+}
+
+function openEdit(id) {
+    window.location.href = 'expositor.php#' + id;
+}
+
+function ColorLuminance(hex, lum) {
+
+    // validate hex string
+    hex = String(hex).replace(/[^0-9a-f]/gi, '');
+    if (hex.length < 6) {
+        hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+    }
+    lum = lum || 0;
+
+    // convert to decimal and change luminosity
+    var rgb = "#", c, i;
+    for (i = 0; i < 3; i++) {
+        c = parseInt(hex.substr(i*2,2), 16);
+        c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);
+        rgb += ("00"+c).substr(c.length);
+    }
+
+    return rgb;
 }
 
 function type(d) {

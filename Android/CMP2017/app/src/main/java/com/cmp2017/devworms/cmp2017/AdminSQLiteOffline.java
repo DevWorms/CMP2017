@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by mac on 07/04/17.
@@ -76,14 +77,23 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
     public static final String COLUMN_IDJPROGRMA= "idPrograma";
     public static final String COLUMN_JSONPROGRAMA= "jsonProgramas";
 
-    // TABLA PARA IMAGENES
+    // TABLA PARA IMAGENES PROGRAMA
     public static final String TABLA_PROGIMAGENES = "ProgramaImagenes";
     public static final String COLUMN_IDPROGIMG = "_id";
-    public static final String COLUMN_IDPROG = "idRuta";
+    public static final String COLUMN_IDPROG = "idProg";
     public static final String COLUMN_PROGRAMAIMAGEN = "imagePrograma";
 
 
+    // TABLA SITIOS INTERES PUEBLA
+    public static final String TABLA_SITIOSPUEBLA = "StiosInteres";
+    public static final String COLUMN_IDJSTIOS= "idJsitios";
+    public static final String COLUMN_JSONSITIOS= "jsonSitios";
 
+    // TABLA PARA IMAGENES SITIOS PUEBLA
+    public static final String TABLA_SITIOIMAGENES = "SitiosImagen";
+    public static final String COLUMN_IDSITIOIMG= "_id";
+    public static final String COLUMN_IDSITIO = "idSitio";
+    public static final String COLUMN_SITIOIMAGEN = "imageSitio";
 
     public AdminSQLiteOffline(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
@@ -483,6 +493,56 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
         return c;
     }
 
+
+    // ** SITIOS PUEBLA
+
+    public void addJsonSitiosPuebla(String jsonSitios){
+        Log.e("BASESITIO",jsonSitios);
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_JSONSITIOS, jsonSitios);
+        SQLiteDatabase db = getWritableDatabase();
+        db.insert(TABLA_SITIOSPUEBLA, null, values);
+        db.close();
+    }
+
+    public Cursor getJsonSitiosPuebla(){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT "+COLUMN_JSONSITIOS+" FROM " + TABLA_SITIOSPUEBLA + " ;";
+        Cursor cursorRs = db.rawQuery(query, null);
+
+        if (cursorRs != null) {
+            cursorRs.moveToFirst();
+        }
+
+        return cursorRs;
+    }
+
+    // ** IMAGENES SITIOS PUEBLA
+
+    public void addImgeSitio(String idImage, String image) {
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_IDSITIO, idImage);
+        values.put(COLUMN_SITIOIMAGEN, image);
+        SQLiteDatabase db = getWritableDatabase();
+        db.insert(TABLA_SITIOIMAGENES, null, values);
+        db.close();
+
+    }
+
+    public Cursor imagenPorSitio(String idSitio){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT "+ COLUMN_SITIOIMAGEN +" FROM " + TABLA_SITIOIMAGENES + " WHERE "+ COLUMN_IDSITIO +" = "+idSitio+";";
+        Cursor c = db.rawQuery(query, null);
+
+        if (c != null) {
+            c.moveToFirst();
+        }
+
+        return c;
+    }
+
+
     public void crearTablas(SQLiteDatabase db){
         String queryBanner = "CREATE TABLE " + TABLA_BANNER + "(" +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -587,6 +647,19 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
                 COLUMN_PROGRAMAIMAGEN + " TEXT" +
                 ");";
         db.execSQL(queryProgImg);
+
+        String querySitios = "CREATE TABLE " + TABLA_SITIOSPUEBLA + "(" +
+                COLUMN_IDJSTIOS + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_JSONSITIOS + " TEXT" + ");";
+
+        db.execSQL(querySitios);
+
+        String querySitioImg = "CREATE TABLE " + TABLA_SITIOIMAGENES + "(" +
+                COLUMN_IDSITIOIMG + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_IDSITIO + " TEXT," +
+                COLUMN_SITIOIMAGEN + " TEXT" +
+                ");";
+        db.execSQL(querySitioImg);
     }
 
     public void borrarTablas(SQLiteDatabase db){
@@ -631,5 +704,12 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
 
         db.execSQL("DROP TABLE IF EXISTS " + TABLA_PROGIMAGENES);
         onCreate(db);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_SITIOSPUEBLA);
+        onCreate(db);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_SITIOIMAGENES);
+        onCreate(db);
+
     }
 }

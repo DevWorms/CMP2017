@@ -6,6 +6,8 @@ import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
@@ -26,6 +28,8 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.loopj.android.http.Base64;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,31 +43,32 @@ import java.util.HashMap;
 public class SitiosInteresFragment extends Fragment
 
 {
-    String  pagianweb, nombre, userId, apiKey, resp,urlImage;
-    String []  idAr, nameAr, descrpAr,mapaAr, paginaAr;
+    String pagianweb, nombre, userId, apiKey, resp, urlImage;
+    String[] idAr, nameAr, descrpAr, mapaAr, paginaAr;
     ProgressDialog pDialog;
     ListView lista;
     int nume;
     ArrayList<HashMap<String, Object>> albumsList;
-    String [] linksMaps;
+    String[] linksMaps;
     ImageView imgFoto;
-    URL imageUrl ;
-    Bitmap []imagen;
+    URL imageUrl;
+    Bitmap[] imagen;
     HttpURLConnection conn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sitios_interes, container, false);
-        lista=  (ListView) view.findViewById(R.id.lvLista);
+        lista = (ListView) view.findViewById(R.id.lvLista);
         SharedPreferences sp = getActivity().getSharedPreferences("prefe", Activity.MODE_PRIVATE);
-        apiKey = sp.getString("APIkey","");
-        userId = sp.getString("IdUser","");
-        new getListaSitios().execute();
-
+        apiKey = sp.getString("APIkey", "");
+        userId = sp.getString("IdUser", "");
+        //new getListaSitios().execute();
+        loadSitios();
         return view;
 
 
     }
+
     class SitiosInteres implements View.OnClickListener {
         public void onClick(View v) {
 
@@ -88,6 +93,7 @@ public class SitiosInteresFragment extends Fragment
 
         }
     }
+
     class getListaSitios extends AsyncTask<String, String, String> {
 
         /**
@@ -109,10 +115,10 @@ public class SitiosInteresFragment extends Fragment
         protected String doInBackground(String... args) {
             // Building Parameters
             //add your data
-            String body= "";
+            String body = "";
 
 
-                body = "http://cmp.devworms.com/api/puebla/sitio/all/"+userId+"/"+apiKey+"";
+            body = "http://cmp.devworms.com/api/puebla/sitio/all/" + userId + "/" + apiKey + "";
 
             JSONParser jsp = new JSONParser();
 
@@ -124,9 +130,7 @@ public class SitiosInteresFragment extends Fragment
                     JSONObject json = new JSONObject(respuesta);
                     String elemBus = "";
 
-                        elemBus = json.getString("sitios");
-
-
+                    elemBus = json.getString("sitios");
 
 
                     JSONArray jsonProgramas = new JSONArray(elemBus);
@@ -134,7 +138,7 @@ public class SitiosInteresFragment extends Fragment
                     int cuanto = jsonProgramas.length();
                     albumsList = new ArrayList<HashMap<String, Object>>();
                     Log.d("ListadoProgra : ", "> " + cuanto);
-                    String actFecha="";
+                    String actFecha = "";
                     linksMaps = new String[jsonProgramas.length()];
                     idAr = new String[jsonProgramas.length()];
                     nameAr = new String[jsonProgramas.length()];
@@ -147,14 +151,12 @@ public class SitiosInteresFragment extends Fragment
                         JSONObject c = jsonProgramas.getJSONObject(i);
 
 
-
-
                         // Storing each json item values in variable
-                         idAr[i] = c.getString("id");
-                         nameAr[i] = c.getString("titulo");
-                         descrpAr[i] = c.getString("descripcion");
-                         mapaAr[i] = c.getString("maps_link");
-                         paginaAr[i] = c.getString("url");
+                        idAr[i] = c.getString("id");
+                        nameAr[i] = c.getString("titulo");
+                        descrpAr[i] = c.getString("descripcion");
+                        mapaAr[i] = c.getString("maps_link");
+                        paginaAr[i] = c.getString("url");
                         String urlImageJson = c.getString("imagen");
 
                         JSONObject jsonImagen = new JSONObject(urlImageJson);
@@ -163,7 +165,7 @@ public class SitiosInteresFragment extends Fragment
                         linksMaps[i] = mapaAr[i];
 
 
-                        mostrarImagen(urlImage,i);
+                        mostrarImagen(urlImage, i);
 
 
                         Log.d("sitioImage : ", "> " + imagen.toString());
@@ -194,8 +196,8 @@ public class SitiosInteresFragment extends Fragment
             // dismiss the dialog after getting all albums
             Log.d("Login : ", "> " + resp);
             pDialog.dismiss();
-            if (resp.equals("ok") ) {
-                ListAdapterCustom adapter=new ListAdapterCustom(getActivity(),nameAr,descrpAr,mapaAr,paginaAr,imagen);
+            if (resp.equals("ok")) {
+                ListAdapterCustom adapter = new ListAdapterCustom(getActivity(), nameAr, descrpAr, mapaAr, paginaAr, imagen);
 
                 // updating listview
 
@@ -208,7 +210,7 @@ public class SitiosInteresFragment extends Fragment
         }
     }
 
-    public void mostrarImagen(String url, int cont){
+    public void mostrarImagen(String url, int cont) {
 
 
         try {
@@ -223,12 +225,95 @@ public class SitiosInteresFragment extends Fragment
             imagen[cont] = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
 
 
-
         } catch (IOException e) {
 
             e.printStackTrace();
 
         }
 
+    }
+
+    public void loadSitios() {
+        AdminSQLiteOffline dbHandler;
+        String respuesta = "";
+        JSONObject tempEventos;
+        JSONArray detalles;
+        String cualDetalle = "";
+        dbHandler = new AdminSQLiteOffline(getActivity(), null, null, 1);
+        SQLiteDatabase db = dbHandler.getWritableDatabase();
+        Cursor cImg;
+        Cursor cursor = dbHandler.getJsonSitiosPuebla();
+        respuesta = cursor.getString(0);
+        Log.e("RESPUESTASITIO",respuesta);
+        if (respuesta != "error") {
+            try {
+                JSONObject json = new JSONObject(respuesta);
+                String elemBus = "";
+
+                elemBus = json.getString("sitios");
+                Log.e("RESPUESTASITIO",elemBus);
+
+                JSONArray jsonProgramas = new JSONArray(elemBus);
+
+                int cuanto = jsonProgramas.length();
+                albumsList = new ArrayList<HashMap<String, Object>>();
+                String actFecha = "";
+                linksMaps = new String[jsonProgramas.length()];
+                idAr = new String[jsonProgramas.length()];
+                nameAr = new String[jsonProgramas.length()];
+                descrpAr = new String[jsonProgramas.length()];
+                paginaAr = new String[jsonProgramas.length()];
+                imagen = new Bitmap[jsonProgramas.length()];
+                mapaAr = new String[jsonProgramas.length()];
+                // looping through All albums
+                for (int i = 0; i < jsonProgramas.length(); i++) {
+                    JSONObject c = jsonProgramas.getJSONObject(i);
+
+
+                    // Storing each json item values in variable
+                    idAr[i] = c.getString("id");
+                    nameAr[i] = c.getString("titulo");
+                    descrpAr[i] = c.getString("descripcion");
+                    mapaAr[i] = c.getString("maps_link");
+                    paginaAr[i] = c.getString("url");
+                    String urlImageJson = c.getString("imagen");
+
+                    JSONObject jsonImagen = new JSONObject(urlImageJson);
+                    urlImage = jsonImagen.getString("url");
+
+                    linksMaps[i] = mapaAr[i];
+
+                    cImg = dbHandler.imagenPorSitio(idAr[i]);
+                    if(cImg.getCount() > 0){
+                        imagen[i] = getImage(cImg.getString(0));
+                    }else{
+                        imagen[i] = null;
+                    }
+
+
+
+                }
+
+                ListAdapterCustom adapter = new ListAdapterCustom(getActivity(), nameAr, descrpAr, mapaAr, paginaAr, imagen);
+
+
+                lista.setAdapter(adapter);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            resp = "ok";
+
+
+        } else {
+            resp = "No hay resultados";
+        }
+
+    }
+
+    public static Bitmap getImage(String imageS) {
+        byte[] b = Base64.decode(imageS , Base64.DEFAULT);
+        Bitmap bmp = BitmapFactory.decodeByteArray(b, 0, b.length);
+        return  bmp;
     }
 }

@@ -2,6 +2,7 @@ package com.cmp2017.devworms.cmp2017;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -191,7 +192,24 @@ public class DetalleEventoFragment extends Fragment {
 
     class Localizar implements View.OnClickListener {
         public void onClick(View v) {
-            Toast.makeText(getActivity(), "Próximamente", Toast.LENGTH_SHORT).show();
+            Fragment fragment = new ClimaFragment();
+
+            Bundle parametro = new Bundle();
+
+
+            parametro.putString("url","http://congreso.digital/public-map.php#"+idProgram);
+            parametro.putString("tipo","3");
+
+
+            fragment.setArguments(parametro);
+
+            final FragmentTransaction ft = getActivity().getFragmentManager()
+                    .beginTransaction();
+            ft.replace(R.id.actividad, fragment, "tag");
+
+            ft.addToBackStack("tag");
+
+            ft.commit();
         }
     }
 

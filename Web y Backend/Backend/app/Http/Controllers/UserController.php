@@ -8,7 +8,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Encuesta;
 use App\User;
+use App\UserHasEncuestas;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -83,6 +85,8 @@ class UserController extends Controller {
                 $user->clave = $clave;
                 $user->save();
 
+                $this->createEncuestas($user->id);
+
                 $res['status'] = 1;
                 $res['mensaje'] = "Perfil creado correctamente";
                 $res['api_key'] = $user->api_token;
@@ -97,6 +101,16 @@ class UserController extends Controller {
             $res['status'] = 0;
             $res['mensaje'] = $ex->getMessage();
             return response()->json($res, 500);
+        }
+    }
+
+    private function createEncuestas($user_id) {
+        $encuestas = Encuesta::all();
+        foreach ($encuestas as $encuesta) {
+            UserHasEncuestas::create([
+                'encuesta_id' => $encuesta->id,
+                'user_id' => $user_id
+            ]);
         }
     }
 

@@ -356,7 +356,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Resultados" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8gv-ea-vxB">
-                                <rect key="frame" x="132" y="116" width="112" height="26.5"/>
+                                <rect key="frame" x="135.5" y="116" width="105.5" height="24.5"/>
                                 <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="21"/>
                                 <color key="textColor" red="0.16038369599999999" green="0.32152638290000002" blue="0.6560517132" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -926,7 +926,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mapa del Recinto" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="laU-II-TsK">
-                                <rect key="frame" x="101" y="116" width="174" height="26.5"/>
+                                <rect key="frame" x="101.5" y="116" width="174" height="26.5"/>
                                 <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="21"/>
                                 <color key="textColor" red="0.16038369599999999" green="0.32152638290000002" blue="0.6560517132" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1360,9 +1360,6 @@
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gXl-A1-7A6">
                                 <rect key="frame" x="0.0" y="64" width="375" height="29"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="28" id="wss-jr-6XU"/>
-                                </constraints>
                                 <segments>
                                     <segment title="Lunes 5"/>
                                     <segment title="Martes 6"/>
@@ -1438,13 +1435,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="gXl-A1-7A6" firstAttribute="width" secondItem="DQa-tq-3Be" secondAttribute="width" id="4fR-8X-nuG"/>
+                            <constraint firstItem="gXl-A1-7A6" firstAttribute="width" relation="lessThanOrEqual" secondItem="DQa-tq-3Be" secondAttribute="width" id="4fR-8X-nuG"/>
                             <constraint firstItem="D6d-kb-7kF" firstAttribute="top" secondItem="fxd-3Z-15j" secondAttribute="bottom" constant="40" id="CY5-4c-pnT"/>
                             <constraint firstItem="gXl-A1-7A6" firstAttribute="top" secondItem="fxd-3Z-15j" secondAttribute="bottom" id="WpQ-gI-EEb"/>
-                            <constraint firstItem="Rnn-H6-2XR" firstAttribute="top" secondItem="D6d-kb-7kF" secondAttribute="bottom" id="a2E-NS-NI2"/>
                             <constraint firstItem="D6d-kb-7kF" firstAttribute="width" secondItem="DQa-tq-3Be" secondAttribute="width" id="gVR-S4-Ztp"/>
                             <constraint firstItem="D6d-kb-7kF" firstAttribute="centerX" secondItem="DQa-tq-3Be" secondAttribute="centerX" id="ijv-5k-cqp"/>
                             <constraint firstItem="gXl-A1-7A6" firstAttribute="centerX" secondItem="DQa-tq-3Be" secondAttribute="centerX" id="w22-ZZ-qx5"/>
+                            <constraint firstItem="Rnn-H6-2XR" firstAttribute="top" secondItem="D6d-kb-7kF" secondAttribute="bottom" id="x1z-VL-Rwn"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="fuq-Gt-wiy">
@@ -1489,7 +1486,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notificaciones" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5si-gK-uK8">
-                                <rect key="frame" x="117" y="72" width="142" height="26.5"/>
+                                <rect key="frame" x="117.5" y="72" width="142" height="26.5"/>
                                 <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="21"/>
                                 <color key="textColor" red="0.16038369599999999" green="0.32152638290000002" blue="0.6560517132" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1593,7 +1590,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sitios de Interés" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8QA-ue-0QC">
-                                <rect key="frame" x="108" y="116" width="160" height="26.5"/>
+                                <rect key="frame" x="112.5" y="116" width="151.5" height="24.5"/>
                                 <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="21"/>
                                 <color key="textColor" red="0.16038369599999999" green="0.32152638290000002" blue="0.6560517132" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1616,7 +1613,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hacienda de Chautla:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iqr-hq-bZs">
-                                                    <rect key="frame" x="8" y="140" width="175" height="21.5"/>
+                                                    <rect key="frame" x="8" y="140" width="164.5" height="20"/>
                                                     <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1628,7 +1625,7 @@
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descripción" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCt-0v-cSt">
-                                                    <rect key="frame" x="8" y="169" width="359" height="18"/>
+                                                    <rect key="frame" x="8" y="169" width="359" height="16.5"/>
                                                     <fontDescription key="fontDescription" name="Muli-Regular" family="Muli" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1640,7 +1637,7 @@
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sitio web:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oXn-HA-fFo">
-                                                    <rect key="frame" x="8" y="220" width="80" height="21.5"/>
+                                                    <rect key="frame" x="8" y="220" width="75.5" height="20"/>
                                                     <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1652,7 +1649,7 @@
                                                     </variation>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yWR-k8-gGz">
-                                                    <rect key="frame" x="8" y="416.5" width="359" height="30"/>
+                                                    <rect key="frame" x="8" y="417.5" width="359" height="29"/>
                                                     <fontDescription key="fontDescription" name="Muli-Regular" family="Muli" pointSize="14"/>
                                                     <state key="normal" title="Link">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2250,7 +2247,7 @@
             <objects>
                 <navigationController storyboardIdentifier="Inicio" automaticallyAdjustsScrollViewInsets="NO" id="hsC-4U-TeZ" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="1nL-t7-c76">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1nL-t7-c76">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2268,7 +2265,7 @@
             <objects>
                 <navigationController storyboardIdentifier="MenuPrincipal" automaticallyAdjustsScrollViewInsets="NO" id="ojg-qp-URi" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="4R6-43-AVe">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4R6-43-AVe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2286,7 +2283,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pvC-jS-sCu" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="qRq-fn-w9u">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qRq-fn-w9u">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2556,7 +2553,7 @@
             <objects>
                 <navigationController storyboardIdentifier="notificaciones" automaticallyAdjustsScrollViewInsets="NO" id="ubV-vj-2zv" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="HAX-Ru-0G4">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HAX-Ru-0G4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2574,7 +2571,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RcV-Hr-1oF" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="MgG-wp-f2A">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MgG-wp-f2A">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2592,7 +2589,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ECH-yc-ql3" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kS6-Dp-See">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kS6-Dp-See">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2882,7 +2879,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9J5-td-au1" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="J8G-4k-b2u">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="J8G-4k-b2u">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2938,11 +2935,11 @@
         <image name="fondoCMP" width="1242" height="2208"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="eOr-Vk-OFl"/>
-        <segue reference="C9o-NW-2zu"/>
-        <segue reference="psR-II-8MZ"/>
-        <segue reference="xQ8-EA-dMz"/>
-        <segue reference="ZdW-HO-l3u"/>
+        <segue reference="xsM-6l-BFs"/>
         <segue reference="rHH-3X-Jaz"/>
+        <segue reference="ZdW-HO-l3u"/>
+        <segue reference="C9o-NW-2zu"/>
+        <segue reference="xQ8-EA-dMz"/>
+        <segue reference="psR-II-8MZ"/>
     </inferredMetricsTieBreakers>
 </document>

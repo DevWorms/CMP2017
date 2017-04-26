@@ -78,6 +78,11 @@ class DetalleViewController: UIViewController {
                     estaMiagenda = 1
                     print("entro en mi agenda \(estaMiagenda)" )
                 }
+                if estaMiagenda > 0 {
+                    btn2.imageView?.image = #imageLiteral(resourceName: "05Boton_Eliminar_Agenda")
+                }else{
+                    btn2.imageView?.image = #imageLiteral(resourceName: "05Boton_Agregar_Agenda")
+                }
             }
             
         case 2,6:
@@ -169,16 +174,31 @@ class DetalleViewController: UIViewController {
         } else if self.seccion == 1 || self.seccion == 3 || self.seccion == 4 {
              print("Agregar a agenda")
             if estaMiagenda > 0 {
-                let vc_alert = UIAlertController(title: "", message: "Ya tienes este evento agregado en tu agenda", preferredStyle: .alert)
+                print("Eliminar agenda")
+                CoreDataHelper.deleteObject(entityName: "MiAgendaT", keyName: "miAgenda", id: detalle["id"] as! Int16)
+                estaMiagenda = 0
+                btn2.setImage(UIImage(named: "05Boton_Agregar_Agenda"), for: UIControlState.normal)
+                let vc_alert = UIAlertController(title: "", message: "Este evento fue eliminado de tu agenda", preferredStyle: .alert)
                 vc_alert.addAction(UIAlertAction(title: "OK",
                                                  style: UIAlertActionStyle.default,
                                                  handler: nil))
                 self.present(vc_alert, animated: true, completion: nil)
 
+                
+
+
             }else{
              CoreDataHelper.saveData(entityName: "MiAgendaT", data: detalle ,keyName: "miAgenda",dataImg: imgData, keyNameImg: "imgMiAgenda" )
                   print("Se agrego a la base")
                  estaMiagenda = 1
+                let vc_alert = UIAlertController(title: "", message: "Este evento se agrego a tu agenda", preferredStyle: .alert)
+                vc_alert.addAction(UIAlertAction(title: "OK",
+                                                 style: UIAlertActionStyle.default,
+                                                 handler: nil))
+                self.present(vc_alert, animated: true, completion: nil)
+                btn2.setImage(UIImage(named: "05Boton_Eliminar_Agenda"), for: UIControlState.normal)
+
+
             }
         } else if self.seccion == 5{
          

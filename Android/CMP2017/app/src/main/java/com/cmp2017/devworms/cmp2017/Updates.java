@@ -264,25 +264,29 @@ public class Updates extends Activity implements View.OnClickListener {
 
 
                     String urlImageJson = c.getString("foto");
-                    JSONObject jsonImagen = new JSONObject(urlImageJson);
-                    urlImage = jsonImagen.getString("url");
+                    if (urlImageJson.equals("[]")) {
 
-                    imageUrl = new URL(urlImage);
-                    conn = (HttpURLConnection) imageUrl.openConnection();
-                    conn.connect();
+                    }else {
+                        JSONObject jsonImagen = new JSONObject(urlImageJson);
+                        urlImage = jsonImagen.getString("url");
 
-                    BitmapFactory.Options options = new BitmapFactory.Options();
-                    options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
+                        imageUrl = new URL(urlImage);
+                        conn = (HttpURLConnection) imageUrl.openConnection();
+                        conn.connect();
 
-                    expoImg = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
-                    ImageDecoExpo = getBytes(expoImg);
+                        BitmapFactory.Options options = new BitmapFactory.Options();
+                        options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
 
-                    dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
-                    SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
+                        expoImg = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
+                        ImageDecoExpo = getBytes(expoImg);
 
-                    String idAcoImagen = c.getString("id");
+                        dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
+                        SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
 
-                    dbHandlerOffline.addAcoImag(idAcoImagen, ImageDecoExpo);
+                        String idAcoImagen = c.getString("id");
+
+                        dbHandlerOffline.addAcoImag(idAcoImagen, ImageDecoExpo);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 } catch (MalformedURLException e) {
@@ -343,25 +347,29 @@ public class Updates extends Activity implements View.OnClickListener {
 
 
                 String urlImageJson = c.getString("logo");
-                JSONObject jsonImagen = new JSONObject(urlImageJson);
-                urlImage = jsonImagen.getString("url");
+                if (urlImageJson.equals("[]")) {
 
-                imageUrl = new URL(urlImage);
-                conn = (HttpURLConnection) imageUrl.openConnection();
-                conn.connect();
+                }else {
+                    JSONObject jsonImagen = new JSONObject(urlImageJson);
+                    urlImage = jsonImagen.getString("url");
 
-                BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
+                    imageUrl = new URL(urlImage);
+                    conn = (HttpURLConnection) imageUrl.openConnection();
+                    conn.connect();
 
-                expoImg = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
-                ImageDecoExpo = getBytes(expoImg);
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
 
-                dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
-                SQLiteDatabase db = dbHandlerOffline.getWritableDatabase();
+                    expoImg = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
+                    ImageDecoExpo = getBytes(expoImg);
 
-                String idExpoImagen = c.getString("id");
+                    dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
+                    SQLiteDatabase db = dbHandlerOffline.getWritableDatabase();
 
-                dbHandlerOffline.addExpoImag(idExpoImagen, ImageDecoExpo);
+                    String idExpoImagen = c.getString("id");
+
+                    dbHandlerOffline.addExpoImag(idExpoImagen, ImageDecoExpo);
+                }
             }
 
 
@@ -421,25 +429,29 @@ public class Updates extends Activity implements View.OnClickListener {
                         c = jsonSDimage.getJSONObject(i);
 
                         String urlImageJson = c.getString("image");
-                        JSONObject jsonImagen = new JSONObject(urlImageJson);
-                        urlImage = jsonImagen.getString("url");
+                        if (urlImageJson.equals("[]")) {
 
-                        imageUrl = new URL(urlImage);
-                        conn = (HttpURLConnection) imageUrl.openConnection();
-                        conn.connect();
+                        }else {
+                            JSONObject jsonImagen = new JSONObject(urlImageJson);
+                            urlImage = jsonImagen.getString("url");
 
-                        BitmapFactory.Options options = new BitmapFactory.Options();
-                        options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
+                            imageUrl = new URL(urlImage);
+                            conn = (HttpURLConnection) imageUrl.openConnection();
+                            conn.connect();
 
-                        expoImg = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
-                        ImageDecoExpo = getBytes(expoImg);
+                            BitmapFactory.Options options = new BitmapFactory.Options();
+                            options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
 
-                        dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
-                        SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
+                            expoImg = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
+                            ImageDecoExpo = getBytes(expoImg);
 
-                        String idTRImagen = c.getString("id");
+                            dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
+                            SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
 
-                        dbHandlerOffline.addRutaImag(idTRImagen, ImageDecoExpo);
+                            String idTRImagen = c.getString("id");
+
+                            dbHandlerOffline.addRutaImag(idTRImagen, ImageDecoExpo);
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     } catch (MalformedURLException e) {
@@ -503,25 +515,29 @@ public class Updates extends Activity implements View.OnClickListener {
 
 
                     String urlImageJson = c.getString("foto");
-                    JSONObject jsonImagen = new JSONObject(urlImageJson);
-                    urlImage = jsonImagen.getString("url");
+                    if (urlImageJson.equals("[]")) {
 
-                    imageUrl = new URL(urlImage);
-                    conn = (HttpURLConnection) imageUrl.openConnection();
-                    conn.connect();
+                    }else {
+                        JSONObject jsonImagen = new JSONObject(urlImageJson);
+                        urlImage = jsonImagen.getString("url");
 
-                    BitmapFactory.Options options = new BitmapFactory.Options();
-                    options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
+                        imageUrl = new URL(urlImage);
+                        conn = (HttpURLConnection) imageUrl.openConnection();
+                        conn.connect();
 
-                    expoImg = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
-                    ImageDecoExpo = getBytes(expoImg);
+                        BitmapFactory.Options options = new BitmapFactory.Options();
+                        options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
 
-                    dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
-                    SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
+                        expoImg = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
+                        ImageDecoExpo = getBytes(expoImg);
 
-                    String idSDImagen = c.getString("id");
+                        dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
+                        SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
 
-                    dbHandlerOffline.addSociaDepoImag(idSDImagen, ImageDecoExpo);
+                        String idSDImagen = c.getString("id");
+
+                        dbHandlerOffline.addSociaDepoImag(idSDImagen, ImageDecoExpo);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 } catch (MalformedURLException e) {
@@ -552,27 +568,31 @@ public class Updates extends Activity implements View.OnClickListener {
                     JSONObject programa = aProgramas.getJSONObject(c);
 
                     String strFoto = programa.getString("foto");
+                    if (strFoto.equals("[]")) {
 
-                    JSONObject jFoto = new JSONObject(strFoto);
+                    }else {
 
-                    urlImage = jFoto.getString("url");
+                        JSONObject jFoto = new JSONObject(strFoto);
 
-                    imageUrl = new URL(urlImage);
-                    conn = (HttpURLConnection) imageUrl.openConnection();
-                    conn.connect();
+                        urlImage = jFoto.getString("url");
 
-                    BitmapFactory.Options options = new BitmapFactory.Options();
-                    options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
+                        imageUrl = new URL(urlImage);
+                        conn = (HttpURLConnection) imageUrl.openConnection();
+                        conn.connect();
 
-                    expoImg = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
-                    ImageDecoExpo = getBytes(expoImg);
+                        BitmapFactory.Options options = new BitmapFactory.Options();
+                        options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
 
-                    dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
-                    SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
+                        expoImg = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
+                        ImageDecoExpo = getBytes(expoImg);
 
-                    String idProgImge = programa.getString("id");
+                        dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
+                        SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
 
-                    dbHandlerOffline.addProgramaImage(idProgImge, ImageDecoExpo);
+                        String idProgImge = programa.getString("id");
+
+                        dbHandlerOffline.addProgramaImage(idProgImge, ImageDecoExpo);
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -653,25 +673,29 @@ public class Updates extends Activity implements View.OnClickListener {
 
 
                 String urlImageJson = c.getString("logo");
-                JSONObject jsonImagen = new JSONObject(urlImageJson);
-                urlImage = jsonImagen.getString("url");
+                if (urlImageJson.equals("[]")) {
 
-                imageUrl = new URL(urlImage);
-                conn = (HttpURLConnection) imageUrl.openConnection();
-                conn.connect();
+                }else {
+                    JSONObject jsonImagen = new JSONObject(urlImageJson);
+                    urlImage = jsonImagen.getString("url");
 
-                BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
+                    imageUrl = new URL(urlImage);
+                    conn = (HttpURLConnection) imageUrl.openConnection();
+                    conn.connect();
 
-                expoImg = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
-                ImageDecoExpo = getBytes(expoImg);
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
 
-                dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
-                SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
+                    expoImg = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
+                    ImageDecoExpo = getBytes(expoImg);
 
-                String idExpoImagen = c.getString("id");
+                    dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
+                    SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
 
-                dbHandlerOffline.addPatroImag(idExpoImagen, ImageDecoExpo);
+                    String idExpoImagen = c.getString("id");
+
+                    dbHandlerOffline.addPatroImag(idExpoImagen, ImageDecoExpo);
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (MalformedURLException e) {
@@ -698,27 +722,31 @@ public class Updates extends Activity implements View.OnClickListener {
                     JSONObject sitio = aSitios.getJSONObject(c);
 
                     String strFoto = sitio.getString("imagen");
+                    if (strFoto.equals("[]")) {
 
-                    JSONObject jFoto = new JSONObject(strFoto);
+                    }else {
 
-                    urlImage = jFoto.getString("url");
+                        JSONObject jFoto = new JSONObject(strFoto);
 
-                    imageUrl = new URL(urlImage);
-                    conn = (HttpURLConnection) imageUrl.openConnection();
-                    conn.connect();
+                        urlImage = jFoto.getString("url");
 
-                    BitmapFactory.Options options = new BitmapFactory.Options();
-                    options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
+                        imageUrl = new URL(urlImage);
+                        conn = (HttpURLConnection) imageUrl.openConnection();
+                        conn.connect();
 
-                    expoImg = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
-                    ImageDecoExpo = getBytes(expoImg);
+                        BitmapFactory.Options options = new BitmapFactory.Options();
+                        options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
 
-                    dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
-                    SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
+                        expoImg = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
+                        ImageDecoExpo = getBytes(expoImg);
 
-                    String idProgImge = sitio.getString("id");
+                        dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
+                        SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
 
-                    dbHandlerOffline.addImgeSitio(idProgImge, ImageDecoExpo);
+                        String idProgImge = sitio.getString("id");
+
+                        dbHandlerOffline.addImgeSitio(idProgImge, ImageDecoExpo);
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();

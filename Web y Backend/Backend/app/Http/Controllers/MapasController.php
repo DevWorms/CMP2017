@@ -305,10 +305,10 @@ class MapasController extends Controller {
     function returnPublicExpositor($expositor) {
         unset($expositor["logo_file"]);
         //unset($expositor["id"]);
-        unset($expositor["logo"]["is_banner"]);
-        unset($expositor["logo"]["user_id"]);
-        unset($expositor["logo"]["id"]);
-        unset($expositor["logo"]["created_at"]);
+        //unset($expositor["logo"]["is_banner"]);
+        //unset($expositor["logo"]["user_id"]);
+        //unset($expositor["logo"]["id"]);
+        //unset($expositor["logo"]["created_at"]);
 
         $estantes = collect($expositor->estantes)->groupBy('coords');
         //unset($expositor["estantes"]);

@@ -44,4 +44,8 @@ class Encuesta extends Model
     public function filexl() {
         return $this->hasOne('App\File', 'id', 'file_xl');
     }
+
+    public function usersHas() {
+        return $this->hasMany('App\UserHasEncuestas', 'encuesta_id', 'id');
+    }
 }

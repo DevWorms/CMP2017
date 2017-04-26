@@ -189,6 +189,7 @@ $app->post('/api/mapa/recinto/upload', ['middleware' => 'cors', 'uses' => 'Mapas
 $app->get('/api/mapa/recinto/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'MapasController@getMapaRecinto']);
 $app->get('/api/mapa/expositores/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'MapasController@getStands']);
 $app->post('/api/mapa/expositores/reservar', ['middleware' => 'cors', 'uses' => 'MapasController@reservar']);
+$app->post('/api/mapa/expositores/remove/reservation', ['middleware' => 'cors', 'uses' => 'MapasController@removeReservations']);
 $app->get('/api/mapa/expositores/public', ['middleware' => 'cors', 'uses' => 'MapasController@getPublicStands']);
 $app->get('/api/mapa/v2', ['middleware' => 'cors', 'uses' => 'MapasController@getPublicStandsV2']);
 $app->get('/api/mapa/expositores/public/expositor/{expositor_id}', ['middleware' => 'cors', 'uses' => 'MapasController@loadExpositorLocation']);

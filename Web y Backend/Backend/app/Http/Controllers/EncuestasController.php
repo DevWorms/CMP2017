@@ -7,6 +7,7 @@ use App\File;
 use App\Pregunta;
 use App\Respuesta;
 use App\User;
+use App\UserHasEncuestas;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -97,6 +98,14 @@ class EncuestasController extends Controller {
                         ]);
                     }
 
+                    $users = User::all();
+                    foreach ($users as $user) {
+                        UserHasEncuestas::create([
+                            'encuesta_id' => $encuesta->id,
+                            'user_id' => $user->id
+                        ]);
+                    }
+
                     $this->createUpdate();
 
                     $response['estado'] = 1;
@@ -131,8 +140,10 @@ class EncuestasController extends Controller {
 
     public function getAll($user_id, $api_key) {
         try {
-            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
-            $encuestas = Encuesta::select('id', 'file_sm')->get();
+            $user = User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+
+            $encs = UserHasEncuestas::where(['user_id' => $user->id, 'resuelta' => 0])->get();
+            $encuestas = Encuesta::select('id', 'file_sm')->whereIn('id', $encs->pluck('encuesta_id'))->get();
 
             foreach ($encuestas as $encuesta) {
                 $encuesta = $this->returnEncuesta($encuesta);
@@ -282,6 +293,14 @@ class EncuestasController extends Controller {
                             ]);
                         }
 
+                        $users = User::all();
+                        foreach ($users as $user) {
+                            UserHasEncuestas::updateOrCreate(
+                                ['encuesta_id' => $encuesta->id, 'user_id' => $user->id],
+                                ['resuelta' => 0]
+                            );
+                        }
+
                         $this->createUpdate();
 
                         $response['estado'] = 1;
@@ -346,6 +365,10 @@ class EncuestasController extends Controller {
                     $count++;
                 }
 
+                UserHasEncuestas::where(['user_id' => $user_id, 'encuesta_id' => $encuesta->id])->update([
+                    'resuelta' => 1
+                ]);
+
                 $res['status'] = 1;
                 $res['mensaje'] = "Tus respuestas se guardaron correctamente";
                 return response()->json($res, 200);
@@ -376,6 +399,14 @@ class EncuestasController extends Controller {
             User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
             $expositor = Encuesta::where('id', $id)->first();
             if ($expositor) {
+                foreach ($expositor->usersHas as $relation) {
+                    $relation->delete();
+                }
+
+                foreach ($expositor->preguntas as $relation) {
+                    $relation->delete();
+                }
+
                 $expositor->delete();
 
                 $res['status'] = 1;

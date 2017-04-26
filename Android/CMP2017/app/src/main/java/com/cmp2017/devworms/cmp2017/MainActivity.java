@@ -172,8 +172,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+
             pDialog = new ProgressDialog(MainActivity.this);
-            pDialog.setMessage("Descargando Datos CMP...");
+            pDialog.setMessage("Descargando información,por favor espera puede tardar 1 o 2 minutos.");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(false);
             pDialog.show();
@@ -677,9 +678,141 @@ public class MainActivity extends AppCompatActivity {
             JSONParser jspPrograma = new JSONParser();
             String strProgramas = jspPrograma.makeHttpRequest(fromUrlPrograma, "GET", fromUrlPrograma, "");
             dbHandlerOffline = new AdminSQLiteOffline(MainActivity.this, null, null, 1);
+            Log.e("JSONPROGRAMAS",strProgramas);
             dbHandlerOffline.addJsonProgramas(strProgramas);
+            String strImg="";
+            try{
+                JSONObject jProgramas = new JSONObject(strProgramas);
+                String strProg = jProgramas.getString("programas");
+                JSONArray aProgramas = new JSONArray(strProg);
+                for(int c = 0; c < aProgramas.length() ; c++){
+                    try {
+                        JSONObject programa = aProgramas.getJSONObject(c);
+
+                        String strFoto = programa.getString("foto");
+
+                        JSONObject jFoto = new JSONObject(strFoto);
+
+                        urlImage = jFoto.getString("url");
+
+                        imageUrl = new URL(urlImage);
+                        conn = (HttpURLConnection) imageUrl.openConnection();
+                        conn.connect();
+
+                        BitmapFactory.Options options = new BitmapFactory.Options();
+                        options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
+
+                        expoImg = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
+                        ImageDecoExpo = getBytes(expoImg);
+
+                        dbHandlerOffline = new AdminSQLiteOffline(MainActivity.this, null, null, 1);
+                        SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
+
+                        String idProgImge = programa.getString("id");
+
+                        dbHandlerOffline.addProgramaImage(idProgImge, ImageDecoExpo);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }catch(JSONException jex){
+                Log.e("DescargaPrograma", jex.getMessage());
+            }
+
 
             Log.e("JSON PROGRAMAS",strProgramas);
+            /**************************************** DESCARGA DE SITIOS DEI INTERES PUEBLA  ******************/
+
+            String fromUrlSitio = "http://cmp.devworms.com/api/puebla/sitio/all/"+userId+"/"+apiKey+"";
+            JSONParser jspSitio = new JSONParser();
+            String strSitio = jspSitio.makeHttpRequest(fromUrlSitio, "GET", fromUrlSitio, "");
+            dbHandlerOffline = new AdminSQLiteOffline(MainActivity.this, null, null, 1);
+            Log.e("JSONSITIOS",strSitio);
+            dbHandlerOffline.addJsonSitiosPuebla(strSitio);
+            try{
+                JSONObject jSitios = new JSONObject(strSitio);
+                String strSit = jSitios.getString("sitios");
+                JSONArray aSitios = new JSONArray(strSit);
+                for(int c = 0; c < aSitios.length() ; c++){
+                    try {
+                        JSONObject sitio = aSitios.getJSONObject(c);
+
+                        String strFoto = sitio.getString("imagen");
+
+                        JSONObject jFoto = new JSONObject(strFoto);
+
+                        urlImage = jFoto.getString("url");
+
+                        imageUrl = new URL(urlImage);
+                        conn = (HttpURLConnection) imageUrl.openConnection();
+                        conn.connect();
+
+                        BitmapFactory.Options options = new BitmapFactory.Options();
+                        options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
+
+                        expoImg = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
+                        ImageDecoExpo = getBytes(expoImg);
+
+                        dbHandlerOffline = new AdminSQLiteOffline(MainActivity.this, null, null, 1);
+                        SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
+
+                        String idProgImge = sitio.getString("id");
+
+                        dbHandlerOffline.addImgeSitio(idProgImge, ImageDecoExpo);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }catch(JSONException jex){
+                Log.e("DescargaPrograma", jex.getMessage());
+            }
+
+            // ************************************* MAPA DEL RESINTO ****************
+            String fromMapa = "http://cmp.devworms.com/api/mapa/recinto/"+userId+"/"+apiKey;
+            JSONParser jpMapa = new JSONParser();
+
+            String rspmapa = jpMapa.makeHttpRequest(fromMapa, "GET", fromMapa, "");
+            try{
+
+                JSONObject jMapa = new JSONObject(rspmapa);
+                JSONObject jResinto = new JSONObject(jMapa.getString("mapa"));
+                String urlResinto = jResinto.getString("url");
+                urlImage = urlResinto;
+
+                imageUrl = new URL(urlImage);
+                conn = (HttpURLConnection) imageUrl.openConnection();
+                conn.connect();
+
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
+
+                expoImg = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
+                ImageDecoExpo = getBytes(expoImg);
+
+                dbHandlerOffline = new AdminSQLiteOffline(MainActivity.this, null, null, 1);
+                SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
+
+
+
+                dbHandlerOffline.addMapaResinto(ImageDecoExpo);
+            }catch (JSONException jex){
+                Log.e("Mapa",jex.getMessage());
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
 
             return null;
         }

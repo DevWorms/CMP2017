@@ -18,7 +18,7 @@ private let userID = 1
 
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 let managedContext = appDelegate.managedObjectContext
-
+var descarga = 0
 
 class ServerConnection {
     
@@ -32,10 +32,10 @@ class ServerConnection {
             
             self.mView = myView
             
-            let alert = UIAlertController(title: nil, message: "Descargando...", preferredStyle: .alert)
+            let alert = UIAlertController(title: nil, message: " \n Descargando información, por favor espera puede tardar 1 o 2 minutos", preferredStyle: .alert)
             alert.view.tintColor = UIColor.black
             
-            let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50)) as UIActivityIndicatorView
+            let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 110, y: -5, width: 50, height: 50)) as UIActivityIndicatorView
             loadingIndicator.hidesWhenStopped = true
             loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
             loadingIndicator.startAnimating()
@@ -47,9 +47,19 @@ class ServerConnection {
              return
              })
              alert.addAction(callAction)*/
+            if let descarga = UserDefaults.standard.value(forKey: "descarga")as? Int {
+           
+                if descarga != 1 {
+                    alert.view.addSubview(loadingIndicator)
+                    myView.present(alert, animated: true, completion: llamadas)
+                }
             
-            alert.view.addSubview(loadingIndicator)
-            myView.present(alert, animated: true, completion: llamadas)
+           
+            }else{
+                alert.view.addSubview(loadingIndicator)
+                myView.present(alert, animated: true, completion: llamadas)
+            }
+            
             
             
         } else {
@@ -124,6 +134,7 @@ class ServerConnection {
         // Expositores
         self.getGeneral(strUrl: "http://cmp.devworms.com/api/expositor/all/\(userID)/\(apiKey)", jsonString: "expositores", datoString: "logo", imgString: "url", entityName: "Expositores", keyName: "expositor", keyNameImg: "imgExpositor",Simple : 0) { (Bool) in
             self.mView.dismiss(animated: false, completion: nil)
+             UserDefaults.standard.setValue(1, forKey: "descarga")
         }
         
   
@@ -195,7 +206,8 @@ class ServerConnection {
                                         }
                                     
                                         if index == (jsonResult[ jsonString ] as! [[String:Any]]).count - 1 {
-                                        
+                                           
+
                                             print("hurra se cargo todo creo :S")
                                             completion(true)
                                         }

@@ -59,10 +59,18 @@
             z-index:10
         }
 
+        .exposColor {
+            position:absolute;
+            left: 840px;
+            top: 180px;
+            display:inline-block;
+            z-index:10
+        }
+
         .expos_btn {
             position:absolute;
             left: 1138px;
-            top: 160px;
+            top: 180px;
             display:inline-block;
             z-index:10
         }
@@ -70,6 +78,7 @@
 
     <script src="js/jquery.js"></script>
     <script src="js/jquery.maphilight.min.js"></script>
+    <script src="js/jscolor.js"></script>
     <script type="text/javascript">
         $(function() {
             $('.map').maphilight();
@@ -169,6 +178,7 @@
                             <select id="expositores" class="form-control">
                                 <option selected></option>
                             </select>
+                            <input class="jscolor form-control exposColor input-sm" value="086A87" id="color" width="8">
                             <button class="btn btn-info expos_btn" id="asignar">Asignar</button>
                         </div>
                     </form>
@@ -183,6 +193,9 @@
     <!-- /#wrapper -->
     
     <!-- Scripts -->
+    <script>
+        var color = "#086A87";
+    </script>
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.12.1/jquery-ui.js"></script>
     <script type="text/javascript" src="js/moment-with-locales.js"></script>

@@ -20,7 +20,8 @@ public class MapaFragment extends Fragment
 
         Button btnMapaExpo= (Button) view.findViewById(R.id.btnMapExp);
         btnMapaExpo.setOnClickListener(new MapaExpo());
-
+        Button btnMapaResinto = (Button) view.findViewById(R.id.btnMapRec);
+        btnMapaResinto.setOnClickListener(new MapaRecinto());
         return view;
 
 
@@ -41,6 +42,25 @@ public class MapaFragment extends Fragment
 
             final FragmentTransaction ft = getActivity().getFragmentManager()
                     .beginTransaction();
+            ft.replace(R.id.actividad, fragment, "tag");
+
+            ft.addToBackStack("tag");
+
+            ft.commit();
+
+
+        }
+    }
+
+    class MapaRecinto implements View.OnClickListener {
+        public void onClick(View v) {
+
+            Fragment fragment = new MapaResintoFragment();
+
+
+            final FragmentTransaction ft = getActivity().getFragmentManager()
+                    .beginTransaction();
+
             ft.replace(R.id.actividad, fragment, "tag");
 
             ft.addToBackStack("tag");

@@ -15,61 +15,36 @@
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:weightSum="1">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="18dp"
+            android:textSize="22dp"
             android:textColor="#000"
-            android:layout_margin="10dp"
-            android:text="Nueva contraseña"/>
-        <EditText
-            android:id="@+id/nuevaContra"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
             android:textAlignment="center"
-            android:background="#FFF"
-            android:textSize="18dp"
-            android:textColorHint="#A4A4A4"
-            android:textColor="#000"
             android:layout_margin="10dp"
-            android:hint="Nueva contraseña"/>
+            android:text="Actualizaciones"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="18dp"
+            android:textSize="22dp"
+            android:id="@+id/descActualizaciones"
             android:textColor="#000"
             android:layout_margin="10dp"
-            android:text="Repetir contraseña"/>
-        <EditText
-            android:id="@+id/repetirContra"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
             android:textAlignment="center"
-            android:background="#FFF"
-            android:textColorHint="#A4A4A4"
-            android:textSize="18dp"
-            android:textColor="#000"
-            android:layout_margin="10dp"
-            android:hint="Otra vez"/>
+            android:text="No hay actualizaciones"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="22dp"
+            android:textSize="18dp"
             android:textColor="#FFF"
-            android:text="Cambiar"
-            android:id="@+id/btnCambiar"
-            android:background="#0404B4"
-            android:layout_margin="10dp"
-            />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="22dp"
-            android:textColor="#FFF"
-            android:text="Cerrar"
-            android:id="@+id/btnCerrar"
+            android:text="Actualizar"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:padding="5dp"
+            android:id="@+id/btnActualizar"
             android:background="#0404B4"
             android:layout_margin="10dp"
             />

@@ -65,6 +65,12 @@
                 <div class="col-md-12">
                     <div id="presentacion"><button type="button" id="btn_presentacion" class="btn btn-primary btn-lg" style="background-color: #2b3f9c"><img src="img/ic_picture_as_pdf_white_24dp_1x.png"> &nbsp;&nbsp;&nbsp;Presentación de la empresa</button></div>
                 </div>
+                <div class="col-md-12">
+                    <hr>
+                </div>
+                <div class="col-md-12">
+                    <div id="mapa"></div>
+                </div>
             </div>
             <div class="col-md-2"></div>
         </div>

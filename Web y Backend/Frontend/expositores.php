@@ -216,6 +216,10 @@
                             <p><strong>PDF</strong>: <% if (pdf.nombre) { %> <a href="${pdf.url}" target="_blank">${pdf.nombre}</a>
                                 <% } %> </p>
                         </div>
+                        <div class="col-md-12">
+                            <p><strong>Ubicación de Google maps</strong>: <% if (maps_url) { %> <a href="${maps_url}" target="_blank">Mostrar mapa</a>
+                                <% } %> </p>
+                        </div>
                     </div>
                     <div class="col-md-2"></div>
                 </div>

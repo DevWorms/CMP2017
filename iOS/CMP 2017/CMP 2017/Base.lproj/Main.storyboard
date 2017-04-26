@@ -254,7 +254,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Programa" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWH-kW-uD4">
-                                <rect key="frame" x="110" y="157" width="100.5" height="26.5"/>
+                                <rect key="frame" x="110.5" y="157" width="100.5" height="26.5"/>
                                 <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="21"/>
                                 <color key="textColor" red="0.16038369600646102" green="0.32152638291275665" blue="0.65605171319796951" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -356,7 +356,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Resultados" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8gv-ea-vxB">
-                                <rect key="frame" x="104" y="116" width="112" height="26.5"/>
+                                <rect key="frame" x="104.5" y="116" width="112" height="26.5"/>
                                 <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="21"/>
                                 <color key="textColor" red="0.16038369599999999" green="0.32152638290000002" blue="0.6560517132" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -539,7 +539,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transportación" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FW1-4Y-qHU">
-                                <rect key="frame" x="84" y="116" width="152.5" height="26.5"/>
+                                <rect key="frame" x="84.5" y="116" width="152.5" height="26.5"/>
                                 <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="21"/>
                                 <color key="textColor" red="0.16038369599999999" green="0.32152638290000002" blue="0.6560517132" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -926,7 +926,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mapa del Recinto" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="laU-II-TsK">
-                                <rect key="frame" x="73" y="116" width="174" height="26.5"/>
+                                <rect key="frame" x="73.5" y="116" width="174" height="26.5"/>
                                 <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="21"/>
                                 <color key="textColor" red="0.16038369599999999" green="0.32152638290000002" blue="0.6560517132" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1068,7 +1068,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Club Campestre de Puebla y muchas mas cosas para generar dos renglones" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XwB-cG-Jqa">
                                         <rect key="frame" x="90" y="78" width="216" height="53"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="53" id="rBa-hx-Rr3"/>
+                                            <constraint firstAttribute="height" constant="53" id="vcb-i4-v19"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Muli-Regular" family="Muli" pointSize="14"/>
                                         <nil key="textColor"/>
@@ -1086,18 +1086,19 @@
                                     <constraint firstAttribute="trailing" secondItem="mMF-nr-YKw" secondAttribute="trailing" constant="18" id="MGy-Xg-Dqo"/>
                                     <constraint firstItem="JNZ-Fp-syY" firstAttribute="top" secondItem="CpU-Tb-FFa" secondAttribute="top" constant="59" id="OA1-aa-njo"/>
                                     <constraint firstAttribute="trailing" secondItem="sIf-mf-txP" secondAttribute="trailing" constant="47" id="OtJ-s6-j8A"/>
-                                    <constraint firstAttribute="trailing" secondItem="XwB-cG-Jqa" secondAttribute="trailing" constant="14" id="PxA-Y7-t91"/>
+                                    <constraint firstItem="XwB-cG-Jqa" firstAttribute="leading" secondItem="CpU-Tb-FFa" secondAttribute="leading" constant="90" id="TS1-o6-gRQ"/>
                                     <constraint firstItem="gu2-nj-jDl" firstAttribute="top" secondItem="CpU-Tb-FFa" secondAttribute="top" constant="95" id="Wbe-Qf-QOQ"/>
                                     <constraint firstItem="mMF-nr-YKw" firstAttribute="leading" secondItem="CpU-Tb-FFa" secondAttribute="leading" constant="16" id="aAb-Zm-84V"/>
                                     <constraint firstItem="gu2-nj-jDl" firstAttribute="leading" secondItem="CpU-Tb-FFa" secondAttribute="leading" constant="16" id="cw4-8a-Dfr"/>
-                                    <constraint firstItem="XwB-cG-Jqa" firstAttribute="leading" secondItem="CpU-Tb-FFa" secondAttribute="leading" constant="90" id="dyt-Cf-qsX"/>
                                     <constraint firstItem="sIf-mf-txP" firstAttribute="top" secondItem="CpU-Tb-FFa" secondAttribute="top" constant="262" id="e8m-G1-ryZ"/>
                                     <constraint firstItem="c5c-30-Ada" firstAttribute="centerX" secondItem="CpU-Tb-FFa" secondAttribute="centerX" id="g3f-H9-xTf"/>
                                     <constraint firstAttribute="trailing" secondItem="kOt-TJ-7bZ" secondAttribute="trailing" constant="14" id="hx5-Xl-vkc"/>
                                     <constraint firstItem="NYc-Xk-NbI" firstAttribute="leading" secondItem="CpU-Tb-FFa" secondAttribute="leading" constant="16" id="iSp-An-978"/>
+                                    <constraint firstItem="XwB-cG-Jqa" firstAttribute="top" secondItem="CpU-Tb-FFa" secondAttribute="top" constant="78" id="ibG-oW-4sX"/>
                                     <constraint firstItem="mMF-nr-YKw" firstAttribute="top" secondItem="CpU-Tb-FFa" secondAttribute="top" constant="20" id="p2g-Uo-lR3"/>
                                     <constraint firstItem="QXv-5h-LLO" firstAttribute="leading" secondItem="CpU-Tb-FFa" secondAttribute="leading" constant="16" id="pWi-S8-bdZ"/>
                                     <constraint firstItem="l0G-B2-VYX" firstAttribute="centerX" secondItem="CpU-Tb-FFa" secondAttribute="centerX" id="pth-1z-F14"/>
+                                    <constraint firstAttribute="trailing" secondItem="XwB-cG-Jqa" secondAttribute="trailing" constant="14" id="rsT-wc-usS"/>
                                     <constraint firstItem="kOt-TJ-7bZ" firstAttribute="top" secondItem="CpU-Tb-FFa" secondAttribute="top" constant="160" id="tIN-ma-rdm"/>
                                     <constraint firstItem="sIf-mf-txP" firstAttribute="centerX" secondItem="CpU-Tb-FFa" secondAttribute="centerX" id="vDe-jj-5vh"/>
                                 </constraints>
@@ -1110,9 +1111,9 @@
                             <constraint firstItem="uAX-0j-wpn" firstAttribute="top" secondItem="MoL-Nu-p6W" secondAttribute="bottom" id="NwR-Yv-3y3"/>
                             <constraint firstItem="CpU-Tb-FFa" firstAttribute="top" secondItem="uAX-0j-wpn" secondAttribute="bottom" constant="-2" id="l4a-AU-1RA"/>
                             <constraint firstItem="CpU-Tb-FFa" firstAttribute="bottom" secondItem="ATO-M7-CeS" secondAttribute="top" id="l7h-aK-tIs"/>
-                            <constraint firstItem="XwB-cG-Jqa" firstAttribute="top" secondItem="uAX-0j-wpn" secondAttribute="bottom" constant="76" id="lq3-yV-jNX"/>
                             <constraint firstItem="uAX-0j-wpn" firstAttribute="centerX" secondItem="fft-Eq-Ch5" secondAttribute="centerX" id="pnG-dG-kwQ"/>
                             <constraint firstItem="CpU-Tb-FFa" firstAttribute="width" secondItem="fft-Eq-Ch5" secondAttribute="width" id="rQQ-92-itK"/>
+                            <constraint firstItem="uAX-0j-wpn" firstAttribute="leading" secondItem="fft-Eq-Ch5" secondAttribute="leadingMargin" constant="-16" id="zEh-j0-gUA"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="6iv-CC-5Br">
@@ -1149,7 +1150,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zQy-h9-r1Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5853.6000000000004" y="180.35982008995504"/>
+            <point key="canvasLocation" x="5851.875" y="180"/>
         </scene>
         <!--Menu Usuario View Controller-->
         <scene sceneID="adq-I6-afJ">
@@ -1478,7 +1479,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notificaciones" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5si-gK-uK8">
-                                <rect key="frame" x="89" y="72" width="142" height="26.5"/>
+                                <rect key="frame" x="89.5" y="72" width="142" height="26.5"/>
                                 <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="21"/>
                                 <color key="textColor" red="0.16038369599999999" green="0.32152638290000002" blue="0.6560517132" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1582,7 +1583,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sitios de Interés" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8QA-ue-0QC">
-                                <rect key="frame" x="80" y="116" width="160" height="26.5"/>
+                                <rect key="frame" x="80.5" y="116" width="160" height="26.5"/>
                                 <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="21"/>
                                 <color key="textColor" red="0.16038369599999999" green="0.32152638290000002" blue="0.6560517132" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -2097,7 +2098,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Conoce Puebla" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LPg-8X-M3p">
-                                <rect key="frame" x="85.5" y="116" width="149" height="26.5"/>
+                                <rect key="frame" x="86" y="116" width="149" height="26.5"/>
                                 <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="21"/>
                                 <color key="textColor" red="0.16038369599999999" green="0.32152638290000002" blue="0.6560517132" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -2927,11 +2928,11 @@
         <image name="fondoCMP" width="1242" height="2208"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Eck-C4-SEN"/>
+        <segue reference="GJj-eU-EjN"/>
+        <segue reference="7E1-SN-eCj"/>
+        <segue reference="DNJ-qc-gaL"/>
         <segue reference="C9o-NW-2zu"/>
         <segue reference="SYf-Ru-mT8"/>
-        <segue reference="xQ8-EA-dMz"/>
         <segue reference="psR-II-8MZ"/>
-        <segue reference="7E1-SN-eCj"/>
     </inferredMetricsTieBreakers>
 </document>

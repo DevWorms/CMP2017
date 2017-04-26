@@ -293,6 +293,14 @@ class EncuestasController extends Controller {
                             ]);
                         }
 
+                        $users = User::all();
+                        foreach ($users as $user) {
+                            UserHasEncuestas::updateOrCreate(
+                                ['encuesta_id' => $encuesta->id, 'user_id' => $user->id],
+                                ['resuelta' => 0]
+                            );
+                        }
+
                         $this->createUpdate();
 
                         $response['estado'] = 1;

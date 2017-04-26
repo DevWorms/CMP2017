@@ -142,7 +142,9 @@ $("document").ready(function () {
     $("#asignar").click(function () {
         event.preventDefault();
 
-        var r = $('rect[style*="fill: rgb(8, 106, 135);"]');
+        var rgb = hexToRgb("#" + $("#color").val());
+        //color = "#" + $("#color").val();
+        var r = $('rect[style*="fill: rgb(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ');"]');
         var expositor = $( "#expositores" ).val();
 
         if ((r.length > 0) && expositor) {

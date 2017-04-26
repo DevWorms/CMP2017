@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -113,8 +114,16 @@ public class ListAdapterAgenda extends ArrayAdapter<AgendaModel> {
                 RoundedBitmapDrawable roundedDrawable =
                         RoundedBitmapDrawableFactory.create(actividad.getResources(), originalBitmap);
 
+
+                Matrix matrix = new Matrix();
+                // resize the Bitmap
+                matrix.postScale(2, 2);
+
+                // volvemos a crear la imagen con los nuevos valores
+                Bitmap resizedBitmap = Bitmap.createBitmap(originalBitmap, 0, 0,
+                        200, 200, matrix, true);
                 //asignamos el CornerRadius
-                roundedDrawable.setCornerRadius(originalBitmap.getHeight());
+                roundedDrawable.setCornerRadius(resizedBitmap.getHeight());
                 roundedDrawable.setCircular(true);
                 this.miniatura.setImageDrawable(roundedDrawable);
             }

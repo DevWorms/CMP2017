@@ -80,6 +80,7 @@ class ExpositorController extends Controller {
             $latitude = $request->get('latitude');
             $longitude = $request->get('longitude');
             $stand = $request->get('stand');
+            $maps_url = $request->get('maps_url');
 
             // Archivos del expositor
             $presentacion = $request->file('archivo_pdf');
@@ -183,7 +184,8 @@ class ExpositorController extends Controller {
                     'longitude' => $longitude,
                     'stand' => $stand,
                     'pdf_file' => $pdf_id,
-                    'logo_file' => $logo_id
+                    'logo_file' => $logo_id,
+                    'maps_url' => $maps_url
                 ]);
 
                 $expositor = $this->returnExpositor($expositor);
@@ -537,6 +539,7 @@ class ExpositorController extends Controller {
             $longitude = $request->get('longitude');
             $stand = $request->get('stand');
             $id = $request->get('id');
+            $maps_url = $request->get('maps_url');
 
             // Archivos del expositor
             $presentacion = $request->file('archivo_pdf');
@@ -640,6 +643,10 @@ class ExpositorController extends Controller {
 
                             return response()->json($response, 400);
                         }
+                    }
+
+                    if ($maps_url) {
+                        $expositor->maps_url = $maps_url;
                     }
 
                     $expositor->url = $url_expositor;

@@ -109,7 +109,20 @@ function loadExpositorLocation(id) {
                     var seat = d3.select("#estante_" + stand.id);
                     seat.style("fill", stand.color);
                 });
-            } else {
+            }
+
+            if (response.status == 2) {
+                var expositor = response.expositor;
+                if (expositor.maps_url) {
+                    window.location.href = expositor.maps_url;
+                } else {
+                    $("#error").fadeIn(1000, function() {
+                        $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
+                    });
+                }
+            }
+
+            if (response.status == 0) {
                 $("#error").fadeIn(1000, function() {
                     $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
                 });

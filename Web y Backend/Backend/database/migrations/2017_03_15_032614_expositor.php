@@ -23,6 +23,7 @@ class Expositor extends Migration
             $table->string('nombre');
             $table->string('email');
             $table->string('url');
+            $table->text('maps_url')->nullable();
             $table->string('telefono');
             $table->text('acerca');
             $table->tinyInteger('is_expositor')->default(1);

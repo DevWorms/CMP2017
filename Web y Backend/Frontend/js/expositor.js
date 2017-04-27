@@ -18,7 +18,7 @@ function loadExpositor(id) {
         type: 'GET',
         success: function (response) {
             $("#error").html("");
-            if (response.status == 1) {
+            if (response.status != 0) {
                 var expositor = response.expositor;
 
                 if (expositor.logo) {
@@ -31,15 +31,24 @@ function loadExpositor(id) {
                     '<a href="mailto:' + expositor.email + '">' + expositor.email + '</a></p>');
                 $("#acerca").html('<p><strong>Contacto: </strong><br>' + expositor.acerca + '</p>');
 
-                console.log(expositor);
                 if (expositor.pdf) {
                     $("#presentacion").html(
-                        '<a type="button" href="' + expositor.pdf.url + '" class="btn btn-primary btn-lg" style="background-color: #2b3f9c">' +
+                        '<a type="button" href="' + expositor.pdf.url + '" class="btn btn-primary btn-lg" style="background-color: #2b3f9c; width: 300px">' +
                         '<img src="img/ic_picture_as_pdf_white_24dp_1x.png"> &nbsp;&nbsp;&nbsp;Presentación de la empresa' +
                         '</a>'
                     );
                 } else {
                     $("#presentacion").html('');
+                }
+
+                if (expositor.maps_url) {
+                    $("#mapa").html(
+                        '<a type="button" href="' + expositor.maps_url + '" class="btn btn-primary btn-lg" style="background-color: #2b3f9c; width: 300px">' +
+                        '<img src="img/ic_pin_drop_white_24dp_1x.png"> &nbsp;&nbsp;&nbsp;Mostrar mapa' +
+                        '</a>'
+                    );
+                } else {
+                    $("#mapa").html('');
                 }
 
             } else {

@@ -275,21 +275,28 @@ class MapasController extends Controller {
     public function loadExpositorLocation($id) {
         try {
             $expositor = Expositor::where('id', $id)
-                ->select('id', 'nombre', 'email', 'url', 'telefono', 'acerca', 'logo_file', 'pdf_file')
+                ->select('id', 'nombre', 'email', 'url', 'telefono', 'acerca', 'logo_file', 'pdf_file', 'maps_url')
                 ->with('estantes', 'logo', 'pdf')
                 ->firstOrFail();
 
-            if ($expositor->estantes->count() > 0) {
-                $expositor = $this->returnPublicExpositor($expositor);
+            if ($expositor) {
+                if ($expositor->estantes->count() > 0) {
+                    $expositor = $this->returnPublicExpositor($expositor);
 
-                $res['status'] = 1;
-                $res['mensaje'] = "success";
-                $res['expositor'] = $expositor;
-                return response()->json($res, 200);
+                    $res['status'] = 1;
+                    $res['mensaje'] = "success";
+                    $res['expositor'] = $expositor;
+                    return response()->json($res, 200);
+                } else {
+                    $res['status'] = 2;
+                    $res['mensaje'] = "No se ha asignado ningún estante al expositor: " . $expositor->nombre;
+                    $res['expositor'] = $expositor;
+                    return response()->json($res, 200);
+                }
             } else {
                 $res['status'] = 0;
-                $res['mensaje'] = "No se ha asignado ningún estante al expositor: " . $expositor->nombre;
-                return response()->json($res, 200);
+                $res['mensaje'] = "No se encontró el expositor: " . $id;
+                return response()->json($res, 400);
             }
         } catch (ModelNotFoundException $ex) {
             $res['status'] = 0;

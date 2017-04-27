@@ -185,6 +185,17 @@
                     <br>
                     <!-- Fin Fila -->
 
+                    <div class="row">
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <div class="form-group">
+                                <label for="">Agregar ubicación de Google maps</label>
+                                <br><br>
+                                <input type="text" name="maps_url" id="maps_url" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
                     <div class="row">    
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
                            <div class="form-group">

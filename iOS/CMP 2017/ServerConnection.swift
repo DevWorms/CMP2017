@@ -84,6 +84,8 @@ class ServerConnection {
         CoreDataHelper.deleteEntity(entityName: "Expositores")
         CoreDataHelper.deleteEntity(entityName: "Programas")
         CoreDataHelper.deleteEntity(entityName: "Categorias")
+        CoreDataHelper.deleteEntity(entityName: "MapaRecinto")
+        
         
         //Cargar BD
         

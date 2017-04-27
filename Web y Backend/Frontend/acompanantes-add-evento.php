@@ -170,9 +170,10 @@
                     <div class="row">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">
                             <div class="form-group">
-                                <label for="">Agregar ubicación en el mapa</label>
+                                <label for="maps_url">Agregar ubicación en el mapa</label>
                                     <br><br>
-                                <button class="btn basico2">Examinar</button>
+                                <!--<button class="btn basico2">Examinar</button>-->
+                                <input type="text" name="maps_url" id="maps_url" class="form-control">
                             </div> 
                         </div>
 
@@ -205,7 +206,7 @@
     <script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
     <script src="js/js.php"></script>
     <script src="js/lodash.js"></script>
-    <script src="js/add-acompañante.js"></script>
+    <script src="js/add-acompanante.js"></script>
 </body>
 
 </html>

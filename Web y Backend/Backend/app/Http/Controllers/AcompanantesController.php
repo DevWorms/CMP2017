@@ -67,6 +67,7 @@ class AcompanantesController extends Controller {
             $latitude = $request->get('latitude');
             $longitude = $request->get('longitude');
             $fecha = Carbon::parse($request->get('fecha'))->toDateString();
+            $maps_url = $request->get('maps_url');
 
             // Si tiene hora de inicio, la valida, si no es null
             if ($request->get('hora_inicio')) {
@@ -150,7 +151,8 @@ class AcompanantesController extends Controller {
                     'hora_inicio' => $hora_inicio,
                     'hora_fin' => $hora_fin,
                     'type' => 2,
-                    'foto_id' => $file_id
+                    'foto_id' => $file_id,
+                    'maps_url' => $maps_url
                 ]);
 
                 $this->createUpdate();
@@ -374,6 +376,7 @@ class AcompanantesController extends Controller {
             $longitude = $request->get('longitude');
             $fecha = Carbon::parse($request->get('fecha'))->toDateString();
             $id_evento = $request->get('id');
+            $maps_url = $request->get('maps_url');
 
             // Si tiene hora de inicio, la valida, si no es null
             if ($request->get('hora_inicio')) {
@@ -449,6 +452,10 @@ class AcompanantesController extends Controller {
 
                             return response()->json($response, 400);
                         }
+                    }
+
+                    if ($maps_url) {
+                        $evento->maps_url = $maps_url;
                     }
 
                     // Actualiza el programa

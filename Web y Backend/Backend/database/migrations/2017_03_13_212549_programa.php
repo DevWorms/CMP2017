@@ -31,6 +31,7 @@ class Programa extends Migration
              * 2 = Eventos acompañantes
              * 3 = Eventos sociales y deportivos
              */
+            $table->text('maps_url')->nullable();
             $table->tinyInteger('type')->default(1);
             $table->timestamps();
         });

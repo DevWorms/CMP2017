@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3B5B8F6C1E7083EC00F0D6AA"
-               BuildableName = "CMP 2017.app"
-               BlueprintName = "CMP 2017"
+               BuildableName = "CMP2017.app"
+               BlueprintName = "CMP2017"
                ReferencedContainer = "container:CMP 2017.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -53,8 +53,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3B5B8F6C1E7083EC00F0D6AA"
-            BuildableName = "CMP 2017.app"
-            BlueprintName = "CMP 2017"
+            BuildableName = "CMP2017.app"
+            BlueprintName = "CMP2017"
             ReferencedContainer = "container:CMP 2017.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -76,8 +76,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3B5B8F6C1E7083EC00F0D6AA"
-            BuildableName = "CMP 2017.app"
-            BlueprintName = "CMP 2017"
+            BuildableName = "CMP2017.app"
+            BlueprintName = "CMP2017"
             ReferencedContainer = "container:CMP 2017.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -95,8 +95,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3B5B8F6C1E7083EC00F0D6AA"
-            BuildableName = "CMP 2017.app"
-            BlueprintName = "CMP 2017"
+            BuildableName = "CMP2017.app"
+            BlueprintName = "CMP2017"
             ReferencedContainer = "container:CMP 2017.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

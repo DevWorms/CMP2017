@@ -14,7 +14,7 @@
 import Foundation
 import UIKit
 import AWSCore
-import AWSMobileHubHelper
+//import AWSMobileHubHelper
 
 /**
  * AWSMobileClient is a singleton that bootstraps the app. It creates an identity manager to establish the user identity with Amazon Cognito.
@@ -48,8 +48,8 @@ class AWSMobileClient: NSObject {
      */
     func withApplication(_ application: UIApplication, withURL url: URL, withSourceApplication sourceApplication: String?, withAnnotation annotation: Any) -> Bool {
         print("withApplication:withURL")
-        AWSSignInManager.sharedInstance().interceptApplication(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
-        
+       /* AWSSignInManager.sharedInstance().interceptApplication(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+        */
         if (!isInitialized) {
             isInitialized = true
         }
@@ -74,7 +74,7 @@ class AWSMobileClient: NSObject {
     * - parameter deviceToken: device token
     */
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        AWSPushManager(forKey: ServiceKey).interceptApplication(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
+      //  AWSPushManager(forKey: ServiceKey).interceptApplication(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
     }
     
     /**
@@ -83,7 +83,7 @@ class AWSMobileClient: NSObject {
      * - parameter error: error
      */
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        AWSPushManager(forKey: ServiceKey).interceptApplication(application, didFailToRegisterForRemoteNotificationsWithError: error)
+      //  AWSPushManager(forKey: ServiceKey).interceptApplication(application, didFailToRegisterForRemoteNotificationsWithError: error)
     }
     
     /**
@@ -92,7 +92,7 @@ class AWSMobileClient: NSObject {
      * - parameter completionHandler: Fetches updated content in background.  You should call the fetchCompletionHandler as soon as you're finished performing that operation, so the system can accurately estimate its power and data cost.
      */
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        AWSPushManager(forKey: ServiceKey).interceptApplication(application, didReceiveRemoteNotification: userInfo)
+       // AWSPushManager(forKey: ServiceKey).interceptApplication(application, didReceiveRemoteNotification: userInfo)
     }
     
     /**
@@ -106,7 +106,7 @@ class AWSMobileClient: NSObject {
 
 
             
-        var didFinishLaunching: Bool = AWSSignInManager.sharedInstance().interceptApplication(application, didFinishLaunchingWithOptions: launchOptions)
+       /* var didFinishLaunching: Bool = AWSSignInManager.sharedInstance().interceptApplication(application, didFinishLaunchingWithOptions: launchOptions)
         didFinishLaunching = didFinishLaunching && AWSPushManager(forKey: ServiceKey).interceptApplication(application, didFinishLaunchingWithOptions: launchOptions)
 
         if (!isInitialized) {
@@ -117,7 +117,8 @@ class AWSMobileClient: NSObject {
             isInitialized = true
         }
    
-        return didFinishLaunching
+*/
+        return true// didFinishLaunching
     }
 
 }

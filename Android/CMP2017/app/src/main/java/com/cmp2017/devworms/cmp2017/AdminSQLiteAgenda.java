@@ -76,9 +76,13 @@ public class AdminSQLiteAgenda extends SQLiteOpenHelper {
 
     // Borrar una evento por su id de la Base de Datos
 
-    public void borrarEvento(String persona_id){
+    public void borrarEvento(String idEvento,String tipoEvento){
+        // los datos vienen de tres tablas por tanto puede duplicarse id de evento ais que diferenciamos por el tipo tambien
+        String deleteEvento = "DELETE FROM " + TABLA_AGENDA
+                + " WHERE " + COLUMN_IDEVENTO + " = '" + idEvento
+                + "' AND " + COLUMN_TIPOEVENTO  + " = '" + tipoEvento + "';";
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM " + TABLA_AGENDA + " WHERE " + COLUMN_IDEVENTO + " = " + persona_id + ";");
+        db.execSQL(deleteEvento);
         db.close();
     }
 

@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -72,12 +73,11 @@ public class DetalleEventoFragment extends Fragment {
         btnAgreAgenda.setOnClickListener(new AgregarAgenda());
 
         ////Se busca si este evento ya se encuentra en la base de agenda
-        AdminSQLiteAgenda dbHandlerAgenda;
-        dbHandlerAgenda = new AdminSQLiteAgenda(getActivity(), null, null, 1);
-        SQLiteDatabase db = dbHandlerAgenda.getWritableDatabase();
-        Cursor cursor = dbHandlerAgenda.BuscarpoId(idProgram);
-        strcursorEncontrado = cursor.getCount();
-        ///////////////////////////
+        // y si esta entonces cambiamos a boton borrar
+        if(estaEnAgenda()){
+            this.btnAgreAgenda.setBackgroundResource(R.drawable.btnborraragenda);
+        }
+
 
         loadDetalleEventos(seccion);
 
@@ -177,18 +177,27 @@ public class DetalleEventoFragment extends Fragment {
 
     class AgregarAgenda implements View.OnClickListener {
         public void onClick(View v) {
-
-            if (strcursorEncontrado == 0) {
-                AgregarAgendaEvento();
-                strcursorEncontrado = 1;
+            if (!estaEnAgenda()) {
+                agregarAgendaEvento();
             } else {
-                Toast.makeText(getActivity(), "Ya se encuentra en tu agenda",
-                        Toast.LENGTH_SHORT).show();
+                borrarAgendaEvento();
             }
         }
     }
 
-    public void AgregarAgendaEvento() {
+    public boolean estaEnAgenda(){
+
+        AdminSQLiteAgenda dbHandlerAgenda;
+        dbHandlerAgenda = new AdminSQLiteAgenda(getActivity(), null, null, 1);
+        SQLiteDatabase db = dbHandlerAgenda.getWritableDatabase();
+        Cursor cursor = dbHandlerAgenda.BuscarpoId(idProgram);
+        if(cursor.getCount() > 0){
+            return true;
+        }
+        return false;
+    }
+
+    public void agregarAgendaEvento() {
 
         AdminSQLiteAgenda dbHandlerAgenda;
         dbHandlerAgenda = new AdminSQLiteAgenda(getActivity(), null, null, 1);
@@ -200,11 +209,24 @@ public class DetalleEventoFragment extends Fragment {
             Log.e("IMAGEN","no tiene");
         }
         dbHandlerAgenda.addEvento(idProgram, txtNombreEven.getText().toString(), strdia, horaIni, horaFin,seccion,strurl);
-
+        this.btnAgreAgenda.setBackgroundResource(R.drawable.btnborraragenda);
         Toast.makeText(getActivity(), "Se guardo en Mi AgendaFragment",
                 Toast.LENGTH_SHORT).show();
     }
 
+
+    public void borrarAgendaEvento(){
+
+        AdminSQLiteAgenda dbHandlerAgenda;
+        dbHandlerAgenda = new AdminSQLiteAgenda(getActivity(), null, null, 1);
+        SQLiteDatabase db = dbHandlerAgenda.getWritableDatabase();
+        //borramos el evento
+        dbHandlerAgenda.borrarEvento(idProgram,seccion);
+        this.btnAgreAgenda.setBackgroundResource(R.drawable.btnagregaragenda);
+        // si la borramos ponemos el boton en agregar de nuevo
+        Toast.makeText(getActivity(), "Evento removido de la agenda",
+                Toast.LENGTH_SHORT).show();
+    }
     class Localizar implements View.OnClickListener {
         public void onClick(View v) {
             Fragment fragment = new ClimaFragment();

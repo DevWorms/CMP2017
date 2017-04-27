@@ -78,7 +78,6 @@ function getElement(id) {
                 $("#stand").val(el.stand);
                 $("#telefono").val(el.telefono);
                 $("#url").val(el.url);
-                $("#maps_url").val(el.maps_url);
 
                 if (el.logo.nombre) {
                     $("label[for='archivo_logo']").text("Actualizar imágen");

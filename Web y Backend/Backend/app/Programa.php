@@ -20,7 +20,7 @@ class Programa extends Model
      */
     protected $fillable = [
         'id', 'categoria_id', 'foto_id', 'user_id', 'nombre', 'lugar', 'recomendaciones', 'latitude', 'longitude',
-        'fecha', 'hora_inicio', 'hora_fin', 'type'
+        'fecha', 'hora_inicio', 'hora_fin', 'type', 'maps_url'
     ];
 
     /**

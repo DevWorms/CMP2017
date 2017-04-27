@@ -110,7 +110,7 @@ function loadExpositorLocation(id) {
                     seat.style("fill", stand.color);
                 });
             }
-
+/*
             if (response.status == 2) {
                 var expositor = response.expositor;
                 if (expositor.maps_url) {
@@ -121,8 +121,9 @@ function loadExpositorLocation(id) {
                     });
                 }
             }
-
-            if (response.status == 0) {
+*/
+            //if (response.status == 0) {
+            else {
                 $("#error").fadeIn(1000, function() {
                     $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
                 });

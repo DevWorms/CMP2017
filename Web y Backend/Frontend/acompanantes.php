@@ -215,6 +215,9 @@
                         <div class="col-md-12">
                             <p><strong>Recomendaciones</strong>: ${recomendaciones}</p>
                         </div>
+                        <div class="col-md-12">
+                            <% if (maps_url) { %> <a href="${maps_url}" target="_blank">Ir al mapa</a> <% } %>
+                        </div>
                     </div>
                     <div class="col-md-2"></div>
                 </div>
@@ -241,7 +244,7 @@
 <script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
 <script src="js/js.php"></script>
 <script src="js/lodash.js"></script>
-<script src="js/acompañante.js"></script>
+<script src="js/acompanante.js"></script>
 </body>
 
 </html>

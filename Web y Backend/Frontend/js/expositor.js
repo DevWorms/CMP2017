@@ -40,7 +40,7 @@ function loadExpositor(id) {
                 } else {
                     $("#presentacion").html('');
                 }
-
+/*
                 if (expositor.maps_url) {
                     $("#mapa").html(
                         '<a type="button" href="' + expositor.maps_url + '" class="btn btn-primary btn-lg" style="background-color: #2b3f9c; width: 300px">' +
@@ -50,7 +50,7 @@ function loadExpositor(id) {
                 } else {
                     $("#mapa").html('');
                 }
-
+*/
             } else {
                 $("#error").fadeIn(1000, function() {
                     $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');

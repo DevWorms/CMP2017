@@ -180,9 +180,10 @@
                             <br>
 
                             <div class="form-group">
-                                <label for="">Agregar ubicación en el mapa</label>
+                                <label for="maps_url">Agregar ubicación en el mapa</label>
                                     <br><br>
-                                <button class="btn basico2">Examinar</button>
+                                <!--<button class="btn basico2">Examinar</button>-->
+                                <input type="text" name="maps_url" id="maps_url" class="form-control">
                             </div> 
                             <br>
                             

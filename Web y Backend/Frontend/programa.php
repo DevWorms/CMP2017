@@ -219,6 +219,9 @@
                         <div class="col-md-12">
                             <p><strong>Recomendaciones</strong>: ${recomendaciones}</p>
                         </div>
+                        <div class="col-md-12">
+                            <% if (maps_url) { %> <a href="${maps_url}" target="_blank">Ir al mapa</a> <% } %>
+                        </div>
                     </div>
                     <div class="col-md-2"></div>
                 </div>

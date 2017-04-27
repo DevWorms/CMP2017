@@ -77,6 +77,7 @@ function getElement(id) {
                 $("#hora_inicio").val(el.hora_inicio);
                 $("#hora_fin").val(el.hora_fin);
                 $("#recomendaciones").val(el.recomendaciones);
+                $("#maps_url").val(el.maps_url);
 
                 if (el.foto.nombre) {
                     $("label[for='archivo']").text("Actualizar imágen");
@@ -93,7 +94,7 @@ function getElement(id) {
             }
         },
         error : function (response) {
-            var response = $.parseJSON(response.responseText);
+            response = $.parseJSON(response.responseText);
             $("#error").fadeIn(1000, function() {
                 $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
             });

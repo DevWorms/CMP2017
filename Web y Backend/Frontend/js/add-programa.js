@@ -102,6 +102,7 @@ function getElement(id) {
                 $("#hora_inicio").val(el.hora_inicio);
                 $("#hora_fin").val(el.hora_fin);
                 $("#recomendaciones").val(el.recomendaciones);
+                $("#maps_url").val(el.maps_url);
 
                 if (el.foto.nombre) {
                     $("label[for='archivo']").text("Actualizar imágen");

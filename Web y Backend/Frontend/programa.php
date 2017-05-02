@@ -115,7 +115,7 @@
 
                                 <form name="" action="" method="post" class="form-inline" role="form">
                                     <div class="input-group">
-                                        <input type="date" class="form-control" placeholder="Buscar ..." name="q"
+                                        <input type="text" class="form-control" placeholder="Buscar por nombre del evento ..." name="q"
                                                id="q">
                                         <div class="input-group-btn">
                                             <button class="btn btn-default" type="button" name="search" id="search"><i

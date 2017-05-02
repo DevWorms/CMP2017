@@ -33,7 +33,7 @@ $app->post('/api/user/resetpassword', ['middleware' => 'cors', 'uses' => 'UserCo
  */
 $app->post('/api/programa/create', ['middleware' => 'cors', 'uses' => 'ProgramaController@create']);
 $app->get('/api/programa/all/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'ProgramaController@getAll']);
-$app->post('/api/programa/search', ['middleware' => 'cors', 'uses' => 'ProgramaController@getFiltro']);
+$app->post('/api/programa/search', ['middleware' => 'cors', 'uses' => 'ProgramaController@search']);
 $app->get('/api/programa/detail/{user_id}/{api_key}/{programa_id}', ['middleware' => 'cors', 'uses' => 'ProgramaController@getPrograma']);
 $app->post('/api/programa/update', ['middleware' => 'cors', 'uses' => 'ProgramaController@update']);
 $app->get('/api/programa/delete/{user_id}/{api_key}/{banner_id}', ['middleware' => 'cors', 'uses' => 'ProgramaController@delete']);
@@ -76,7 +76,7 @@ $app->get('/api/expositor/misfavoritos/{user_id}/{api_key}', ['middleware' => 'c
  */
 $app->post('/api/acompanantes/create', ['middleware' => 'cors', 'uses' => 'AcompanantesController@create']);
 $app->get('/api/acompanantes/all/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'AcompanantesController@getAll']);
-$app->post('/api/acompanantes/search', ['middleware' => 'cors', 'uses' => 'AcompanantesController@getFiltro']);
+$app->post('/api/acompanantes/search', ['middleware' => 'cors', 'uses' => 'AcompanantesController@search']);
 $app->get('/api/acompanantes/detail/{user_id}/{api_key}/{programa_id}', ['middleware' => 'cors', 'uses' => 'AcompanantesController@getPrograma']);
 $app->post('/api/acompanantes/update', ['middleware' => 'cors', 'uses' => 'AcompanantesController@update']);
 $app->get('/api/acompanantes/delete/{user_id}/{api_key}/{programa_id}', ['middleware' => 'cors', 'uses' => 'AcompanantesController@delete']);
@@ -89,7 +89,7 @@ $app->get('/api/acompanantes/paginate/{user_id}/{api_key}', ['middleware' => 'co
  */
 $app->post('/api/deportivos/create', ['middleware' => 'cors', 'uses' => 'SocioDeportivosController@create']);
 $app->get('/api/deportivos/all/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'SocioDeportivosController@getAll']);
-$app->post('/api/deportivos/search', ['middleware' => 'cors', 'uses' => 'SocioDeportivosController@getFiltro']);
+$app->post('/api/deportivos/search', ['middleware' => 'cors', 'uses' => 'SocioDeportivosController@search']);
 $app->get('/api/deportivos/detail/{user_id}/{api_key}/{programa_id}', ['middleware' => 'cors', 'uses' => 'SocioDeportivosController@getPrograma']);
 $app->post('/api/deportivos/update', ['middleware' => 'cors', 'uses' => 'SocioDeportivosController@update']);
 $app->get('/api/deportivos/delete/{user_id}/{api_key}/{programa_id}', ['middleware' => 'cors', 'uses' => 'SocioDeportivosController@delete']);

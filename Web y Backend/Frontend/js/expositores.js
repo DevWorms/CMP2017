@@ -99,7 +99,7 @@ function loadExpostitores(url) {
 }
 
 function buscar() {
-    event.preventDefault();
+    //event.preventDefault();
 
     $.ajax({
         type : 'POST',

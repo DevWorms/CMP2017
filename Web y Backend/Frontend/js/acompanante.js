@@ -113,7 +113,7 @@ function loadExpostitores(url) {
 }
 
 function buscar() {
-    event.preventDefault();
+    //event.preventDefault();
 
     $.ajax({
         type : 'POST',
@@ -121,7 +121,7 @@ function buscar() {
         data : {
             user_id: user_id,
             api_key: api_key,
-            fecha: $('#q').val()
+            search: $('#q').val()
         },
         success :  function(response) {
             if (response.status == 1) {

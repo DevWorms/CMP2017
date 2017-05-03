@@ -105,6 +105,7 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div id="error"></div>
+                <div class="modal" id="wait"></div>
                 <div class="row page-header">
                    <div class="col-xs-12 col-md-offset-1 col-md-4">
                         <h3 style="color: #10375e;">Puebla</h3>

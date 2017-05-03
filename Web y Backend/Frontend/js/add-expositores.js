@@ -33,6 +33,9 @@ $('document').ready(function() {
             url: url,
             type: 'POST',
             data: formData,
+            beforeSend: function () {
+                $("#wait").show();
+            },
             success: function (data) {
                 $("#error").fadeIn(1000, function() {
                     $("#error").html('<div class="alert alert-success"> &nbsp; ' + data.mensaje + '</div>');
@@ -48,6 +51,9 @@ $('document').ready(function() {
                 $("#error").fadeIn(1000, function() {
                     $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
                 });
+            },
+            complete: function () {
+                $("#wait").hide();
             }
         });
         return false;
@@ -67,6 +73,9 @@ function getElement(id) {
     $.ajax({
         type : 'GET',
         url  : API_URL + 'expositor/detail/' + user_id + '/' + api_key + '/' + id,
+        beforeSend: function () {
+            $("#wait").show();
+        },
         success :  function(response) {
             if (response.status === 1) {
                 var el = response.expositor;
@@ -104,6 +113,9 @@ function getElement(id) {
                 $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
             });
             $("#crearExpositor input, textarea, button").prop("disabled", true);
+        },
+        complete: function () {
+            $("#wait").hide();
         }
     });
 }

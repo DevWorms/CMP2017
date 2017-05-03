@@ -16,6 +16,9 @@ $('document').ready(function() {
             url: API_URL + 'puebla/mapa/upload',
             type: 'POST',
             data: formData,
+            beforeSend: function () {
+                $("#wait").show();
+            },
             success: function (data) {
                 $("#error").fadeIn(1000, function() {
                     $("#error").html('<div class="alert alert-success"> &nbsp; ' + data.mensaje + '</div>');
@@ -31,6 +34,9 @@ $('document').ready(function() {
                 $("#error").fadeIn(1000, function() {
                     $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
                 });
+            },
+            complete: function () {
+                $("#wait").hide();
             }
         });
         return false;
@@ -39,6 +45,9 @@ $('document').ready(function() {
     $.ajax({
         url: API_URL + 'puebla/mapa/' + user_id + '/' + api_key,
         type: 'GET',
+        beforeSend: function () {
+            $("#wait").show();
+        },
         success: function (data) {
             if (data.status === 1) {
                 $("label[for='mapa']").text("Actualizar mapa");
@@ -50,6 +59,9 @@ $('document').ready(function() {
             $("#error").fadeIn(1000, function() {
                 $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
             });
+        },
+        complete: function () {
+            $("#wait").hide();
         }
     });
 });

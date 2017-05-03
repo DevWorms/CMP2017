@@ -36,6 +36,9 @@ $('document').ready(function() {
             url: url,
             type: 'POST',
             data: formData,
+            beforeSend: function () {
+                $("#wait").show();
+            },
             success: function (data) {
                 $("#error").fadeIn(1000, function() {
                     $("#error").html('<div class="alert alert-success"> &nbsp; ' + data.mensaje + '</div>');
@@ -53,6 +56,9 @@ $('document').ready(function() {
                 $("#error").fadeIn(1000, function() {
                     $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
                 });
+            },
+            complete: function () {
+                $("#wait").hide();
             }
         });
         return false;
@@ -63,6 +69,9 @@ function loadExpostitores(url) {
     $.ajax({
         type : 'GET',
         url  : decodeURIComponent(url),
+        beforeSend: function () {
+            $("#wait").show();
+        },
         success :  function(response) {
             if (response.status === 1) {
                 var table = document.getElementById("tbl_eventos");
@@ -98,6 +107,9 @@ function loadExpostitores(url) {
             $("#error").fadeIn(1000, function() {
                 $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
             });
+        },
+        complete: function () {
+            $("#wait").hide();
         }
     });
 }
@@ -108,6 +120,9 @@ function showAll() {
     $.ajax({
         type : 'GET',
         url  : API_URL + 'encuesta/all/' + user_id + '/' + api_key,
+        beforeSend: function () {
+            $("#wait").show();
+        },
         success :  function(response) {
             if (response.status === 1) {
                 var table = document.getElementById("tbl_eventos");
@@ -134,6 +149,9 @@ function showAll() {
         },
         error : function (response) {
             console.log(response);
+        },
+        complete: function () {
+            $("#wait").hide();
         }
     });
 }
@@ -145,6 +163,9 @@ function deletePrograma(id) {
         $.ajax({
             type : 'GET',
             url  : API_URL + 'encuesta/delete/' + user_id + '/' + api_key + '/' + id,
+            beforeSend: function () {
+                $("#wait").show();
+            },
             success :  function(response) {
                 if (response.status === 1) {
                     $("#error").fadeIn(1000, function() {
@@ -166,6 +187,9 @@ function deletePrograma(id) {
                 $("#error").fadeIn(1000, function() {
                     $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
                 });
+            },
+            complete: function () {
+                $("#wait").hide();
             }
         });
     }
@@ -188,6 +212,9 @@ function getElement(id) {
     $.ajax({
         type : 'GET',
         url  : API_URL + 'encuesta/detail/' + user_id + '/' + api_key + '/' + id,
+        beforeSend: function () {
+            $("#wait").show();
+        },
         success :  function(response) {
             if (response.status === 1) {
                 var el = response.encuesta;
@@ -229,6 +256,9 @@ function getElement(id) {
                 $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
             });
             $("#crearEvento input, textarea, button").prop("disabled", true);
+        },
+        complete: function () {
+            $("#wait").hide();
         }
     });
 }

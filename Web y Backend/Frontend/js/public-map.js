@@ -12,6 +12,9 @@ function seating(xml) {
     $.ajax({
         url: API_URL + 'mapa/v2',
         type: 'GET',
+        beforeSend: function () {
+            $("#wait").show();
+        },
         success: function (response) {
             var expositores = response.expositores;
 
@@ -75,6 +78,9 @@ function seating(xml) {
             $("#error").fadeIn(1000, function() {
                 $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
             });
+        },
+        complete: function () {
+            $("#wait").hide();
         }
     });
 }
@@ -83,6 +89,9 @@ function loadExpositorLocation(id) {
     $.ajax({
         url: API_URL + 'mapa/expositores/public/expositor/' + id,
         type: 'GET',
+        beforeSend: function () {
+            $("#wait").show();
+        },
         success: function (response) {
             if (response.status == 1) {
                 var expositor = response.expositor;
@@ -134,6 +143,9 @@ function loadExpositorLocation(id) {
             $("#error").fadeIn(1000, function() {
                 $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
             });
+        },
+        complete: function () {
+            $("#wait").hide();
         }
     });
 }

@@ -105,9 +105,9 @@
 
     <!-- Contenido -->
     <div id="page-wrapper">
-
         <div class="container-fluid">
-
+            <div id="error"></div>
+            <div class="modal" id="wait"></div>
             <div class="row page-header">
                 <div class="col-xs-12 col-md-6">
                     <form action="">

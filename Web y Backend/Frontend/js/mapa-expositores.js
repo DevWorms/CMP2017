@@ -205,6 +205,9 @@ function saveEstantes(estantes, id) {
             expositor_id: id,
             color: "#" + $("#color").val()
         },
+        beforeSend: function () {
+            $("#wait").show();
+        },
         success :  function(response) {
             if (response.status === 1) {
                 $("#error").fadeIn(1000, function() {
@@ -226,6 +229,9 @@ function saveEstantes(estantes, id) {
             $("#error").fadeIn(1000, function() {
                 $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
             });
+        },
+        complete: function () {
+            $("#wait").hide();
         }
     });
 }
@@ -234,6 +240,9 @@ function loadExpositores() {
     $.ajax({
         type : 'GET',
         url  : API_URL + 'expositor/all/' + user_id + '/' + api_key,
+        beforeSend: function () {
+            $("#wait").show();
+        },
         success :  function(response) {
             if (response.status === 1) {
                 response.expositores.forEach(function (expositor) {
@@ -253,6 +262,9 @@ function loadExpositores() {
             $("#error").fadeIn(1000, function() {
                 $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
             });
+        },
+        complete: function () {
+            $("#wait").hide();
         }
     });
 }
@@ -265,6 +277,9 @@ function seating(xml) {
     $.ajax({
         url: API_URL + 'mapa/expositores/' + user_id + '/' + api_key,
         type: 'GET',
+        beforeSend: function () {
+            $("#wait").show();
+        },
         success: function (response) {
             stands = response.stands;
             seats.selectAll("rect").each(function() {
@@ -300,6 +315,9 @@ function seating(xml) {
             $("#error").fadeIn(1000, function() {
                 $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
             });
+        },
+        complete: function () {
+            $("#wait").hide();
         }
     });
 }
@@ -343,6 +361,9 @@ function deleteReservation(estantes) {
             api_key: api_key,
             estantes: estantes
         },
+        beforeSend: function () {
+            $("#wait").show();
+        },
         success :  function(response) {
             if (response.status == 1) {
                 $("#error").fadeIn(1000, function() {
@@ -361,6 +382,9 @@ function deleteReservation(estantes) {
             $("#error").fadeIn(1000, function() {
                 $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
             });
+        },
+        complete: function () {
+            $("#wait").hide();
         }
     });
 }

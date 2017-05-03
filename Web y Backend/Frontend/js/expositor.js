@@ -16,6 +16,9 @@ function loadExpositor(id) {
     $.ajax({
         url: API_URL + 'mapa/expositores/public/expositor/' + id,
         type: 'GET',
+        beforeSend: function () {
+            $("#wait").show();
+        },
         success: function (response) {
             $("#error").html("");
             if (response.status != 0) {
@@ -62,6 +65,9 @@ function loadExpositor(id) {
             $("#error").fadeIn(1000, function() {
                 $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
             });
+        },
+        complete: function () {
+            $("#wait").hide();
         }
     });
 }

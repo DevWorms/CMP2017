@@ -171,6 +171,7 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div id="error"></div>
+                <div class="modal" id="wait"></div>
                 <div class="row">
                     <form>
                         <div class="col-md-2">

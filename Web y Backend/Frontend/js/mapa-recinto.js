@@ -16,6 +16,9 @@ $('document').ready(function() {
             url: API_URL + 'mapa/recinto/upload',
             type: 'POST',
             data: formData,
+            beforeSend: function () {
+                $("#wait").show();
+            },
             success: function (data) {
                 $("#error").fadeIn(1000, function() {
                     $("#error").html('<div class="alert alert-success"> &nbsp; ' + data.mensaje + '</div>');
@@ -36,6 +39,9 @@ $('document').ready(function() {
                 $("#error").fadeIn(1000, function() {
                     $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
                 });
+            },
+            complete: function () {
+                $("#wait").hide();
             }
         });
         return false;
@@ -44,6 +50,9 @@ $('document').ready(function() {
     $.ajax({
         url: API_URL + 'mapa/recinto/' + user_id + '/' + api_key,
         type: 'GET',
+        beforeSend: function () {
+            $("#wait").show();
+        },
         success: function (data) {
             if (data.mapa.url) {
                 $("label[for='archivo']").text("Actualizar mapa");
@@ -55,6 +64,9 @@ $('document').ready(function() {
             $("#error").fadeIn(1000, function() {
                 $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
             });
+        },
+        complete: function () {
+            $("#wait").hide();
         }
     });
 });

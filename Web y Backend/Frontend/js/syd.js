@@ -17,6 +17,9 @@ function showAll() {
     $.ajax({
         type : 'GET',
         url  : API_URL + 'deportivos/all/' + user_id + '/' + api_key,
+        beforeSend: function () {
+            $("#wait").show();
+        },
         success :  function(response) {
             if (response.status == 1) {
                 var table = document.getElementById("tbl_syd");
@@ -54,6 +57,9 @@ function showAll() {
         },
         error : function (response) {
             console.log(response);
+        },
+        complete: function () {
+            $("#wait").hide();
         }
     });
 }
@@ -62,6 +68,9 @@ function loadExpostitores(url) {
     $.ajax({
         type : 'GET',
         url  : decodeURIComponent(url),
+        beforeSend: function () {
+            $("#wait").show();
+        },
         success :  function(response) {
             if (response.status == 1) {
                 var table = document.getElementById("tbl_syd");
@@ -108,6 +117,9 @@ function loadExpostitores(url) {
             $("#error").fadeIn(1000, function() {
                 $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
             });
+        },
+        complete: function () {
+            $("#wait").hide();
         }
     });
 }
@@ -122,6 +134,9 @@ function buscar() {
             user_id: user_id,
             api_key: api_key,
             search: $('#q').val()
+        },
+        beforeSend: function () {
+            $("#wait").show();
         },
         success :  function(response) {
             if (response.status == 1) {
@@ -167,6 +182,9 @@ function buscar() {
         },
         error : function (response) {
             console.log(response);
+        },
+        complete: function () {
+            $("#wait").hide();
         }
     });
 }
@@ -187,6 +205,9 @@ function deletePrograma(id) {
         $.ajax({
             type : 'GET',
             url  : API_URL + 'deportivos/delete/' + user_id + '/' + api_key + '/' + id,
+            beforeSend: function () {
+                $("#wait").show();
+            },
             success :  function(response) {
                 if (response.status == 1) {
                     $("#error").fadeIn(1000, function() {
@@ -208,6 +229,9 @@ function deletePrograma(id) {
                 $("#error").fadeIn(1000, function() {
                     $("#error").html('<div class="alert alert-danger"> &nbsp; ' + response.mensaje + '</div>');
                 });
+            },
+            complete: function () {
+                $("#wait").hide();
             }
         });
     }

@@ -73,6 +73,7 @@
                 </div>
             </div>
             <div class="col-md-2"></div>
+            <div class="modal" id="wait"></div>
         </div>
     </div>
 </div>

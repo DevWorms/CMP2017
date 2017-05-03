@@ -61,14 +61,21 @@ function seating(xml) {
 
                 var r = seats.select("#estante_" + estantes[0].id);
 
-                gE
-                    .append("text")
-                    .text(expositor.nombre)
-                    //.attr("transform", "matrix(" + expositor.coords + ")")
-                    .attr("font-size", 5)
-                    .attr("id", "txt_" + expositor.id)
-                    .attr("x", r.attr("x"))
-                    .attr("y", parseInt(r.attr("y")) + 15);
+                var yPosition = parseInt(r.attr("y")) + 10;
+                var strings = expositor.nombre.split(" ");
+
+                strings.forEach(function (string) {
+                    gE
+                        .append("text")
+                        .text(string)
+                        //.attr("transform", "matrix(" + expositor.coords + ")")
+                        .attr("font-size", 5)
+                        .attr("id", "txt_" + expositor.id)
+                        .attr("x", r.attr("x"))
+                        .attr("y", yPosition);
+
+                    yPosition = yPosition + 10;
+                });
             });
 
             handleResevations(data);

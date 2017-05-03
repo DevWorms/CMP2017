@@ -77,9 +77,41 @@
       <file leaf-file-name="acompanantes-add-evento.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/acompanantes-add-evento.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69">
+            <state relative-caret-position="120">
               <caret line="107" column="51" lean-forward="true" selection-start-line="106" selection-start-column="38" selection-end-line="107" selection-end-column="51" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="encuestas.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/encuestas.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1549">
+              <caret line="109" column="47" lean-forward="false" selection-start-line="109" selection-start-column="47" selection-end-line="109" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="encuesta.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/encuesta.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="537">
+              <caret line="216" column="10" lean-forward="false" selection-start-line="216" selection-start-column="10" selection-end-line="216" selection-end-column="10" />
+              <folding>
+                <marker date="1493781157078" expanded="true" signature="262:268" ph=" " />
+                <marker date="1493781157078" expanded="true" signature="1398:1404" ph=" " />
+                <marker date="1493781157078" expanded="true" signature="1904:1910" ph=" " />
+                <marker date="1493781157078" expanded="true" signature="4072:4078" ph=" " />
+                <marker date="1493781157078" expanded="true" signature="4313:4319" ph=" " />
+                <marker date="1493781157078" expanded="true" signature="5904:5910" ph=" " />
+                <marker date="1493781157078" expanded="true" signature="6717:6723" ph=" " />
+                <marker date="1493781157078" expanded="true" signature="7111:7117" ph=" " />
+                <marker date="1493781157078" expanded="true" signature="7376:7382" ph=" " />
+                <marker date="1493781157078" expanded="true" signature="9408:9414" ph=" " />
+                <marker date="1493781157078" expanded="true" signature="9791:9797" ph=" " />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -94,7 +126,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="transporte.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="transporte.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/transporte.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="442">
@@ -109,6 +141,16 @@
                 <marker date="1493782420246" expanded="true" signature="7672:7678" ph=" " />
                 <marker date="1493782420246" expanded="true" signature="7937:7943" ph=" " />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css/main.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="202">
+              <caret line="234" column="30" lean-forward="true" selection-start-line="234" selection-start-column="30" selection-end-line="234" selection-end-column="30" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -160,7 +202,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/css/seats.css" />
         <option value="$PROJECT_DIR$/img/plano.svg" />
         <option value="$PROJECT_DIR$/js/add-transporte.js" />
         <option value="$PROJECT_DIR$/agregar-transportacion.php" />
@@ -211,6 +252,7 @@
         <option value="$PROJECT_DIR$/js/add-syd.js" />
         <option value="$PROJECT_DIR$/transportacion.php" />
         <option value="$PROJECT_DIR$/js/transporte.js" />
+        <option value="$PROJECT_DIR$/encuestas.php" />
       </list>
     </option>
   </component>
@@ -442,12 +484,12 @@
       <workItem from="1493223762248" duration="4983000" />
       <workItem from="1493309585139" duration="2481000" />
       <workItem from="1493762913665" duration="106000" />
-      <workItem from="1493763316078" duration="7119000" />
+      <workItem from="1493763316078" duration="7452000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="216390000" />
+    <option name="totallyTimeSpent" value="216723000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -502,14 +544,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/js/js.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/login.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="262">
@@ -599,14 +633,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-342">
-          <caret line="202" column="28" lean-forward="false" selection-start-line="202" selection-start-column="28" selection-end-line="202" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/acompanante.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -691,26 +717,6 @@
         <state relative-caret-position="-1396">
           <caret line="108" column="51" lean-forward="false" selection-start-line="108" selection-start-column="51" selection-end-line="108" selection-end-column="51" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/encuesta.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-316">
-          <caret line="216" column="10" lean-forward="false" selection-start-line="216" selection-start-column="10" selection-end-line="216" selection-end-column="10" />
-          <folding>
-            <marker date="1493781157078" expanded="true" signature="262:268" ph=" " />
-            <marker date="1493781157078" expanded="true" signature="1398:1404" ph=" " />
-            <marker date="1493781157078" expanded="true" signature="1904:1910" ph=" " />
-            <marker date="1493781157078" expanded="true" signature="4072:4078" ph=" " />
-            <marker date="1493781157078" expanded="true" signature="4313:4319" ph=" " />
-            <marker date="1493781157078" expanded="true" signature="5904:5910" ph=" " />
-            <marker date="1493781157078" expanded="true" signature="6717:6723" ph=" " />
-            <marker date="1493781157078" expanded="true" signature="7111:7117" ph=" " />
-            <marker date="1493781157078" expanded="true" signature="7376:7382" ph=" " />
-            <marker date="1493781157078" expanded="true" signature="9408:9414" ph=" " />
-            <marker date="1493781157078" expanded="true" signature="9791:9797" ph=" " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1036,22 +1042,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/acompanantes-add-evento.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="107" column="51" lean-forward="true" selection-start-line="106" selection-start-column="38" selection-end-line="107" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/transportacion.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1564">
-          <caret line="109" column="47" lean-forward="false" selection-start-line="109" selection-start-column="47" selection-end-line="109" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/add-programa.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="279">
@@ -1064,6 +1054,14 @@
             <marker date="1493768277109" expanded="true" signature="4223:4229" ph=" " />
             <marker date="1493768277109" expanded="true" signature="4606:4612" ph=" " />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="234" column="30" lean-forward="true" selection-start-line="234" selection-start-column="30" selection-end-line="234" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1081,6 +1079,50 @@
             <marker date="1493782420246" expanded="true" signature="7672:7678" ph=" " />
             <marker date="1493782420246" expanded="true" signature="7937:7943" ph=" " />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/transportacion.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1564">
+          <caret line="109" column="47" lean-forward="false" selection-start-line="109" selection-start-column="47" selection-end-line="109" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/acompanantes-add-evento.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="107" column="51" lean-forward="true" selection-start-line="106" selection-start-column="38" selection-end-line="107" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/encuesta.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="537">
+          <caret line="216" column="10" lean-forward="false" selection-start-line="216" selection-start-column="10" selection-end-line="216" selection-end-column="10" />
+          <folding>
+            <marker date="1493781157078" expanded="true" signature="262:268" ph=" " />
+            <marker date="1493781157078" expanded="true" signature="1398:1404" ph=" " />
+            <marker date="1493781157078" expanded="true" signature="1904:1910" ph=" " />
+            <marker date="1493781157078" expanded="true" signature="4072:4078" ph=" " />
+            <marker date="1493781157078" expanded="true" signature="4313:4319" ph=" " />
+            <marker date="1493781157078" expanded="true" signature="5904:5910" ph=" " />
+            <marker date="1493781157078" expanded="true" signature="6717:6723" ph=" " />
+            <marker date="1493781157078" expanded="true" signature="7111:7117" ph=" " />
+            <marker date="1493781157078" expanded="true" signature="7376:7382" ph=" " />
+            <marker date="1493781157078" expanded="true" signature="9408:9414" ph=" " />
+            <marker date="1493781157078" expanded="true" signature="9791:9797" ph=" " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/encuestas.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1549">
+          <caret line="109" column="47" lean-forward="false" selection-start-line="109" selection-start-column="47" selection-end-line="109" selection-end-column="47" />
+          <folding />
         </state>
       </provider>
     </entry>

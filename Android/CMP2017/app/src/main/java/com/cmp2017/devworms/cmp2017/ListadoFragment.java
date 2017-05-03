@@ -43,16 +43,16 @@ public class ListadoFragment extends Fragment {
     ConnectionDetector cd;
     Cursor cursor;
     ArrayList<HashMap<String, String>> albumsList;
-
+    TextView txtTitulo;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_listado, container, false);
         SharedPreferences sp = getActivity().getSharedPreferences("prefe", Activity.MODE_PRIVATE);
         apiKey = sp.getString("APIkey","");
         userId = sp.getString("IdUser","");
-       lista=  (ListView) view.findViewById(R.id.lvLista);
+        lista=  (ListView) view.findViewById(R.id.lvLista);
         nombre = getArguments() != null ? getArguments().getString("nombre"):"Resultados";
-        TextView txtTitulo= (TextView) view.findViewById(R.id.txtTituloListado);
+        txtTitulo= (TextView) view.findViewById(R.id.txtTituloListado);
         txtTitulo.setText(nombre);
         seccion =  getArguments().getString("seccion");
         cd = new ConnectionDetector(getActivity());
@@ -126,7 +126,7 @@ public class ListadoFragment extends Fragment {
 
     //metodo para obtener los programos de acuerdo a la busqeda, BASE DE DATOS
     public void getListaProgramas(String categoria, String fechaPrograma){
-
+        txtTitulo.setText("Programas");
         // obtengo el json de la base de datos
         AdminSQLiteOffline dbHandlerOffline;
         dbHandlerOffline = new AdminSQLiteOffline(getActivity(), null, null, 1);
@@ -214,7 +214,7 @@ public class ListadoFragment extends Fragment {
         }
 
     }
-    
+
     class getListaAcompSocial extends AsyncTask<String, String, String> {
 
         /**

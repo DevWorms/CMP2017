@@ -235,7 +235,7 @@ ul.alert-dropdown {
     background-color: #DAD8D8;
     border-color: #b2b2b2;
 }
-.modal {
+.modalLoading {
     display:    none;
     position:   fixed;
     z-index:    1000;
@@ -244,7 +244,7 @@ ul.alert-dropdown {
     height:     100%;
     width:      100%;
     background: rgba( 255, 255, 255, .8 )
-    url('http://i.stack.imgur.com/FhHRx.gif')
+    url('../img/FhHRx.gif')
     50% 50%
     no-repeat;
 }

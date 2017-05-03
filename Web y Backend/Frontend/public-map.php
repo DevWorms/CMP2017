@@ -100,7 +100,7 @@
 
 <body>
     <div id="error"></div>
-    <div class="modal" id="wait"></div>
+    <div class="modalLoading" id="wait"></div>
     <div class="row">
         <div class="room" id="room"></div>
     </div>

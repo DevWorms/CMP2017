@@ -105,6 +105,7 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div id="error"></div>
+                <div class="modalLoading" id="wait"></div>
                 <input type="hidden" id="id">
                 <form enctype="multipart/form-data" method="POST" id="crearPatrocinador" name="crearPatrocinador">
                     <div class="row page-header">

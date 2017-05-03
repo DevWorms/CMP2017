@@ -105,6 +105,7 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div id="error"></div>
+                <div class="modalLoading" id="wait"></div>
                 <input type="hidden" id="id" value="">
                 <div class="row page-header__2">
                     <div class="col-md-6 col-md-offset-1">

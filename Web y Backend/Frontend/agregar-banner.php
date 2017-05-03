@@ -105,7 +105,7 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div id="error"></div>
-                <div class="modal" id="wait"></div>
+                <div class="modalLoading" id="wait"></div>
                 <form enctype="multipart/form-data" method="POST" id="crearBanner"name="crearBanner">
                     <div class="row page-header">
                         <div class="col-xs-12 col-md-5 col-md-offset-1">

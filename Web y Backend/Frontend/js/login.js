@@ -1,7 +1,7 @@
 //var baseUrl = "http://congreso.digital";
 var baseUrl = "http://localhost:8000";
-var api_base = "http://cmp.devworms.com/api/";
-//var api_base = "http://localhost:8001/api/";
+//var api_base = "http://cmp.devworms.com/api/";
+var api_base = "http://localhost:8001/api/";
 
 $("#login").click(
     function () {

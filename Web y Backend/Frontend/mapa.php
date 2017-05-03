@@ -103,7 +103,7 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div id="error"></div>
-                <div class="modal" id="wait"></div>
+                <div class="modalLoading" id="wait"></div>
                 <div class="row custom-page-header">
                    <div class="col-xs-offset-1 col-md-offset-1">
                         <h3 style="color: #10375e;">Mapa</h3>

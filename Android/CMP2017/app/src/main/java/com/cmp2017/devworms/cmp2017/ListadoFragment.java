@@ -32,8 +32,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class ListadoFragment extends Fragment {
+
     String seccion, nombre, diaProgram, userId, apiKey, cateId, fecha, resp;
     int tipoEvento;
     ProgressDialog pDialog;
@@ -41,6 +43,7 @@ public class ListadoFragment extends Fragment {
     ConnectionDetector cd;
     Cursor cursor;
     ArrayList<HashMap<String, String>> albumsList;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_listado, container, false);
@@ -80,17 +83,9 @@ public class ListadoFragment extends Fragment {
             }else {
                 fecha = "";
             }
-            if (!cd.isConnectingToInternet()) {
-                // Internet Connection is not present
-                Toast.makeText(getActivity(), "Se necesita internet", Toast.LENGTH_SHORT).show();
-                // stop executing code by return
 
-            }else{
-
-                new getListaPrograma().execute();
-            }
-
-
+            // llamamos el metodo que carga desde la BD
+            getListaProgramas(cateId,fecha);
 
         }else if(seccion.equals("acomp") || seccion.equals("social")){
             new getListaAcompSocial().execute();
@@ -129,146 +124,97 @@ public class ListadoFragment extends Fragment {
 
     }
 
-    class getListaPrograma extends AsyncTask<String, String, String> {
+    //metodo para obtener los programos de acuerdo a la busqeda, BASE DE DATOS
+    public void getListaProgramas(String categoria, String fechaPrograma){
 
-        /**
-         * Before starting background thread Show Progress Dialog
-         */
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            pDialog = new ProgressDialog(getActivity());
-            pDialog.setMessage("Buscando");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(false);
-            pDialog.show();
-        }
+        // obtengo el json de la base de datos
+        AdminSQLiteOffline dbHandlerOffline;
+        dbHandlerOffline = new AdminSQLiteOffline(getActivity(), null, null, 1);
+        Cursor crsProgramas = dbHandlerOffline.getJsonProgramas();
 
-        /**
-         * getting Albums JSON
-         */
-        protected String doInBackground(String... args) {
-            // Building Parameters
-            //add your data
-            String body= "";
+        // lo guardamos en un string para parsearlo
+        String strProgramas = crsProgramas.getString(0);
 
+        JSONObject jProgramas = null;
+        JSONArray aProgramas = null;
+        String actFecha="";
 
-            body = "{\n\t\"user_id\" : \"" + userId + "\",\n\t\"api_key\" : \"" + apiKey + "\",\n\t\"categoria_id\" : \"" + cateId + "\",\n\t\"fecha\" : \"" + fecha + "\"\n}\n\n";
+        try{
+            jProgramas = new JSONObject(strProgramas);
+            aProgramas = jProgramas.getJSONArray("programas");
+            albumsList = new ArrayList<HashMap<String, String>>();
+            for (int i = 0; i< aProgramas.length() ; i++) {
+                JSONObject jTemp = aProgramas.getJSONObject(i);
+                JSONObject jCategoria = new JSONObject(jTemp.getString("categoria"));
+                // filtro misma categoria misma fecha
+                if((jCategoria.getString("id").equals(categoria) || categoria.equals("")) && (jTemp.getString("fecha").equals(fechaPrograma) || fechaPrograma.equals(""))){
 
-            JSONParser jsp = new JSONParser();
+                    HashMap<String, String> map = new HashMap<String, String>();
 
+                    // Storing each json item values in variable
+                    String id = jTemp.getString("id");
+                    String name = jTemp.getString("nombre");
+                    String lugar = jTemp.getString("lugar");
+                    String recomendaciones = jTemp.getString("recomendaciones");
+                    String hora_inicio = jTemp.getString("hora_inicio");
+                    String hora_fin = jTemp.getString("hora_fin");
+                    String proFecha = jTemp.getString("fecha");
+                    Log.e("FECHAFILTRADA",proFecha);
+                    String fechaLetra = "";
 
+                    if(proFecha.equals("2017-06-05")){
+                        fechaLetra = "Lunes 5 de Junio";
+                    }else if(proFecha.equals("2017-06-06")){
+                        fechaLetra = "Martes 6 de Junio";
+                    }else if(proFecha.equals("2017-06-07")){
+                        fechaLetra = "Miercoles 7 de Junio";
+                    }else if(proFecha.equals("2017-06-08")){
+                        fechaLetra = "Jueves 8 de Junio";
+                    }else if(proFecha.equals("2017-06-09")){
+                        fechaLetra = "Viernes 9 de Junio";
+                    }else if(proFecha.equals("2017-06-10")){
+                        fechaLetra = "Sabado 10 de Junio";
+                    }
+                    if(diaProgram.equals("Todos")){
 
-            String respuesta= jsp.makeHttpRequest("http://cmp.devworms.com/api/programa/search","POST",body,"");
-            Log.d("LoginRes : ", "> " + respuesta);
-            if (respuesta != "error") {
-                try {
-                    JSONObject json = new JSONObject(respuesta);
-                    String programs = json.getString("programas");
-
-                    JSONArray jsonProgramas = new JSONArray(programs);
-
-                    int cuanto = jsonProgramas.length();
-                    albumsList = new ArrayList<HashMap<String, String>>();
-                    Log.d("ListadoProgra : ", "> " + cuanto);
-                    String actFecha="";
-                    // looping through All albums
-                    for (int i = 0; i <= jsonProgramas.length(); i++) {
-                        JSONObject c = jsonProgramas.getJSONObject(i);
-
-
-                        // creating new HashMap
-                        HashMap<String, String> map = new HashMap<String, String>();
-
-                        // Storing each json item values in variable
-                        String id = c.getString("id");
-                        String name = c.getString("nombre");
-                        String lugar = c.getString("lugar");
-                        String recomendaciones = c.getString("recomendaciones");
-                        String hora_inicio = c.getString("hora_inicio");
-                        String hora_fin = c.getString("hora_fin");
-                        String proFecha = c.getString("fecha");
-
-                        String fechaLetra = "";
-
-                        if(proFecha.equals("2017-06-05")){
-                            fechaLetra = "Lunes 5 de Junio";
-                        }else if(proFecha.equals("2017-06-06")){
-                            fechaLetra = "Martes 6 de Junio";
-                        }else if(proFecha.equals("2017-06-07")){
-                            fechaLetra = "Miercoles 7 de Junio";
-                        }else if(proFecha.equals("2017-06-08")){
-                            fechaLetra = "Jueves 8 de Junio";
-                        }else if(proFecha.equals("2017-06-09")){
-                            fechaLetra = "Viernes 9 de Junio";
-                        }else if(proFecha.equals("2017-06-10")){
-                            fechaLetra = "Sabado 10 de Junio";
-                        }
-                        if(diaProgram.equals("Todos")){
-                            if (actFecha.equals("")||  !actFecha.equals(proFecha)){
-                                map.put("progFecha", fechaLetra);
-                                actFecha = proFecha;
-                            }
-
-                            map.put("progId", id);
-
-
-                            map.put("progName", name);
-                        }else{
-                            map.put("progId", id);
-                            if (i==0){
-                                map.put("progFecha", diaProgram);
-                            }
-
-                            map.put("progName", name);
+                        if (actFecha.equals("")||  !actFecha.equals(proFecha)){
+                            map.put("progFecha", fechaLetra);
+                            actFecha = proFecha;
                         }
 
+                        map.put("progId", id);
+                        map.put("progName", name);
 
-                        // adding HashList to ArrayList
-                        albumsList.add(map);
+                    }else{
 
+                        map.put("progId", id);
+
+                        if (i==0){
+                            map.put("progFecha", diaProgram);
+                        }
+
+                        map.put("progName", name);
                     }
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    albumsList.add(map);
                 }
-                resp = "ok";
-
-
-            } else {
-                resp = "No hay resultados";
             }
 
+            // ya que seteamos los valores pasamos al adapter
+            ListAdapter adapter = new SimpleAdapter(
+                    getActivity(), albumsList,
+                    R.layout.formato_lista_resultados, new String[] { "progFecha",
+                    "progName","progId" }, new int[] {
+                    R.id.txtFecha, R.id.txtTitulo , R.id.txtid});
 
-            return null;
+            lista.setAdapter(adapter);
+
+        }catch(JSONException jex){
+            Log.e("Programas BD",jex.getMessage());
         }
 
-
-        /**
-         * After completing background task Dismiss the progress dialog
-         **/
-        protected void onPostExecute(String file_url) {
-            // dismiss the dialog after getting all albums
-            Log.d("Login : ", "> " + resp);
-            pDialog.dismiss();
-            if (resp.equals("ok") ) {
-                ListAdapter adapter = new SimpleAdapter(
-                        getActivity(), albumsList,
-                        R.layout.formato_lista_resultados, new String[] { "progFecha",
-                        "progName","progId" }, new int[] {
-                        R.id.txtFecha, R.id.txtTitulo , R.id.txtid});
-
-                // updating listview
-
-                    lista.setAdapter(adapter);
-
-            }
-            // updating UI from Background Thread
-
-
-        }
     }
-
+    
     class getListaAcompSocial extends AsyncTask<String, String, String> {
 
         /**

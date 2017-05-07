@@ -142,20 +142,21 @@ $("document").ready(function () {
     $("#asignar").click(function () {
         event.preventDefault();
 
-        var rgb = hexToRgb("#" + $("#color").val());
+        //var rgb = hexToRgb("#" + $("#color").val());
         //color = "#" + $("#color").val();
-        var r = $('rect[style*="fill: rgb(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ');"]');
+        //var r = $('rect[style*="fill: rgb(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ');"]');
         var expositor = $( "#expositores" ).val();
 
-        if ((r.length > 0) && expositor) {
+        var reservados = data.filter(function(x) { return x.reserved == true; });
+        if ((reservados.length > 0) && expositor) {
             var expositores = "";
-            r.each(function (i) {
-                expositores = expositores + r[i].id + ",";
+            reservados.forEach(function (r) {
+                expositores = expositores + r.id + ",";
             });
             expositores = expositores.substring(0, expositores.length - 1);
             saveEstantes(expositores, expositor);
         } else {
-            if (r.length <= 0) {
+            if (reservados.length <= 0) {
                 alert("Selecciona al menos un estante");
             } else {
                 alert("Selecciona un expositor");
@@ -394,6 +395,8 @@ function seatColor(data, node) {
         data.origColor = node.style("fill");
     }
     node.style("fill");
+    console.log(data.id);
+    $("#" + data.id).addClass("reserved");
     return data.reserved ? color : data.origColor;
 }
 

@@ -32,6 +32,7 @@ function seating(xml) {
 
             d3.select("#Layer_2").call(d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoom));
 
+            var secciones = [];
             expositores.forEach(function (expositor) {
                 var estantes = expositor.estantes;
                 estantes.forEach(function (stand) {
@@ -57,6 +58,10 @@ function seating(xml) {
                         coords: stand.coords,
                         expositor: expositor.id
                     });
+
+                    if (!contains.call(secciones, stand.coords)) {
+                        secciones.push(stand.coords);
+                    }
                 });
 
                 var r = seats.select("#estante_" + estantes[0].id);
@@ -64,6 +69,7 @@ function seating(xml) {
                 var yPosition = parseInt(r.attr("y")) + 10;
                 var strings = expositor.nombre.split(" ");
 
+                console.log(expositor.nombre + ": " + secciones);
                 strings.forEach(function (string) {
                     gE
                         .append("text")
@@ -91,6 +97,33 @@ function seating(xml) {
         }
     });
 }
+
+var contains = function(needle) {
+    // Per spec, the way to identify NaN is that it is not equal to itself
+    var findNaN = needle !== needle;
+    var indexOf;
+
+    if(!findNaN && typeof Array.prototype.indexOf === 'function') {
+        indexOf = Array.prototype.indexOf;
+    } else {
+        indexOf = function(needle) {
+            var i = -1, index = -1;
+
+            for(i = 0; i < this.length; i++) {
+                var item = this[i];
+
+                if((findNaN && item !== item) || item === needle) {
+                    index = i;
+                    break;
+                }
+            }
+
+            return index;
+        };
+    }
+
+    return indexOf.call(this, needle) > -1;
+};
 
 function loadExpositorLocation(id) {
     $.ajax({

@@ -90,12 +90,7 @@ public class ProgramFragment extends Fragment {
     class Buscar implements View.OnClickListener {
         public void onClick(View v) {
 
-            if (!cd.isConnectingToInternet()) {
-                // Internet Connection is not present
-                Toast.makeText(getActivity(), "Se necesita internet", Toast.LENGTH_SHORT).show();
-                // stop executing code by return
-                return;
-            }
+        
             if(spinDia.getSelectedItem().toString().equals("Seleciona un día")){
                 Toast.makeText(getActivity(), "Seleciona un dia", Toast.LENGTH_SHORT).show();
                 return;
@@ -148,3 +143,4 @@ public class ProgramFragment extends Fragment {
         }
     }
 }
+

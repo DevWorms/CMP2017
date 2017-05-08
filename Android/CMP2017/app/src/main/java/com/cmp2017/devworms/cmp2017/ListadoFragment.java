@@ -306,15 +306,15 @@ public class ListadoFragment extends Fragment {
                             fechaLetra = "Viernes 9 de Junio";
                         }
 
-                            if (actFecha.equals("")||  !actFecha.equals(proFecha)){
-                                map.put("acompFecha", fechaLetra);
-                                actFecha = proFecha;
-                            }
+                        if (actFecha.equals("")||  !actFecha.equals(proFecha)){
+                            map.put("acompFecha", fechaLetra);
+                            actFecha = proFecha;
+                        }
 
-                            map.put("acompId", id);
+                        map.put("acompId", id);
 
 
-                            map.put("acompName", name);
+                        map.put("acompName", name);
 
 
 

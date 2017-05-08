@@ -94,6 +94,8 @@ class ServerConnection {
             if tipoDescar == 1 {
                 
                 URLSession.shared.dataTask(with: URL(string: "http://cmp.devworms.com/api/updates/check/\(userID)/\(apiKey)")!, completionHandler: parseJson).resume()
+            } else {
+                self.llamadas()
             }
             
             
@@ -200,6 +202,7 @@ class ServerConnection {
             self.getGeneral(strUrl: "http://cmp.devworms.com/api/expositor/all/\(userID)/\(apiKey)", jsonString: "expositores", datoString: "logo", imgString: "url", entityName: "Expositores", keyName: "expositor", keyNameImg: "imgExpositor",Simple : 0) { (Bool) in
                 self.mView.dismiss(animated: false, completion: nil)
                 UserDefaults.standard.setValue(1, forKey: "descarga")
+              
             }
         }
         
@@ -323,6 +326,7 @@ class ServerConnection {
                            let status = jsonResult["status"] as! Int
                             
                             if status == 1 {
+                                
                           
                                 for dato in jsonResult["actualizaciones"] as! [[String:Any]] {
                                 
@@ -358,10 +362,17 @@ class ServerConnection {
                                 }
                                 tipoDescar = 1
                                 self.llamadas()
+                                
                             } else
                             {
                                  print("Sin actuaizaciones")
                                 self.mView.dismiss(animated: false, completion: nil)
+                                
+                                let vc_alert = UIAlertController(title: "Actualizaciones", message: "No hay actualizaciones disponibles", preferredStyle: .alert)
+                                vc_alert.addAction(UIAlertAction(title: "OK",
+                                                                 style: UIAlertActionStyle.default,
+                                                                 handler: nil))
+                                self.mView.present(vc_alert, animated: true, completion: nil)
                             
                             }
                         }

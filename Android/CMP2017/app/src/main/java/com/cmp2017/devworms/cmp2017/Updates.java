@@ -40,6 +40,7 @@ import java.util.HashMap;
 public class Updates extends Activity implements View.OnClickListener {
 
     private String apiKey,urlImage,ImageDecoExpo,resp;
+    private String resFinal ;
     private String userId;
     private ProgressDialog pDialog;
     private ArrayList<Integer> modulosParaActulizar;
@@ -49,6 +50,7 @@ public class Updates extends Activity implements View.OnClickListener {
     private URL imageUrl;
     private Bitmap[] imagen;
     private Bitmap expoImg;
+    private int numModulos;
     private HttpURLConnection conn;
     private String[] ArrayBanners, ImagenDeco;
     private AdminSQLiteOffline dbHandlerOffline;
@@ -77,14 +79,15 @@ public class Updates extends Activity implements View.OnClickListener {
         this.modulosParaActulizar = new ArrayList<Integer>();
         this.btnActualizar.setOnClickListener(this);
         this.yo = this;
-        Log.e("UPDATESXZY","AQUIINCIIA");
         GetUpdates getUpdates = new GetUpdates();
         getUpdates.execute();
+
+        resFinal = "";
     }
 
     @Override
     public void onClick(View v) {
-        if(this.modulosParaActulizar.size()>0){
+        if(numModulos > 0){
             UpdateModulos update = new UpdateModulos();
             update.execute();
         }else{
@@ -126,7 +129,8 @@ public class Updates extends Activity implements View.OnClickListener {
                         @Override
                         public void run() {
                             if(modulosParaActulizar.size() > 0){
-                                descActualizaciones.setText("Existe " + modulosParaActulizar.size() + " actualizaciones disponibles.");
+                                numModulos = modulosParaActulizar.size();
+                                descActualizaciones.setText("Existe " + numModulos + " actualizaciones disponibles.");
 
                             }else{
                                 descActualizaciones.setText("No hay actualizaciones por el momento");
@@ -171,34 +175,30 @@ public class Updates extends Activity implements View.OnClickListener {
             //primero restauramos las tablas
             dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
             SQLiteDatabase db = dbHandlerOffline.getWritableDatabase();
-            // borramos tablas previas
-            //dbHandlerOffline.borrarTablas(db);
-            //volvemos a crearlas
-            //dbHandlerOffline.crearTablas(db);
 
             for(Integer modulo : modulosParaActulizar){
                 if(modulo == 1){ //Eventos de acompañantes
-                    updateAcompanate();
+                    resFinal += updateAcompanate();
                 }else if(modulo == 4){ // Expositores
-                    updateExpositores();
+                    resFinal += updateExpositores();
                 }else if(modulo == 5){ // Patrocinadores
-                    updatePatrocinadores();
+                    resFinal += updatePatrocinadores();
                 }else if(modulo == 6){ //Programas
-                    updateCategorias();
-                    updateProgramas();
+                    resFinal += updateCategorias();
+                    resFinal += updateProgramas();
                 }else if(modulo == 7){ // Rutas / Transportación
-                    updateTransportacion();
+                    resFinal += updateTransportacion();
                 }else if(modulo == 8){ // Eventos Sociales y Deportivos
-                    updateSocialDepo();
+                    resFinal += updateSocialDepo();
                 }else if(modulo == 9){ // Conoce Puebla, teléfonos
                     // code here
                 }else if(modulo == 10){ // Conoce Puebla, sitios interes
-                    updateSitiosPuebla();
+                    resFinal +=  updateSitiosPuebla();
                 }
             }
 
-
-            return null;
+            Log.e("RESFINAL",resFinal);
+            return resFinal;
         }
 
         @Override
@@ -208,7 +208,15 @@ public class Updates extends Activity implements View.OnClickListener {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(yo, "Actualizacion finalizada", Toast.LENGTH_SHORT).show();
+                    if(resFinal.equals("")){
+                        // refrescamos las actualizaciones una vez realizadas
+                        numModulos = 0;
+                        descActualizaciones.setText("No hay actualizaciones por el momento");
+                        btnActualizar.setText("Cerrar");
+                        Toast.makeText(yo, "Actualizacion finalizada", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(yo, "No se actualizó correctamente", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 
@@ -226,7 +234,8 @@ public class Updates extends Activity implements View.OnClickListener {
     }
 
     // metodos para actualizar secciones
-    public void updateAcompanate(){
+    public String updateAcompanate(){
+        String resolucion = "";
         String respuesta = "";
         String bodyAco  = "http://cmp.devworms.com/api/acompanantes/all/" + userId + "/" + apiKey + "";
         JSONParser jspAco = new JSONParser();
@@ -239,12 +248,14 @@ public class Updates extends Activity implements View.OnClickListener {
                 jsonimageA = new JSONObject(respuestaAco);
             } catch (JSONException e) {
                 e.printStackTrace();
+                resolucion += "x";
             }
             String acomp = "";
 
             try {
                 acomp = jsonimageA.getString("acompanantes");
             } catch (JSONException e) {
+                resolucion += "x";
                 e.printStackTrace();
             }
 
@@ -253,11 +264,12 @@ public class Updates extends Activity implements View.OnClickListener {
             try {
                 jsonAcoimage = new JSONArray(acomp);
             } catch (JSONException e) {
+                resolucion += "x";
                 e.printStackTrace();
             }
 
 
-            for (int i = 0; i <= jsonAcoimage.length(); i++) {
+            for (int i = 0; i < jsonAcoimage.length(); i++) {
                 JSONObject c = null;
                 try {
                     c = jsonAcoimage.getJSONObject(i);
@@ -288,20 +300,27 @@ public class Updates extends Activity implements View.OnClickListener {
                         dbHandlerOffline.addAcoImag(idAcoImagen, ImageDecoExpo);
                     }
                 } catch (JSONException e) {
+                    resolucion += "x";
                     e.printStackTrace();
                 } catch (MalformedURLException e) {
+                    resolucion += "x";
                     e.printStackTrace();
                 } catch (IOException e) {
+                    resolucion += "x";
                     e.printStackTrace();
                 }
             }
 
 
+        }else {
+            resolucion += "x";
         }
+
+        return resolucion;
     }
 
-    public void updateExpositores(){
-
+    public String updateExpositores(){
+        String resolucion = "";
         String body = "";
         String bodyExpo = "http://cmp.devworms.com/api/expositor/order/name/" + userId + "/" + apiKey + "";
 
@@ -342,13 +361,13 @@ public class Updates extends Activity implements View.OnClickListener {
 
             int cuanto = jsonExpositores.length();
 
-            for (int i = 0; i <= jsonExpositores.length(); i++) {
+            for (int i = 0; i < jsonExpositores.length(); i++) {
                 JSONObject c = jsonExpositores.getJSONObject(i);
 
 
                 String urlImageJson = c.getString("logo");
                 if (urlImageJson.equals("[]")) {
-
+                    //resolucion += "x";
                 }else {
                     JSONObject jsonImagen = new JSONObject(urlImageJson);
                     urlImage = jsonImagen.getString("url");
@@ -374,24 +393,36 @@ public class Updates extends Activity implements View.OnClickListener {
 
 
         } catch (JSONException e) {
+            resolucion += "x";
             e.printStackTrace();
         } catch (MalformedURLException e) {
+            resolucion += "x";
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+            resolucion += "x";
         }
+
+        return resolucion;
     }
 
-    public void updateCategorias(){
-        String fromUrlCat = "http://cmp.devworms.com/api/categoria/all/" + userId + "/" + apiKey + "";
-        JSONParser jspCat= new JSONParser();
-        String strCat = jspCat.makeHttpRequest(fromUrlCat, "GET", fromUrlCat, "");
-        dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
-        dbHandlerOffline.addJsonCategorias(strCat);
-        Log.d("Descarga: ", "> Datos Programa completo");
+    public String  updateCategorias(){
+        String resolucion = "";
+        try{
+            String fromUrlCat = "http://cmp.devworms.com/api/categoria/all/" + userId + "/" + apiKey + "";
+            JSONParser jspCat= new JSONParser();
+            String strCat = jspCat.makeHttpRequest(fromUrlCat, "GET", fromUrlCat, "");
+            dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
+            dbHandlerOffline.addJsonCategorias(strCat);
+            Log.d("Descarga: ", "> Datos Programa completo");
+        }catch(Exception ex){
+            resolucion += "x";
+        }
+        return  resolucion;
     }
 
-    public void updateTransportacion(){
+    public String updateTransportacion(){
+        String resolucion = "";
         String bodyT = "";
 
 
@@ -423,14 +454,14 @@ public class Updates extends Activity implements View.OnClickListener {
                 JSONArray jsonSDimage = null;
                 jsonSDimage = new JSONArray(ruta);
 
-                for (int i = 0; i <= jsonSDimage.length(); i++) {
+                for (int i = 0; i < jsonSDimage.length(); i++) {
                     JSONObject c = null;
                     try {
                         c = jsonSDimage.getJSONObject(i);
 
                         String urlImageJson = c.getString("image");
                         if (urlImageJson.equals("[]")) {
-
+                            //resolucion += "x";
                         }else {
                             JSONObject jsonImagen = new JSONObject(urlImageJson);
                             urlImage = jsonImagen.getString("url");
@@ -453,25 +484,30 @@ public class Updates extends Activity implements View.OnClickListener {
                             dbHandlerOffline.addRutaImag(idTRImagen, ImageDecoExpo);
                         }
                     } catch (JSONException e) {
+                        resolucion += "x";
                         e.printStackTrace();
                     } catch (MalformedURLException e) {
+                        resolucion += "x";
                         e.printStackTrace();
                     } catch (IOException e) {
+                        resolucion += "x";
                         e.printStackTrace();
                     }
                 }
 
 
             } catch (JSONException e) {
+                resolucion += "x";
                 e.printStackTrace();
             }
         }
-
+        return resolucion;
     }
 
-    public void updateSocialDepo(){
+    public String updateSocialDepo(){
+        String resolucion= "";
         String bodySD = "";
-        String respuesta = "";
+
 
         bodySD = "http://cmp.devworms.com/api/deportivos/all/" + userId + "/" + apiKey + "";
 
@@ -481,7 +517,7 @@ public class Updates extends Activity implements View.OnClickListener {
 
         String respuestaSocialDepo = jspSoci.makeHttpRequest(bodySD, "GET", bodySD, "");
 
-        if (respuesta != "error") {
+        if (respuestaSocialDepo != "error") {
             dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
             dbHandlerOffline.addSocialDepo(respuestaSocialDepo);
 
@@ -489,6 +525,7 @@ public class Updates extends Activity implements View.OnClickListener {
             try {
                 jsonimageS = new JSONObject(respuestaSocialDepo);
             } catch (JSONException e) {
+                resolucion += "x";
                 e.printStackTrace();
             }
             String socialdepo = "";
@@ -496,6 +533,7 @@ public class Updates extends Activity implements View.OnClickListener {
             try {
                 socialdepo = jsonimageS.getString("eventos");
             } catch (JSONException e) {
+                resolucion += "x";
                 e.printStackTrace();
             }
 
@@ -504,11 +542,12 @@ public class Updates extends Activity implements View.OnClickListener {
             try {
                 jsonSDimage = new JSONArray(socialdepo);
             } catch (JSONException e) {
+                resolucion += "x";
                 e.printStackTrace();
             }
 
 
-            for (int i = 0; i <= jsonSDimage.length(); i++) {
+            for (int i = 0; i < jsonSDimage.length(); i++) {
                 JSONObject c = null;
                 try {
                     c = jsonSDimage.getJSONObject(i);
@@ -516,7 +555,7 @@ public class Updates extends Activity implements View.OnClickListener {
 
                     String urlImageJson = c.getString("foto");
                     if (urlImageJson.equals("[]")) {
-
+                        //resolucion += "x";
                     }else {
                         JSONObject jsonImagen = new JSONObject(urlImageJson);
                         urlImage = jsonImagen.getString("url");
@@ -539,19 +578,27 @@ public class Updates extends Activity implements View.OnClickListener {
                         dbHandlerOffline.addSociaDepoImag(idSDImagen, ImageDecoExpo);
                     }
                 } catch (JSONException e) {
+                    resolucion += "x";
                     e.printStackTrace();
                 } catch (MalformedURLException e) {
+                    resolucion += "x";
                     e.printStackTrace();
                 } catch (IOException e) {
+                    resolucion += "x";
                     e.printStackTrace();
                 }
             }
 
 
+        }else {
+            resolucion += "x";
         }
+
+        return resolucion;
     }
 
-    public void updateProgramas (){
+    public String  updateProgramas (){
+        String resolucion= "";
         String fromUrlPrograma = "http://cmp.devworms.com/api/programa/all/" + userId + "/" + apiKey + "";
         JSONParser jspPrograma = new JSONParser();
         String strProgramas = jspPrograma.makeHttpRequest(fromUrlPrograma, "GET", fromUrlPrograma, "");
@@ -569,7 +616,7 @@ public class Updates extends Activity implements View.OnClickListener {
 
                     String strFoto = programa.getString("foto");
                     if (strFoto.equals("[]")) {
-
+                       // resolucion += "x";
                     }else {
 
                         JSONObject jFoto = new JSONObject(strFoto);
@@ -595,20 +642,25 @@ public class Updates extends Activity implements View.OnClickListener {
                     }
 
                 } catch (JSONException e) {
+                    resolucion += "x";
                     e.printStackTrace();
                 } catch (MalformedURLException e) {
+                    resolucion += "x";
                     e.printStackTrace();
                 } catch (IOException e) {
+                    resolucion += "x";
                     e.printStackTrace();
                 }
             }
         }catch(JSONException jex){
+            resolucion += "x";
             Log.e("DescargaPrograma", jex.getMessage());
         }
-
+        return  resolucion;
     }
 
-    public void updatePatrocinadores(){
+    public String  updatePatrocinadores(){
+        String resolucion = "";
         String bodyPatro = "";
         String respuestaAlfa = "";
         String respuestaNumerico = "";
@@ -621,22 +673,13 @@ public class Updates extends Activity implements View.OnClickListener {
 
         String respuestaAlfaPatro = jspPatro.makeHttpRequest(bodyPatro, "GET", bodyPatro, "");
 
-        if (respuestaAlfa != "error") {
 
-
-        } else {
-            resp = "No hay resultados";
-        }
         bodyPatro = "http://cmp.devworms.com/api/patrocinador/order/stand/" + userId + "/" + apiKey + "";
         JSONParser jspNumericoPatro = new JSONParser();
 
 
         String respuestaNumericoPatro = jspNumericoPatro.makeHttpRequest(bodyPatro, "GET", bodyPatro, "");
 
-        if (respuestaNumerico != "error") {
-
-
-        }
 
         dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
         SQLiteDatabase db = dbHandlerOffline.getWritableDatabase();
@@ -646,6 +689,7 @@ public class Updates extends Activity implements View.OnClickListener {
         try {
             jsonimageP = new JSONObject(respuestaAlfaPatro);
         } catch (JSONException e) {
+            resolucion += "0x";
             e.printStackTrace();
         }
         String patro = "";
@@ -653,6 +697,7 @@ public class Updates extends Activity implements View.OnClickListener {
         try {
             patro = jsonimageP.getString("patrocinadores");
         } catch (JSONException e) {
+            resolucion += "1x";
             e.printStackTrace();
         }
 
@@ -661,12 +706,13 @@ public class Updates extends Activity implements View.OnClickListener {
         try {
             jsonPatroimage = new JSONArray(patro);
         } catch (JSONException e) {
+            resolucion += "2x";
             e.printStackTrace();
         }
 
         int cuanto = jsonPatroimage.length();
 
-        for (int i = 0; i <= jsonPatroimage.length(); i++) {
+        for (int i = 0; i < jsonPatroimage.length(); i++) {
             JSONObject c = null;
             try {
                 c = jsonPatroimage.getJSONObject(i);
@@ -674,7 +720,7 @@ public class Updates extends Activity implements View.OnClickListener {
 
                 String urlImageJson = c.getString("logo");
                 if (urlImageJson.equals("[]")) {
-
+                    //resolucion += "3x";
                 }else {
                     JSONObject jsonImagen = new JSONObject(urlImageJson);
                     urlImage = jsonImagen.getString("url");
@@ -697,21 +743,27 @@ public class Updates extends Activity implements View.OnClickListener {
                     dbHandlerOffline.addPatroImag(idExpoImagen, ImageDecoExpo);
                 }
             } catch (JSONException e) {
+                resolucion += "4x";
                 e.printStackTrace();
             } catch (MalformedURLException e) {
+                resolucion += "5x";
                 e.printStackTrace();
             } catch (IOException e) {
+                resolucion += "6x";
                 e.printStackTrace();
             }
         }
+
+        return resolucion;
     }
 
-    public void updateSitiosPuebla(){
+    public String updateSitiosPuebla(){
+        String resolucion = "";
         String fromUrlSitio = "http://cmp.devworms.com/api/puebla/sitio/all/"+userId+"/"+apiKey+"";
         JSONParser jspSitio = new JSONParser();
         String strSitio = jspSitio.makeHttpRequest(fromUrlSitio, "GET", fromUrlSitio, "");
         dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
-        Log.e("JSONSITIOS",strSitio);
+
         dbHandlerOffline.addJsonSitiosPuebla(strSitio);
         try{
             JSONObject jSitios = new JSONObject(strSitio);
@@ -723,7 +775,7 @@ public class Updates extends Activity implements View.OnClickListener {
 
                     String strFoto = sitio.getString("imagen");
                     if (strFoto.equals("[]")) {
-
+                        //resolucion += "x";
                     }else {
 
                         JSONObject jFoto = new JSONObject(strFoto);
@@ -749,16 +801,23 @@ public class Updates extends Activity implements View.OnClickListener {
                     }
 
                 } catch (JSONException e) {
+                    resolucion += "x";
                     e.printStackTrace();
                 } catch (MalformedURLException e) {
+                    resolucion += "x";
                     e.printStackTrace();
                 } catch (IOException e) {
+                    resolucion += "x";
                     e.printStackTrace();
                 }
             }
         }catch(JSONException jex){
+            resolucion += "x";
             Log.e("DescargaPrograma", jex.getMessage());
         }
+        return resolucion;
     }
+
+
 
 }

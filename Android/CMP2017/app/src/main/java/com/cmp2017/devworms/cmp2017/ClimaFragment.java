@@ -30,7 +30,7 @@ public class ClimaFragment extends Fragment
             public void onPageStarted(WebView view, String url, Bitmap favicon){
                 super.onPageStarted(view, url, favicon);
                 pDialog = new ProgressDialog(getActivity());
-                pDialog.setMessage("Cargando mapa de expositores...");
+                pDialog.setMessage("Cargando mapa");
                 pDialog.setIndeterminate(false);
                 pDialog.setCancelable(false);
                 pDialog.show();
@@ -40,9 +40,12 @@ public class ClimaFragment extends Fragment
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
+                log.d("url Termino","termino");
                 pDialog.dismiss();
 
+
             }
+
         });
         url =  getArguments().getString("url");
         tipo = getArguments().getString("tipo");

@@ -42,7 +42,7 @@ import java.util.HashMap;
 
 public class DetalleEventoFragment extends Fragment {
     ProgressDialog pDialog;
-    String resp, userId, apiKey, idProgram, strNomEven, strLugEven, strRecomEven, urlImage, horaIni, horaFin, strdia, seccion;
+    String resp, userId, apiKey, idProgram, strNomEven, strLugEven, strRecomEven, urlMapa, horaIni, horaFin, strdia, seccion;
     TextView txtNombreEven, txtLugarEven, txtRecomendaEven, txtHorario;
     int strcursorEncontrado, posJson;
     ImageView imgFoto;
@@ -157,6 +157,7 @@ public class DetalleEventoFragment extends Fragment {
                     horaIni = detalle.getString("hora_inicio");
                     horaFin = detalle.getString("hora_fin");
                     strdia = detalle.getString("fecha");
+                    urlMapa =  detalle.getString("maps_url");
 
 
 
@@ -229,24 +230,29 @@ public class DetalleEventoFragment extends Fragment {
     }
     class Localizar implements View.OnClickListener {
         public void onClick(View v) {
-            Fragment fragment = new ClimaFragment();
+            if (urlMapa== null || urlMapa == "null") {
+                Toast.makeText(getActivity(), "No tiene ninguna localización",
+                        Toast.LENGTH_SHORT).show();
+            }else{
+                Fragment fragment = new ClimaFragment();
 
-            Bundle parametro = new Bundle();
+                Bundle parametro = new Bundle();
 
 
-            parametro.putString("url","http://congreso.digital/public-map.php#"+idProgram);
-            parametro.putString("tipo","3");
+                parametro.putString("url", urlMapa);
+                parametro.putString("tipo", "3");
 
 
-            fragment.setArguments(parametro);
+                fragment.setArguments(parametro);
 
-            final FragmentTransaction ft = getActivity().getFragmentManager()
-                    .beginTransaction();
-            ft.replace(R.id.actividad, fragment, "tag");
+                final FragmentTransaction ft = getActivity().getFragmentManager()
+                        .beginTransaction();
+                ft.replace(R.id.actividad, fragment, "tag");
 
-            ft.addToBackStack("tag");
+                ft.addToBackStack("tag");
 
-            ft.commit();
+                ft.commit();
+            }
         }
     }
 

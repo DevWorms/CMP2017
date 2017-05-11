@@ -53,6 +53,8 @@ class MapaSimpleViewController: UIViewController, UIWebViewDelegate {
         } else if self.tipoMapa == 6 {
             titleLabel.text = "Mapa de Expositor"
             
+        } else {
+            titleLabel.text = "Google Maps"
         }
 
         
@@ -106,10 +108,13 @@ class MapaSimpleViewController: UIViewController, UIWebViewDelegate {
                 webView.load(img, mimeType: "image/png", textEncodingName: "UTF-8", baseURL: NSURL() as URL)
             }
             
-        } else if self.tipoMapa == 4 || self.tipoMapa == 6 {
+        } else if self.tipoMapa == 4 || self.tipoMapa == 6  {
            print("se mostrara\(urlWeb)")
              webView.loadRequest(URLRequest(url: URL(string: urlWeb)!))
+        }else {
+             webView.loadRequest(URLRequest(url: URL(string: urlWeb)!))
         }
+        
     }
     
     func webViewDidFinishLoad(_ webView: UIWebView) {

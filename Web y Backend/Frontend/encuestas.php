@@ -98,6 +98,9 @@
                 <li>
                     <a href="categorias.php">Categorías</a>
                 </li>
+                <li>
+                    <a href="usuarios.php">Usuarios</a>
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -134,7 +137,8 @@
                         <thead>
                         <tr>
                             <th>Encuesta</th>
-                            <th align="center">Ver/Editar</th>
+                            <th align="center">Ver</th>
+                            <th align="center">Editar</th>
                             <th align="center">Eliminar</th>
                         </tr>
                         </thead>
@@ -168,9 +172,10 @@
 
 </div>
 <div id="modalsExpositores"></div>
+
 <script type="text/template" id="modal_detalle_expositor">
     <div id="DetalleExpositor-${id}" class="modal" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
@@ -178,19 +183,90 @@
                     <h4 class="modal-title" style="text-align:center;">Encuesta: ${id}</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-8">
+                    <div class="row">
                         <div class="col-md-12">
-                            <a href="${filesm.url}" target="_blank"><img src="${filesm.url}" title="${filesm.nombre}" style="width: 100%"></a>
-                        </div>
-                        <div class="col-md-12">
-                            <br>
-                        </div>
-                        <div class="col-md-12">
-                            <!--<p><strong>Nombre</strong>: <a href="" target="_blank"></a></p>-->
+                            <div class="col-sm-12" align="center">
+                                <br>
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a data-toggle="tab" href="#detalles-${id}"><b>Detalles</b></a></li>
+                                    <li><a data-toggle="tab" href="#usuariosRespondidos-${id}"><b>Usuarios que han respondido</b></a></li>
+                                    <li><a data-toggle="tab" href="#usuariosFaltantes-${id}"><b>Usuarios faltantes</b></a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div id="detalles-${id}" class="tab-pane fade in active">
+                                        <div class="col-md-12">
+                                            <br>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <a href="${filesm.url}" target="_blank"><img src="${filesm.url}" title="${filesm.nombre}" style="width: 100%"></a>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <br>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <p><strong>Usuarios que han respondido</strong>: ${respondidos} de ${totales}</p>
+                                            <p><strong>Calificación general</strong>: ${media}</p>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <br>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <p><strong>Pregunta 1</strong>: ${preguntas[0].pregunta}</p>
+                                            <p><strong>Calificación promedio</strong>: ${media1}</p>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <br>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <p><strong>Pregunta 2</strong>: ${preguntas[1].pregunta}</p>
+                                            <p><strong>Calificación promedio</strong>: ${media2}</p>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <br>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <p><strong>Pregunta 3</strong>: ${preguntas[2].pregunta}</p>
+                                            <p><strong>Calificación promedio</strong>: ${media3}</p>
+                                        </div>
+                                    </div>
+                                    <div id="usuariosRespondidos-${id}" class="tab-pane fade">
+                                        <div class="col-md-12">
+                                            <br>
+                                        </div>
+                                        <p><strong>Usuarios que han respondido</strong>:</p>
+                                        <table class="table table-striped" id="tbl_users_respondidos_${id}">
+                                            <thead>
+                                            <tr>
+                                                <th>Usuario</th>
+                                                <th>Cal. Pregunta 1</th>
+                                                <th>Cal. Pregunta 2</th>
+                                                <th>Cal. Pregunta 3</th>
+                                                <th>Cal. General</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="usuariosFaltantes-${id}" class="tab-pane fade">
+                                        <div class="col-md-12">
+                                            <br>
+                                        </div>
+                                        <p><strong>Usuarios que aún no han respondido</strong>:</p>
+                                        <table class="table table-striped" id="tbl_users_faltantes_${id}">
+                                            <thead>
+                                            <tr>
+                                                <th>Usuario</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-2"></div>
                 </div>
                 <div class="modal-footer">
                     <div class="form-group" align="right">

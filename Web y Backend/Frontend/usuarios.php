@@ -86,7 +86,7 @@
                 <li>
                     <a href="transportacion.php">Transportación</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="puebla.php">Puebla</a>
                 </li>
                 <li>
@@ -98,7 +98,7 @@
                 <li>
                     <a href="categorias.php">Categorías</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="usuarios.php">Usuarios</a>
                 </li>
             </ul>
@@ -117,15 +117,20 @@
                         <div class="form-group row">
                             <div class="col-md-10">
 
+                                <form name="" action="" method="post" class="form-inline" role="form">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Buscar por nombre o email..." name="q"
+                                               id="q">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-default" type="button" name="search" id="search"><i
+                                                        class="glyphicon glyphicon-search"></i></button>
+                                        </div>
+                                    </div>
+                                </form>
 
                             </div>
                         </div>
                     </form>
-                </div>
-
-                <div class="col-xs-12 col-md-6" align="right">
-                    <a href="agregar-puebla-interes.php" class="btn basico" id="btn_crearEvento"><i
-                                class="fa fa-plus-circle"></i> &nbsp;Agregar Sitio de interés</a>
                 </div>
             </div>
             <!-- Fin Fila -->
@@ -136,11 +141,12 @@
                     <table class="table table-striped" id="tbl_eventos">
                         <thead>
                         <tr>
-                            <th>Título</th>
-                            <th>Descripción</th>
-                            <th align="center">Ver</th>
-                            <th align="center">Editar</th>
-                            <th align="center">Eliminar</th>
+                            <th>#id</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Asociación</th>
+                            <th>Tipo</th>
+                            <th>Fecha de registro</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -172,54 +178,6 @@
     <!-- /#page-wrapper -->
 
 </div>
-<div id="modalsExpositores"></div>
-<script type="text/template" id="modal_detalle_expositor">
-    <div id="DetalleExpositor-${id}" class="modal" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title" style="text-align:center;">Sitio: ${titulo}</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-8">
-                        <div class="col-md-12">
-                            <% if (imagen.nombre) { %> <img src="${imagen.url}" width="200px" height="200px"> <% } %>
-                        </div>
-                        <div class="col-md-12">
-                            <br>
-                        </div>
-                        <div class="col-md-12">
-                            <p><strong>Título</strong>: ${titulo}
-                        </div>
-                        <div class="col-md-12">
-                            <p><strong>Link de mapa</strong>: <a href="${maps_link}" target="_blank">${maps_link}</a>
-                        </div>
-                        <div class="col-md-12">
-                            <p><strong>Descripción</strong>: ${descripcion}
-                        </div>
-                        <div class="col-md-12">
-                            <p><strong>Url</strong>: <a href="${url}" target="_blank">${url}</a>
-                        </div>
-                    </div>
-                    <div class="col-md-2"></div>
-                </div>
-                <div class="modal-footer">
-                    <div class="form-group" align="right">
-                        <div class="col-md-12">
-                            <div class="col-md-8"></div>
-                            <div class="col-md-4">
-                                <!--<button class="btn btn-primary btn-block" type="submit" name="up_button" onclick="event.preventDefault();" id="up_button">Guardar</button>-->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</script>
 <!-- /#wrapper -->
 
 <!-- Scripts -->
@@ -230,7 +188,7 @@
 <script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
 <script src="js/js.php"></script>
 <script src="js/lodash.js"></script>
-<script src="js/add-sitio.js"></script>
+<script src="js/usuarios.js"></script>
 
 <script>
     loadExpostitores(init_url);

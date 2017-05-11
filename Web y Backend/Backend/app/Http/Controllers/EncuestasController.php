@@ -213,6 +213,7 @@ class EncuestasController extends Controller {
         unset($encuesta->filesm['user_id']);
         unset($encuesta->filesm['is_banner']);
         unset($encuesta['file_sm']);
+        unset($encuesta['usersHas']);
         return $encuesta;
     }
 
@@ -431,14 +432,77 @@ class EncuestasController extends Controller {
     public function paginate($user_id, $api_key) {
         try {
             User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
-            $expositores = Encuesta::orderBy('id', 'DESC')->paginate(5);
-            foreach ($expositores as $expositor) {
-                $expositor = $this->returnEncuesta($expositor);
+            $encuestas = Encuesta::orderBy('id', 'DESC')->paginate(5);
+
+            foreach ($encuestas as $encuesta) {
+                $usersHas = $encuesta->usersHas;
+                $preguntas = $encuesta->preguntas;
+
+                $encuesta->respondidos = $usersHas->where('resuelta', 1)->count();
+                $encuesta->faltantes = $usersHas->where('resuelta', 0)->count();
+                $encuesta->totales = $usersHas->count();
+                $encuesta->usuarios = User::
+                        select("id", "name", "last_name", "email")
+                        ->whereIn('id', $usersHas->pluck('user_id'))
+                        ->get();
+                $encuesta->usuariosRespondidos = $encuesta->usuarios->whereIn('id', $usersHas->where('resuelta', 1)->pluck('user_id'));
+                foreach ($encuesta->usuariosRespondidos as $usuario) {
+                    $usuario->respuestas = Respuesta::
+                                            select('pregunta_id', 'respuesta', 'updated_at')
+                                            ->whereIn('pregunta_id', $preguntas->pluck('id'))
+                                            ->where('user_id', $usuario->id)
+                                            ->get();
+                }
+                $encuesta->usuariosFaltantes = $encuesta->usuarios->whereIn('id', $usersHas->where('resuelta', 0)->pluck('user_id'))->values();
+                $encuesta = $this->returnEncuesta($encuesta);
             }
 
             $res['status'] = 1;
             $res['mensaje'] = "success";
-            $res['encuestas'] = $expositores;
+            $res['encuestas'] = $encuestas;
+            return response()->json($res, 200);
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    public function getAllAdmin($user_id, $api_key) {
+        try {
+            User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+            $encuestas = Encuesta::orderBy('id', 'DESC')->get();
+
+            foreach ($encuestas as $encuesta) {
+                $usersHas = $encuesta->usersHas;
+                $preguntas = $encuesta->preguntas;
+
+                $encuesta->respondidos = $usersHas->where('resuelta', 1)->count();
+                $encuesta->faltantes = $usersHas->where('resuelta', 0)->count();
+                $encuesta->totales = $usersHas->count();
+                $encuesta->usuarios = User::
+                select("id", "name", "last_name", "email")
+                    ->whereIn('id', $usersHas->pluck('user_id'))
+                    ->get();
+                $encuesta->usuariosRespondidos = $encuesta->usuarios->whereIn('id', $usersHas->where('resuelta', 1)->pluck('user_id'));
+                foreach ($encuesta->usuariosRespondidos as $usuario) {
+                    $usuario->respuestas = Respuesta::
+                                            select('pregunta_id', 'respuesta', 'updated_at')
+                                                ->whereIn('pregunta_id', $preguntas->pluck('id'))
+                                                ->where('user_id', $usuario->id)
+                                                ->get();
+                }
+                $encuesta->usuariosFaltantes = $encuesta->usuarios->whereIn('id', $usersHas->where('resuelta', 0)->pluck('user_id'))->values();
+                $encuesta = $this->returnEncuesta($encuesta);
+            }
+
+            $res['status'] = 1;
+            $res['mensaje'] = "success";
+            $res['encuestas'] = $encuestas;
             return response()->json($res, 200);
         } catch (ModelNotFoundException $ex) {
             $res['status'] = 0;

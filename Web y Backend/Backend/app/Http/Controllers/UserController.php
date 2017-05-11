@@ -464,4 +464,102 @@ class UserController extends Controller {
                 break;
         }
     }
+
+    public function listAll(Request $request) {
+        try {
+            $user_id = $request->get('user_id');
+            $api_key = $request->get('api_key');
+
+            $user = User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+            if ($user->type == 0) {
+                $users = User::select('id', 'name', 'last_name', 'type', 'association', 'email', 'created_at')->get();
+                foreach ($users as $u) {
+                    $u->type = $this->parseType($u->type);
+                    $u->association = $this->parseAssociation($u->association);
+                }
+                $res['status'] = 1;
+                $res['mensaje'] = "success";
+                $res['users'] = $users;
+                return response()->json($res, 200);
+            } else {
+                $res['status'] = 0;
+                $res['mensaje'] = "Permiso denegado";
+                return response()->json($res, 200);
+            }
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    public function search(Request $request) {
+        try {
+            $user_id = $request->get('user_id');
+            $api_key = $request->get('api_key');
+            $string = $request->get('search');
+
+            $user = User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+            if ($user->type == 0) {
+                $users = User::select('id', 'name', 'last_name', 'type', 'association', 'email', 'created_at')
+                                ->where('name', 'LIKE', '%'. $string .'%')
+                                ->orWhere('last_name', 'LIKE', '%'. $string .'%')
+                                ->orWhere('email', 'LIKE', '%'. $string .'%')
+                                ->get();
+                foreach ($users as $u) {
+                    $u->type = $this->parseType($u->type);
+                    $u->association = $this->parseAssociation($u->association);
+                }
+                $res['status'] = 1;
+                $res['mensaje'] = "success";
+                $res['users'] = $users;
+                return response()->json($res, 200);
+            } else {
+                $res['status'] = 0;
+                $res['mensaje'] = "Permiso denegado";
+                return response()->json($res, 200);
+            }
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
+
+    public function paginate($user_id, $api_key) {
+        try {
+            $user = User::where(['id' => $user_id, 'api_token' => $api_key])->firstOrFail();
+            if ($user->type == 0) {
+                $users = User::select('id', 'name', 'last_name', 'type', 'association', 'email', 'created_at')->paginate(5);
+                foreach ($users as $u) {
+                    $u->type = $this->parseType($u->type);
+                    $u->association = $this->parseAssociation($u->association);
+                }
+                $res['status'] = 1;
+                $res['mensaje'] = "success";
+                $res['users'] = $users;
+                return response()->json($res, 200);
+            } else {
+                $res['status'] = 0;
+                $res['mensaje'] = "Permiso denegado";
+                return response()->json($res, 200);
+            }
+        } catch (ModelNotFoundException $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = "Error de credenciales";
+            return response()->json($res, 400);
+        } catch (\Exception $ex) {
+            $res['status'] = 0;
+            $res['mensaje'] = $ex->getMessage();
+            return response()->json($res, 500);
+        }
+    }
 }

@@ -93,9 +93,71 @@ function loadExpostitores(url) {
                 data.data.forEach(function (expositor) {
                     $('#tbl_eventos tr:last').after('<tr>' +
                         '<td><img src="' + expositor.filesm.url + '" width="10%"></td>' +
+                        '<td align="center"><a href="#" onclick="openEncuesta(' + expositor.id + ')" class="btn btn-primary">Ver</a></td>' +
                         '<td align="center"><a href="#" onclick="openEdit(' + expositor.id + ')" class="btn btn-primary">Editar</a></td>' +
                         '<td align="center"><a href="#" onclick="deletePrograma(' + expositor.id + ')" class="btn btn-danger">Eliminar</a></td>' +
                         '</tr>');
+
+                    var media = 0, media1 = 0, media2 = 0, media3 = 0;
+                    if (expositor.usuariosRespondidos.length > 0) {
+                        expositor.usuariosRespondidos.forEach(function (user) {
+                            media1 = media1 + parseFloat(user.respuestas[0].respuesta);
+                            media2 = media2 + parseFloat(user.respuestas[1].respuesta);
+                            media3 = media3 + parseFloat(user.respuestas[2].respuesta);
+
+                            media += (parseFloat(user.respuestas[0].respuesta) + parseFloat(user.respuestas[1].respuesta) + parseFloat(user.respuestas[2].respuesta)) / 3;
+                        });
+
+                        console.log(media + ": " + expositor.usuariosRespondidos.length);
+                        media = media / expositor.usuariosRespondidos.length;
+                        media1 = media1 / expositor.usuariosRespondidos.length;
+                        media2 = media2 / expositor.usuariosRespondidos.length;
+                        media3 = media3 / expositor.usuariosRespondidos.length;
+                    }
+
+                    expositor.media = Math.round(media * 100) / 100;
+                    expositor.media1 = Math.round(media1 * 100) / 100;
+                    expositor.media2 = Math.round(media2 * 100) / 100;
+                    expositor.media3 = Math.round(media3 * 100) / 100;
+
+                    var actionsTemplate = _.template($('#modal_detalle_expositor').text());
+                    $('#modalsExpositores').append(actionsTemplate(expositor));
+
+                    if (expositor.usuariosRespondidos.length > 0) {
+                        expositor.usuariosRespondidos.forEach(function (user) {
+                            var nombre = "";
+                            if (user.name) { nombre = user.name; }
+                            if (user.last_name) { nombre = nombre + " " + user.last_name; }
+
+                            var general = parseFloat(user.respuestas[0].respuesta) + parseFloat(user.respuestas[1].respuesta) +
+                                parseFloat(user.respuestas[2].respuesta);
+                            general = Math.round((parseFloat(general) / 3) * 100) / 100;
+
+                            $("#tbl_users_respondidos_" + expositor.id + " tr:last").after(
+                                "<tr>" +
+                                "<td>" + nombre + "</td>" +
+                                "<td align='center'>" + Math.round(parseFloat(user.respuestas[0].respuesta) * 100) / 100 + "</td>" +
+                                "<td align='center'>" + Math.round(parseFloat(user.respuestas[1].respuesta) * 100) / 100 + "</td>" +
+                                "<td align='center'>" + Math.round(parseFloat(user.respuestas[2].respuesta) * 100) / 100 + "</td>" +
+                                "<td align='center'>" + general + "</td>" +
+                                "</tr>"
+                            );
+                        });
+                    }
+
+                    if (expositor.usuariosFaltantes.length > 0) {
+                        expositor.usuariosFaltantes.forEach(function (us) {
+                            var nombre = "";
+                            if (us.name) { nombre = us.name; }
+                            if (us.last_name) { nombre = nombre + " " + us.last_name; }
+
+                            $("#tbl_users_faltantes_" + expositor.id + " tr:last").after(
+                                "<tr>" +
+                                "<td>" + nombre + "</td>" +
+                                "</tr>"
+                            );
+                        });
+                    }
                 });
             } else {
                 $("#error").fadeIn(1000, function() {
@@ -119,7 +181,7 @@ function showAll() {
 
     $.ajax({
         type : 'GET',
-        url  : API_URL + 'encuesta/all/' + user_id + '/' + api_key,
+        url  : API_URL + 'encuesta/admin/all/' + user_id + '/' + api_key,
         beforeSend: function () {
             $("#wait").show();
         },
@@ -137,9 +199,70 @@ function showAll() {
                 response.encuestas.forEach(function (expositor) {
                     $('#tbl_eventos tr:last').after('<tr>' +
                         '<td><img src="' + expositor.filesm.url + '" width="10%"></td>' +
+                        '<td align="center"><a href="#" onclick="openEncuesta(' + expositor.id + ')" class="btn btn-primary">Ver</a></td>' +
                         '<td align="center"><a href="#" onclick="openEdit(' + expositor.id + ')" class="btn btn-primary">Editar</a></td>' +
                         '<td align="center"><a href="#" onclick="deletePrograma(' + expositor.id + ')" class="btn btn-danger">Eliminar</a></td>' +
                         '</tr>');
+
+                    var media = 0, media1 = 0, media2 = 0, media3 = 0;
+                    if (expositor.usuariosRespondidos.length > 0) {
+                        expositor.usuariosRespondidos.forEach(function (user) {
+                            media1 = media1 + parseFloat(user.respuestas[0].respuesta);
+                            media2 = media2 + parseFloat(user.respuestas[1].respuesta);
+                            media3 = media3 + parseFloat(user.respuestas[2].respuesta);
+
+                            media += (media1 + media2 + media3) / 3;
+                        });
+
+                        media = media / expositor.usuariosRespondidos.length;
+                        media1 = media1 / expositor.usuariosRespondidos.length;
+                        media2 = media2 / expositor.usuariosRespondidos.length;
+                        media3 = media3 / expositor.usuariosRespondidos.length;
+                    }
+
+                    expositor.media = Math.round(media * 100) / 100;
+                    expositor.media1 = Math.round(media1 * 100) / 100;
+                    expositor.media2 = Math.round(media2 * 100) / 100;
+                    expositor.media3 = Math.round(media3 * 100) / 100;
+
+                    var actionsTemplate = _.template($('#modal_detalle_expositor').text());
+                    $('#modalsExpositores').append(actionsTemplate(expositor));
+
+                    if (expositor.usuariosRespondidos.length > 0) {
+                        expositor.usuariosRespondidos.forEach(function (user) {
+                            var nombre = "";
+                            if (user.name) { nombre = user.name; }
+                            if (user.last_name) { nombre = nombre + " " + user.last_name; }
+
+                            var general = parseFloat(user.respuestas[0].respuesta) + parseFloat(user.respuestas[1].respuesta) +
+                                parseFloat(user.respuestas[2].respuesta);
+                            general = Math.round((parseFloat(general) / 3) * 100) / 100;
+
+                            $("#tbl_users_respondidos_" + expositor.id + " tr:last").after(
+                                "<tr>" +
+                                "<td>" + nombre + "</td>" +
+                                "<td align='center'>" + Math.round(parseFloat(user.respuestas[0].respuesta) * 100) / 100 + "</td>" +
+                                "<td align='center'>" + Math.round(parseFloat(user.respuestas[1].respuesta) * 100) / 100 + "</td>" +
+                                "<td align='center'>" + Math.round(parseFloat(user.respuestas[2].respuesta) * 100) / 100 + "</td>" +
+                                "<td align='center'>" + general + "</td>" +
+                                "</tr>"
+                            );
+                        });
+                    }
+
+                    if (expositor.usuariosFaltantes.length > 0) {
+                        expositor.usuariosFaltantes.forEach(function (us) {
+                            var nombre = "";
+                            if (us.name) { nombre = us.name; }
+                            if (us.last_name) { nombre = nombre + " " + us.last_name; }
+
+                            $("#tbl_users_faltantes_" + expositor.id + " tr:last").after(
+                                "<tr>" +
+                                "<td>" + nombre + "</td>" +
+                                "</tr>"
+                            );
+                        });
+                    }
                 });
             } else {
                 $("#error").fadeIn(1000, function() {
@@ -206,6 +329,10 @@ function isUpdate() {
 
 function openEdit(id) {
     window.location.href = "agregar-encuestas.php#id=" + id;
+}
+
+function openEncuesta(id) {
+    $("#DetalleExpositor-" + id).modal("show");
 }
 
 function getElement(id) {

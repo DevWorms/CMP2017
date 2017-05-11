@@ -39,6 +39,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import uk.co.senab.photoview.PhotoViewAttacher;
+
 public class PDFFragment extends Fragment
 
 {
@@ -150,9 +152,14 @@ public class PDFFragment extends Fragment
             getActivity().runOnUiThread(new Runnable() {
                 public void run() {
 
+                    imgRuta.setImageBitmap(imagen);
+                // hacemos zoomeable la imagen
 
-                        imgRuta.setImageBitmap(imagen);
-
+                PhotoViewAttacher visorFoto = new PhotoViewAttacher(imgRuta);
+                float scala = (float)1;
+                visorFoto.setScale(scala,true);
+                visorFoto.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                visorFoto.update();
 
 
 

@@ -22,6 +22,8 @@ import com.loopj.android.http.Base64;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import uk.co.senab.photoview.PhotoViewAttacher;
+
 public class MapaResintoFragment extends Fragment {
     private ImageView mapaResinto;
     @Override
@@ -41,7 +43,17 @@ public class MapaResintoFragment extends Fragment {
         cImg = dbHandler.getMmapaResinto();
 
         if(cImg.getCount() > 0){
+            // cargamos el mapa
             this.mapaResinto.setImageBitmap(getImage(cImg.getString(0)));
+
+            // hacemos zoomeable el mapa
+
+            PhotoViewAttacher visorFoto = new PhotoViewAttacher(this.mapaResinto);
+            float scala = (float)1;
+            visorFoto.setScale(scala,true);
+            visorFoto.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            visorFoto.update();
+
         }else{
             Toast.makeText(getActivity(), "No hay mapa de resinto", Toast.LENGTH_SHORT).show();
         }

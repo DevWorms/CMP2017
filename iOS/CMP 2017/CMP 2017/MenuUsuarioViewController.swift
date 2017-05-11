@@ -59,6 +59,7 @@ class MenuUsuarioViewController: ViewController {
     
     @IBAction func actualizarInfo(_ sender: Any) {
         UserDefaults.standard.setValue(0, forKey: "descarga")
+        UserDefaults.standard.setValue(1, forKey: "tipoDescar")
         let methodsCMP = ServerConnection()
         methodsCMP.getCMP(myView: self)
     }
@@ -75,6 +76,8 @@ class MenuUsuarioViewController: ViewController {
         UserDefaults.standard.set("", forKey: "api_key")
         UserDefaults.standard.set("", forKey: "user_id")
         UserDefaults.standard.set("", forKey: "name")
+        UserDefaults.standard.setValue(1, forKey: "descarga")
+        UserDefaults.standard.setValue(0, forKey: "tipoDescar")
         
         let vc = storyboard!.instantiateViewController(withIdentifier: "Inicio")
         self.present( vc , animated: true, completion: nil)

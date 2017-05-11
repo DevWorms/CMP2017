@@ -1,6 +1,7 @@
 package com.cmp2017.devworms.cmp2017;
 
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import static com.loopj.android.http.AsyncHttpClient.log;
 public class ClimaFragment extends Fragment
 
 {
+    private ProgressDialog pDialog;
     String url, tipo;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -23,15 +25,22 @@ public class ClimaFragment extends Fragment
         WebView web = (WebView) view.findViewById(R.id.webViewClima);
         web.getSettings().setJavaScriptEnabled(true);
         web.setWebViewClient(new WebViewClient() {
+
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon){
                 super.onPageStarted(view, url, favicon);
+                pDialog = new ProgressDialog(getActivity());
+                pDialog.setMessage("Cargando mapa de expositores...");
+                pDialog.setIndeterminate(false);
+                pDialog.setCancelable(false);
+                pDialog.show();
 
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
+                pDialog.dismiss();
 
             }
         });

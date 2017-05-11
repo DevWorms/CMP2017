@@ -181,6 +181,7 @@ $app->get('/api/encuesta/all/{user_id}/{api_key}', ['middleware' => 'cors', 'use
 $app->get('/api/encuesta/detail/{user_id}/{api_key}/{encuesta_id}', ['middleware' => 'cors', 'uses' => 'EncuestasController@getEncuesta']);
 $app->get('/api/encuesta/delete/{user_id}/{api_key}/{encuesta_id}', ['middleware' => 'cors', 'uses' => 'EncuestasController@delete']);
 $app->get('/api/encuesta/paginate/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'EncuestasController@paginate']);
+$app->get('/api/encuesta/admin/all/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'EncuestasController@getAllAdmin']);
 
 /*
  * Mapa recinto & mapa expositores
@@ -199,3 +200,10 @@ $app->get('/api/mapa/expositores/public/expositor/{expositor_id}', ['middleware'
  */
 $app->get('/api/push/send', ['middleware' => 'cors', 'uses' => 'PushNotificationsController@toAwsSnsTopic']);
 $app->post('/api/push/save', ['middleware' => 'cors', 'uses' => 'PushNotificationsController@save']);
+
+/*
+ * Usuarios admin
+ */
+$app->post('/api/users/search', ['middleware' => 'cors', 'uses' => 'UserController@search']);
+$app->post('/api/users/all', ['middleware' => 'cors', 'uses' => 'UserController@listAll']);
+$app->get('/api/users/paginate/{user_id}/{api_key}', ['middleware' => 'cors', 'uses' => 'UserController@paginate']);

@@ -6,6 +6,8 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -187,14 +189,19 @@ public class MenuPrincipal extends AppCompatActivity
 
             }
         } else if (id == R.id.nav_encuestas) {
+
             if(inicioComo.equals("invi")){
                 Toast.makeText(MenuPrincipal.this,"Registrate para activar esta sección",Toast.LENGTH_SHORT).show();
 
             }else{
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.actividad, new EncuestasFragment()).commit();
-                //Toast.makeText(MenuPrincipal.this,"Próximamente",Toast.LENGTH_SHORT).show();
 
+                if(this.isTherInternet()){
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.actividad, new EncuestasFragment()).commit();
+                }else{
+                    String msjEnc = "Para poder contestar las encuestas \n nesecitas una conexión a internet";
+                    Toast.makeText(MenuPrincipal.this,msjEnc,Toast.LENGTH_LONG).show();
+                }
 
             }
         }  else if (id == R.id.nav_notifiaciones) {
@@ -214,10 +221,12 @@ public class MenuPrincipal extends AppCompatActivity
                 Toast.makeText(MenuPrincipal.this,"Registrate para activar esta sección",Toast.LENGTH_SHORT).show();
 
             }else{
-                startActivity(new Intent(this,Updates.class));
-                //Toast.makeText(MenuPrincipal.this,"Próximamente actualiza",Toast.LENGTH_SHORT).show();
-
-
+                if(this.isTherInternet()){
+                    startActivity(new Intent(this,Updates.class));
+                }else{
+                    String msjUp = "Para actualizar los datos \n nesecitas una conexión a internet";
+                    Toast.makeText(MenuPrincipal.this,msjUp,Toast.LENGTH_LONG).show();
+                }
             }
         } else if (id == R.id.nav_cerrar) {
 
@@ -241,6 +250,16 @@ public class MenuPrincipal extends AppCompatActivity
         return true;
     }
 
+    public boolean isTherInternet(){
+        //metodo para verificar si hay internet
+        ConnectivityManager cm = (ConnectivityManager)getSystemService(this.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        if(activeNetwork != null){
+
+            return activeNetwork.isConnectedOrConnecting();
+        }
+        return false;
+    }
 
 
 

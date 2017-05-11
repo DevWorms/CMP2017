@@ -96,6 +96,9 @@
                     <li class="active">
                         <a href="categorias.php">Categorías</a>
                     </li>
+                    <li>
+                        <a href="usuarios.php">Usuarios</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

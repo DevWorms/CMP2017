@@ -24,7 +24,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.loopj.android.http.Base64;
+import com.nostra13.universalimageloader.core.assist.LoadedFrom;
+import com.nostra13.universalimageloader.core.display.BitmapDisplayer;
+import com.nostra13.universalimageloader.core.imageaware.ImageAware;
+import com.nostra13.universalimageloader.core.process.BitmapProcessor;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,6 +51,7 @@ public class MenuFragment extends Fragment {
     URL imageUrl;
     Bitmap[] imagen;
     HttpURLConnection conn;
+    String misBytes[];
     String[] ArrayBanners;
     ImageView imageAnim;
     View viewBanner;
@@ -131,7 +137,7 @@ public class MenuFragment extends Fragment {
         SQLiteDatabase db = dbHandler.getWritableDatabase();
         Cursor cursor = dbHandler.listarTodosBanner();
         imagen = new Bitmap[cursor.getCount()];
-
+        misBytes= new String[cursor.getCount()];
        /* for(int i = 0; i< cursor.getCount(); i++) {
             Log.d("Imagen "+i+" : ", "> " + cursor.getString(0).substring(i));
             imagen[i]   = getImage(cursor.getString(0).substring(i));
@@ -140,6 +146,7 @@ public class MenuFragment extends Fragment {
        int i=0;
         for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()){
             imagen[i]   = getImage(cursor.getString(0));
+            misBytes[i]= cursor.getString(0);
             i++;
         }
 
@@ -157,6 +164,10 @@ public class MenuFragment extends Fragment {
 
     }
 
+    public byte[] quieroBytes(String str){
+        byte[] b = Base64.decode(str , Base64.DEFAULT);
+        return  b;
+    }
     public void BannerSinBloqueo(){
         new Thread(new Runnable() {
             public void run() {
@@ -251,7 +262,8 @@ public class MenuFragment extends Fragment {
             int i = 0;
 
             public void run() {
-                imageAnim.setImageBitmap(imagen[i]);
+                //imageAnim.setImageBitmap(imagen[i]);
+                Glide.with(getActivity()).load(quieroBytes(misBytes[i])).into(imageAnim);
                 i++;
                 if (i > imagen.length - 1) {
                     i = 0;

@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo"
+    android:id="@+id/fondoMenufragment"
     tools:context="com.cmp2017.devworms.cmp2017.MenuFragment">
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
@@ -19,9 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:scaleType="centerCrop"
-
             tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="0dp" />
+            tools:layout_editor_absoluteY="0dp"/>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -156,7 +157,6 @@
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
-
 
 
 </android.support.constraint.ConstraintLayout>

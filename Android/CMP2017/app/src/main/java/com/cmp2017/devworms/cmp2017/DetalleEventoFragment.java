@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
@@ -51,7 +52,8 @@ public class DetalleEventoFragment extends Fragment {
     HttpURLConnection conn;
     Button btnLocalizar, btnAgreAgenda;
     Cursor cursor;
-
+    ImageTools tools;
+    LinearLayout linearDetalleEvent;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detalle_evento, container, false);
@@ -71,13 +73,14 @@ public class DetalleEventoFragment extends Fragment {
         btnLocalizar.setOnClickListener(new Localizar());
         btnAgreAgenda = (Button) view.findViewById(R.id.btnAgreExpo);
         btnAgreAgenda.setOnClickListener(new AgregarAgenda());
-
+        linearDetalleEvent = (LinearLayout) view.findViewById(R.id.linearDetalleEvent);
+        tools = new ImageTools(getActivity());
+        tools.loadBackground(R.drawable.fondo,linearDetalleEvent);
         ////Se busca si este evento ya se encuentra en la base de agenda
         // y si esta entonces cambiamos a boton borrar
         if(estaEnAgenda()){
             this.btnAgreAgenda.setBackgroundResource(R.drawable.btnborraragenda);
         }
-
 
         loadDetalleEventos(seccion);
 
@@ -104,7 +107,7 @@ public class DetalleEventoFragment extends Fragment {
 
                 cImg = dbHandler.ImagenPorIdSocialDepo(idProgram);
                 if(cImg.getCount()>0){
-                    imgFoto.setImageBitmap(getImage(cImg.getString(0)));
+                    tools.loadByBytesToImageView(cImg.getString(0),imgFoto);
                 }
 
 
@@ -118,7 +121,7 @@ public class DetalleEventoFragment extends Fragment {
                 Log.e("PROGRGRAL",respuesta);
                 cImg = dbHandler.imagenPorPrograma(idProgram);
                 if(cImg.getCount() > 0){
-                    imgFoto.setImageBitmap(getImage(cImg.getString(0)));
+                    tools.loadByBytesToImageView(cImg.getString(0),imgFoto);
                 }
 
 
@@ -131,7 +134,7 @@ public class DetalleEventoFragment extends Fragment {
                 cualDetalle = "acompanantes";
                 cImg = dbHandler.ImagenPorIdAco(idProgram);
                 if(cImg.getCount() > 0){
-                    imgFoto.setImageBitmap(getImage(cImg.getString(0)));
+                    tools.loadByBytesToImageView(cImg.getString(0),imgFoto);
                 }
 
 
@@ -210,7 +213,8 @@ public class DetalleEventoFragment extends Fragment {
             Log.e("IMAGEN","no tiene");
         }
         dbHandlerAgenda.addEvento(idProgram, txtNombreEven.getText().toString(), strdia, horaIni, horaFin,seccion,strurl);
-        this.btnAgreAgenda.setBackgroundResource(R.drawable.btnborraragenda);
+        //this.btnAgreAgenda.setBackgroundResource(R.drawable.btnborraragenda);
+        tools.loadBackground(R.drawable.btnborraragenda,btnAgreAgenda);
         Toast.makeText(getActivity(), "Se guardo en Mi AgendaFragment",
                 Toast.LENGTH_SHORT).show();
     }
@@ -223,7 +227,8 @@ public class DetalleEventoFragment extends Fragment {
         SQLiteDatabase db = dbHandlerAgenda.getWritableDatabase();
         //borramos el evento
         dbHandlerAgenda.borrarEvento(idProgram,seccion);
-        this.btnAgreAgenda.setBackgroundResource(R.drawable.btnagregaragenda);
+        //this.btnAgreAgenda.setBackgroundResource(R.drawable.btnagregaragenda);
+        tools.loadBackground(R.drawable.btnagregaragenda,btnAgreAgenda);
         // si la borramos ponemos el boton en agregar de nuevo
         Toast.makeText(getActivity(), "Evento removido de la agenda",
                 Toast.LENGTH_SHORT).show();

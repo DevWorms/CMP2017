@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
@@ -28,6 +29,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.internal.bind.ArrayTypeAdapter;
@@ -63,12 +65,14 @@ public class ListAdapterAgenda extends ArrayAdapter<AgendaModel> {
     private Activity actividad;
     private int posicionGeneral;
     private static int posicionColor = 1;
+    private ImageTools tools;
     //constructoe recibimos la lsita de objetos
     public ListAdapterAgenda(Context context, List<AgendaModel> objetos, Activity a) {
         super(context, R.layout.formato_lista_agenda, objetos);
         this.contex = context;
         this.actividad = a;
         this.rowsAgenda = objetos;
+        this.tools = new ImageTools(context);
     }
 
 
@@ -152,7 +156,9 @@ public class ListAdapterAgenda extends ArrayAdapter<AgendaModel> {
                 //asignamos el CornerRadius
                 roundedDrawable.setCornerRadius(originalBitmap.getHeight());
                 roundedDrawable.setCircular(true);
+
                 this.miniatura.setImageDrawable(roundedDrawable);
+
             }
         }
         // asignamos el evento onclick para que lleve al detalle

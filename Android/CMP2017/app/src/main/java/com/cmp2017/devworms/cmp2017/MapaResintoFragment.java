@@ -26,9 +26,12 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class MapaResintoFragment extends Fragment {
     private ImageView mapaResinto;
+    ImageTools tools;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_mapa_resinto, container, false);
+        tools = new ImageTools(getActivity());
         this.mapaResinto = (ImageView) view.findViewById(R.id.imgMapaResinto);
         loadMapa();
         return view;
@@ -44,8 +47,8 @@ public class MapaResintoFragment extends Fragment {
 
         if(cImg.getCount() > 0){
             // cargamos el mapa
-            this.mapaResinto.setImageBitmap(getImage(cImg.getString(0)));
-
+            //this.mapaResinto.setImageBitmap(getImage(cImg.getString(0)));
+            tools.loadByBytesToImageView(cImg.getString(0),this.mapaResinto);
             // hacemos zoomeable el mapa
 
             PhotoViewAttacher visorFoto = new PhotoViewAttacher(this.mapaResinto);

@@ -35,11 +35,12 @@ public class ListAdapterEncuestas extends ArrayAdapter<EncuestaModel> {
     private Activity contexto;
     private ImageView imagenEncuesta;
     private Button botonEncuesta;
-
+    private ImageTools tools;
     public ListAdapterEncuestas(Activity contexto, EncuestaModel[] modelo) {
         super(contexto, R.layout.formato_lista_encuestas, modelo);
         this.modelo = modelo;
         this.contexto = contexto;
+        tools = new ImageTools(contexto);
 
     }
 
@@ -71,8 +72,8 @@ public class ListAdapterEncuestas extends ArrayAdapter<EncuestaModel> {
         });
         contexto.runOnUiThread(new Runnable() {
             public void run() {
-
-                imagenEncuesta.setImageBitmap(modelo[posicion].getImagen());
+                tools.loadByBytesToImageView(modelo[posicion].getImagen(),imagenEncuesta);
+                //imagenEncuesta.setImageBitmap(modelo[posicion].getImagen());
 
             }
         });

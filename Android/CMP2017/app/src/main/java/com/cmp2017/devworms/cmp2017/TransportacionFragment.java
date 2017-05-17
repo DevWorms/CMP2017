@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -49,7 +50,9 @@ public class TransportacionFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_transportacion, container, false);
         SharedPreferences sp = getActivity().getSharedPreferences("prefe", Activity.MODE_PRIVATE);
-
+        ImageTools tools = new ImageTools(getActivity());
+        LinearLayout transFrag = (LinearLayout) view.findViewById(R.id.transFrag);
+        tools.loadBackground(R.drawable.fondo,transFrag);
 
         apiKey = sp.getString("APIkey", "");
         userId = sp.getString("IdUser", "");

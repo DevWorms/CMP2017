@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.Toast;
@@ -53,6 +55,10 @@ public class AgendaFragment extends Fragment implements View.OnClickListener{
         this.listaAgenda = (ListView) view.findViewById(R.id.lvAgenda);
         //por default cargamos el lunes
         this.loadEventoPorDia("2017-06-05");
+
+        ImageTools tools = new ImageTools(getActivity());
+        LinearLayout agenda = (LinearLayout) view.findViewById(R.id.agendaFrag);
+        tools.loadBackground(R.drawable.fondo,agenda);
         return view;
 
     }

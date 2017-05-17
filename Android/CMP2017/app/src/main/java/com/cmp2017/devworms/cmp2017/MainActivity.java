@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.os.AsyncTask;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,14 +52,16 @@ public class MainActivity extends AppCompatActivity {
     String[] ArrayBanners, ImagenDeco;
     ImageView imageAnim;
     View viewBanner;
-
+    ConstraintLayout mainFondo;
     AdminSQLiteOffline dbHandlerOffline;
-
+    ImageTools tools;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        tools = new ImageTools(this);
+        mainFondo= (ConstraintLayout) findViewById(R.id.mainFondo);
+        tools.loadBackground(R.drawable.fondoini,mainFondo);
 
         SharedPreferences sp = getSharedPreferences("prefe", Activity.MODE_PRIVATE);
         String nombre = sp.getString("APIkey", "");

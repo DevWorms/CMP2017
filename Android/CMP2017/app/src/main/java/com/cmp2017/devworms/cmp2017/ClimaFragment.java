@@ -3,6 +3,7 @@ package com.cmp2017.devworms.cmp2017;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import static com.loopj.android.http.AsyncHttpClient.log;
 
@@ -23,6 +25,8 @@ public class ClimaFragment extends Fragment
     private boolean isRedirected ;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+
         //inicializamos dialog
         pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Cargando mapa" );
@@ -32,6 +36,10 @@ public class ClimaFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_clima, container, false);
         WebView web = (WebView) view.findViewById(R.id.webViewClima);
         web.getSettings().setJavaScriptEnabled(true);
+
+        ImageTools tools = new ImageTools(getActivity());
+        LinearLayout climaFrag = (LinearLayout) view.findViewById(R.id.climaFrag);
+        tools.loadBackground(R.drawable.fondo,climaFrag);
 
         web.setWebViewClient(new WebViewClient() {
             @Override

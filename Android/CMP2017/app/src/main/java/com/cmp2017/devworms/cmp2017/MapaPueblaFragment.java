@@ -32,6 +32,7 @@ public class MapaPueblaFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_mapa_puebla, container, false);
         // Create global configuration and initialize ImageLoader with this config
         final ImageView mapaPuebla = (ImageView)view.findViewById(R.id.imgPuebla);
+
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getActivity()).build();
         ImageLoader.getInstance().init(config);
 

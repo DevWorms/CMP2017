@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -29,10 +30,14 @@ public class NotificacionFragment extends Fragment
     private ListViewAdapter adapter;
     private int leido;
     String apiKey,userId,idNoti;
-
+    ImageTools tools;
+    RelativeLayout relNoti;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.notificacion_fragment, container, false);
+        tools = new ImageTools(getActivity());
+        relNoti = (RelativeLayout) view.findViewById(R.id.relNoti);
+        tools.loadBackground(R.drawable.fondo,relNoti);
         lvNoti = (ListView)view.findViewById(R.id.lvNoti);
         ivImagen = (ImageView)view.findViewById(R.id.ivImagen);
         arrayNoti = new ArrayList<>();

@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.os.AsyncTask;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,10 +23,13 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.loopj.android.http.Base64;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -53,9 +57,14 @@ public class EncuestaDetalleFragment  extends Fragment implements View.OnClickLi
     float valorRatingDos;
     float valorRatingTres;
     String mensajeRespuestas;
+    ImageTools tools;
+    ConstraintLayout constEncDeta;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_encuesta_detalle, container, false);
+        constEncDeta = (ConstraintLayout) view.findViewById(R.id.constEncDeta);
+        tools = new ImageTools(getActivity());
+        tools.loadBackground(R.drawable.fondo,constEncDeta);
         SharedPreferences sp = getActivity().getSharedPreferences("prefe", Activity.MODE_PRIVATE);
         this.apiKey = sp.getString("APIkey", "");
         this.userId = sp.getString("IdUser", "");
@@ -217,7 +226,9 @@ public class EncuestaDetalleFragment  extends Fragment implements View.OnClickLi
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    imagenEvento.setImageBitmap(imagen);
+                    tools.loadByBytesToImageView(getBytes(imagen),imagenEvento);
+                    //imagenEvento.setImageBitmap(imagen);
+
                 }
             });
     }
@@ -238,5 +249,16 @@ public class EncuestaDetalleFragment  extends Fragment implements View.OnClickLi
             Log.e("Error imagen encuesta" , iox.getMessage());
         }
         return imagen;
+    }
+
+    public  String getBytes(Bitmap bitmap) {
+        ByteArrayOutputStream blob = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0 /* Ignored for PNGs */, blob);
+        byte[] bitmapdata = blob.toByteArray();
+
+        String encodedImage = Base64.encodeToString(bitmapdata, Base64.DEFAULT);
+        //---------------
+
+        return encodedImage;
     }
 }

@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo"
+    android:id="@+id/fondoProgFra"
     tools:context="com.cmp2017.devworms.cmp2017.ProgramFragment">
+
 
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -62,7 +63,6 @@
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:layout_marginTop="50dp"
-            android:background="@drawable/btnbuscar"
             android:paddingBottom="5dp"
             android:textSize="17sp"
             android:textStyle="normal" />

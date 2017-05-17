@@ -10,7 +10,7 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="0dp"
         android:layout_height="551dp"
-        android:background="@drawable/fondo"
+        android:id="@+id/transFrag"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:weightSum="1"

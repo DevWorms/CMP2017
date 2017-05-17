@@ -34,6 +34,7 @@ public class ListViewAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater layoutInflater;
     private String userId,apikey,idNoti,response;
+    ImageTools tools;
     ProgressDialog pDialog;
 
 
@@ -44,6 +45,7 @@ public class ListViewAdapter extends BaseAdapter {
         this.userId = userId;
         this.apikey = apikey;
         this.idNoti = idNoti;
+        tools = new ImageTools(contexto);
 
     }
 
@@ -72,7 +74,10 @@ public class ListViewAdapter extends BaseAdapter {
         txtNoti.setText(arrayListNoti.get(position).getNotificacion());
         if(arrayListNoti.get(position).leido == 1)
         {
-            ivImagen.setImageResource(R.mipmap.mensaje_recibido);
+            tools.drawableToImageView(R.mipmap.mensaje_recibido,ivImagen);
+            //ivImagen.setImageResource(R.mipmap.mensaje_recibido);
+        }else {
+            tools.drawableToImageView(R.mipmap.mensaje,ivImagen);
         }
 
         vista.setOnClickListener(new View.OnClickListener() {
@@ -80,11 +85,13 @@ public class ListViewAdapter extends BaseAdapter {
             public void onClick(View v) {
                 if(arrayListNoti.get(position).leido == 1)
                 {
-                    ivImagen.setImageResource(R.mipmap.mensaje_recibido);
+                    //vImagen.setImageResource(R.mipmap.mensaje_recibido);
+                    tools.drawableToImageView(R.mipmap.mensaje_recibido,ivImagen);
                 }
                 else
                 {
-                    ivImagen.setImageResource(R.mipmap.mensaje_recibido);
+                    tools.drawableToImageView(R.mipmap.mensaje,ivImagen);
+                    //ivImagen.setImageResource(R.mipmap.mensaje_recibido);
                     arrayListNoti.get(position).setLeido(1);
                 }
                 new MandarLeido().execute();

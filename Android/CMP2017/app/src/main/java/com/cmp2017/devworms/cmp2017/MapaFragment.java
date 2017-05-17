@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MapaFragment extends Fragment
@@ -17,6 +18,10 @@ public class MapaFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mapa, container, false);
+        LinearLayout fondoMapas = (LinearLayout) view.findViewById(R.id.fondoMapas);
+        ImageTools tools = new ImageTools(getActivity());
+
+        tools.loadBackground(R.drawable.fondo,fondoMapas);
 
         Button btnMapaExpo= (Button) view.findViewById(R.id.btnMapExp);
         btnMapaExpo.setOnClickListener(new MapaExpo());

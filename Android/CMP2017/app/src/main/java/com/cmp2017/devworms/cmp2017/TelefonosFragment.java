@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class TelefonosFragment extends Fragment
@@ -18,7 +19,10 @@ public class TelefonosFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_telefonos, container, false);
-
+        ImageTools tools = new ImageTools(getActivity());
+        LinearLayout telFondo = (LinearLayout) view.findViewById(R.id.telFondo);
+        tools.loadBackground(R.drawable.fondo,telFondo
+        );
         txtAmbulancias = (TextView) view.findViewById(R.id.txtAmbula);
         txtPlocias = (TextView) view.findViewById(R.id.txtPolicia);
         txtBomberos = (TextView) view.findViewById(R.id.txtBomberos);

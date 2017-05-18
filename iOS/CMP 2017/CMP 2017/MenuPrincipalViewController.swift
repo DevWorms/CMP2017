@@ -58,25 +58,6 @@ class MenuPrincipalViewController: UITableViewController {
         nav?.titleTextAttributes = [NSForegroundColorAttributeName: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)]
         nav?.topItem?.title = UserDefaults.standard.value(forKey: "name") as! String?
         
-        ///
-        let invitado = UserDefaults.standard.value(forKey: "invitado") as! Bool
-        
-        if invitado {
-            programaBtn.isEnabled = false
-            acompañantesBtn.isEnabled = false
-            transportacionBtn.isEnabled = false
-            conoceBtn.isEnabled = false
-            mapaBtn.isEnabled = false
-            socialesBtn.isEnabled = false
-            
-            programaBtn.setImage(UIImage(named: "01Programa-1.png"), for: .normal)
-            acompañantesBtn.setImage(UIImage(named: "03Eventos_Acompañantes-1.png"), for: .normal)
-            transportacionBtn.setImage(UIImage(named: "07Transportacion-1.png"), for: .normal)
-            conoceBtn.setImage(UIImage(named: "08Conoce_Puebla-1.png"), for: .normal)
-            mapaBtn.setImage(UIImage(named: "06Mapas-1.png"), for: .normal)
-            socialesBtn.setImage(UIImage(named: "04Eventos_Deportivos-1.png"), for: .normal)
-        }
-        
         cargarImg()
         
     ////// copiar desde aqui para puush notifications

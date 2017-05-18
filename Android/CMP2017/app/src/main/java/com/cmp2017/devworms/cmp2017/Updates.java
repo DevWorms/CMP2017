@@ -177,6 +177,7 @@ public class Updates extends Activity implements View.OnClickListener {
             SQLiteDatabase db = dbHandlerOffline.getWritableDatabase();
 
             for(Integer modulo : modulosParaActulizar){
+                Log.e("MODULOSQUEVIENEN",modulo+"");
                 if(modulo == 1){ //Eventos de acompañantes
                     resFinal += updateAcompanate();
                 }else if(modulo == 4){ // Expositores

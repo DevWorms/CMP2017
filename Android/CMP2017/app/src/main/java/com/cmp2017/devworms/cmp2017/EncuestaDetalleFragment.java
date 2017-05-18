@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -58,11 +59,11 @@ public class EncuestaDetalleFragment  extends Fragment implements View.OnClickLi
     float valorRatingTres;
     String mensajeRespuestas;
     ImageTools tools;
-    ConstraintLayout constEncDeta;
+    LinearLayout constEncDeta;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_encuesta_detalle, container, false);
-        constEncDeta = (ConstraintLayout) view.findViewById(R.id.constEncDeta);
+        constEncDeta = (LinearLayout) view.findViewById(R.id.constEncDeta);
         tools = new ImageTools(getActivity());
         tools.loadBackground(R.drawable.fondo,constEncDeta);
         SharedPreferences sp = getActivity().getSharedPreferences("prefe", Activity.MODE_PRIVATE);

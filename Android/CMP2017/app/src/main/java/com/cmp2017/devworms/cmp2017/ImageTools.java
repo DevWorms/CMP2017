@@ -73,7 +73,7 @@ public class ImageTools {
 
         byte[] loadBytes = Base64.decode(strB64 , Base64.DEFAULT);
 
-        Glide.with(this.contexto).load(loadBytes).centerCrop().into(target);
+        Glide.with(this.contexto).load(loadBytes).into(target);
 
 
     }

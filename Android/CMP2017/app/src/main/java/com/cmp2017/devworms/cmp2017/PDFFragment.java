@@ -162,7 +162,9 @@ public class PDFFragment extends Fragment
                 PhotoViewAttacher visorFoto = new PhotoViewAttacher(imgRuta);
                 float scala = (float)1;
                 visorFoto.setScale(scala,true);
-                visorFoto.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                visorFoto.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+                    visorFoto.setZoomable(true);
+
                 visorFoto.update();
 
 

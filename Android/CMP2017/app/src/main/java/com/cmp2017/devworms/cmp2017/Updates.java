@@ -198,7 +198,7 @@ public class Updates extends Activity implements View.OnClickListener {
                     dbHandlerOffline.resetSocialDepo();
                     resFinal += updateSocialDepo();
                 }else if(modulo == 9){ // Conoce Puebla, teléfonos
-                    // code here
+                    // code son fijos
                 }else if(modulo == 10){ // Conoce Puebla, sitios interes
                     dbHandlerOffline.resetSitiosInt();
                     resFinal +=  updateSitiosPuebla();

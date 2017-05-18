@@ -30,6 +30,8 @@ public class MenuFragment extends Fragment {
     ImageView imageAnim;
     ConstraintLayout fondoMenufragment;
     private ImageTools imageTools;
+    private Handler myHandler;
+    private Runnable runnable;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
@@ -118,7 +120,12 @@ public class MenuFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        myHandler.removeCallbacks(runnable);
         ImageLoader.getInstance().destroy();
+        Glide.clear(imageAnim);
+
+
+
     }
 
     public void llenarArregloImagenes(){
@@ -153,8 +160,9 @@ public class MenuFragment extends Fragment {
     public void cambioBanner(){
         try{
 
-            final Handler handler = new Handler();
-            Runnable runnable = new Runnable() {
+            myHandler = new Handler();
+
+             runnable = new Runnable() {
                 int i = 0;
 
                 public void run() {
@@ -163,13 +171,16 @@ public class MenuFragment extends Fragment {
                     if (i > misBytes.length - 1) {
                         i = 0;
                     }
-                    handler.postDelayed(this, 5000);
+                    myHandler.postDelayed(this, 5000);
                 }
             };
-            handler.postDelayed(runnable, 5000);
+
+            myHandler.postDelayed(runnable, 5000);
 
         }catch(OutOfMemoryError error){
             Log.e("ERROR MEMORIA", error.getMessage());
+        }catch (IllegalArgumentException ix){
+            Log.e("IMAGEN CARGADO", "SE DETUVO");
         }
 
     }

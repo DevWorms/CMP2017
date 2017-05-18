@@ -308,7 +308,8 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
         db.close();
 
     }
-    //Regresa el jsonAcomp de la Base de Datos
+
+
     public Cursor jsonAcompa(){
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT jsonAcomp FROM " + TABLA_ACOMPAÑANTE + " ;";
@@ -323,7 +324,6 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
 
     }
 
-    //Añade Las Imagenes de Los acompañantes
 
     public void addAcoImag(String idImage, String image) {
 
@@ -746,6 +746,87 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
 
         db.execSQL("DROP TABLE IF EXISTS " + TABLA_MAPARESINTO);
         onCreate(db);
+
+    }
+
+    // metodos para el reseteo de tablas
+
+    public void resetAcompanantes(){
+        SQLiteDatabase db = getWritableDatabase();
+
+        String queryAcom = "DELETE FROM " + TABLA_ACOMPAÑANTE;
+        String queryImAcom = "DELETE FROM " + TABLA_ACOMPAÑANTEIMAGENES;
+
+        db.execSQL(queryAcom);
+        db.execSQL(queryImAcom);
+
+    }
+
+    public void resetExpositores(){
+        SQLiteDatabase db = getWritableDatabase();
+
+        String query = "DELETE FROM " + TABLA_EXPOSITORES;
+        String queryImg = "DELETE FROM " + TABLA_EXPOSITORESIMAGENES;
+
+        db.execSQL(query);
+        db.execSQL(queryImg);
+
+    }
+
+    public void resetPatrocinadores(){
+        SQLiteDatabase db = getWritableDatabase();
+
+        String query = "DELETE FROM " + TABLA_PATROCINADORES;
+        String queryImg = "DELETE FROM " + TABLA_PATROIMAGENES;
+
+        db.execSQL(query);
+        db.execSQL(queryImg);
+
+    }
+
+    public void resetProgramas(){
+        SQLiteDatabase db = getWritableDatabase();
+
+        String query = "DELETE FROM " + TABLA_PROGRAMAS;
+        String queryImg = "DELETE FROM " + TABLA_PROGIMAGENES;
+        String queryCat = "DELETE FROM " + TABLA_CATEGORIAS;
+
+        db.execSQL(queryCat);
+        db.execSQL(query);
+        db.execSQL(queryImg);
+
+    }
+
+    public void resetTransportacion(){
+        SQLiteDatabase db = getWritableDatabase();
+
+        String query = "DELETE FROM " + TABLA_TRANSP;
+        String queryImg = "DELETE FROM " + TABLA_TRANSPOIMAGENES;
+
+        db.execSQL(query);
+        db.execSQL(queryImg);
+
+    }
+
+    public void resetSocialDepo(){
+        SQLiteDatabase db = getWritableDatabase();
+
+        String query = "DELETE FROM " + TABLA_SOCIALDEPO;
+        String queryImg = "DELETE FROM " + TABLA_SOCIALDEPOIMAGENES;
+
+        db.execSQL(query);
+        db.execSQL(queryImg);
+
+    }
+
+    public void resetSitiosInt(){
+        SQLiteDatabase db = getWritableDatabase();
+
+        String query = "DELETE FROM " + TABLA_SITIOSPUEBLA;
+        String queryImg = "DELETE FROM " + TABLA_SITIOIMAGENES;
+
+        db.execSQL(query);
+        db.execSQL(queryImg);
 
     }
 }

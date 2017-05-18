@@ -120,6 +120,7 @@ public class DetalleEventoFragment extends Fragment {
                 Log.e("CURSORPROGRAMA",cursor.getCount()+"");
                 Log.e("PROGRGRAL",respuesta);
                 cImg = dbHandler.imagenPorPrograma(idProgram);
+
                 if(cImg.getCount() > 0){
                     tools.loadByBytesToImageView(cImg.getString(0),imgFoto);
                 }

@@ -86,7 +86,7 @@ public class MenuFragment extends Fragment {
         ImageView imagbtnPuebla= (ImageView) view.findViewById(R.id.imagbtnPuebla);
         imagbtnPuebla.setOnClickListener(new SecPuebla());
 
-        if(inicioComo.equals("invi")){
+        /* if(inicioComo.equals("invi")){
 
             // ahora cargamos todas las imagenes por manejador
             imageTools.drawableToImageView(R.drawable.btnprogramagris,imgbtnProgramas);
@@ -107,7 +107,7 @@ public class MenuFragment extends Fragment {
             imageTools.drawableToImageView(R.drawable.btnpueblagris,imagbtnPuebla);
             imagbtnPuebla.setEnabled(false);
 
-        }
+        }*/
 
         return view;
 

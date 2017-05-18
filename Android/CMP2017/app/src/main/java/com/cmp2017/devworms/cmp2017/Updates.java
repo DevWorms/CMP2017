@@ -613,7 +613,6 @@ public class Updates extends Activity implements View.OnClickListener {
         dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
         Log.e("JSONPROGRAMAS",strProgramas);
         dbHandlerOffline.addJsonProgramas(strProgramas);
-
         try{
             JSONObject jProgramas = new JSONObject(strProgramas);
             String strProg = jProgramas.getString("programas");

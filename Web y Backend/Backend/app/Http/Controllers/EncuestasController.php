@@ -446,7 +446,7 @@ class EncuestasController extends Controller {
                         select("id", "name", "last_name", "email")
                         ->whereIn('id', $usersHas->pluck('user_id'))
                         ->get();
-                $encuesta->usuariosRespondidos = $encuesta->usuarios->whereIn('id', $usersHas->where('resuelta', 1)->pluck('user_id'));
+                $encuesta->usuariosRespondidos = $encuesta->usuarios->whereIn('id', $usersHas->where('resuelta', 1)->pluck('user_id'))->values();
                 foreach ($encuesta->usuariosRespondidos as $usuario) {
                     $usuario->respuestas = Respuesta::
                                             select('pregunta_id', 'respuesta', 'updated_at')

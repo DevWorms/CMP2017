@@ -552,6 +552,7 @@ class ProgramaController extends Controller {
             $programa = Programa::where('id', $id)->first();
             if ($programa) {
                 $programa->delete();
+                $this->createUpdate();
 
                 $res['status'] = 1;
                 $res['mensaje'] = "El patrocinador se eliminó correctamente.";

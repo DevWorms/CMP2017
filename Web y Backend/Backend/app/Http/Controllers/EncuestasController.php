@@ -409,6 +409,7 @@ class EncuestasController extends Controller {
                 }
 
                 $expositor->delete();
+                $this->createUpdate();
 
                 $res['status'] = 1;
                 $res['mensaje'] = "La encuesta se eliminó correctamente.";

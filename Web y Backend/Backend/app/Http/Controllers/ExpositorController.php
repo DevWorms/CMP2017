@@ -698,6 +698,7 @@ class ExpositorController extends Controller {
             $programa = Expositor::where('id', $expositor)->first();
             if ($programa) {
                 $programa->delete();
+                $this->createUpdate();
 
                 $res['status'] = 1;
                 $res['mensaje'] = "El expositor se eliminó correctamente.";

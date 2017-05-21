@@ -78,8 +78,8 @@
       <file leaf-file-name="encuesta.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/encuesta.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-273">
-              <caret line="107" column="0" lean-forward="false" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
+            <state relative-caret-position="189">
+              <caret line="129" column="47" lean-forward="false" selection-start-line="129" selection-start-column="47" selection-end-line="129" selection-end-column="47" />
               <folding>
                 <marker date="1494526424738" expanded="true" signature="262:268" ph=" " />
                 <marker date="1494526424738" expanded="true" signature="1398:1404" ph=" " />
@@ -487,12 +487,12 @@
       <workItem from="1494183727733" duration="2737000" />
       <workItem from="1494191293435" duration="46000" />
       <workItem from="1494479219782" duration="9509000" />
-      <workItem from="1494523419272" duration="3521000" />
+      <workItem from="1494523419272" duration="3915000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="235604000" />
+    <option name="totallyTimeSpent" value="235998000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -504,7 +504,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1050" extended-state="1" />
+    <frame x="0" y="0" width="1920" height="1050" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19391026" sideWeight="0.49624062" order="0" side_tool="false" content_ui="combo" />
@@ -989,8 +989,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/encuesta.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-273">
-          <caret line="107" column="0" lean-forward="false" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
+        <state relative-caret-position="189">
+          <caret line="129" column="47" lean-forward="false" selection-start-line="129" selection-start-column="47" selection-end-line="129" selection-end-column="47" />
           <folding>
             <marker date="1494526424738" expanded="true" signature="262:268" ph=" " />
             <marker date="1494526424738" expanded="true" signature="1398:1404" ph=" " />

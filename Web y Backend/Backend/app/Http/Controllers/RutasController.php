@@ -333,6 +333,7 @@ class RutasController extends Controller {
             $expositor = Ruta::where('id', $id)->first();
             if ($expositor) {
                 $expositor->delete();
+                $this->createUpdate();
 
                 $res['status'] = 1;
                 $res['mensaje'] = "La ruta se eliminó correctamente.";

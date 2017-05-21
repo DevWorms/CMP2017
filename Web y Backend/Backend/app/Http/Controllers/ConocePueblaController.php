@@ -600,6 +600,7 @@ class ConocePueblaController extends Controller {
             $programa = PueblaSitios::where('id', $sitio)->first();
             if ($programa) {
                 $programa->delete();
+                $this->createUpdate(10);
 
                 $res['status'] = 1;
                 $res['mensaje'] = "El sitio se eliminó correctamente.";
@@ -736,6 +737,7 @@ class ConocePueblaController extends Controller {
             $programa = PueblaTelefonos::where('id', $telefono)->first();
             if ($programa) {
                 $programa->delete();
+                $this->createUpdate(9);
 
                 $res['status'] = 1;
                 $res['mensaje'] = "El telefono se eliminó correctamente.";

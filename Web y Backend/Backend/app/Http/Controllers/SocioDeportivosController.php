@@ -503,6 +503,7 @@ class SocioDeportivosController extends Controller {
             $expositor = Programa::where('id', $id)->first();
             if ($expositor) {
                 $expositor->delete();
+                $this->createUpdate();
 
                 $res['status'] = 1;
                 $res['mensaje'] = "El evento se eliminó correctamente.";

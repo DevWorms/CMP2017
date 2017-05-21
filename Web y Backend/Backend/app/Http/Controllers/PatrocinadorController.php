@@ -581,6 +581,7 @@ class PatrocinadorController extends Controller {
             $expositor = Expositor::where('id', $id)->first();
             if ($expositor) {
                 $expositor->delete();
+                $this->createUpdate();
 
                 $res['status'] = 1;
                 $res['mensaje'] = "El patrocinador se eliminó correctamente.";

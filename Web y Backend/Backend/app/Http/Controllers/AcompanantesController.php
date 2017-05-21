@@ -511,6 +511,8 @@ class AcompanantesController extends Controller {
             if ($programa) {
                 $programa->delete();
 
+                $this->createUpdate();
+
                 $res['status'] = 1;
                 $res['mensaje'] = "El programa de acompañantes se eliminó correctamente.";
                 return response()->json($res, 200);

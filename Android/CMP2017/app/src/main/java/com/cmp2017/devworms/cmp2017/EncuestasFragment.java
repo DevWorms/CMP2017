@@ -17,13 +17,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.loopj.android.http.Base64;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -37,9 +41,14 @@ public class EncuestasFragment extends Fragment{
     EncuestaModel modelo[];
     String response;
     ProgressDialog pDialog;
+    LinearLayout fragEnc;
+    ImageTools tools;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_encuestas, container, false);
+        tools = new ImageTools(getActivity());
+        fragEnc = (LinearLayout) view.findViewById(R.id.fragEnc);
+        tools.loadBackground(R.drawable.fondo,fragEnc);
         SharedPreferences sp = getActivity().getSharedPreferences("prefe", Activity.MODE_PRIVATE);
         this.apiKey = sp.getString("APIkey", "");
         this.userId = sp.getString("IdUser", "");
@@ -86,7 +95,8 @@ public class EncuestasFragment extends Fragment{
                         modelo[cont]= new EncuestaModel();
                         modelo[cont].setId(jEncuestas.getJSONObject(cont).getInt("id"));
                         JSONObject archivos = new JSONObject(jEncuestas.getJSONObject(cont).getString("filesm"));
-                        modelo[cont].setImagen(getBitmapFromURL(archivos.getString("url")));
+                        String misbytes = getBytes(getBitmapFromURL(archivos.getString("url")));
+                        modelo[cont].setImagen(misbytes);
                     }
 
                     response = "OK";
@@ -129,5 +139,16 @@ public class EncuestasFragment extends Fragment{
             Log.e("Error imagen encuesta" , iox.getMessage());
         }
         return imagen;
+    }
+
+    public  String getBytes(Bitmap bitmap) {
+        ByteArrayOutputStream blob = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0 /* Ignored for PNGs */, blob);
+        byte[] bitmapdata = blob.toByteArray();
+
+        String encodedImage = Base64.encodeToString(bitmapdata, Base64.DEFAULT);
+        //---------------
+
+        return encodedImage;
     }
 }

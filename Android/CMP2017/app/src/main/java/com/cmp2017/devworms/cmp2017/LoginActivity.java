@@ -33,6 +33,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,13 +57,16 @@ public class LoginActivity extends AppCompatActivity {
     String resp,nombre;
     private ProgressDialog pDialog;
     ConnectionDetector cd;
+    ImageTools tools;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        String font_path = "font/muliregular.ttf";  //definimos un STRING con el valor PATH ( o ruta por                                                                                    //donde tiene que buscar ) de nuetra fuente
-
+        String font_path = "font/muliregular.ttf";
+        tools = new ImageTools(this);
+        LinearLayout linearLogin = (LinearLayout) findViewById(R.id.linearLogin);
+        tools.loadBackground(R.drawable.fondo,linearLogin);
         Typeface TF = Typeface.createFromAsset(getAssets(),font_path);
 
         // Set up the login form.

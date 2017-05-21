@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.os.AsyncTask;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -48,14 +49,17 @@ public class PDFFragment extends Fragment
     String url, idRuta;
     Cursor cursor;
     int posJson;
-    Bitmap imagen;
+    String imagen;
+    ImageTools tools;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pdffragment, container, false);
         url =  getArguments().getString("url");
         imgRuta = (ImageView) view.findViewById(R.id.imgRuta);
         posJson = getArguments().getInt("posicion");
-
+        tools  = new ImageTools(getActivity());
+        ConstraintLayout fondoPdf = (ConstraintLayout) view.findViewById(R.id.fondoPdf);
+        tools.loadBackground(R.drawable.fondo,fondoPdf);
         new LoadSingleTrack().execute();
         return view;
 
@@ -122,7 +126,7 @@ public class PDFFragment extends Fragment
 
 
                     if(cursor.getCount()>0) {
-                        imagen = getImage(cursor.getString(0));
+                        imagen = cursor.getString(0);
                     }
 
 
@@ -151,14 +155,16 @@ public class PDFFragment extends Fragment
             // updating UI from Background Thread
             getActivity().runOnUiThread(new Runnable() {
                 public void run() {
-
-                    imgRuta.setImageBitmap(imagen);
+                    //imgRuta.setImageBitmap(imagen);
+                    tools.loadByBytesToImageView(imagen,imgRuta);
                 // hacemos zoomeable la imagen
 
                 PhotoViewAttacher visorFoto = new PhotoViewAttacher(imgRuta);
                 float scala = (float)1;
                 visorFoto.setScale(scala,true);
-                visorFoto.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                visorFoto.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+                    visorFoto.setZoomable(true);
+
                 visorFoto.update();
 
 

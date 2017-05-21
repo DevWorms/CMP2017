@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,9 +45,15 @@ public class ListadoFragment extends Fragment {
     Cursor cursor;
     ArrayList<HashMap<String, String>> albumsList;
     TextView txtTitulo;
+    ImageTools tools;
+    ConstraintLayout fragListado;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_listado, container, false);
+        Log.e("listadoFragment","x");
+        tools = new ImageTools(getActivity());
+        fragListado = (ConstraintLayout) view.findViewById(R.id.fragListado);
+        tools.loadBackground(R.drawable.fondo,fragListado);
         SharedPreferences sp = getActivity().getSharedPreferences("prefe", Activity.MODE_PRIVATE);
         apiKey = sp.getString("APIkey","");
         userId = sp.getString("IdUser","");

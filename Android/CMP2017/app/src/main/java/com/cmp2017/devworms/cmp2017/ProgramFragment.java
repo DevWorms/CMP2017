@@ -4,6 +4,9 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.database.Cursor;
 import android.graphics.Typeface;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +20,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,15 +34,18 @@ public class ProgramFragment extends Fragment {
 
     Spinner spinTipoEven,spinDia;
     AdminSQLiteOffline dbHandlerOffline;
-
-
+    ConstraintLayout fondoProg;
+    View view;
+    private  ImageTools imageTools;
 
     private final static String[] diaSelec = { "Seleciona un día", "Todos", "Lunes 5 de Junio",
             "Martes 6 de Junio", "Miercoles 7 de Junio","Jueves 8 de Junio","Viernes 9 de Junio","Sabado 10 de Junio" };
     ConnectionDetector cd;
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_program, container, false);
+
+        view = inflater.inflate(R.layout.fragment_program, container, false);
         spinTipoEven = (Spinner)view.findViewById(R.id.spinTipoEven);
         spinDia = (Spinner)view.findViewById(R.id.spinDia);
         TextView txtTituloP = (TextView) view.findViewById(R.id.txtTituloP);
@@ -78,13 +86,27 @@ public class ProgramFragment extends Fragment {
                 android.R.layout.simple_spinner_dropdown_item, diaSelec);
         spinDia.setAdapter(adapterDia);
 
-        Button btnBusca = (Button)view.findViewById(R.id.btnSubmit);
-        btnBusca.setOnClickListener(new Buscar());
+
+
+        imageTools = new ImageTools(this.getContext());
+
+        fondoProg = (ConstraintLayout) view.findViewById(R.id.fondoProgFra);
+
+
 
         return view;
 
 
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Button btnBusca = (Button)view.findViewById(R.id.btnSubmit);
+        btnBusca.setOnClickListener(new Buscar());
+        btnBusca.setBackgroundResource(R.drawable.btnbuscar);
+        imageTools.loadBackground(R.drawable.fondo,fondoProg);
     }
 
     class Buscar implements View.OnClickListener {

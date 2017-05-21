@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -26,12 +27,16 @@ public class MiPerfilFragment  extends Fragment
     String userId, apiKey,resp,nombre,apellido,clave;
     String paramNombre,paramApellido,paramClave;
     Button btnGuarCamb, btnCambioContra;
+    LinearLayout miperfil;
+    ImageTools tools;
     private ProgressDialog pDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mi_perfil, container, false);
-
+        tools = new ImageTools(getActivity());
+        miperfil = (LinearLayout) view.findViewById(R.id.miperfil);
+        tools.loadBackground(R.drawable.fondo,miperfil);
         SharedPreferences sp = getActivity().getSharedPreferences("prefe", Activity.MODE_PRIVATE);
         apiKey = sp.getString("APIkey","");
         userId = sp.getString("IdUser","");

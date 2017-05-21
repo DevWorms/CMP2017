@@ -8,7 +8,7 @@ import android.graphics.Bitmap;
 
 public class EncuestaModel {
     public int id;
-    public Bitmap imagen;
+    public String imagen;
 
     public int getId() {
         return id;
@@ -18,11 +18,11 @@ public class EncuestaModel {
         this.id = id;
     }
 
-    public Bitmap getImagen() {
+    public String getImagen() {
         return imagen;
     }
 
-    public void setImagen(Bitmap imagen) {
+    public void setImagen(String imagen) {
         this.imagen = imagen;
     }
 }

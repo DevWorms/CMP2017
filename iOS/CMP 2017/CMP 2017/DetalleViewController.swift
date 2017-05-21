@@ -140,11 +140,25 @@ class DetalleViewController: UIViewController {
     }
     
     @IBAction func btnUno(_ sender: Any) {
+        if  self.seccion == 3 || self.seccion == 4 {
+            self.tipoMapa = 7
+            self.urlMapa = detalle["maps_url"] as! String
+            self.performSegue(withIdentifier: "webView", sender: nil)
         
-          self.idMapa = detalle["id"] as! Int
-          self.tipoMapa = 6
-          self.urlMapa = "http://congreso.digital/public-map.php#\(self.idMapa)"
-          self.performSegue(withIdentifier: "webView", sender: nil)
+        } else{
+            
+            self.idMapa = detalle["id"] as! Int
+            if self.idMapa != nil {
+                self.tipoMapa = 6
+                self.urlMapa = "http://congreso.digital/public-map.php#\(self.idMapa)"
+                self.performSegue(withIdentifier: "webView", sender: nil)
+            }else{
+            
+            }
+         
+        
+        }
+        
         
         
     }

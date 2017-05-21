@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,7 +47,7 @@ public class DetalleExpoFragment extends Fragment {
     ProgressDialog pDialog;
     ImageView imgFoto;
     URL imageUrl ;
-    Bitmap imagen;
+    String imagen;
     View viewR;
     int cursorEncontrado,posJson;
     byte[] imageArray;
@@ -54,7 +55,8 @@ public class DetalleExpoFragment extends Fragment {
     String inicioComo;
     Button btnLocalizar,btnAgreExpo,btnPresent;
     Cursor cursor;
-
+    ImageTools tools;
+    LinearLayout linearExpo;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detalle_expo, container, false);
         viewR = view;
@@ -68,6 +70,9 @@ public class DetalleExpoFragment extends Fragment {
             apiKey = sp.getString("APIkey","");
             userId = sp.getString("IdUser","");
         }
+        tools = new ImageTools(getActivity());
+        linearExpo = (LinearLayout) view.findViewById(R.id.linearExpo);
+        tools.loadBackground(R.drawable.fondo,linearExpo);
         expoId = getArguments().getString("expoId");
         misExpo = getArguments().getString("miExpositores");
         nombreSec = getArguments().getString("nombre");
@@ -112,7 +117,9 @@ public class DetalleExpoFragment extends Fragment {
 
             if(!imageF.equals("no")){
                 Bitmap bmimage = getImage(imageF);
-                imgFoto.setImageBitmap(bmimage);
+
+                tools.loadByBytesToImageView(imageF,imgFoto);
+                //imgFoto.setImageBitmap(bmimage);
             }
 
 
@@ -193,7 +200,7 @@ public class DetalleExpoFragment extends Fragment {
         SQLiteDatabase db = dbHandler.getWritableDatabase();
        String imageString = "no";
        if(imagen != null) {
-           imageString = getBytes(imagen);
+           imageString = imagen;
        }
 
         dbHandler.addExpo(expoId,txtNomEmpre.getText().toString(),txtAcercaDe.getText().toString(),txtTelefono.getText().toString(),txtCorreo.getText().toString(),txtPagina.getText().toString(), urlPresenta, imageString,"Stand "+strStand);
@@ -211,7 +218,7 @@ public class DetalleExpoFragment extends Fragment {
         SQLiteDatabase db = dbHandler.getWritableDatabase();
         String imageString = "no";
         if(imagen != null) {
-            imageString = getBytes(imagen);
+            imageString = imagen;
         }
 
         dbHandler.borrarPersona(expoId);
@@ -321,7 +328,7 @@ public class DetalleExpoFragment extends Fragment {
                     }
 
                     if(cursor.getCount()>0) {
-                        imagen = getImage(cursor.getString(0));
+                        imagen = cursor.getString(0);
                     }
                     /*
                     String urlImageJson = jsonExpo.getString("logo");
@@ -367,7 +374,8 @@ public class DetalleExpoFragment extends Fragment {
                         txtTelefono.setText(strTelefono);
                         txtCorreo.setText(strCorreo);
                         txtAcercaDe.setText(strAcercaDe);
-                        imgFoto.setImageBitmap(imagen);
+                        tools.loadByBytesToImageView(imagen,imgFoto);
+                        //imgFoto.setImageBitmap(imagen);
                     }
 
 
@@ -414,12 +422,12 @@ public class DetalleExpoFragment extends Fragment {
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inSampleSize = 2; // el factor de escala a minimizar la imagen, siempre es potencia de 2
 
-            imagen = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
+            //imagen = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
 
             getActivity().runOnUiThread(new Runnable() {
                 public void run() {
 
-                    imgFoto.setImageBitmap(imagen);
+                    //imgFoto.setImageBitmap(imagen);
 
                 }
             });

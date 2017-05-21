@@ -22,11 +22,11 @@ public class ListAdapterCustom extends ArrayAdapter<String> {
 
     private final Activity context;
     private final String[] itemname, itemdescrip, itemmapa, itempag;
-    private final Bitmap[] itemBipmap;
+    private final String[] itemBipmap;
     private String paginaWeb;
     private String googleMaps;
-
-    public ListAdapterCustom(Activity context, String[] itemname, String[] itemdescrip, String[] itemmapa, String[] itempag, Bitmap[] itemBipmap) {
+    ImageTools tools;
+    public ListAdapterCustom(Activity context, String[] itemname, String[] itemdescrip, String[] itemmapa, String[] itempag, String[] itemBipmap) {
         super(context, R.layout.formato_lista_sitios_interes, itemname);
         // TODO Auto-generated constructor stub
 
@@ -38,6 +38,8 @@ public class ListAdapterCustom extends ArrayAdapter<String> {
         this.itempag = itempag;
 
         this.itemBipmap = itemBipmap;
+
+        tools = new ImageTools(context);
     }
 
     public View getView(int posicion, View view, ViewGroup parent) {
@@ -52,7 +54,10 @@ public class ListAdapterCustom extends ArrayAdapter<String> {
         TextView txtMap = (TextView) rowView.findViewById(R.id.txtUrlMapLugar);
 
         txtNombreLugar.setText(itemname[posicion]);
-        imageView.setImageBitmap(itemBipmap[posicion]);
+
+        tools.loadByBytesToImageView(itemBipmap[posicion],imageView);
+        //imageView.setImageBitmap(itemBipmap[posicion]);
+
         txtDescrip.setText(itemdescrip[posicion]);
         txtSitioweb.setText(itempag[posicion]);
         //txtMap.setText(itemmapa[posicion]);

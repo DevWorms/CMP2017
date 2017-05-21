@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,7 +34,7 @@ public class Registro extends AppCompatActivity {
     private ProgressDialog pDialog;
     private final static String[] tipoUsuarios = { "Congresista", "Acompañante", "Expositor", "Estudiante","Otro"};
     private final static String[] asociaciones = { "Ninguna","AIPM", "CIPM", "AMGE", "AMGP", "SPE / México" };
-
+    ImageTools tools;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +44,9 @@ public class Registro extends AppCompatActivity {
         spiTipoUsu.setPrompt("Tipo de Usuarios");
         spiAso.setPrompt("Asociaciones");
         String font_path = "font/mulibold.ttf";  //definimos un STRING con el valor PATH ( o ruta por                                                                                    //donde tiene que buscar ) de nuetra fuente
-
+        tools = new ImageTools(this);
+        LinearLayout regFondo = (LinearLayout) findViewById(R.id.regFondo);
+        tools.loadBackground(R.drawable.fondo,regFondo);
         Typeface TF = Typeface.createFromAsset(getAssets(),font_path);
         TextView txtNombreR = (TextView) findViewById(R.id.textViewNombreR);
         TextView txtApellidoR = (TextView) findViewById(R.id.textViewApellidoR);

@@ -25,7 +25,7 @@ public class MenuPrincipal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     String nombre, inicioComo;
 
-
+    ImageTools tools;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +34,9 @@ public class MenuPrincipal extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
-
+        tools = new ImageTools(this);
+        NavigationView nav_view = (NavigationView) findViewById(R.id.nav_view);
+        tools.loadBackground(R.drawable.fondomenu,nav_view);
         SharedPreferences sp = getSharedPreferences("prefe", Activity.MODE_PRIVATE);
         inicioComo = sp.getString("Nombre","");
         if(inicioComo.equals("invi")){

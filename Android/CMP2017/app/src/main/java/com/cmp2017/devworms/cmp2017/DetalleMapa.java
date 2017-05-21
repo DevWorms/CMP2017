@@ -12,6 +12,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,7 +26,9 @@ WebView wbPdf;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detalle_mapa, container, false);
-
+        ImageTools tools = new ImageTools( getActivity());
+        LinearLayout linearFmapa = (LinearLayout) view.findViewById(R.id.linearFmapa);
+        tools.loadBackground(R.drawable.fondo,linearFmapa);
         wbPdf = (WebView) view.findViewById(R.id.webMapa);
         WebSettings wbs=wbPdf.getSettings();
         wbs.setBuiltInZoomControls(true);

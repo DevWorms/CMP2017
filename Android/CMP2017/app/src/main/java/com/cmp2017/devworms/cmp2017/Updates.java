@@ -177,22 +177,30 @@ public class Updates extends Activity implements View.OnClickListener {
             SQLiteDatabase db = dbHandlerOffline.getWritableDatabase();
 
             for(Integer modulo : modulosParaActulizar){
+                Log.e("MODULOSQUEVIENEN",modulo+"");
                 if(modulo == 1){ //Eventos de acompañantes
+                    dbHandlerOffline.resetAcompanantes();
                     resFinal += updateAcompanate();
                 }else if(modulo == 4){ // Expositores
+                    dbHandlerOffline.resetExpositores();
                     resFinal += updateExpositores();
                 }else if(modulo == 5){ // Patrocinadores
+                    dbHandlerOffline.resetPatrocinadores();
                     resFinal += updatePatrocinadores();
-                }else if(modulo == 6){ //Programas
+                }else if(modulo == 6){ //Programas.
+                    dbHandlerOffline.resetProgramas();
                     resFinal += updateCategorias();
                     resFinal += updateProgramas();
                 }else if(modulo == 7){ // Rutas / Transportación
+                    dbHandlerOffline.resetTransportacion();
                     resFinal += updateTransportacion();
                 }else if(modulo == 8){ // Eventos Sociales y Deportivos
+                    dbHandlerOffline.resetSocialDepo();
                     resFinal += updateSocialDepo();
                 }else if(modulo == 9){ // Conoce Puebla, teléfonos
-                    // code here
+                    // code son fijos
                 }else if(modulo == 10){ // Conoce Puebla, sitios interes
+                    dbHandlerOffline.resetSitiosInt();
                     resFinal +=  updateSitiosPuebla();
                 }
             }
@@ -605,7 +613,6 @@ public class Updates extends Activity implements View.OnClickListener {
         dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
         Log.e("JSONPROGRAMAS",strProgramas);
         dbHandlerOffline.addJsonProgramas(strProgramas);
-
         try{
             JSONObject jProgramas = new JSONObject(strProgramas);
             String strProg = jProgramas.getString("programas");

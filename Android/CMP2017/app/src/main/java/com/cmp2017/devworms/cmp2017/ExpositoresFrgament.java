@@ -22,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -46,10 +47,14 @@ public class ExpositoresFrgament extends Fragment {
     ConnectionDetector cd;
     TextView txtTitulo;
     Cursor cursor;
+    ImageTools tools;
+    LinearLayout fragExpo;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_expo, container, false);
-
+        tools = new ImageTools(getActivity());
+        fragExpo = (LinearLayout) view.findViewById(R.id.fragExpo);
+        tools.loadBackground(R.drawable.fondo,fragExpo);
            SharedPreferences sp = getActivity().getSharedPreferences("prefe", Activity.MODE_PRIVATE);
            String inicioComo = sp.getString("Nombre","");
            cd = new ConnectionDetector(getActivity());

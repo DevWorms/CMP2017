@@ -3,10 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-
+    android:id="@+id/climaFrag"
     tools:context="com.cmp2017.devworms.cmp2017.LoginActivity">
 
 

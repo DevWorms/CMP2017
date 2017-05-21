@@ -5,6 +5,7 @@ package com.cmp2017.devworms.cmp2017;
  */
 
 public class NotificacionModelo {
+    // test
     public int id;
     public int user_id;
     public  String notificacion;

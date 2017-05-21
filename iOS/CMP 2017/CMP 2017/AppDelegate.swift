@@ -13,6 +13,7 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var descargaB = 0
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -20,18 +21,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let apiKey = UserDefaults.standard.value(forKey: "api_key") as? String
         if let descarga = UserDefaults.standard.value(forKey: "descarga")as? Int {
-        
+             descargaB = descarga
         }else{
-            descarga = 0
+        
+            descargaB = 0
         }
         
-        
+  
         if ( apiKey == "" || apiKey == nil ){
             print("Not logged in..")
             
         }else{
-            if descarga == 0 {
-            
+            print ("Descarga \(descargaB)")
+
+            if descargaB == 0 {
+             print("no descargo correctamente ")
             }else{
                 print("Logged in..")
                 //print("current key: \( NSUserDefaults.standardUserDefaults().stringForKey("ApiKey")!)")

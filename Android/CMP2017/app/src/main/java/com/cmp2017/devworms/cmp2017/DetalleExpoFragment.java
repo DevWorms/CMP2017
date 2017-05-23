@@ -115,7 +115,7 @@ public class DetalleExpoFragment extends Fragment {
             String imageF = cursor.getString(8);
 
 
-            if(!imageF.equals("no")){
+            if(!imageF.equals("")){
                 Bitmap bmimage = getImage(imageF);
 
                 tools.loadByBytesToImageView(imageF,imgFoto);

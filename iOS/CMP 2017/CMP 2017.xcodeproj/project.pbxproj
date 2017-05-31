@@ -115,7 +115,7 @@
 		3B4AC3831E85ED1400570A99 /* Muli-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Regular.ttf"; sourceTree = "<group>"; };
 		3B4AC3841E85ED1400570A99 /* Muli-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-SemiBold.ttf"; sourceTree = "<group>"; };
 		3B4AC3851E85ED1400570A99 /* Muli-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
-		3B5B8F6D1E7083ED00F0D6AA /* CMP 2017.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CMP 2017.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B5B8F6D1E7083ED00F0D6AA /* CMP 2017.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "CMP 2017.app"; path = CMP2017.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B5B8F701E7083ED00F0D6AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B5B8F721E7083ED00F0D6AA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3B5B8F751E7083ED00F0D6AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };

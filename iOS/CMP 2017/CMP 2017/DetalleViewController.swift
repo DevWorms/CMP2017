@@ -67,7 +67,9 @@ class DetalleViewController: UIViewController {
             self.recomendaciones.text = detalle["recomendaciones"] as! String?
             self.horario.text = "\(detalle["hora_inicio"]!) - \(detalle["hora_fin"]!)"
             let miAgendaEventos = CoreDataHelper.fetchData(entityName: "MiAgendaT", keyName: "miAgenda")!
-            
+            if self.seccion == 1 {
+             self.lbl3.text = "Más información:"
+            }
             for ftdA in miAgendaEventos {
                 print("ftdA: \(ftdA["id"] as! Int16)")
                 print("detalle: \(detalle["id"] as! Int16)")

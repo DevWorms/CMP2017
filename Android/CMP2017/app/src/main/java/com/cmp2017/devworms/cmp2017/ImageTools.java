@@ -80,6 +80,17 @@ public class ImageTools {
 
     }
 
+    public void  loadByBytesToImageViewCenterCrop(String strB64,ImageView target){
+
+        // validamos que se haya guarado la imagen es decir que haya bytes que convertir
+        if(strB64 != null && !strB64.equals("")){
+            byte[] loadBytes = Base64.decode(strB64 , Base64.DEFAULT);
+
+            Glide.with(this.contexto).load(loadBytes).fitCenter().into(target);
+        }
+
+    }
+
 
 
 

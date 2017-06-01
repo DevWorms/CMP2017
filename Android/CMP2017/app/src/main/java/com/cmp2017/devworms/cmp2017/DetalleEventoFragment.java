@@ -107,7 +107,7 @@ public class DetalleEventoFragment extends Fragment {
 
                 cImg = dbHandler.ImagenPorIdSocialDepo(idProgram);
                 if(cImg.getCount()>0){
-                    tools.loadByBytesToImageView(cImg.getString(0),imgFoto);
+                    tools.loadByBytesToImageViewCenterCrop(cImg.getString(0),imgFoto);
                 }
 
 
@@ -122,7 +122,7 @@ public class DetalleEventoFragment extends Fragment {
                 cImg = dbHandler.imagenPorPrograma(idProgram);
 
                 if(cImg.getCount() > 0){
-                    tools.loadByBytesToImageView(cImg.getString(0),imgFoto);
+                    tools.loadByBytesToImageViewCenterCrop(cImg.getString(0),imgFoto);
                 }
 
 
@@ -135,7 +135,7 @@ public class DetalleEventoFragment extends Fragment {
                 cualDetalle = "acompanantes";
                 cImg = dbHandler.ImagenPorIdAco(idProgram);
                 if(cImg.getCount() > 0){
-                    tools.loadByBytesToImageView(cImg.getString(0),imgFoto);
+                    tools.loadByBytesToImageViewCenterCrop(cImg.getString(0),imgFoto);
                 }
 
 

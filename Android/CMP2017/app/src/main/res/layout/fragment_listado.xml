@@ -28,7 +28,20 @@
             android:textSize="30sp"
             android:textStyle="bold" />
 
+        <AutoCompleteTextView
+            android:id="@+id/acSearchProgramas"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="#ffffff"
+            android:ems="10"
+            android:hint="Buscar">
 
+        </AutoCompleteTextView>
 
         <ListView
             android:id="@+id/lvLista"

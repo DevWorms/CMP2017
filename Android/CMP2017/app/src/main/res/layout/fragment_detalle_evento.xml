@@ -76,7 +76,7 @@
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Recomendaciones:"
+                android:text="Más información:"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 android:textStyle="bold" />

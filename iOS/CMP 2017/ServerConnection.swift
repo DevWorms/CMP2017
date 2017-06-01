@@ -184,9 +184,11 @@ class ServerConnection {
             CoreDataHelper.deleteEntity(entityName: "Programas")
             // Programas
             
-            self.getGeneral(strUrl: "http://cmp.devworms.com/api/programa/all/\(userID)/\(apiKey)", jsonString: "programas", datoString: "foto", imgString: "url", entityName: "Programas", keyName: "programa", keyNameImg: "imgPrograma",Simple : 0 , completion: { (Bool) in
+                self.postPrograma(strUrl: "http://cmp.devworms.com/api/programa/search", jsonString: "programas", datoString: "foto", imgString: "url", entityName: "Programas", keyName: "programa", keyNameImg: "imgPrograma",Simple : 0 , completion: { (Bool) in
                 
             })
+            
+ 
         }
         if actualizarExpositores == 1 || tipoDescar == 0  {
 
@@ -308,6 +310,116 @@ class ServerConnection {
             print("Sin conexión a internet: \(entityName)")
         }
     }
+    
+    private func postPrograma(strUrl: String, jsonString: String, datoString: String?, imgString: String?, entityName: String, keyName: String, keyNameImg: String?,Simple: Int, completion: @escaping (Bool) -> Void) {
+        if Accesibilidad.isConnectedToNetwork() == true {
+            let parameterString = "user_id=1&api_key=0"
+            
+            print(parameterString)
+            
+            let strUrl = "http://cmp.devworms.com/api/programa/search"
+            
+            if let httpBody = parameterString.data(using: String.Encoding.utf8) {
+                var urlRequest = URLRequest(url: URL(string: strUrl)!)
+                urlRequest.httpMethod = "POST"
+             
+           
+            print(strUrl)
+            
+             URLSession.shared.uploadTask(with: urlRequest, from: httpBody, completionHandler: { (data: Data?, urlResponse: URLResponse?, error: Error?) in
+                if error != nil {
+                    print(error!)
+                } else if urlResponse != nil {
+                    if (urlResponse as! HTTPURLResponse).statusCode == 200 {
+                        if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                            //print(json)
+                            
+                            if let jsonResult = json as? [String: Any] {
+                                if Simple == 1{
+                                    let jsonMapa = jsonResult[ jsonString ]  as? [String: Any]
+                                    let urlMapaInfo = jsonMapa?["url"] as! String
+                                    
+                                    
+                                    if let img = jsonResult[ jsonString ] as? [String: Any] { // si la etiqueta se puede castear a un arreglo
+                                        
+                                        let dataImg = try? Data(contentsOf: URL(string: img[ imgString! ] as! String)!)
+                                        
+                                        CoreDataHelper.saveData(entityName: entityName, data: urlMapaInfo, keyName: keyName, dataImg: dataImg!, keyNameImg: keyNameImg)
+                                        
+                                    } else { // si no se puede procesar la imagen
+                                        
+                                        
+                                        CoreDataHelper.saveData(entityName: entityName, data: urlMapaInfo, keyName: keyName, dataImg: nil, keyNameImg: keyNameImg)
+                                        
+                                    }
+                                    
+                                    
+                                    
+                                }else{
+                                    for (index, dato) in (jsonResult[ jsonString ] as! [[String:Any]]).enumerated() {
+                                        
+                                        if datoString != nil { // si encuentra etiqueta de imagen
+                                            if let img = dato[ datoString! ] as? [String: Any] { // si la etiqueta se puede castear a un arreglo
+                                                
+                                                let dataImg = try? Data(contentsOf: URL(string: img[ imgString! ] as! String)!)
+                                                
+                                                CoreDataHelper.saveData(entityName: entityName, data: dato, keyName: keyName, dataImg: dataImg!, keyNameImg: keyNameImg)
+                                                
+                                            } else { // si no se puede procesar la imagen
+                                                
+                                                
+                                                CoreDataHelper.saveData(entityName: entityName, data: dato, keyName: keyName, dataImg: nil, keyNameImg: keyNameImg)
+                                                
+                                            }
+                                            
+                                        } else { // si solo cuenta con url para la imagen
+                                            
+                                            if imgString != nil { // url no esta vacio
+                                                let dataImg = try? Data(contentsOf: URL(string: dato[ imgString! ] as! String)!)
+                                                
+                                                CoreDataHelper.saveData(entityName: entityName, data: dato, keyName: keyName, dataImg: dataImg!, keyNameImg: keyNameImg)
+                                            } else { // no tiene url
+                                                CoreDataHelper.saveData(entityName: entityName, data: dato, keyName: keyName, dataImg: nil, keyNameImg: nil)
+                                            }
+                                            
+                                        }
+                                        
+                                        if index == (jsonResult[ jsonString ] as! [[String:Any]]).count - 1 {
+                                            
+                                            
+                                            print("hurra se cargo todo creo :S")
+                                            completion(true)
+                                        }
+                                        
+                                    }
+                                }
+                            }
+                            
+                        } else {
+                            print("HTTP Status Code: 200")
+                            print("El JSON de respuesta es inválido.")
+                        }
+                    } else {
+                        
+                        if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                            if let jsonResult = json as? [String: Any] {
+                                print("Error json: \(jsonResult["mensaje"])")
+                            }
+                            
+                        } else {
+                            print("HTTP Status Code: 400 o 500")
+                            print("El JSON de respuesta es inválido.")
+                        }
+                    }
+                }
+            }).resume()
+            }
+            
+        } else {
+            print("Sin conexión a internet: \(entityName)")
+        }
+    }
+
     
     func parseJson(data: Data?, urlResponse: URLResponse?, error: Error?) {
         if error != nil {

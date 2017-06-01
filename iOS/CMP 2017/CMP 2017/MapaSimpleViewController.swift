@@ -54,7 +54,7 @@ class MapaSimpleViewController: UIViewController, UIWebViewDelegate {
             titleLabel.text = "Mapa de Expositor"
             
         } else {
-            titleLabel.text = "Google Maps"
+            titleLabel.text = "Mapa"
         }
 
         

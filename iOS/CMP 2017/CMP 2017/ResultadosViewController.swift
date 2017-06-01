@@ -48,7 +48,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
                 
                 self.datosGlobal = CoreDataHelper.fetchData(entityName: "Programas", keyName: "programa")!
                 self.imgs = CoreDataHelper.fetchItem(entityName: "Programas", keyName: "imgPrograma")!
-                
+                  self.datosGlobal = self.datosGlobal.sorted(by: { (a,b) in (a["fecha"] as! String) < (b["fecha"] as! String) })
                 if diaPrograma == "" && tipoPrograma == "" { //  Todos
                     self.datos = self.datosGlobal
                     
@@ -170,7 +170,12 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
     func numberOfSections(in tableView: UITableView) -> Int {
         switch self.seccion {
         case 1,3,4:
-            return fechas.count
+           // if fechas.count < 7{
+                return fechas.count
+           /* } else {
+                return 6
+            }*/
+            
         default:
             return 0
         }

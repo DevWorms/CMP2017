@@ -115,7 +115,7 @@
 		3B4AC3831E85ED1400570A99 /* Muli-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Regular.ttf"; sourceTree = "<group>"; };
 		3B4AC3841E85ED1400570A99 /* Muli-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-SemiBold.ttf"; sourceTree = "<group>"; };
 		3B4AC3851E85ED1400570A99 /* Muli-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
-		3B5B8F6D1E7083ED00F0D6AA /* CMP 2017.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "CMP 2017.app"; path = CMP2017.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B5B8F6D1E7083ED00F0D6AA /* CMP2017.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CMP2017.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B5B8F701E7083ED00F0D6AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B5B8F721E7083ED00F0D6AA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3B5B8F751E7083ED00F0D6AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -212,7 +212,7 @@
 		3B5B8F6E1E7083ED00F0D6AA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3B5B8F6D1E7083ED00F0D6AA /* CMP 2017.app */,
+				3B5B8F6D1E7083ED00F0D6AA /* CMP2017.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -346,7 +346,7 @@
 			);
 			name = CMP2017;
 			productName = "CMP 2017";
-			productReference = 3B5B8F6D1E7083ED00F0D6AA /* CMP 2017.app */;
+			productReference = 3B5B8F6D1E7083ED00F0D6AA /* CMP2017.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -362,7 +362,7 @@
 					3B5B8F6C1E7083EC00F0D6AA = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = B9E9GA7RYJ;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -584,7 +584,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "CMP 2017/CMP 2017.entitlements";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = B9E9GA7RYJ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -596,8 +596,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.devworms.CMP2017;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "56abfd64-ad06-4ae2-a937-730e666238b5";
+				PROVISIONING_PROFILE_SPECIFIER = "cmp 2017";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -607,7 +607,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "CMP 2017/CMP 2017.entitlements";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = B9E9GA7RYJ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -619,8 +619,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.devworms.CMP2017;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "56abfd64-ad06-4ae2-a937-730e666238b5";
+				PROVISIONING_PROFILE_SPECIFIER = "cmp 2017";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

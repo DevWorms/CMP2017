@@ -10,6 +10,8 @@ import UIKit
 
 class BuscadorViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
+    @IBOutlet weak var btnNume: UIButton!
+    @IBOutlet weak var btnAlfa: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     //var abcArray = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","P","Q","R","S","T","U","V","W","X","Y","Z", "#"]
@@ -34,8 +36,24 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
     var imgs = [Any?]()
     var imgAmostrar: Any?
     
+    var diaPrograma = ""
+    var tipoPrograma = ""
     var seccion = 2
     var alphabet = true
+    
+    ///programa
+    
+    var datosGlobal = [[String : Any]]()
+   
+    var fechas = [String]()
+    var datoXfecha = [[], [], [], [], [], []]
+    var idXdato = [[], [], [], [], [], []]
+    // variables finales sin basura
+    var datoFecha = [[String]]()
+    var idDato = [[Int]]()
+    
+    var datoAmostrar = [String : Any]()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,13 +68,17 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
         
         nav?.titleTextAttributes = [NSForegroundColorAttributeName: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)]
         nav?.topItem?.title = UserDefaults.standard.value(forKey: "name") as! String?
-        
+        if self.seccion == 1{
+            self.btnAlfa.isHidden = true
+            self.btnNume.isHidden = true
+            
+        }
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeKeyBoard(sender:)))
         swipeDown.direction = UISwipeGestureRecognizerDirection.down
         self.view.addGestureRecognizer(swipeDown)
         
         searchBar.delegate = self
-        
+     
         self.alfabeticamente(alph: true)
      
     }
@@ -85,6 +107,7 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
             self.idExpositores.removeAll()
             self.expositoresArray.removeAll()
             self.expositorAmostrar.removeAll()
+            self.datos.removeAll()
         }
         
         if alph {
@@ -102,6 +125,52 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
                   self.imgs = CoreDataHelper.fetchItem(entityName: "MisExpositores", keyName: "imgMisExpositores")!
                 self.expositores = self.datos.sorted(by: { (a,b) in (a["nombre"] as! String) < (b["nombre"] as! String) })
 
+            }else if self.seccion == 1{
+                
+                self.datosGlobal = CoreDataHelper.fetchData(entityName: "Programas", keyName: "programa")!
+                self.imgs = CoreDataHelper.fetchItem(entityName: "Programas", keyName: "imgPrograma")!
+                self.datosGlobal = self.datosGlobal.sorted(by: { (a,b) in (a["fecha"] as! String) < (b["fecha"] as! String) })
+                
+                if diaPrograma == "" && tipoPrograma == "" { //  Todos
+                   self.datos = self.datosGlobal
+                    
+                    
+                } else { // busqueda
+                    
+                    if diaPrograma != "" && tipoPrograma != "" { // por dia y tipo
+                        for item in self.datosGlobal {
+                            if item["fecha"] as! String == diaPrograma {
+                                if let a = item["categoria"] as? [String:Any] {
+                                    if a["id"] as! Int == Int(tipoPrograma)! {
+                                        self.datos.append(item)
+                                    }
+                                    
+                                }
+                            }
+                        }
+                        
+                    } else if diaPrograma != "" && tipoPrograma == "" { // por dia
+                        for item in self.datosGlobal {
+                            if item["fecha"] as! String == diaPrograma {
+                                self.datos.append(item)
+                            }
+                        }
+                        
+                    } else if diaPrograma == "" && tipoPrograma != "" { // por tipo
+                        for item in self.datosGlobal {
+                            if let a = item["categoria"] as? [String:Any] {
+                                if a["id"] as! Int == Int(tipoPrograma)! {
+                                    self.datos.append(item)
+                                }
+                                
+                            }
+                        }
+                        
+                    }
+                }
+
+                    
+                
             }else {
                 self.datos = CoreDataHelper.fetchData(entityName: "Expositores", keyName: "expositor")!
                 self.imgs = CoreDataHelper.fetchItem(entityName: "Expositores", keyName: "imgExpositor")!
@@ -109,11 +178,71 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
             }
             
             // llenar las secciones
-            for letra in self.expositores {
+            if self.seccion != 1{
+                for letra in self.expositores {
                 
-                if !self.abcArray.contains( String(describing: (letra["nombre"] as! String).characters.first!).uppercased() ) {
-                    self.abcArray.append( String(describing: (letra["nombre"] as! String).characters.first!).uppercased() )
+                    if !self.abcArray.contains( String(describing: (letra["nombre"] as! String).characters.first!).uppercased() ) {
+                        self.abcArray.append( String(describing: (letra["nombre"] as!  String).characters.first!).uppercased() )
+                    }
                 }
+            }else{
+            
+                for date in self.datos {
+                    if self.fechas.contains(date["fecha"] as! String) {
+                    
+                    } else {
+                        self.fechas.append(date["fecha"] as! String)
+                    }
+                
+                    if date["fecha"] as! String == "2017-06-05" {
+                        self.datoXfecha[0].append(date["nombre"] as! String)
+                        self.idXdato[0].append(date["id"] as! Int)
+                    }else if date["fecha"] as! String == "2017-06-06" {
+                        self.datoXfecha[1].append(date["nombre"] as! String)
+                        self.idXdato[1].append(date["id"] as! Int)
+                    }else if date["fecha"] as! String == "2017-06-07" {
+                        self.datoXfecha[2].append(date["nombre"] as! String)
+                        self.idXdato[2].append(date["id"] as! Int)
+                    }else if date["fecha"] as! String == "2017-06-08" {
+                        self.datoXfecha[3].append(date["nombre"] as! String)
+                        self.idXdato[3].append(date["id"] as! Int)
+                    }else if date["fecha"] as! String == "2017-06-09" {
+                        self.datoXfecha[4].append(date["nombre"] as! String)
+                        self.idXdato[4].append(date["id"] as! Int)
+                    }else if date["fecha"] as! String == "2017-06-10" {
+                        self.datoXfecha[5].append(date["nombre"] as! String)
+                        self.idXdato[5].append(date["id"] as! Int)
+                    }
+                }
+            
+            // agregar los datos que no estan vacios
+                if self.datoXfecha[0].count != 0 {
+                    self.datoFecha.append(self.datoXfecha[0] as! [String])
+                    self.idDato.append(self.idXdato[0] as! [Int])
+                }
+                if self.datoXfecha[1].count != 0 {
+                    self.datoFecha.append(self.datoXfecha[1] as! [String])
+                    self.idDato.append(self.idXdato[1] as! [Int])
+                }
+                if self.datoXfecha[2].count != 0 {
+                    self.datoFecha.append(self.datoXfecha[2] as! [String])
+                    self.idDato.append(self.idXdato[2] as! [Int])
+                }
+                if self.datoXfecha[3].count != 0 {
+                    self.datoFecha.append(self.datoXfecha[3] as! [String])
+                    self.idDato.append(self.idXdato[3] as! [Int])
+                }
+                if self.datoXfecha[4].count != 0 {
+                    self.datoFecha.append(self.datoXfecha[4] as! [String])
+                    self.idDato.append(self.idXdato[4] as! [Int])
+                }
+                if self.datoXfecha[5].count != 0 {
+                    self.datoFecha.append(self.datoXfecha[5] as! [String])
+                    self.idDato.append(self.idXdato[5] as! [Int])
+                }
+            
+            //self.tableView.reloadData()
+            
             }
             
             // llenar las rows
@@ -223,23 +352,46 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         //junta los arrays[String] de adentro a uno solo
-        filtered = expositoresArray.joined().filter { (text) in
-            //print(text)
-            return text.lowercased().contains(searchText.lowercased())
-        }
-        
-        filteredProvisional = expositoresArray.joined().filter({ (text) in
-            return true
-        })
-        
-        filteredID = idExpositores.joined().filter({ (Int) in
-            return true
-        })
-        
-        if(filtered.count == 0){
-            searchActive = false;
-        } else {
-            searchActive = true;
+        if self.seccion == 1 {
+            
+            filtered = datoFecha.joined().filter { (text) in
+                //print(text)
+                return text.lowercased().contains(searchText.lowercased())
+            }
+            
+            filteredProvisional = datoFecha.joined().filter({ (text) in
+                return true
+            })
+            
+            filteredID = idDato.joined().filter({ (Int) in
+                return true
+            })
+            
+            if(filtered.count == 0){
+                searchActive = false;
+            } else {
+                searchActive = true;
+            }
+
+        }else{
+            filtered = expositoresArray.joined().filter { (text) in
+                //print(text)
+                return text.lowercased().contains(searchText.lowercased())
+            }
+            
+            filteredProvisional = expositoresArray.joined().filter({ (text) in
+                return true
+            })
+            
+            filteredID = idExpositores.joined().filter({ (Int) in
+                return true
+            })
+            
+            if(filtered.count == 0){
+                searchActive = false;
+            } else {
+                searchActive = true;
+            }
         }
         
         self.tableView.reloadData()
@@ -251,6 +403,10 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
         if(searchActive) {
             return 1
         }
+        if self.seccion == 1{
+            return fechas.count
+        }
+        
         return abcArray.count
     }
     
@@ -258,6 +414,10 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
         if(searchActive) {
             return filtered.count
         }
+        if self.seccion == 1{
+             return self.datoFecha[section].count
+        }
+    
         return self.expositoresArray[section].count
     }
     
@@ -265,6 +425,29 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
         if(searchActive) {
             return nil
         }
+        var diaMostrar = ""
+        
+        if self.seccion == 1 {
+            switch fechas[section] {
+            case "2017-06-05":
+                diaMostrar = "Lunes 5 de Junio"
+            case "2017-06-06":
+                diaMostrar = "Martes 6 de Junio"
+            case "2017-06-07":
+                diaMostrar = "Miércoles 7 de Junio"
+            case "2017-06-08":
+                diaMostrar = "Jueves 8 de Junio"
+            case "2017-06-09":
+                diaMostrar = "Viernes 9 de Junio"
+            case "2017-06-10":
+                diaMostrar = "Sábado 10 de Junio"
+            default:
+                diaMostrar = ""
+            }
+         return diaMostrar
+        }
+    
+
         return abcArray[section]
     }
     
@@ -282,8 +465,14 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
         if(searchActive){
             cell.textLabel?.text = filtered[indexPath.row]
         } else {
+            if self.seccion == 1 {
+            cell.textLabel?.text = self.datoFecha[indexPath.section][indexPath.row]
+
+            }else{
             cell.textLabel?.text = self.expositoresArray[indexPath.section][indexPath.row]
+            }
         }
+        
         
         return cell
     }
@@ -302,12 +491,25 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
             }
             
         } else {
+            if self.seccion != 1 {
             for (index, expositor) in self.datos.enumerated() {
                 if expositor["id"] as! Int == idExpositores[indexPath.section][indexPath.row] {
                     expositorAmostrar = expositor
                     self.imgAmostrar = imgs[index]
                     self.performSegue(withIdentifier: "detalle", sender: nil)
                 }
+            }
+            }else{
+                for (index, dato) in self.datos.enumerated() {
+                    if dato["id"] as! Int == idDato[indexPath.section][indexPath.row] {
+                        self.expositorAmostrar = dato
+                        
+                        self.imgAmostrar = imgs[index]
+                        
+                        self.performSegue(withIdentifier: "detalle", sender: nil)
+                    }
+                }
+
             }
         }
     }

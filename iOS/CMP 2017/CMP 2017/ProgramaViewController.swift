@@ -112,9 +112,9 @@ class ProgramaViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
                 diaEnviar = ""
             }
             
-            (segue.destination as! ResultadosViewController).seccion = 1
-            (segue.destination as! ResultadosViewController).diaPrograma = diaEnviar
-            (segue.destination as! ResultadosViewController).tipoPrograma = self.selectedTipo
+            (segue.destination as! BuscadorViewController).seccion = 1
+            (segue.destination as! BuscadorViewController).diaPrograma = diaEnviar
+            (segue.destination as! BuscadorViewController).tipoPrograma = self.selectedTipo
         }
     }
 

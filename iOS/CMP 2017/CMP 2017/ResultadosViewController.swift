@@ -48,7 +48,7 @@ class ResultadosViewController: UIViewController, UITableViewDataSource, UITable
                 
                 self.datosGlobal = CoreDataHelper.fetchData(entityName: "Programas", keyName: "programa")!
                 self.imgs = CoreDataHelper.fetchItem(entityName: "Programas", keyName: "imgPrograma")!
-                  self.datosGlobal = self.datosGlobal.sorted(by: { (a,b) in (a["fecha"] as! String) < (b["fecha"] as! String) })
+                 self.datosGlobal = self.datosGlobal.sorted(by: { (a,b) in (a["fecha"] as! String) < (b["fecha"] as! String) })
                 if diaPrograma == "" && tipoPrograma == "" { //  Todos
                     self.datos = self.datosGlobal
                     

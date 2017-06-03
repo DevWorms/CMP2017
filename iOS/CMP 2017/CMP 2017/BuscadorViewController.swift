@@ -44,6 +44,8 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
     ///programa
     
     var datosGlobal = [[String : Any]]()
+    var datosGlobalOrde = [[String : Any]]()
+
    
     var fechas = [String]()
     var datoXfecha = [[], [], [], [], [], []]
@@ -129,16 +131,16 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
                 
                 self.datosGlobal = CoreDataHelper.fetchData(entityName: "Programas", keyName: "programa")!
                 self.imgs = CoreDataHelper.fetchItem(entityName: "Programas", keyName: "imgPrograma")!
-                self.datosGlobal = self.datosGlobal.sorted(by: { (a,b) in (a["fecha"] as! String) < (b["fecha"] as! String) })
+                self.datosGlobalOrde = self.datosGlobal.sorted(by: { (a,b) in (a["fecha"] as! String) < (b["fecha"] as! String) })
                 
                 if diaPrograma == "" && tipoPrograma == "" { //  Todos
-                   self.datos = self.datosGlobal
+                   self.datos = self.datosGlobalOrde
                     
                     
                 } else { // busqueda
                     
                     if diaPrograma != "" && tipoPrograma != "" { // por dia y tipo
-                        for item in self.datosGlobal {
+                        for item in self.datosGlobalOrde {
                             if item["fecha"] as! String == diaPrograma {
                                 if let a = item["categoria"] as? [String:Any] {
                                     if a["id"] as! Int == Int(tipoPrograma)! {
@@ -150,14 +152,14 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
                         }
                         
                     } else if diaPrograma != "" && tipoPrograma == "" { // por dia
-                        for item in self.datosGlobal {
+                        for item in self.datosGlobalOrde {
                             if item["fecha"] as! String == diaPrograma {
                                 self.datos.append(item)
                             }
                         }
                         
                     } else if diaPrograma == "" && tipoPrograma != "" { // por tipo
-                        for item in self.datosGlobal {
+                        for item in self.datosGlobalOrde {
                             if let a = item["categoria"] as? [String:Any] {
                                 if a["id"] as! Int == Int(tipoPrograma)! {
                                     self.datos.append(item)
@@ -481,12 +483,23 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
         
         if(searchActive){
             let cellText = tableView.cellForRow(at: indexPath)?.textLabel?.text
-            
-            for (index, expositor) in self.datos.enumerated() {
-                if expositor["id"] as! Int == filteredID[filteredProvisional.index(of: cellText!)!] {
-                    expositorAmostrar = expositor
-                    self.imgAmostrar = imgs[index]
-                    self.performSegue(withIdentifier: "detalle", sender: nil)
+            if self.seccion == 1{
+                for (index, dato) in self.datosGlobal.enumerated() {
+                    if dato["id"] as! Int == filteredID[filteredProvisional.index(of: cellText!)!]{
+                        self.expositorAmostrar = dato
+                        
+                        self.imgAmostrar = imgs[index]
+                        
+                        self.performSegue(withIdentifier: "detalle", sender: nil)
+                    }
+                }
+            }else{
+                for (index, expositor) in self.datos.enumerated() {
+                    if expositor["id"] as! Int == filteredID[filteredProvisional.index(of: cellText!)!] {
+                        expositorAmostrar = expositor
+                        self.imgAmostrar = imgs[index]
+                        self.performSegue(withIdentifier: "detalle", sender: nil)
+                    }
                 }
             }
             
@@ -500,7 +513,7 @@ class BuscadorViewController: UIViewController, UITableViewDataSource, UITableVi
                 }
             }
             }else{
-                for (index, dato) in self.datos.enumerated() {
+                for (index, dato) in self.datosGlobal.enumerated() {
                     if dato["id"] as! Int == idDato[indexPath.section][indexPath.row] {
                         self.expositorAmostrar = dato
                         

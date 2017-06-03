@@ -125,6 +125,7 @@ public class Updates extends Activity implements View.OnClickListener {
 
             updateBanners();
             updateMapas();
+            updateCategorias();
 
             String fromUrl = "http://cmp.devworms.com/api/updates/check/" + userId + "/" + apiKey;
 
@@ -200,33 +201,24 @@ public class Updates extends Activity implements View.OnClickListener {
         protected String doInBackground(String... args) {
             //primero restauramos las tablas
             dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
-            SQLiteDatabase db = dbHandlerOffline.getWritableDatabase();
+            //SQLiteDatabase db = dbHandlerOffline.getWritableDatabase();
 
             for (Integer modulo : modulosParaActulizar) {
-                Log.e("MODULOSQUEVIENEN", modulo + "");
                 if (modulo == 1) { //Eventos de acompañantes
-                    dbHandlerOffline.resetAcompanantes();
                     resFinal += updateAcompanate();
                 } else if (modulo == 4) { // Expositores
-                    dbHandlerOffline.resetExpositores();
                     resFinal += updateExpositores();
                 } else if (modulo == 5) { // Patrocinadores
-                    dbHandlerOffline.resetPatrocinadores();
                     resFinal += updatePatrocinadores();
                 } else if (modulo == 6) { //Programas.
-                    dbHandlerOffline.resetProgramas();
-                    resFinal += updateCategorias();
                     resFinal += updateProgramas();
                 } else if (modulo == 7) { // Rutas / Transportación
-                    dbHandlerOffline.resetTransportacion();
                     resFinal += updateTransportacion();
                 } else if (modulo == 8) { // Eventos Sociales y Deportivos
-                    dbHandlerOffline.resetSocialDepo();
                     resFinal += updateSocialDepo();
                 } else if (modulo == 9) { // Conoce Puebla, teléfonos
                     // code son fijos
                 } else if (modulo == 10) { // Conoce Puebla, sitios interes
-                    dbHandlerOffline.resetSitiosInt();
                     resFinal += updateSitiosPuebla();
                 }
             }
@@ -307,8 +299,9 @@ public class Updates extends Activity implements View.OnClickListener {
         String bodyAco = "http://cmp.devworms.com/api/acompanantes/all/" + userId + "/" + apiKey + "";
         JSONParser jspAco = new JSONParser();
         String respuestaAco = jspAco.makeHttpRequest(bodyAco, "GET", bodyAco, "");
-        if (respuesta != "error") {
+        if (respuestaAco != "error") {
             dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
+            dbHandlerOffline.resetAcompanantes();
             dbHandlerOffline.addAcomp(respuestaAco);
             JSONObject jsonimageA = null;
             try {
@@ -340,7 +333,7 @@ public class Updates extends Activity implements View.OnClickListener {
                         ImageDecoExpo = getBytes(expoImg);
 
                         dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
-                        SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
+                        //SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
 
                         String idAcoImagen = c.getString("id");
 
@@ -348,6 +341,8 @@ public class Updates extends Activity implements View.OnClickListener {
                     }
 
                 }
+            } catch (NullPointerException n) {
+                Log.e("NULO", n.getMessage());
             } catch (JSONException e) {
                 e.printStackTrace();
                 resolucion += "x";
@@ -357,8 +352,6 @@ public class Updates extends Activity implements View.OnClickListener {
             } catch (IOException e) {
                 resolucion += "x";
                 e.printStackTrace();
-            } catch (NullPointerException n) {
-                resolucion += "x";
             }
 
         } else {
@@ -396,8 +389,8 @@ public class Updates extends Activity implements View.OnClickListener {
 
         }
         dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
-        SQLiteDatabase dbExpo = dbHandlerOffline.getWritableDatabase();
-
+        //SQLiteDatabase dbExpo = dbHandlerOffline.getWritableDatabase();
+        dbHandlerOffline.resetExpositores();
         dbHandlerOffline.addExpo(respuestaAlfa, respuestaNumerico);
         try {
             JSONObject json = new JSONObject(respuestaAlfa);
@@ -432,7 +425,7 @@ public class Updates extends Activity implements View.OnClickListener {
                     ImageDecoExpo = getBytes(expoImg);
 
                     dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
-                    SQLiteDatabase db = dbHandlerOffline.getWritableDatabase();
+                    //SQLiteDatabase db = dbHandlerOffline.getWritableDatabase();
 
                     String idExpoImagen = c.getString("id");
 
@@ -441,6 +434,8 @@ public class Updates extends Activity implements View.OnClickListener {
             }
 
 
+        } catch (NullPointerException n) {
+            Log.e("NULO", n.getMessage());
         } catch (JSONException e) {
             resolucion += "x";
             e.printStackTrace();
@@ -449,8 +444,6 @@ public class Updates extends Activity implements View.OnClickListener {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-            resolucion += "x";
-        } catch (NullPointerException n) {
             resolucion += "x";
         }
 
@@ -464,6 +457,7 @@ public class Updates extends Activity implements View.OnClickListener {
             JSONParser jspCat = new JSONParser();
             String strCat = jspCat.makeHttpRequest(fromUrlCat, "GET", fromUrlCat, "");
             dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
+            dbHandlerOffline.resetCategorias();
             dbHandlerOffline.addJsonCategorias(strCat);
             Log.d("Descarga: ", "> Datos Programa completo");
         } catch (Exception ex) {
@@ -488,6 +482,7 @@ public class Updates extends Activity implements View.OnClickListener {
         if (respuestaT != "error") {
 
             dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
+            dbHandlerOffline.resetTransportacion();
             dbHandlerOffline.addTrans(respuestaT);
 
             try {
@@ -528,12 +523,14 @@ public class Updates extends Activity implements View.OnClickListener {
                             ImageDecoExpo = getBytes(expoImg);
 
                             dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
-                            SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
+                            //SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
 
                             String idTRImagen = c.getString("id");
 
                             dbHandlerOffline.addRutaImag(idTRImagen, ImageDecoExpo);
                         }
+                    } catch (NullPointerException n) {
+                        Log.e("NULO", n.getMessage());
                     } catch (JSONException e) {
                         resolucion += "x";
                         e.printStackTrace();
@@ -543,12 +540,12 @@ public class Updates extends Activity implements View.OnClickListener {
                     } catch (IOException e) {
                         resolucion += "x";
                         e.printStackTrace();
-                    } catch (NullPointerException n) {
-                        resolucion += "x";
                     }
                 }
 
 
+            } catch (NullPointerException n) {
+                Log.e("NULO", n.getMessage());
             } catch (JSONException e) {
                 resolucion += "x";
                 e.printStackTrace();
@@ -572,6 +569,8 @@ public class Updates extends Activity implements View.OnClickListener {
 
         if (respuestaSocialDepo != "error") {
             dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
+
+            dbHandlerOffline.resetSocialDepo();
             dbHandlerOffline.addSocialDepo(respuestaSocialDepo);
 
             JSONObject jsonimageS = null;
@@ -606,7 +605,7 @@ public class Updates extends Activity implements View.OnClickListener {
                         ImageDecoExpo = getBytes(expoImg);
 
                         dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
-                        SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
+                        //SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
 
                         String idSDImagen = c.getString("id");
 
@@ -614,6 +613,8 @@ public class Updates extends Activity implements View.OnClickListener {
                     }
 
                 }
+            } catch (NullPointerException n) {
+                Log.e("NULO", n.getMessage());
             } catch (JSONException e) {
                 resolucion += "x";
                 e.printStackTrace();
@@ -623,8 +624,6 @@ public class Updates extends Activity implements View.OnClickListener {
             } catch (IOException e) {
                 resolucion += "x";
                 e.printStackTrace();
-            } catch (NullPointerException n) {
-                resolucion += "x";
             }
 
 
@@ -637,12 +636,16 @@ public class Updates extends Activity implements View.OnClickListener {
 
     public String updateProgramas() {
         String resolucion = "";
-        String fromUrlPrograma = "http://cmp.devworms.com/api/programa/all/" + userId + "/" + apiKey + "";
+        String fromUrlPrograma = "http://cmp.devworms.com/api/programa/all/" + userId + "/" + apiKey;
+        Log.e("URLPROGRAMAS", fromUrlPrograma);
         JSONParser jspPrograma = new JSONParser();
         String strProgramas = jspPrograma.makeHttpRequest(fromUrlPrograma, "GET", fromUrlPrograma, "");
         dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
         Log.e("JSONPROGRAMAS", strProgramas);
+
+        dbHandlerOffline.resetProgramas();
         dbHandlerOffline.addJsonProgramas(strProgramas);
+
         try {
             JSONObject jProgramas = new JSONObject(strProgramas);
             String strProg = jProgramas.getString("programas");
@@ -671,13 +674,15 @@ public class Updates extends Activity implements View.OnClickListener {
                         ImageDecoExpo = getBytes(expoImg);
 
                         dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
-                        SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
+                        //SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
 
                         String idProgImge = programa.getString("id");
 
                         dbHandlerOffline.addProgramaImage(idProgImge, ImageDecoExpo);
                     }
 
+                } catch (NullPointerException n) {
+                    Log.e("NULO", n.getMessage());
                 } catch (JSONException e) {
                     resolucion += "x";
                     e.printStackTrace();
@@ -687,15 +692,14 @@ public class Updates extends Activity implements View.OnClickListener {
                 } catch (IOException e) {
                     resolucion += "x";
                     e.printStackTrace();
-                } catch (NullPointerException n) {
-                    resolucion += "x";
                 }
             }
         } catch (JSONException jex) {
             resolucion += "x";
             Log.e("DescargaPrograma", jex.getMessage());
+            jex.printStackTrace();
         } catch (NullPointerException n) {
-            resolucion += "x";
+            Log.e("NULO", n.getMessage());
         }
         return resolucion;
     }
@@ -723,7 +727,8 @@ public class Updates extends Activity implements View.OnClickListener {
 
 
         dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
-        SQLiteDatabase db = dbHandlerOffline.getWritableDatabase();
+        //SQLiteDatabase db = dbHandlerOffline.getWritableDatabase();
+        dbHandlerOffline.resetPatrocinadores();
         dbHandlerOffline.addPatro(respuestaAlfaPatro, respuestaNumericoPatro);
 
         JSONObject jsonimageP = null;
@@ -756,7 +761,7 @@ public class Updates extends Activity implements View.OnClickListener {
                     ImageDecoExpo = getBytes(expoImg);
 
                     dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
-                    SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
+                    //SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
 
                     String idExpoImagen = c.getString("id");
 
@@ -764,11 +769,11 @@ public class Updates extends Activity implements View.OnClickListener {
                 }
 
             }
+        } catch (NullPointerException n) {
+            Log.e("NULO", n.getMessage());
         } catch (JSONException e) {
             resolucion += "0x";
             e.printStackTrace();
-        } catch (NullPointerException n) {
-            resolucion += "x";
         } catch (MalformedURLException e) {
             resolucion += "5x";
             e.printStackTrace();
@@ -787,7 +792,7 @@ public class Updates extends Activity implements View.OnClickListener {
         JSONParser jspSitio = new JSONParser();
         String strSitio = jspSitio.makeHttpRequest(fromUrlSitio, "GET", fromUrlSitio, "");
         dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
-
+        dbHandlerOffline.resetSitiosInt();
         dbHandlerOffline.addJsonSitiosPuebla(strSitio);
         try {
             JSONObject jSitios = new JSONObject(strSitio);
@@ -817,13 +822,15 @@ public class Updates extends Activity implements View.OnClickListener {
                         ImageDecoExpo = getBytes(expoImg);
 
                         dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
-                        SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
+                        //SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
 
                         String idProgImge = sitio.getString("id");
 
                         dbHandlerOffline.addImgeSitio(idProgImge, ImageDecoExpo);
                     }
 
+                } catch (NullPointerException n) {
+                    Log.e("NULO", n.getMessage());
                 } catch (JSONException e) {
                     resolucion += "x";
                     e.printStackTrace();
@@ -833,15 +840,13 @@ public class Updates extends Activity implements View.OnClickListener {
                 } catch (IOException e) {
                     resolucion += "x";
                     e.printStackTrace();
-                } catch (NullPointerException n) {
-                    resolucion += "x";
                 }
             }
+        } catch (NullPointerException n) {
+            Log.e("NULO", n.getMessage());
         } catch (JSONException jex) {
             resolucion += "x";
             Log.e("DescargaPrograma", jex.getMessage());
-        } catch (NullPointerException n) {
-            resolucion += "x";
         }
         return resolucion;
     }
@@ -851,6 +856,8 @@ public class Updates extends Activity implements View.OnClickListener {
         JSONParser jsp = new JSONParser();
         String respuesta = "";
         respuesta = jsp.makeHttpRequest(body, "GET", body, "");
+        dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
+        dbHandlerOffline.resetBanners();
         if (respuesta != "error") {
             try {
 
@@ -885,28 +892,28 @@ public class Updates extends Activity implements View.OnClickListener {
                         imagen[cou] = BitmapFactory.decodeStream(conn.getInputStream(), new Rect(0, 0, 0, 0), options);
                         ImagenDeco[cou] = getBytes(imagen[cou]);
 
-                        dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
-                        SQLiteDatabase db = dbHandlerOffline.getWritableDatabase();
+
+                        //SQLiteDatabase db = dbHandlerOffline.getWritableDatabase();
 
                         dbHandlerOffline.addBanner(ArrayBanners[cou], ImagenDeco[cou]);
 
                     }
 
 
+                } catch (NullPointerException n) {
+                    Log.e("NULO", n.getMessage());
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
-                } catch (NullPointerException n) {
-                    Log.e("NULO", n.getMessage());
                 }
 
 
+            } catch (NullPointerException n) {
+                Log.e("NULO", n.getMessage());
             } catch (JSONException e) {
                 e.printStackTrace();
 
-            } catch (NullPointerException n) {
-                Log.e("NULO", n.getMessage());
             }
         }
 
@@ -936,18 +943,18 @@ public class Updates extends Activity implements View.OnClickListener {
             ImageDecoExpo = getBytes(expoImg);
 
             dbHandlerOffline = new AdminSQLiteOffline(Updates.this, null, null, 1);
-            SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
+            //SQLiteDatabase dbP = dbHandlerOffline.getWritableDatabase();
 
-
+            dbHandlerOffline.resetMaparesinto();
             dbHandlerOffline.addMapaResinto(ImageDecoExpo);
+        } catch (NullPointerException n) {
+            Log.e("NULO", n.getMessage());
         } catch (JSONException jex) {
             Log.e("Mapa", jex.getMessage());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (NullPointerException n) {
-            Log.e("NULO", n.getMessage());
         }
     }
 

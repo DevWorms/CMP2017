@@ -790,12 +790,16 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
 
         String query = "DELETE FROM " + TABLA_PROGRAMAS;
         String queryImg = "DELETE FROM " + TABLA_PROGIMAGENES;
-        String queryCat = "DELETE FROM " + TABLA_CATEGORIAS;
 
-        db.execSQL(queryCat);
         db.execSQL(query);
         db.execSQL(queryImg);
 
+    }
+
+    public void resetCategorias(){
+        SQLiteDatabase db = getWritableDatabase();
+        String queryCat = "DELETE FROM " + TABLA_CATEGORIAS;
+        db.execSQL(queryCat);
     }
 
     public void resetTransportacion(){
@@ -829,5 +833,17 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
         db.execSQL(query);
         db.execSQL(queryImg);
 
+    }
+
+    public void resetBanners(){
+        SQLiteDatabase db = getWritableDatabase();
+        String queryBanner = "DELETE FROM " + TABLA_BANNER;
+        db.execSQL(queryBanner);
+    }
+
+    public void resetMaparesinto(){
+        SQLiteDatabase db = getWritableDatabase();
+        String queryMresinto = "DELETE FROM " + TABLA_MAPARESINTO;
+        db.execSQL(queryMresinto);
     }
 }

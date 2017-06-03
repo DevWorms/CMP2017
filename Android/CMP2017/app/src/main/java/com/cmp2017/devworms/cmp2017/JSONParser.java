@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -41,7 +42,12 @@ public class JSONParser {
             if (method == "POST") {
                 // request method is POST
                 // defaultHttpClient
-                OkHttpClient client = new OkHttpClient();
+                OkHttpClient client = new OkHttpClient.Builder()
+                        .connectTimeout(300, TimeUnit.SECONDS)
+                        .writeTimeout(300, TimeUnit.SECONDS)
+                        .readTimeout(300, TimeUnit.SECONDS)
+                        .build();
+
                 MediaType mediaType = MediaType.parse("application/json");
                 RequestBody body = RequestBody.create(mediaType,bd );
                 Request request = new Request.Builder()
@@ -58,7 +64,12 @@ public class JSONParser {
             } else if (method == "GET") {
 
                 // request method is GET
-                OkHttpClient client = new OkHttpClient();
+                OkHttpClient client = new OkHttpClient.Builder()
+                        .connectTimeout(300, TimeUnit.SECONDS)
+                        .writeTimeout(300, TimeUnit.SECONDS)
+                        .readTimeout(300, TimeUnit.SECONDS)
+                        .build();
+
                 Log.d("URL : ", "> " + url);
                 Request request = new Request.Builder()
                         .url(url)

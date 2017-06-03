@@ -200,6 +200,7 @@ class ServerConnection {
                 UserDefaults.standard.setValue(1, forKey: "descarga")
             }
         }else{
+             CoreDataHelper.deleteEntity(entityName: "Expositores")
             // Expositores
             self.getGeneral(strUrl: "http://cmp.devworms.com/api/expositor/all/\(userID)/\(apiKey)", jsonString: "expositores", datoString: "logo", imgString: "url", entityName: "Expositores", keyName: "expositor", keyNameImg: "imgExpositor",Simple : 0) { (Bool) in
                 self.mView.dismiss(animated: false, completion: nil)

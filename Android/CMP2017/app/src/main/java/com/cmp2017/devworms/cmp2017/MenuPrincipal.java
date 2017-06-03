@@ -174,8 +174,9 @@ public class MenuPrincipal extends AppCompatActivity
                 Bundle parametro = new Bundle();
 
 
-                parametro.putString("MiExpo","Si");
-                parametro.putString("nombre","Mis Expositores");
+                parametro.putString("origen","me");
+
+
                 fragment.setArguments(parametro);
 
                 final FragmentTransaction ft = getFragmentManager()
@@ -186,7 +187,6 @@ public class MenuPrincipal extends AppCompatActivity
 
                 ft.commit();
 
-                //Toast.makeText(MenuPrincipal.this,"Próximamente",Toast.LENGTH_SHORT).show();
 
 
             }

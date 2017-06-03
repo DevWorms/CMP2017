@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 
 public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
@@ -58,7 +59,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     //Añade un nuevo Row a la Base de Datos
 
     public void addExpo(String idExpo,String nombre, String descri, String tel, String email, String web, String prese, String image, String stand) {
-
+        Log.e("imagenExpo",image);
         ContentValues values = new ContentValues();
         values.put(COLUMN_IDEXPO, idExpo);
         values.put(COLUMN_NOMBRE, nombre);

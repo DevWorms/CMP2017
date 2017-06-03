@@ -201,8 +201,21 @@ public class MenuFragment extends Fragment {
         public void onClick(View v) {
 
 
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.actividad, new ExpositoresFrgament()).addToBackStack(null).commit();
+            Fragment fragment = new ExpositoresFrgament();
+
+            Bundle parametro = new Bundle();
+
+            parametro.putString("origen","e");
+
+            fragment.setArguments(parametro);
+
+            final FragmentTransaction ft = getFragmentManager()
+                    .beginTransaction();
+            ft.replace(R.id.actividad, fragment, "tag");
+
+            ft.addToBackStack("tag");
+
+            ft.commit();
 
 
         }
@@ -260,8 +273,7 @@ public class MenuFragment extends Fragment {
 
             Bundle parametro = new Bundle();
 
-            parametro.putString("nombre","Patrocinadores");
-            parametro.putString("MiExpo","No");
+            parametro.putString("origen","p");
 
             fragment.setArguments(parametro);
 

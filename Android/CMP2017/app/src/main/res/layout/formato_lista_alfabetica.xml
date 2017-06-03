@@ -1,68 +1,54 @@
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
     tools:context="com.cmp2017.devworms.cmp2017.DetalleEventoFragment">
 
-
-    <TextView
-        android:id="@+id/txtid"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight=".1"
-        android:text="TextView"
-        android:visibility="invisible"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="0dp" />
+        android:layout_weight="5">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+        <TextView
+            android:id="@+id/txtid"
+            android:layout_width="wrap_content"
+            android:layout_height="1px"
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/txtLetra"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
-
             android:textColor="#2844a8"
             android:textSize="20sp"
-            android:textStyle="bold"
-             />
+            android:textStyle="bold" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/txtNombre"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="30dp"
             android:layout_weight="4"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp">
+            android:maxLength="50"
+            android:maxLines="1"
+            android:text="TextView"
+            android:textColor="#2844a8"
+            android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/txtNombre"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_weight="4"
-                android:maxLength="50"
-                android:maxLines="1"
-                android:text="TextView"
-                android:textColor="#2844a8"
-                android:textSize="18sp" />
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight=".5"
-                app:srcCompat="@drawable/imaflecha" />
-
-        </LinearLayout>
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/imaflecha" />
+
+
+
+</LinearLayout>

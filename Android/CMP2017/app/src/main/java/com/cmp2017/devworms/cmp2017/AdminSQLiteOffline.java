@@ -265,6 +265,7 @@ public class AdminSQLiteOffline extends SQLiteOpenHelper {
         db.close();
 
     }
+
     public Cursor ImagenPorIdPatro(String idPatro){
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT imagePatro FROM " + TABLA_PATROIMAGENES + " WHERE idPatro = "+idPatro+";";
